@@ -1,0 +1,429 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Views &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="FAQ" href="../usage/FAQ.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-useroperations.views">
+<span id="views"></span><h1>Views<a class="headerlink" href="#module-useroperations.views" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="useroperations.views.activation_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">activation_view</code><span class="sig-paren">(</span><em>request</em>, <em>activation_key=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#activation_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.activation_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View for activating user account after creation or deletion</p>
+<p>After creating an account, a user has to verify his email by clicking a link that was send to him.
+After deleting an account, a user can reactivate his account by clicking a link in the email.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest
+activation_key (slug): Key to activate the user, stored in database</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>Template:</dt>
+<dd>(activation.html) in case activation was successful
+(404.html) in case activation failed for some reason</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.change_profile_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">change_profile_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#change_profile_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.change_profile_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View to change or delete profile data</p>
+<p>This view is needed if a user wants to change his personal data.
+To achieve this he has to enter his valid password.
+Further the user has the option to delete his account.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd><p class="first">On HTTPGet it renders the ChangeProfileForm in forms.py.
+On HTTPPost it checks whether the user wants to delete or change his profile.</p>
+<blockquote class="last">
+<div>Afterwards password is checked for both options and action is takes on.</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.delete_profile_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">delete_profile_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#delete_profile_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.delete_profile_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View for profile deletion</p>
+<p>This view handles the deletion of profiles.
+Users get redirected to this view if they click on “delete profile”</p>
+<blockquote>
+<div>in the change profile form and provided a valid password.</div></blockquote>
+<dl class="docutils">
+<dt>Args</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd>DeleteProfileForm</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.feedback_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">feedback_view</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#feedback_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.feedback_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a feedback form for the user</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.index_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">index_view</code><span class="sig-paren">(</span><em>request</em>, <em>wiki_keyword=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#index_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.index_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares the index view, and renders the page.</p>
+<p>This view is the main view and landing page of the project. 
+It includes checking if a mediawiki page should be rendered or not.
+The default page, if no keyword was given, is favourite_wmcs.html,</p>
+<blockquote>
+<div>which shows an overview of the most popular wmc services.</div></blockquote>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">request: HTTP request coming from djangos URLconf.
+wiki_keyword: If a string is present it will be used to render</p>
+<blockquote>
+<div>a mediawiki page transparently to the user.</div></blockquote>
+<dl class="last docutils">
+<dt>HTTPGet(‘status’): Checks if the login was successful or not.</dt>
+<dd>‘status’ comes from a mapbender php script(authentication.php)</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>view: returns the rendered view, which can be:</dt>
+<dd>(default): favourite_wmcs.html
+(wiki): a mediawiki page
+(viewer): geoportal.html
+(error): 404.html</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.login_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">login_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#login_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.login_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View that handles the login</p>
+<p>Login is handled by a mapbender php script(authentication.php),
+this view just takes credentials and forwards it to the script.
+The script returns a status message to the index view.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd>The login page</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.logout_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">logout_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#logout_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.logout_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View for logging out users</p>
+<p>This view deletes the session if a user logs out.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd>LogoutForm</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.map_viewer_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">map_viewer_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#map_viewer_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.map_viewer_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse all important data for the map rendering from the session</p>
+<dl class="docutils">
+<dt>This view is used to hand over all the data that is needed</dt>
+<dd>by the mapviewer, which currently is mapbender2.</dd>
+<dt>The parameters come from the search interface are therefore</dt>
+<dd>included in the URL.</dd>
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>request: HTTPReqeust , this in includes all mapviewer</dt>
+<dd>parameters coming from the search module</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>response: a json object containing all the</dt>
+<dd>mapviewer parameters</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.pw_reset_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">pw_reset_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#pw_reset_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.pw_reset_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View to reset password</p>
+<p>This view has the purpose to regain access if a password is lost.
+To achieve this the user has to enter the correct username and password combination.
+After doing so he gets an email with a new password.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd>PasswordResetForm
+Email confirmation</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="useroperations.views.register_view">
+<code class="descclassname">useroperations.views.</code><code class="descname">register_view</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/views.html#register_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.views.register_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>View for user registration.</p>
+<p>On HTTPGet it renders the registration Form in forms.py.
+On HTTPPost it checks if the username is taken and validates password specification.
+It uses pythons hashlib.pbkdf2_hmac for password storage.
+Further it tries to read the mapbender.conf to get the id of the admin user.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request: HTTPRequest</dd>
+<dt>Returns:</dt>
+<dd>RegistrationForm</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-searchCatalogue.views"></span><p>Author: Michel Peltriaux
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: <a class="reference external" href="mailto:michel&#46;peltriaux&#37;&#52;&#48;vermkv&#46;rlp&#46;de">michel<span>&#46;</span>peltriaux<span>&#64;</span>vermkv<span>&#46;</span>rlp<span>&#46;</span>de</a>
+Created on: 22.01.19</p>
+<dl class="function">
+<dt id="searchCatalogue.views.auto_completion">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">auto_completion</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#auto_completion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.auto_completion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns suggestions for searchfield input</p>
+<p>The call comes from an ajax function, therefore we respond using a JsonResponse,
+which can be parsed by ajax.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains auto-completion suggestions</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_data">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_data</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redistributor for general get_data requests.</p>
+<p>Decides which kind of data needs to be fetched and redirects to the according view.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: If nothing was found, an empty JsonResponse will be returned to reduce the harm
+Redirects otherwise to working functions.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_data_info">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_data_info</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_data_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_data_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for results in the mediawiki</p>
+<p>THIS IS A FEATURE THAT ISN’T IMPLEMENTED YET</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains data for the ajax call</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_data_other">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_data_other</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em>, <em>catalogue_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_data_other"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_data_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data for other search catalogues than RLP.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request
+catalogue_id: Specifies which catalogue (API) shall be used</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains the content for the ajax call</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_data_rlp">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_data_rlp</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_data_rlp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_data_rlp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data for the search catalogue of RLP</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains data for the ajax call</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_permission_email_form">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_permission_email_form</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_permission_email_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_permission_email_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns rendered email permission template.</p>
+<p>Reacts on an ajax call and renders an email form for requesting access permission to a specific resource.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains the prerendered html for the form</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.get_spatial_results">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">get_spatial_results</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#get_spatial_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.get_spatial_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data for a spatial search.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains the content for the ajax call</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.index">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">index</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em>, <em>external_call=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the index template for all calls.</p>
+<p>If the external_call flag is set to True, this function will change the template to be rendered.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request
+external_call: A flag that indicates if the call comes from an external source</dd>
+<dt>Returns:</dt>
+<dd>The rendered page</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.index_external">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">index_external</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#index_external"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.index_external" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the index template for external embedded calls.</p>
+<p>This route is for external embedded calls in iFrames and so on.
+The template provides an own searchbar, which is not necessary on the geoportal homepage.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>Redirect: Redirect to the real render functionality with a flag for external_call</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.views.send_permission_email">
+<code class="descclassname">searchCatalogue.views.</code><code class="descname">send_permission_email</code><span class="sig-paren">(</span><em>request: django.http.request.HttpRequest</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/views.html#send_permission_email"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.views.send_permission_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a permission email</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>request (HttpRequest): The incoming request</dd>
+<dt>Returns:</dt>
+<dd>JsonResponse: Contains the success/fail status</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../usage/FAQ.html" title="previous chapter">FAQ</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

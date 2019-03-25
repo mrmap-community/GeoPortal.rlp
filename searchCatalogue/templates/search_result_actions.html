@@ -1,0 +1,97 @@
+{% load static i18n %}
+{% if layer.permission is None or layer.permission == 'true' %}
+    <div class="search-result-action-buttons">
+        <!-- WMC and WFS -->
+        {% if type == 'wmc' or type == 'wfs' or type == 'service_DE' %}
+            {% if type == 'wfs' and parent_result is None %}
+            {% elif type == 'service_DE' %}
+                {% if layer.showMapUrl %}
+                    <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+                {% endif %}
+            {% else %}
+                <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+            {% endif %}
+
+        {% else %}
+        <!-- WMS and DATASET -->
+            {% if feeds is not None and feeds|length > 0 %}
+                <a class="button download-button" id="download_{{ result.id }}">{% trans 'Download' %} ({{ feeds|length }})</a>
+            {% endif %}
+            {% if layers is not None and layers|length > 0 %}
+                {% if type == 'wms' %}
+                    <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+                {% elif type == 'dataset' %}
+                    <a class='button view-button' id="view_{{ result.id }}">{% trans 'Show' %} ({{ layers|length }})</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="search-result-actions">
+        <!-- WMC -->
+        {% if type == 'wmc' or type == 'wfs' or type == 'service_DE' %}
+        <div class="resource-list view_{{ layer.id }}" style="display:none;">
+            <ul style="overflow: hidden;">
+                <li class="resource-category-header">{% trans 'Compilations' %}</li>
+                    {% with layer as layer_data %}
+                        {% with result as layer_info %}
+                            {% include 'search_result_list_entry.html' %}
+                        {% endwith %}
+                    {% endwith %}
+            </ul>
+        </div>
+
+        {% else %}
+        <!-- WMS and DATASET -->
+            {% if feeds is not None and feeds|length > 0 %}
+            <div class="resource-list download_{{ result.id }}" style="display:none;">
+                <ul style="overflow: hidden;">
+                    <li class="resource-category-header">{% trans 'Download services' %}</li>
+                    {% for feed in feeds %}
+                    <li class="resource-element">
+                        <a href="{{ feed.download_url }}" target="_blank" >
+                            <div id="download_button_{{ feed.serviceUuid }}" class="feed-download">
+                                <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
+                                <strong>{{ feed.serviceUuid }}</strong>
+                                <!-- ToDo: Replace the type here with a title -->
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download_2018.png' %}" title="Herunterladen"/>
+                            </div></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if layers is not None and layers|length > 0 %}
+                <div class="resource-list view_{% if type == 'wms' %}{{ layer.id }}{% elif type == 'dataset' %}{{ result.id }}{% endif %}" style="display:none;">
+                <ul style="overflow: hidden;">
+                    <!-- <li class="resource-category-header">{% trans 'Layers' %}</li> -->
+                    {% if type == 'dataset' %}
+                        {% for layer in layers %}
+                            {% with layer.srv.layer.0 as layer_data %}
+                            {% with layer.srv as layer_info %}
+                                {% include 'search_result_list_entry.html' %}
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        {% with layer as layer_data %}
+                            {% with result as layer_info %}
+                                {% include 'search_result_list_entry.html' %}
+                            {% endwith %}
+                        {% endwith %}
+                    {% endif %}
+                </ul>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+{% else %}
+    <div class="not-allowed-wrapper">
+            {% if loggedin %}
+            <img class="ask-permission-img" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" src="{% static 'searchCatalogue/images/icons/icn_permission_email.png' %}" title="{% trans 'Ask data provider for permission' %}">
+            {% else %}
+            <a href="/login">
+                <img class="not-allowed-img" src="{% static 'searchCatalogue/images/icons/icn_permission_restricted.png' %}" title="{% trans 'Only for registered users' %}">
+            </a>
+            {% endif %}
+    </div>
+{% endif %}

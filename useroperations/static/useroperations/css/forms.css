@@ -1,0 +1,147 @@
+@import "color_schema.css"
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.ttf?f76mlk") format("truetype"), url("../fonts/icomoon.woff?f76mlk") format("woff"), url("../fonts/icomoon.svg?f76mlk#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+.field-wrapper{
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.warning{
+    color: red;
+    font-weight: bold;
+}
+
+form input[type=text], form input[type=password], form input[type=email]{
+    padding: 10px;
+    border: 2px solid var(--rlp-gray);
+    border-radius: 5px;
+    color: var(--rlp-red);
+    background-color: white;
+    width: 100%;
+}
+
+.submit-button-wrapper{
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.submit-button-wrapper a{
+    text-decoration: none;
+}
+
+#delete-form-button:hover{
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    font-weight: bold;
+}
+
+.forgot-pw-button{
+    padding: 10px;
+    color: var(--rlp-red);
+}
+.forgot-pw-button:hover{
+    cursor: pointer;
+    color: var(--rlp-light-hover);
+}
+
+.form-submit-button, .form-cancel-button{
+    padding: 10px;
+    font-size: 1.2em;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background-color: var(--rlp-red);
+}
+.form-submit-button:hover, .form-cancel-button:hover{
+    cursor: pointer;
+    background-color: var(--rlp-red-light-hover);
+}
+
+
+.form-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.small-label label{
+    color: gray;
+    font-size: 12px;
+}
+
+.title h1{
+    color: var(--rlp-red);
+}
+.field-label{
+    width: 300px;
+}
+.field-value{
+    min-width: 200px;
+    width: 100%;
+}
+
+.field-value input:focus{
+    border-color: var(--rlp-red);
+    box-shadow: 0 0 10px var(--rlp-red);
+}
+
+#password_message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding:   20px;
+  margin-top: 10px;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  content: "✔ ";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  content: "✖ ";
+}
+
+.captcha{
+    width: 100px;
+    height: 45px;
+}
+
+.foot-note{
+    color: gray;
+    font-size: 0.8em;
+}
+
+.captcha-refresh{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5em;
+    position: relative;
+    padding: 8px;
+    left: 10px;
+    bottom: 12px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--rlp-red);
+}
+.captcha-refresh:hover{
+    background-color: var(--rlp-red-light-hover);
+}

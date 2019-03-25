@@ -1,0 +1,48 @@
+{% load static i18n %}
+    {% if result.mdLink is not None %}
+    <a title='zu {{ result.title }}' href='{{ result.mdLink }}' target="_blank" style="text-decoration: none;">
+        <div class="search-result-title">
+            {{ result.title }}
+        </div>
+    </a>
+    {% endif %}
+
+<div class="search-result-area">
+        <div class="img-area">
+            <img class="img-preview" style="max-width:100px;" src="{% if result.previewURL is None or result.previewURL|length == 0%} {{ result.extent_url }} {% else %} {{ result.previewURL }} {% endif %}">
+            <br>
+            {% if result.logoUrl is not None or result.logoUrl|length > 0 %}
+                <a href="{{ result.mdLink }}#tabs-3" target="_blank"><img class="img-logo" title="{{ result.respOrg }}" src="{{ result.logoUrl }}"></a>
+            {% endif %}
+            <a href="{{ result.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %}  {% static 'searchCatalogue/images/icons/icn_warn.png' %}  {% endif %}"></a>
+            {% if result.isopen is not None %}
+                <a href="{{ OPEN_DATA_URL }}" target="_blank">
+                    <img class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
+                </a>
+            {% endif %}
+            {% if result.logged is true %}
+                <img class="resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+            {% endif %}
+        </div>
+
+    <table class="search-result-detail-table">
+        <tr>
+            <td class="search-result-detail-title">{% trans 'Competent authority:' %}</td>
+            <td class="search-result-detail"><a href="{{ result.mdLink }}#tabs-3" target="_blank">{{ result.respOrg }}</a></td>
+        </tr>
+        <tr>
+            <td class="search-result-detail-title">{% trans 'Date of metadata:' %}</td>
+            <td class="search-result-detail"><a href="{{ result.mdLink }}#tabs-2" target="_blank">{{ result.date }}</a></td>
+        </tr>
+        <tr>
+            <td class="search-result-detail-title">{% trans 'Description:' %}</td>
+            <td class="search-result-detail"><p>{{ result.abstract }}</p></td>
+        </tr>
+    </table>
+
+    {% with 'wmc' as type %}
+        {% with result as layer %}
+            {% include 'search_result_actions.html' %}
+        {% endwith %}
+    {% endwith %}
+</div>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h1>{% trans 'Feedback form' %}</h1>
+<hr>
+<div class="form-wrapper">
+
+    <form action="{% url 'useroperations:feedback' %}" method="post">
+        {% csrf_token %}
+        <table>
+            {% for field in form %}
+                <tr class="field-wrapper">
+                    <td class="field-label">
+                        {{ field.label_tag }}
+                    </td>
+                    <td class="field-value">
+                        {{ field }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="foot-note">
+            {% trans 'Remaining characters: ' %}
+            <span id="character-counter"></span>
+        </div>
+        <hr>
+        <div class="foot-note">
+            {{ disclaimer }}
+            <a target="_blank" href="/article/datenschutz">{% trans 'privacy rules' %}.</a>
+        </div>
+
+        <div class="submit-button-wrapper">
+            <input id="submit-form-button" class="form-submit-button" type="submit" value="{{ btn_send }}">
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

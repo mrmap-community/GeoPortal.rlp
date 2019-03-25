@@ -1,0 +1,57 @@
+{% load i18n static %}
+    <!-- Max displayed -->
+    <table>
+        {% if search_filters.maxResults|length > 0 %}
+        <tr>
+            <td>
+                {% trans 'Hits per page:' %}
+            </td>
+            <td>
+                <div class="select-wrapper">
+                    <select id='geoportal-maxResults'>
+                        <option selected='selected' value='{{ search_filters.maxResults.title }}'
+                data-url='{{ search_filters.maxResults.origUrl }}'>{{ search_filters.maxResults.title }}</option>
+                        {% for page_item in search_filters.maxResults.item %}
+                            <option value='{{ page_item.title }}' data-url='{{ page_item.url }}'>{{ page_item.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+
+        {% if search_filters.orderFilter|length > 0 %}
+        <tr>
+            <td>
+            {% trans 'Sort by:' %}
+            </td>
+            <td>
+                <div class="select-wrapper">
+                <select id="geoportal-orderBy">
+                    <option selected="selected" value="{{ search_filters.orderFilter.title }}">{{ search_filters.orderFilter.title }}</option>
+                    {% for order_item in search_filters.orderFilter.item %}
+                        <option value='{{ order_item.title }}' data-url='{{ order_item.url }}'>{{ order_item.title }}</option>
+                    {% endfor %}
+                </select>
+
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+
+        {% if not is_de_search and not is_eu_search %}
+        <tr>
+            <td>
+                {% trans 'Only open data' %}:
+            </td>
+            <td>
+                {% if search_filters.restrictToOpenData.item.0.title == 'true' %}
+                    <img title="{% trans 'Active' %}" class="filter-onlyOpenData-img active-img" src="{% static 'searchCatalogue/images/open-data.jpg' %}">
+                {% else %}
+                    <img title="{% trans 'Not active' %}" class="filter-onlyOpenData-img" src="{% static 'searchCatalogue/images/open-data.jpg' %}">
+                {% endif %}
+            </td>
+        </tr>
+        {% endif %}
+
+    </table>

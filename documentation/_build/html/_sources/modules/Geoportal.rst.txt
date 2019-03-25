@@ -1,0 +1,46 @@
+Geoportal package
+=================
+
+Submodules
+----------
+
+Geoportal.geoportalObjects module
+---------------------------------
+
+.. automodule:: Geoportal.geoportalObjects
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Geoportal.helper module
+-----------------------
+
+.. automodule:: Geoportal.helper
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Geoportal.settings module
+-------------------------
+
+.. automodule:: Geoportal.settings
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Geoportal.urls module
+---------------------
+
+.. automodule:: Geoportal.urls
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: Geoportal
+    :members:
+    :undoc-members:
+    :show-inheritance:

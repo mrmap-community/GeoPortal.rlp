@@ -1,0 +1,1223 @@
+@charset "UTF-8";
+/*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/*
+DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
+*/
+:root{
+    --rlp-red: #871d33;
+    --rlp-red-hover: #b77784;
+    --rlp-gray: #eee;
+    --rlp-gray-hover: #aeaeae;
+}
+
+
+/*
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: "Arial";
+  font-size: 15px;
+  color: #333;
+  width: 80%;
+  margin: auto; }
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+  display: block; }
+*/
+
+audio, canvas, progress, video {
+  display: inline-block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+progress {
+  vertical-align: baseline; }
+
+template, [hidden] {
+  display: none; }
+
+a {
+  background-color: transparent;
+  }
+
+a:active, a:hover {
+  outline-width: 0; }
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted; }
+
+b, strong {
+  font-weight: inherit; }
+
+b, strong {
+  font-weight: bolder; }
+
+dfn {
+  font-style: italic; }
+
+h1, h2, h3, h4 {
+  font-size: 2em;
+  margin:0; }
+
+mark {
+  background-color: #ff0;
+  color: #000; }
+
+small {
+  font-size: 80%; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sub {
+  bottom: -0.25em; }
+
+sup {
+  top: -0.5em; }
+
+img {
+  border-style: none; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+figure {
+  margin: 1em 40px; }
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
+
+button, input, #geoportal-search-extended-when .hasDatepicker, select, textarea {
+  font: inherit; }
+
+optgroup {
+  font-weight: bold; }
+
+button, input, #geoportal-search-extended-when .hasDatepicker, select {
+  overflow: visible; }
+
+button, input, #geoportal-search-extended-when .hasDatepicker, select, textarea {
+  margin: 0; }
+
+button, select {
+  text-transform: none; }
+
+button, [type="button"], [type="reset"], [type="submit"] {
+  cursor: pointer; }
+
+[disabled] {
+  cursor: default; }
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+  -webkit-appearance: button; }
+
+button::-moz-focus-inner, input::-moz-focus-inner, #geoportal-search-extended-when .hasDatepicker::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+button:-moz-focusring, input:-moz-focusring, #geoportal-search-extended-when .hasDatepicker:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal; }
+
+textarea {
+  overflow: auto; }
+
+[type="checkbox"], [type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+[type="search"] {
+  -webkit-appearance: textfield; }
+
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+*::selection {
+  color: #fff;
+  background: var(--rlp-red); }
+
+*::-moz-selection {
+  color: #fff;
+  background: var(--rlp-red); }
+
+
+ul, li, button, label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+a, button {
+  color: #333;
+  outline: 0;
+  outline: none; }
+
+a:hover, a:active, a:focus, button:hover, button:active, button:focus {
+  outline: none;
+  outline: 0; }
+
+input, #geoportal-search-extended-when .hasDatepicker {
+  color: #333;
+  outline: 0;
+  outline: none;
+  -webkit-box-shadow: inset 1px 1px 5px 1px var(--rlp-gray);
+  -moz-box-shadow: inset 1px 1px 5px 1px var(--rlp-gray);
+  box-shadow: inset 1px 1px 5px 1px var(--rlp-gray); }
+
+input:hover, #geoportal-search-extended-when .hasDatepicker:hover, input:active, #geoportal-search-extended-when .hasDatepicker:active, input:focus, #geoportal-search-extended-when .hasDatepicker:focus {
+  outline: none;
+  outline: 0; }
+
+select {
+  overflow: auto; }
+
+dl {
+  display: table-row; }
+
+dl dt {
+  font-weight: bold; }
+
+dl dd {
+  display: table-cell;
+  padding: 5px; }
+
+.wrapper{
+    margin: 20px 0 0 0;
+    width: 100%
+}
+
+
+.l-wrapper {
+  position: absolute;
+  width: 480px;
+  height: 276px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  text-align: center; }
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.button {
+  font-weight: bold;
+  height: 40px;
+  border: 1px solid var(--rlp-gray);
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-color: #6f6f6f;
+  line-height: 40px;
+  text-decoration: none; }
+
+.button:hover {
+  background-color: #e6e6e6;
+  border-color: #6f6f6f; }
+
+.loading {
+  margin: 100px auto 0;
+  width: 200px;
+  text-align: center;
+}
+
+.loading > div {
+  width: 25px;
+  height: 25px;
+  background-color: var(--rlp-red);
+  border: 1px solid #f2f2f2;
+  border-radius: 0%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 2.0s infinite ease-in-out both;
+  animation: sk-bouncedelay 2.0s infinite ease-in-out both;
+}
+
+.loading .bounce1 {
+  -webkit-animation-delay: -0.48s;
+  animation-delay: -0.48s;
+}
+
+.loading .bounce2 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.loading .bounce3 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.ttf?f76mlk") format("truetype"), url("../fonts/icomoon.woff?f76mlk") format("woff"), url("../fonts/icomoon.svg?f76mlk#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+.icon, .accordion {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-chevron-small-up:before {
+  content: ""; }
+
+.icon-chevron-small-right:before, .accordion.closed:before {
+  content: ""; }
+
+.icon-chevron-small-left:before {
+  content: ""; }
+
+.icon-chevron-small-down:before, .accordion.open:before {
+  content: ""; }
+
+.icon-plus:before {
+  content: ""; }
+
+.icon-minus:before {
+  content: ""; }
+
+.icon-cancel-circle:before {
+  content: ""; }
+
+.icon-cross:before {
+  content: ""; }
+
+.icon-checkmark:before {
+  content: ""; }
+
+.icon-checkmark2:before {
+  content: ""; }
+
+.icon-arrow-right:before {
+  content: ""; }
+
+.icon-arrow-down:before {
+  content: ""; }
+
+.icon-arrow-left:before {
+  content: ""; }
+
+.icon-arrow-up2:before {
+  content: ""; }
+
+.icon-arrow-right2:before {
+  content: ""; }
+
+.icon-arrow-down2:before {
+  content: ""; }
+
+.icon-arrow-left2:before {
+  content: ""; }
+
+.icon-circle-up:before {
+  content: ""; }
+
+.icon-circle-right:before {
+  content: ""; }
+
+.icon-circle-down:before {
+  content: ""; }
+
+.icon-circle-left:before {
+  content: ""; }
+
+.icon-checkbox-checked:before {
+  content: ""; }
+
+.icon-checkbox-unchecked:before {
+  content: ""; }
+
+.icon-radio-checked:before {
+  content: ""; }
+
+.icon-radio-unchecked:before {
+  content: ""; }
+
+.hide {
+  display: none; }
+
+.show {
+  display: block; }
+
+.center {
+  text-align: center; }
+
+.fs-10px {
+  font-size: 10px; }
+
+.fs-15px {
+  font-size: 15px; }
+
+.fs-20px {
+  font-size: 20px; }
+
+.fs-35px {
+  font-size: 35px; }
+
+.accordion.open {
+  vertical-align: middle; }
+
+.accordion.closed {
+  vertical-align: middle; }
+
+.searchbar {
+  margin: 20px auto;
+  width: 75%;
+  display: block;
+  position: relative; }
+
+/* LANGUAGE SELECTOR */
+#lang-code{
+    width: auto;
+    height: 40px;
+}
+.flag-selector{
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+.flag-selector:hover{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 0.5;
+    cursor: pointer;
+}
+.active-language{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+.right-header-top{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+@media only screen and (max-width: 480px) {
+  .searchbar {
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px; } }
+
+.searchbar .simple-search-field, .searchbar .search-start {
+  background-color: #fff;
+  border-radius: 0px;
+  height: 40px;
+  line-height: 30px;
+  display: inline-block; }
+
+.simple-search-field:focus{
+    border-color: var(--rlp-red);
+    box-shadow: 0 0 10px var(--rlp-red);
+}
+
+.searchbar .simple-search-field {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  padding: 0 60px 0 10px;
+  display: block; }
+
+.searchbar .simple-search-field:focus {
+  border: 1px solid rgba(135, 29, 51, 0.9); }
+
+.searchbar .simple-search-autocomplete {
+  border-left: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
+  background-color: #fff;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  display: none;
+  cursor: pointer;
+  z-index: 1; }
+
+.searchbar .simple-search-autocomplete div {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  display: block; }
+
+.searchbar .simple-search-autocomplete div:hover, .searchbar .simple-search-autocomplete div.active {
+  background-color: #f2f2f2; }
+
+.searchbar .simple-search-autocomplete.active {
+  display: block; }
+
+.searchbar .search-start, .searchbar .search--submit {
+  font-weight: bold;
+  height: 40px;
+  width: 15%;
+  border: 1px solid var(--rlp-gray);
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-color: #6f6f6f; }
+
+.searchbar .search-start:hover, .searchbar .search--submit:hover {
+  background-color: #e6e6e6;
+  border-color: #6f6f6f; }
+
+.search-tabs, .content-tabs{
+  margin: 10px 0 0 0;
+  display: flex;
+  padding-bottom: 1px;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rlp-red); }
+
+.search-tabs > .tab-item, .content-tabs > .tab-item {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 10px;
+  color: var(--rlp-red);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--rlp-red);
+  background-color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+
+.search-tabs > .tab-item:hover, .content-tabs > .tab-item:hover{
+    background-color: var(--rlp-red-hover);
+    color: white;
+}
+.source-tab-img{
+    width: 100px;
+    width: 100px;
+    background-image: linear-gradient(white, var(--rlp-gray));
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    border-radius: 10px 10px 0 0;
+}
+.info-title{
+    padding: 10px;
+}
+
+
+.search-tabs > .tab-item.active, .content-tabs > .tab-item.active {
+  background-color: var(--rlp-red);
+  margin-bottom: -1px;
+  color: #fff; }
+
+.source-tab-img:hover{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 0.5;
+    cursor: pointer;
+    background-color: none;
+}
+
+.sub-header-wrapper{
+    padding: 5px 0 10px 0;
+    margin: 0 0 10px 0;
+}
+
+.simple-search-input-wrapper{
+    display: flex;
+
+}
+
+.area-elements{
+    padding-top: 10px;
+    padding-left: 50px;
+    display: none;
+}
+
+.area-wrapper{
+    margin: 5px;
+}
+
+.tab-icn{
+  margin-right: 10px;
+  max-height: 25px;
+}
+
+.select-wrapper{
+    position: relative;
+}
+
+.select-wrapper select{
+  /* Remove default style */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  /* Add new style */
+  height: 30px;
+  padding: 5px 5px 5px 20px;
+  color: white;
+  background-color: var(--rlp-red);
+}
+
+.select-wrapper::before {
+  font-family: 'icomoon' !important;
+  content: "\e903";
+  font-size: 20px;
+  position: absolute;
+  left: 1px;
+  top: 5px;
+  color: #fff;
+  pointer-events: none;
+}
+
+.select-wrapper select:hover{
+    background-color: var(--rlp-red-hover);
+}
+.select-wrapper select::-ms-expand{
+    /* For IE */
+    display: none;
+}
+
+#info-result-number{
+    font-size: 0.9em;
+    padding: 5px;
+    color: white;
+    background-color: var(--rlp-red);
+    border-radius: 10px;
+}
+
+.content-tab-item.active #info-result-number{
+    background-color: white;
+    color: var(--rlp-red);
+}
+
+
+.area-title{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--rlp-red);
+    color: white;
+    padding: 10px;
+}
+.area-title:hover{
+    background-color: var(--rlp-red-hover);
+    border-color: var(--rlp-red-hover);
+}
+
+#filter-area{
+    background-color: white;
+    border: 1px solid var(--rlp-red);
+    color: var(--rlp-red);
+}
+#filter-area:hover{
+    background-color: var(--rlp-red-hover);
+    color: white;
+}
+
+.filter-onlyOpenData-img{
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.filter-onlyOpenData-img:hover{
+    opacity: 0.5;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    cursor:pointer;
+}
+
+.active-img{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+.search-content {
+  display: none; }
+
+.search-content.active {
+  display: block; }
+
+.search-content.active .search-cat {
+  display: none; }
+
+.search-content.active .search-cat.active {
+  display: block; }
+
+.search-extended {
+    border-style: solid;
+    border-width: 1px;
+    border-color:  var(--rlp-red);
+    margin: 5px;
+    padding: 5px;
+  display: none; }
+
+.search-extended .search--submit{
+  margin-top: 10px;
+  font-weight: bold;
+  height: 40px;
+  border: 1px solid var(--rlp-gray);
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-color: #6f6f6f;
+}
+
+.search-extended .search--submit:hover{
+  background-color: #e6e6e6;
+  border-color: #6f6f6f;
+  }
+
+.search-extended.active {
+  display: block; }
+
+.search-cat {
+  display: none;
+  padding: 0; }
+
+@media only screen and (max-width: 480px) {
+  .search--sort--box {
+    width: 25px;
+    height: 25px; } }
+
+
+.spatial-result-header, .spatial-result-title{
+    margin-top: 10px;
+    display: flex;
+    align-vertical-items:center;
+    background: white;
+    border: 1px solid var(--rlp-red);
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--rlp-red);
+}
+.spatial-result-header:hover{
+    cursor: default;
+}
+.spatial-result-title:hover{
+    background-color: var(--rlp-red-hover);
+    cursor: pointer;
+}
+.spatial-search-result-wrapper{
+    display: none;
+}
+
+
+.spatial-search-list-element {
+    list-style-type: none;
+}
+
+.spatial-results-list{
+    display: none;
+    margin-left: 20px;
+}
+
+.spatial-search-result {
+    display: flex;
+    align-vertical-items:center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--rlp-red);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0 0 20px;
+}
+
+.spatial-search-result:hover{
+    background-color: var(--rlp-red-hover);
+}
+
+.source--title{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: var(--rlp-red);
+  color: var(--rlp-gray);
+  cursor: pointer; }
+
+.source--title:hover {
+  color: white;
+  background-color: var(--rlp-red-hover);}
+
+.source--title--result {
+  font-size: 24px;
+  color: var(--rlp-gray); }
+
+.keywords{
+ }
+
+.keywords--headline {
+  display: inline-block;
+  color: #333;
+  border: 2px solid #6f6f6f;
+  border-radius: 0px;
+  font-size: 15px;
+  padding: 10px;
+  cursor: pointer; }
+
+.keywords--headline:hover{
+  background:var(--rlp-gray-hover);
+  color:#fff !important;
+  }
+
+.keywords--container {
+  margin-top: 10px; }
+
+.keywords--item {
+  margin: 10px;
+  cursor: pointer; }
+
+.keywords--item:hover {
+  color: var(--rlp-red);
+  font-weight: bold; }
+
+.pager {
+  text-align: center; }
+
+.pager--list {
+  display: inline-block;
+  padding-left: 0; }
+
+.pager--list--item {
+  display: inline-block;
+  background: var(--rlp-gray);
+  margin: 7px;
+  padding: 10px;
+  cursor: pointer; }
+
+.pager--list--item.active-Page {
+  background: var(--rlp-red);
+  color: var(--rlp-gray); }
+
+.pager--list--item:hover {
+  background: var(--rlp-gray-hover); }
+
+.pager--list--points {
+  display: inline-block;
+  margin: 7px;
+  padding: 10px; }
+
+.result--item {
+  border: 1px solid #ddd;
+  background: var(--rlp-gray);
+  padding: 15px 15px;
+  margin-top: 5px; }
+
+.result--item--title {
+  font-size: 20px; }
+
+
+.result-item {
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  background: var(--rlp-gray);
+  padding: 10px 10px;
+  margin-top: 6px; }
+
+.result-item dl dt, .result-item .result-item dl dd {
+  display: inline-block; }
+
+.result-item dl dt {
+  width: 150px; }
+
+.result-item-layer {
+  margin-top: 10px;
+  padding-left: 30px; }
+
+.-js-subfacet-toggle-button, .search--list .search--list--item, .search--list .resource--list--item, .resource--list .search--list--item, .resource--list .resource--list--item {
+  display: inline-block;
+  color: white;
+  background-color: var(--rlp-red);
+  border: 2px solid var(--rlp-red);
+  border-radius: 0px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer; }
+
+.search--list .search--list--item.inactive, .search--list .resource--list--item.inactive, .resource--list .search--list--item.inactive, .resource--list .resource--list--item.inactive {
+  color: #666;
+  background-color: white;
+  border: 1px solid #bbb; }
+
+.-js-subfacet-toggle-button:hover, .search--list .search--list--item:hover, .search--list .resource--list--item:hover, .resource--list .search--list--item:hover, .resource--list .resource--list--item:hover {
+  background-color: white;
+  color: var(--rlp-red); }
+
+.-js-subfacet-toggle-button.inactive:hover, .search--list .search--list--item.inactive:hover, .search--list .resource--list--item.inactive:hover, .resource--list .search--list--item.inactive:hover, .resource--list .resource--list--item.inactive:hover {
+  color: white;
+  background-color: var(--rlp-red);
+  border-color: var(--rlp-red);
+}
+
+.search--list .inactive, .resource--list .inactive {
+  color: #666;
+  border: 1px solid #bbb; }
+
+.item-list span {
+  display: inline-block;
+  color: #333;
+  border: 1px solid #6f6f6f;
+  border-radius: 0px;
+  padding: 2px 8px;
+  cursor: pointer; }
+
+.item-list span.inactive {
+  color: #666;
+  border: 1px solid #bbb; }
+
+.item-list span:hover {
+  background: #e1e1e1; }
+
+.map {
+  width: 250px;
+  height: 250px;
+  display: inline-block; }
+
+@media only screen and (max-width: 480px) {
+  .map {
+    width: 100%; } }
+
+@media only screen and (max-width: 720px) {
+  .map {
+    width: 100%; } }
+
+@media only screen and (max-width: 960px) {
+  .map {
+    width: 100%; } }
+
+
+.search-content-geoportal .search-extended.active {
+  display: block; }
+
+.search-content-geoportal .search-extended .search-filter {
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--rlp-red);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px; }
+
+
+.search-content-geoportal .search-extended .search-filter .map-wrapper {
+  margin: 10px 0 0 4px; }
+
+.search-content-geoportal .search-extended .search-filter .map-wrapper .map {
+  border: var(--rlp-red) solid 1px; }
+
+.search-content-geoportal .search-extended .search-filter .block {
+  display: block; }
+
+.search-content-geoportal .search-extended .search-filter .block label {
+  display: inline-block;
+  width: 100px; }
+
+.search-content-geoportal .search-extended .search-filter .block{
+  display: block; }
+
+.search-content-geoportal .search-extended .search-filter{
+  margin: 10px 0 0 4px; }
+
+.search-content-geoportal .search-extended .search-filter .filter-title {
+  font-weight: bold;
+  margin: 0 0 0 4px; }
+
+.search-content-geoportal .search-extended .search-filter select {
+  margin: 10px 0 0 4px; }
+
+.search-content-geoportal .search-extended .search-filter input, .search-content-geoportal .search-extended .search-filter #geoportal-search-extended-when .hasDatepicker, #geoportal-search-extended-when .search-content-geoportal .search-extended .search-filter .hasDatepicker, .search-content-geoportal .search-extended .search-filter label, .search-content-geoportal .search-extended .search-filter select, .search-content-geoportal .search-extended .search-filter .reset-select {
+  cursor: pointer; }
+
+.search-content-geoportal .search-extended .search-filter{
+  display: block;
+  margin: 0 0 0 4px; }
+
+.search-content-geoportal .search-extended .search-filter .inspire img {
+  position: absolute;
+  top: 0;
+  right: 0; }
+
+.reset-select{
+    background-color: var(--rlp-red);
+    color: white;
+    padding: 5px;
+}
+.reset-select:hover{
+    background-color: var(--rlp-red-hover);
+    color: #000;
+    cursor: pointer;
+}
+
+.img-area .img-preview {
+  height: 100px; }
+
+.img-area .img-logo {
+  max-height: 100px;
+  max-width: 100px;}
+
+.img-logo:hover, .img-symbollink:hover, .img-open:hover{
+    border: 1px solid var(--rlp-red);
+}
+
+.img-area .img-symbollink {
+  max-height: 40px;
+  }
+
+.img-symbollink{
+    padding: 5px;
+}
+
+
+
+.thumbnail-preview, .thumbnail-extent{
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--rlp-red);
+}
+
+.thumbnail-preview:hover, .thumbnail-extent:hover{
+    border-width: 3px;
+    cursor: pointer;
+}
+
+
+.inline {
+  margin: 10px 0 0 4px;
+  display: inline-block;
+  position: relative; }
+
+.extended-search-header {
+  padding: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--rlp-red); }
+
+.extended-search-header.active {
+  font-weight: bolder;
+  color: var(--rlp-red-hover); }
+
+.extended-search-header:hover {
+  font-weight: bolder;
+  color: #000; }
+
+#geoportal-search-extended-when .inline label {
+  width: 80px;
+  display: inline-block; }
+
+#geoportal-search-extended-when .hasDatepicker {
+  border: 1px solid #ddd;
+  height: 30px;
+  width: 250px; }
+
+@media only screen and (max-width: 480px) {
+  #geoportal-search-extended-when .hasDatepicker {
+    width: 100%; } }
+
+#geoportal-search-extended-what .inline {
+  display: block; }
+
+#geoportal-search-extended-theme .inline {
+  width: 100%; }
+
+.filter-group-title, .filter-title {
+    background-color: var(--rlp-red);
+    padding: 5px;
+    color: white;
+    margin: 5px 0 0 0;
+    font-weight: bold;
+}
+.filter-group{
+    margin: 5px 0 0 20px;
+}
+.filter-title{
+    background-color: white;
+    color: var(--rlp-red);
+    border: 1px solid var(--rlp-red);
+}
+
+.filter-title:hover, .filter-group-title:hover{
+    cursor: default;
+}
+
+.date-picker-wrapper{
+    margin: 10px;
+}
+
+.selectCat {
+  height: 250px;
+  width: 100%;
+  display: block; }
+
+.selectCat:not(:checked) {
+  color: gray; }
+
+.selectCat option {
+  padding: 5px;
+  color: #333; }
+
+.selectCat option:hover, .selectCat option:active, .selectCat optionfocus, .selectCat option:checked {
+  color: #fff;
+  background-color: var(--rlp-red);
+  background: var(--rlp-red) !important;
+  background: linear-gradient(var(--rlp-red), var(--rlp-red)); }
+
+#chosen-facets > div{
+    padding-left: 25px;
+}
+
+.facet-list h4 {
+  color: #fff;
+  font-size: 18px;
+  background-color: var(--rlp-red);
+  background: var(--rlp-red) !important;
+  padding: 10px;
+  }
+
+.facet-item{
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--rlp-red);
+    margin: 10px 0;
+}
+
+.facet-item ul{
+    max-height: 170px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.facet-list ul {
+  padding: 5px;
+  list-style-type: none; }
+
+.facet-list ul li {
+  padding: 5px;
+  cursor: pointer; }
+
+.facet-list ul li:hover, .facet-list ul li:active, .facet-list ul lifocus, .facet-list ul li:checked {
+  color: #fff;
+  background-color: var(--rlp-red);
+  background: var(--rlp-red) !important;
+  background: linear-gradient(var(--rlp-red), var(--rlp-red)); }
+
+.Zebra_DatePicker {
+  font-size: 15px;
+  color: #373737 !important;
+  background: var(--rlp-red) !important;
+  border: 1px solid var(--rlp-gray) !important;
+  border-radius: 0px !important; }
+
+.Zebra_DatePicker:hover {
+  background: #5d1423; }
+
+.Zebra_DatePicker .dp_footer {
+  margin-top: 0 !important; }
+
+.Zebra_DatePicker .dp_header .dp_hover, .Zebra_DatePicker .dp_footer .dp_hover {
+  background: #b12643 !important; }
+
+.Zebra_DatePicker .dp_today {
+  padding: 5px !important; }
+
+.Zebra_DatePicker .dp_daypicker th {
+  background: #fff !important; }
+
+.Zebra_DatePicker .dp_daypicker td, .Zebra_DatePicker .dp_daypicker th, .Zebra_DatePicker .dp_monthpicker td, .Zebra_DatePicker .dp_yearpicker td {
+  border: 1px solid #ddd !important; }
+
+.Zebra_DatePicker_Icon_Inside_Right {
+  margin: 0 10px 0 0 !important; }

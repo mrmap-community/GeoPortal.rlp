@@ -1,0 +1,15 @@
+/*
+DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
+*/
+:root{
+    --rlp-red: #871d33;
+    --rlp-red-hover: #b77784;
+    --rlp-red-light: #a7233f;
+    --rlp-red-light-hover: #c82a4b;
+    --rlp-gray: #eee;
+    --rlp-gray-hover: #aeaeae;
+    --rlp-gray-placeholder: #868686;
+    --rlp-gray-light: #EFEFEF;
+
+    --success-green: #2e9b2e;
+}

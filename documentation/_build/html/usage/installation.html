@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Installation &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FAQ" href="FAQ.html" />
+    <link rel="prev" title="Welcome to Geoportal’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p><strong>Requirements:</strong></p>
+<ul class="simple">
+<li>Debian 9 with working internet connection</li>
+<li>Git installed</li>
+</ul>
+<p><strong>How to install:</strong></p>
+<p>./geoportal_maintenance.sh --help</p>
+<p>This script is for installing and maintaining your geoportal solution
+You can choose from the following options:</p>
+<div class="line-block">
+<div class="line">--ipaddress=IPADDRESS</div>
+<div class="line">Default: “127.0.0.1”</div>
+</div>
+<div class="line-block">
+<div class="line">--proxyip=Proxy IP</div>
+<div class="line">Default: “None”</div>
+</div>
+<div class="line-block">
+<div class="line">--proxyport=Proxy Port</div>
+<div class="line">Default: “None”</div>
+</div>
+<div class="line-block">
+<div class="line">--mapbenderdbuser=User for Database access</div>
+<div class="line">Default: “mapbenderdbuser”</div>
+</div>
+<div class="line-block">
+<div class="line">--mapbenderdbpassword=Password for database access</div>
+<div class="line">Default: “mapbenderdbpassword”</div>
+</div>
+<div class="line-block">
+<div class="line">--phppgadmin_user=User for PGAdmin web access</div>
+<div class="line">Default: “postgresadmin”</div>
+</div>
+<div class="line-block">
+<div class="line">--phppgadmin_password=Password for PGAdmin web access</div>
+<div class="line">Default: “postgresadmin_password”</div>
+</div>
+<div class="line-block">
+<div class="line">--mysqlpw=database password for MySQL</div>
+<div class="line">Default: “root”</div>
+</div>
+<div class="line-block">
+<div class="line">--mode=what you want to do</div>
+<div class="line">Default: “none” [install,update,delete,backup]</div>
+</div>
+<p><strong>Description</strong>:</p>
+<p>mandatory:</p>
+<p>--ipaddress             -&gt; The address/name of your external interface. This will be used for building links that refer to your server.</p>
+<p>--mode                  -&gt; What you want to do. Choices are install | update | delete | backup.</p>
+<p>optional:</p>
+<p>--proxyip               -&gt; IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf</p>
+<p>--proxyport             -&gt; Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf</p>
+<p>--mapbenderdbuser       -&gt; User for accessing the mapbender database. Will be created on install.</p>
+<p>--mapbenderdbpassword   -&gt; Password for mapbenderdbuser.</p>
+<p>--phppgadmin_user       -&gt; User for the PHPPgAdmin Webinterface.</p>
+<p>--phppgadmin_password   -&gt; Password for phppgadmin_user.</p>
+<p>--mysqlpw               -&gt; Passwort for the MySql root user.</p>
+<p><strong>Examples</strong></p>
+<p>Full install:</p>
+<p>geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword
+--phppgadmin_user=MyPHPPgAdminUser --phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install</p>
+<p>Update:</p>
+<p>geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword
+--phppgadmin_user=MyPHPPgAdminUser --phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update</p>
+<p>Delete:</p>
+<p>geoportal_maintenance.sh --mode=delete</p>
+<p>Backup:</p>
+<p>geoportal_maintenance.sh --mode=backup</p>
+<p>default credentials:</p>
+<p>mysql       -&gt; root:root
+wiki        -&gt; root:rootroot
+postgres    -&gt; postgres:
+phppgadmin  -&gt; postgresadmin:postgresadmin_password</p>
+<p>Things that need to be done after installation:</p>
+<p>Create Navigation:
+Nagivation items are stored in database and can be found in the table navigations under the django schema.
+An example navigation is created upon installation and can be used as reference.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to Geoportal’s documentation!</a></li>
+      <li>Next: <a href="FAQ.html" title="next chapter">FAQ</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage/installation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

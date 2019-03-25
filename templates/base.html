@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static i18n %}
+{% csrf_token %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<html>
+
+<head>
+    <title>Geoportal{% block title %} RLP {% endblock %}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'useroperations/images/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/forms.css' %}" media="all" />
+        <script>
+            var BASEDIR = '{{ basedir }}'
+        </script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/vendor/leaflet/leaflet.js' %}"></script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/vendor/zebra/javascript/zebra_datepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
+    <script type="text/javascript" src="{% static 'useroperations/js/frontpage.js' %}"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<header>
+
+<div class="header">
+    <div class="left-header">
+        <a href="/"><img id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+    </div>
+    <div class="middle-header">
+        <div class="middle-header-top">
+            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
+            <div id="geoportal-search-button" class="search-submit-button">{% trans 'Search' %}</div>
+            <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
+        </div>
+        <div id="middle-header-bottom">
+            <div class="inline">
+                <input class="spatial-checkbox-item" id="spatial-checkbox" type="checkbox" title="{% trans 'Spatial Filter' %}">
+                <label class="spatial-checkbox-item" for="spatial-checkbox">{% trans 'Use spatial filter' %}</label>
+            </div>
+        </div>
+    </div>
+    <div class="right-header">
+        <div class="right-header-top">
+            <div class="language-selector-wrapper">
+                <img class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
+                <img class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
+            </div>
+        </div>
+        <div class="right-header-bottom">
+            <!--<a href="/"><img id="logo-gdi-rp" src="{% static 'useroperations/images/logo-gdi.png' %}" title="GDI-RP Rheinland Pfalz"/></a>-->
+            <!--<a href="http://www.rlp.de" target="_blank"><img id="logo-country" src="{% static 'useroperations/images/logo-rlp.png' %}" title="Rheinland Pfalz"/></a>-->
+        </div>
+    </div>
+</div>
+</header>
+
+<body>
+    <nav>
+    <div class="map-viewer-toggler">
+        <img width="50px" src="{% static 'useroperations/images/icn_map_viewer_toggler.png' %}" title="{% trans 'Open and close map viewer' %}">
+    </div>
+    <div class="map-viewer-overlay closed">
+        {% include 'geoportal.html' %}
+    </div>
+    <div class="sidebar-toggler">
+        <img width="50px" src="{% static 'useroperations/images/icn_toggler.png' %}" title="{% trans 'Open and close menu' %}">
+    </div>
+    <div id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-title">
+            {% trans 'Menu' %}
+        </div>
+        <div class="sidebar-content">
+        <div class="sidebar-area login-status">
+            <div class="sidebar-area-title">
+                <div class="sidebar-area-title-icon">
+                    {% if loggedin %}
+                        <img width="40px" src="{% static 'useroperations/images/icn_user_logged_in.png' %}">
+                    {% else %}
+                        <img width="40px" src="{% static 'useroperations/images/icn_user.png' %}">
+                    {% endif %}
+                </div>
+                <div class="sidebar-area-title-text">
+                    {% if loggedin %}
+                        {{ user }}
+                    {% else %}
+                        {% trans 'My Profile' %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="sidebar-area-content">
+                {% if loggedin %}
+                <div>{% trans 'Hello' %}, {{ user }}!</div>
+                    <a href="{% url 'useroperations:change_profile' %}"><div class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</div></a>
+                    <a href="{% url 'useroperations:logout' %}"><div class="sidebar-list-element {% if request.session.current_page == 'logout' %}current-page{% endif %}">{% trans 'Logout' %}</div></a>
+                {% else %}
+                <div>{% trans 'Not signed in' %}</div>
+                    <a href="{% url 'useroperations:login' %}"><div class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</div></a>
+                    <a href="{% url 'useroperations:register' %}"><div class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</div></a>
+                    <!--<a href="{% url 'useroperations:pw_reset' %}"><div class="sidebar-list-element">{% trans 'Reset Password' %}</div></a> ToDo: Move to login form -->
+                {% endif %}
+            </div>
+        </div>
+        {% for main_page_key, main_page_val in navigation.items %}
+            <div class="sidebar-area">
+                    <div class="sidebar-area-title">
+                        <div class="sidebar-area-title-icon">
+                            <img width="40px" src="{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}">
+                        </div>
+                        <div class="sidebar-area-title-text">
+                            {% trans main_page_key %}
+                        </div>
+                    </div>
+                    <div class="sidebar-area-content">
+                        {% for sub_page in main_page_val.children %}
+                            {% if sub_page.name == "Kartenviewer" or sub_page.name == "Mapviewer" %}
+                                {% for gui in guis %}
+                                    <a href="{% url 'useroperations:map_viewer' %}?g={{ gui }}"><div class="sidebar-list-element">{{ gui }}</div></a>
+                                {% endfor %}
+                            {% else %}
+                                <a href="{{ sub_page.url }}"><div class="sidebar-list-element">{% trans sub_page.name %}</div></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </nav>
+    <div id="body-content" class="body-content">
+
+        {% if messages %}
+        <div class="messages-container">
+            <div class="messages">
+                {% for message in messages %}
+                <div class="{{ message.tags }}">
+                    <div class="message-toggler">
+                        x
+                    </div>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% block body %}
+    {% endblock %}
+    </div>
+</body>
+
+<footer>
+    <div class="left-footer">
+        <a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}https://www.rlp.de/de/startseite/{% else %}https://www.rlp.de/en/english/{% endif %}"><img id="logo_rlp" src="{% static 'useroperations/images/logo-country.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+    </div>
+    <div class="footer-col-wrapper">
+        <div id="footer-legal" class="footer-col">
+            <ul class="footer-list">
+                <li><a href="/article/kontakt">{% trans 'Contact' %}</a></li>
+                <li><a href="/article/impressum">{% trans 'Legal Disclosure' %}</a></li>
+                <li><a href="/article/datenschutz">{% trans 'Privacy' %}</a></li>
+                <li><a href="/article/rechtshinweis">{% trans 'Legal Notice' %}</a></li>
+                <li><a href="/article/transparenzgesetz">{% trans 'Transparency law' %}</a></li>
+            </ul>
+        </div>
+        <div id="footer-news-api" class="footer-col">
+            <ul class="footer-list">
+                <li><a class="image-text-container" target="_blank" href="{{ rss_file }}">
+                    <img src="{% static 'useroperations/images/icn_rss.png' %}">
+                    {% trans 'RSS Newsfeed' %}
+                </a></li>
+                <li><a class="image-text-container" href="/news/twitter">
+                    <img src="{% static 'useroperations/images/icn_twitter.png' %}">
+                    {% trans 'Twitter' %}
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="right-footer">
+        <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-geoportal.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+    </div>
+</footer>

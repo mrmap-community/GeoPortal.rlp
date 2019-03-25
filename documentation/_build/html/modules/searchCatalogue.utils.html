@@ -1,0 +1,573 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>searchCatalogue.utils package &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="searchcatalogue-utils-package">
+<h1>searchCatalogue.utils package<a class="headerlink" href="#searchcatalogue-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-searchCatalogue.utils.autoCompleter">
+<span id="searchcatalogue-utils-autocompleter-module"></span><h2>searchCatalogue.utils.autoCompleter module<a class="headerlink" href="#module-searchCatalogue.utils.autoCompleter" title="Permalink to this headline">¶</a></h2>
+<p>Author: Michel Peltriaux
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: <a class="reference external" href="mailto:michel&#46;peltriaux&#37;&#52;&#48;vermkv&#46;rlp&#46;de">michel<span>&#46;</span>peltriaux<span>&#64;</span>vermkv<span>&#46;</span>rlp<span>&#46;</span>de</a>
+Created on: 22.01.19</p>
+<dl class="class">
+<dt id="searchCatalogue.utils.autoCompleter.AutoCompleter">
+<em class="property">class </em><code class="descclassname">searchCatalogue.utils.autoCompleter.</code><code class="descname">AutoCompleter</code><span class="sig-paren">(</span><em>search_text</em>, <em>max_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/autoCompleter.html#AutoCompleter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.autoCompleter.AutoCompleter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The class instance for the auto completion on the address bar.</p>
+<dl class="method">
+<dt id="searchCatalogue.utils.autoCompleter.AutoCompleter.get_auto_completion_suggestions">
+<code class="descname">get_auto_completion_suggestions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/autoCompleter.html#AutoCompleter.get_auto_completion_suggestions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.autoCompleter.AutoCompleter.get_auto_completion_suggestions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all suggestions for the search texts</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>dict: Contains suggestions</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.autoCompleter.AutoCompleter.set_max_results">
+<code class="descname">set_max_results</code><span class="sig-paren">(</span><em>max_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/autoCompleter.html#AutoCompleter.set_max_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.autoCompleter.AutoCompleter.set_max_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for max results</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>max_results (int): The new search_text</dd>
+<dt>Returns:</dt>
+<dd>AutoCompleter: Returns the object itself</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.autoCompleter.AutoCompleter.set_search_text">
+<code class="descname">set_search_text</code><span class="sig-paren">(</span><em>search_text</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/autoCompleter.html#AutoCompleter.set_search_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.autoCompleter.AutoCompleter.set_search_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setter for search text</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_text (string): The new search_text</dd>
+<dt>Returns:</dt>
+<dd>AutoCompleter: Returns the object itself</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-searchCatalogue.utils.rehasher">
+<span id="searchcatalogue-utils-rehasher-module"></span><h2>searchCatalogue.utils.rehasher module<a class="headerlink" href="#module-searchCatalogue.utils.rehasher" title="Permalink to this headline">¶</a></h2>
+<p>Author: Michel Peltriaux
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: <a class="reference external" href="mailto:michel&#46;peltriaux&#37;&#52;&#48;vermkv&#46;rlp&#46;de">michel<span>&#46;</span>peltriaux<span>&#64;</span>vermkv<span>&#46;</span>rlp<span>&#46;</span>de</a>
+Created on: 22.01.19</p>
+<dl class="class">
+<dt id="searchCatalogue.utils.rehasher.Rehasher">
+<em class="property">class </em><code class="descclassname">searchCatalogue.utils.rehasher.</code><code class="descname">Rehasher</code><span class="sig-paren">(</span><em>categories: dict</em>, <em>filters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/rehasher.html#Rehasher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.rehasher.Rehasher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Merges categories and filters from all search result types (wms, wfs, dataset, wmc) into one dict for better handling</p>
+<dl class="method">
+<dt id="searchCatalogue.utils.rehasher.Rehasher.get_rehashed_categories">
+<code class="descname">get_rehashed_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/rehasher.html#Rehasher.get_rehashed_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.rehasher.Rehasher.get_rehashed_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for rehashed categories</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>dict: The rehashed categories</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.rehasher.Rehasher.get_rehashed_filters">
+<code class="descname">get_rehashed_filters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/rehasher.html#Rehasher.get_rehashed_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.rehasher.Rehasher.get_rehashed_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for rehashed filters</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>dict: The rehashed filters</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-searchCatalogue.utils.searcher">
+<span id="searchcatalogue-utils-searcher-module"></span><h2>searchCatalogue.utils.searcher module<a class="headerlink" href="#module-searchCatalogue.utils.searcher" title="Permalink to this headline">¶</a></h2>
+<p>Author: Michel Peltriaux
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: <a class="reference external" href="mailto:michel&#46;peltriaux&#37;&#52;&#48;vermkv&#46;rlp&#46;de">michel<span>&#46;</span>peltriaux<span>&#64;</span>vermkv<span>&#46;</span>rlp<span>&#46;</span>de</a>
+Created on: 22.01.19</p>
+<dl class="class">
+<dt id="searchCatalogue.utils.searcher.Searcher">
+<em class="property">class </em><code class="descclassname">searchCatalogue.utils.searcher.</code><code class="descname">Searcher</code><span class="sig-paren">(</span><em>keywords=''</em>, <em>resource_set='dataset'</em>, <em>extended_search_params=''</em>, <em>page=1</em>, <em>page_res=''</em>, <em>selected_facets={}</em>, <em>order_by=''</em>, <em>bbox=None</em>, <em>type_bbox=None</em>, <em>language_code='de'</em>, <em>catalogue_id=3</em>, <em>only_open_data='false'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_categories_list">
+<code class="descname">get_categories_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_categories_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_categories_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all categories/facets from the database using a GET request</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>Returns the categories which have been found during the search</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_info_all_pages">
+<code class="descname">get_info_all_pages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_info_all_pages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_info_all_pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_info_result_category">
+<code class="descname">get_info_result_category</code><span class="sig-paren">(</span><em>search_result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_info_result_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_info_result_category" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd>search_result (dict): The search result that shall be checked</dd>
+<dt>Returns:</dt>
+<dd>category (str): The categories for the search result</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_info_search_results">
+<code class="descname">get_info_search_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_info_search_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_info_search_results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_search_results_de">
+<code class="descname">get_search_results_de</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_search_results_de"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_search_results_de" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function for calling the german catalogue</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>dict: Contains all search results</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_search_results_rlp">
+<code class="descname">get_search_results_rlp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_search_results_rlp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_search_results_rlp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the search</p>
+<p>Search parameters will be used from the Searcher object itself.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>dict: Contains the search results</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.get_spatial_data">
+<code class="descname">get_spatial_data</code><span class="sig-paren">(</span><em>search_texts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.get_spatial_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.get_spatial_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a spatial filtered search</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_texts: All search words in a list</dd>
+<dt>Returns:</dt>
+<dd>Returns the spatial search results from the database</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="searchCatalogue.utils.searcher.Searcher.is_article_internal">
+<code class="descname">is_article_internal</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/searcher.html#Searcher.is_article_internal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.searcher.Searcher.is_article_internal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the provided title is associated with an internal article</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>title (str): The title of the article</dd>
+<dt>Returns:</dt>
+<dd>bool: True if the article is internal, False otherwise</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-searchCatalogue.utils.viewHelper">
+<span id="searchcatalogue-utils-viewhelper-module"></span><h2>searchCatalogue.utils.viewHelper module<a class="headerlink" href="#module-searchCatalogue.utils.viewHelper" title="Permalink to this headline">¶</a></h2>
+<p>This class provides all functions that are needed in view.py.
+For beautiful code-reasons we put these functions in here.</p>
+<p>Author: Michel Peltriaux
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: <a class="reference external" href="mailto:michel&#46;peltriaux&#37;&#52;&#48;vermkv&#46;rlp&#46;de">michel<span>&#46;</span>peltriaux<span>&#64;</span>vermkv<span>&#46;</span>rlp<span>&#46;</span>de</a>
+Created on: 22.01.19</p>
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.calculate_pages_to_render">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">calculate_pages_to_render</code><span class="sig-paren">(</span><em>search_results</em>, <em>requested_page: int</em>, <em>requested_page_res: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#calculate_pages_to_render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.calculate_pages_to_render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict of page configurations for all requested resource types.</p>
+<p>Page configuration means:
+* current_page = which page is requested by the user
+* range_page = list of integers from 1 to max_page (for a loop in the view template necessary)
+* max_page = the maximum number of displayed pages before and after the current page
+* display_pages_before_current = which pages shall be displayed before the currently selected
+* display_pages_after_current = which pages shall be displayed after the currently selected</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: The dict of search results, which is an output of searcher.py
+requested_page: The requested_page means which page has been fetched
+requested_page_res: This stands for the resource which gets this new page</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains every resource encoded with it’s current selected page</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.calculate_pages_to_render_de">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">calculate_pages_to_render_de</code><span class="sig-paren">(</span><em>search_results</em>, <em>requested_page: int</em>, <em>requested_page_res: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#calculate_pages_to_render_de"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.calculate_pages_to_render_de" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict of page configurations for all requested resource types of the german catalogue</p>
+<p>Page configuration means:
+* current_page = which page is requested by the user
+* range_page = list of integers from 1 to max_page (for a loop in the view template necessary)
+* max_page = the maximum number of displayed pages before and after the current page
+* display_pages_before_current = which pages shall be displayed before the currently selected
+* display_pages_after_current = which pages shall be displayed after the currently selected</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: The dict of search results, which is an output of searcher.py
+requested_page: The requested_page means which page has been fetched
+requested_page_res: This stands for the resource which gets this new page</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains every resource encoded with it’s current selected page</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.gen_extent_graphic_url">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">gen_extent_graphic_url</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#gen_extent_graphic_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.gen_extent_graphic_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the url which leads to the web generated map graphics for each search result</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: The output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.gen_inspire_url">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">gen_inspire_url</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#gen_inspire_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.gen_inspire_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the inspire download urls and stores them in search_results</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: The output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.gen_resource_arr">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">gen_resource_arr</code><span class="sig-paren">(</span><em>search_results: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#gen_resource_arr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.gen_resource_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an array which contains only the names of the current selected resources</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results (dict): The output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>list: All resource keys that show up in the search_results dict.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.generate_page_list">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">generate_page_list</code><span class="sig-paren">(</span><em>max_page</em>, <em>current_page</em>, <em>max_displayed_pages</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#generate_page_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.generate_page_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a list of elements for the pagination</p>
+<p>Content of returned list may look like this:
+[1, ‘…’, 50, 51, 52, 53, 54, ‘…’, 3210]
+or
+[1, 2, 3]</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>max_page: The maximum page available for the search results
+current_page: The current page number
+max_displayed_pages: How many pages before and after the current shall be displayed until ‘…’ is showed</dd>
+<dt>Returns:</dt>
+<dd>list: Contains all page elements</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.get_preselected_facets">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">get_preselected_facets</code><span class="sig-paren">(</span><em>params</em>, <em>all_categories</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#get_preselected_facets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.get_preselected_facets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolve all facets that have been determined by the GET parameters.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>params: Contains the categories/facets
+all_categories:</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains all sorted facets</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.get_search_filters">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">get_search_filters</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#get_search_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.get_search_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find any search filter from the search results. Which one does not matter, since they contain all the same searchText and so on.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: Output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>OrderedDict: Contains the search_filter object from the search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.group_all_download_options">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">group_all_download_options</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#group_all_download_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.group_all_download_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all download Options in search_results to a grouped format, including the amount of available options</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: The output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>list: Contains the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.hash_inspire_ids">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">hash_inspire_ids</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#hash_inspire_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.hash_inspire_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash the inspire ids</p>
+<p>The inspire ids contain symbols that are not allowed to use as IDs in javascript. Therefore
+many functions would not work if we do not hash these.
+Args:</p>
+<blockquote>
+<div>search_results: Contains all search results</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>nothing</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.parse_extended_params">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">parse_extended_params</code><span class="sig-paren">(</span><em>params: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#parse_extended_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.parse_extended_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert one long GET url parameter into a well formed dict.</p>
+<p>Represents the incoming params, which are expected to be in a decoded url pattern.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>params (dict): Contains the extended search parameters as one long GET url parameter</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains the splitted extended search parameters</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.prepare_info_search_results">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">prepare_info_search_results</code><span class="sig-paren">(</span><em>search_results</em>, <em>list_all: bool</em>, <em>lang: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#prepare_info_search_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.prepare_info_search_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge info search results</p>
+<p>Merges all search results for each keyword into one list.
+Simplifies later usage in template rendering</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results (dict): The info search results dict
+list_all (bool): Flag indicates if this function handles the results of a real search or simple listing of all
+lang (str): Contains the selected language for the page</dd>
+<dt>Returns:</dt>
+<dd>nothing</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.prepare_requested_resources">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">prepare_requested_resources</code><span class="sig-paren">(</span><em>requ_res</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#prepare_requested_resources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.prepare_requested_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ajax sends an array as a string. We need to decompose each element from that string and reforge it into a “true” array</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>requ_res:</dd>
+<dt>Returns:</dt>
+<dd>list: Represents the string array requ_res as a real list</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.prepare_selected_facets">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">prepare_selected_facets</code><span class="sig-paren">(</span><em>selected_facets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#prepare_selected_facets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.prepare_selected_facets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selected facets are sent as a triple of (parentCategory, title, id) which needs to be transformed into a dict for better handling</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>selected_facets: An array of facets which were selected by the user</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains (parentCategory, title, id)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.prepare_spatial_data">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">prepare_spatial_data</code><span class="sig-paren">(</span><em>spatial_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#prepare_spatial_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.prepare_spatial_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Organizes keywords in spatial_data</p>
+<p>The results of the spatial data search does not differentiate between a search word that encodes a location,
+like a city name, and a “thing” the user is looking for, like “environment”.
+This function analyzes the output of the spatial search and transforms it into a dict
+where the location (‘in’) and the “thing” (‘looking_for’) can be differentiated.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>spatial_data: The results of the search results from the spatial search</dd>
+<dt>Returns:</dt>
+<dd>dict: Contains the same data but sorted by “is it a location or a thing we are looking for in the location?”</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.resolve_internal_external_info">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">resolve_internal_external_info</code><span class="sig-paren">(</span><em>search_results</em>, <em>searcher: searchCatalogue.utils.searcher.Searcher</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#resolve_internal_external_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.resolve_internal_external_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a mediawiki article is an internal or external article</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results:
+searcher:</dd>
+<dt>Returns:</dt>
+<dd>nothing</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.set_children_data_wfs">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">set_children_data_wfs</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#set_children_data_wfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.set_children_data_wfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the important top-level attributes to all children for all wfs results.</p>
+<p>Otherwise some top-level information might be missing on lower level sublayers.
+This way it is much easier to render the corresponding organization logo for all entries in the template.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: All search results - output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.set_iso3166_icon_path">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">set_iso3166_icon_path</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#set_iso3166_icon_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.set_iso3166_icon_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the state icon file path for all search results</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results:</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.set_service_disclaimer_url">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">set_service_disclaimer_url</code><span class="sig-paren">(</span><em>search_results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#set_service_disclaimer_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.set_service_disclaimer_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets for all search results the service disclaimer url</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>search_results: Output of searcher.py</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified search_results</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="searchCatalogue.utils.viewHelper.translate_filter_titles">
+<code class="descclassname">searchCatalogue.utils.viewHelper.</code><code class="descname">translate_filter_titles</code><span class="sig-paren">(</span><em>filters</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/searchCatalogue/utils/viewHelper.html#translate_filter_titles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchCatalogue.utils.viewHelper.translate_filter_titles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates filter titles according to the selected language</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filters (dict): Contains the filters that shall be translated</dd>
+<dt>Returns:</dt>
+<dd>Returns the modified filters</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-searchCatalogue.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-searchCatalogue.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/FAQ.html">FAQ</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/searchCatalogue.utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

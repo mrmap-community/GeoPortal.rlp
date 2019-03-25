@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+
+<div class="title">
+    <h1>{{ headline }}</h1>
+</div>
+
+{% if activated %}
+    <p> {% trans 'Account successfully activated!' %} </p>
+{% else %}
+    <p> {% trans 'Activation failed. Please contact an administrator!' %} </p>
+{% endif %}
+<hr>
+
+{% endblock %}

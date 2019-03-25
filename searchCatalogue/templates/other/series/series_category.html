@@ -1,0 +1,50 @@
+{% load static i18n humanize %}
+<div class="search-cat {% if 'series' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}" title="{% trans 'Series' %}">
+            {% trans 'Series' %}
+            ({{ series.md.nresults|intcomma }})
+        </div>
+    </div><!-- end .search-header -->
+
+    <div class="series search--body hide">
+        <div>
+            <div class="center">
+                {% if series.md.nresults|add:0 > 0 %}
+                {% with pages.series as page_data %}
+                    {% with 'series' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+            </div>
+            <div class="search-results">
+                {% for result in series.srv %}
+                    {% include 'other/search_result.html' %}
+                {% endfor %}
+            </div><!-- end .search-results -->
+
+            {% else %}
+            <p>
+                {% trans 'No results found, please use another search term...' %}
+
+            </p>
+            </div>
+            {% endif %}
+
+            <div class="center">
+                {% if series.md.nresults|add:0 > 0 %}
+                {% with pages.series as page_data %}
+                    {% with 'series' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div>
+        </div><!-- end .div -->
+    </div><!-- end .series .search--body -->
+</div>

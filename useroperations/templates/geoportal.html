@@ -1,0 +1,28 @@
+{% load i18n static %}
+
+{% block body %}
+	<div class="mapbender">
+        <div class="map-sidebar">
+            <div class="map-sidebar-actions">
+                <div class="mobile-map-toggler">
+		        	<img width="50px" src="{% static 'useroperations/images/icn_switch.png' %}" title="{% trans 'Switch between default and mobile map viewer' %}">
+		        </div>
+		        <div class="map-application-selector">
+		        	<div class="map-applications-toggler">
+		        		<img width="50px" src="{% static 'useroperations/images/icn_map_application_toggler.png' %}" title="{% trans 'Select other map application' %}">
+		        	</div>
+		        </div>
+            </div>
+            <div class="map-applications-list">
+                {% for gui in guis %}
+                <div class="map-applications-list-entry" data-id="{{ gui }}">{{ gui }}</div>
+                {% endfor %}
+            </div>
+        </div>
+		{% if mapviewer_params is None %}
+			<iframe id="mapviewer" frameborder="no" src="about:blank" data-toggle="http://{{ EXTERNAL_INTERFACE }}/mapbender/extensions/mobilemap2/index.html" data-params="http://{{ EXTERNAL_INTERFACE }}/mapbender/frames/index.php?lang={{ lang }}&mb_user_myGui={{ DEFAULT_GUI }}&LAYER[visible]=1&LAYER[querylayer]=1" name="geop_map" width="1000px" height="700px"></iframe>
+		{% else %}
+			<iframe id="mapviewer" frameborder="no" src="about:blank" data-toggle="http://{{ EXTERNAL_INTERFACE }}/mapbender/extensions/mobilemap2/index.html" data-params="http://{{ EXTERNAL_INTERFACE }}/mapbender/frames/index.php?lang={{ lang }}&mb_user_myGui={{ mapviewer_params }}" name="geop_map" width="1000px" height="700px"></iframe>
+		{% endif %}
+	</div>
+{% endblock %}

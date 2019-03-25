@@ -1,0 +1,518 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>crispy_forms.helper &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for crispy_forms.helper</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="k">import</span> <span class="n">mark_safe</span>
+
+<span class="kn">from</span> <span class="nn">crispy_forms.compatibility</span> <span class="k">import</span> <span class="n">string_types</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.exceptions</span> <span class="k">import</span> <span class="n">FormHelpersException</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.layout</span> <span class="k">import</span> <span class="n">Layout</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.layout_slice</span> <span class="k">import</span> <span class="n">LayoutSlice</span>
+<span class="kn">from</span> <span class="nn">crispy_forms.utils</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">TEMPLATE_PACK</span><span class="p">,</span> <span class="n">flatatt</span><span class="p">,</span> <span class="n">list_difference</span><span class="p">,</span> <span class="n">list_intersection</span><span class="p">,</span> <span class="n">render_field</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">django.urls</span> <span class="k">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">NoReverseMatch</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Django &lt; 1.10</span>
+    <span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="k">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">NoReverseMatch</span>
+
+
+<span class="k">class</span> <span class="nc">DynamicLayoutHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_check_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FormHelpersException</span><span class="p">(</span><span class="s2">&quot;You need to set a layout in your FormHelper&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_layout_and_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FormHelpersException</span><span class="p">(</span><span class="s2">&quot;You need to pass a form instance to your FormHelper&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all layout objects of first level of depth</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">fields</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">LayoutClasses</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a LayoutSlice pointing to layout objects of type `LayoutClass`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout</span><span class="p">()</span>
+        <span class="n">max_level</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;max_level&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">greedy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;greedy&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">filtered_layout_objects</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">get_layout_objects</span><span class="p">(</span><span class="n">LayoutClasses</span><span class="p">,</span> <span class="n">max_level</span><span class="o">=</span><span class="n">max_level</span><span class="p">,</span> <span class="n">greedy</span><span class="o">=</span><span class="n">greedy</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">filtered_layout_objects</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">filter_by_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a LayoutSlice pointing to fields with widgets of `widget_type`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout_and_form</span><span class="p">()</span>
+        <span class="n">layout_field_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">()</span>
+
+        <span class="c1"># Let&#39;s filter all fields with widgets like widget_type</span>
+        <span class="n">filtered_fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">pointer</span> <span class="ow">in</span> <span class="n">layout_field_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">pointer</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">widget</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>
+                <span class="n">filtered_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">filtered_fields</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">exclude_by_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a LayoutSlice pointing to fields with widgets NOT matching `widget_type`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout_and_form</span><span class="p">()</span>
+        <span class="n">layout_field_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">()</span>
+
+        <span class="c1"># Let&#39;s exclude all fields with widgets like widget_type</span>
+        <span class="n">filtered_fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">pointer</span> <span class="ow">in</span> <span class="n">layout_field_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">pointer</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">widget</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>
+                <span class="n">filtered_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">filtered_fields</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a LayoutSlice that makes changes affect the current instance of the layout</span>
+<span class="sd">        and not a copy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># when key is a string containing the field name</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="c1"># Django templates access FormHelper attributes using dictionary [] operator</span>
+            <span class="c1"># This could be a helper[&#39;form_id&#39;] access, not looking for a field</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_layout</span><span class="p">()</span>
+            <span class="n">layout_field_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">()</span>
+
+            <span class="n">filtered_field</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">pointer</span> <span class="ow">in</span> <span class="n">layout_field_names</span><span class="p">:</span>
+                <span class="c1"># There can be an empty pointer</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">pointer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="n">filtered_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">filtered_field</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">LayoutSlice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">class</span> <span class="nc">FormHelper</span><span class="p">(</span><span class="n">DynamicLayoutHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class controls the form rendering behavior of the form passed to</span>
+<span class="sd">    the `{% crispy %}` tag. For doing so you will need to set its attributes</span>
+<span class="sd">    and pass the corresponding helper object to the tag::</span>
+
+<span class="sd">        {% crispy form form.helper %}</span>
+
+<span class="sd">    Let&#39;s see what attributes you can set and what form behaviors they apply to:</span>
+
+<span class="sd">        **form_method**: Specifies form method attribute.</span>
+<span class="sd">            You can see it to &#39;POST&#39; or &#39;GET&#39;. Defaults to &#39;POST&#39;</span>
+
+<span class="sd">        **form_action**: Applied to the form action attribute:</span>
+<span class="sd">            - Can be a named url in your URLconf that can be executed via the `{% url %}` template tag. \</span>
+<span class="sd">            Example: &#39;show_my_profile&#39;. In your URLconf you could have something like::</span>
+
+<span class="sd">                url(r&#39;^show/profile/$&#39;, &#39;show_my_profile_view&#39;, name = &#39;show_my_profile&#39;)</span>
+
+<span class="sd">            - It can simply point to a URL &#39;/whatever/blabla/&#39;.</span>
+
+<span class="sd">        **form_id**: Generates a form id for dom identification.</span>
+<span class="sd">            If no id provided then no id attribute is created on the form.</span>
+
+<span class="sd">        **form_class**: String containing separated CSS classes to be applied</span>
+<span class="sd">            to form class attribute. The form will always have by default</span>
+<span class="sd">            &#39;uniForm&#39; class.</span>
+
+<span class="sd">        **form_group_wrapper_class**: String containing separated CSS classes to be applied</span>
+<span class="sd">            to each row of inputs.</span>
+
+<span class="sd">        **form_tag**: It specifies if &lt;form&gt;&lt;/form&gt; tags should be rendered when using a Layout.</span>
+<span class="sd">            If set to False it renders the form without the &lt;form&gt;&lt;/form&gt; tags. Defaults to True.</span>
+
+<span class="sd">        **form_error_title**: If a form has `non_field_errors` to display, they</span>
+<span class="sd">            are rendered in a div. You can set title&#39;s div with this attribute.</span>
+<span class="sd">            Example: &quot;Oooops!&quot; or &quot;Form Errors&quot;</span>
+
+<span class="sd">        **formset_error_title**: If a formset has `non_form_errors` to display, they</span>
+<span class="sd">            are rendered in a div. You can set title&#39;s div with this attribute.</span>
+
+<span class="sd">        **form_style**: Uni-form has two built in different form styles. You can choose</span>
+<span class="sd">            your favorite. This can be set to &quot;default&quot; or &quot;inline&quot;. Defaults to &quot;default&quot;.</span>
+
+<span class="sd">        **include_media**: Whether to automatically include form media. Set to False if</span>
+<span class="sd">            you want to manually include form media outside the form. Defaults to True.</span>
+
+<span class="sd">    Public Methods:</span>
+
+<span class="sd">        **add_input(input)**: You can add input buttons using this method. Inputs</span>
+<span class="sd">            added using this method will be rendered at the end of the form/formset.</span>
+
+<span class="sd">        **add_layout(layout)**: You can add a `Layout` object to `FormHelper`. The Layout</span>
+<span class="sd">            specifies in a simple, clean and DRY way how the form fields should be rendered.</span>
+<span class="sd">            You can wrap fields, order them, customize pretty much anything in the form.</span>
+
+<span class="sd">    Best way to add a helper to a form is adding a property named helper to the form</span>
+<span class="sd">    that returns customized `FormHelper` object::</span>
+
+<span class="sd">        from crispy_forms.helper import FormHelper</span>
+<span class="sd">        from crispy_forms.layout import Submit</span>
+
+<span class="sd">        class MyForm(forms.Form):</span>
+<span class="sd">            title = forms.CharField(_(&quot;Title&quot;))</span>
+
+<span class="sd">            @property</span>
+<span class="sd">            def helper(self):</span>
+<span class="sd">                helper = FormHelper()</span>
+<span class="sd">                helper.form_id = &#39;this-form-rocks&#39;</span>
+<span class="sd">                helper.form_class = &#39;search&#39;</span>
+<span class="sd">                helper.add_input(Submit(&#39;save&#39;, &#39;save&#39;))</span>
+<span class="sd">                [...]</span>
+<span class="sd">                return helper</span>
+
+<span class="sd">    You can use it in a template doing::</span>
+
+<span class="sd">        {% load crispy_forms_tags %}</span>
+<span class="sd">        {% crispy form %}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_form_method</span> <span class="o">=</span> <span class="s1">&#39;post&#39;</span>
+    <span class="n">_form_action</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">_form_style</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">form_id</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">form_class</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">form_group_wrapper_class</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">form_tag</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">form_error_title</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">formset_error_title</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">form_show_errors</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">render_unmentioned_fields</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">render_hidden_fields</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">render_required_fields</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_help_text_inline</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_error_text_inline</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">html5_required</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">form_show_labels</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">field_template</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">disable_csrf</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">label_class</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">field_class</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">include_media</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="n">form</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_default_layout</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build_default_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Layout</span><span class="p">(</span><span class="o">*</span><span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">form_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form_method</span>
+
+    <span class="nd">@form_method</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">form_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">FormHelpersException</span><span class="p">(</span><span class="s1">&#39;Only GET and POST are valid in the </span><span class="se">\</span>
+<span class="s1">                    form_method helper attribute&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form_method</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">form_action</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_form_action</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">NoReverseMatch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form_action</span>
+
+    <span class="nd">@form_action</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">form_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form_action</span> <span class="o">=</span> <span class="n">action</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">form_style</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form_style</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_form_style</span> <span class="o">==</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;inlineLabels&#39;</span>
+
+    <span class="nd">@form_style</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">form_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">style</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">FormHelpersException</span><span class="p">(</span><span class="s1">&#39;Only default and inline are valid in the </span><span class="se">\</span>
+<span class="s1">                    form_style helper attribute&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_form_style</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">help_text_inline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_help_text_inline</span>
+
+    <span class="nd">@help_text_inline</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">help_text_inline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_help_text_inline</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_error_text_inline</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">flag</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">error_text_inline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error_text_inline</span>
+
+    <span class="nd">@error_text_inline</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">error_text_inline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_error_text_inline</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_help_text_inline</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">flag</span>
+
+    <span class="k">def</span> <span class="nf">add_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_object</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_object</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span>
+
+    <span class="k">def</span> <span class="nf">render_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">template_pack</span><span class="o">=</span><span class="n">TEMPLATE_PACK</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns safe html of the rendering of the layout</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">rendered_fields</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">crispy_field_template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_template</span>
+
+        <span class="c1"># This renders the specified Layout strictly</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+            <span class="n">form</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">form_style</span><span class="p">,</span>
+            <span class="n">context</span><span class="p">,</span>
+            <span class="n">template_pack</span><span class="o">=</span><span class="n">template_pack</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Rendering some extra fields if specified</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_unmentioned_fields</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_hidden_fields</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_required_fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">left_fields_to_render</span> <span class="o">=</span> <span class="n">fields</span> <span class="o">-</span> <span class="n">form</span><span class="o">.</span><span class="n">rendered_fields</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">left_fields_to_render</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">render_unmentioned_fields</span> <span class="ow">or</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">render_hidden_fields</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">is_hidden</span> <span class="ow">or</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">render_required_fields</span> <span class="ow">and</span> <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">is_required</span>
+                <span class="p">):</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">render_field</span><span class="p">(</span>
+                        <span class="n">field</span><span class="p">,</span>
+                        <span class="n">form</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">form_style</span><span class="p">,</span>
+                        <span class="n">context</span><span class="p">,</span>
+                        <span class="n">template_pack</span><span class="o">=</span><span class="n">template_pack</span>
+                    <span class="p">)</span>
+
+        <span class="c1"># If the user has Meta.fields defined, not included in the layout,</span>
+        <span class="c1"># we suppose they need to be rendered</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="s1">&#39;Meta&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s1">&#39;fields&#39;</span><span class="p">):</span>
+                <span class="n">current_fields</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="s1">&#39;fields&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">meta_fields</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s1">&#39;fields&#39;</span><span class="p">)</span>
+
+                <span class="n">fields_to_render</span> <span class="o">=</span> <span class="n">list_intersection</span><span class="p">(</span><span class="n">current_fields</span><span class="p">,</span> <span class="n">meta_fields</span><span class="p">)</span>
+                <span class="n">left_fields_to_render</span> <span class="o">=</span> <span class="n">list_difference</span><span class="p">(</span><span class="n">fields_to_render</span><span class="p">,</span> <span class="n">form</span><span class="o">.</span><span class="n">rendered_fields</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">left_fields_to_render</span><span class="p">:</span>
+                    <span class="c1"># We still respect the configuration of the helper</span>
+                    <span class="c1"># regarding which fields to render</span>
+                    <span class="k">if</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">render_unmentioned_fields</span> <span class="ow">or</span>
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">render_hidden_fields</span> <span class="ow">and</span>
+                         <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">is_hidden</span><span class="p">)</span> <span class="ow">or</span>
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">render_required_fields</span> <span class="ow">and</span>
+                         <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span><span class="o">.</span><span class="n">is_required</span><span class="p">)</span>
+                    <span class="p">):</span>
+                        <span class="n">html</span> <span class="o">+=</span> <span class="n">render_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_style</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_pack</span><span class="o">=</span><span class="n">TEMPLATE_PACK</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Used by crispy_forms_tags to get helper attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;form_method&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_method</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+            <span class="s1">&#39;form_tag&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_tag</span><span class="p">,</span>
+            <span class="s1">&#39;form_style&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_style</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+            <span class="s1">&#39;form_show_errors&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_show_errors</span><span class="p">,</span>
+            <span class="s1">&#39;help_text_inline&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">help_text_inline</span><span class="p">,</span>
+            <span class="s1">&#39;error_text_inline&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_text_inline</span><span class="p">,</span>
+            <span class="s1">&#39;html5_required&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">html5_required</span><span class="p">,</span>
+            <span class="s1">&#39;form_show_labels&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_show_labels</span><span class="p">,</span>
+            <span class="s1">&#39;disable_csrf&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">disable_csrf</span><span class="p">,</span>
+            <span class="s1">&#39;label_class&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_class</span><span class="p">,</span>
+            <span class="s1">&#39;field_class&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_class</span><span class="p">,</span>
+            <span class="s1">&#39;include_media&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_media</span>
+        <span class="p">}</span>
+        <span class="n">bootstrap_size_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;col-(lg|md|sm|xs)-(\d+)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_class</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bootstrap_size_match</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">template_pack</span> <span class="o">==</span> <span class="s1">&#39;bootstrap4&#39;</span><span class="p">:</span>
+                <span class="n">offset_pattern</span> <span class="o">=</span> <span class="s1">&#39;offset-</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">offset_pattern</span> <span class="o">=</span> <span class="s1">&#39;col-</span><span class="si">%s</span><span class="s1">-offset-</span><span class="si">%s</span><span class="s1">&#39;</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;bootstrap_checkbox_offsets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">offset_pattern</span> <span class="o">%</span> <span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">bootstrap_size_match</span><span class="p">]</span>
+
+        <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_action</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_action</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_id</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_id</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span><span class="p">:</span>
+            <span class="c1"># uni_form TEMPLATE PACK has a uniForm class by default</span>
+            <span class="k">if</span> <span class="n">template_pack</span> <span class="o">==</span> <span class="s1">&#39;uni_form&#39;</span><span class="p">:</span>
+                <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;uniForm </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_class</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">template_pack</span> <span class="o">==</span> <span class="s1">&#39;uni_form&#39;</span><span class="p">:</span>
+                <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; uniForm&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_group_wrapper_class</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">][</span><span class="s1">&#39;form_group_wrapper_class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_group_wrapper_class</span>
+
+        <span class="n">items</span><span class="p">[</span><span class="s1">&#39;flat_attrs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flatatt</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_error_title</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;form_error_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">form_error_title</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">formset_error_title</span><span class="p">:</span>
+            <span class="n">items</span><span class="p">[</span><span class="s1">&#39;formset_error_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formset_error_title</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">attribute_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">items</span> <span class="ow">and</span> <span class="n">attribute_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;layout&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">attribute_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+                <span class="n">items</span><span class="p">[</span><span class="n">attribute_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">items</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

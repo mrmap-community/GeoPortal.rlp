@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/mediawiki.css' %}" media="all" />
+{% endblock %}
+
+{% block body %}
+<div class="mediawiki-article">
+    {{ content|safe }}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,451 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>searchCatalogue.utils.searcher &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for searchCatalogue.utils.searcher</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Author: Michel Peltriaux</span>
+<span class="sd">Organization: Spatial data infrastructure Rheinland-Pfalz, Germany</span>
+<span class="sd">Contact: michel.peltriaux@vermkv.rlp.de</span>
+<span class="sd">Created on: 22.01.19</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="k">import</span> <span class="n">JSONDecodeError</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+
+<span class="kn">from</span> <span class="nn">Geoportal</span> <span class="k">import</span> <span class="n">helper</span>
+<span class="kn">from</span> <span class="nn">Geoportal.settings</span> <span class="k">import</span> <span class="n">RLP_CATALOGUE</span>
+<span class="kn">from</span> <span class="nn">searchCatalogue.settings</span> <span class="k">import</span> <span class="n">PROXIES</span>
+<span class="kn">from</span> <span class="nn">searchCatalogue.utils.url_conf</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="Searcher"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher">[docs]</a><span class="k">class</span> <span class="nc">Searcher</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">resource_set</span><span class="o">=</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span>
+                 <span class="n">extended_search_params</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">page_res</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">selected_facets</span><span class="o">=</span><span class="p">{},</span>
+                 <span class="n">order_by</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">bbox</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">type_bbox</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">language_code</span><span class="o">=</span><span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                 <span class="n">catalogue_id</span><span class="o">=</span><span class="n">RLP_CATALOGUE</span><span class="p">,</span>
+                 <span class="n">only_open_data</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Constructor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            keywords: The search text</span>
+<span class="sd">            resource_set: The resource for that a search shall be started</span>
+<span class="sd">            extended_search_params: The search parameters from the extended search menu</span>
+<span class="sd">            page: The page that is requested</span>
+<span class="sd">            page_res: For which resource is the page requested</span>
+<span class="sd">            selected_facets: Which facets/filters/categories are currently selected in the search module</span>
+<span class="sd">            order_by: Which order shall be used</span>
+<span class="sd">            bbox: The bbox for e.g. intersection</span>
+<span class="sd">            type_bbox: The type of bbox</span>
+<span class="sd">            language_code: In which language shall the results be returned</span>
+<span class="sd">            catalogue_id: Which catalogue is fetched</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span> <span class="o">=</span> <span class="n">keywords</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_format</span> <span class="o">=</span> <span class="s2">&quot;json&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_target</span> <span class="o">=</span> <span class="s2">&quot;webclient&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_pages</span> <span class="o">=</span> <span class="n">page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span> <span class="o">=</span> <span class="n">resource_set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extended_params</span> <span class="o">=</span> <span class="n">extended_search_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_page_resource</span> <span class="o">=</span> <span class="n">page_res</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selected_facets</span> <span class="o">=</span> <span class="n">selected_facets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_by</span> <span class="o">=</span> <span class="n">order_by</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span> <span class="o">=</span> <span class="n">bbox</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">typeBbox</span> <span class="o">=</span> <span class="n">type_bbox</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">catalogue_id</span> <span class="o">=</span> <span class="n">catalogue_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language_code</span> <span class="o">=</span> <span class="n">language_code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">only_open_data</span> <span class="o">=</span> <span class="n">only_open_data</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">org_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iso_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inspire_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">BoundedSemaphore</span><span class="p">()</span>
+
+
+        <span class="c1"># get random search id</span>
+        <span class="n">md_5</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+        <span class="n">microseconds</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">md_5</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">microseconds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_id</span> <span class="o">=</span> <span class="n">md_5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__prepare_selected_facets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Find the ids of the selected facets in all facets</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># prepare registrating departments facets</span>
+        <span class="k">for</span> <span class="n">facet_key</span><span class="p">,</span> <span class="n">facet_val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_facets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">facet</span> <span class="ow">in</span> <span class="n">facet_val</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parent_category&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;ISO 19115&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">iso_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parent_category&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;INSPIRE&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">inspire_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parent_category&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sonstige&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">custom_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parent_category&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Organisationen&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">org_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">__get_resource_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Use a GET request to retrieve the search results for a specific data resource</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: The url to be fetched from</span>
+<span class="sd">            params: The parameters for the GET request as dict</span>
+<span class="sd">            resource: The name of the data resource that shall be fetched</span>
+<span class="sd">            result: The return dict that will be changed during this function</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">resource</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Searcher.get_categories_list"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_categories_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_categories_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get a list of all categories/facets from the database using a GET request</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns the categories which have been found during the search</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URL_BASE</span> <span class="o">+</span> <span class="n">URL_SEARCH_RLP_SUFFIX</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;outputFormat&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">,</span>
+            <span class="s2">&quot;resultTarget&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_target</span><span class="p">,</span>
+            <span class="s2">&quot;searchResources&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">,</span>
+            <span class="s2">&quot;searchId&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_id</span><span class="p">,</span>
+            <span class="s2">&quot;languageCode&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_code</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;categories&quot;</span><span class="p">][</span><span class="s2">&quot;searchMD&quot;</span><span class="p">][</span><span class="s2">&quot;category&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">categories</span></div>
+
+
+<div class="viewcode-block" id="Searcher.get_search_results_rlp"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_search_results_rlp">[docs]</a>    <span class="k">def</span> <span class="nf">get_search_results_rlp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Performs the search</span>
+
+<span class="sd">        Search parameters will be used from the Searcher object itself.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Contains the search results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URL_BASE</span> <span class="o">+</span> <span class="n">URL_SEARCH_RLP_SUFFIX</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__prepare_selected_facets</span><span class="p">()</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;searchText&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">,</span>
+            <span class="s2">&quot;outputFormat&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">,</span>
+            <span class="s2">&quot;resultTarget&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_target</span><span class="p">,</span>
+            <span class="s2">&quot;searchPages&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1"># default for non directly requested categories</span>
+            <span class="s2">&quot;searchResources&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">,</span>
+            <span class="s2">&quot;searchId&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_id</span><span class="p">,</span>
+            <span class="s2">&quot;resolveCoupledResources&quot;</span><span class="p">:</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
+            <span class="s2">&quot;registratingDepartments&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">org_ids</span><span class="p">),</span>
+            <span class="s2">&quot;isoCategories&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iso_ids</span><span class="p">),</span>
+            <span class="s2">&quot;customCategories&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_ids</span><span class="p">),</span>
+            <span class="s2">&quot;inspireThemes&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspire_ids</span><span class="p">),</span>
+            <span class="s2">&quot;orderBy&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_by</span><span class="p">,</span>
+            <span class="s2">&quot;searchBbox&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span>
+            <span class="s2">&quot;searchTypeBbox&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">typeBbox</span><span class="p">,</span>
+            <span class="s2">&quot;languageCode&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_code</span><span class="p">,</span>
+            <span class="s2">&quot;restrictToOpenData&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_open_data</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extended_params</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">resource</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_page_resource</span><span class="p">:</span>
+                <span class="c1"># use requested page</span>
+                <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchPages&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_pages</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchPages&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchResources&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resource</span>
+            <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_resource_results</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">resource</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+            <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+            <span class="c1">#self.__get_resource_results(url, params, resource, result)</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">execute_threads</span><span class="p">(</span><span class="n">thread_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+    <span class="k">def</span> <span class="nf">__get_resource_results_de</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Executes API calls for the german catalogue for each resource in an own thread</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resource:    The name of the data resource that will be fetched</span>
+<span class="sd">            params:      The parameters for the GET request as a dict</span>
+<span class="sd">            results:     The result dict which will be filled with the search results during this function&#39;s call</span>
+<span class="sd">            url:         The GET url</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">resource</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
+            <span class="k">return</span>
+
+<div class="viewcode-block" id="Searcher.get_search_results_de"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_search_results_de">[docs]</a>    <span class="k">def</span> <span class="nf">get_search_results_de</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Main function for calling the german catalogue</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Contains all search results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URL_BASE</span> <span class="o">+</span> <span class="n">URL_SEARCH_DE_SUFFIX</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;catalogueId&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">catalogue_id</span><span class="p">,</span>
+            <span class="s2">&quot;searchText&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">,</span>
+            <span class="s2">&quot;searchResources&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;searchPages&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_pages</span><span class="p">,</span>
+            <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_resources</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">resource</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_page_resource</span><span class="p">:</span>
+                <span class="c1"># use requested page</span>
+                <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchPages&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_pages</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchPages&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;searchResources&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resource</span>
+            <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_resource_results_de</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">results</span><span class="p">,</span> <span class="n">url</span><span class="p">)))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">execute_threads</span><span class="p">(</span><span class="n">thread_list</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+
+<div class="viewcode-block" id="Searcher.get_spatial_data"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_spatial_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_spatial_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_texts</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Performs a spatial filtered search</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search_texts: All search words in a list</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns the spatial search results from the database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret_val</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URL_SPATIAL_BASE</span> <span class="o">+</span> <span class="n">URL_SPATIAL_SEARCH_SUFFIX</span>
+        <span class="k">for</span> <span class="n">search_text</span> <span class="ow">in</span> <span class="n">search_texts</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;outputFormat&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">,</span>
+                <span class="s2">&quot;resultTarget&quot;</span><span class="p">:</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;searchEPSG&quot;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">,</span>
+                <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+                <span class="s2">&quot;maxRows&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+                <span class="s2">&quot;searchText&quot;</span><span class="p">:</span> <span class="n">search_text</span>
+            <span class="p">}</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">PROXIES</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keyword&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_text</span>
+            <span class="n">ret_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">ret_val</span></div>
+
+    <span class="k">def</span> <span class="nf">__get_single_info_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Runs a single thread GET request</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            params: Parameters for the GET request</span>
+<span class="sd">            results: The dict to be modified</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">URL_SEARCH_INFO</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># remove asterisks to avoid rendering them to the user!</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Searcher.get_info_result_category"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_info_result_category">[docs]</a>    <span class="k">def</span> <span class="nf">get_info_result_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_result</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search_result (dict): The search result that shall be checked</span>
+<span class="sd">        Returns:</span>
+<span class="sd">             category (str): The categories for the search result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;titles&quot;</span><span class="p">:</span> <span class="n">search_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;prop&quot;</span><span class="p">:</span> <span class="s2">&quot;categories&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">URL_SEARCH_INFO</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">][</span><span class="s2">&quot;pages&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">resp_key</span><span class="p">,</span> <span class="n">resp_val</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">resp_val</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;categories&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
+
+<div class="viewcode-block" id="Searcher.is_article_internal"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.is_article_internal">[docs]</a>    <span class="k">def</span> <span class="nf">is_article_internal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Checks if the provided title is associated with an internal article</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title (str): The title of the article</span>
+<span class="sd">        Returns:</span>
+<span class="sd">             bool: True if the article is internal, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span>
+        <span class="p">}</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info_result_category</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;Intern&quot;</span> <span class="ow">in</span> <span class="n">category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Searcher.get_info_search_results"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_info_search_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_info_search_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;list&quot;</span><span class="p">:</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;srsearch&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">,</span>
+            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;srwhat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;nearmatch&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="c1"># since the mediawiki API does not handle multiple search words, we need to iterate over all</span>
+        <span class="c1"># keywords in the keywords array and search every time for all three srwhat types for hits</span>
+        <span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keywords</span><span class="p">:</span>
+            <span class="c1"># append a asterisks for matching everything that contains this part</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;srsearch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">keyword</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span>
+            <span class="k">for</span> <span class="n">what</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;srwhat&quot;</span><span class="p">]:</span>
+                <span class="n">params_cp</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+                <span class="n">params_cp</span><span class="p">[</span><span class="s2">&quot;srwhat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">what</span>
+                <span class="c1"># create thread</span>
+                <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_single_info_result</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">params_cp</span><span class="p">,</span> <span class="n">results</span><span class="p">)))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">execute_threads</span><span class="p">(</span><span class="n">thread_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+<div class="viewcode-block" id="Searcher.get_info_all_pages"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.searcher.Searcher.get_info_all_pages">[docs]</a>    <span class="k">def</span> <span class="nf">get_info_all_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;list&quot;</span><span class="p">:</span> <span class="s2">&quot;allpages&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;apprefix&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;aplimit&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">URL_SEARCH_INFO</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="k">return</span> <span class="n">results</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

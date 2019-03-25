@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+
+<div class="title">
+    <h1>{{ headline }}</h1>
+</div>
+
+<hr>
+
+<div class="form-wrapper">
+    <form method="post" action="http://{{ EXTERNAL_INTERFACE }}/mapbender/geoportal/authentication.php">
+        {% csrf_token %}
+            <table>
+            {% for field in form %}
+            <tr class="field-wrapper {% if field.id_for_label in small_labels %}small-label{% endif %}">
+                <td class="field-label">
+                    {{ field.label_tag }}
+                </td>
+                <td class="field-value">
+                    {{ field }}
+                </td>
+            </tr>{% endfor %}
+        </table>
+        <div class="submit-button-wrapper">
+          <a href="{% url 'useroperations:pw_reset' %}">
+                <div class="forgot-pw-button" >
+                    {{ btn_label_pw }}
+                </div>
+            </a>
+            <input id="login-form-button" class="form-submit-button" type="submit" value="{{ btn_label_login }}">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

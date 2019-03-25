@@ -1,0 +1,139 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>useroperations.migrations package &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="useroperations-migrations-package">
+<h1>useroperations.migrations package<a class="headerlink" href="#useroperations-migrations-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-useroperations.migrations.0001_initial">
+<span id="useroperations-migrations-0001-initial-module"></span><h2>useroperations.migrations.0001_initial module<a class="headerlink" href="#module-useroperations.migrations.0001_initial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="useroperations.migrations.0001_initial.Migration">
+<em class="property">class </em><code class="descclassname">useroperations.migrations.0001_initial.</code><code class="descname">Migration</code><span class="sig-paren">(</span><em>name</em>, <em>app_label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/useroperations/migrations/0001_initial.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#useroperations.migrations.0001_initial.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="attribute">
+<dt id="useroperations.migrations.0001_initial.Migration.dependencies">
+<code class="descname">dependencies</code><em class="property"> = []</em><a class="headerlink" href="#useroperations.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="useroperations.migrations.0001_initial.Migration.initial">
+<code class="descname">initial</code><em class="property"> = True</em><a class="headerlink" href="#useroperations.migrations.0001_initial.Migration.initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="useroperations.migrations.0001_initial.Migration.operations">
+<code class="descname">operations</code><em class="property"> = [&lt;CreateModel  options={'db_table': 'gui', 'managed': False}, fields=[('gui_id', &lt;django.db.models.fields.CharField&gt;), ('gui_name', &lt;django.db.models.fields.CharField&gt;), ('gui_description', &lt;django.db.models.fields.CharField&gt;), ('gui_public', &lt;django.db.models.fields.IntegerField&gt;)], name='Gui'&gt;, &lt;CreateModel  options={'db_table': 'mb_group', 'managed': False}, fields=[('mb_group_id', &lt;django.db.models.fields.AutoField&gt;), ('mb_group_name', &lt;django.db.models.fields.CharField&gt;), ('mb_group_owner', &lt;django.db.models.fields.IntegerField&gt;), ('mb_group_description', &lt;django.db.models.fields.CharField&gt;), ('mb_group_title', &lt;django.db.models.fields.CharField&gt;), ('mb_group_ext_id', &lt;django.db.models.fields.BigIntegerField&gt;), ('mb_group_address', &lt;django.db.models.fields.CharField&gt;), ('mb_group_postcode', &lt;django.db.models.fields.CharField&gt;), ('mb_group_city', &lt;django.db.models.fields.CharField&gt;), ('mb_group_stateorprovince', &lt;django.db.models.fields.CharField&gt;), ('mb_group_country', &lt;django.db.models.fields.CharField&gt;), ('mb_group_voicetelephone', &lt;django.db.models.fields.CharField&gt;), ('mb_group_facsimiletelephone', &lt;django.db.models.fields.CharField&gt;), ('mb_group_email', &lt;django.db.models.fields.CharField&gt;), ('mb_group_logo_path', &lt;django.db.models.fields.TextField&gt;), ('mb_group_homepage', &lt;django.db.models.fields.CharField&gt;), ('mb_group_admin_code', &lt;django.db.models.fields.CharField&gt;), ('timestamp_create', &lt;django.db.models.fields.DateTimeField&gt;), ('timestamp', &lt;django.db.models.fields.DateTimeField&gt;), ('mb_group_address_location', &lt;django.db.models.fields.TextField&gt;), ('uuid', &lt;django.db.models.fields.UUIDField&gt;), ('mb_group_ckan_uuid', &lt;django.db.models.fields.UUIDField&gt;), ('mb_group_ckan_api_key', &lt;django.db.models.fields.UUIDField&gt;), ('mb_group_csw_catalogues', &lt;django.db.models.fields.TextField&gt;), ('mb_group_ckan_catalogues', &lt;django.db.models.fields.TextField&gt;), ('mb_group_registry_url', &lt;django.db.models.fields.CharField&gt;), ('export2ckan', &lt;django.db.models.fields.BooleanField&gt;)], name='MbGroup'&gt;, &lt;CreateModel  options={'db_table': 'mb_proxy_log', 'managed': False}, fields=[('proxy_log_timestamp', &lt;django.db.models.fields.DateTimeField&gt;), ('fkey_wms_id', &lt;django.db.models.fields.IntegerField&gt;), ('fkey_mb_user_id', &lt;django.db.models.fields.IntegerField&gt;), ('request', &lt;django.db.models.fields.CharField&gt;), ('pixel', &lt;django.db.models.fields.BigIntegerField&gt;), ('price', &lt;django.db.models.fields.FloatField&gt;), ('got_result', &lt;django.db.models.fields.IntegerField&gt;), ('error_message', &lt;django.db.models.fields.TextField&gt;), ('error_mime_type', &lt;django.db.models.fields.CharField&gt;), ('layer_featuretype_list', &lt;django.db.models.fields.TextField&gt;), ('request_type', &lt;django.db.models.fields.CharField&gt;), ('log_id', &lt;django.db.models.fields.BigAutoField&gt;), ('fkey_wfs_id', &lt;django.db.models.fields.IntegerField&gt;), ('features', &lt;django.db.models.fields.IntegerField&gt;)], name='MbProxyLog'&gt;, &lt;CreateModel  options={'db_table': 'mb_role', 'managed': False}, fields=[('role_id', &lt;django.db.models.fields.AutoField&gt;), ('role_name', &lt;django.db.models.fields.CharField&gt;), ('role_description', &lt;django.db.models.fields.CharField&gt;), ('role_exclude_auth', &lt;django.db.models.fields.IntegerField&gt;)], name='MbRole'&gt;, &lt;CreateModel  options={'db_table': 'mb_user', 'managed': False}, fields=[('mb_user_id', &lt;django.db.models.fields.AutoField&gt;), ('mb_user_name', &lt;django.db.models.fields.CharField&gt;), ('mb_user_password', &lt;django.db.models.fields.CharField&gt;), ('mb_user_owner', &lt;django.db.models.fields.IntegerField&gt;), ('mb_user_description', &lt;django.db.models.fields.CharField&gt;), ('mb_user_login_count', &lt;django.db.models.fields.IntegerField&gt;), ('mb_user_email', &lt;django.db.models.fields.EmailField&gt;), ('mb_user_phone', &lt;django.db.models.fields.CharField&gt;), ('mb_user_department', &lt;django.db.models.fields.CharField&gt;), ('mb_user_resolution', &lt;django.db.models.fields.IntegerField&gt;), ('mb_user_organisation_name', &lt;django.db.models.fields.CharField&gt;), ('mb_user_position_name', &lt;django.db.models.fields.CharField&gt;), ('mb_user_phone1', &lt;django.db.models.fields.CharField&gt;), ('mb_user_facsimile', &lt;django.db.models.fields.CharField&gt;), ('mb_user_delivery_point', &lt;django.db.models.fields.CharField&gt;), ('mb_user_city', &lt;django.db.models.fields.CharField&gt;), ('mb_user_postal_code', &lt;django.db.models.fields.IntegerField&gt;), ('mb_user_country', &lt;django.db.models.fields.CharField&gt;), ('mb_user_online_resource', &lt;django.db.models.fields.CharField&gt;), ('mb_user_realname', &lt;django.db.models.fields.CharField&gt;), ('mb_user_street', &lt;django.db.models.fields.CharField&gt;), ('mb_user_housenumber', &lt;django.db.models.fields.CharField&gt;), ('mb_user_reference', &lt;django.db.models.fields.CharField&gt;), ('mb_user_for_attention_of', &lt;django.db.models.fields.CharField&gt;), ('mb_user_valid_from', &lt;django.db.models.fields.DateField&gt;), ('mb_user_valid_to', &lt;django.db.models.fields.DateField&gt;), ('mb_user_password_ticket', &lt;django.db.models.fields.CharField&gt;), ('mb_user_digest', &lt;django.db.models.fields.TextField&gt;), ('mb_user_firstname', &lt;django.db.models.fields.CharField&gt;), ('mb_user_lastname', &lt;django.db.models.fields.CharField&gt;), ('mb_user_academictitle', &lt;django.db.models.fields.CharField&gt;), ('timestamp_create', &lt;django.db.models.fields.DateTimeField&gt;), ('timestamp', &lt;django.db.models.fields.DateTimeField&gt;), ('mb_user_newsletter', &lt;django.db.models.fields.BooleanField&gt;), ('mb_user_allow_survey', &lt;django.db.models.fields.BooleanField&gt;), ('mb_user_aldigest', &lt;django.db.models.fields.TextField&gt;), ('mb_user_glossar', &lt;django.db.models.fields.CharField&gt;), ('mb_user_textsize', &lt;django.db.models.fields.CharField&gt;), ('mb_user_last_login_date', &lt;django.db.models.fields.DateField&gt;), ('mb_user_spatial_suggest', &lt;django.db.models.fields.CharField&gt;), ('password', &lt;django.db.models.fields.CharField&gt;), ('salt', &lt;django.db.models.fields.CharField&gt;), ('is_active', &lt;django.db.models.fields.BooleanField&gt;)], name='MbUser'&gt;, &lt;CreateModel  options={'db_table': 'wfs', 'managed': False}, fields=[('wfs_id', &lt;django.db.models.fields.AutoField&gt;), ('wfs_version', &lt;django.db.models.fields.CharField&gt;), ('wfs_name', &lt;django.db.models.fields.CharField&gt;), ('wfs_title', &lt;django.db.models.fields.CharField&gt;), ('wfs_abstract', &lt;django.db.models.fields.TextField&gt;), ('wfs_getcapabilities', &lt;django.db.models.fields.CharField&gt;), ('wfs_describefeaturetype', &lt;django.db.models.fields.CharField&gt;), ('wfs_getfeature', &lt;django.db.models.fields.CharField&gt;), ('wfs_transaction', &lt;django.db.models.fields.CharField&gt;), ('wfs_owsproxy', &lt;django.db.models.fields.CharField&gt;), ('wfs_getcapabilities_doc', &lt;django.db.models.fields.TextField&gt;), ('wfs_upload_url', &lt;django.db.models.fields.CharField&gt;), ('fees', &lt;django.db.models.fields.TextField&gt;), ('accessconstraints', &lt;django.db.models.fields.TextField&gt;), ('individualname', &lt;django.db.models.fields.CharField&gt;), ('positionname', &lt;django.db.models.fields.CharField&gt;), ('providername', &lt;django.db.models.fields.CharField&gt;), ('city', &lt;django.db.models.fields.CharField&gt;), ('deliverypoint', &lt;django.db.models.fields.CharField&gt;), ('administrativearea', &lt;django.db.models.fields.CharField&gt;), ('postalcode', &lt;django.db.models.fields.CharField&gt;), ('voice', &lt;django.db.models.fields.CharField&gt;), ('facsimile', &lt;django.db.models.fields.CharField&gt;), ('electronicmailaddress', &lt;django.db.models.fields.CharField&gt;), ('wfs_mb_getcapabilities_doc', &lt;django.db.models.fields.TextField&gt;), ('wfs_owner', &lt;django.db.models.fields.IntegerField&gt;), ('wfs_timestamp', &lt;django.db.models.fields.IntegerField&gt;), ('country', &lt;django.db.models.fields.CharField&gt;), ('wfs_timestamp_create', &lt;django.db.models.fields.IntegerField&gt;), ('wfs_network_access', &lt;django.db.models.fields.IntegerField&gt;), ('fkey_mb_group_id', &lt;django.db.models.fields.IntegerField&gt;), ('uuid', &lt;django.db.models.fields.UUIDField&gt;), ('wfs_max_features', &lt;django.db.models.fields.IntegerField&gt;), ('inspire_annual_requests', &lt;django.db.models.fields.BigIntegerField&gt;), ('wfs_username', &lt;django.db.models.fields.CharField&gt;), ('wfs_password', &lt;django.db.models.fields.CharField&gt;), ('wfs_auth_type', &lt;django.db.models.fields.CharField&gt;), ('wfs_license_source_note', &lt;django.db.models.fields.TextField&gt;), ('wfs_proxylog', &lt;django.db.models.fields.IntegerField&gt;), ('wfs_pricevolume', &lt;django.db.models.fields.IntegerField&gt;)], name='Wfs'&gt;, &lt;CreateModel  options={'db_table': 'wms', 'managed': False}, fields=[('wms_id', &lt;django.db.models.fields.AutoField&gt;), ('wms_version', &lt;django.db.models.fields.CharField&gt;), ('wms_title', &lt;django.db.models.fields.CharField&gt;), ('wms_abstract', &lt;django.db.models.fields.TextField&gt;), ('wms_getcapabilities', &lt;django.db.models.fields.CharField&gt;), ('wms_getmap', &lt;django.db.models.fields.CharField&gt;), ('wms_getfeatureinfo', &lt;django.db.models.fields.CharField&gt;), ('wms_getlegendurl', &lt;django.db.models.fields.CharField&gt;), ('wms_filter', &lt;django.db.models.fields.CharField&gt;), ('wms_getcapabilities_doc', &lt;django.db.models.fields.TextField&gt;), ('wms_owsproxy', &lt;django.db.models.fields.CharField&gt;), ('wms_upload_url', &lt;django.db.models.fields.CharField&gt;), ('fees', &lt;django.db.models.fields.TextField&gt;), ('accessconstraints', &lt;django.db.models.fields.TextField&gt;), ('contactperson', &lt;django.db.models.fields.CharField&gt;), ('contactposition', &lt;django.db.models.fields.CharField&gt;), ('contactorganization', &lt;django.db.models.fields.CharField&gt;), ('address', &lt;django.db.models.fields.CharField&gt;), ('city', &lt;django.db.models.fields.CharField&gt;), ('stateorprovince', &lt;django.db.models.fields.CharField&gt;), ('postcode', &lt;django.db.models.fields.CharField&gt;), ('country', &lt;django.db.models.fields.CharField&gt;), ('contactvoicetelephone', &lt;django.db.models.fields.CharField&gt;), ('contactfacsimiletelephone', &lt;django.db.models.fields.CharField&gt;), ('contactelectronicmailaddress', &lt;django.db.models.fields.CharField&gt;), ('wms_mb_getcapabilities_doc', &lt;django.db.models.fields.TextField&gt;), ('wms_owner', &lt;django.db.models.fields.IntegerField&gt;), ('wms_timestamp', &lt;django.db.models.fields.IntegerField&gt;), ('wms_supportsld', &lt;django.db.models.fields.BooleanField&gt;), ('wms_userlayer', &lt;django.db.models.fields.BooleanField&gt;), ('wms_userstyle', &lt;django.db.models.fields.BooleanField&gt;), ('wms_remotewfs', &lt;django.db.models.fields.BooleanField&gt;), ('wms_proxylog', &lt;django.db.models.fields.IntegerField&gt;), ('wms_pricevolume', &lt;django.db.models.fields.IntegerField&gt;), ('wms_username', &lt;django.db.models.fields.CharField&gt;), ('wms_password', &lt;django.db.models.fields.CharField&gt;), ('wms_auth_type', &lt;django.db.models.fields.CharField&gt;), ('wms_timestamp_create', &lt;django.db.models.fields.IntegerField&gt;), ('wms_network_access', &lt;django.db.models.fields.IntegerField&gt;), ('fkey_mb_group_id', &lt;django.db.models.fields.IntegerField&gt;), ('uuid', &lt;django.db.models.fields.UUIDField&gt;), ('wms_max_imagesize', &lt;django.db.models.fields.IntegerField&gt;), ('wms_max_imagesize_x', &lt;django.db.models.fields.IntegerField&gt;), ('wms_max_imagesize_y', &lt;django.db.models.fields.IntegerField&gt;), ('inspire_annual_requests', &lt;django.db.models.fields.BigIntegerField&gt;), ('wms_proxy_log_fi', &lt;django.db.models.fields.IntegerField&gt;), ('wms_price_fi', &lt;django.db.models.fields.IntegerField&gt;), ('wms_license_source_note', &lt;django.db.models.fields.TextField&gt;), ('wms_bequeath_licence_info', &lt;django.db.models.fields.IntegerField&gt;), ('wms_bequeath_contact_info', &lt;django.db.models.fields.IntegerField&gt;), ('wms_proxy_exchange_external_urls', &lt;django.db.models.fields.IntegerField&gt;)], name='Wms'&gt;, &lt;CreateModel  fields=[('id', &lt;django.db.models.fields.AutoField&gt;), ('name', &lt;django.db.models.fields.CharField&gt;), ('url', &lt;django.db.models.fields.CharField&gt;), ('page_identifier', &lt;django.db.models.fields.CharField&gt;), ('icon_name', &lt;django.db.models.fields.CharField&gt;), ('position', &lt;django.db.models.fields.IntegerField&gt;), ('parent', &lt;django.db.models.fields.related.ForeignKey&gt;)], name='Navigation'&gt;, &lt;CreateModel  options={'db_table': 'gui_mb_user', 'managed': False}, fields=[('fkey_gui', &lt;django.db.models.fields.related.OneToOneField&gt;), ('mb_user_type', &lt;django.db.models.fields.CharField&gt;)], name='GuiMbUser'&gt;, &lt;CreateModel  options={'db_table': 'mb_user_mb_group', 'managed': False}, fields=[('fkey_mb_user', &lt;django.db.models.fields.related.OneToOneField&gt;)], name='MbUserMbGroup'&gt;]</em><a class="headerlink" href="#useroperations.migrations.0001_initial.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-useroperations.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-useroperations.migrations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/FAQ.html">FAQ</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/useroperations.migrations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

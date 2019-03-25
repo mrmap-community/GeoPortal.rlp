@@ -1,0 +1,250 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Geoportal.helper &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Geoportal.helper</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file contains methods that are needed in all apps.</span>
+
+<span class="sd">Author: Michel Peltriaux</span>
+<span class="sd">Organization: Spatial data infrastructure Rheinland-Pfalz, Germany</span>
+<span class="sd">Contact: michel.peltriaux@vermkv.rlp.de</span>
+<span class="sd">Created on: 22.01.19</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="k">import</span> <span class="n">HttpRequest</span>
+
+<span class="kn">from</span> <span class="nn">Geoportal.settings</span> <span class="k">import</span> <span class="n">VIRTUAL_MACHINE</span><span class="p">,</span> <span class="n">LOCAL_MACHINE</span><span class="p">,</span> <span class="n">DEFAULT_GUI</span>
+<span class="kn">from</span> <span class="nn">useroperations.models</span> <span class="k">import</span> <span class="n">Navigation</span><span class="p">,</span> <span class="n">MbUser</span>
+<span class="kn">from</span> <span class="nn">useroperations.utils</span> <span class="k">import</span> <span class="n">helper_functions</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<div class="viewcode-block" id="get_navigation_items"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.helper.get_navigation_items">[docs]</a><span class="k">def</span> <span class="nf">get_navigation_items</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Returns the navigation items from the database</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Contains upper level pagenames with associated lists of subpagenames</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">navigation</span> <span class="o">=</span> <span class="n">Navigation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">)</span>
+    <span class="n">navigation_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">navigation</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">navigation</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">upper_item</span> <span class="ow">in</span> <span class="n">navigation</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">upper_item</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">navigation_dict</span><span class="p">[</span><span class="n">upper_item</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="n">upper_item</span><span class="p">,</span>
+                <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">lower_item</span> <span class="ow">in</span> <span class="n">navigation</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lower_item</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">navigation_dict</span><span class="p">[</span><span class="n">lower_item</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="s2">&quot;children&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lower_item</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">navigation_dict</span></div>
+
+<div class="viewcode-block" id="get_session_data"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.helper.get_session_data">[docs]</a><span class="k">def</span> <span class="nf">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parses the PHP session file</span>
+
+<span class="sd">    To link between Django and old times PHP components, we need to fetch</span>
+<span class="sd">    data from the PHP session file on the filesystem.</span>
+<span class="sd">    This function parses the file and returns the information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The incoming request</span>
+<span class="sd">    Returns:</span>
+<span class="sd">         dict: Contains the session data for python</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Noone&#39;</span>
+    <span class="n">userid</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">gui</span> <span class="o">=</span> <span class="n">DEFAULT_GUI</span>
+    <span class="n">guis</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">loggedin</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">session_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">COOKIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">session_data</span> <span class="o">=</span> <span class="n">helper_functions</span><span class="o">.</span><span class="n">get_mapbender_session_by_memcache</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">COOKIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">))</span>
+        <span class="c1">#session_data = get_mapbender_session_by_file(request.COOKIES.get(&#39;PHPSESSID&#39;))</span>
+        <span class="k">if</span> <span class="n">session_data</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;mb_user_id&#39;</span> <span class="ow">in</span> <span class="n">session_data</span><span class="p">:</span>
+                <span class="n">guest_id</span> <span class="o">=</span> <span class="n">helper_functions</span><span class="o">.</span><span class="n">get_mapbender_config_value</span><span class="p">(</span><span class="s1">&#39;ANONYMOUS_USER&#39;</span><span class="p">)</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_name&#39;</span><span class="p">]</span>
+                <span class="n">userid</span> <span class="o">=</span> <span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_id&#39;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">guest_id</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
+                    <span class="n">gui</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_gui&#39;</span><span class="p">],</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="n">loggedin</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">LOCAL_MACHINE</span> <span class="o">+</span> <span class="s1">&#39;/portal/guiapi.php&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_guis&#39;</span><span class="p">])</span>
+
+                    <span class="k">if</span> <span class="n">session_data</span><span class="p">[</span><span class="sa">b</span><span class="s1">&#39;mb_user_guis&#39;</span><span class="p">]:</span>
+
+                        <span class="n">guistring</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+                        <span class="n">guistring</span> <span class="o">=</span> <span class="n">guistring</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="n">guistring</span> <span class="o">=</span> <span class="n">guistring</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="n">guistring</span> <span class="o">=</span> <span class="n">guistring</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="n">guistring</span> <span class="o">=</span> <span class="n">guistring</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">u00e4&#39;</span><span class="p">,</span> <span class="s1">&#39;ae&#39;</span><span class="p">)</span>
+                        <span class="n">guis</span> <span class="o">=</span> <span class="n">guistring</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                        <span class="n">loggedin</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">guis</span> <span class="o">=</span> <span class="n">DEFAULT_GUI</span>
+                        <span class="n">loggedin</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;session_data&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="p">,</span>
+        <span class="s1">&#39;gui&#39;</span><span class="p">:</span> <span class="n">gui</span><span class="p">,</span>
+        <span class="s1">&#39;guis&#39;</span><span class="p">:</span> <span class="n">guis</span><span class="p">,</span>
+        <span class="s1">&#39;loggedin&#39;</span><span class="p">:</span> <span class="n">loggedin</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="get_mb_user_session_data"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.helper.get_mb_user_session_data">[docs]</a><span class="k">def</span> <span class="nf">get_mb_user_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">HttpRequest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse PHP session, focusing on mb_user data</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest):</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Contains only user relevant data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session_data</span><span class="o">=</span><span class="n">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">ret_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">guest_gui</span> <span class="o">=</span> <span class="p">[</span><span class="n">DEFAULT_GUI</span><span class="p">]</span>
+    <span class="n">guest_id</span> <span class="o">=</span> <span class="n">helper_functions</span><span class="o">.</span><span class="n">get_mapbender_config_value</span><span class="p">(</span><span class="s1">&#39;ANONYMOUS_USER&#39;</span><span class="p">)</span>
+    <span class="n">guest_name</span> <span class="o">=</span> <span class="n">MbUser</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mb_user_id</span><span class="o">=</span><span class="n">guest_id</span><span class="p">)</span>
+    <span class="c1"># USER</span>
+    <span class="k">if</span> <span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;loggedin&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;user&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;session_data&#39;</span><span class="p">][</span><span class="sa">b</span><span class="s1">&#39;mb_user_name&#39;</span><span class="p">],</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;userid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;session_data&#39;</span><span class="p">][</span><span class="sa">b</span><span class="s1">&#39;mb_user_id&#39;</span><span class="p">])</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;gui&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;gui&#39;</span><span class="p">]</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;guis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;guis&#39;</span><span class="p">]</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;loggedin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session_data</span><span class="p">[</span><span class="s1">&#39;loggedin&#39;</span><span class="p">]</span>
+    <span class="c1"># GUEST</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guest_name</span><span class="o">.</span><span class="n">mb_user_name</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;userid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guest_id</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;gui&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guest_gui</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;guis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guest_gui</span>
+        <span class="n">ret_dict</span><span class="p">[</span><span class="s2">&quot;loggedin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">ret_dict</span></div>
+
+
+<div class="viewcode-block" id="execute_threads"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.helper.execute_threads">[docs]</a><span class="k">def</span> <span class="nf">execute_threads</span><span class="p">(</span><span class="n">thread_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Executes a list of threads</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        thread_list (list): A list of threads</span>
+<span class="sd">    Returns: nothing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">thread_list</span><span class="p">:</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">thread_list</span><span class="p">:</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

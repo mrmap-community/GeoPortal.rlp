@@ -1,0 +1,514 @@
+/**
+
+    THIS IS THE STYLESHEET FILE FOR base.html
+    ALL CHANGES SHOULD GO HERE!
+
+**/
+
+
+@import 'color_schema.css';
+
+
+/*
+CHANGE PLACEHOLDER COLORS
+*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--rlp-gray-placeholder);
+  text-align: center;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--rlp-gray-placeholder);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--rlp-gray-placeholder);
+}
+
+*{font-family:Arial,Helvetica,"Sans Serif" !important;}
+
+html{
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0;
+    background-color: var(--rlp-gray-light);
+    height: 100%;
+    position: relative;
+}
+
+.body-content{
+    min-height: 800px;      /* ToDO: As long as the iframe mapviewer is used, we need to provide a minimum height for the body content */
+    background-color: white;
+    /*
+    min-width: 60%;
+    max-width: 70%;
+    */
+    /*width: 70%;*/
+    padding: 20px;
+    margin: 0 250px 0 250px;
+}
+
+footer{
+    border-top: 5px solid var(--rlp-red);
+    padding: 20px;
+    background-image: linear-gradient(var(--rlp-gray), white);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#logo_geoportal{
+    max-height: 50px;
+}
+#logo_gdi{
+    max-height: 100px;
+    max-width: 100%;
+    height: auto;
+}
+
+#logo_rlp{
+    max-height: 75px;
+}
+.message-container{
+    display: flex;
+    justify-content: center;
+}
+
+.alert-error{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--rlp-red);
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 20px;
+    width: 50%;
+    min-width: 150px;
+}
+.alert-error:hover{
+    cursor: default;
+    background-color: red;
+}
+
+.image-text-container{
+    display: flex;
+    align-items: center;
+}
+
+.show{
+    display: block;
+}
+
+.header{
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    background-image: linear-gradient(to bottom left, white, var(--rlp-gray));
+    border-bottom: 5px solid var(--rlp-red);
+    /*background-color: var(--rlp-gray);*/
+}
+
+.logo-geoportal-wrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.25;
+}
+
+/* FOR MOBILE USERS */
+@media only screen and (max-width: 1000px){
+    .body-content{
+        margin: 0 0 0 0;
+    }
+    #logo_rlp{
+        width: 100%;
+    }
+    #logo_geoportal{
+        width: 100%;
+    }
+}
+
+.left-header{
+    flex-grow: 1;
+    padding: 0 0 0 5%;
+}
+
+.middle-header{
+    display: block;
+    flex-grow: 2;
+}
+
+.middle-header-top{
+    display: flex;
+    justify-content: center;
+    position:relative;
+}
+
+.right-header{
+    flex-grow: 1;
+}
+
+.right-header-top{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+
+}
+.right-header-bottom{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin: 10px 20px 0 0;
+}
+
+
+.sub-header-wrapper{
+    padding: 5px 0 10px 0;
+    margin: 0 0 10px 0;
+}
+
+.inline {
+  margin: 10px 0 0 4px;
+  display: inline-block;
+  position: relative; }
+
+.simple-search-field{
+    font: inherit;
+    width: 100%;
+    color: #000;
+    border: 0px solid;
+    background-color: #fff;
+    border-radius: 0px;
+    height: 50px;
+    line-height: 40px;
+    padding: 0 10px 0 10px;
+}
+
+.simple-search-field:focus{
+    border-color: var(--rlp-red);
+    box-shadow: 0 0 10px var(--rlp-red);
+}
+
+.search-submit-button{
+    display: flex;
+    align-items: center;
+    background-color: var(--rlp-red);
+    color: white;
+    padding: 10px;
+}
+.search-submit-button:hover{
+    background-color: var(--rlp-red-hover);
+    cursor: pointer;
+}
+
+.simple-search-autocomplete {
+
+    box-shadow: 0px 5px 5px 0px var(--rlp-red);
+    border-left: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    display: none;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+.simple-search-autocomplete div {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    display: block; }
+
+.simple-search-autocomplete div:hover, .simple-search-autocomplete div.active {
+  /*background-color: #f2f2f2; */
+  background-color: var(--rlp-red);
+  color: white;
+  }
+
+.simple-search-autocomplete.active {
+  display: block; }
+
+/* LANGUAGE SELECTOR */
+.flag-selector{
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+
+.flag-selector:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.active-language{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mapbender{
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+
+}
+
+.map-viewer-overlay{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--rlp-gray), white);
+    position: absolute;
+    margin: 0;
+    /*
+    top: 150px;
+    */
+    z-index: 1;
+    display: none;
+}
+
+#mapviewer{
+    margin: 50px;
+}
+#mapviewer-external{
+    width: 100%;
+    height: 600px;
+}
+
+.map-viewer-toggler{
+    drop-shadow: 0px 0px 0px;
+    position: absolute;
+    top: 150px;
+    right: 0px;
+    z-index: 2;
+}
+
+.mobile-map-toggler{
+    margin: 5px 0 0 0;
+}
+
+.map-applications-toggler{
+    margin: 5px 0 0 0;
+}
+.map-sidebar{
+    position: absolute;
+    top: 50px;
+    right: 0px;
+}
+.map-sidebar-actions{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.map-applications-list{
+    display: none;
+}
+.map-applications-list-entry{
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: var(--rlp-red-light);
+    border-radius: 10px;
+}
+.map-applications-list-entry:hover{
+    background-color: var(--rlp-red-light-hover);
+    cursor: pointer;
+}
+
+.sidebar-toggler{
+    drop-shadow: 0px 0px 0px;
+    position: absolute;
+    top: 150px;
+    left: 0px;
+    z-index: 2;
+}
+
+.sidebar-toggler:hover, .map-viewer-toggler:hover, .map-applications-toggler:hover, .mobile-map-toggler:hover{
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+	-webkit-filter: drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-moz-filter:    drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-ms-filter:     drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-o-filter:      drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	filter:         drop-shadow(0 5px 2px rgba(0,0,0,.5));
+}
+
+.sidebar-wrapper {
+    background-color: var(--rlp-red);
+    /* background-image: linear-gradient(var(--rlp-red), white); */
+    list-style-type: none;
+    width: 250px;
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    z-index: 1;
+    transition-duration: 0.8s;
+    transform: translateX(0px);
+}
+.sidebar-wrapper.closed{
+    transform: translateX(-250px);
+}
+
+.sidebar-content{
+    text-align: center;
+    width: 100%;
+    margin-top: 0px;
+    padding: 20px 0 0 0;
+    color: white;
+}
+
+.sidebar-title{
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sidebar-area-title{
+    display: flex;
+    align-items: center;
+    /*justify-content: space-evenly;*/
+    font-weight: bold;
+    background-color: var(--rlp-red-light);
+    padding: 20px;
+}
+
+.sidebar-area-title-text{
+    text-align: middle;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-area-title:hover{
+    cursor: pointer;
+    background-color: var(--rlp-red-light-hover);
+}
+
+.sidebar-area-content{
+    display: none;
+}
+
+.sidebar-area-content > div{
+    background-color: var(--rlp-red-light);
+    font-weight: bold;
+    padding: 10px 0 10px 0;
+}
+
+.sidebar-area-content > a{
+    outline: none;
+    text-decoration:none;
+    color: white;
+}
+
+.sidebar-list-element{
+    color: white;
+    padding: 15px 0px 15px 0px;
+    cursor: pointer;
+}
+
+.current-page{
+    background-color: var(--rlp-red-light-hover);
+}
+
+.sidebar-list-element:hover{
+    text-decoration: none;
+    background-color: var(--rlp-red-light-hover);
+    color: white;
+}
+
+#map-viewer-selector{
+    display: none;
+}
+
+.footer-col-wrapper{
+    display: flex;
+    justify-content: center;
+
+}
+.footer-col{
+    align-items: flex-start;
+    margin: 0 40px 0 40px;
+}
+
+.footer-col > h6{
+    color: var(--rlp-red);
+    font-weight: bold;
+}
+
+.footer-list{
+    list-style-type: none !importan;
+}
+
+.footer-col a{
+    text-decoration: none;
+    color: var(--rlp-gray-placeholder);
+}
+.footer-col a:hover{
+    color: var(--rlp-red-hover);
+}
+
+.search-form-text-input{
+    width: 100%;
+}
+
+/* MESSAGES */
+.messages-container{
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+}
+.messages{
+    width: 100%;
+    filter: drop-shadow(2px 2px 2px black);
+}
+.message-toggler{
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 1px;
+    background-color: var(--success-green);
+    border-radius: 10px;
+}
+.message-toggler:hover{
+    cursor:pointer;
+    filter: drop-shadow(2px 2px 2px black);
+}
+
+.messages .success {
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: var(--success-green);
+}
+.messages .success:hover{
+    cursor: default;
+}

@@ -1,0 +1,39 @@
+{% load static i18n %}
+
+<div class="email-form-container">
+    <div class="email-form-title">
+        {{ title }}
+    </div>
+    <div class="email-form-body">
+        <table>
+            <tr class="email-to-label">
+                <td>
+                    {% trans 'To:' context "email" %}
+                </td>
+                <td class="email-to-label-address">
+                    {{ data_provider }}
+                </td>
+            </tr>
+            <tr class="email-subject">
+                <td>
+                    {% trans 'Subject:' context "email" %}
+                </td>
+                <td class="email-subject-content">
+                    {{ subject }}
+                </td>
+            </tr>
+        </table>
+        <div class="email-input">
+            <textarea class="email-input-field">{{ draft }}</textarea>
+        </div>
+    </div>
+    <div class="submit-button-wrapper">
+        <div id="cancel-permission-email-button" class="form-cancel-button">
+            {% trans 'Cancel' %}
+        </div>
+        <div id="send-permission-email-button" class="form-submit-button">
+            {% trans 'Send' %}
+        </div>
+
+    </div>
+</div>

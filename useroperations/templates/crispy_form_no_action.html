@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="title">
+    <h1>{{ headline }}</h1>
+</div>
+
+<div class="description">
+    <a target="_blank" href="/mediawiki/index.php/Registrierung/{{ lang }}">{% trans 'Why should I create an account?' %}</a>
+    {% trans 'A short explanation of the benefits of an account for Geoportal.rlp!' %}
+</div>
+
+<hr>
+
+<div class="form-wrapper">
+    <form method="post">
+        {% csrf_token %}
+            <table>
+            {% for field in form %}
+            <tr class="field-wrapper {% if field.id_for_label in small_labels %}small-label{% endif %}">
+                <td class="field-label">
+                    {{ field.label_tag }}
+                    {% if field.field.required %}
+                    *
+                    {% endif %}
+                </td>
+                <td class="field-value">
+                    {{ field }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="foot-note">
+            {% trans '* The field is required.' %}
+        </div>
+        <hr>
+        <div class="foot-note">
+            {% trans 'For additional information regarding your privacy and the GDPR, please read our ' %}
+            <a target="_blank" href="/article/datenschutz">{% trans 'privacy rules' %}.</a>
+        </div>
+        <div class="submit-button-wrapper">
+            <input type="hidden" name="action" value="submit" />
+            {% if btn_label2 %}
+                <input id="delete-form-button" class="form-submit-button" name="submit" type="submit" value="{{ btn_label2 }}">
+            {% endif %}
+            {% if btn_label1 %}
+            <input id="change-form-button" class="form-submit-button" name="submit" type="submit" value="{{ btn_label1 }}">
+            {% endif %}
+        </div>
+            <div id="password_message">
+                <h3>{% trans 'Password must contain the following:' %}</h3>
+                <p id="letter" class="invalid"><b>{% trans 'A lowercase letter' %}</b> </p>
+                <p id="capital" class="invalid"><b>{% trans 'A uppercase letter' %}</b> </p>
+                <p id="number" class="invalid"><b>{% trans 'A number' %}</b></p>
+                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
+            </div>
+    </form>
+</div>
+
+
+{% endblock %}

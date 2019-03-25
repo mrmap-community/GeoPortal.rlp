@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+{% endblock %}
+
+{% block body %}
+<h2>{% trans 'Most frequently used Map Combinations' %}</h2>
+
+<div class="wmc-tile-wrapper">
+    {% for result in wmc_results %}
+        <div class="wmc-tile">
+            <div class="wmc-tile-content">
+                <a href="WMC={{ result.id }}" target="_blank">
+                    <div class="wmc-tile-header">
+                        <img src="{{ result.previewURL }}">
+                    </div>
+                    <div lang="en" class="wmc-tile-body">
+                        {{ result.title|safe }}
+                    </div>
+                </a>
+            </div>
+            <div class="wmc-tile-info-popup">
+                {% if result.abstract|length == 0 %}
+                    {% trans 'No description available' %}
+                {% else %}
+                    {{ result.abstract|safe }}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

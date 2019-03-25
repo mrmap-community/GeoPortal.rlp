@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>searchCatalogue.utils.autoCompleter &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for searchCatalogue.utils.autoCompleter</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Author: Michel Peltriaux</span>
+<span class="sd">Organization: Spatial data infrastructure Rheinland-Pfalz, Germany</span>
+<span class="sd">Contact: michel.peltriaux@vermkv.rlp.de</span>
+<span class="sd">Created on: 22.01.19</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">requests</span>  <span class="c1"># pip install requests</span>
+
+<span class="kn">from</span> <span class="nn">searchCatalogue.settings</span> <span class="k">import</span> <span class="n">PROXIES</span>
+<span class="kn">from</span> <span class="nn">searchCatalogue.utils.url_conf</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="AutoCompleter"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.autoCompleter.AutoCompleter">[docs]</a><span class="k">class</span> <span class="nc">AutoCompleter</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; The class instance for the auto completion on the address bar.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_text</span><span class="p">,</span> <span class="n">max_results</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Constructor</span>
+
+<span class="sd">        Argas:</span>
+<span class="sd">            search_text (string): Which strings shall be searched for</span>
+<span class="sd">            max_results (int): How many hits shall be fetched/displayed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define search arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_text</span> <span class="o">=</span> <span class="n">search_text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_results</span> <span class="o">=</span> <span class="n">max_results</span>
+
+<div class="viewcode-block" id="AutoCompleter.set_search_text"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.autoCompleter.AutoCompleter.set_search_text">[docs]</a>    <span class="k">def</span> <span class="nf">set_search_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Setter for search text</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search_text (string): The new search_text</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            AutoCompleter: Returns the object itself</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">search_text</span> <span class="o">=</span> <span class="n">search_text</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="AutoCompleter.set_max_results"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.autoCompleter.AutoCompleter.set_max_results">[docs]</a>    <span class="k">def</span> <span class="nf">set_max_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_results</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Setter for max results</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_results (int): The new search_text</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            AutoCompleter: Returns the object itself</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_results</span> <span class="o">=</span> <span class="n">max_results</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="AutoCompleter.get_auto_completion_suggestions"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.autoCompleter.AutoCompleter.get_auto_completion_suggestions">[docs]</a>    <span class="k">def</span> <span class="nf">get_auto_completion_suggestions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns all suggestions for the search texts</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">             dict: Contains suggestions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">URL_BASE</span> <span class="o">+</span> <span class="n">URL_AUTO_COMPLETE_SUFFIX</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;searchText&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_text</span><span class="p">,</span>
+            <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_results</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">results</span></div></div>
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

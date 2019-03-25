@@ -1,0 +1,253 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>searchCatalogue.utils.rehasher &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for searchCatalogue.utils.rehasher</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Author: Michel Peltriaux</span>
+<span class="sd">Organization: Spatial data infrastructure Rheinland-Pfalz, Germany</span>
+<span class="sd">Contact: michel.peltriaux@vermkv.rlp.de</span>
+<span class="sd">Created on: 22.01.19</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">Geoportal</span> <span class="k">import</span> <span class="n">helper</span>
+
+
+<div class="viewcode-block" id="Rehasher"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.rehasher.Rehasher">[docs]</a><span class="k">class</span> <span class="nc">Rehasher</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Merges categories and filters from all search result types (wms, wfs, dataset, wmc) into one dict for better handling</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">categories</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Constructor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            categories (dict): Specifies which categories/resource types shall be worked on</span>
+<span class="sd">            filters: Specifies which filters will be used for rehashing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_categories</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_filters</span> <span class="o">=</span> <span class="n">filters</span>
+        <span class="k">for</span> <span class="n">category_key</span><span class="p">,</span> <span class="n">category_val</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_categories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="n">category_key</span><span class="p">][</span><span class="s2">&quot;categories&quot;</span><span class="p">][</span><span class="s2">&quot;searchMD&quot;</span><span class="p">][</span><span class="s2">&quot;category&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_filters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__parent_categories</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__rehash</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sort_by_count</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__search_and_handle_subcat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_subcat</span><span class="p">,</span> <span class="n">rehashed_categories</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Searches a specific subcategory and recalculates the parent category count number</span>
+
+<span class="sd">        Since rehashing works multithreaded, we use these private functions for intra-class usage only!</span>
+<span class="sd">        Recounts the occurences of a specific subcategory in the rehashed categories</span>
+<span class="sd">        and updates the count number for the parent category.</span>
+<span class="sd">        Only one subcategory per call will be searched and handled</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            c_subcat: Specifies the subcategory that we are looking for</span>
+<span class="sd">            rehashed_categories (list): A list with categories that shall be handled</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the subcategory was found and handled, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret_val</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">rehashed_category</span> <span class="ow">in</span> <span class="n">rehashed_categories</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rehashed_category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c_subcat</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]:</span>
+                <span class="c1"># found the subcat in the rehashed categories</span>
+                <span class="c1"># update count number</span>
+                <span class="n">rehashed_category</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rehashed_category</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">c_subcat</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">])</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">ret_val</span>
+
+    <span class="k">def</span> <span class="nf">__sort_by_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Sort facets by number of count</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">category_key</span><span class="p">,</span> <span class="n">category_val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">category_val</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__rehash_single_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Rehashing of a single datatype</span>
+
+<span class="sd">        This is one of multiple multithreaded calls. Each datatype has its own</span>
+<span class="sd">        thread to be handled in.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            datatype: Specifies the datatype that shall be handled.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">datatype</span><span class="p">:</span>
+            <span class="c1"># if there are no subcategories in the datatype but we haven&#39;t seen it yet, we take it anyway</span>
+            <span class="c1"># if there are no subcategories in this datatype and we know the category itself already, we pass it</span>
+            <span class="k">if</span> <span class="n">category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subcat&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">[</span><span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">:</span>
+                <span class="c1"># this category is not know yet, add it!</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">[</span><span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;subcat&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># the category is already in the rehashed list</span>
+                <span class="c1"># we need to add the new subcategory elements to the existing ones</span>
+                <span class="k">for</span> <span class="n">c_subcat</span> <span class="ow">in</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;subcat&quot;</span><span class="p">]:</span>
+                    <span class="c1"># if the category has already a subcat with the title of c_subcat we need to update the count number</span>
+                    <span class="c1"># otherwise if the subcat we currently iterate over is not in the subcategories of the category, we append it</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__search_and_handle_subcat</span><span class="p">(</span><span class="n">c_subcat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">[</span><span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]):</span>
+                        <span class="c1"># Yes, the name is shitty, but if we got in this branch it means that we found no matching subcategory</span>
+                        <span class="c1"># So we add the c_subcat to the list, since it seems to be unknown so far</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span><span class="p">[</span><span class="n">category</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c_subcat</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__rehash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Merges all four category dicts into one large.</span>
+
+<span class="sd">        Parent categories will be merged.</span>
+<span class="sd">        Count of subcategories will be updated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 1) Rehash categories</span>
+        <span class="k">for</span> <span class="n">datatype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_categories</span><span class="p">:</span>
+            <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__rehash_single_thread</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">datatype</span><span class="p">,)))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">execute_threads</span><span class="p">(</span><span class="n">thread_list</span><span class="p">)</span>
+        <span class="c1"># 2) Reorganize filter</span>
+        <span class="c1"># Reorganize means we need to get rid of certain elements, which are useless in this system and would disturb the handling in a later process</span>
+        <span class="c1"># only searchResources, orderFilter, maxResults and searchText from one datatype are needed, the rest is irrelevant</span>
+        <span class="n">delete_keys</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;isoCategories&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;searchResources&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inspireThemes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;customCategories&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;registratingDepartments&quot;</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">delete_keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_filters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_filters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_filters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_filters</span>
+
+
+<div class="viewcode-block" id="Rehasher.get_rehashed_categories"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.rehasher.Rehasher.get_rehashed_categories">[docs]</a>    <span class="k">def</span> <span class="nf">get_rehashed_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Getter for rehashed categories</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: The rehashed categories</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_categories</span></div>
+
+<div class="viewcode-block" id="Rehasher.get_rehashed_filters"><a class="viewcode-back" href="../../../modules/searchCatalogue.utils.html#searchCatalogue.utils.rehasher.Rehasher.get_rehashed_filters">[docs]</a>    <span class="k">def</span> <span class="nf">get_rehashed_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Getter for rehashed filters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: The rehashed filters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rehashed_filters</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

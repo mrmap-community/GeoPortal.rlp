@@ -1,0 +1,12 @@
+{% load i18n %}
+<div data-result="dataset" class="keywords -js-keywords ">
+    <div class="keywords--headline">
+        <span class="accordion icon closed"></span>
+        {% trans 'Search for keywords' %}
+    </div>
+    <div class="keywords--container hide">
+        {% for tag in tags %}
+        <span class="keywords--item -js-keyword" data-params="{{ tag.url }}" title="{{ tag.title }}" style="font-size: {{ tag.weight }}px;">{{ tag.title }}</span>
+        {% endfor %}
+    </div><!-- end .keywords--container -->
+</div><!-- end .keywords -->

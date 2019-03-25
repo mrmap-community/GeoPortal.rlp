@@ -1,0 +1,24 @@
+{% load i18n %}
+<div class="pager">
+    <ul class="pager--list" data-id="{{ resource_name }}">
+        {% if page_data.page_list|length > 0 %}
+            <span>{% trans 'Pages:' %}</span>
+            {% if page_data.current_page > 1 %}
+                <li class='pager--list--item -js-pager-item' data-page='{{ page_data.current_page|add:"-1" }}'>{% trans 'Back' %}</li>
+            {% endif %}
+            {% for p in page_data.page_list %}
+                {% if p != "..." %}
+                    <li data-page='{{ p }}' class='pager--list--item -js-pager-item {% if page_data.current_page == p %} active-Page {% else %} {% endif %}'>{{ p }}</li>
+                {% else %}
+                    <li class='pager--list--points'>{{ p }}</li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_data.current_page < page_data.max_page %}
+                <li class='pager--list--item -js-pager-item' data-page='{{ page_data.current_page|add:"1" }}'>{% trans 'Next' %}</li>
+            {% endif %}
+        {% else %}
+        </ul></div>
+        {% endif %}
+    </ul><!-- end .pager--list -->
+</div><!-- end .pager -->

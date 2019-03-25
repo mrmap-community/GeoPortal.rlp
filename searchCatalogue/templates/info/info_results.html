@@ -1,0 +1,53 @@
+{% load i18n static search_tags %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/mediawiki.css' %}" media="all" />
+{% endblock %}
+
+{% for search_result_key, search_result_val in search_results.items %}
+
+<div class="search-cat active">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_info.png' %}" title="{{ search_result_key }}">
+            {% if list_all %}
+            {% trans 'All articles' %}
+            {% else %}
+            "{{ search_result_key }}"
+            {% endif %}
+        </div>
+    </div><!-- end .search-header -->
+    <div class="dataset search--body hide">
+        <div class="search-results">
+            {% for result in search_result_val %}
+                <div class="result--item -js-result-info">
+                    {% if result.is_intern %}
+                        <div class="info-search-result" data-target="{{ result.title|drop_translation:lang }}">
+                            <div class="search-result-title">
+                                {{ result.title|drop_translation:lang }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <a target="_blank" href="{{ LOCAL_MACHINE }}/mediawiki/index.php/{{ result.title }}">
+                            <div class="search-result-title">
+                                {{ result.title|drop_translation:lang }}
+                            </div>
+                        </a>
+                    {% endif %}
+                    <div class="search-result-area">
+                        {% if result.snippet|length > 0 %}
+                            {% autoescape off %}
+                            "{{ result.snippet|bold:search_result_key|safe }}"
+                            {% endautoescape %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                {% trans 'No hits found for this search configuration' %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+{% endfor %}

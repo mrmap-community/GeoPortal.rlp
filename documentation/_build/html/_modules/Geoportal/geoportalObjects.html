@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Geoportal.geoportalObjects &#8212; Geoportal 01.05.2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Geoportal.geoportalObjects</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Author: Michel Peltriaux</span>
+<span class="sd">Organization: Spatial data infrastructure Rheinland-Pfalz, Germany</span>
+<span class="sd">Contact: michel.peltriaux@vermkv.rlp.de</span>
+<span class="sd">Created on: 11.03.19</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">django.http.response</span> <span class="k">import</span> <span class="n">JsonResponse</span>
+
+<span class="kn">from</span> <span class="nn">Geoportal</span> <span class="k">import</span> <span class="n">helper</span><span class="p">,</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">Geoportal.settings</span> <span class="k">import</span> <span class="n">LOCAL_MACHINE</span><span class="p">,</span> <span class="n">DEFAULT_GUI</span>
+
+
+<div class="viewcode-block" id="GeoportalJsonResponse"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.geoportalObjects.GeoportalJsonResponse">[docs]</a><span class="k">class</span> <span class="nc">GeoportalJsonResponse</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Generic JsonResponse wrapper for Geoportal</span>
+
+<span class="sd">    Use for AJAX responses.</span>
+<span class="sd">    There are three default values for the response: &#39;html&#39;, &#39;response&#39; and &#39;url&#39;.</span>
+<span class="sd">    &#39;Html&#39; contains prerendered html content, that will be pasted by Javascript into an html element.</span>
+
+<span class="sd">    IMPORTANT:</span>
+<span class="sd">    Always(!) use this object instead of a direct JsonResponse() object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;html&quot;</span><span class="p">:</span> <span class="n">html</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># add optional parameters</span>
+        <span class="k">for</span> <span class="n">arg_key</span><span class="p">,</span> <span class="n">arg_val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="n">arg_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">arg_val</span>
+
+<div class="viewcode-block" id="GeoportalJsonResponse.get_response"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.geoportalObjects.GeoportalJsonResponse.get_response">[docs]</a>    <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="GeoportalContext"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.geoportalObjects.GeoportalContext">[docs]</a><span class="k">class</span> <span class="nc">GeoportalContext</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Contains boilerplate attributes</span>
+
+<span class="sd">    Parameters and attributes that are always used in rendering for pages shall be put in here.</span>
+
+<span class="sd">    IMPORTANT:</span>
+<span class="sd">    Always(!) use this object for render() calls to make sure there are all parameters available in the templates.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">session_data</span><span class="o">=</span><span class="n">helper</span><span class="o">.</span><span class="n">get_mb_user_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;navigation&quot;</span><span class="p">:</span> <span class="n">helper</span><span class="o">.</span><span class="n">get_navigation_items</span><span class="p">(),</span>
+            <span class="s2">&quot;loggedin&quot;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;loggedin&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;userid&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;userid&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;gui&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gui&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="s1">&#39;guis&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;guis&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">LANGUAGE_CODE</span><span class="p">,</span>
+            <span class="s2">&quot;LOCAL_MACHINE&quot;</span><span class="p">:</span> <span class="n">LOCAL_MACHINE</span><span class="p">,</span>
+            <span class="s2">&quot;DEFAULT_GUI&quot;</span><span class="p">:</span> <span class="n">DEFAULT_GUI</span><span class="p">,</span>
+            <span class="s2">&quot;basedir&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">BASE_DIR</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="GeoportalContext.add_context"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.geoportalObjects.GeoportalContext.add_context">[docs]</a>    <span class="k">def</span> <span class="nf">add_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Adds a complete dict to the default configuration</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            context (dict): The context dict</span>
+<span class="sd">        Returns:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
+
+<div class="viewcode-block" id="GeoportalContext.get_context"><a class="viewcode-back" href="../../modules/Geoportal.html#Geoportal.geoportalObjects.GeoportalContext.get_context">[docs]</a>    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Geoportal</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/views.html">Views</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, André Holl, Michel Peltriaux, Armin Retterath.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

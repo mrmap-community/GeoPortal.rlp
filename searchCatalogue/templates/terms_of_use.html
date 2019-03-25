@@ -1,0 +1,20 @@
+{% load i18n %}
+<div id="terms-of-use" class="modalDialog">
+    <div>
+        <a id="tou-close" class="close">X</a>
+        {% autoescape off %}
+        {{ content }}
+        {% endautoescape %}
+        <div class="tou_buttons">
+            <a id="tou_button_accept" class="tou_button" data-params="" href="" target="_blank">
+                <div>
+                    {% trans 'Accept' %}
+                </div>
+            </a>
+                <div id="tou_button_decline" class="tou_button">
+                    {% trans 'Decline' %}
+                </div>
+        </div>
+    </div>
+
+</div>

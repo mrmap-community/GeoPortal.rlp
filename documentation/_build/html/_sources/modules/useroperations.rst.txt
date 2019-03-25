@@ -1,0 +1,46 @@
+useroperations package
+======================
+
+Submodules
+----------
+
+useroperations.apps module
+--------------------------
+
+.. automodule:: useroperations.apps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+useroperations.forms module
+---------------------------
+
+.. automodule:: useroperations.forms
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+useroperations.urls module
+--------------------------
+
+.. automodule:: useroperations.urls
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+useroperations.views module
+---------------------------
+
+.. automodule:: useroperations.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: useroperations
+    :members:
+    :undoc-members:
+    :show-inheritance:

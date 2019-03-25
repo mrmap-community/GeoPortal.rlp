@@ -1,0 +1,50 @@
+{% load static i18n humanize %}
+<div class="search-cat {% if 'service' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_services.png' %}" title="{% trans 'Services' %}">
+            {% trans 'Services' %}
+            ({{ service.md.nresults|intcomma }})
+        </div>
+    </div><!-- end .search-header -->
+
+    <div class="service search--body hide">
+        <div>
+            <div class="center">
+                {% if service.md.nresults|add:0 > 0 %}
+                {% with pages.service as page_data %}
+                    {% with 'service' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+            </div>
+            <div class="search-results">
+                {% for result in service.srv %}
+                    {% include 'other/search_result.html' %}
+                {% endfor %}
+            </div><!-- end .search-results -->
+
+            {% else %}
+            <p>
+                {% trans 'No results found, please use another search term...' %}
+
+            </p>
+            </div>
+            {% endif %}
+
+            <div class="center">
+                {% if service.md.nresults|add:0 > 0 %}
+                {% with pages.service as page_data %}
+                    {% with 'service' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div>
+        </div><!-- end .div -->
+    </div><!-- end .dataset .search--body -->
+</div>

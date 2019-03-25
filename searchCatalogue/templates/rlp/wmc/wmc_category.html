@@ -1,0 +1,56 @@
+{% load static i18n humanize %}
+<div class="search-cat {% if 'wmc' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wmc.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            {{ all_resources.wmc }}
+            ({{ search_results.wmc.wmc.wmc.md.nresults|intcomma }})
+        </div><!-- end .source--title -->
+    </div><!-- end .search-header -->
+    <div class="wmc search--body hide">
+        {% if search_results.wmc.keywords.tagCloud.tags|length > 0 and search_results.wmc.wmc.wmc.md.nresults|add:0 > 0 %}
+            {% with search_results.wmc.keywords.tagCloud.tags as tags %}
+
+                {% include 'keywords.html' %}
+
+            {% endwith %}
+        {% endif %}
+        <div>
+            <div class="center">
+                {% if search_results.wmc.wmc.wmc.md.nresults|add:0 > 0 %}
+                {% with pages.wmc as page_data %}
+                    {% with 'wmc' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+            </div><!-- end .center -->
+            <div class="search-results">
+                {% for result in search_results.wmc.wmc.wmc.srv %}
+                    <div class="result--item -js-result-wmc">
+                        {% include 'rlp/wmc/wmc_search_result.html' %}
+                    </div><!-- end .result--item -->
+                {% endfor %}
+            </div><!-- end .search-results -->
+            {% else %}
+            <p>
+                {% trans 'No results found, please use another search term...' %}
+            </p>
+            </div>
+            {% endif %}
+
+            <div class="center">
+                {% if search_results.wmc.wmc.wmc.md.nresults|add:0 > 0 %}
+                {% with pages.wmc as page_data %}
+                    {% with 'wmc' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div><!-- end .center -->
+        </div><!-- end .div -->
+    </div><!-- end .wmc .search--body -->
+</div><!-- end .search-cat -->

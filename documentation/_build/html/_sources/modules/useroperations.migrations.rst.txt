@@ -1,0 +1,22 @@
+useroperations.migrations package
+=================================
+
+Submodules
+----------
+
+useroperations.migrations.0001\_initial module
+----------------------------------------------
+
+.. automodule:: useroperations.migrations.0001_initial
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: useroperations.migrations
+    :members:
+    :undoc-members:
+    :show-inheritance:

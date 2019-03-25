@@ -1,0 +1,36 @@
+{% load static i18n %}
+<div class="result--item -js-result-dataset">
+    <a title='zu {{ result.title }}' href='{{ result.htmlLink }}' target="_blank" style="text-decoration: none">
+        <div class="search-result-title">
+            {{ result.title }}
+        </div>
+    </a>
+    <div class="search-result-area">
+        <div class="img-area">
+            <img class="img-preview" style="max-width:100px;" src="{% if result.previewUrl is None or result.previewUrl|length == 0%}{% static 'searchCatalogue/images/no_image.png' %}{% else %}{{ result.previewUrl }}{% endif %}">
+        </div>
+        <table class="search-result-detail-table">
+            <tr>
+                <td class="search-result-detail-title">{% trans 'Competent authority:' %}</td>
+                <td class="search-result-detail"><a href="{{ result.htmlLink }}#tabs-3" target="_blank">{{ result.respOrg }}</a></td>
+            </tr>
+            {% if result.date|length > 0 %}
+            <tr>
+                <td class="search-result-detail-title">{% trans 'Date of metadata:' %}</td>
+                <td class="search-result-detail"><a href="{{ result.htmlLink }}#tabs-2" target="_blank">{{ result.date }}</a></td>
+            </tr>
+            {% endif %}
+            {% if result.abstract|length > 0 %}
+            <tr>
+                <td class="search-result-detail-title">{% trans 'Description:' %}</td>
+                <td class="search-result-detail"><p>{{ result.abstract }}</p></td>
+            </tr>
+            {% endif %}
+        </table>
+        {% with result as layer %}
+            {% with "service_DE" as type %}
+                {% include 'search_result_actions.html' %}
+            {% endwith %}
+        {% endwith %}
+    </div>
+</div><!-- end .result--item -->

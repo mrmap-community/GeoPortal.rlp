@@ -1,0 +1,73 @@
+/*
+
+    THIS IS THE STYLESHEET FOR wiki.html
+    ALL CHANGES SHOULD GO HERE
+
+*/
+
+@import 'color_schema.css';
+
+.mediawiki-article{
+}
+
+.mediawiki-article p, .mediawiki-article li{
+    font-size: 1.0em;
+    hyphens: auto;
+    text-align: justify
+}
+
+h1 .mw-headline{
+    color: var(--rlp-red);
+}
+
+h2 .mw-headline{
+    color: var(--rlp-red);
+}
+
+h3 .mw-headline{
+    color: var(--rlp-red);
+}
+
+.mediawiki-article ul{
+    list-style: square var(--rlp-red);
+    padding: 0 0 0 20px;
+}
+
+.tright{
+    float: right;
+}
+.tleft{
+    float: left;
+}
+
+.thumbinner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--rlp-gray);
+    padding: 5px;
+}
+.thumbcaption{
+    text-align: center;
+}
+
+.external, a{
+    color: var(--rlp-red);
+    text-decoration: none;
+}
+.external:hover, a:hover{
+    color: var(--rlp-red-light-hover);
+    text-decoration: underline;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.image > img{
+    max-width: 100%;
+    height: auto;
+}
+
+

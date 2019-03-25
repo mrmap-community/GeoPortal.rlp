@@ -1,0 +1,58 @@
+{% load static i18n humanize %}
+<div class="search-cat {% if 'wfs' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wfs.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            {{ all_resources.wfs }}
+            ({{ search_results.wfs.wfs.wfs.md.nresults|intcomma }})
+        </div><!-- end .source--title -->
+    </div><!-- end .search-header -->
+    <div class="wfs search--body hide">
+        {% if search_results.wfs.keywords.tagCloud.tags|length > 0 and search_results.wfs.wfs.wfs.md.nresults|add:0 > 0 %}
+            {% with search_results.wfs.keywords.tagCloud.tags as tags %}
+
+                {% include 'keywords.html' %}
+
+            {% endwith %}
+        {% endif %}
+        <div>
+            <div class="center">
+            {% if search_results.wfs.wfs.wfs.md.nresults|add:0 > 0 %}
+                {% with pages.wfs as page_data %}
+                    {% with 'wfs' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+            </div><!-- end .center -->
+            <div class="search-results">
+                {% for result in search_results.wfs.wfs.wfs.srv %}
+                    <div class="result--item -js-result-wmc">
+                            {% with result.ftype.0 as ftype %}
+                                {% include 'rlp/wfs/wfs_search_result.html' %}
+                            {% endwith %}
+                    </div>
+                {% endfor %}
+            </div><!-- end .search-results -->
+            {% else %}
+                <p>
+                    {% trans 'No results found, please use another search term...' %}
+                </p>
+            </div><!-- end .center -->
+            {% endif %}
+
+            <div class="center">
+                {% if search_results.wfs.wfs.wfs.md.nresults|add:0 > 0 %}
+                {% with pages.wfs as page_data %}
+                    {% with 'wfs' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div><!-- end .center -->
+        </div><!-- end .div -->
+    </div><!-- end .wmc .search--body -->
+</div><!-- end .search-cat -->

@@ -1,0 +1,69 @@
+
+{% load static humanize %}
+<div class="search-cat {% if 'wms' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wms.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            {{ all_resources.wms }}
+            ({{ search_results.wms.wms.wms.md.nresults|intcomma }})
+        </div>
+    </div><!-- end .search-header -->
+    <div class="wms search--body hide">
+        {% if search_results.wms.keywords.tagCloud.tags|length  > 0 and search_results.wms.wms.wms.md.nresults|add:0 > 0 %}
+            {% with search_results.wms.keywords.tagCloud.tags as tags %}
+
+                {% include 'keywords.html' %}
+
+            {% endwith %}
+        {% endif %}
+        <div>
+            <div class="center">
+                {% if search_results.wms.wms.wms.md.nresults|add:0 > 0 %}
+                {% with pages.wms as page_data %}
+                    {% with 'wms' as resource_name %}
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div><!-- end .center -->
+
+
+            <div class="search-results">
+                {% for result in search_results.wms.wms.wms.srv %}
+                    {% with result.layer.0 as result_l %}
+                    <div class="result--item -js-result-wms">
+                        <!-- parent layer -->
+                            {% with result_l as layer %}
+                                {% include 'rlp/wms/wms_search_result.html' %}
+                            {% endwith %}
+                            {% if result_l.layer is not None %}
+                                <!-- children layer -->
+                                {% for layer in result_l.layer %}
+                                    {% with result_l as parent_result %}
+                                    <div class="result-item-layer hide">
+                                        {% include 'rlp/wms/wms_search_result.html' %}
+                                    </div>
+                                    {% endwith %}
+                                {% endfor %}
+                            {% endif %}
+                    </div><!-- end .result--item -->
+                {% endwith %}
+                {% endfor %}
+            </div><!-- end .search-results -->
+
+            <div class="center">
+                {% if search_results.wms.wms.wms.md.nresults|add:0 > 0 %}
+                {% with pages.wms as page_data %}
+                    {% with 'wms' as resource_name %}
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div><!-- end .center -->
+
+
+        </div><!-- end .div -->
+    </div><!-- end .wms .search--body -->
+</div><!-- end .search-cat -->

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+{% extends extended_template %}
+{% block body %}
+
+<html>
+    <head>
+        {% csrf_token %}
+        {% load static %}
+        {% load i18n %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1"/>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{% static 'searchCatalogue/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'searchCatalogue/css/geoportal.rlp.css' %}">
+        <link rel="stylesheet" href="{% static 'searchCatalogue/vendor/leaflet/leaflet.css' %}" />
+        <link rel="stylesheet" href="{% static 'searchCatalogue/vendor/zebra/css/default.css' %}" type="text/css">
+        {% if external_call %}
+            <script type="text/javascript" src="{% static 'searchCatalogue/vendor/leaflet/leaflet.js' %}"></script>
+            <script>
+                var BASEDIR = '{{ basedir }}'
+            </script>
+            <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-1.12.4.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'searchCatalogue/vendor/zebra/javascript/zebra_datepicker.js' %}"></script>
+            <script type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
+        {% endif %}
+    </head>
+    <body>
+    <div class="wrapper">
+        <div id='-js-loading' class='centered hide'>
+            <div class="block"></div>
+            <div class='loading'>
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+                <div class="bounce4"></div>
+            </div>
+        </div>
+        <div id="overlay">
+            <!-- Header -->
+            {% if external_call %}
+                <div class="searchbar -js-input-div">
+                    <div class="simple-search-input-wrapper">
+                        <input id="external-search-field" type="text" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Insert search term here' %}">
+                        <button id="external-search-button" class="search--submit -js-search-start">{% trans 'Search' %}</button>
+                    </div>
+                    <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
+                    <div id="sub-header-wrapper">
+                        <div class="inline">
+                            <input class="spatial-checkbox-item" id="spatial-checkbox" type="checkbox" title="{% trans 'Spatial Filter' %}">
+                            <label class="spatial-checkbox-item" for="spatial-checkbox">{% trans 'Use spatial filter' %}</label>
+                        </div>
+                    </div>
+                </div>
+                {% get_current_language as LANGUAGE_CODE %}
+                <div class="right-header-top">
+                    <div class="language-selector-wrapper">
+                        <img class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
+                        <img class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Body content -->
+            <div class="content-tabs -js-tabs">
+                {% for source_key, source_val in sources.items %}
+                <div id="{{ source_key }}" data-id="{{ source_key }}" class="-js-tab-item content-tab-item tab-item {% if forloop.counter == 1 %} active {% endif %}">
+                    {% if source_key != "info" %}
+                        <img title="{{ source_val.key }}" class="source-tab-img {% if forloop.counter == 1 %} active-img {% endif %}" src="{% static 'searchCatalogue/images/' %}{{ source_val.img }}">
+                    {% else %}
+                        <div class="info-title" title="{{ source_val.title }}">
+                            {{ source_val.key }}
+                            <span id="info-result-number" class="hide"></span>
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% if not is_info_search %}
+            <!--
+                <div id="extended-search" data-source="rlp" class="">
+                    <span class="-js-extended-search-header extended-search-header -js-accordion">
+                        <span class="accordion icon closed fs-20px"></span>
+                        {% trans 'Extended Search' %}
+                    </span>
+                    {% block form %}
+                    {% endblock %}
+                </div>
+                -->
+            {% endif %}
+            <div id="search-results" class="-js-content search-content">
+                <div class="-js-result">
+                    {% block search_results %}
+                    <!-- Results go here -->
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="search-overlay-content">
+        </div>
+    </div>
+
+    </body>
+</html>
+{% endblock %}

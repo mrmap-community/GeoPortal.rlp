@@ -1,0 +1,50 @@
+{% load static humanize i18n %}
+<div class="search-cat {% if 'nonGeographicDataset' in search_results %} active {% endif %}">
+    <div class="search-header">
+        <div class="source--title -js-title -js-accordion">
+            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_nonSpatialDataset.png' %}" title="{% trans 'Miscellaneous Datasets' %}">
+            {% trans 'Miscellaneous Datasets' %}
+            ({{ nonGeographicDataset.md.nresults|intcomma }})
+        </div>
+    </div><!-- end .search-header -->
+
+    <div class="nonGeographicDataset search--body hide">
+        <div>
+            <div class="center">
+                {% if nonGeographicDataset.md.nresults|add:0 > 0 %}
+                {% with pages.nonGeographicDataset as page_data %}
+                    {% with 'nonGeographicDataset' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+            </div>
+            <div class="search-results">
+                {% for result in nonGeographicDataset.srv %}
+                    {% include 'other/search_result.html' %}
+                {% endfor %}
+            </div><!-- end .search-results -->
+
+            {% else %}
+            <p>
+                {% trans 'No results found, please use another search term...' %}
+
+            </p>
+            </div>
+            {% endif %}
+
+            <div class="center">
+                {% if nonGeographicDataset.md.nresults|add:0 > 0 %}
+                {% with pages.nonGeographicDataset as page_data %}
+                    {% with 'nonGeographicDataset' as resource_name %}
+
+                        {% include 'pagination.html' %}
+
+                    {% endwith %}
+                {% endwith %}
+                {% endif %}
+            </div>
+        </div><!-- end .div -->
+    </div><!-- end .dataset .search--body -->
+</div>
