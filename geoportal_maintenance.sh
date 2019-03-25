@@ -969,9 +969,9 @@ EOF
           RewriteRule ^/icons/maki/([^/]+)/([^/]+)/([^[/]+).png$ http://127.0.0.1/mapbender/php/mod_getSymbolFromRepository.php?marker-color=\$1&marker-size=\$2&marker-symbol=\$3 [P,L,QSA,NE]
 
 
-  	    Alias /static/ /opt/geoportal/static/
+  	    Alias /static/ /opt/GeoPortal.rlp/static/
 
-  	    <Directory /opt/geoportal/static>
+  	    <Directory /opt/GeoPortal.rlp/static>
   	    Require all granted
   	    </Directory>
 
@@ -1291,19 +1291,18 @@ apt-get update
 apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev
 
 cd /opt/
-git config --global http.sslVerify false
-git clone https://vmlxgit.lvermgeo.vermkv/peltriau/geoportal
+git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
 mkdir -p /data/portal
 
 # copy some mapbender related scripts
-cp -a /opt/geoportal/scripts/guiapi.php /data/portal
+cp -a /opt/GeoPortal.rlp/scripts/guiapi.php /data/portal
 
 cp -a /data/mapbender/http/geoportal/authentication.php /data/mapbender/http/geoportal/authentication.php.backup
-cp -a /opt/geoportal/scripts/authentication.php /data/mapbender/http/geoportal/authentication.php
+cp -a /opt/GeoPortal.rlp/scripts/authentication.php /data/mapbender/http/geoportal/authentication.php
 
-cp -a /opt/geoportal/scripts/delete_inactive_users.sql /data/mapbender/resources/db/delete_inactive_users.sql
+cp -a /opt/GeoPortal.rlp/scripts/delete_inactive_users.sql /data/mapbender/resources/db/delete_inactive_users.sql
 
 cp -a /data/mapbender/conf/mapbender.conf /data/mapbender/conf/mapbender.conf.backup
 
@@ -1317,7 +1316,7 @@ sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbende
 sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/g" /data/mapbender/conf/mapbender.conf
 
 # django code
-sed -i s/"EXTERNAL_INTERFACE = \"127.0.0.1\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/geoportal/Geoportal/settings.py
+sed -i s/"EXTERNAL_INTERFACE = \"127.0.0.1\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 
 
 # enable php_serialize
@@ -1332,7 +1331,7 @@ sed -i s"/;     session.save_path = \"N;\/path\""/"session.save_path = \"127.0.0
 sed -i s/"Require ip 192.168.56.222"/"Require ip $ipaddress"/g /etc/apache2/sites-enabled/geoportal-apache.conf
 
 
-cd /opt/geoportal
+cd /opt/GeoPortal.rlp/
 
 # create and activate virtualenv
 virtualenv -ppython3 /opt/env
@@ -1340,7 +1339,7 @@ source /opt/env/bin/activate
 
 # install needed python packages
 pip install -r requirements.txt
-rm -r /opt/geoportal/static
+rm -r /opt/GeoPortal.rlp/static
 python manage.py collectstatic
 python manage.py migrate --fake sessions zero
 python manage.py migrate --fake-initial
@@ -1352,10 +1351,10 @@ python manage.py loaddata useroperations/fixtures/navigation.json
 
 # apache config
 if [ ! -f "/etc/apache2/conf-available/wsgi.conf"  ]; then
-	echo "WSGIScriptAlias / /opt/geoportal/Geoportal/wsgi.py" >> /etc/apache2/conf-available/wsgi.conf
+	echo "WSGIScriptAlias / /opt/GeoPortal.rlp/Geoportal/wsgi.py" >> /etc/apache2/conf-available/wsgi.conf
 	echo "WSGIPythonPath /opt/geoportal" >> /etc/apache2/conf-available/wsgi.conf
 	echo "WSGIPythonHome /opt/env" >> /etc/apache2/conf-available/wsgi.conf
-	echo "<Directory /opt/geoportal/Geoportal>" >> /etc/apache2/conf-available/wsgi.conf
+	echo "<Directory /opt/GeoPortal.rlp/Geoportal>" >> /etc/apache2/conf-available/wsgi.conf
 	echo "<Files wsgi.py>" >> /etc/apache2/conf-available/wsgi.conf
 	echo "Require all Granted" >> /etc/apache2/conf-available/wsgi.conf
 	echo "</Files>" >> /etc/apache2/conf-available/wsgi.conf
@@ -1387,7 +1386,7 @@ mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%
 mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
 
 mysql -uroot -p$mysqlpw -e "create database Geoportal;"
-mysql -uroot -p$mysqlpw Geoportal < /opt/geoportal/scripts/geoportal.sql
+mysql -uroot -p$mysqlpw Geoportal < /opt/GeoPortal.rlp/scripts/geoportal.sql
 
 cd /tmp/
 wget https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
@@ -1396,7 +1395,7 @@ cp -a /tmp/extensions/* /usr/share/mediawiki/extensions
 rm -r /tmp/extensions
 rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 
-cp -a /opt/geoportal/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
+cp -a /opt/GeoPortal.rlp/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
 
 cd /usr/share/mediawiki
 composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev
@@ -1464,11 +1463,11 @@ sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sin
 cd /opt/geoportal
 git pull
 
-cp -a /opt/geoportal/scripts/guiapi.php /data/portal
+cp -a /opt/GeoPortal.rlp/scripts/guiapi.php /data/portal
 
-cp -a /opt/geoportal/scripts/authentication.php /data/mapbender/http/geoportal/authentication.php
+cp -a /opt/GeoPortal.rlp/scripts/authentication.php /data/mapbender/http/geoportal/authentication.php
 
-cp -a /opt/geoportal/scripts/delete_inactive_users.sql /data/mapbender/resources/db/delete_inactive_users.sql
+cp -a /opt/GeoPortal.rlp/scripts/delete_inactive_users.sql /data/mapbender/resources/db/delete_inactive_users.sql
 
 cp -a /data/mapbender/conf/mapbender.conf /data/mapbender/conf/mapbender.conf.backup
 
@@ -1486,18 +1485,18 @@ source /opt/env/bin/activate
 # install needed python packages
 cd /opt/geoportal
 pip install -r requirements.txt
-rm -r /opt/geoportal/static
+rm -r /opt/GeoPortal.rlp/static
 python manage.py collectstatic
 
 # change ip address in various locations
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /data/mapbender/http/geoportal/authentication.php`
 sed -i s/"Location: http:\/\/$OLDADDRESS"/"Location: http:\/\/$ipaddress"/g /data/mapbender/http/geoportal/authentication.php
 
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/geoportal/useroperations/templates/geoportal.html`
-sed -i s/"http:\/\/$OLDADDRESS\/mapbender\/frames\/index.php"/"http:\/\/$ipaddress\/mapbender\/frames\/index.php"/g /opt/geoportal/useroperations/templates/geoportal.html
+OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/useroperations/templates/geoportal.html`
+sed -i s/"http:\/\/$OLDADDRESS\/mapbender\/frames\/index.php"/"http:\/\/$ipaddress\/mapbender\/frames\/index.php"/g /opt/GeoPortal.rlp/useroperations/templates/geoportal.html
 
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/geoportal/Geoportal/settings.py`
-sed -i s/"EXTERNAL_INTERFACE = \"$OLDADDRESS\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/geoportal/Geoportal/settings.py
+OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/Geoportal/settings.py`
+sed -i s/"EXTERNAL_INTERFACE = \"$OLDADDRESS\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"Require ip $OLDADDRESS"/"Require ip $ipaddress"/g /etc/apache2/sites-enabled/geoportal-apache.conf
 
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /etc/mediawiki/LocalSettings.php`
@@ -1521,7 +1520,7 @@ delete(){
 #django deletion
 
 rm -r /opt/env
-rm -r /opt/geoportal
+rm -r /opt/GeoPortal.rlp
 
 # mapbender deletion
 cd ${installation_folder}
@@ -1557,11 +1556,11 @@ if [ -e "/etc/apache2/phppgadmin.conf_backup_geoportal" ]; then
 fi
 if [ -e "/etc/php/7.0/apache2/php.ini_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
-        cp /etc/php/7.0/apache2/php.ini_geoportal_backup /etc/php5/apache2/php.ini
+        cp /etc/php/7.0/apache2/php.ini_geoportal_backup /etc/php/7.0/apache2/php.ini
 fi
 if [ -e "/etc/php/7.0/cli/php.ini_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
-        cp /etc/php/7.0/cli/php.ini_geoportal_backup /etc/php5/cli/php.ini
+        cp /etc/php/7.0/cli/php.ini_geoportal_backup /etc/php/7.0/cli/php.ini
 fi
 if [ -e "/etc/phppgadmin/config.inc.php_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
@@ -1596,7 +1595,7 @@ mkdir /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 
 # Django Backup
-cp -a /opt/geoportal/Geoportal/settings.py /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
+cp -a /opt/GeoPortal.rlp/Geoportal/settings.py /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
 cp -a /data/mapbender/conf/mapbender.conf /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql"
