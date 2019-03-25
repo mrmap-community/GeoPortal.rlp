@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load i18n static %}
+
+{% block head %}
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/news/css/twitter.css' %}" media="all" />
+{% endblock %}
+
+{% block body %}
+<div class="twitter-container">
+    <div class="twitter-element">
+        <a href="https://twitter.com/{{ twitter_name }}" class="twitter-follow-button" data-show-count="false">{% trans 'Loading follow button...' %}</a>
+    </div>
+    <div class="twitter-element">
+        <a class="twitter-timeline" data-width="600" data-theme="light" data-link-color="#871d33" href="https://twitter.com/{{ twitter_name }}">{% trans 'Loading tweets...' %}</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+.twitter-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.twitter-element{
+    display: flex;
+    justify-content: center;
+}
