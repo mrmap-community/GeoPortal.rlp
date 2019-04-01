@@ -1291,8 +1291,7 @@ apt-get update
 apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev
 
 cd /opt/
-git config --global http.sslVerify false
-git clone https://vmlxgit.lvermgeo.vermkv/peltriau/geoportal
+git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
 mkdir -p /data/portal
