@@ -1556,11 +1556,11 @@ if [ -e "/etc/apache2/phppgadmin.conf_backup_geoportal" ]; then
 fi
 if [ -e "/etc/php/7.0/apache2/php.ini_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
-        cp /etc/php/7.0/apache2/php.ini_geoportal_backup /etc/php5/apache2/php.ini
+        cp /etc/php/7.0/apache2/php.ini_geoportal_backup /etc/php/7.0/apache2/php.ini
 fi
 if [ -e "/etc/php/7.0/cli/php.ini_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
-        cp /etc/php/7.0/cli/php.ini_geoportal_backup /etc/php5/cli/php.ini
+        cp /etc/php/7.0/cli/php.ini_geoportal_backup /etc/php/7.0/cli/php.ini
 fi
 if [ -e "/etc/phppgadmin/config.inc.php_geoportal_backup" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
