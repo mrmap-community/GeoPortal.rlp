@@ -1520,7 +1520,7 @@ delete(){
 #django deletion
 
 rm -r /opt/env
-rm -r /opt/geoportal
+rm -r /opt/GeoPortal.rlp
 
 # mapbender deletion
 cd ${installation_folder}
