@@ -42,7 +42,7 @@ Requirements:
 
 Debian 9 with working internet connection.
 
-root@geoportal:~# ./geoportal_maintenance.sh --help
+./geoportal_maintenance.sh --help
 
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
@@ -73,7 +73,7 @@ optional:
 --mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
-Full install:  
+Install:  
     geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
     
 Update:  
