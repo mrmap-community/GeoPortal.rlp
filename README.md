@@ -74,16 +74,16 @@ optional:
 
 Examples:  
 Full install:  
-geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
+    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
     
 Update:  
-geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update
+    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update
     
 Delete:  
-geoportal_maintenance.sh --mode=delete
+    geoportal_maintenance.sh --mode=delete
 
 Backup:  
-geoportal_maintenance.sh --mode=backup
+    geoportal_maintenance.sh --mode=backup
 
 default credentials:  
 mysql       -> root:root  
