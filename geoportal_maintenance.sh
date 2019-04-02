@@ -1352,7 +1352,7 @@ python manage.py loaddata useroperations/fixtures/navigation.json
 # apache config
 if [ ! -f "/etc/apache2/conf-available/wsgi.conf"  ]; then
 	echo "WSGIScriptAlias / /opt/GeoPortal.rlp/Geoportal/wsgi.py" >> /etc/apache2/conf-available/wsgi.conf
-	echo "WSGIPythonPath /opt/geoportal" >> /etc/apache2/conf-available/wsgi.conf
+	echo "WSGIPythonPath /opt/GeoPortal.rlp" >> /etc/apache2/conf-available/wsgi.conf
 	echo "WSGIPythonHome /opt/env" >> /etc/apache2/conf-available/wsgi.conf
 	echo "<Directory /opt/GeoPortal.rlp/Geoportal>" >> /etc/apache2/conf-available/wsgi.conf
 	echo "<Files wsgi.py>" >> /etc/apache2/conf-available/wsgi.conf
@@ -1460,7 +1460,7 @@ sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sin
 
 #update django
 
-cd /opt/geoportal
+cd /opt/GeoPortal.rlp
 git pull
 
 cp -a /opt/GeoPortal.rlp/scripts/guiapi.php /data/portal
@@ -1483,7 +1483,7 @@ virtualenv -ppython3 /opt/env
 source /opt/env/bin/activate
 
 # install needed python packages
-cd /opt/geoportal
+cd /opt/GeoPortal.rlp
 pip install -r requirements.txt
 rm -r /opt/GeoPortal.rlp/static
 python manage.py collectstatic
