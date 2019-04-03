@@ -102,8 +102,8 @@ Create Navigation:
 Nagivation items are stored in database and can be found in the table navigations under the django schema.
 An example navigation is created upon installation and can be used as reference.
 
-Create Content:
-The content for the navigation items is stored in a mediawiki (http://IP/mediawiki) and is rendered transparently into the django interface. After creating the navigation items in the database, you can add the corresponding mediawiki pages with the same name.
+Create Content:  
+The content for the navigation items is stored in a mediawiki (http://IP/mediawiki) and is rendered transparently into the django interface. After creating the navigation items in the database, you can add the corresponding mediawiki pages with the same name as the database item. Examples are present in the database and mediawiki.
 
 
 
