@@ -7,6 +7,9 @@ class Navigation(models.Model):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     icon_name = models.CharField(max_length=200, blank=True)
     position = models.IntegerField(unique=True)
+    
+    def __str__(self):
+        return self.name
 
 
 
