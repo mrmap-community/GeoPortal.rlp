@@ -402,7 +402,7 @@ EOF
   ALTER TABLE mb_user ADD COLUMN is_active boolean;
   ALTER TABLE mb_user ADD COLUMN activation_key character varying(255);
   ALTER TABLE mb_user ADD COLUMN timestamp_delete bigint;
-  ALTER TABLE mb_user ADD COLUMN timestamp_dsgvo_accepted date;
+  ALTER TABLE mb_user ADD COLUMN timestamp_dsgvo_accepted bigint;
 
   UPDATE gui_category SET category_name='Anwendung' WHERE category_id=2;
   UPDATE gui_category SET category_description='Anwendungen (Applications)' WHERE category_id=2;
