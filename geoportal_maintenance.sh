@@ -969,26 +969,23 @@ EOF
           RewriteRule ^/icons/maki/([^/]+)/([^/]+)/([^[/]+).png$ http://127.0.0.1/mapbender/php/mod_getSymbolFromRepository.php?marker-color=\$1&marker-size=\$2&marker-symbol=\$3 [P,L,QSA,NE]
 
 
-  	    Alias /static/ /opt/GeoPortal.rlp/static/
+  	      Alias /static/ /opt/GeoPortal.rlp/static/
 
-  	    <Directory /opt/GeoPortal.rlp/static>
-  	    Require all granted
-  	    </Directory>
+  	      Directory /opt/GeoPortal.rlp/static>
+  		  Options -Indexes -FollowSymlinks
+	      Require all granted
+  	      </Directory>
 
 
-          #DocumentRoot ${installation_folder}portal
-          <Directory /data/portal>
-                  Options FollowSymLinks
-                  AllowOverride None
-  		Require ip 127.0.0.1
-  	 </Directory>
+          DocumentRoot /data/portal
+          Alias /portal /data/portal 
+	      <Directory /data/portal>
+          Options -Indexes -FollowSymlinks
+          AllowOverride None
+  		  Require ip 127.0.0.1
+  	      </Directory>
 
-          Alias /portal ${installation_folder}portal
-          <Directory  ${installation_folder}portal/>
-                  Allow from all
-                  Options -Indexes +FollowSymLinks +Includes
-                  AllowOverride FileInfo
-          </Directory>
+
 
           ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
           <Directory "/usr/lib/cgi-bin">
