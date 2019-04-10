@@ -971,7 +971,7 @@ EOF
 
   	      Alias /static/ /opt/GeoPortal.rlp/static/
 
-  	      Directory /opt/GeoPortal.rlp/static>
+  	      <Directory> /opt/GeoPortal.rlp/static>
   		  Options -Indexes -FollowSymlinks
 	      Require all granted
   	      </Directory>
