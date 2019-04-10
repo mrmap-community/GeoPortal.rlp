@@ -978,7 +978,7 @@ EOF
 
 
           DocumentRoot /data/portal
-          Alias /portal /data/portal 
+          Alias /portal /data/portal
 	      <Directory /data/portal>
           Options -Indexes -FollowSymlinks
           AllowOverride None
@@ -1145,14 +1145,72 @@ EOF
 
 EOF
 
-  ############################################################
-  # security stuff
-  ############################################################
+############################################################
+# security stuff
+############################################################
+
+# iptables rule to restrict connections per ip to 25
+if [ ! -f "/etc/firewall.conf"  ]; then
+cat << EOF > /etc/firewall.conf
+  *filter
+  :INPUT ACCEPT [8292:4951608]
+  :FORWARD ACCEPT [0:0]
+  :OUTPUT ACCEPT [5381:471699]
+  -A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m connlimit --connlimit-above 25 --connlimit-mask 32 --connlimit-saddr -j REJECT --reject-with tcp-reset
+  COMMIT
+EOF
+fi
+
+# make startup file for iptables conf
+if [ ! -f "/etc/network/if-up.d/iptables"  ]; then
+cat << EOF > /etc/network/if-up.d/iptables
+  #!/bin/sh
+  iptables-restore < /etc/firewall.conf
+EOF
+fi
+
+chmod +x /etc/network/if-up.d/iptables
+
+if [ ! grep -q "MaxRequestsPerChild"  /etc/apache2/apache2.conf ];then
+  sed -i '/MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
+fi
+
+if [ ! grep -q "Header edit Set-Cookie"  /etc/apache2/conf-enabled/security.conf ];then
+  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly;Secure" >>/etc/apache2/conf-enabled/security.conf
+fi
+
+if [ ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ];then
+  echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
+fi
+
+if [ ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ];then
+  echo  "Timeout 60" >>/etc/apache2/conf-enabled/security.conf
+fi
+
+
+  sed -i s/"#Header set X-Frame-Options: \"sameorigin\""/"Header set X-Frame-Options: \"sameorigin\""/g /etc/apache2/conf-enabled/security.conf
+  sed -i s/"#Header set X-Content-Type-Options: \"nosniff\""/"Header set X-Content-Type-Options: \"nosniff\""/g /etc/apache2/conf-enabled/security.conf
   sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-enabled/security.conf
   sed -i s/"ServerSignature On"/"ServerSignature Off"/g /etc/apache2/conf-enabled/security.conf
   cp -a  /etc/modsecurity/modsecurity.conf-recommended  /etc/modsecurity/modsecurity.conf
-  #cd /tmp/
-  #git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+
+  rm -rf /usr/share/modsecurity-crs
+  git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs
+  cd /usr/share/modsecurity-crs
+  mv crs-setup.conf.example crs-setup.conf
+
+  if [ ! -f "/etc/apache2/mods-enabled/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
+    mv /etc/apache2/mods-enabled/security2.conf /etc/apache2/mods-enabled/security2.conf_backup_$(date +"%d_%m_%Y")
+  fi
+
+  echo "<IfModule security2_module>" > /etc/apache2/mods-enabled/security2.conf
+  echo "SecDataDir /var/cache/modsecurity" >> /etc/apache2/mods-enabled/security2.conf
+  echo "IncludeOptional /etc/modsecurity/*.conf " >> /etc/apache2/mods-enabled/security2.conf
+  echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
+  echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
+  echo "</IfModule>" > /etc/apache2/mods-enabled/security2.conf
+
+
   #cd owasp-modsecurity-crs
   #mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
   #mv rules/ /etc/modsecurity/
