@@ -971,7 +971,7 @@ EOF
 
   	      Alias /static/ /opt/GeoPortal.rlp/static/
 
-  	      Directory /opt/GeoPortal.rlp/static>
+  	      <Directory> /opt/GeoPortal.rlp/static>
   		  Options -Indexes -FollowSymlinks
 	      Require all granted
   	      </Directory>
@@ -1208,7 +1208,7 @@ fi
   echo "IncludeOptional /etc/modsecurity/*.conf " >> /etc/apache2/mods-enabled/security2.conf
   echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
   echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
-  echo "</IfModule>" > /etc/apache2/mods-enabled/security2.conf
+  echo "</IfModule>" >> /etc/apache2/mods-enabled/security2.conf
 
 
   #cd owasp-modsecurity-crs
