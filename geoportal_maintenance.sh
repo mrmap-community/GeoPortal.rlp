@@ -1195,7 +1195,6 @@ if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
 fi
 
 
-  sed -i s/"#Header set X-Content-Type-Options: \"nosniff\""/"Header set X-Content-Type-Options: \"nosniff\""/g /etc/apache2/conf-enabled/security.conf
   sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-enabled/security.conf
   sed -i s/"ServerSignature On"/"ServerSignature Off"/g /etc/apache2/conf-enabled/security.conf
   cp -a  /etc/modsecurity/modsecurity.conf-recommended  /etc/modsecurity/modsecurity.conf
