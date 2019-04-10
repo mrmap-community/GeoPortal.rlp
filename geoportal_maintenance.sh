@@ -1178,10 +1178,6 @@ if  ! grep -q "MaxRequestsPerChild"  /etc/apache2/apache2.conf ;then
   sed -i '/MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
 fi
 
-if  ! grep -q "Header edit Set-Cookie"  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly;Secure" >>/etc/apache2/conf-enabled/security.conf
-fi
-
 if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ;then
   echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
 fi
