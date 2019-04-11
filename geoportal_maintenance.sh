@@ -1178,16 +1178,16 @@ if  ! grep -q "MaxRequestsPerChild"  /etc/apache2/apache2.conf ;then
   sed -i '/MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
 fi
 
-if  ! grep -q "Header edit Set-Cookie"  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly;Secure" >>/etc/apache2/conf-enabled/security.conf
-fi
-
 if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ;then
   echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
 fi
 
 if  ! grep -q "Header always append X-Frame-Options SAMEORIGIN"  /etc/apache2/conf-enabled/security.conf ;then
   echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
+fi
+
+if  ! grep -q "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly"  /etc/apache2/conf-enabled/security.conf ;then
+  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly" >>/etc/apache2/conf-enabled/security.conf
 fi
 
 if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
@@ -1376,8 +1376,7 @@ sed -i s/"EXTERNAL_INTERFACE = \"127.0.0.1\""/"EXTERNAL_INTERFACE = \"$ipaddress
 
 
 # enable php_serialize
-if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini
-then
+if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
 	sed -i s/"session.serialize_handler = php"/"session.serialize_handler = php_serialize"/g /etc/php/7.0/apache2/php.ini
 fi
 
@@ -1464,6 +1463,10 @@ sed -i s/"$wgPasswordSender = \"apache@192.168.56.222\";"/"$wgPasswordSender = \
 sed -i s/"$wgDBpassword = \"root\";"/"$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
 
 sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$ipaddress' );"/g /etc/mediawiki/LocalSettings.php
+
+if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
+	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
+fi
 
 }
 
