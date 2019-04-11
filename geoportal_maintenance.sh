@@ -1178,6 +1178,10 @@ if  ! grep -q "MaxRequestsPerChild"  /etc/apache2/apache2.conf ;then
   sed -i '/MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
 fi
 
+if  ! grep -q "FileETag None"  /etc/apache2/apache2.conf ;then
+  sed -i '/MaxKeepAliveRequests*/a FileETag None' /etc/apache2/apache2.conf
+fi
+
 if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ;then
   echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
 fi
