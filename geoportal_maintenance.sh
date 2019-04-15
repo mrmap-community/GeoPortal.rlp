@@ -1157,7 +1157,7 @@ cat << EOF > /etc/firewall.conf
 :INPUT ACCEPT [34:2360]
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [18:1640]
--A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m connlimit --connlimit-above 25 --connlimit-mask 32 --connlimit-saddr -j REJECT --reject-with tcp-reset
+-A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m connlimit --connlimit-above 100 --connlimit-mask 32 --connlimit-saddr -j REJECT --reject-with tcp-reset
 COMMIT
 # Completed on Wed Apr 10 08:53:32 2019
 EOF
