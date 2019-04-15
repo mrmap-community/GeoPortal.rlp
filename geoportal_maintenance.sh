@@ -1190,9 +1190,9 @@ fi
 #  echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
 #fi
 
-if  ! grep -q "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly"  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly" >>/etc/apache2/conf-enabled/security.conf
-fi
+#if  ! grep -q "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly"  /etc/apache2/conf-enabled/security.conf ;then
+#  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly" >>/etc/apache2/conf-enabled/security.conf
+#fi
 
 if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
   echo  "Timeout 60" >>/etc/apache2/conf-enabled/security.conf
