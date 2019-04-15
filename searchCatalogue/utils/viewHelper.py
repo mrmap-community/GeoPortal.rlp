@@ -22,6 +22,7 @@ import math
 import requests
 
 from Geoportal import helper
+from Geoportal.settings import INTERNAL_PAGES_CATEGORY
 from searchCatalogue.settings import *
 
 
@@ -223,10 +224,10 @@ def prepare_spatial_data(spatial_data):
     looking_for = []
     _in = []
     for data in spatial_data:
+        looking_for.append(data.get("keyword"))
         if data.get("totalResultsCount", 0) == 0:
             continue
         _in.append(data)
-        looking_for.append(data.get("keyword"))
 
     result = {
         "looking_for": looking_for,
@@ -531,8 +532,36 @@ def __wms_srv_disclaimer(layer, language, resource):
     if service_id is None:
         return
     url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    layer["disclaimer_html"] =  requests.get(url).content.decode() # ToDo: Remove these proxies for production
+    layer["disclaimer_html"] = requests.get(url).content.decode()
 
+def __wfs_srv_disclaimer(srv, language, resource):
+    """ Handles a wfs srv set and sets the disclaimer info
+
+    Args:
+        srv: The current service working on
+        language: The language that shall be used
+        resource: The resource that shall be used in the url
+    Returns:
+        nothing
+    """
+    service_id = srv.get("id", None)
+    if service_id is None:
+        return
+    url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    srv["disclaimer_html"] = requests.get(url).content.decode()
+
+def generic_srv_disclaimer(resource, service_id, language):
+    """ Handles a generic srv set and returns the fetched disclaimer html
+
+    Args:
+        service_id: The service id
+        language: The language that shall be used
+        resource: The resource that shall be used in the url
+    Returns:
+        nothing
+    """
+    url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    return requests.get(url).content.decode()
 
 def __set_single_service_disclaimer_url(search_results, resource):
     """ Function handles a single resource from search_results. This function is needed for multithreading.
@@ -543,7 +572,6 @@ def __set_single_service_disclaimer_url(search_results, resource):
     Returns:
         nothing
     """
-    service_type = ""
     language = "de"
     thread_list = []
     if resource == "dataset":
@@ -558,11 +586,7 @@ def __set_single_service_disclaimer_url(search_results, resource):
             thread_list.append(threading.Thread(target=__wms_srv_disclaimer, args=(layer, language, resource)))
     elif resource == "wfs":
         for srv in search_results["wfs"]["wfs"]["wfs"]["srv"]:
-            service_id = srv.get("id", None)
-            if service_id is None:
-                continue
-            url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-            srv["disclaimer_html"] = requests.get(url, proxies=PROXIES).content.decode() # ToDo: Remove these proxies for production
+            thread_list.append(threading.Thread(target=__wfs_srv_disclaimer, args=(srv, language, resource)))
 
     # Run threads
     helper.execute_threads(thread_list)
@@ -581,9 +605,7 @@ def set_service_disclaimer_url(search_results):
     for resource in resources:
         #__set_single_service_disclaimer_url(search_results, resource)
         thread_list.append(threading.Thread(target=__set_single_service_disclaimer_url, args=(search_results, resource)))
-
     helper.execute_threads(thread_list)
-
     return search_results
 
 
@@ -799,7 +821,7 @@ def resolve_internal_external_info(search_results, searcher: Searcher):
             result["is_intern"] = False
             categories = searcher.get_info_result_category(result)
             for cat in categories:
-                result["is_intern"] = "Intern" in cat.get("title", "")
+                result["is_intern"] = INTERNAL_PAGES_CATEGORY in cat.get("title", "")
                 break
     return search_results
 
@@ -828,7 +850,7 @@ def hash_inspire_ids(search_results):
     Args:
         search_results: Contains all search results
     Returns:
-         nothing
+         search_results
     """
     thread_list = []
     for search_result_key, search_result_val in search_results.items():
@@ -838,4 +860,21 @@ def hash_inspire_ids(search_results):
             )
         )
     helper.execute_threads(thread_list)
+    return search_results
+
+def check_previewUrls(search_results):
+    """ Checks if a result provides a previewUrl for thumbnails. Otherwise a placeholder will be set.
+
+    This function is needed to avoid too much logic in template rendering.
+
+    Args:
+        search_results: Contains all search results
+    Returns:
+        search_results
+    """
+    for result_key, result_val in search_results.items():
+        results = result_val.get(result_key, {}).get("srv", [])
+        for result in results:
+            if len(result.get("previewUrl", "")) == 0:
+                result["previewUrl"] = None
     return search_results

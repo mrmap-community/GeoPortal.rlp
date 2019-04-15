@@ -7,7 +7,9 @@
 
 @import 'color_schema.css';
 
+
 .mediawiki-article{
+    padding: 0 50px 0 0;
 }
 
 .mediawiki-article p, .mediawiki-article li{
@@ -71,3 +73,10 @@ h3 .mw-headline{
 }
 
 
+
+/* FOR MOBILE USERS */
+@media only screen and (max-width: 1000px){
+    .mediawiki-article{
+        padding: 0;
+    }
+}

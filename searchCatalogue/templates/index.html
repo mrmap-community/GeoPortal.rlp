@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{% static 'searchCatalogue/vendor/leaflet/leaflet.css' %}" />
         <link rel="stylesheet" href="{% static 'searchCatalogue/vendor/zebra/css/default.css' %}" type="text/css">
         {% if external_call %}
+            <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base.css' %}" media="all" />
             <script type="text/javascript" src="{% static 'searchCatalogue/vendor/leaflet/leaflet.js' %}"></script>
             <script>
                 var BASEDIR = '{{ basedir }}'
@@ -41,8 +42,8 @@
             {% if external_call %}
                 <div class="searchbar -js-input-div">
                     <div class="simple-search-input-wrapper">
-                        <input id="external-search-field" type="text" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Insert search term here' %}">
-                        <button id="external-search-button" class="search--submit -js-search-start">{% trans 'Search' %}</button>
+                        <input id="geoportal-search-field" type="text" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Insert search term here' %}">
+                        <button id="geoportal-search-button" class="search--submit -js-search-start">{% trans 'Search' %}</button>
                     </div>
                     <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
                     <div id="sub-header-wrapper">
@@ -90,6 +91,7 @@
             <div id="search-results" class="-js-content search-content">
                 <div class="-js-result">
                     {% block search_results %}
+                    {% include 'filterarea.html' %}
                     <!-- Results go here -->
                     {% endblock %}
                 </div>

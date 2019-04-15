@@ -1,53 +1,62 @@
 {% load static i18n %}
-    {% if not is_info_search %}
-        <div class="area-wrapper">
-            <h2 id="filter-area" class="area-title -js-accordion">
-                <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_filter.png' %}">
-                {% trans 'Filter' %}
-            </h2>
-            <div class="area-elements">
-                {% include 'filterarea.html' %}
-                {% include 'facets.html' %}
-            </div>
+    <div class="search-result-body">
+        {% if not is_de_search and not is_eu_search and not is_info_search %}
+        <div id="search-categories-sidebar">
+            {% include 'facets.html' %}
         </div>
-    {% endif %}
-    <div class="area-wrapper">
-        <h2 id="search-area" class="area-title">
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_search_results.png' %}">
-            {% trans 'Results' %}
-        </h2>
-        <div class="area-elements">
-            {% if is_de_search or is_eu_search%}
-                {% with search_results.dataset.dataset as dataset %}
-                    {% include 'other/dataset/dataset_category.html' %}
-                {% endwith %}
-                {% with search_results.series.series as series %}
-                    {% include 'other/series/series_category.html' %}
-                {% endwith %}
-                {% with search_results.service.service as service %}
-                    {% include 'other/service/service_category.html' %}
-                {% endwith %}
-                {% if is_de_search %}
-                    {% with search_results.application.application as application %}
-                        {% include 'other/application/application_category.html' %}
-                    {% endwith %}
-                    {% with search_results.nonGeographicDataset.nonGeographicDataset as nonGeographicDataset %}
-                        {% include 'other/nonGeographicDataset/nonGeographicDataset_category.html' %}
-                    {% endwith %}
-                {% endif %}
-            {% elif is_info_search %}
-                {% include 'info/info_results.html' %}
-            {% else %}
-                {% include 'rlp/dataset/dataset_category.html' %}
-                {% include 'rlp/wms/wms_category.html' %}
-                {% include 'rlp/wmc/wmc_category.html' %}
-                {% include 'rlp/wfs/wfs_category.html' %}
-                {% include 'terms_of_use.html' %}
+        {% endif %}
+        <div id="search-main-content">
+            {% if not is_info_search %}
+            <div class="area-wrapper">
+                <h2 id="filter-area" class="area-title -js-accordion">
+                    <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_filter.png' %}">
+                    {% trans 'Filter' %}
+                </h2>
+                <div class="area-elements">
+                    {% include 'filterarea.html' %}
+                    <div id="mobile-categories">
+                        {% include 'facets.html' %}
+                    </div>
+                </div>
+            </div>
             {% endif %}
+            <div class="area-wrapper">
+                <h2 id="search-area" class="area-title">
+                    <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_search_results.png' %}">
+                    {% trans 'Results' %}
+                </h2>
+                <div class="area-elements">
+                    {% if is_de_search or is_eu_search%}
+                        {% with search_results.dataset.dataset as dataset %}
+                            {% include 'other/dataset/dataset_category.html' %}
+                        {% endwith %}
+                        {% with search_results.series.series as series %}
+                            {% include 'other/series/series_category.html' %}
+                        {% endwith %}
+                        {% with search_results.service.service as service %}
+                            {% include 'other/service/service_category.html' %}
+                        {% endwith %}
+                        {% if is_de_search %}
+                            {% with search_results.application.application as application %}
+                                {% include 'other/application/application_category.html' %}
+                            {% endwith %}
+                            {% with search_results.nonGeographicDataset.nonGeographicDataset as nonGeographicDataset %}
+                                {% include 'other/nonGeographicDataset/nonGeographicDataset_category.html' %}
+                            {% endwith %}
+                        {% endif %}
+                    {% elif is_info_search %}
+                        {% include 'info/info_results.html' %}
+                    {% else %}
+                        {% include 'rlp/dataset/dataset_category.html' %}
+                        {% include 'rlp/wms/wms_category.html' %}
+                        {% include 'rlp/wmc/wmc_category.html' %}
+                        {% include 'rlp/wfs/wfs_category.html' %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
     {% if is_info_search %}
-        <br>
         <div class="mediawiki-article">
         </div>
     {% endif %}

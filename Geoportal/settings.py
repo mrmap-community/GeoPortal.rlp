@@ -29,6 +29,9 @@ EXTERNAL_INTERFACE = "127.0.0.1"
 LOCAL_MACHINE = "http://127.0.0.1"
 ALLOWED_HOSTS = [EXTERNAL_INTERFACE, '127.0.0.1', 'localhost']
 
+# Mediawiki
+INTERNAL_PAGES_CATEGORY = "Intern"
+
 # Search module settings
 RLP_CATALOGUE = 3
 RLP_SRC_IMG = "rlp_results.png"
@@ -82,11 +85,16 @@ ROOT_URLCONF = 'Geoportal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'APP_DIRS': True,
         'DIRS':[
             BASE_DIR + "/templates"
         ],
         'OPTIONS': {
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

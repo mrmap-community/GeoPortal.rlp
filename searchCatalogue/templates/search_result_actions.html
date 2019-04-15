@@ -6,22 +6,44 @@
             {% if type == 'wfs' and parent_result is None %}
             {% elif type == 'service_DE' %}
                 {% if layer.showMapUrl %}
-                    <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+                    <a class='button view-button' id="view_{{ layer.id }}">
+                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        {% trans 'Show' %}
+                    </a>
+                {% endif %}
+                {% if layer.downloadFeedClientUrl %}
+                    <a class='button download-button' target="_blank" href="{{ layer.downloadFeedClientUrl }}">
+                        <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                        {% trans 'Download' %}
+                    </a>
                 {% endif %}
             {% else %}
-                <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+                <a class='button view-button' id="view_{{ layer.id }}">
+                    <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                    {% trans 'Show' %}
+                </a>
             {% endif %}
 
         {% else %}
         <!-- WMS and DATASET -->
             {% if feeds is not None and feeds|length > 0 %}
-                <a class="button download-button" id="download_{{ result.id }}">{% trans 'Download' %} ({{ feeds|length }})</a>
+                <a class="button download-button" id="download_{{ result.id }}">
+                    <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                    {% trans 'Download' %} ({{ feeds|length }})
+                </a>
+
             {% endif %}
             {% if layers is not None and layers|length > 0 %}
                 {% if type == 'wms' %}
-                    <a class='button view-button' id="view_{{ layer.id }}">{% trans 'Show' %}</a>
+                    <a class='button view-button' id="view_{{ layer.id }}">
+                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        {% trans 'Show' %}
+                    </a>
                 {% elif type == 'dataset' %}
-                    <a class='button view-button' id="view_{{ result.id }}">{% trans 'Show' %} ({{ layers|length }})</a>
+                    <a class='button view-button' id="view_{{ result.id }}">
+                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        {% trans 'Show' %} ({{ layers|length }})
+                    </a>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -53,7 +75,7 @@
                                 <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
                                 <strong>{{ feed.serviceUuid }}</strong>
                                 <!-- ToDo: Replace the type here with a title -->
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download_2018.png' %}" title="Herunterladen"/>
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="Herunterladen"/>
                             </div></a>
                     </li>
                     {% endfor %}

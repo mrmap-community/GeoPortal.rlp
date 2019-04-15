@@ -40,40 +40,20 @@
             {% endif %}
         </div>
         {% if type != 'service_DE' %}
-        <div id="{{layer.srv.id}}" class="resource-element-actions">
+        <div id="{{layer.srv.id}}" class="resource-element-actions" data-id="{% if type == 'wfs' or type == 'wms' %}{{ result.id }}{% else %}{{ layer.srv.id }}{% endif %}" data-resource="{{ type }}">
             {% if type == 'wms' %}
-                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities_2018.png'%}"></div></a>
+                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
                 <a href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
                 <a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>
-                {% if result.disclaimer_html is not None and result.hasConstraints is True %}
-                    {% with result.disclaimer_html as content  %}
-                        {% include 'terms_of_use.html' %}
-                    {% endwith %}
-                {% endif %}
             {% elif type == 'dataset' %}
-                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities_2018.png'%}"></div></a>
+                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
                 <a href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
                 <a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>
-                {% if layer_info.disclaimer_html is not None and layer_info.hasConstraints is True %}
-                    {% with layer_info.disclaimer_html as content  %}
-                        {% include 'terms_of_use.html' %}
-                    {% endwith %}
-                {% endif %}
             {% elif type == 'wmc' %}
                 <a href="WMC={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
                 <!--<a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>-->
-                {% if result.disclaimer_html is not None and result.hasConstraints is True %}
-                    {% with result.disclaimer_html as content  %}
-                        {% include 'terms_of_use.html' %}
-                    {% endwith %}
-                {% endif %}
             {% else %}
                 <a href="FEATURETYPE[id]={{ layer_data.id }}" id="add-map-button" ><div class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_suche.png'%}"></div></a>
-                {% if result.disclaimer_html is not None and result.hasConstraints is True %}
-                    {% with result.disclaimer_html as content  %}
-                        {% include 'terms_of_use.html' %}
-                    {% endwith %}
-                {% endif %}
             {% endif %}
         </div>
         {% else %}

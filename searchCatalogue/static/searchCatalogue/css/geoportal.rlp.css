@@ -457,8 +457,16 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 /* DOWNLOAD AND VIEW OPTIONS */
 .button-clickable{background:var(--rlp-red);color:#fff !important; padding: 5px 5px 5px 5px}
 .button-clickable:hover{background:var(--rlp-red-hover);}
-.active-button{background:var(--rlp-red);color:#fff !important;}
-.active-button:hover{background:var(--rlp-red-hover);color:#fff !important;}
+.active-button{
+    -webkit-filter: invert(1.0);
+    filter: invert(1.0);
+    background:var(--rlp-red-invert);
+    color: black;
+}
+.active-button:hover{
+    background:var(--rlp-red-hover);
+    color:#fff !important;
+}
 .resource-list{padding:10px; border-width:1px; border-style: solid; border-color: var(--rlp-red);}
 .resource-view-title{padding:5px; background:var(--rlp-red); color:#fff !important; width:100%; display: inline-block}
 .resource-view-title:hover{background:var(--rlp-red-hover)}
@@ -596,6 +604,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 
 .search-result-title{
   background: var(--rlp-red);
+  font-weight: bold;
   min-width: 20%;
   max-width: 100%;
   color: var(--rlp-gray);
@@ -608,12 +617,78 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
   background:var(--rlp-gray-hover);
   }
 
-.search-result-detail-table > tbody > tr > td{
+.view-count{
+    padding: 10px 0;
+    font-size: 0.8em;
+    opacity: 0.5;
+}
+.view-count:hover{
+    cursor: default;
+}
+
+.metadata-links{
+    font-size: 0.8em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+
+.metadata-link-element{
+    margin: 0 10px 0 0;
+}
+
+.metadata-links img{
+    max-height: 50px;
+    max-width: 100px;
+}
+
+.metadata-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px;
+    border: 1px solid black;
+}
+
+
+.metadata-links a{
+    text-decoration: none;
+}
+
+.metadata-button img{
+    max-width: 20px;
+    max-height: 20px;
+    margin: 0 10px 0 0;
+}
+
+.metadata-button:hover, .metadata-button a:hover{
+    /*
+    Little trick: since we invert the colors here to make black icons white,
+    we need to make all other colors inverted before, to display the correct ones
+    */
+    -webkit-filter: invert(1.0);
+    filter: invert(1.0);
+    color: black;
+    background: var(--rlp-red-invert);
+    cursor: pointer;
+    border: 1px solid black;
+
+}
+
+.search-result-detail{
+    font-size: 0.8em;
+    padding: 0 5px;
+}
+
+.search-result-detail-table > tbody > tr > td{
     border-bottom: 1px solid var(--rlp-gray-hover);
 }
 
 .search-result-detail-table{
+    padding: 0 0 0 10px;
+    font-size: 0.8em;
+    width: 100%;
     border-collapse: collapse;
 }
 
@@ -644,8 +719,10 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
   border-color: grey;}
 
 .search-result-action-buttons{
-  margin-top: 5px;
-  }
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 .sublayer{
     display:inline-block;
@@ -766,10 +843,24 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
   cursor: pointer;
 }
 
-.view-button:hover{
-  background: var(--rlp-gray-hover);
-  color: var(--rlp-gray);
-  }
+.view-button, .download-button{
+    max-width: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid black;
+}
+
+.view-button img, .download-button img{
+    margin: 0 10px 0 0;
+}
+
+.view-button:hover, .download-button:hover{
+    filter: invert(1.0);
+    -webkit-filter: invert(1.0);
+    background: var(--rlp-red-invert);
+    color: black;
+}
 
 .not-allowed-img, .ask-permission-img{
     padding: 10px;
@@ -799,6 +890,11 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 .flex{
     display: flex;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }
 
 .searchmatch{

@@ -61,7 +61,6 @@ def index(request: HttpRequest, external_call = False):
     Returns:
         The rendered page
     """
-    loggedin = False
     language_cookie = request.COOKIES.get("django_language", None)
     if language_cookie is None:
         # user needs to see the default language!
@@ -74,23 +73,25 @@ def index(request: HttpRequest, external_call = False):
     searcher = Searcher()
     facets = searcher.get_categories_list()
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
+
     sources = OrderedDict()
     sources["rlp"] = {
         "key": _("State-wide"),
         "img": RLP_SRC_IMG,
     }
-    sources["de"] = {
-        "key": _("Germany"),
-        "img": DE_SRC_IMG,
-    }
-    sources["eu"] = {
-        "key": _("Europe"),
-        "img": EU_SRC_IMG,
-    }
-    sources["info"] = {
-        "key": _("Info"),
-        "title": _("Info pages"),
-    }
+    if not external_call:
+        sources["de"] = {
+            "key": _("Germany"),
+            "img": DE_SRC_IMG,
+        }
+        sources["eu"] = {
+            "key": _("Europe"),
+            "img": EU_SRC_IMG,
+        }
+        sources["info"] = {
+            "key": _("Info"),
+            "title": _("Info pages"),
+        }
 
     params = {
         "title": _("Search"),
@@ -223,10 +224,6 @@ def get_data_other(request: HttpRequest, catalogue_id):
     search_words = post_params.get("terms")
     is_eu_search = False
     is_de_search = True
-    # EU catalogue does not allow '*' or no search input to search for everything. We need to provide a dummy value if nothing was entered by the user. Let's use 'all'.
-    if len(search_words) == 0 or search_words == '*':
-        if catalogue_id == EU_CATALOGUE:
-            search_words = "all"
 
     search_pages = int(post_params.get("page-geoportal"))
     requested_page_res = post_params.get("data-geoportal")
@@ -280,6 +277,12 @@ def get_data_other(request: HttpRequest, catalogue_id):
         # hash inspire id, so we can use them in a better way with javascript
         search_results = viewHelper.hash_inspire_ids(search_results)
         print(EXEC_TIME_PRINT % ("hash inspire ids", time.time() - start_time))
+
+    start_time = time.time()
+    # prepare preview images
+    search_results = viewHelper.check_previewUrls(search_results)
+    print(EXEC_TIME_PRINT % ("checking previewUrls", time.time() - start_time))
+
 
     results = {
         "source": source,
@@ -400,10 +403,11 @@ def get_data_rlp(request: HttpRequest):
     search_results = viewHelper.set_children_data_wfs(search_results)
     print(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
 
-    start_time = time.time()
-    # set disclaimer info
-    search_results = viewHelper.set_service_disclaimer_url(search_results)
-    print(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
+    # ToDO: Keep an eye on the disclaimer behaviour. If something does not work and we need a quick solution, comment these lines back in
+    #start_time = time.time()
+    ## set disclaimer info
+    #search_results = viewHelper.set_service_disclaimer_url(search_results)
+    #print(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
 
     start_time = time.time()
     # set state icon file paths
@@ -501,9 +505,9 @@ def get_data_info(request: HttpRequest):
         "is_info_search": True,
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
-    start_time = time.time()
+    #start_time = time.time()
     view_content = render_to_string(template_name, params)
-    print(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
+    #print(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
     return GeoportalJsonResponse(html=view_content, nresults=nresults).get_response()
 
@@ -570,3 +574,35 @@ def send_permission_email(request: HttpRequest):
         success = False
 
     return GeoportalJsonResponse(success=success).get_response()
+
+def terms_of_use(request: HttpRequest):
+    """ Fetches the terms of use for a specific search result
+
+    Args:
+        request (HttpRequest): The incoming request
+    Returns:
+        JsonResponse: Contains the required data
+    """
+    html = ""
+    params_GET = request.GET.dict()
+    lang_code = request.LANGUAGE_CODE
+    href = params_GET.get("href")
+    id = params_GET.get("id")
+    resource = params_GET.get("resourceType")
+    if resource == "dataset":
+        resource = "wms"
+    if resource == "wmc":
+        # wmc has no disclaimer
+        return GeoportalJsonResponse(html=html).get_response()
+
+    html = viewHelper.generic_srv_disclaimer(resource=resource, service_id=id, language=lang_code)
+
+    if len(html) > 0:
+        template = "terms_of_use.html"
+        params = {
+            "content": html,
+            "href": href
+        }
+
+        html = render_to_string(template_name=template, context=params)
+    return GeoportalJsonResponse(html=html).get_response()

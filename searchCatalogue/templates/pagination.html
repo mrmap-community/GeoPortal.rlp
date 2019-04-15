@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n humanize %}
 <div class="pager">
     <ul class="pager--list" data-id="{{ resource_name }}">
         {% if page_data.page_list|length > 0 %}
@@ -8,7 +8,7 @@
             {% endif %}
             {% for p in page_data.page_list %}
                 {% if p != "..." %}
-                    <li data-page='{{ p }}' class='pager--list--item -js-pager-item {% if page_data.current_page == p %} active-Page {% else %} {% endif %}'>{{ p }}</li>
+                    <li data-page='{{ p }}' class='pager--list--item -js-pager-item {% if page_data.current_page == p %} active-Page {% else %} {% endif %}'>{{ p|intcomma }}</li>
                 {% else %}
                     <li class='pager--list--points'>{{ p }}</li>
                 {% endif %}

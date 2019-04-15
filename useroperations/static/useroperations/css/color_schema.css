@@ -6,10 +6,14 @@ DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
     --rlp-red-hover: #b77784;
     --rlp-red-light: #a7233f;
     --rlp-red-light-hover: #c82a4b;
-    --rlp-gray: #eee;
+    --rlp-gray: #e2e2e2;
+    --rlp-gray-font: #666;
+    /* --rlp-gray: #eee; */
     --rlp-gray-hover: #aeaeae;
     --rlp-gray-placeholder: #868686;
     --rlp-gray-light: #EFEFEF;
+
+    --rlp-red-invert: #78E2CC;
 
     --success-green: #2e9b2e;
 }
