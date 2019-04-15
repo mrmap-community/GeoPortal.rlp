@@ -89,16 +89,17 @@ Search.prototype = {
     },
 
     hideLoadingAfterLoad: function() {
+    if($("#-js-loading").is(":visible")){
         this.toggleBlurryOverlay();
-        this.getAjaxDeferred()
-            .done( function() {
-                $('#-js-loading').hide();
-            });
+        $('#-js-loading').hide();
+    }
     },
 
     showLoading: function() {
+    if(!$("#-js-loading").is(":visible")){
         this.toggleBlurryOverlay();
         $('#-js-loading').show();
+    }
     },
 
     autocomplete: function() {
@@ -159,6 +160,7 @@ Search.prototype = {
             type: 'post',
             dataType: 'json',
             success: function(data) {
+                self.hideLoadingAfterLoad();
                 self.parseSearchResult(data);
                 if(self.getParam("source") != "info"){
                     startInfoCall();
@@ -166,6 +168,7 @@ Search.prototype = {
             },
             timeout: 60000,
             error: function(jqXHR, textStatus, errorThrown){
+                self.hideLoadingAfterLoad();
                 if(textStatus === "timeout"){
                     alert("A timeout occured.");
                 }else{
@@ -173,7 +176,6 @@ Search.prototype = {
             },
         })
             .always(function() {
-                self.hideLoadingAfterLoad();
                 self.searching = false;
                 self.setParam("facet", "");
                 self.setParam("keywords", "");
@@ -182,7 +184,7 @@ Search.prototype = {
                 toggleSearchArea();
                 openSpatialArea();
                 enableSearchInputField();
-                focus_on_search_input();
+                //focus_on_search_input();
             });
     },
 
@@ -507,16 +509,18 @@ function enableSearchInputField(){
 function changeMapviewerIframeSrc(srcSuffix){
     // replace the src from "Geoportal-RLP" on
     var src = $("#mapviewer").attr("data-params");
-    var srcArr = src.split("mb_user_myGui")
-    var newSrc = srcArr[0] + "mb_user_myGui=" + srcSuffix;
-    $("#mapviewer").attr("data-params", newSrc);
+    if(src != null){
+        var srcArr = src.split("mb_user_myGui")
+        var newSrc = srcArr[0] + "mb_user_myGui=" + srcSuffix;
+        $("#mapviewer").attr("data-params", newSrc);
+    }
 }
 
 /*
  * Removes asterisks from search field so that the user won't has to see this implicit symbol
  */
 function clearAsterisk(){
-    var searchbar = $("#geoportal-search-field");
+    var searchbar = $(".simple-search-field");
     searchbar.val(searchbar.val().replace("*", ""));
     search.setParam("terms", search.getParam("terms").replace("*",""));
 }
@@ -561,20 +565,42 @@ function startAjaxMapviewerCall(value){
         type: 'get',
         dataType: 'json',
         success: function(data) {
-            if(data["mapviewer_params"] != null){
-                console.log(data["mapviewer_params"]);
+            if(data["mapviewer_params"] != "" && data["url"] == ""){
+            // internal mapviewer call
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
-                window.scrollTo(0,0);
+                window.scrollTo({
+                    top:150,
+                    left:0,
+                    behavior:'smooth'
+                });
+
                 $(".map-viewer-toggler").click();
-            }else if(data["url"] != null){
+            }else if(data["url"] != ""){
+            // external mapviewer call
                 var url = data["url"];
+                var params = data["mapviewer_params"];
+                window.sessionStorage.setItem("geoportalExternalMapCall", params);
                 window.open(url, "_blank").focus();
             }
         },
         error: function(jqXHR, textStatus, errorThrown){
-
         }
     });
+}
+
+function checkForExternalMapviewerCall(){
+    var item = "geoportalExternalMapCall";
+    var call = window.sessionStorage.getItem(item);
+    window.sessionStorage.removeItem(item);
+    if(call != null){
+        changeMapviewerIframeSrc(call);
+        window.scrollTo({
+            top:0,
+            left:0,
+            behavior:'smooth'
+        });
+        $(".map-viewer-toggler").click();
+    }
 }
 
 /**
@@ -582,6 +608,10 @@ function startAjaxMapviewerCall(value){
  *
  */
 jQuery(document).ready(function() {
+
+    checkForExternalMapviewerCall();
+
+
 
     var resources_rlp = {
         wms: true,
@@ -975,25 +1005,25 @@ jQuery(document).ready(function() {
     $(document).on("mouseover", "#capabilities-button-div", function(){
         var elem = $(this);
         var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_2018_hover.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_hover.png");
     });
 
     $(document).on("mouseout", "#capabilities-button-div", function(){
         var elem = $(this);
         var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_2018.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
     });
 
     $(document).on("mouseover", ".feed-download", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_2018_hover.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
     });
 
     $(document).on("mouseout", ".feed-download", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_2018.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download.png");
     });
 
     $(document).on("click", ".thumbnail-extent", function(){
@@ -1124,36 +1154,50 @@ jQuery(document).ready(function() {
      * Terms of use event listener
      */
     $(document).on("click", "#add-map-button, #add-map-and-zoom-button", function(event){
+        event.preventDefault();
         var elem = $(this);
         var elem_href = elem.attr("href");
-        var tou = elem.siblings("#terms-of-use");
-        event.preventDefault();
-        if(tou.length == 0){
-            startAjaxMapviewerCall(elem_href);
-        }else{
-            var acceptButton = tou.find("#tou_button_accept");
-            tou.toggleClass("open");
-            acceptButton.attr("data-params", elem_href);
-        }
+        var buttonParent = elem.parent(".resource-element-actions");
+        var elem_id = buttonParent.attr("data-id");
+        var elem_resource = buttonParent.attr("data-resource");
+
+        $.ajax({
+            url: "/search/terms-of-use",
+            headers:{
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            data:{
+                "id": elem_id,
+                "resourceType": elem_resource,
+                "href": elem_href
+            },
+            type: 'get',
+            dataType: 'json',
+            success: function(data){
+                var html = data["html"];
+                var infoOverlay = $("#info-overlay");
+                if(html.length == 0){
+                    startAjaxMapviewerCall(elem_href);
+                }else{
+                    infoOverlay.html(html);
+                    infoOverlay.toggleClass("open");
+                }
+            }
+
+        })
     });
 
     $(document).on("click", "#tou-close, #tou_button_decline", function(){
         var elem = $(this);
-        var tou = elem.parents("#terms-of-use");
+        var tou = elem.parents("#info-overlay");
         tou.toggleClass("open");
     });
-    /*
-    $(document).on("click", "#tou_button_decline", function(){
-        var elem = $(this);
-        var tou = elem.parents("#terms-of-use");
-        tou.toggleClass("open");
-    });
-    */
+
     $(document).on("click", "#tou_button_accept", function(event){
         event.preventDefault();
         var elem = $(this);
-        var tou = elem.parents("#terms-of-use");
-        var value = elem.attr("data-params");
+        var tou = elem.parents("#info-overlay");
+        var value = elem.attr("href");
         tou.toggleClass("open");
         // start ajax call to server to decide what to do
         // for search/external a new browser tab shall open, leading to geoportal/map-viewer
@@ -1319,6 +1363,11 @@ jQuery(document).ready(function() {
         search.setParam('previousPage', search.getParam('pages', 1)); //alternativly we can use .-js-pager-item .active
         search.setParam('paginated', true);
         search.setParam('terms', $(".-js-simple-search-field").val());
+        window.scrollTo({
+            top:150,
+            left:0,
+            behavior:'smooth'
+        });
         prepareAndSearch(undefined, true);
     });
 
@@ -1440,7 +1489,7 @@ jQuery(document).ready(function() {
         var wikiKeyword = elem.attr("data-target");
         // start call for mediawiki content
         $.ajax({
-            url: "/" + wikiKeyword,
+            url: "/article/" + wikiKeyword,
             headers: {
                 "X-CSRFToken": getCookie("csrftoken")
             },
@@ -1449,7 +1498,7 @@ jQuery(document).ready(function() {
                 "category": ""
             },
             success: function(data){
-                var con = data["content"];
+                var con = data["html"];
                 var article = $(".mediawiki-article");
                 if(article.is(":visible")){
                     article.toggle();

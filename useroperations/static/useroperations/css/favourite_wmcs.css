@@ -14,6 +14,7 @@
     flex-direction:row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: stretch;
 }
 
 .wmc-tile-wrapper a{
@@ -25,12 +26,11 @@
     display: flex;
     flex-direction: column;
     margin: 10px;
-    width: 150px;
-    height: 100%;
+    width: 250px;
     transition: all 0.1s ease-in-out;
+    background-color: var(--rlp-gray);
 }
 .wmc-tile:hover{
-    cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--rlp-red);
 }
@@ -38,52 +38,45 @@
 .wmc-tile-header{
     display: flex;
     justify-content: center;
-    border: 1px solid var(--rlp-red-light);
+    padding: 10px;
+    color: var(--rlp-red);
+    font-weight: bold;
 }
 
-.wmc-tile-header img{
-    width: 148px;
+.wmc-tile-img{
+    width: 250px;
     height: 150px;
-    background-color: var(--rlp-red);
-    transition: all 0.1s ease-in-out;
+    object-fit: cover;
 }
-.wmc-tile-header img:hover{
+.wmc-tile-img:hover{
+    cursor: pointer;
     opacity: 0.5;
 }
 
-.wmc-tile-body{
+.wmc-tile-content{
     -moz-hyphens: auto;
     hyphens: auto;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 0.8em;
     min-height: 150px;
     height: auto;
     padding: 10px;
-    color: white;
-    background-color: var(--rlp-red-light);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.wmc-tile-content-abstract{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px 0;
+}
+
+.wmc-tile-content-img{
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
+
 .wmc-tile-body:hover{
-    cursor: pointer;
     background-color: var(--rlp-red-light-hover);
 }
 
-.wmc-tile-info-popup{
-    font-size: 12px;
-    display: none;
-    opacity: 0.95;
-    position: absolute;
-    left: 150px;
-    top: 0px;
-    min-width: 200px;
-    max-width: 300px;
-    height: 100%;
-    padding: 10px;
-    box-shadow: 0 0 10px var(--rlp-red);
-    border: 1px solid var(--rlp-red-light-hover);
-    background-color: var(--rlp-red-light-hover);
-    color: white;
-    z-index: 10;
-}

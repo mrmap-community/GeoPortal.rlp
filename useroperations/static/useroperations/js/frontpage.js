@@ -143,7 +143,9 @@ $(document).on("click", ".map-viewer-toggler", function(){
 $(document).on("click", ".sidebar-toggler", function(){
     var elem = $(this);
     var sidebar = $(".sidebar-wrapper");
-    sidebar.toggleClass("closed")
+    var bodyContent = $("#body-content");
+    sidebar.toggleClass("closed");
+    bodyContent.toggleClass("sidebar-open");
 });
 
 /*
@@ -193,7 +195,7 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
     popup.toggle();
  });
 
- $(document).on("click", ".wmc-tile-content", function(event){
+ $(document).on("click", ".wmc-tile-content-img", function(event){
     event.preventDefault();
     var elem = $(this);
     href = elem.children("a").attr("href");

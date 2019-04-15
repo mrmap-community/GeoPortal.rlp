@@ -7,9 +7,6 @@ class Navigation(models.Model):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     icon_name = models.CharField(max_length=200, blank=True)
     position = models.IntegerField(unique=True)
-    
-    def __str__(self):
-        return self.name
 
 
 
@@ -60,7 +57,7 @@ class MbUser(models.Model):
     is_active = models.BooleanField(blank=True, null=True)
     activation_key = models.CharField(max_length=250, blank=True, null=True)
     timestamp_delete = models.BigIntegerField(blank=True, null=True)
-    timestamp_dsgvo_accepted = models.BigIntegerField(blank=True, null=True)
+    timestamp_dsgvo_accepted = models.DateTimeField(blank=True, null=True)
 
 
 

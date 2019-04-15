@@ -507,7 +507,7 @@ def map_viewer_view(request):
     """ Parse all important data for the map rendering from the session
 
     This view is used to hand over all the data that is needed
-     by the mapviewer, which currently is mapbender2.
+     by the mapviewer.
     The parameters come from the search interface are therefore
      included in the URL.
 
@@ -541,7 +541,6 @@ def map_viewer_view(request):
                 continue
             request_get_params["WMS"] += "&" + request_get_params_key + "=" + request_get_params_val
 
-    # ToDo: Implement mb_user_myGui parsing
 
     mapviewer_params_dict = {
         "LAYER[id]": request_get_params.get("LAYER[id]", None),
@@ -552,7 +551,7 @@ def map_viewer_view(request):
         "WMC": request_get_params.get("WMC", ""),
         "GEORSS": urllib.parse.urlencode(request_get_params.get("GEORSS", "")),
         "KML": urllib.parse.urlencode(request_get_params.get("KML", "")),
-        "FEATURETYPE": request_get_params.get("FEATURETYPE", {}).get("id", None),
+        "FEATURETYPE": request_get_params.get("FEATURETYPE[id]", ""),
         "ZOOM": request_get_params.get("ZOOM", None),
         "GEOJSON": request_get_params.get("GEOJSON", None),
         "GEOJSONZOOM": request_get_params.get("GEOJSONZOOM", None),
@@ -576,7 +575,7 @@ def map_viewer_view(request):
         return render(request, template, geoportal_context.get_context())
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url=LOCAL_MACHINE + ":8000/map-viewer/?" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url=LOCAL_MACHINE, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()

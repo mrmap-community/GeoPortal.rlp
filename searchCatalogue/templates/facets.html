@@ -1,28 +1,19 @@
 {% load i18n %}
-
-    {% if not is_de_search and not is_eu_search  %}
-<span class='-js-show-facets -js-accordion extended-search-header'>
-    <span class='accordion icon closed fs-20px'></span>
-    {% trans 'Categories' %}
-</span>
-<div class='-js-facets hide facet-list'>
-        {% for facet_key, facet_val in facets.items %}
-        <div class='-js-facet facet-item' data-name='{{ facet_key }}'>
-             <h4>{{ facet_key }}</h4>
-             <ul>
-                 {% for subcat in facet_val %}
-                    <li class='-js-subfacet' data-name='{{ subcat.title }}' data-id='{{ subcat.id }}' data-parent="{{ facet_key }}">
-                        {{ subcat.title }} ({{ subcat.count }})
-                    </li>
-                 {% empty %}
-                    {% trans 'No Categories found for this search configuration' %}
-                 {% endfor %}
-
-             </ul>
-        </div>
-        {% endfor %}
-    {% endif %}
-
-
-
+{% if not is_de_search and not is_eu_search  %}
+<div class='-js-facets facet-list'>
+    {% for facet_key, facet_val in facets.items %}
+    <div class='-js-facet facet-item' data-name='{{ facet_key }}'>
+         <h4>{{ facet_key }}</h4>
+         <ul>
+             {% for subcat in facet_val %}
+                <li class='-js-subfacet subfacet' data-name='{{ subcat.title }}' data-id='{{ subcat.id }}' data-parent="{{ facet_key }}" title="{{ subcat.title }} ({{ subcat.count }})">
+                    {{ subcat.title }} ({{ subcat.count }})
+                </li>
+             {% empty %}
+                {% trans 'No Categories found for this search configuration' %}
+             {% endfor %}
+         </ul>
+    </div>
+    {% endfor %}
 </div>
+{% endif %}

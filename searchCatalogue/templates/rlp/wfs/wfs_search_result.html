@@ -6,36 +6,32 @@
         </div> </a>
     {% endif %}
 <div class="search-result-area">
-    <div class="img-area">
-        <br>
-        {% if result.logoUrl is not None or result.logoUrl == '' %}
-        <a href="{{ result.mdLink }}#tabs-3" target="_blank"><img class="img-logo" style="max-width:100px;" src="{{ result.logoUrl }}"></a>
-        {% endif %}
-        <a href="{{ result.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}"  src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %}  {% static 'searchCatalogue/images/icons/icn_warn.png' %}  {% endif %}"></a>
-        {% if result.isopen is not None %}
-            <a href="{{ OPEN_DATA_URL }}" target="_blank">
-                <img class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}">
-            </a>
-        {% endif %}
-        {% if result.logged is true %}
-            <img class="resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
-        {% endif %}
-    </div>
 
-    <table class="search-result-detail-table">
-        <tr>
-            <td class="search-result-detail-title">{% trans 'Competent authority:' %}</td>
-            <td class="search-result-detail"><a href="{{ result.mdLink }}#tabs-3" target="_blank">{{ result.respOrg }}</a></td>
-        </tr>
-        <tr>
-            <td class="search-result-detail-title">{% trans 'Date of metadata:' %}</td>
-            <td class="search-result-detail"><a href="{{ result.mdLink }}#tabs-2" target="_blank">{{ result.date }}</a></td>
-        </tr>
-        <tr>
-            <td class="search-result-detail-title">{% trans 'Description:' %}</td>
-            <td class="search-result-detail"><p>{{ ftype.abstract }}</p></td>
-        </tr>
-    </table>
+        <div class="img-area flex-row">
+            <article class="search-result-detail">{{ ftype.abstract }}</article>
+        </div>
+        <hr>
+        <div class="img-area">
+        </div>
+        <div class="flex-row metadata-links">
+            <a class="metadata-link-element" href="{{ result.mdLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
+                <img class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                {{ result.respOrg }}
+            </span></a>
+            <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
+                <img class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                {{ result.date }}
+            </span></a>
+            <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %} {% static 'searchCatalogue/images/icons/icn_warn.png' %} {% endif %}"></a>
+            {% if result.isopen is not None %}
+                <a class="metadata-link-element"  href="{{ OPEN_DATA_URL }}" target="_blank">
+                    <img class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
+                </a>
+            {% endif %}
+            {% if result.logged is True or result.logged == "1" %}
+                <img class="metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+            {% endif %}
+        </div>
 
     {% with 'wfs' as type %}
         {% with ftype as layer %}

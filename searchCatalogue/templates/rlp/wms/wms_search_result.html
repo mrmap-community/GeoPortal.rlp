@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n humanize %}
 
 <a title='zu {{ layer.title }}' href='{{ layer.mdLink }}' target="_blank" style="text-decoration: none">
     <div class="search-result-title" >
@@ -6,40 +6,40 @@
     </div>
 </a>
 <div class="search-result-area">
-
+        <div class="img-area flex-row">
+            <div class="flex-row">
+                <img class="img-preview" style="max-width:100px;" src="{% if layer.previewURL is not None %}{{ layer.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
+                <img class="img-preview" style="max-width:100px;" src="{% if layer.extent_url is not None or layer.extent_url|length == 0 %}{{ layer.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
+            </div>
+            <article class="search-result-detail">{{ layer.abstract }}</article>
+        </div>
+        <div title="{% trans 'Total view count' %}" class="view-count">
+            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+            <span>{{ layer.loadCount|intcomma }}</span>
+        </div>
+        <hr>
         <div class="img-area">
-            <img class="img-preview" style="max-width:100px;" src="{% if result.previewURL is None or result.previewURL|length == 0%} {{ result.extent_url }} {% else %} {{ result.previewURL }} {% endif %}">
-            <br>
-            {% if result.logoUrl is not None or result.logoUrl|length > 0 %}
-                <a href="{{ layer.mdLink }}#tabs-3" target="_blank"><img class="img-logo" title="{{ result.respOrg }}" src="{{ result.logoUrl }}"></a>
-            {% endif %}
-            <a href="{{ layer.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %}  {% static 'searchCatalogue/images/icons/icn_warn.png' %} {% endif %}"></a>
+        </div>
+        <div class="flex-row metadata-links">
+            <a class="metadata-link-element" href="{{ layer.mdLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
+                <img class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                {{ result.respOrg }}
+            </span></a>
+            <a class="metadata-link-element"  href="{{ layer.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
+                <img class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                {{ result.date }}
+            </span></a>
+            <a class="metadata-link-element"  href="{{ layer.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %} {% static 'searchCatalogue/images/icons/icn_warn.png' %} {% endif %}"></a>
             {% if result.isopen is not None %}
-                <a href="{{ OPEN_DATA_URL }}" target="_blank">
+                <a class="metadata-link-element"  href="{{ OPEN_DATA_URL }}" target="_blank">
                     <img class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
                 </a>
             {% endif %}
-            {% if result.logged %}
-                <img class="resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+            {% if result.logged is True or result.logged == "1" %}
+                <img class="metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
             {% endif %}
         </div>
 
-        <table class="search-result-detail-table">
-            <tr>
-                <td class="search-result-detail-title">Zuständige Stelle:</td>
-                <td class="search-result-detail"><a href="{{ layer.mdLink }}#tabs-3" target="_blank">{{ result.respOrg }}</a></td>
-            </tr>
-            <tr>
-                <td class="search-result-detail-title">Datum der Metadaten:</td>
-                <td class="search-result-detail"><a href="{{ layer.mdLink }}#tabs-2" target="_blank">{{ result.date }}</a></td>
-            </tr>
-            {% if layer.abstract is not None %}
-            <tr>
-                <td class="search-result-detail-title">Beschreibung:</td>
-                <td class="search-result-detail"><p>{{ layer.abstract }}</p></td>
-            </tr>
-            {% endif %}
-        </table>
     <div>
         {% with result.layer as layers %}
             {% with 'wms' as type %}

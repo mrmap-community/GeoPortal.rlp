@@ -35,7 +35,9 @@ html{
 
 body{
     margin: 0;
+    /*
     background-color: var(--rlp-gray-light);
+    */
     height: 100%;
     position: relative;
 }
@@ -48,8 +50,16 @@ body{
     max-width: 70%;
     */
     /*width: 70%;*/
-    padding: 20px;
-    margin: 0 250px 0 250px;
+    transition-duration: 0.8s;
+    padding: 10px 50px 10px 50px;
+    color: var(--rlp-gray-font);
+    /*
+    margin: 0 200px 0 200px;
+    */
+}
+.body-content.sidebar-open{
+    transform: translateX(200px);
+    margin-right: 200px;
 }
 
 footer{
@@ -124,6 +134,7 @@ footer{
 @media only screen and (max-width: 1000px){
     .body-content{
         margin: 0 0 0 0;
+        padding: 20px;
     }
     #logo_rlp{
         width: 100%;
@@ -351,7 +362,7 @@ ul {
     background-color: var(--rlp-red);
     /* background-image: linear-gradient(var(--rlp-red), white); */
     list-style-type: none;
-    width: 250px;
+    width: 200px;
     margin: 0;
     position: absolute;
     left: 0px;
@@ -362,7 +373,7 @@ ul {
     transform: translateX(0px);
 }
 .sidebar-wrapper.closed{
-    transform: translateX(-250px);
+    transform: translateX(-200px);
 }
 
 .sidebar-content{
