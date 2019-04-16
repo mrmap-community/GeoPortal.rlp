@@ -1186,6 +1186,10 @@ if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf
   echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
 fi
 
+if  ! grep -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
+  sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.0/apache2/php.ini
+fi
+
 #if  ! grep -q "Header always append X-Frame-Options SAMEORIGIN"  /etc/apache2/conf-enabled/security.conf ;then
 #  echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
 #fi
