@@ -236,7 +236,9 @@ def register_view(request):
                                         "You have to activate your account via email before you can login!" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key))
 
             return redirect('useroperations:login')
-
+        else:
+            messages.error(request, _("Captcha was invalid"))   
+	
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
 
