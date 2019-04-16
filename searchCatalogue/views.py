@@ -218,6 +218,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     """
     post_params = request.POST.dict()
     template_name = app_name + "search_results.html"
+    host = request.META.get("HTTP_HOST")
 
     # extract parameters
     start_time = time.time()
@@ -254,7 +255,8 @@ def get_data_other(request: HttpRequest, catalogue_id):
                         page=search_pages,
                         resource_set=requested_resources,
                         language_code=request.LANGUAGE_CODE,
-                        catalogue_id=catalogue_id
+                        catalogue_id=catalogue_id,
+                        host=host
                         )
     start_time = time.time()
     search_results = searcher.get_search_results_de()
@@ -312,6 +314,7 @@ def get_data_rlp(request: HttpRequest):
         JsonResponse: Contains data for the ajax call
     """
     post_params = request.POST.dict()
+    host = request.META.get("HTTP_HOST")
     template_name = app_name + "search_results.html"
     resources = {
         "dataset": _("Datasets"),
@@ -368,7 +371,8 @@ def get_data_rlp(request: HttpRequest):
                         search_type_bbox,
                         only_open_data=only_open_data,
                         language_code=lang_code,
-                        catalogue_id=catalogue_id)
+                        catalogue_id=catalogue_id,
+                        host=host)
     search_results = searcher.get_search_results_rlp()
     print(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 

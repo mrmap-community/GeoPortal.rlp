@@ -35,7 +35,8 @@ class Searcher:
                  type_bbox=None,
                  language_code="de",
                  catalogue_id=RLP_CATALOGUE,
-                 only_open_data='false'):
+                 only_open_data='false',
+                 host=None):
         """ Constructor
 
         Args:
@@ -65,13 +66,13 @@ class Searcher:
         self.catalogue_id = catalogue_id
         self.language_code = language_code
         self.only_open_data = only_open_data
+        self.host = host
 
         self.org_ids = []
         self.iso_ids = []
         self.custom_ids = []
         self.inspire_ids = []
         self.lock = threading.BoundedSemaphore()
-
 
         # get random search id
         md_5 = hashlib.md5()
@@ -126,6 +127,8 @@ class Searcher:
             "searchId": self.search_id,
             "languageCode": self.language_code,
         }
+        if self.host is not None:
+            params["hostName"] = self.host
         response = requests.get(url, params)
         response = response.json()
         categories = response["categories"]["searchMD"]["category"]
@@ -158,8 +161,11 @@ class Searcher:
             "searchBbox": self.bbox,
             "searchTypeBbox": self.typeBbox,
             "languageCode": self.language_code,
-            "restrictToOpenData": self.only_open_data,
+            "restrictToOpenData": self.only_open_data
         }
+        if self.host is not None:
+            params["hostName"] = self.host
+
         params.update(self.extended_params)
         result = {}
         thread_list = []
@@ -211,6 +217,8 @@ class Searcher:
             "searchPages": self.search_pages,
             "maxResults": 5,
         }
+        if self.host is not None:
+            params["hostName"] = self.host
         thread_list = []
         results = OrderedDict()
         for resource in self.search_resources:
@@ -244,6 +252,8 @@ class Searcher:
                 "maxRows": 15,
                 "searchText": search_text
             }
+            if self.host is not None:
+                params["hostName"] = self.host
             response = requests.get(url, params, proxies=PROXIES)
             result = response.json()
             result["keyword"] = search_text
