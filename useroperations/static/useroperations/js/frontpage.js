@@ -269,6 +269,18 @@ $(document).on('keyup', "#id_password", function(){
 
 });
 
+$(document).on('click', "#change-form-button", function(){
+
+  var PasswordInput = document.getElementById("id_password");
+  var PasswordInputConfirm = document.getElementById("id_passwordconfirm");
+
+  if(PasswordInput.value == "" && PasswordInput.value != PasswordInputConfirm.value) {
+    alert("Passwörter stimmen nicht überein");
+    event.preventDefault();
+  }
+
+});
+
 //captcha refresh
 $(function() {
     // Add refresh button after field (this can be done in the template as well)
