@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from django.utils.translation import gettext_lazy as _
+from django.utils.log import DEFAULT_LOGGING
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +25,7 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
 EXTERNAL_INTERFACE = "127.0.0.1"
 LOCAL_MACHINE = "http://127.0.0.1"
