@@ -21,8 +21,8 @@ from django.utils.translation import gettext as _
 
 from Geoportal import helper
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import LOCAL_MACHINE, DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
-    EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME_HTTP
+from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
+    EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
@@ -453,7 +453,7 @@ def get_data_rlp(request: HttpRequest):
         "download_feed_url": host + "/mapbender/plugins/mb_downloadFeedClient.php?url=",
         "download_feed_inspire": host + "/mapbender/php/mod_inspireDownloadFeed.php?id=",
         "view_map_url": "//localhost/portal/karten.html?",
-        "wms_action_url": HOSTNAME_HTTP + "/mapbender/php/wms.php?",
+        "wms_action_url": "http://" + HOSTNAME + "/mapbender/php/wms.php?",
         "OPEN_DATA_URL": OPEN_DATA_URL,
     }
 
@@ -477,7 +477,7 @@ def get_data_info(request: HttpRequest):
     """
     post_params = request.POST.dict()
     template_name = "search_results.html"
-    host = HOSTNAME_HTTP
+    host = "http://" + HOSTNAME
     # get language
     lang = request.LANGUAGE_CODE
 

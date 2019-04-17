@@ -25,13 +25,12 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
-HOSTNAME = "opendata.geoportal.rlp.de"
-HOSTNAME_HTTP = "http://" + HOSTNAME
-EXTERNAL_INTERFACE = "10.227.0.134"
-LOCAL_MACHINE = "http://" + EXTERNAL_INTERFACE
+HOSTNAME = "geoportal-test.de"
+HOSTIP = "192.168.56.101"
 
-ALLOWED_HOSTS = ['opendata.geoportal.rlp.de',EXTERNAL_INTERFACE, '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [HOSTIP, HOSTNAME, '127.0.0.1', 'localhost']
 
 # Mediawiki
 INTERNAL_PAGES_CATEGORY = "Portalseite"
@@ -123,8 +122,8 @@ DATABASES = {
                     },
         'NAME': 'mapbender',
         'USER':'mapbenderdbuser',
-        'PASSWORD':'mrmapownstherest',
-        'HOST' : '10.227.0.253',
+        'PASSWORD':'mapbenderdbpassword',
+        'HOST' : '127.0.0.1',
         'PORT' : ''
     }
 }
@@ -186,4 +185,3 @@ LOCALE_PATHS = (
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + "/static/"
-DEFAULT_LOGGING['handlers']['console']['filters'] = []

@@ -7,7 +7,7 @@ from pymemcache.client import base
 from phpserialize import *
 import re, os, configparser
 
-from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE, HOSTNAME
+from Geoportal.settings import HOSTNAME, HOSTIP
 from searchCatalogue.utils.searcher import Searcher
 import random
 import string
@@ -108,7 +108,7 @@ def set_links_in_dom(dom):
     :param dom:
     :return:
     """
-    prefix = LOCAL_MACHINE
+    prefix = "http://" + HOSTIP
 
     # handle links
     thread_list = []
@@ -139,7 +139,7 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
         str: The html content of the wiki article
     """
     # get mediawiki html
-    url = LOCAL_MACHINE + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
+    url = "http://" + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
     html_raw = request.urlopen(url)
     html_raw = html_raw.read()
     html_con = html.fromstring(html_raw)

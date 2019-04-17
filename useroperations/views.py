@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 
 from Geoportal import helper
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE, ROOT_EMAIL_ADDRESS, DEFAULT_GUI
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP
 from useroperations.utils import helper_functions
 
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 def index_view(request, wiki_keyword=""):
     """ Prepares the index view, and renders the page.
 
-    This view is the main view and landing page of the project. 
+    This view is the main view and landing page of the project.
     It includes checking if a mediawiki page should be rendered or not.
     The default page, if no keyword was given, is favourite_wmcs.html,
      which shows an overview of the most popular wmc services.
@@ -47,7 +47,7 @@ def index_view(request, wiki_keyword=""):
          (viewer): geoportal.html
          (error): 404.html
     """
-    
+
     request.session["current_page"] = "index"
     lang = request.LANGUAGE_CODE
     get_params = request.GET.dict()
@@ -253,7 +253,7 @@ def pw_reset_view(request):
         PasswordResetForm
         Email confirmation
     """
-    
+
     request.session["current_page"] = "pw_reset"
     geoportal_context = GeoportalContext(request=request)
 
@@ -489,7 +489,7 @@ def logout_view(request):
     Returns:
         LogoutForm
     """
-    
+
     request.session["current_page"] = "logout"
     geoportal_context = GeoportalContext(request=request)
 
@@ -569,13 +569,13 @@ def map_viewer_view(request):
         # an internal call from our geoportal should lead to the map viewer page without problems
         params = {
             "mapviewer_params": mapviewer_params,
-            "mapviewer_src":  LOCAL_MACHINE + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
+            "mapviewer_src":  "http://" + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url=LOCAL_MACHINE, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url="http://" + HOSTIP, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()

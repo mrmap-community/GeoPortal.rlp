@@ -9,7 +9,7 @@ Created on: 11.03.19
 from django.http.response import JsonResponse
 
 from Geoportal import helper, settings
-from Geoportal.settings import LOCAL_MACHINE, DEFAULT_GUI, EXTERNAL_INTERFACE, RSS_FILE
+from Geoportal.settings import DEFAULT_GUI, RSS_FILE, HOSTNAME
 
 
 class GeoportalJsonResponse:
@@ -57,8 +57,7 @@ class GeoportalContext:
             'gui': session_data.get("gui", None),
             'guis': session_data.get("guis", ""),
             'lang': request.LANGUAGE_CODE,
-            "LOCAL_MACHINE": LOCAL_MACHINE,
-            "EXTERNAL_INTERFACE": EXTERNAL_INTERFACE,
+            "HOSTNAME": HOSTNAME,
             "DEFAULT_GUI": DEFAULT_GUI,
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,

@@ -11,7 +11,7 @@ from copy import copy
 
 from django.http import HttpRequest
 
-from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE, DEFAULT_GUI, HOSTNAME_HTTP
+from Geoportal.settings import DEFAULT_GUI
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
 import requests
