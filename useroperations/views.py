@@ -209,15 +209,15 @@ def register_view(request):
             user.activation_key = helper_functions.random_string(50)
             #activation_key = user.activation_key
 
-            send_mail(
-                 _("Activation Mail"),
-                _("Hello ") + user.mb_user_name +
-                _(",\n\nThis is your activation link. It will be valid until the end of the day, "
-                  "please click it!\n Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key),
-                'kontakt@geoportal.de',
-                ['root@debian'],  # später email variable eintragen
-                fail_silently=False,
-            )
+            #send_mail(
+            #     _("Activation Mail"),
+            #    _("Hello ") + user.mb_user_name +
+            #    _(",\n\nThis is your activation link. It will be valid until the end of the day, "
+            #        "please click it!\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+            #    'kontakt@geoportal.de',
+            #    ['root@debian'],  # später email variable eintragen
+            #    fail_silently=False,
+            #)
 
             user.save()
 
@@ -233,12 +233,10 @@ def register_view(request):
             UserGroupRel.save()
 
             messages.success(request, _("Account creation was successful. "
-                                        "You have to activate your account via email before you can login!" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key))
+                "You have to activate your account via email before you can login! http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
 
             return redirect('useroperations:login')
-        else:
-            messages.error(request, _("Captcha was invalid"))   
-	
+
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
 
@@ -290,13 +288,13 @@ def pw_reset_view(request):
                 user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)), 'utf-8')
 
                 user.save()
-                send_mail(
-                    subject=_("Lost Password"),
-                    message=_("This is your new password, please change it immediately!\n Password: " + newpassword ),
-                    from_email='kontakt@geoportal.de',
-                    recipient_list=[ROOT_EMAIL_ADDRESS],
-                    fail_silently=False,
-                )
+                #send_mail(
+                #    subject=_("Lost Password"),
+                #    message=_("This is your new password, please change it immediately!\n Password: " + newpassword ),
+                #    from_email='kontakt@geoportal.de',
+                #    recipient_list=[ROOT_EMAIL_ADDRESS],
+                #    fail_silently=False,
+                #)
                 messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
                 return redirect('useroperations:login')
 
@@ -457,23 +455,23 @@ def delete_profile_view(request):
                 user.timestamp_delete = time.time()
                 user.save()
 
-                send_mail(
-                    _("Reactivation Mail"),
-                    _("Hello ") + user.mb_user_name +
-                    _(
-                        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
-                        "\n Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key),
-                    'kontakt@geoportal.de',
-                    ['root@debian'],  # später email variable eintragen
-                    fail_silently=False,
-                )
+                #send_mail(
+                #    _("Reactivation Mail"),
+                #    _("Hello ") + user.mb_user_name +
+                #    _(
+                #        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
+                #        "\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+                #    'kontakt@geoportal.de',
+                #    ['root@debian'],  # später email variable eintragen
+                #    fail_silently=False,
+                #)
 
                 # user.delete()
                 helper_functions.delete_mapbender_session_by_memcache(session_id)
                 messages.success(request, _("Successfully deleted the user:")
                                  + " {str_name} ".format(str_name=user.mb_user_name)
                                  + _(". In case this was an accident, we sent you a link where you can reactivate "
-                                     "your account for 24 hours!" + "Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key))
+                                     "your account for 24 hours!" + "Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
 
                 return redirect('useroperations:index')
 

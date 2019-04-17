@@ -22,7 +22,7 @@ import math
 import requests
 
 from Geoportal import helper
-from Geoportal.settings import INTERNAL_PAGES_CATEGORY
+from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME_HTTP
 from searchCatalogue.settings import *
 
 
@@ -331,15 +331,17 @@ def __type_inspire_url(uuid, option:dict):
     """
     url = None
     _type = option["type"]
-    base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
-    if _type == "wmslayergetmap":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+    # base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
+    base_url = HOSTNAME_HTTP + "/mapbender/plugins/mb_downloadFeedClient.php?url="
+    if _type == "wmslayergetmap":        
+	# url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus(HOSTNAME_HTTP + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wmslayerdataurl":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus(HOSTNAME_HTTP + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wfsrequest":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
+        url = base_url + urllib.parse.quote_plus(HOSTNAME_HTTP + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
     if _type == "downloadlink":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
+        url = base_url + urllib.parse.quote_plus(HOSTNAME_HTTP + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
     return url
 
 

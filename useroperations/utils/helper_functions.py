@@ -7,7 +7,7 @@ from pymemcache.client import base
 from phpserialize import *
 import re, os, configparser
 
-from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE
+from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE, HOSTNAME
 from searchCatalogue.utils.searcher import Searcher
 import random
 import string
@@ -164,7 +164,7 @@ def get_landing_page(lang):
     :param lang:
     :return:
     """
-    searcher = Searcher(keywords="", resource_set=["wmc"],page=1,order_by="rank")
+    searcher = Searcher(keywords="", resource_set=["wmc"],page=1,order_by="rank",host=HOSTNAME)
     search_results = searcher.get_search_results_rlp()
     ret_list = search_results.get("wmc", {}).get("wmc", {}).get("wmc", {}).get("srv", [])
 

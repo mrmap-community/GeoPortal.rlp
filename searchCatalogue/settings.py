@@ -3,7 +3,7 @@ Constants for the search catalogue app
 """
 from Geoportal.settings import LOCAL_MACHINE
 
-EXTENT_SERVICE_URL = LOCAL_MACHINE + "/cgi-bin/mapserv?map=/data/mapbender/tools/wms_extent/extents.map&"
+EXTENT_SERVICE_URL = "http://opendata.geoportal.rlp.de/cgi-bin/mapserv?map=/data/mapbender/tools/wms_extent/extents.map&"
 EXTENT_SERVICE_LAYER = "demis,ows_layer_target,extent,metadata_polygon"
 EXTENT_SERVICE_BBOX = "6.05,48.9,8.6,50.96"
 
