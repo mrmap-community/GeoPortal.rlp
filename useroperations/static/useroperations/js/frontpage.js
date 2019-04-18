@@ -198,6 +198,10 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
  $(document).on("click", ".wmc-tile-content-img", function(event){
     event.preventDefault();
     var elem = $(this);
+    if(elem.attr("id") == "show-all-tile-content"){
+        $("#geoportal-search-button").click();
+        return;
+    }
     href = elem.children("a").attr("href");
     startAjaxMapviewerCall(href);
 

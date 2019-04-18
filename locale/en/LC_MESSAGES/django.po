@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 12:29+0000\n"
+"POT-Creation-Date: 2019-04-18 12:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -786,6 +786,14 @@ msgstr ""
 
 #: useroperations/templates/favourite_wmcs.html:30
 msgid "No description available"
+msgstr ""
+
+#: useroperations/templates/favourite_wmcs.html:40
+msgid "Show all"
+msgstr ""
+
+#: useroperations/templates/favourite_wmcs.html:50
+msgid "Start a search and explore all results. Let's go!"
 msgstr ""
 
 #: useroperations/templates/feedback_form.html:5

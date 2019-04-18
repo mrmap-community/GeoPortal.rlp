@@ -91,3 +91,7 @@
 .view-count:hover{
     cursor: default;
 }
+
+#show-all-tile{
+    border: 2px solid var(--rlp-red);
+}
