@@ -10,6 +10,7 @@
 
 # Variables
 ipaddress="127.0.0.1"
+hostname="127.0.0.1"
 mysqlpw="root"
 mode="none"
 
@@ -65,12 +66,12 @@ http_proxy_host=""
 http_proxy_port=""
 https_proxy_host=""
 https_proxy_port=""
-not_proxy_hosts="localhost,127.0.0.1"
+proxyuser=""
+proxypassword=""
 
 # misc
 webadmin_email="test@test.de"
 use_ssl="false"
-domain_name="127.0.0.1"
 not_proxy_hosts="localhost,127.0.0.1"
 installation_folder="/data/"
 
@@ -85,14 +86,12 @@ install_mapbender_conf="true"
 configure_mapbender="true"
 configure_apache="true"
 configure_cronjobs="true"
-checkout_custom_svn="false"
-custom_svn_url="http://www.gdi-rp-dienste.rlp.de/svn/de-rp-landau/data"
 
 if [ $use_ssl = 'true' ]; then
-    server_url="https://"$domain_name
+    server_url="https://"$hostname
 fi
 if [ $use_ssl = 'false' ]; then
-    server_url="http://"$domain_name
+    server_url="http://"$hostname
 fi
 
 # mobilemap.conf
@@ -126,13 +125,33 @@ install_full(){
 
 date
 
+# hexlify credentials for export
+if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+
+  proxyuser_hex=`echo $proxyuser | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
+  proxyuser_hex=%$proxyuser_hex
+  proxyuser_hex=${proxyuser_hex::len-3}
+
+  proxypassword_hex=`echo $proxypassword | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
+  proxypassword_hex=%$proxypassword_hex
+  proxypassword_hex=${proxypassword_hex::len-3}
+
+else
+
+  proxyuser_hex=""
+  proxypassword_hex=""
+fi
+
+
 if [ $use_proxy_svn = 'true' ]; then
     # set proxy env for wget from shell
     cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
 fi
 if [ $use_proxy_system = 'true' ]; then
-    export http_proxy=http://$http_proxy_host:$http_proxy_port
-    export https_proxy=http://$https_proxy_host:$https_proxy_port
+    #export http_proxy=http://$http_proxy_host:$http_proxy_port
+    export http_proxy="http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port"
+    #export https_proxy=http://$https_proxy_host:$https_proxy_port
+    export https_proxy="http://$proxyuser_hex:$proxypassword_hex@$https_proxy_host:$https_proxy_port"
     # for git access behind proxy
     # git config --global http.proxy http://$http_proxy_host:$http_proxy_port
     # git config --global https.proxy http://$https_proxy_host:$https_proxy_port
@@ -142,11 +161,14 @@ if [ $use_proxy_apt = 'true' ]; then
     if [ -e "/etc/apt/apt.conf" ]; then
         echo "File exists"
 	cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
-	echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+  #echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+
+  echo "Acquire::http::Proxy \"http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
     else
         echo "File does not exist"
 	touch /etc/apt/apt.conf
-	echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+	#echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+  echo "Acquire::http::Proxy \"http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
     fi
     # first line should be: Acquire::http::Proxy "http://$http_proxy_host:$http_proxy_port";
     # for subversion alter /etc/subversion/servers - alter following lines
@@ -155,6 +177,7 @@ if [ $use_proxy_apt = 'true' ]; then
     # sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
     # # http-proxy-port = 7000
 fi
+
 ############################################################
 if [ $install_system_packages = 'true' ]; then
     ############################################################
@@ -189,7 +212,13 @@ if [ $use_proxy_svn = 'true' ]; then
     sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
     sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
     # # http-proxy-port = 7000
-fi
+
+    if [ "$proxyuser" != "" ]  && [  "$proxypassword" != "" ];then
+      sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $proxyuser/g" /etc/subversion/servers
+      sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $proxypassword/g" /etc/subversion/servers
+    fi
+ fi
+
 ############################################################
 if [ $create_folders = 'true' ]; then
     # initial installation of geoportal.rlp on debian 9
@@ -213,10 +242,6 @@ fi
 if [ $checkout_mapbender_conf = 'true' ]; then
     echo "checkout mapbender conf folder for geoportal ..."
     svn co -q http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf
-fi
-
-if  [ $checkout_custom_svn = 'true' ]; then
-	svn co -q $custom_svn_url
 fi
 
 ############################################################
@@ -262,31 +287,6 @@ if [ $install_mapbender_conf = 'true' ]; then
     echo 'done.'
 fi
 
-############################################################
-# compress and create custom conf files
-############################################################
-if  [ $checkout_custom_svn = 'true' ]; then
-    cd ${installation_folder}svn/
-    tar -czf custom.tar.gz data/
-    mv custom.tar.gz /tmp/
-    cd ${installation_folder}
-    mv /tmp/custom.tar.gz .
-    tar -xzf custom.tar.gz
-    cd ${installation_folder}data/conf/
-    rm -rf $(find . -type d -name .svn)
-    cd ${installation_folder}data/portal
-    rm -rf $(find . -type d -name .svn)
-    cd ${installation_folder}data/mapbender/
-    rm -rf $(find . -type d -name .svn)
-    cd ${installation_folder}
-    cp -r -a ${installation_folder}data/conf ${installation_folder}
-    cp -r -a ${installation_folder}data/portal ${installation_folder}
-    cp -r -a ${installation_folder}data/mapbender ${installation_folder}
-    rm -R ${installation_folder}data/
-    #svn info $custom_svn_url"/conf" | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}conf/lastinstalled
-    rm custom.tar.gz
-    echo 'done.'
-fi
 ############################################################
 # cleanup .svn relicts
 ############################################################
@@ -715,6 +715,12 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+
+        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
+          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
+        fi
+
       fi
       #####################
       # set database connection
@@ -801,6 +807,12 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
+
+        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
+          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
+        fi
+
       fi
       #####################
       # set database connection
@@ -811,7 +823,7 @@ EOF
       sed -i "s/%%DBOWNER%%/$mapbender_database_user/g" ${installation_folder}conf/mapbender.conf
       sed -i "s/%%DBPASSWORD%%/$mapbender_database_password/g" ${installation_folder}conf/mapbender.conf
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DOMAINNAME%%/$domain_name/g" ${installation_folder}conf/mapbender.conf
+      sed -i "s/%%DOMAINNAME%%/$hostname/g" ${installation_folder}conf/mapbender.conf
       sed -i "s/%%WEBADMINMAIL%%/$webadmin_email/g" ${installation_folder}conf/mapbender.conf
       #####################
       # special users & groups%%INSTALLATIONFOLDER%%
@@ -852,6 +864,15 @@ EOF
           #####################
           sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+
+          if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+            sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+            sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$proxyuser\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+            sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$proxypassword\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+          fi
+
+
+
       fi
 
       cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
@@ -880,70 +901,6 @@ EOF
       cp ${installation_folder}conf/mobilemap.conf ${installation_folder}mapbender/conf/mobilemap.conf
 
   fi
-  if [ $checkout_custom_svn = 'true' ]; then
-      # override information in custom conf files
-      # mapbender.conf
-      #####################
-      echo -n 'adopt mapbender.conf from custom geoportal conf files ...'
-      #####################
-      # alter connection type to use curl
-      #####################
-      sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # define proxy settings
-      #####################
-      # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
-      if [ $use_proxy_mb = 'true' ]; then
-  	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
-  	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
-  	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
-      fi
-      #####################
-      # set database connection
-      #####################
-      sed -i "s/%%DBSERVER%%/localhost/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBPORT%%/$mapbender_database_port/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBNAME%%/$mapbender_database_name/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBOWNER%%/$mapbender_database_user/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBPASSWORD%%/$mapbender_database_password/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DOMAINNAME%%/$domain_name/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%WEBADMINMAIL%%/$webadmin_email/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # special users & groups%%INSTALLATIONFOLDER%%
-      #####################
-      sed -i "s/%%PUBLICUSERID%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%PORTALADMINUSERID%%/1/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%ANONYMOUSUSER%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%ANONYMOUSGROUP%%/$mapbender_guest_group_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%REGISTRATINGGROUP%%/$mapbender_subadmin_group_id/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # enable public user auto session
-      #####################
-      sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
-      #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
-      # copy conf files to right places
-      cp ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
-      # alter other conf files
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
-      # copy conf file to right places
-      cp ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
-      # mapfile for metadata wms
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84_space/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
-      # conf file for invocation of metadata wms
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-      sed -i "s/%%BBOXWGS84%%/$bbox_wgs84/g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-      cp ${installation_folder}conf/extent_service_geoportal_rlp.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
-  fi
-
 
   if [ $configure_apache = 'true' ]; then
   ############################################################
@@ -1382,8 +1339,8 @@ sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbende
 sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/g" /data/mapbender/conf/mapbender.conf
 
 # django code
-sed -i s/"EXTERNAL_INTERFACE = \"127.0.0.1\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-
+sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 
 # enable php_serialize
 if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
@@ -1466,13 +1423,13 @@ cd /usr/share/mediawiki
 composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev
 php maintenance/update.php --skip-external-dependencies
 
-sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgEmergencyContact = \"apache@192.168.56.222\";"/"$wgEmergencyContact = \"apache@$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgPasswordSender = \"apache@192.168.56.222\";"/"$wgPasswordSender = \"apache@$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"$wgEmergencyContact = \"apache@192.168.56.222\";"/"$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"$wgPasswordSender = \"apache@192.168.56.222\";"/"$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 
 sed -i s/"$wgDBpassword = \"root\";"/"$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
 
-sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$ipaddress' );"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
@@ -1559,21 +1516,22 @@ python manage.py collectstatic
 
 # change ip address in various locations
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /data/mapbender/http/geoportal/authentication.php`
-sed -i s/"Location: http:\/\/$OLDADDRESS"/"Location: http:\/\/$ipaddress"/g /data/mapbender/http/geoportal/authentication.php
+sed -i s/"Location: http:\/\/$OLDADDRESS"/"Location: http:\/\/$hostname"/g /data/mapbender/http/geoportal/authentication.php
 
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/useroperations/templates/geoportal.html`
-sed -i s/"http:\/\/$OLDADDRESS\/mapbender\/frames\/index.php"/"http:\/\/$ipaddress\/mapbender\/frames\/index.php"/g /opt/GeoPortal.rlp/useroperations/templates/geoportal.html
+sed -i s/"http:\/\/$OLDADDRESS\/mapbender\/frames\/index.php"/"http:\/\/$hostname\/mapbender\/frames\/index.php"/g /opt/GeoPortal.rlp/useroperations/templates/geoportal.html
 
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/Geoportal/settings.py`
-sed -i s/"EXTERNAL_INTERFACE = \"$OLDADDRESS\""/"EXTERNAL_INTERFACE = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTIP = \"$OLDADDRESS\""/"HOSTIP = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTNAME = \"$OLDADDRESS\""/"HOSTNAME = \"$hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"Require ip $OLDADDRESS"/"Require ip $ipaddress"/g /etc/apache2/sites-enabled/geoportal-apache.conf
 
 OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /etc/mediawiki/LocalSettings.php`
-sed -i s/"\$wgServer = \"http:\/\/$OLDADDRESS\";"/"\$wgServer = \"http:\/\/$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgEmergencyContact = \"apache@$OLDADDRESS\";"/"$wgEmergencyContact = \"apache@$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgPasswordSender = \"apache@$OLDADDRESS\";"/"$wgPasswordSender = \"apache@$ipaddress\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgServer = \"http:\/\/$OLDADDRESS\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"$wgEmergencyContact = \"apache@$OLDADDRESS\";"/"$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"$wgPasswordSender = \"apache@$OLDADDRESS\";"/"$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"$wgDBpassword = \"root\";"/"$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"enableSemantics( '$OLDADDRESS' );"/"enableSemantics( '$ipaddress' );"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"enableSemantics( '$OLDADDRESS' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 
 /etc/init.d/apache2 restart
 
@@ -1699,15 +1657,18 @@ echo "
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-	--ipaddress=IPADDRESS             			| Default \"127.0.0.1\"
-	--proxyip=Proxy IP     	 			        | Default \"None\"
-	--proxyport=Proxy Port		  		        | Default \"None\"
-	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
-	--mapbenderdbpassword=Password for database access	| Default \"mapbenderdbpassword\"
-	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
-	--phppgadmin_password=Password for PGAdmin web access	| Default \"postgresadmin_password\"
-	--mysqlpw=database password for MySQL			| Default \"root\"
-	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
+    	--ipaddress=ipaddress             			| Default \"127.0.0.1\"
+        --hostname=hostname              			| Default \"127.0.0.1\"
+    	--proxyip=Proxy IP     	 			        | Default \"None\"
+    	--proxyport=Proxy Port		  		        | Default \"None\"
+        --proxyuser=username                                    | Default \"\"
+        --proxypw=password                                      | Default \"\"
+    	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
+    	--mapbenderdbpw=Password for database access	| Default \"mapbenderdbpassword\"
+    	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
+    	--phppgadmin_pw=Password for PGAdmin web access	| Default \"postgresadmin_password\"
+    	--mysqlpw=database password for MySQL			| Default \"root\"
+    	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
 
 "
 
@@ -1722,11 +1683,14 @@ while getopts h-: arg; do
 	   help				)  usage;;
      proxyip=?*     		)  http_proxy_host=$LONG_OPTARG;https_proxy_host=$LONG_OPTARG;;
      proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;https_proxy_port=$LONG_OPTARG;;
+     proxyuser=?*       )  proxyuser=$LONG_OPTARG;;
+     proxypw=?*       )  proxypassword=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbenderdbuser=$LONG_OPTARG;;
-	   mapbenderdbpassword=?*	)  mapbenderdbpassword=$LONG_OPTARG;;
+	   mapbenderdbpw=?*	)  mapbenderdbpassword=$LONG_OPTARG;;
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
-	   phppgadmin_password=?*	)  phppgadmin_password=$LONG_OPTARG;;
+	   phppgadmin_pw=?*	)  phppgadmin_password=$LONG_OPTARG;;
 	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
+     hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
            '' 				)  break ;; # "--" terminates argument processing
