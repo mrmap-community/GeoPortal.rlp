@@ -126,7 +126,7 @@ install_full(){
 date
 
 # hexlify credentials for export
-if [ $proxyuser != "" ] && [ $proxyuser != "" ];then
+if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
 
   proxyuser_hex=`echo $proxyuser | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
   proxyuser_hex=%$proxyuser_hex
@@ -155,9 +155,6 @@ if [ $use_proxy_system = 'true' ]; then
     # for git access behind proxy
     # git config --global http.proxy http://$http_proxy_host:$http_proxy_port
     # git config --global https.proxy http://$https_proxy_host:$https_proxy_port
-    wget google.de
-    env
-    exit
 fi
 if [ $use_proxy_apt = 'true' ]; then
     # for apt alter or create /etc/apt/apt.conf
@@ -216,7 +213,7 @@ if [ $use_proxy_svn = 'true' ]; then
     sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
     # # http-proxy-port = 7000
 
-    if [ $proxyuser != "" ]  && [  $proxypassword != "" ];then
+    if [ "$proxyuser" != "" ]  && [  "$proxypassword" != "" ];then
       sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $proxyuser/g" /etc/subversion/servers
       sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $proxypassword/g" /etc/subversion/servers
     fi
@@ -719,7 +716,7 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
 
-        if [ $proxyuser != "" ] && [ $proxyuser != "" ];then
+        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
           sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
           sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
         fi
@@ -811,7 +808,7 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
 
-        if [ $proxyuser != "" ] && [ $proxyuser != "" ];then
+        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
           sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
           sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
         fi
@@ -868,7 +865,7 @@ EOF
           sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-          if [ $proxyuser != "" ] && [ $proxyuser != "" ];then
+          if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
             sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
             sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$proxyuser\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
             sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$proxypassword\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
@@ -1667,9 +1664,9 @@ You can choose from the following options:
         --proxyuser=username                                    | Default \"\"
         --proxypw=password                                      | Default \"\"
     	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
-    	--mapbenderdbpassword=Password for database access	| Default \"mapbenderdbpassword\"
+    	--mapbenderdbpw=Password for database access	| Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
-    	--phppgadmin_password=Password for PGAdmin web access	| Default \"postgresadmin_password\"
+    	--phppgadmin_pw=Password for PGAdmin web access	| Default \"postgresadmin_password\"
     	--mysqlpw=database password for MySQL			| Default \"root\"
     	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
 
