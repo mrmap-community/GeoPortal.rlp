@@ -80,7 +80,6 @@ def index_view(request, wiki_keyword=""):
         # display the favourite WMCs in the template
         results = helper_functions.get_landing_page(lang)
 
-
     context = {
                'content': output,
                "wmc_results": results,

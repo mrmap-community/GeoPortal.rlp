@@ -80,3 +80,14 @@
     background-color: var(--rlp-red-light-hover);
 }
 
+
+.view-count{
+    padding: 10px 0;
+    font-size: 0.8em;
+}
+.view-count img{
+    opacity: 0.5;
+}
+.view-count:hover{
+    cursor: default;
+}

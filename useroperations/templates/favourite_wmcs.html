@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n humanize %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
@@ -21,6 +21,11 @@
                     </a>
                 </div>
                 <div class="wmc-tile-content-abstract">
+                    <div title="{% trans 'Total views this week' %}" class="view-count">
+                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <span>{{ result.loadCount|intcomma }}</span>
+                        <hr>
+                    </div>
                     {% if result.abstract|length == 0 %}
                         {% trans 'No description available' %}
                     {% else %}
