@@ -22,7 +22,7 @@ import math
 import requests
 
 from Geoportal import helper
-from Geoportal.settings import INTERNAL_PAGES_CATEGORY
+from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP
 from searchCatalogue.settings import *
 
 
@@ -331,15 +331,17 @@ def __type_inspire_url(uuid, option:dict):
     """
     url = None
     _type = option["type"]
-    base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
+    # base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
+    base_url = "http://" + HOSTNAME + "/mapbender/plugins/mb_downloadFeedClient.php?url="
     if _type == "wmslayergetmap":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+	# url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus("http://" + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wmslayerdataurl":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus("http://" + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wfsrequest":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
+        url = base_url + urllib.parse.quote_plus("http://" + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
     if _type == "downloadlink":
-        url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
+        url = base_url + urllib.parse.quote_plus("http://" + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
     return url
 
 
@@ -497,7 +499,7 @@ def __dataset_single_layer_disclaimer(layer, language):
         service_id = layer.get("srv", {}).get("id", None)
         if service_id is None:
             return
-        url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
+        url = "http://" + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
             service_id) + "&languageCode=" + language + "&withHeader=true"
         layer["srv"]["disclaimer_html"] = requests.get(url).content.decode()
 
@@ -531,7 +533,7 @@ def __wms_srv_disclaimer(layer, language, resource):
     service_id = layer.get("id", None)
     if service_id is None:
         return
-    url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = "http://" + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     layer["disclaimer_html"] = requests.get(url).content.decode()
 
 def __wfs_srv_disclaimer(srv, language, resource):
@@ -547,7 +549,7 @@ def __wfs_srv_disclaimer(srv, language, resource):
     service_id = srv.get("id", None)
     if service_id is None:
         return
-    url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = "http://" + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     srv["disclaimer_html"] = requests.get(url).content.decode()
 
 def generic_srv_disclaimer(resource, service_id, language):
@@ -560,7 +562,7 @@ def generic_srv_disclaimer(resource, service_id, language):
     Returns:
         nothing
     """
-    url = LOCAL_MACHINE + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = "http://" + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     return requests.get(url).content.decode()
 
 def __set_single_service_disclaimer_url(search_results, resource):

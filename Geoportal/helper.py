@@ -11,7 +11,7 @@ from copy import copy
 
 from django.http import HttpRequest
 
-from Geoportal.settings import EXTERNAL_INTERFACE, DEFAULT_GUI
+from Geoportal.settings import DEFAULT_GUI
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
 import requests
@@ -75,7 +75,7 @@ def get_session_data(request):
                     loggedin = False
                 else:
                     response = requests.post('http://127.0.0.1/portal/guiapi.php',data=session_data[b'mb_user_guis'])
-
+                    
                     if session_data[b'mb_user_guis']:
 
                         guistring = response.text

@@ -57,7 +57,7 @@
             {% endif %}
         </div>
         {% else %}
-        <div id="{{ layer.id }}" class="resource-element-actions">
+        <div id="{{ layer.id }}" class="resource-element-actions" data-resource="other-catalogue">
             <a href="WMS={{ layer_data.showMapUrl }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
         </div>
         {% endif %}

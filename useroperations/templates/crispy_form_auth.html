@@ -12,7 +12,7 @@
 <hr>
 
 <div class="form-wrapper">
-    <form method="post" action="http://{{ EXTERNAL_INTERFACE }}/mapbender/geoportal/authentication.php">
+    <form method="post" action="http://{{ HOSTNAME }}/mapbender/geoportal/authentication.php">
         {% csrf_token %}
             <table>
             {% for field in form %}

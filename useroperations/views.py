@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 
 from Geoportal import helper
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import EXTERNAL_INTERFACE, LOCAL_MACHINE, ROOT_EMAIL_ADDRESS, DEFAULT_GUI
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP
 from useroperations.utils import helper_functions
 
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 def index_view(request, wiki_keyword=""):
     """ Prepares the index view, and renders the page.
 
-    This view is the main view and landing page of the project. 
+    This view is the main view and landing page of the project.
     It includes checking if a mediawiki page should be rendered or not.
     The default page, if no keyword was given, is favourite_wmcs.html,
      which shows an overview of the most popular wmc services.
@@ -47,7 +47,7 @@ def index_view(request, wiki_keyword=""):
          (viewer): geoportal.html
          (error): 404.html
     """
-    
+
     request.session["current_page"] = "index"
     lang = request.LANGUAGE_CODE
     get_params = request.GET.dict()
@@ -209,15 +209,15 @@ def register_view(request):
             user.activation_key = helper_functions.random_string(50)
             #activation_key = user.activation_key
 
-            send_mail(
-                 _("Activation Mail"),
-                _("Hello ") + user.mb_user_name +
-                _(",\n\nThis is your activation link. It will be valid until the end of the day, "
-                  "please click it!\n Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key),
-                'kontakt@geoportal.de',
-                ['root@debian'],  # später email variable eintragen
-                fail_silently=False,
-            )
+            #send_mail(
+            #     _("Activation Mail"),
+            #    _("Hello ") + user.mb_user_name +
+            #    _(",\n\nThis is your activation link. It will be valid until the end of the day, "
+            #        "please click it!\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+            #    'kontakt@geoportal.de',
+            #    ['root@debian'],  # später email variable eintragen
+            #    fail_silently=False,
+            #)
 
             user.save()
 
@@ -233,12 +233,10 @@ def register_view(request):
             UserGroupRel.save()
 
             messages.success(request, _("Account creation was successful. "
-                                        "You have to activate your account via email before you can login!" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key))
+                "You have to activate your account via email before you can login! http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
 
             return redirect('useroperations:login')
-        else:
-            messages.error(request, _("Captcha was invalid"))   
-	
+
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
 
@@ -255,7 +253,7 @@ def pw_reset_view(request):
         PasswordResetForm
         Email confirmation
     """
-    
+
     request.session["current_page"] = "pw_reset"
     geoportal_context = GeoportalContext(request=request)
 
@@ -290,13 +288,13 @@ def pw_reset_view(request):
                 user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)), 'utf-8')
 
                 user.save()
-                send_mail(
-                    subject=_("Lost Password"),
-                    message=_("This is your new password, please change it immediately!\n Password: " + newpassword ),
-                    from_email='kontakt@geoportal.de',
-                    recipient_list=[ROOT_EMAIL_ADDRESS],
-                    fail_silently=False,
-                )
+                #send_mail(
+                #    subject=_("Lost Password"),
+                #    message=_("This is your new password, please change it immediately!\n Password: " + newpassword ),
+                #    from_email='kontakt@geoportal.de',
+                #    recipient_list=[ROOT_EMAIL_ADDRESS],
+                #    fail_silently=False,
+                #)
                 messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
                 return redirect('useroperations:login')
 
@@ -457,23 +455,23 @@ def delete_profile_view(request):
                 user.timestamp_delete = time.time()
                 user.save()
 
-                send_mail(
-                    _("Reactivation Mail"),
-                    _("Hello ") + user.mb_user_name +
-                    _(
-                        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
-                        "\n Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key),
-                    'kontakt@geoportal.de',
-                    ['root@debian'],  # später email variable eintragen
-                    fail_silently=False,
-                )
+                #send_mail(
+                #    _("Reactivation Mail"),
+                #    _("Hello ") + user.mb_user_name +
+                #    _(
+                #        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
+                #        "\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+                #    'kontakt@geoportal.de',
+                #    ['root@debian'],  # später email variable eintragen
+                #    fail_silently=False,
+                #)
 
                 # user.delete()
                 helper_functions.delete_mapbender_session_by_memcache(session_id)
                 messages.success(request, _("Successfully deleted the user:")
                                  + " {str_name} ".format(str_name=user.mb_user_name)
                                  + _(". In case this was an accident, we sent you a link where you can reactivate "
-                                     "your account for 24 hours!" + "Link: http://" + EXTERNAL_INTERFACE + "/activate/" + user.activation_key))
+                                     "your account for 24 hours!" + "Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
 
                 return redirect('useroperations:index')
 
@@ -491,7 +489,7 @@ def logout_view(request):
     Returns:
         LogoutForm
     """
-    
+
     request.session["current_page"] = "logout"
     geoportal_context = GeoportalContext(request=request)
 
@@ -571,13 +569,13 @@ def map_viewer_view(request):
         # an internal call from our geoportal should lead to the map viewer page without problems
         params = {
             "mapviewer_params": mapviewer_params,
-            "mapviewer_src":  LOCAL_MACHINE + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
+            "mapviewer_src":  "http://" + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url=LOCAL_MACHINE, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url="http://" + HOSTIP, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
