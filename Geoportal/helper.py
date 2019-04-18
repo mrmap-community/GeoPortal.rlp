@@ -74,8 +74,8 @@ def get_session_data(request):
                     gui = str(session_data[b'mb_user_gui'], 'utf-8')
                     loggedin = False
                 else:
-                    #response = requests.post(LOCAL_MACHINE + '/portal/guiapi.php',data=session_data[b'mb_user_guis'])
                     response = requests.post('http://127.0.0.1/portal/guiapi.php',data=session_data[b'mb_user_guis'])
+                    
                     if session_data[b'mb_user_guis']:
 
                         guistring = response.text

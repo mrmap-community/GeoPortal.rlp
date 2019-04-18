@@ -27,8 +27,8 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 DEBUG = False
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
-HOSTNAME = "geoportal-test.de"
-HOSTIP = "192.168.56.101"
+HOSTNAME = "127.0.0.1"
+HOSTIP = "127.0.0.1"
 
 ALLOWED_HOSTS = [HOSTIP, HOSTNAME, '127.0.0.1', 'localhost']
 
