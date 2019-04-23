@@ -21,11 +21,16 @@
                     </a>
                 </div>
                 <div class="wmc-tile-content-abstract">
-                    <div title="{% trans 'Total views this week' %}" class="view-count">
-                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
-                        <span>{{ result.loadCount|intcomma }}</span>
-                        <hr>
+                    <div class="sub-tile-container">
+                        <div title="{% trans 'Total views this week' %}" class="view-count">
+                            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                            <span>{{ result.loadCount|intcomma }}</span>
+                        </div>
+                        <div title="{% trans 'Open in mobile viewer' %}" class="mobile-button">
+                            <img src="{% static 'useroperations/images/icn_mobile.png' %}">
+                        </div>
                     </div>
+                    <hr>
                     {% if result.abstract|length == 0 %}
                         {% trans 'No description available' %}
                     {% else %}
