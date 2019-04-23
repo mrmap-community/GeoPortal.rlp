@@ -553,7 +553,7 @@ function startInfoCall(){
     })
 }
 
-function startAjaxMapviewerCall(value, isMobile){
+function startAjaxMapviewerCall(value){
     $.ajax({
         url: "/map-viewer/",
         headers: {
@@ -574,9 +574,6 @@ function startAjaxMapviewerCall(value, isMobile){
                     behavior:'smooth'
                 });
                 $(".map-viewer-toggler").click();
-                if(isMobile){
-                    toggleMapViewers();
-                }
             }else if(data["url"] != ""){
             // external mapviewer call
                 var url = data["url"];

@@ -63,13 +63,10 @@ function toggleMapViewers(target){
 }
 
 $(document).on("click", ".mobile-button", function(){
+    // get wmc id
     var elem = $(this).parents(".wmc-tile-content").find(".wmc-tile-content-img");
-    if(elem.attr("id") == "show-all-tile-content"){
-        $("#geoportal-search-button").click();
-        return;
-    }
-    href = elem.children("a").attr("href");
-    startAjaxMapviewerCall(href, true);
+    var id = elem.find("a").attr("href").split("=")[1];
+    openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
 });
 
 $(document).on("click", ".mobile-map-toggler", function(){
