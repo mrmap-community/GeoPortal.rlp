@@ -139,7 +139,7 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
         str: The html content of the wiki article
     """
     # get mediawiki html
-    url = "http://" + HOSTNAME + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
+    url = "http://" + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
     html_raw = request.urlopen(url)
     html_raw = html_raw.read()
     html_con = html.fromstring(html_raw)
