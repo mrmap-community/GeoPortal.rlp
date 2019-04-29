@@ -27,6 +27,10 @@ Existing mapbender2 installations with a great amount of resources and users:
 
 ## Get Started
 
+### Prototype
+
+http://opendata.geoportal.rlp.de
+
 ### Try it out!
 
 Live debian9 ISO image for testing purposes (django and mediawiki based frontend, mapbender2 backend and viewer):
