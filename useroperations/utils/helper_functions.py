@@ -108,7 +108,7 @@ def set_links_in_dom(dom):
     :param dom:
     :return:
     """
-    prefix = "http://" + HOSTIP
+    prefix = "http://" + HOSTNAME
 
     # handle links
     thread_list = []
