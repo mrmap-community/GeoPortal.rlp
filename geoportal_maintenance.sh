@@ -127,7 +127,6 @@ date
 
 # hexlify credentials for export
 if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
-
   proxyuser_hex=`echo $proxyuser | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
   proxyuser_hex=%$proxyuser_hex
   proxyuser_hex=${proxyuser_hex::len-3}
@@ -135,9 +134,7 @@ if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
   proxypassword_hex=`echo $proxypassword | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
   proxypassword_hex=%$proxypassword_hex
   proxypassword_hex=${proxypassword_hex::len-3}
-
 else
-
   proxyuser_hex=""
   proxypassword_hex=""
 fi
@@ -148,14 +145,19 @@ if [ $use_proxy_svn = 'true' ]; then
     cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
 fi
 if [ $use_proxy_system = 'true' ]; then
-    #export http_proxy=http://$http_proxy_host:$http_proxy_port
-    export http_proxy="http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port"
-    #export https_proxy=http://$https_proxy_host:$https_proxy_port
-    export https_proxy="http://$proxyuser_hex:$proxypassword_hex@$https_proxy_host:$https_proxy_port"
+    
+    if [ "$proxyuser_hex" != "" ] && [ "$proxypassword_hex" != "" ];then
+    	export http_proxy="http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port"
+    	export https_proxy="http://$proxyuser_hex:$proxypassword_hex@$https_proxy_host:$https_proxy_port"
+    else
+    	export http_proxy=http://$http_proxy_host:$http_proxy_port
+    	export https_proxy=http://$https_proxy_host:$https_proxy_port
+    fi
     # for git access behind proxy
     # git config --global http.proxy http://$http_proxy_host:$http_proxy_port
     # git config --global https.proxy http://$https_proxy_host:$https_proxy_port
 fi
+
 if [ $use_proxy_apt = 'true' ]; then
     # for apt alter or create /etc/apt/apt.conf
     if [ -e "/etc/apt/apt.conf" ]; then
