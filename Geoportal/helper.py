@@ -130,7 +130,15 @@ def get_mb_user_session_data(request: HttpRequest):
 
     return ret_dict
 
-def write_gml_to_session(sessionId: str, lat_lon: dict):
+def write_gml_to_session(session_id: str, lat_lon: dict):
+    """ Writes gml data to session
+
+    Args:
+        session_id: The php session id
+        lat_lon: A dict containing the x and y min and max values
+    Returns:
+        Nothing
+    """
     minx = str(lat_lon.get("minx", -1))
     miny = str(lat_lon.get("miny", -1))
     maxx = str(lat_lon.get("maxx", -1))
@@ -146,10 +154,9 @@ def write_gml_to_session(sessionId: str, lat_lon: dict):
     post_content += minx + "," + maxy + " " + minx + "," + miny
     post_content += "</coordinates></LinearRing></outerBoundaryIs></Polygon></polygonMember></MultiPolygon></the_geom></gemeinde></featureMember></FeatureCollection>"
 
-    uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + sessionId + "&operation=set&key=GML&value={GML}"
+    uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&value={GML}"
 
     response = requests.post(url=uri, data=post_content)
-    i = 0
 
 def execute_threads(thread_list):
     """ Executes a list of threads

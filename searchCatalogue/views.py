@@ -427,7 +427,7 @@ def get_data_rlp(request: HttpRequest):
     bbox = post_params.get("searchBbox", '')
     if bbox != '':
         # set glm to session
-        session_id = request.COOKIES.get("sessionid", "")
+        session_id = request.COOKIES.get("PHPSESSID", "")
         lat_lon = bbox.split(",")
         lat_lon = {
             "minx": lat_lon[0],
