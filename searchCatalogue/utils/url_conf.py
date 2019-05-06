@@ -15,5 +15,7 @@ URL_SEARCH_RLP_SUFFIX = "php/mod_callMetadata.php"
 URL_SEARCH_DE_SUFFIX = "php/mod_callCswMetadata.php"
 URL_SEARCH_INFO = "http://" + HOSTIP + "/mediawiki/api.php"
 
+URL_GLM_MOD = "php/mod_sessionWrapper.php"
+
 URL_SPATIAL_BASE = "http://geoportal.rlp.de/mapbender/"
 URL_SPATIAL_SEARCH_SUFFIX = "geoportal/gaz_geom_mobile.php"
