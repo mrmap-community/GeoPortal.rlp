@@ -6,6 +6,7 @@ Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 
 """
+import json
 import smtplib
 import time
 import logging
@@ -21,8 +22,9 @@ from django.utils.translation import gettext as _
 
 from Geoportal import helper
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
+from Geoportal.helper import write_gml_to_session, get_mb_user_session_data
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
-    EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME
+    EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
@@ -421,6 +423,21 @@ def get_data_rlp(request: HttpRequest):
     # get user php session info
     session_data = helper.get_mb_user_session_data(request)
 
+    # check for bounding box
+    bbox = post_params.get("searchBbox", '')
+    if bbox != '':
+        # set glm to session
+        session_id = request.COOKIES.get("PHPSESSID", "")
+        lat_lon = bbox.split(",")
+        lat_lon = {
+            "minx": lat_lon[0],
+            "miny": lat_lon[1],
+            "maxx": lat_lon[2],
+            "maxy": lat_lon[3],
+        }
+        write_gml_to_session(sessionId=session_id, lat_lon=lat_lon)
+
+
     # prepare data for rendering
     types = {
         'Suchbegriff(e):': 'searchText',
@@ -453,7 +470,7 @@ def get_data_rlp(request: HttpRequest):
         "download_feed_url": host + "/mapbender/plugins/mb_downloadFeedClient.php?url=",
         "download_feed_inspire": host + "/mapbender/php/mod_inspireDownloadFeed.php?id=",
         "view_map_url": "//localhost/portal/karten.html?",
-        "wms_action_url": "http://" + HOSTNAME + "/mapbender/php/wms.php?",
+        "wms_action_url": HTTP_OR_SSL + HOSTNAME + "/mapbender/php/wms.php?",
         "OPEN_DATA_URL": OPEN_DATA_URL,
     }
 
@@ -477,7 +494,7 @@ def get_data_info(request: HttpRequest):
     """
     post_params = request.POST.dict()
     template_name = "search_results.html"
-    host = "http://" + HOSTNAME
+    host = HTTP_OR_SSL + HOSTNAME
     # get language
     lang = request.LANGUAGE_CODE
 
@@ -610,3 +627,10 @@ def terms_of_use(request: HttpRequest):
 
         html = render_to_string(template_name=template, context=params)
     return GeoportalJsonResponse(html=html).get_response()
+
+def write_gml_session(request: HttpRequest):
+    params_GET = request.GET.dict()
+    lat_lon = params_GET.get("latLon", "{}")
+    lat_lon = json.loads(lat_lon)
+    session_id = request.COOKIES.get("sessionid", "")
+    write_gml_to_session(lat_lon=lat_lon, sessionId=session_id)

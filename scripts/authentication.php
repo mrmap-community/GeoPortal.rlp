@@ -15,7 +15,7 @@ $isAuthenticated = authenticate($name,$pw);
 
 if($isAuthenticated != false) {
 	setSession();
-	Mapbender::session()->set("mb_user_password",$pw); 
+	Mapbender::session()->set("mb_user_password",$pw);
   	Mapbender::session()->set("mb_user_id",$isAuthenticated["mb_user_id"]);
 	Mapbender::session()->set("mb_user_name",$isAuthenticated["mb_user_name"]);
 	Mapbender::session()->set("mb_user_ip",$_SERVER['REMOTE_ADDR']);
@@ -51,18 +51,29 @@ if($isAuthenticated != false) {
 	$T[0] = 'i';
 	$sql .= 'WHERE mb_user_id = $1';
 	$res = db_prep_query($sql, $V, $T);
-	//UPDATE USER LOGIN DATE and TIME	
+	//UPDATE USER LOGIN DATE and TIME
 	require_once(dirname(__FILE__)."/../php/mb_getGUIs.php");
 	$arrayGUIs = mb_getGUIs($isAuthenticated["mb_user_id"]);
 	Mapbender::session()->set("mb_user_guis",$arrayGUIs);
 	$URLAdd="?status=success";
-	header ("Location: http://192.168.56.222".$URLAdd);	
-	#header ("Location: http://".$_SERVER['HTTP_HOST']."/portal/success.html".$URLAdd);
+
+	if($_SERVER["HTTPS"] != "on") {
+		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+	} else  {
+		header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+	}
 	session_write_close();
+
 } else {
+
 	$URLAdd="?status=fail";
-	header ("Location: http://192.168.56.222".$URLAdd);	
-	#header ("Location: http://".$_SERVER['HTTP_HOST']."/portal/failed.html".$URLAdd);
+
+	if($_SERVER["HTTPS"] != "on") {
+		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+	} else  {
+		header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+	}
+
 }
 
 function authenticate ($name,$pw){
@@ -79,7 +90,13 @@ $row = db_fetch_array($res);
 if ($row['is_active'] == "f"){
 
 	$URLAdd="?status=notactive";
-	header ("Location: http://192.168.56.222".$URLAdd);
+
+	if($_SERVER["HTTPS"] != "on") {
+		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+	} else  {
+		header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+	}
+
 	exit();
 
 }else if ($row['is_active'] == "t" or $row['is_active'] == ""){
@@ -133,7 +150,7 @@ if ($row['is_active'] == "f"){
 	}
 }
 
- 
+
 function setSession(){
 	session_start(); //function is ok cause the session will be closed directly after starting it!
 	session_write_close();

@@ -2,7 +2,7 @@
 {% if layer.permission is None or layer.permission == 'true' %}
     <div class="search-result-action-buttons">
         <!-- WMC and WFS -->
-        {% if type == 'wmc' or type == 'wfs' or type == 'service_DE' %}
+        {% if type == 'wmc' or type == 'service_DE' %}
             {% if type == 'wfs' and parent_result is None %}
             {% elif type == 'service_DE' %}
                 {% if layer.showMapUrl %}
@@ -31,10 +31,15 @@
                     <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
                     {% trans 'Download' %} ({{ feeds|length }})
                 </a>
-
             {% endif %}
             {% if layers is not None and layers|length > 0 %}
                 {% if type == 'wms' %}
+                    {% if layer.download_url is not None and layer.download_url|length > 0%}
+                        <a class="button download-button" id="download_{{ layer.id }}">
+                            <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                            {% trans 'Download' %}
+                        </a>
+                    {% endif %}
                     <a class='button view-button' id="view_{{ layer.id }}">
                         <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                         {% trans 'Show' %}
@@ -64,6 +69,7 @@
 
         {% else %}
         <!-- WMS and DATASET -->
+            <!-- DATASET -->
             {% if feeds is not None and feeds|length > 0 %}
             <div class="resource-list download_{{ result.id }}" style="display:none;">
                 <ul style="overflow: hidden;">
@@ -75,13 +81,30 @@
                                 <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
                                 <strong>{{ feed.serviceUuid }}</strong>
                                 <!-- ToDo: Replace the type here with a title -->
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="Herunterladen"/>
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
                             </div></a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
             {% endif %}
+            <!-- WMS -->
+            {% if layer.download_url is not None and layer.download_url|length > 0%}
+            <div class="resource-list download_{{ layer.id }}" style="display:none;">
+                <ul style="overflow: hidden;">
+                    <li class="resource-category-header">{% trans 'Download services' %}</li>
+                    <li class="resource-element">
+                        <a href="{{ layer.download_url }}" target="_blank" >
+                            <div id="download_button_{{ layer.id }}" class="feed-download">
+                                <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
+                                <strong>{{ layer.name }}</strong>
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                            </div></a>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+
             {% if layers is not None and layers|length > 0 %}
                 <div class="resource-list view_{% if type == 'wms' %}{{ layer.id }}{% elif type == 'dataset' %}{{ result.id }}{% endif %}" style="display:none;">
                 <ul style="overflow: hidden;">

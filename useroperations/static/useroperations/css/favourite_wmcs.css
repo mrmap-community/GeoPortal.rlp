@@ -80,3 +80,30 @@
     background-color: var(--rlp-red-light-hover);
 }
 
+.sub-tile-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mobile-button{
+    opacity: 0.5;
+}
+.mobile-button:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.view-count{
+    padding: 10px 0;
+    font-size: 0.8em;
+}
+.view-count img{
+    opacity: 0.5;
+}
+.view-count:hover{
+    cursor: default;
+}
+
+#show-all-tile{
+    border: 2px solid var(--rlp-red);
+}

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n humanize %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
@@ -21,6 +21,16 @@
                     </a>
                 </div>
                 <div class="wmc-tile-content-abstract">
+                    <div class="sub-tile-container">
+                        <div title="{% trans 'Total views this week' %}" class="view-count">
+                            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                            <span>{{ result.loadCount|intcomma }}</span>
+                        </div>
+                        <div title="{% trans 'Open in mobile viewer' %}" class="mobile-button">
+                            <img src="{% static 'useroperations/images/icn_mobile.png' %}">
+                        </div>
+                    </div>
+                    <hr>
                     {% if result.abstract|length == 0 %}
                         {% trans 'No description available' %}
                     {% else %}
@@ -30,6 +40,22 @@
             </div>
         </div>
     {% endfor %}
+        <div id="show-all-tile" class="wmc-tile">
+            <div class="wmc-tile-header">
+                {% trans 'Show all' %}
+            </div>
+            <div class="wmc-tile-content">
+                <div id="show-all-tile-content" class="wmc-tile-content-img">
+                    <a href="" target="_blank">
+                        <img class="wmc-tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
+                    </a>
+                </div>
+                <div class="wmc-tile-content-abstract">
+                    <hr>
+                    {% trans "Start a search and explore all results. Let's go!" %}
+                </div>
+            </div>
+        </div>
 </div>
 
 

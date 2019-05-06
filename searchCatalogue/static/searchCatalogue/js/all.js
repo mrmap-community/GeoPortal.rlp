@@ -573,7 +573,6 @@ function startAjaxMapviewerCall(value){
                     left:0,
                     behavior:'smooth'
                 });
-
                 $(".map-viewer-toggler").click();
             }else if(data["url"] != ""){
             // external mapviewer call

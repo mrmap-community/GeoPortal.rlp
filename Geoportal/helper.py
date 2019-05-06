@@ -12,6 +12,7 @@ from copy import copy
 from django.http import HttpRequest
 
 from Geoportal.settings import DEFAULT_GUI
+from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
 import requests
@@ -74,8 +75,8 @@ def get_session_data(request):
                     gui = str(session_data[b'mb_user_gui'], 'utf-8')
                     loggedin = False
                 else:
-                    response = requests.post('http://127.0.0.1/portal/guiapi.php',data=session_data[b'mb_user_guis'])
-                    
+                    response = requests.post('https://127.0.0.1/portal/guiapi.php',verify=False,data=session_data[b'mb_user_guis'])
+
                     if session_data[b'mb_user_guis']:
 
                         guistring = response.text
@@ -129,6 +130,33 @@ def get_mb_user_session_data(request: HttpRequest):
 
     return ret_dict
 
+def write_gml_to_session(session_id: str, lat_lon: dict):
+    """ Writes gml data to session
+
+    Args:
+        session_id: The php session id
+        lat_lon: A dict containing the x and y min and max values
+    Returns:
+        Nothing
+    """
+    minx = str(lat_lon.get("minx", -1))
+    miny = str(lat_lon.get("miny", -1))
+    maxx = str(lat_lon.get("maxx", -1))
+    maxy = str(lat_lon.get("maxy", -1))
+
+    post_content = '<FeatureCollection xmlns:gml="http://www.opengis.net/gml"><boundedBy><Box srsName="EPSG:4326">'
+    post_content += "<coordinates>" + minx + "," + miny + " " + maxx
+    post_content += "," + maxy + "</coordinates></Box>"
+    post_content += '</boundedBy><featureMember><gemeinde><title>BBOX</title><the_geom><MultiPolygon srsName="EPSG:'
+    post_content += "4326" + '"><polygonMember><Polygon><outerBoundaryIs><LinearRing><coordinates>'
+    post_content += minx + "," + miny + " " + maxx + ","
+    post_content += miny + " " + maxx + "," + maxy + " "
+    post_content += minx + "," + maxy + " " + minx + "," + miny
+    post_content += "</coordinates></LinearRing></outerBoundaryIs></Polygon></polygonMember></MultiPolygon></the_geom></gemeinde></featureMember></FeatureCollection>"
+
+    uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&value={GML}"
+
+    response = requests.post(url=uri, data=post_content)
 
 def execute_threads(thread_list):
     """ Executes a list of threads

@@ -7,13 +7,15 @@ Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
 Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 """
-from Geoportal.settings import HOSTIP
+from Geoportal.settings import HOSTIP, HTTP_OR_SSL
 
-URL_BASE = "http://" + HOSTIP + "/mapbender/"
+URL_BASE = HTTP_OR_SSL + HOSTIP + "/mapbender/"
 URL_AUTO_COMPLETE_SUFFIX = "geoportal/mod_getCatalogueKeywordSuggestion.php"
 URL_SEARCH_RLP_SUFFIX = "php/mod_callMetadata.php"
 URL_SEARCH_DE_SUFFIX = "php/mod_callCswMetadata.php"
-URL_SEARCH_INFO = "http://" + HOSTIP + "/mediawiki/api.php"
+URL_SEARCH_INFO = HTTP_OR_SSL + HOSTIP + "/mediawiki/api.php"
+
+URL_GLM_MOD = "php/mod_sessionWrapper.php"
 
 URL_SPATIAL_BASE = "http://geoportal.rlp.de/mapbender/"
 URL_SPATIAL_SEARCH_SUFFIX = "geoportal/gaz_geom_mobile.php"

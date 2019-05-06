@@ -42,7 +42,6 @@ function resizeSidebar(){
     if(sidebar.outerHeight() != body.outerHeight()){
         sidebar.outerHeight(body.outerHeight());
     }
-       // ToDo: Find working solution that fits all webpages needs, such as dynamic ajax content and so on
 }
 
 function resizeMapOverlay(){
@@ -55,15 +54,20 @@ function resizeMapOverlay(){
 /*
  * Switch between mobile and default map viewer
  */
-function toggleMapViewers(){
+function toggleMapViewers(target){
     var iframe = $("#mapviewer");
     var oldSrc = iframe.attr("data-toggle");
     iframe.attr("data-toggle", iframe.attr("src"));
     iframe.attr("src", oldSrc);
     iframe.toggleClass("mobile-viewer");
-
 }
 
+$(document).on("click", ".mobile-button", function(){
+    // get wmc id
+    var elem = $(this).parents(".wmc-tile-content").find(".wmc-tile-content-img");
+    var id = elem.find("a").attr("href").split("=")[1];
+    openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
+});
 
 $(document).on("click", ".mobile-map-toggler", function(){
     toggleMapViewers();
@@ -198,9 +202,12 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
  $(document).on("click", ".wmc-tile-content-img", function(event){
     event.preventDefault();
     var elem = $(this);
+    if(elem.attr("id") == "show-all-tile-content"){
+        $("#geoportal-search-button").click();
+        return;
+    }
     href = elem.children("a").attr("href");
     startAjaxMapviewerCall(href);
-
 
  });
 
