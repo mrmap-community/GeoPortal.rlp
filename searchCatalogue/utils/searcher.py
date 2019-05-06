@@ -110,7 +110,7 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url, params)
+        response = requests.get(url, params)#, verify=False)
         result[resource] = response.json()
 
     def get_categories_list(self):
@@ -129,7 +129,7 @@ class Searcher:
         }
         if self.host is not None:
             params["hostName"] = self.host
-        response = requests.get(url, params)
+        response = requests.get(url, params)#, verify=False)
         response = response.json()
         categories = response["categories"]["searchMD"]["category"]
         return categories
@@ -196,7 +196,7 @@ class Searcher:
             nothing
         """
 
-        response = requests.get(url, params)
+        response = requests.get(url, params)#, verify=False)
         try:
             response = response.json()
             results[resource] = response
@@ -254,7 +254,7 @@ class Searcher:
             }
             if self.host is not None:
                 params["hostName"] = self.host
-            response = requests.get(url, params, proxies=PROXIES)
+            response = requests.get(url, params, proxies=PROXIES)#, verify=False)
             result = response.json()
             result["keyword"] = search_text
             ret_val.append(result)
@@ -271,7 +271,7 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url=URL_SEARCH_INFO, params=params)
+        response = requests.get(url=URL_SEARCH_INFO, params=params)#, verify=False)
         response = response.json()
         params["srsearch"] = params["srsearch"].replace("*", "")
         if results.get(params["srsearch"], None) is None:
@@ -293,7 +293,7 @@ class Searcher:
             "format": "json",
             "prop": "categories",
         }
-        response = requests.get(url=URL_SEARCH_INFO, params=params)
+        response = requests.get(url=URL_SEARCH_INFO, params=params)#, verify=False)
         response = response.json()
         response = response["query"]["pages"]
         for resp_key, resp_val in response.items():
@@ -348,7 +348,7 @@ class Searcher:
             "aplimit": 500,
         }
         results = {}
-        response = requests.get(url=URL_SEARCH_INFO, params=params)
+        response = requests.get(url=URL_SEARCH_INFO, params=params)#, verify=False)
         response = response.json()
         results = response
         return results
