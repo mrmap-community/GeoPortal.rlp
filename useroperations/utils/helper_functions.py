@@ -7,7 +7,7 @@ from pymemcache.client import base
 from phpserialize import *
 import re, os, configparser
 
-from Geoportal.settings import HOSTNAME, HOSTIP
+from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL
 from searchCatalogue.utils.searcher import Searcher
 import random
 import string
