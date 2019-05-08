@@ -9,6 +9,7 @@ class FeedbackForm(forms.Form):
     family_name = forms.CharField(max_length=200, label=_("Family name"))
     email = forms.EmailField(label=_("E-Mail address"))
     message = forms.CharField(label=_("Your Message"), widget=forms.Textarea(attrs={"maxlength": 3000}))
+    captcha = CaptchaField(label=_("I'm not a robot"))
 
 class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=25, label=_("Username"))
