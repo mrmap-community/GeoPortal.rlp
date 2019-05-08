@@ -235,6 +235,9 @@ def register_view(request):
                 "You have to activate your account via email before you can login!" + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key))
 
             return redirect('useroperations:login')
+        else:
+            messages.error(request, _("Captcha was wrong! Please try again")
+            
 
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
@@ -660,7 +663,7 @@ def feedback_view(request: HttpRequest):
                 logger.error("Could not send feedback mail!")
                 messages.error(request, _("An error occured during sending. Please inform an administrator."))
         else:
-            messages.error(request, _("An error occured during sending. Please inform an administrator."))
+            messages.error(request, _("Captcha was wrong! Please try again")               
         return index_view(request=request)
     else:
         # create the form
