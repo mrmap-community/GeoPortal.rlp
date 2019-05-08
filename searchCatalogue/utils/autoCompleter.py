@@ -60,7 +60,7 @@ class AutoCompleter:
             "searchText": self.search_text,
             "maxResults": self.max_results,
         }
-        response = requests.get(url, params)
+        response = requests.get(url, params, verify=False)
         results = response.json()
         return results
 
