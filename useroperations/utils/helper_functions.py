@@ -140,7 +140,7 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
     """
     # get mediawiki html
     url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
-    html_raw = request.urlopen(url)
+    html_raw = request.urlopen(url, context=ssl._create_unverified_context())
     html_raw = html_raw.read()
     html_con = html.fromstring(html_raw)
     # get body html div - due to translation module on mediawiki, we need to fetch the parser output
