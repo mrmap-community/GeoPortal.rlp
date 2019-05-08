@@ -28,7 +28,7 @@
       "pk":8,
       "fields":{  
          "name":"Wiki",
-         "url":"/Wiki",
+         "url":"/mediawiki",
          "page_identifier":"wiki",
          "parent":9,
          "icon_name":"",
