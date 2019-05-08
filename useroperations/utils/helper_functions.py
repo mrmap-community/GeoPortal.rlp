@@ -11,6 +11,7 @@ from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL
 from searchCatalogue.utils.searcher import Searcher
 import random
 import string
+import ssl
 
 
 def random_string(stringLength=15):
