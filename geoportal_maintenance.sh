@@ -126,7 +126,7 @@ install_full(){
 date
 
 # hexlify credentials for export
-if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
   proxyuser_hex=`echo $proxyuser | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
   proxyuser_hex=%$proxyuser_hex
   proxyuser_hex=${proxyuser_hex::len-3}
@@ -145,7 +145,7 @@ if [ $use_proxy_svn = 'true' ]; then
     cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
 fi
 if [ $use_proxy_system = 'true' ]; then
-    
+
     if [ "$proxyuser_hex" != "" ] && [ "$proxypassword_hex" != "" ];then
     	export http_proxy="http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port"
     	export https_proxy="http://$proxyuser_hex:$proxypassword_hex@$https_proxy_host:$https_proxy_port"
@@ -197,13 +197,8 @@ fi
 cp /etc/php/7.0/cli/php.ini /etc/php/7.0/cli/php.ini_geoportal_backup
 cp /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini_geoportal_backup
 
-
 sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.0/cli/php.ini
 sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g" /etc/php/7.0/cli/php.ini
-
-
-sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.0/apache2/php.ini
-sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_apache_errors\.log/g" /etc/php/7.0/apache2/php.ini
 
 
 # set some environment variables
@@ -292,7 +287,7 @@ fi
 ############################################################
 # cleanup .svn relicts
 ############################################################
-echo -n 'delete .svn files ... '
+echo 'delete .svn files ... '
 if [ $install_mapbender_source = 'true' ]; then
     cd ${installation_folder}mapbender/
     rm -rf $(find . -type d -name .svn)
@@ -310,7 +305,7 @@ fi
 ############################################################
 if [ $install_mapbender_database = 'true' ]; then
 
-  echo -n 'install mapbender database ... '
+  echo 'install mapbender database ... '
   # su postgres
   # createuser  -S -D -R -P $mapbender_database_user #mapbenderdbpassword
   # CREATE DATABASE yourdbname;
@@ -703,7 +698,7 @@ EOF
       chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/news/
       chown -R www-data:www-data ${installation_folder}mapbender/metadata/
       #####################
-      echo -n 'adopt mapbender.conf ... '
+      echo 'adopt mapbender.conf ... '
       #####################
       # alter connection type to use curl
       #####################
@@ -718,9 +713,9 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
 
-        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
-          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
-          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
+        if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
+          sed -i "s/define(\"CONNECTION_USER\", \"\");/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
+          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
         fi
 
       fi
@@ -737,7 +732,7 @@ EOF
       #####################
       # special users & groups
       #####################
-      sed -i "s/#define(\"PUBLIC_USER\", \"\");/#define(\"PUBLIC_USER\", \"${mapbender_guest_user_id}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+      sed -i "s/#define(\"PUBLIC_USER\", \"\");/define(\"PUBLIC_USER\", \"${mapbender_guest_user_id}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
       sed -i "s/#define(\"REGISTRATING_GROUP\",36);/define(\"REGISTRATING_GROUP\",${mapbender_subadmin_group_id});/g" ${installation_folder}mapbender/conf/mapbender.conf
       sed -i "s/#define(\"PORTAL_ADMIN_USER_ID\",\"1\");/define(\"PORTAL_ADMIN_USER_ID\",\"1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
       sed -i "s/#define(\"CATALOGUE_MAINTENANCE_USER\",\"1\");/define(\"CATALOGUE_MAINTENANCE_USER\",\"1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
@@ -745,7 +740,7 @@ EOF
       # enable public user auto session
       #####################
       sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}mapbender/conf/mapbender.conf
       #####################
       # metadata management
@@ -766,7 +761,7 @@ EOF
       # register initial services for default and extended search GUIs
       #####################
     cd ${installation_folder}mapbender/tools/
-  echo -n 'register initial default services ... '
+  echo 'register initial default services ... '
       ##################### Geoportal-RLP
   eval $wms_1_register_cmd
   eval $wms_2_register_cmd
@@ -787,7 +782,7 @@ EOF
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element_vars SET var_value = 'auto' WHERE fkey_gui_id='${default_gui_name}' AND fkey_e_id='resizeMapsize' AND var_name = 'resize_option'"
   # set max height and width for resize
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_width', '1000', 'define a max mapframe width (units pixel) f.e. 700 or false' ,'var')"
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_height', '600', 'define a max mapframe width (units pixel) f.e. 700 or false' ,'var')"
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_height', '600', 'define a max mapframe height (units pixel) f.e. 700 or false' ,'var')"
   #####################
   fi
 
@@ -795,7 +790,7 @@ EOF
       # override information in custom conf files
       # mapbender.conf
       #####################
-      echo -n 'adopt mapbender.conf from default geoportal conf files ... '
+      echo 'adopt mapbender.conf from default geoportal conf files ... '
       #####################
       # alter connection type to use curl
       #####################
@@ -804,13 +799,13 @@ EOF
       #####################
       # define proxy settings
       #####################
-      # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
+      # sed -i "s///g" ${installation_folder}conf/mapbender.conf
       if [ $use_proxy_mb = 'true' ]; then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
 
-        if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+        if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
           sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
           sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
         fi
@@ -839,12 +834,12 @@ EOF
       # enable public user auto session
       #####################
       sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
+      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
       #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
       # copy conf files to right places
       echo "copy mapbender.conf from ${installation_folder}/mapbender.conf to ${installation_folder}mapbender/conf/ ..."
-      cp ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
+      cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
       # alter other conf files
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
       # copy conf file to right places
@@ -867,7 +862,7 @@ EOF
           sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-          if [ "$proxyuser" != "" ] && [ "$proxyuser" != "" ];then
+          if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
             sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
             sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$proxyuser\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
             sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$proxypassword\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
@@ -908,7 +903,7 @@ EOF
   ############################################################
   # create apache configuration for mapbender
   ############################################################
-  echo -n 'create apache configuration ...'
+  echo 'create apache configuration ...'
   cat << EOF > ${installation_folder}geoportal-apache.conf
   <VirtualHost *:80>
           ServerAdmin $webadmin_email
@@ -1134,11 +1129,11 @@ iptables-restore < /etc/firewall.conf
 chmod +x /etc/network/if-up.d/iptables
 
 if  ! grep -q "MaxRequestsPerChild"  /etc/apache2/apache2.conf ;then
-  sed -i '/MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
+  sed -i '/^MaxKeepAliveRequests*/a MaxRequestsPerChild 10000' /etc/apache2/apache2.conf
 fi
 
 if  ! grep -q "FileETag None"  /etc/apache2/apache2.conf ;then
-  sed -i '/MaxKeepAliveRequests*/a FileETag None' /etc/apache2/apache2.conf
+  sed -i '/^MaxKeepAliveRequests*/a FileETag None' /etc/apache2/apache2.conf
 fi
 
 if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ;then
@@ -1149,6 +1144,10 @@ if  ! grep -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
   sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.0/apache2/php.ini
 fi
 
+if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
+  echo  "Timeout 60" >>/etc/apache2/conf-enabled/security.conf
+fi
+
 #if  ! grep -q "Header always append X-Frame-Options SAMEORIGIN"  /etc/apache2/conf-enabled/security.conf ;then
 #  echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
 #fi
@@ -1156,10 +1155,6 @@ fi
 #if  ! grep -q "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly"  /etc/apache2/conf-enabled/security.conf ;then
 #  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly" >>/etc/apache2/conf-enabled/security.conf
 #fi
-
-if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Timeout 60" >>/etc/apache2/conf-enabled/security.conf
-fi
 
 
   sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-enabled/security.conf
@@ -1687,9 +1682,9 @@ while getopts h-: arg; do
      proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;https_proxy_port=$LONG_OPTARG;;
      proxyuser=?*       )  proxyuser=$LONG_OPTARG;;
      proxypw=?*       )  proxypassword=$LONG_OPTARG;;
-	   mapbenderdbuser=?*		)  mapbenderdbuser=$LONG_OPTARG;;
+	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
 	   mapbenderdbpw=?*	)  mapbenderdbpassword=$LONG_OPTARG;;
-	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
+	   phppgadmin_user=?*		)  mapbender_database_password=$LONG_OPTARG;;
 	   phppgadmin_pw=?*	)  phppgadmin_password=$LONG_OPTARG;;
 	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
      hostname=?*			)  hostname=$LONG_OPTARG;;
