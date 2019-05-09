@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n humanize %}
     {% if result.mdLink is not None %}
     <a title='zu {{ result.title }}' href='{{ result.mdLink }}' target="_blank" style="text-decoration: none;">
         <div class="search-result-title">
@@ -13,6 +13,10 @@
                 <img class="img-preview" style="max-width:100px;" src="{% if result.previewURL is not None %}{{ result.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
             </div>
             <article class="search-result-detail">{{ result.abstract }}</article>
+        </div>
+        <div title="{% trans 'Total view count' %}" class="view-count">
+            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+            <span>{{ result.loadCount|intcomma }}</span>
         </div>
         <hr>
         <div class="img-area">

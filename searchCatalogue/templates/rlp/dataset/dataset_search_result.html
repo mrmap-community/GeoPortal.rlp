@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n humanize %}
 <div class="result--item -js-result-dataset">
     <a title="{% trans 'Open metadata for' %} {{ result.title }}" href='{{ result.mdLink }}' target="_blank" style="text-decoration: none">
         <div class="search-result-title">
@@ -12,6 +12,10 @@
                 <img class="img-preview" style="max-width:100px;" src="{% if result.extent_url is not None or result.extent_url|length == 0 %}{{ result.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
             </div>
             <article class="search-result-detail">{{ result.abstract }}</article>
+        </div>
+        <div title="{% trans 'Total view count' %}" class="view-count">
+            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+            <span>{{ result.loadCount|intcomma }}</span>
         </div>
         <hr>
         <div class="img-area">
