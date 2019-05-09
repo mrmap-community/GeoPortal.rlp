@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 
 from Geoportal import helper
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL
 from useroperations.utils import helper_functions
 
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -212,7 +212,7 @@ def register_view(request):
             #     _("Activation Mail"),
             #    _("Hello ") + user.mb_user_name +
             #    _(",\n\nThis is your activation link. It will be valid until the end of the day, "
-            #        "please click it!\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+            #        "please click it!\n Link:" + HTTP_OR_SSL + HOSTNAME "/activate/" + user.activation_key),
             #    'kontakt@geoportal.de',
             #    ['root@debian'],  # später email variable eintragen
             #    fail_silently=False,
@@ -232,7 +232,7 @@ def register_view(request):
             UserGroupRel.save()
 
             messages.success(request, _("Account creation was successful. "
-                "You have to activate your account via email before you can login! http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
+                "You have to activate your account via email before you can login!" + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key))
 
             return redirect('useroperations:login')
 
@@ -459,7 +459,7 @@ def delete_profile_view(request):
                 #    _("Hello ") + user.mb_user_name +
                 #    _(
                 #        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
-                #        "\n Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key),
+                #        "\n Link:" + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key),
                 #    'kontakt@geoportal.de',
                 #    ['root@debian'],  # später email variable eintragen
                 #    fail_silently=False,
@@ -470,7 +470,7 @@ def delete_profile_view(request):
                 messages.success(request, _("Successfully deleted the user:")
                                  + " {str_name} ".format(str_name=user.mb_user_name)
                                  + _(". In case this was an accident, we sent you a link where you can reactivate "
-                                     "your account for 24 hours!" + "Link: http://opendata.geoportal.rlp.de/activate/" + user.activation_key))
+                                     "your account for 24 hours!" + "Link:" + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key))
 
                 return redirect('useroperations:index')
 
@@ -568,13 +568,13 @@ def map_viewer_view(request):
         # an internal call from our geoportal should lead to the map viewer page without problems
         params = {
             "mapviewer_params": mapviewer_params,
-            "mapviewer_src":  "http://" + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
+            "mapviewer_src":  HTTP_OR_SSL + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url="http://" + HOSTIP, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTIP, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()

@@ -29,6 +29,9 @@ DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
 HOSTNAME = "127.0.0.1"
 HOSTIP = "127.0.0.1"
+HTTP_OR_SSL = "http://"
+# HTTPS will fail on self signed certs, uncomment all occurrences of "verify=False"
+# in /opt/GeoPortal.rlp/searchCatalogue/utils/searcher.py if you want to bypass validation
 
 ALLOWED_HOSTS = [HOSTIP, HOSTNAME, '127.0.0.1', 'localhost']
 
