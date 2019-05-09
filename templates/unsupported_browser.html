@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static i18n %}
+<head>
+    <meta charset="UTF-8">
+    <title>Geoportal{% block title %} RLP {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/unsupported.css' %}" media="all" />
+</head>
+<body class="unsupported-browser">
+    <div class="content">
+        <h1>{% trans 'Unsupported browser detected' %}</h1>
+        <article>
+            {% trans 'Dear Visitor,' %} <br>
+            {% trans 'you are using a not supported browser. For the best user experience and for reasons of data security it is recommended to use a modern browser,' %} <br>
+            {% trans 'such as Microsoft Edge, Mozilla Firefox, Google Chrome or Opera.' %}
+        </article>
+        <h3>{% trans 'Thank you for your understanding!' %}</h3>
+    </div>
+</body>
+
+<footer class="unsupported-browser">
+    <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-gdi.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+</footer>
+
+</html>

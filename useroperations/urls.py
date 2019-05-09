@@ -4,6 +4,7 @@ from .views import *
 
 app_name = "useroperations"
 urlpatterns = [
+    path('', index_view, name='index'),
     path('feedback/', feedback_view, name='feedback'),
     path('map-viewer/', map_viewer_view, name='map_viewer'),
     path('login/', login_view, name='login'),
@@ -15,5 +16,5 @@ urlpatterns = [
     path('article/<slug:wiki_keyword>/', index_view, name='index'),
     path('activate/<slug:activation_key>', activation_view, name='activation'),
     path('viewer/', index_view, name='index'),
-    path('', index_view, name='index'),
+    path('incompatible/', incompatible_browser, name='incompatible-browser'),
 ]

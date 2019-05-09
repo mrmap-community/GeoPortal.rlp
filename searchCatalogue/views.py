@@ -21,6 +21,7 @@ from django_extensions import settings
 from django.utils.translation import gettext as _
 
 from Geoportal import helper
+from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.helper import write_gml_to_session, get_mb_user_session_data
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
@@ -37,6 +38,7 @@ app_name = ""
 
 logger = logging.getLogger(__name__)
 
+@check_browser
 def  index_external(request: HttpRequest):
     """ Renders the index template for external embedded calls.
 
@@ -51,7 +53,7 @@ def  index_external(request: HttpRequest):
     external_call = True
     return index(request, external_call)
 
-
+@check_browser
 def index(request: HttpRequest, external_call = False):
     """ Renders the index template for all calls.
 
@@ -115,7 +117,7 @@ def index(request: HttpRequest, external_call = False):
 
     return render(request, template_name, geoportal_context.get_context())
 
-
+@check_browser
 def auto_completion(request: HttpRequest):
     """ Returns suggestions for searchfield input
 
@@ -143,7 +145,7 @@ def auto_completion(request: HttpRequest):
 
     return GeoportalJsonResponse(results=results["results"], resultList=results["resultList"]).get_response()
 
-
+@check_browser
 def get_data(request: HttpRequest):
     """ Redistributor for general get_data requests.
 
@@ -187,7 +189,7 @@ def get_data(request: HttpRequest):
     else:
         return GeoportalJsonResponse().get_response()
 
-
+@check_browser
 def get_spatial_results(request: HttpRequest):
     """ Returns the data for a spatial search.
 
@@ -208,7 +210,7 @@ def get_spatial_results(request: HttpRequest):
 
     return GeoportalJsonResponse(html=view_content).get_response()
 
-
+@check_browser
 def get_data_other(request: HttpRequest, catalogue_id):
     """ Returns data for other search catalogues than RLP.
 
@@ -306,7 +308,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
 
     return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
 
-
+@check_browser
 def get_data_rlp(request: HttpRequest):
     """ Returns data for the search catalogue of RLP
 
@@ -481,7 +483,7 @@ def get_data_rlp(request: HttpRequest):
 
     return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
 
-
+@check_browser
 def get_data_info(request: HttpRequest):
     """ Searches for results in the mediawiki
 
@@ -532,6 +534,7 @@ def get_data_info(request: HttpRequest):
 
     return GeoportalJsonResponse(html=view_content, nresults=nresults).get_response()
 
+@check_browser
 def get_permission_email_form(request: HttpRequest):
     """ Returns rendered email permission template.
 
@@ -567,7 +570,7 @@ def get_permission_email_form(request: HttpRequest):
 
     return GeoportalJsonResponse(html=html).get_response()
 
-
+@check_browser
 def send_permission_email(request: HttpRequest):
     """ Sends a permission email
 
@@ -596,6 +599,7 @@ def send_permission_email(request: HttpRequest):
 
     return GeoportalJsonResponse(success=success).get_response()
 
+@check_browser
 def terms_of_use(request: HttpRequest):
     """ Fetches the terms of use for a specific search result
 
@@ -628,6 +632,7 @@ def terms_of_use(request: HttpRequest):
         html = render_to_string(template_name=template, context=params)
     return GeoportalJsonResponse(html=html).get_response()
 
+@check_browser
 def write_gml_session(request: HttpRequest):
     params_GET = request.GET.dict()
     lat_lon = params_GET.get("latLon", "{}")

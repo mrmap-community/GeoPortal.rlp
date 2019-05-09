@@ -12,6 +12,7 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect
 
 from Geoportal import helper
+from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL
 from useroperations.utils import helper_functions
@@ -24,6 +25,7 @@ from pprint import pprint
 
 logger = logging.getLogger(__name__)
 
+@check_browser
 def index_view(request, wiki_keyword=""):
     """ Prepares the index view, and renders the page.
 
@@ -95,7 +97,7 @@ def index_view(request, wiki_keyword=""):
     else:
         return render(request, template, geoportal_context.get_context())
 
-
+@check_browser
 def login_view(request):
     """ View that handles the login
 
@@ -124,7 +126,7 @@ def login_view(request):
 
     return render(request, "crispy_form_auth.html", geoportal_context.get_context())
 
-
+@check_browser
 def register_view(request):
     """ View for user registration.
 
@@ -241,7 +243,7 @@ def register_view(request):
 
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
-
+@check_browser
 def pw_reset_view(request):
     """ View to reset password
 
@@ -302,7 +304,7 @@ def pw_reset_view(request):
 
     return render(request, "crispy_form_no_action.html", geoportal_context.get_context())
 
-
+@check_browser
 def change_profile_view(request):
     """ View to change or delete profile data
 
@@ -399,7 +401,7 @@ def change_profile_view(request):
     geoportal_context.add_context(context)
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
-
+@check_browser
 def delete_profile_view(request):
     """ View for profile deletion
 
@@ -479,7 +481,7 @@ def delete_profile_view(request):
 
     return render(request, "crispy_form_no_action.html", geoportal_context.get_context())
 
-
+@check_browser
 def logout_view(request):
     """ View for logging out users
 
@@ -504,7 +506,7 @@ def logout_view(request):
         messages.error(request, _("You are not logged in"))
     return render(request, "crispy_form_no_action.html", geoportal_context.get_context())
 
-
+@check_browser
 def map_viewer_view(request):
     """ Parse all important data for the map rendering from the session
 
@@ -582,7 +584,7 @@ def map_viewer_view(request):
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
 
-
+@check_browser
 def activation_view(request, activation_key=""):
     """
     View for activating user account after creation or deletion
@@ -631,7 +633,7 @@ def activation_view(request, activation_key=""):
 
     return render(request, template, context=geoportal_context.get_context())
 
-
+@check_browser
 def feedback_view(request: HttpRequest):
 
     """ Renders a feedback form for the user
@@ -680,3 +682,18 @@ def feedback_view(request: HttpRequest):
         geoportal_context = GeoportalContext(request=request)
         geoportal_context.add_context(params)
         return render(request=request, context=geoportal_context.get_context(), template_name=template)
+
+
+def incompatible_browser(request: HttpRequest):
+    """ Renders a template about how the user's browser is a filthy peasants tool.
+
+    Args:
+        request: The incoming request
+    Returns:
+         A rendered view
+    """
+    template = "unsupported_browser.html"
+    params = {
+
+    }
+    return render(request, template_name=template, context=params)
