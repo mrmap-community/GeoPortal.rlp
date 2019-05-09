@@ -121,7 +121,7 @@ $(document).on("keypress", "#id_message", function(){
     out.html(restLength);
 });
 
-$(document).on("click", ".map-viewer-toggler", function(){
+$(document).on("click", ".map-viewer-toggler, #mapviewer-sidebar", function(){
     // start loading the iframe content
     var iframe = $("#mapviewer");
     var src = iframe.attr("src");

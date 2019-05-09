@@ -102,6 +102,17 @@
                 {% endif %}
             </div>
         </div>
+        <div class="sidebar-area" id="mapviewer-sidebar">
+            <div class="sidebar-area-title">
+                <div class="sidebar-area-title-icon">
+                    <img width="40px" src="{% static 'useroperations/images/icn_map_viewer.png' %}">
+                </div>
+                <div class="sidebar-area-title-text">
+                    {% trans 'Mapviewer' %}
+                </div>
+            </div>
+        </div>
+
         {% for main_page_key, main_page_val in navigation.items %}
             <div class="sidebar-area">
                     <div class="sidebar-area-title">

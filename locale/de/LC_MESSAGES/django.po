@@ -1046,3 +1046,5 @@ msgstr "Passwort vergessen"
 msgid "This is your new password, please change it immediately!"
 msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
 
+msgid "Mapviewer"
+msgstr "Kartenviewer"

@@ -1,10 +1,9 @@
 {% load static i18n %}
 {% if layer.permission is None or layer.permission == 'true' %}
     <div class="search-result-action-buttons">
-        <!-- WMC and WFS -->
-        {% if type == 'wmc' or type == 'service_DE' %}
-            {% if type == 'wfs' and parent_result is None %}
-            {% elif type == 'service_DE' %}
+        <!-- WMC and WFS and CSW -->
+        {% if type == 'wmc' or type == 'wfs' or type == 'service_DE' %}
+            {% if type == 'service_DE' %}
                 {% if layer.showMapUrl %}
                     <a class='button view-button' id="view_{{ layer.id }}">
                         <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
