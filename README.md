@@ -71,24 +71,27 @@ You can choose from the following options:
 Description:  
 
 mandatory:  
---ipaddress             -> The address/name of your external interface. This will be used for building links that refer to your server.  
+--ipaddress             -> The address of your external interface.
+--hostname              -> FQDN of your Server www.example.rlp.de
 --mode                  -> What you want to do. Choices are install | update | delete | backup.  
   
 optional:  
 --proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
 --proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
+--proxyuser             -> Username for proxy auth 
+--proxypw               -> Passwort for proxy auth
 --mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.  
---mapbenderdbpassword   -> Password for mapbenderdbuser.  
+--mapbenderdbpw         -> Password for mapbenderdbuser.  
 --phppgadmin_user       -> User for the PHPPgAdmin Webinterface.  
---phppgadmin_password   -> Password for phppgadmin_user.  
+--phppgadmin_pw   -> Password for phppgadmin_user.  
 --mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
 Install:  
-    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
+    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
     
 Update:  
-    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpassword=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_password=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update
+    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update
     
 Delete:  
     geoportal_maintenance.sh --mode=delete
