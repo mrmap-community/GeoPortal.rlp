@@ -62,9 +62,9 @@ You can choose from the following options:
     --proxyuser=username                                    | Default ""
     --proxypw=Password for proxy auth                       | Default ""
 	--mapbenderdbuser=User for Database access              | Default "mapbenderdbuser"
-	--mapbenderdbpw=Password for database access      | Default "mapbenderdbpassword"
+	--mapbenderdbpw=Password for database access            | Default "mapbenderdbpassword"
 	--phppgadmin_user=User for PGAdmin web access           | Default "postgresadmin"
-	--phppgadmin_pw=Password for PGAdmin web access   | Default "postgresadmin_password"
+	--phppgadmin_pw=Password for PGAdmin web access         | Default "postgresadmin_password"
 	--mysqlpw=database password for MySQL                   | Default "root"
 	--mode=what you want to do                              | Default "none" [install,update,delete,backup]
   
