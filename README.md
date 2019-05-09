@@ -71,8 +71,8 @@ You can choose from the following options:
 Description:  
 
 mandatory:  
---ipaddress             -> The address of your external interface.
---hostname              -> FQDN of your Server www.example.rlp.de
+--ipaddress             -> The address of your external interface.  
+--hostname              -> FQDN of your Server www.example.rlp.de  
 --mode                  -> What you want to do. Choices are install | update | delete | backup.  
   
 optional:  
