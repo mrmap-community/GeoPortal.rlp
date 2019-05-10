@@ -646,6 +646,7 @@ EOF
 
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapbender TO $mapbender_database_user'"
 
@@ -1175,7 +1176,7 @@ fi
   echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
   echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
   echo "SecRequestBodyNoFilesLimit 10485760" >> /etc/apache2/mods-enabled/security2.conf
-  echo "SecRuleRemoveById 920350 949110 980130 930100 930110 20675" >> /etc/apache2/mods-enabled/security2.conf
+  echo "SecRuleRemoveById 920350" >> /etc/apache2/mods-enabled/security2.conf
   echo "</IfModule>" >> /etc/apache2/mods-enabled/security2.conf
 
 
@@ -1327,7 +1328,6 @@ cp -a /data/mapbender/conf/mapbender.conf /data/mapbender/conf/mapbender.conf.ba
 
 # change ip address in various locations
 # mapbender
-sed -i s/"Location: http:\/\/192.168.56.222"/"Location: http:\/\/$ipaddress"/g /data/mapbender/http/geoportal/authentication.php
 
 # change mapbender login path
 sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/g" /data/mapbender/conf/mapbender.conf
@@ -1435,11 +1435,19 @@ fi
 
 update(){
 
+  while true; do
+      read -p "Do you want me to make a backup before updating y/n?" yn
+      case $yn in
+          [Yy]* ) backup; break;;
+          [Nn]* ) break;;
+          * ) echo "Please answer yes or no.";;
+      esac
+  done
+
 #update mapbender
 echo update svn
 cd /data/svn/mapbender
-#su -c 'svn update -r 10053' retterath
-su -c 'svn update' retterath
+svn -q update
 cd /data/svn/
 tar -czvf mapbender_trunk.tar.gz mapbender/
 mv mapbender_trunk.tar.gz /tmp/
@@ -1481,18 +1489,42 @@ sed -i 's/options.isGeonames = true;/options.isGeonames = false;/' /data/mapbend
 sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sind bei der Adresssuche mit einem Komma voneinander zu trennen!<br><br>Auch Textfragmente der gesuchten Adresse reichen hierbei aus.<br><br>\&nbsp\&nbsp\&nbsp\&nbsp Beispiel:<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"Am Zehnthof 10 , St. Goar\\" oder<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"zehnt 10 , goar\\"<br><br>Der passende Treffer muss in der erscheinenden Auswahlliste per Mausklick ausgewählt werden!";/' /data/mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 
 #update django
-
 cd /opt/GeoPortal.rlp
+
+# save settings
+old_hostname=`grep -m 1 HOSTNAME  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
+old_hostip=`grep -m 1 HOSTIP  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
+old_ssl_conf=`grep -m 1 HTTP_OR_SSL  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
+old_database_name=`grep -wm 1 NAME  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
+old_database_user=`grep -wm 1 USER  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
+old_database_password=`grep -wm 1 PASSWORD  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
+old_database_host=`grep -wm 1 HOST  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
+old_database_port=`grep -wm 1 PORT  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
+
+mv /opt/GeoPortal.rlp/Geoportal/settings.py /opt/GeoPortal.rlp/Geoportal/settings.py_$(date +"%m_%d_%Y")
 git pull
+
+if [ ! -f /opt/GeoPortal.rlp/Geoportal/settings.py ]; then
+  wget -P /opt/GeoPortal.rlp/Geoportal/ https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/Geoportal/settings.py
+fi
+
+# refill with old values
+sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$old_hostip\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$old_hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"$old_ssl_conf\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$old_database_name',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$old_database_user',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$old_database_password',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'HOST':'127.0.0.1',"/"        'HOST':'$old_database_host',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'PORT':''"/"        'PORT':'$old_database_port'"/g /opt/GeoPortal.rlp/Geoportal/settings.py
+
+
 
 cp -a /opt/GeoPortal.rlp/scripts/guiapi.php /data/portal
 
 cp -a /opt/GeoPortal.rlp/scripts/authentication.php /data/mapbender/http/geoportal/authentication.php
 
 cp -a /opt/GeoPortal.rlp/scripts/delete_inactive_users.sql /data/mapbender/resources/db/delete_inactive_users.sql
-
-cp -a /data/mapbender/conf/mapbender.conf /data/mapbender/conf/mapbender.conf.backup
-
 
 # change ip address in various locations
 # mapbender
@@ -1509,25 +1541,6 @@ cd /opt/GeoPortal.rlp
 pip install -r requirements.txt
 rm -r /opt/GeoPortal.rlp/static
 python manage.py collectstatic
-
-# change ip address in various locations
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /data/mapbender/http/geoportal/authentication.php`
-sed -i s/"Location: http:\/\/$OLDADDRESS"/"Location: http:\/\/$hostname"/g /data/mapbender/http/geoportal/authentication.php
-
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/useroperations/templates/geoportal.html`
-sed -i s/"http:\/\/$OLDADDRESS\/mapbender\/frames\/index.php"/"http:\/\/$hostname\/mapbender\/frames\/index.php"/g /opt/GeoPortal.rlp/useroperations/templates/geoportal.html
-
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /opt/GeoPortal.rlp/Geoportal/settings.py`
-sed -i s/"HOSTIP = \"$OLDADDRESS\""/"HOSTIP = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"HOSTNAME = \"$OLDADDRESS\""/"HOSTNAME = \"$hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"Require ip $OLDADDRESS"/"Require ip $ipaddress"/g /etc/apache2/sites-enabled/geoportal-apache.conf
-
-OLDADDRESS=`grep -m 1 -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' /etc/mediawiki/LocalSettings.php`
-sed -i s/"\$wgServer = \"http:\/\/$OLDADDRESS\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgEmergencyContact = \"apache@$OLDADDRESS\";"/"$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgPasswordSender = \"apache@$OLDADDRESS\";"/"$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgDBpassword = \"root\";"/"$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"enableSemantics( '$OLDADDRESS' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 
 /etc/init.d/apache2 restart
 
@@ -1609,12 +1622,12 @@ backup () {
 
 
 if [ -d /opt/backup/geoportal_backup_$(date +"%m_%d_%Y") ]; then
-  echo "Backup for today already exists. Remove or rename it if you want to use this function"
+  echo "I have found a Backup for today. You should remove or rename it if you want to use this function.
+  Do sth like: mv /opt/backup/geoportal_backup_$(date +"%m_%d_%Y") /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")_old"
   exit
 fi
 
-mkdir /opt/backup
-mkdir /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
+mkdir -p /opt/backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 
 # Django Backup
