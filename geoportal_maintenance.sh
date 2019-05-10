@@ -646,7 +646,6 @@ EOF
 
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapbender TO $mapbender_database_user'"
 
@@ -1176,7 +1175,7 @@ fi
   echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
   echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
   echo "SecRequestBodyNoFilesLimit 10485760" >> /etc/apache2/mods-enabled/security2.conf
-  echo "SecRuleRemoveById 920350" >> /etc/apache2/mods-enabled/security2.conf
+  echo "SecRuleRemoveById 920350 949110 980130 930100 930110 20675" >> /etc/apache2/mods-enabled/security2.conf
   echo "</IfModule>" >> /etc/apache2/mods-enabled/security2.conf
 
 

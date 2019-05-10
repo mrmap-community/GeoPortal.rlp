@@ -29,7 +29,7 @@ Existing mapbender2 installations with a great amount of resources and users:
 
 ### Prototype
 
-http://opendata.geoportal.rlp.de
+https://opendata.geoportal.rlp.de
 
 ### Try it out!
 
@@ -83,7 +83,7 @@ optional:
 --mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.  
 --mapbenderdbpw         -> Password for mapbenderdbuser.  
 --phppgadmin_user       -> User for the PHPPgAdmin Webinterface.  
---phppgadmin_pw   -> Password for phppgadmin_user.  
+--phppgadmin_pw         -> Password for phppgadmin_user.  
 --mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
