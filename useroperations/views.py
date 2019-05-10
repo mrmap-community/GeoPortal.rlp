@@ -217,7 +217,7 @@ def register_view(request):
                 'kontakt@geoportal.de',
                 [user.mb_user_email],  # später email variable eintragen
                 fail_silently=False,
-
+            )
 
             user.save()
 
@@ -299,7 +299,8 @@ def pw_reset_view(request):
                         'kontakt@geoportal.de',
                         [user.mb_user_email],  # später email variable eintragen
                         fail_silently=False,
-
+                )
+                
                 messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
                 return redirect('useroperations:login')
 
