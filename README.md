@@ -79,19 +79,19 @@ optional:
 --proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
 --proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
 --proxyuser             -> Username for proxy auth 
---proxypw               -> Passwort for proxy auth
+--proxypw               -> Passwort for proxy auth  
 --mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.  
 --mapbenderdbpw         -> Password for mapbenderdbuser.  
 --phppgadmin_user       -> User for the PHPPgAdmin Webinterface.  
 --phppgadmin_pw         -> Password for phppgadmin_user.  
---mysqlpw               -> Passwort for the MySql root user.
+--mysqlpw               -> Passwort for the MySql root user.  
 
 Examples:  
 Install:  
     geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
     
 Update:  
-    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=update
+    geoportal_maintenance.sh --mode=update
     
 Delete:  
     geoportal_maintenance.sh --mode=delete
