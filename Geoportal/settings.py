@@ -125,11 +125,11 @@ DATABASES = {
         'OPTIONS' : {
                     'options': '-c search_path=django,mapbender,public'
                     },
-        'NAME': 'mapbender',
+        'NAME':'mapbender',
         'USER':'mapbenderdbuser',
         'PASSWORD':'mapbenderdbpassword',
-        'HOST' : '127.0.0.1',
-        'PORT' : ''
+        'HOST':'127.0.0.1',
+        'PORT':''
     }
 }
 
