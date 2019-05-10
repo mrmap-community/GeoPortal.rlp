@@ -213,7 +213,7 @@ def register_view(request):
                  _("Activation Mail"),
                 _("Hello ") + user.mb_user_name +
                 _(",\n\nThis is your activation link. It will be valid until the end of the day, "
-                    "please click it!\n Link: " + HTTP_OR_SSL + HOSTNAME "/activate/" + user.activation_key),
+                    "please click it!\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key),
                 'kontakt@geoportal.de',
                 [user.mb_user_email],  # später email variable eintragen
                 fail_silently=False,
