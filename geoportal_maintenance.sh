@@ -1176,7 +1176,7 @@ fi
   echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
   echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
   echo "SecRequestBodyNoFilesLimit 10485760" >> /etc/apache2/mods-enabled/security2.conf
-  echo "SecRuleRemoveById 920350" >> /etc/apache2/mods-enabled/security2.conf
+  echo "SecRuleRemoveById 920350 949110 980130 930100 930110 20675" >> /etc/apache2/mods-enabled/security2.conf
   echo "</IfModule>" >> /etc/apache2/mods-enabled/security2.conf
 
 
