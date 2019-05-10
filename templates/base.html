@@ -162,6 +162,9 @@
     {% block body %}
     {% endblock %}
     </div>
+    {% if cookie is None %}
+        {% include 'cookie_banner.html' %}
+    {% endif %}
 </body>
 
 <footer>

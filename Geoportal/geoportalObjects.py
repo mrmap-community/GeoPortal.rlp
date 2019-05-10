@@ -62,6 +62,7 @@ class GeoportalContext:
             "DEFAULT_GUI": DEFAULT_GUI,
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,
+            "cookie": request.COOKIES.get("Geoportal-RLP", None)
         }
 
     def add_context(self, context: dict):

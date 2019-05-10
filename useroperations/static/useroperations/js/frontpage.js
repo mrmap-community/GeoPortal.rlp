@@ -17,6 +17,10 @@ function getCookie(cname) {
     return "";
 }
 
+function setCookie(cname, cvalue){
+    document.cookie = cname + "=" + cvalue + ";";
+}
+
 function startSearch(){
     var inputTerms = $(".-js-simple-search-field").val().trim();
     search.setParam("terms", inputTerms);
@@ -286,6 +290,13 @@ $(document).on('click', "#change-form-button", function(){
     event.preventDefault();
   }
 
+});
+
+$(document).on("click", ".cookie-button", function(){
+    var cookieBanner = $(".cookie-container");
+    cookieBanner.toggle();
+    // set cookie, so we know that the user already accepted on the next visit
+    setCookie("Geoportal-RLP", true)
 });
 
 //captcha refresh
