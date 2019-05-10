@@ -524,6 +524,7 @@ ul {
     width: 100%;
     filter: drop-shadow(2px 2px 2px black);
 }
+
 .message-toggler{
     padding: 10px;
     color: white;
@@ -531,22 +532,32 @@ ul {
     position: absolute;
     top: 5px;
     right: 1px;
-    background-color: var(--success-green);
     border-radius: 10px;
+}
+.success .message-toggler{
+    background-color: var(--success-green);
+}
+.error .message-toggler{
+    background-color: var(--error-red);
 }
 .message-toggler:hover{
     cursor:pointer;
     filter: drop-shadow(2px 2px 2px black);
 }
 
-.messages .success {
+.messages{
     padding: 15px;
     color: white;
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
+}
+.messages .success {
     background-color: var(--success-green);
 }
-.messages .success:hover{
+.messages .error {
+    background-color: var(--error-red);
+}
+.messages .success:hover, .messages .error:hover{
     cursor: default;
 }
