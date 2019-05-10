@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 05:17+0000\n"
+"POT-Creation-Date: 2019-05-10 10:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:679
+#: useroperations/views.py:681
 msgid "Send"
 msgstr "Senden"
 
@@ -576,61 +576,66 @@ msgstr "Mein Profil"
 msgid "Hello"
 msgstr "Hallo"
 
-#: templates/base.html:95 useroperations/views.py:390
+#: templates/base.html:95 useroperations/views.py:392
 msgid "Change Profile"
 msgstr "Profil bearbeiten"
 
 #: templates/base.html:96
+#| msgid "Description"
+msgid "Show subscription"
+msgstr "Abos anzeigen"
+
+#: templates/base.html:97
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/base.html:98
+#: templates/base.html:99
 msgid "Not signed in"
 msgstr "Nicht angemeldet"
 
-#: templates/base.html:99 useroperations/views.py:117
+#: templates/base.html:100 useroperations/views.py:117
 #: useroperations/views.py:123
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/base.html:100 useroperations/views.py:146
+#: templates/base.html:101 useroperations/views.py:146
 #: useroperations/views.py:158
 msgid "Registration"
 msgstr "Registrierung"
 
-#: templates/base.html:101
+#: templates/base.html:102
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: templates/base.html:111
+#: templates/base.html:112
 msgid "Mapviewer"
 msgstr "Kartenviewer"
 
-#: templates/base.html:177
+#: templates/base.html:178
 msgid "Contact"
 msgstr "Kontakt"
 
-#: templates/base.html:178
+#: templates/base.html:179
 msgid "Legal Disclosure"
 msgstr "Impressum"
 
-#: templates/base.html:179
+#: templates/base.html:180
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: templates/base.html:180
+#: templates/base.html:181
 msgid "Legal Notice"
 msgstr "Rechtshinweis"
 
-#: templates/base.html:181
+#: templates/base.html:182
 msgid "Transparency law"
 msgstr "Transparenzgesetz"
 
-#: templates/base.html:188
+#: templates/base.html:189
 msgid "RSS Newsfeed"
 msgstr ""
 
-#: templates/base.html:192
+#: templates/base.html:193
 msgid "Twitter"
 msgstr ""
 
@@ -644,10 +649,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        Diese Webseite verwendet Cookies um die bestmögliche Nutzerfahrung bieten zu können. "
-"<br>\n"
-"        Weitere Informationen zu unserem Datenschutz finden Sie in  "
-"unseren\n"
+"        Diese Webseite verwendet Cookies um die bestmögliche Nutzerfahrung "
+"bieten zu können. <br>\n"
+"        Weitere Informationen zu unserem Datenschutz finden Sie in  unseren\n"
 "        "
 
 #: templates/cookie_banner.html:10
@@ -671,8 +675,9 @@ msgid ""
 "you are using a not supported browser. For the best user experience and for "
 "reasons of data security it is recommended to use a modern browser,"
 msgstr ""
-"Sie verwenden einen nicht unterstützten Browser. Für die beste Nutzbarkeit und aus "
-"Gründen der Sicherheit empfehlen wir die Verwendung eines modernen Browsers,"
+"Sie verwenden einen nicht unterstützten Browser. Für die beste Nutzbarkeit "
+"und aus Gründen der Sicherheit empfehlen wir die Verwendung eines modernen "
+"Browsers,"
 
 #: templates/unsupported_browser.html:15
 msgid "such as Microsoft Edge, Mozilla Firefox, Google Chrome or Opera."
@@ -943,11 +948,29 @@ msgstr ""
 "einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, außerdem müssen Sie "
 "mindestens 9 Zeichen verwenden"
 
-#: useroperations/views.py:196 useroperations/views.py:372
+#: useroperations/views.py:196 useroperations/views.py:374
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: useroperations/views.py:236
+#: useroperations/views.py:213
+msgid "Activation Mail"
+msgstr "Aktivierungsmail"
+
+#: useroperations/views.py:214 useroperations/views.py:297
+#: useroperations/views.py:466
+msgid "Hello "
+msgstr "Hallo"
+
+#: useroperations/views.py:215
+msgid ""
+",\n"
+"\n"
+"This is your activation link. It will be valid until the end of the day, "
+"please click it!\n"
+" Link: "
+msgstr "Dies ist ihr Aktivierungslink. Er ist für die nächsten 24 Stunden gültig"
+
+#: useroperations/views.py:235
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
@@ -955,51 +978,65 @@ msgstr ""
 "Account wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link "
 "in der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
 
-#: useroperations/views.py:241 useroperations/views.py:668
+#: useroperations/views.py:240 useroperations/views.py:670
 msgid "Captcha was wrong! Please try again"
 msgstr "Captcha war falsch! Bitte erneut versuchen"
 
-#: useroperations/views.py:265
+#: useroperations/views.py:264
 msgid "Submit"
 msgstr "Bestätigen"
 
-#: useroperations/views.py:281
+#: useroperations/views.py:280
 msgid "No Account with this Username or Email found"
 msgstr "Kein Konto mit diesem Benutzernamen oder dieser Email Adresse gefunden"
 
-#: useroperations/views.py:302
+#: useroperations/views.py:296
+msgid "Lost Password"
+msgstr "Passwort vergessen"
+
+#: useroperations/views.py:298
+#, fuzzy
+#| msgid "This is your new password, please change it immediately!"
+msgid ""
+",\n"
+"\n"
+"This is your new password, please change it immediately!\n"
+" Password: "
+msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
+
+#: useroperations/views.py:304
 msgid "Password reset was successful, check your mails. Password: "
 msgstr "Passwort erfolgreich zurückgesetzt, bitte prüfen Sie ihre Emails"
 
-#: useroperations/views.py:353 useroperations/views.py:363
+#: useroperations/views.py:355 useroperations/views.py:365
 msgid "Your old Password was wrong"
 msgstr "Ihr altes Passwort war falsch"
 
-#: useroperations/views.py:383
+#: useroperations/views.py:385
 msgid "Successfully changed data"
 msgstr "Daten erfolgreich geändert"
 
-#: useroperations/views.py:391
+#: useroperations/views.py:393
 msgid "Delete Profile"
 msgstr "Profil entfernen"
 
-#: useroperations/views.py:398
+#: useroperations/views.py:400
 msgid "Change data"
 msgstr "Daten ändern"
 
-#: useroperations/views.py:424
+#: useroperations/views.py:426
 msgid "Delete Profile!"
 msgstr "Profil entfernen!"
 
-#: useroperations/views.py:428
+#: useroperations/views.py:430
 msgid "Delete Profile?"
 msgstr "Profil entfernen?"
 
-#: useroperations/views.py:440 useroperations/views.py:506
+#: useroperations/views.py:442 useroperations/views.py:508
 msgid "You are not logged in"
 msgstr "Sie sind nicht angemeldet"
 
-#: useroperations/views.py:446
+#: useroperations/views.py:448
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
@@ -1007,7 +1044,7 @@ msgstr ""
 "Sie sind Besitzer von registrierten Diensten - Dienste löschen oder einem "
 "anderen Eigentümer übergeben"
 
-#: useroperations/views.py:449
+#: useroperations/views.py:451
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
@@ -1015,7 +1052,7 @@ msgstr ""
 "Sie sind Besitzer von Anwendungen - Anwendungen löschen doer einem anderen "
 "Besitzer übergeben"
 
-#: useroperations/views.py:452
+#: useroperations/views.py:454
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
@@ -1023,43 +1060,63 @@ msgstr ""
 "Für dieses Profile existieren gebührenpflichtige Dienste - Bitte "
 "kontaktieren Sie einen Administrator"
 
-#: useroperations/views.py:475
+#: useroperations/views.py:465
+#, fuzzy
+#| msgid "Activation Mail"
+msgid "Reactivation Mail"
+msgstr "Aktivierungsmail"
+
+#: useroperations/views.py:468
+msgid ""
+",\n"
+"\n"
+" In case the deletion of your account was a mistake, you can reactivate it "
+"by clicking this link! \n"
+" Link: "
+msgstr ""
+",\n"
+"\n"
+"Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem folgenden Link reaktivieren: "
+"\n"
+" Link: "
+
+#: useroperations/views.py:477
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:477
+#: useroperations/views.py:479
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
-"your account for 24 hours!Link:"
-msgstr ""
+"your account for 24 hours!"
+msgstr "Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 
-#: useroperations/views.py:503
+#: useroperations/views.py:505
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
 
-#: useroperations/views.py:607
+#: useroperations/views.py:609
 msgid "Account already active"
 msgstr "Account bereits aktiviert"
 
-#: useroperations/views.py:612
+#: useroperations/views.py:614
 msgid "Invalid data"
 msgstr "Invalide Daten"
 
-#: useroperations/views.py:624
+#: useroperations/views.py:626
 msgid "Account activation"
 msgstr "Accountaktivierung"
 
-#: useroperations/views.py:650
+#: useroperations/views.py:652
 msgid "Feedback sent. Thank you!"
 msgstr "Feedback gesendet. Vielen Dank!"
 
-#: useroperations/views.py:666
+#: useroperations/views.py:668
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
-"einen Administrator"
+"einen Administrator."
 
-#: useroperations/views.py:674
+#: useroperations/views.py:676
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1071,23 +1128,11 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-msgid "Categories"
-msgstr "Kategorien"
+#~ msgid "Categories"
+#~ msgstr "Kategorien"
 
-msgid "Description:"
-msgstr "Beschreibung:"
+#~ msgid "Description:"
+#~ msgstr "Beschreibung:"
 
-msgid "bis"
-msgstr "to"
-
-msgid "Activation Mail"
-msgstr "Aktivierungsmail"
-
-msgid "Hello "
-msgstr "Hallo"
-
-msgid "Lost Password"
-msgstr "Passwort vergessen"
-
-msgid "This is your new password, please change it immediately!"
-msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
+#~ msgid "bis"
+#~ msgstr "to"
