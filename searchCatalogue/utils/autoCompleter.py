@@ -6,7 +6,9 @@ Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 
 """
-import requests  # pip install requests
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
