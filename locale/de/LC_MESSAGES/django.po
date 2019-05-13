@@ -1085,6 +1085,7 @@ msgid ""
 msgstr ""
 ". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
 "Reaktivierung geschickt. Diese ist 24 Stunden gültig."
+  
 #: useroperations/views.py:505
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
