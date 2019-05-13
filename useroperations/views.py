@@ -212,12 +212,14 @@ def register_view(request):
             send_mail(
                  _("Activation Mail"),
                 _("Hello ") + user.mb_user_name +
-                _(",\n\nThis is your activation link. It will be valid until the end of the day, "
-                    "please click it!\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key),
+                ", \n \n" +
+                _("This is your activation link. It will be valid until the end of the day, please click it!") 
+              	+ "\n Link: "  + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
                 'kontakt@geoportal.de',
                 [user.mb_user_email],  # später email variable eintragen
                 fail_silently=False,
             )
+
 
             user.save()
 
@@ -295,11 +297,13 @@ def pw_reset_view(request):
                 send_mail(
                         _("Lost Password"),
                         _("Hello ") + user.mb_user_name +
-                        _(",\n\nThis is your new password, please change it immediately!\n Password: " + newpassword ),
+                        +", \n\n" +
+                        _("This is your new password, please change it immediately!\n Password: ") + newpassword ,
                         'kontakt@geoportal.de',
-                        [user.mb_user_email],  # später email variable eintragen
+                        [user.mb_user_email],
                         fail_silently=False,
                 )
+	
                 
                 messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
                 return redirect('useroperations:login')
@@ -464,13 +468,14 @@ def delete_profile_view(request):
                 send_mail(
                     _("Reactivation Mail"),
                     _("Hello ") + user.mb_user_name +
-                    _(
-                        ",\n\n In case the deletion of your account was a mistake, you can reactivate it by clicking this link! "
-                        "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key),
+                    ", \n \n" +
+                    _("In case the deletion of your account was a mistake, you can reactivate it by clicking this link!")
+                    + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
                     'kontakt@geoportal.de',
                     [user.mb_user_email],  # später email variable eintragen
                     fail_silently=False,
                 )
+
 
                 # user.delete()
                 helper_functions.delete_mapbender_session_by_memcache(session_id)
