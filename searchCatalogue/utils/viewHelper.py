@@ -20,6 +20,8 @@ from django.utils.translation import gettext as _
 import math
 
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from Geoportal import helper
 from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP, HTTP_OR_SSL
