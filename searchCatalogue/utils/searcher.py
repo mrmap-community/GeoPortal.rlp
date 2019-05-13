@@ -12,6 +12,9 @@ from collections import OrderedDict
 from json import JSONDecodeError
 
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 import threading
 
 from copy import copy
