@@ -1134,14 +1134,14 @@ msgstr "Beschreibung:"
 msgid "bis"
 msgstr "to"
 
-msgid "Activation Mail"
-msgstr "Aktivierungsmail"
+#msgid "Activation Mail"
+#msgstr "Aktivierungsmail"
 
-msgid "Hello "
-msgstr "Hallo"
+#msgid "Hello "
+#msgstr "Hallo"
 
-msgid "Lost Password"
-msgstr "Passwort vergessen"
+#msgid "Lost Password"
+#msgstr "Passwort vergessen"
 
 msgid "This is your new password, please change it immediately!"
 msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
