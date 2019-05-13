@@ -16,6 +16,8 @@ from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def get_navigation_items():
