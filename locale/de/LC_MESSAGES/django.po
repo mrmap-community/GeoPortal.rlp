@@ -961,14 +961,14 @@ msgstr "Aktivierungsmail"
 msgid "Hello "
 msgstr "Hallo"
 
-#: useroperations/views.py:215
+#: useroperations/views.py:216
 msgid ""
-",\n"
-"\n"
 "This is your activation link. It will be valid until the end of the day, "
-"please click it!\n"
-" Link: "
-msgstr "Dies ist ihr Aktivierungslink. Er ist für die nächsten 24 Stunden gültig"
+"please click it!"
+msgstr ""
+"Dies ist ihr Aktivierungslink. Er wird für die nächsten 24 Stunden gültig "
+"sein. Bitte klicken um Aktivierung abzuschließen!"
+
 
 #: useroperations/views.py:235
 msgid ""
@@ -977,6 +977,7 @@ msgid ""
 msgstr ""
 "Account wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link "
 "in der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
+
 
 #: useroperations/views.py:240 useroperations/views.py:670
 msgid "Captcha was wrong! Please try again"
@@ -994,15 +995,13 @@ msgstr "Kein Konto mit diesem Benutzernamen oder dieser Email Adresse gefunden"
 msgid "Lost Password"
 msgstr "Passwort vergessen"
 
-#: useroperations/views.py:298
-#, fuzzy
-#| msgid "This is your new password, please change it immediately!"
+#: useroperations/views.py:299
 msgid ""
-",\n"
-"\n"
 "This is your new password, please change it immediately!\n"
 " Password: "
-msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
+msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich!\n"
+" Passwort: "
+
 
 #: useroperations/views.py:304
 msgid "Password reset was successful, check your mails. Password: "
@@ -1064,32 +1063,28 @@ msgstr ""
 #, fuzzy
 #| msgid "Activation Mail"
 msgid "Reactivation Mail"
-msgstr "Aktivierungsmail"
+msgstr "Reaktivierungsmail"
 
-#: useroperations/views.py:468
+#: useroperations/views.py:469
 msgid ""
-",\n"
-"\n"
-" In case the deletion of your account was a mistake, you can reactivate it "
-"by clicking this link! \n"
-" Link: "
+"In case the deletion of your account was a mistake, you can reactivate it by "
+"clicking this link!"
 msgstr ""
-",\n"
-"\n"
-"Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem folgenden Link reaktivieren: "
-"\n"
-" Link: "
+"Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem "
+"folgenden Link reaktivieren!"
+
 
 #: useroperations/views.py:477
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:479
+#: useroperations/views.py:480
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
-msgstr "Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur Reaktivierung geschickt. Diese ist 24 Stunden gültig."
-
+msgstr ""
+". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
+"Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 #: useroperations/views.py:505
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
