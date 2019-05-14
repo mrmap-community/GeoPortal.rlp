@@ -6,21 +6,32 @@
 {% endblock %}
 
 {% block body %}
-<h2>{% trans 'Most frequently used Map Combinations' %}</h2>
+<h2>{% trans 'Organizations and topics' %}</h2>
+<div class="quickstart-container">
+    <a class="quickstart" href="{% url 'useroperations:organizations' %}">
+        <img src="{% static 'searchCatalogue/images/icons/icn_organization_hover.png' %}">
+        <span>{% trans 'Data publishing organizations' %}</span>
+    </a>
+    <a class="quickstart" href="{% url 'useroperations:categories' %}">
+        <img src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}">
+        <span>{% trans 'Categories and topics' %}</span>
+    </a>
+</div>
 
-<div class="wmc-tile-wrapper">
-    {% for result in wmc_results %}
-        <div class="wmc-tile">
-            <div class="wmc-tile-header">
+<h2>{% trans 'Most frequently used Map Combinations' %}</h2>
+<div class="tile-wrapper">
+    {% for result in results.wmc %}
+        <div class="tile">
+            <div class="tile-header">
                 {{ result.title|safe }}
             </div>
-            <div class="wmc-tile-content">
-                <div class="wmc-tile-content-img">
+            <div class="tile-content">
+                <div class="tile-content-img">
                     <a href="WMC={{ result.id }}" target="_blank">
-                        <img class="wmc-tile-img" src="{{ result.previewURL }}">
+                        <img class="tile-img" src="{{ result.previewURL }}">
                     </a>
                 </div>
-                <div class="wmc-tile-content-abstract">
+                <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div title="{% trans 'Total views this week' %}" class="view-count">
                             <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
@@ -40,17 +51,17 @@
             </div>
         </div>
     {% endfor %}
-        <div id="show-all-tile" class="wmc-tile">
-            <div class="wmc-tile-header">
+        <div id="show-all-tile" class="tile">
+            <div class="tile-header">
                 {% trans 'Show all' %}
             </div>
-            <div class="wmc-tile-content">
-                <div id="show-all-tile-content" class="wmc-tile-content-img">
+            <div class="tile-content">
+                <div id="show-all-tile-content" class="tile-content-img">
                     <a href="" target="_blank">
-                        <img class="wmc-tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
+                        <img class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
                     </a>
                 </div>
-                <div class="wmc-tile-content-abstract">
+                <div class="tile-content-abstract">
                     <hr>
                     {% trans "Start a search and explore all results. Let's go!" %}
                 </div>

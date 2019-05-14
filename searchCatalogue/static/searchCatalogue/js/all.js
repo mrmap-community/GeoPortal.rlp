@@ -41,6 +41,20 @@ var Search = function() {
 
     this.timeoutDelay = 300;
     this.searchUrl = null;
+
+    this.resources_rlp = {
+        wms: true,
+        wfs: true,
+        wmc: true,
+        dataset: true
+    };
+    this.resources_de = {
+        dataset: true,
+        series: true,
+        service: true,
+        application: true,
+        nonGeographicDataset: true,
+    };
 };
 
 function getCookie(cname) {
@@ -610,23 +624,7 @@ jQuery(document).ready(function() {
 
     checkForExternalMapviewerCall();
 
-
-
-    var resources_rlp = {
-        wms: true,
-        wfs: true,
-        wmc: true,
-        dataset: true
-    };
-    var resources_de = {
-        dataset: true,
-        series: true,
-        service: true,
-        application: true,
-        nonGeographicDataset: true,
-    };
-
-    var resources = resources_rlp;
+    var resources = search.resources_rlp;
 
     var fixDateFormat = function(val) {
         var ms = val.match(/(\d\d).(\d\d).(\d\d\d\d)/);
@@ -650,9 +648,9 @@ jQuery(document).ready(function() {
 
     function toggleResources(){
         if($(".-js-tab-item.active").attr("data-id") == "rlp"){
-            resources = resources_rlp;
+            resources = search.resources_rlp;
         }else{
-            resources = resources_de;
+            resources = search.resources_de;
         }
     }
 

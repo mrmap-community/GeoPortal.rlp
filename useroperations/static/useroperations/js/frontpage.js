@@ -68,7 +68,7 @@ function toggleMapViewers(target){
 
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
-    var elem = $(this).parents(".wmc-tile-content").find(".wmc-tile-content-img");
+    var elem = $(this).parents(".tile-content").find(".tile-content-img");
     var id = elem.find("a").attr("href").split("=")[1];
     openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
 });
@@ -197,13 +197,34 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
 /**
  * Display info for favourite wmc tiles
  */
- $(document).on("mouseover mouseleave", ".wmc-tile-body", function(){
+ $(document).on("mouseover mouseleave", ".tile-body", function(){
     var elem = $(this);
-    var popup = elem.parents().children(".wmc-tile-info-popup");
+    var popup = elem.parents().children(".tile-info-popup");
     popup.toggle();
  });
 
- $(document).on("click", ".wmc-tile-content-img", function(event){
+ $(document).on("click", ".organizations .tile-content-img", function(){
+     var elem = $(this);
+     var id = elem.attr("data-id");
+     var name = elem.attr("data-name");
+     var searchButton = $("#geoportal-search-button");
+     var facet = ["Organisationen", name, id].join(",");
+     search.setParam("facet", facet);
+     searchButton.click();
+ });
+
+ $(document).on("click", ".organizations .data-info-container", function(){
+     var elem = $(this);
+     var datatype = elem.attr("data-resource");
+     search.resources_rlp[datatype] = false;
+     /*
+     * ToDo: THis does not work yet due to the 'great' structure of the search engine...
+     */
+     var tileContentImg = elem.parents(".tile").find(".tile-content-img");
+     tileContentImg.click();
+ });
+
+ $(document).on("click", ".tile-content-img", function(event){
     event.preventDefault();
     var elem = $(this);
     if(elem.attr("id") == "show-all-tile-content"){
@@ -214,7 +235,6 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
     startAjaxMapviewerCall(href);
 
  });
-
 $(document).on("click", ".message-toggler", function(){
     var elem = $(this);
     elem.toggle();
@@ -298,6 +318,7 @@ $(document).on("click", ".cookie-button", function(){
     // set cookie, so we know that the user already accepted on the next visit
     setCookie("Geoportal-RLP", true)
 });
+
 
 //captcha refresh
 $(function() {

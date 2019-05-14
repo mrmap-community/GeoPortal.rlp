@@ -1,6 +1,6 @@
 /*
 
-    THIS IS THE STYLESHEET FOR favourite_wmcs.html
+    THIS IS THE STYLESHEET FOR landing_page.html, publishing_organizations.html and
     ALL CHANGES SHOULD GO HERE
 
 */
@@ -9,7 +9,7 @@
 
 @import 'color_schema.css';
 
-.wmc-tile-wrapper{
+.tile-wrapper{
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
@@ -17,12 +17,12 @@
     align-items: stretch;
 }
 
-.wmc-tile-wrapper a{
+.tile-wrapper a{
     outline: none;
     text-decoration: none;
 }
 
-.wmc-tile{
+.tile{
     display: flex;
     flex-direction: column;
     margin: 10px;
@@ -30,30 +30,40 @@
     transition: all 0.1s ease-in-out;
     background-color: var(--rlp-gray);
 }
-.wmc-tile:hover{
+.organizations .tile{
+    width: 150px;
+}
+.tile:hover{
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--rlp-red);
 }
 
-.wmc-tile-header{
+.tile-header{
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 10px;
     color: var(--rlp-red);
     font-weight: bold;
+    height: 50px;
 }
 
-.wmc-tile-img{
+.tile-img{
     width: 250px;
     height: 150px;
     object-fit: cover;
 }
-.wmc-tile-img:hover{
+.organizations .tile-img{
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+}
+.tile-img:hover{
     cursor: pointer;
     opacity: 0.5;
 }
 
-.wmc-tile-content{
+.tile-content{
     -moz-hyphens: auto;
     hyphens: auto;
     font-size: 0.8em;
@@ -64,25 +74,28 @@
     flex-direction: column;
 }
 
-.wmc-tile-content-abstract{
+.tile-content-abstract{
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 10px 0;
 }
 
-.wmc-tile-content-img{
+.tile-content-img{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.wmc-tile-body:hover{
+.tile-body:hover{
     background-color: var(--rlp-red-light-hover);
 }
 
 .sub-tile-container{
     display: flex;
     justify-content: space-between;
+}
+.organizations .sub-tile-container{
+    background-color: var(--rlp-red);
 }
 
 .mobile-button{
@@ -106,4 +119,19 @@
 
 #show-all-tile{
     border: 2px solid var(--rlp-red);
+}
+
+.sub-tile-img{
+    padding: 0 10px 0 0;
+}
+
+.organizations .data-info-container{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    color: white;
+}
+.organizations .data-info-container:hover{
+    background-color: var(--rlp-red-light-hover);
+    cursor: pointer;
 }

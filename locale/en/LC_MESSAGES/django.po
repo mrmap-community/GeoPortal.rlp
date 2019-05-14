@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 05:17+0000\n"
+"POT-Creation-Date: 2019-05-14 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: Geoportal/settings.py:162 Geoportal/settings.py:181
+#: Geoportal/settings.py:166 Geoportal/settings.py:185
 msgid "German"
 msgstr ""
 
-#: Geoportal/settings.py:163 Geoportal/settings.py:180
+#: Geoportal/settings.py:167 Geoportal/settings.py:184
 msgid "English"
 msgstr ""
 
@@ -52,7 +52,7 @@ msgstr ""
 
 #: searchCatalogue/templates/hits_and_sort_option.html:26
 #: searchCatalogue/templates/search_forms.html:8
-#: searchCatalogue/utils/viewHelper.py:253
+#: searchCatalogue/utils/viewHelper.py:255
 msgid "Sort by:"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgid "Cancel"
 msgstr ""
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:679
+#: useroperations/views.py:720
 msgid "Send"
 msgstr ""
 
@@ -459,15 +459,15 @@ msgstr ""
 msgid "Decline"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:247
+#: searchCatalogue/utils/viewHelper.py:249
 msgid "Search terms(e):"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:249
+#: searchCatalogue/utils/viewHelper.py:251
 msgid "Spatial Restriction:"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:251
+#: searchCatalogue/utils/viewHelper.py:253
 msgid "Hits per Page:"
 msgstr ""
 
@@ -565,61 +565,65 @@ msgstr ""
 msgid "Hello"
 msgstr ""
 
-#: templates/base.html:95 useroperations/views.py:390
+#: templates/base.html:95 useroperations/views.py:430
 msgid "Change Profile"
 msgstr ""
 
 #: templates/base.html:96
+msgid "Show subscription"
+msgstr ""
+
+#: templates/base.html:97
 msgid "Logout"
 msgstr ""
 
-#: templates/base.html:98
+#: templates/base.html:99
 msgid "Not signed in"
 msgstr ""
 
-#: templates/base.html:99 useroperations/views.py:117
-#: useroperations/views.py:123
+#: templates/base.html:100 useroperations/views.py:151
+#: useroperations/views.py:157
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:100 useroperations/views.py:146
-#: useroperations/views.py:158
+#: templates/base.html:101 useroperations/views.py:180
+#: useroperations/views.py:192
 msgid "Registration"
 msgstr ""
 
-#: templates/base.html:101
+#: templates/base.html:102
 msgid "Reset Password"
 msgstr ""
 
-#: templates/base.html:111
+#: templates/base.html:112
 msgid "Mapviewer"
 msgstr ""
 
-#: templates/base.html:177
+#: templates/base.html:178
 msgid "Contact"
 msgstr ""
 
-#: templates/base.html:178
+#: templates/base.html:179
 msgid "Legal Disclosure"
 msgstr ""
 
-#: templates/base.html:179
+#: templates/base.html:180
 msgid "Privacy"
 msgstr ""
 
-#: templates/base.html:180
+#: templates/base.html:181
 msgid "Legal Notice"
 msgstr ""
 
-#: templates/base.html:181
+#: templates/base.html:182
 msgid "Transparency law"
 msgstr ""
 
-#: templates/base.html:188
+#: templates/base.html:189
 msgid "RSS Newsfeed"
 msgstr ""
 
-#: templates/base.html:192
+#: templates/base.html:193
 msgid "Twitter"
 msgstr ""
 
@@ -826,30 +830,6 @@ msgstr ""
 msgid "Minimum 9 characters"
 msgstr ""
 
-#: useroperations/templates/favourite_wmcs.html:9
-msgid "Most frequently used Map Combinations"
-msgstr ""
-
-#: useroperations/templates/favourite_wmcs.html:25
-msgid "Total views this week"
-msgstr ""
-
-#: useroperations/templates/favourite_wmcs.html:29
-msgid "Open in mobile viewer"
-msgstr ""
-
-#: useroperations/templates/favourite_wmcs.html:35
-msgid "No description available"
-msgstr ""
-
-#: useroperations/templates/favourite_wmcs.html:45
-msgid "Show all"
-msgstr ""
-
-#: useroperations/templates/favourite_wmcs.html:55
-msgid "Start a search and explore all results. Let's go!"
-msgstr ""
-
 #: useroperations/templates/feedback_form.html:5
 msgid "Feedback form"
 msgstr ""
@@ -866,6 +846,62 @@ msgstr ""
 msgid "Select other map application"
 msgstr ""
 
+#: useroperations/templates/landing_page.html:9
+msgid "Organizations and topics"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:13
+msgid "Data publishing organizations"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:17
+msgid "Categories and topics"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:21
+msgid "Most frequently used Map Combinations"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:36
+msgid "Total views this week"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:40
+msgid "Open in mobile viewer"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:46
+msgid "No description available"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:56
+msgid "Show all"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:66
+msgid "Start a search and explore all results. Let's go!"
+msgstr ""
+
+#: useroperations/templates/publishing_organizations.html:9
+msgid "Publishing Organizations"
+msgstr ""
+
+#: useroperations/templates/publishing_organizations.html:24
+msgid "Published datasets"
+msgstr ""
+
+#: useroperations/templates/publishing_organizations.html:28
+msgid "Published layers"
+msgstr ""
+
+#: useroperations/templates/publishing_organizations.html:34
+msgid "Published featuretypes"
+msgstr ""
+
+#: useroperations/templates/publishing_organizations.html:38
+msgid "Published wmcs"
+msgstr ""
+
 #: useroperations/views.py:62
 msgid "Login failed"
 msgstr ""
@@ -878,138 +914,173 @@ msgstr ""
 msgid "Account not active"
 msgstr ""
 
-#: useroperations/views.py:116
+#: useroperations/views.py:150
 msgid "Forgot Password?"
 msgstr ""
 
-#: useroperations/views.py:154
+#: useroperations/views.py:188
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:171
+#: useroperations/views.py:205
 msgid "The Username"
 msgstr ""
 
-#: useroperations/views.py:171
+#: useroperations/views.py:205
 msgid "is already taken"
 msgstr ""
 
-#: useroperations/views.py:175
+#: useroperations/views.py:209
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
 "characters, allowed special chars are: @#$%&+=!"
 msgstr ""
 
-#: useroperations/views.py:196 useroperations/views.py:372
+#: useroperations/views.py:230 useroperations/views.py:412
 msgid "Passwords do not match"
 msgstr ""
 
-#: useroperations/views.py:236
+#: useroperations/views.py:247
+msgid "Activation Mail"
+msgstr ""
+
+#: useroperations/views.py:248 useroperations/views.py:333
+#: useroperations/views.py:504
+msgid "Hello "
+msgstr ""
+
+#: useroperations/views.py:250
+msgid ""
+"This is your activation link. It will be valid until the end of the day, "
+"please click it!"
+msgstr ""
+
+#: useroperations/views.py:271
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
 msgstr ""
 
-#: useroperations/views.py:241 useroperations/views.py:668
+#: useroperations/views.py:276 useroperations/views.py:709
 msgid "Captcha was wrong! Please try again"
 msgstr ""
 
-#: useroperations/views.py:265
+#: useroperations/views.py:300
 msgid "Submit"
 msgstr ""
 
-#: useroperations/views.py:281
+#: useroperations/views.py:316
 msgid "No Account with this Username or Email found"
 msgstr ""
 
-#: useroperations/views.py:302
+#: useroperations/views.py:332
+msgid "Lost Password"
+msgstr ""
+
+#: useroperations/views.py:335
+msgid ""
+"This is your new password, please change it immediately!\n"
+" Password: "
+msgstr ""
+
+#: useroperations/views.py:342
 msgid "Password reset was successful, check your mails. Password: "
 msgstr ""
 
-#: useroperations/views.py:353 useroperations/views.py:363
+#: useroperations/views.py:393 useroperations/views.py:403
 msgid "Your old Password was wrong"
 msgstr ""
 
-#: useroperations/views.py:383
+#: useroperations/views.py:423
 msgid "Successfully changed data"
 msgstr ""
 
-#: useroperations/views.py:391
+#: useroperations/views.py:431
 msgid "Delete Profile"
 msgstr ""
 
-#: useroperations/views.py:398
+#: useroperations/views.py:438
 msgid "Change data"
 msgstr ""
 
-#: useroperations/views.py:424
+#: useroperations/views.py:464
 msgid "Delete Profile!"
 msgstr ""
 
-#: useroperations/views.py:428
+#: useroperations/views.py:468
 msgid "Delete Profile?"
 msgstr ""
 
-#: useroperations/views.py:440 useroperations/views.py:506
+#: useroperations/views.py:480 useroperations/views.py:547
 msgid "You are not logged in"
 msgstr ""
 
-#: useroperations/views.py:446
+#: useroperations/views.py:486
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:449
+#: useroperations/views.py:489
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:452
+#: useroperations/views.py:492
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
 msgstr ""
 
-#: useroperations/views.py:475
+#: useroperations/views.py:503
+msgid "Reactivation Mail"
+msgstr ""
+
+#: useroperations/views.py:506
+msgid ""
+"In case the deletion of your account was a mistake, you can reactivate it by "
+"clicking this link!"
+msgstr ""
+
+#: useroperations/views.py:516
 msgid "Successfully deleted the user:"
 msgstr ""
 
-#: useroperations/views.py:477
+#: useroperations/views.py:518
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
-"your account for 24 hours!Link:"
+"your account for 24 hours!"
 msgstr ""
 
-#: useroperations/views.py:503
+#: useroperations/views.py:544
 msgid "Successfully logged out"
 msgstr ""
 
-#: useroperations/views.py:607
+#: useroperations/views.py:648
 msgid "Account already active"
 msgstr ""
 
-#: useroperations/views.py:612
+#: useroperations/views.py:653
 msgid "Invalid data"
 msgstr ""
 
-#: useroperations/views.py:624
+#: useroperations/views.py:665
 msgid "Account activation"
 msgstr ""
 
-#: useroperations/views.py:650
+#: useroperations/views.py:691
 msgid "Feedback sent. Thank you!"
 msgstr ""
 
-#: useroperations/views.py:666
+#: useroperations/views.py:707
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 
-#: useroperations/views.py:674
+#: useroperations/views.py:715
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "

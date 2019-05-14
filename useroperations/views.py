@@ -31,7 +31,7 @@ def index_view(request, wiki_keyword=""):
 
     This view is the main view and landing page of the project.
     It includes checking if a mediawiki page should be rendered or not.
-    The default page, if no keyword was given, is favourite_wmcs.html,
+    The default page, if no keyword was given, is landing_page.html,
      which shows an overview of the most popular wmc services.
 
 
@@ -44,7 +44,7 @@ def index_view(request, wiki_keyword=""):
 
     Returns:
         view: returns the rendered view, which can be:
-         (default): favourite_wmcs.html
+         (default): landing_page.html
          (wiki): a mediawiki page
          (viewer): geoportal.html
          (error): 404.html
@@ -78,13 +78,13 @@ def index_view(request, wiki_keyword=""):
             template = "404.html"
             output = ""
     else:
-        template = "favourite_wmcs.html"
+        template = "landing_page.html"
         # display the favourite WMCs in the template
         results = helper_functions.get_landing_page(lang)
 
     context = {
                'content': output,
-               "wmc_results": results,
+               "results": results,
                }
     geoportal_context = GeoportalContext(request)
     geoportal_context.add_context(context=context)
@@ -96,6 +96,40 @@ def index_view(request, wiki_keyword=""):
         return GeoportalJsonResponse(html=output).get_response()
     else:
         return render(request, template, geoportal_context.get_context())
+
+@check_browser
+def organizations_view(request: HttpRequest):
+    """ Renders the view for showing all participating organizations
+
+    Args:
+        request: The incoming request
+    Returns:
+         A rendered view
+    """
+    template = "publishing_organizations.html"
+    geoportal_context = GeoportalContext(request)
+    context = {
+        "organizations": helper_functions.get_all_organizations()
+    }
+    geoportal_context.add_context(context)
+    return render(request, template, geoportal_context.get_context())
+
+@check_browser
+def categories_view(request: HttpRequest):
+    """ Renders the view for showing all available categories
+
+    Args:
+        request: The incoming request
+    Returns:
+         A rendered view
+    """
+    template = "publishing_organizations.html"
+    geoportal_context = GeoportalContext(request)
+    context = {
+        "organizations": helper_functions.get_all_organizations()
+    }
+    geoportal_context.add_context(context)
+    return render(request, template, geoportal_context.get_context())
 
 @check_browser
 def login_view(request):

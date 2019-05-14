@@ -15,6 +15,8 @@ URL_SEARCH_RLP_SUFFIX = "php/mod_callMetadata.php"
 URL_SEARCH_DE_SUFFIX = "php/mod_callCswMetadata.php"
 URL_SEARCH_INFO = HTTP_OR_SSL + HOSTIP + "/mediawiki/api.php"
 
+URL_GET_ORGANIZATIONS = "php/mod_showOrganizationList.php"
+
 URL_GLM_MOD = "php/mod_sessionWrapper.php"
 
 URL_SPATIAL_BASE = "http://geoportal.rlp.de/mapbender/"

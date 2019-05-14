@@ -137,6 +137,19 @@ class Searcher:
         categories = response["categories"]["searchMD"]["category"]
         return categories
 
+    def get_all_organizations(self):
+        """ Get a list of all organizations that published data
+
+        Returns:
+             dict: Contains a json list of all organizations
+        """
+        # get overview of all organizations
+        uri = URL_BASE + URL_GET_ORGANIZATIONS
+        response = requests.get(uri, {})
+        if response.status_code == 200:
+            response = response.json().get("organizations")
+            return response
+        return {}
 
     def get_search_results_rlp(self):
         """ Performs the search

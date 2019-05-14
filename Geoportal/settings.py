@@ -38,6 +38,10 @@ ALLOWED_HOSTS = [HOSTIP, HOSTNAME, '127.0.0.1', 'localhost']
 # Mediawiki
 INTERNAL_PAGES_CATEGORY = "Portalseite"
 
+# Mapviewer
+IFRAME_HEIGHT = 700
+IFRAME_WIDTH = 2000
+
 # Search module settings
 RLP_CATALOGUE = 3
 RLP_SRC_IMG = "rlp_results.png"

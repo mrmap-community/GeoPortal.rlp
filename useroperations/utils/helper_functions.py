@@ -1,7 +1,7 @@
 import threading
-from urllib import request, error
+from urllib import request
 
-from django.http import Http404
+
 from lxml import html
 from pymemcache.client import base
 from phpserialize import *
@@ -160,13 +160,26 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
 
 
 def get_landing_page(lang):
-    """ Returns the HTML body content of
+    """ Returns the landing page content (favourite wmcs)
 
     :param lang:
     :return:
     """
+    ret_dict = {}
+    # get favourite wmcs
     searcher = Searcher(keywords="", resource_set=["wmc"],page=1,order_by="rank",host=HOSTNAME)
     search_results = searcher.get_search_results_rlp()
-    ret_list = search_results.get("wmc", {}).get("wmc", {}).get("wmc", {}).get("srv", [])
+    ret_dict["wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("wmc", {}).get("srv", [])
 
-    return ret_list
+    return ret_dict
+
+
+def get_all_organizations():
+    """ Returns a list of all data publishing organizations
+
+    Returns:
+         A list of all organizations which publish data
+    """
+    searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
+
+    return searcher.get_all_organizations()

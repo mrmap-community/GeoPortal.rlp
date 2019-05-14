@@ -5,6 +5,8 @@ from .views import *
 app_name = "useroperations"
 urlpatterns = [
     path('', index_view, name='index'),
+    path('organizations/', organizations_view, name='organizations'),
+    path('categories/', categories_view, name='categories'),
     path('feedback/', feedback_view, name='feedback'),
     path('map-viewer/', map_viewer_view, name='map_viewer'),
     path('login/', login_view, name='login'),

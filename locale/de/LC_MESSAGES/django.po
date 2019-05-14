@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 10:55+0000\n"
+"POT-Creation-Date: 2019-05-14 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: Geoportal/settings.py:162 Geoportal/settings.py:181
+#: Geoportal/settings.py:166 Geoportal/settings.py:185
 msgid "German"
 msgstr "Deutsch"
 
-#: Geoportal/settings.py:163 Geoportal/settings.py:180
+#: Geoportal/settings.py:167 Geoportal/settings.py:184
 msgid "English"
 msgstr "Englisch"
 
@@ -52,7 +52,7 @@ msgstr "Treffer pro Seite:"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:26
 #: searchCatalogue/templates/search_forms.html:8
-#: searchCatalogue/utils/viewHelper.py:253
+#: searchCatalogue/utils/viewHelper.py:255
 msgid "Sort by:"
 msgstr "Sortieren nach:"
 
@@ -188,7 +188,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:681
+#: useroperations/views.py:720
 msgid "Send"
 msgstr "Senden"
 
@@ -460,15 +460,15 @@ msgstr "Akzeptieren"
 msgid "Decline"
 msgstr "Ablehnen"
 
-#: searchCatalogue/utils/viewHelper.py:247
+#: searchCatalogue/utils/viewHelper.py:249
 msgid "Search terms(e):"
 msgstr "Suchbegriffe:"
 
-#: searchCatalogue/utils/viewHelper.py:249
+#: searchCatalogue/utils/viewHelper.py:251
 msgid "Spatial Restriction:"
 msgstr "Räumliche Einschränkung:"
 
-#: searchCatalogue/utils/viewHelper.py:251
+#: searchCatalogue/utils/viewHelper.py:253
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
 
@@ -576,12 +576,11 @@ msgstr "Mein Profil"
 msgid "Hello"
 msgstr "Hallo"
 
-#: templates/base.html:95 useroperations/views.py:392
+#: templates/base.html:95 useroperations/views.py:430
 msgid "Change Profile"
 msgstr "Profil bearbeiten"
 
 #: templates/base.html:96
-#| msgid "Description"
 msgid "Show subscription"
 msgstr "Abos anzeigen"
 
@@ -593,13 +592,13 @@ msgstr "Abmelden"
 msgid "Not signed in"
 msgstr "Nicht angemeldet"
 
-#: templates/base.html:100 useroperations/views.py:117
-#: useroperations/views.py:123
+#: templates/base.html:100 useroperations/views.py:151
+#: useroperations/views.py:157
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/base.html:101 useroperations/views.py:146
-#: useroperations/views.py:158
+#: templates/base.html:101 useroperations/views.py:180
+#: useroperations/views.py:192
 msgid "Registration"
 msgstr "Registrierung"
 
@@ -649,10 +648,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        Diese Webseite verwendet Cookies um die bestmögliche Nutzererfahrung bieten zu können. "
-"<br>\n"
-"        Weitere Informationen zu unserem Datenschutz finden Sie in  "
-"unseren\n"
+"        Diese Webseite verwendet Cookies um die bestmögliche Nutzererfahrung "
+"bieten zu können. <br>\n"
+"        Weitere Informationen zu unserem Datenschutz finden Sie in  unseren\n"
 "        "
 
 #: templates/cookie_banner.html:10
@@ -863,32 +861,6 @@ msgstr "Eine Zahl"
 msgid "Minimum 9 characters"
 msgstr "Mindestens 9 Buchstaben"
 
-#: useroperations/templates/favourite_wmcs.html:9
-msgid "Most frequently used Map Combinations"
-msgstr "Meistgenutzte Kartenzusammenstellungen"
-
-#: useroperations/templates/favourite_wmcs.html:25
-msgid "Total views this week"
-msgstr "Anzahl Aufrufe diese Woche"
-
-#: useroperations/templates/favourite_wmcs.html:29
-msgid "Open in mobile viewer"
-msgstr "Kartenviewer öffnen/schließen"
-
-#: useroperations/templates/favourite_wmcs.html:35
-msgid "No description available"
-msgstr "Keine Beschreibung verfügbar"
-
-#: useroperations/templates/favourite_wmcs.html:45
-msgid "Show all"
-msgstr "Anzeigen"
-
-#: useroperations/templates/favourite_wmcs.html:55
-msgid "Start a search and explore all results. Let's go!"
-msgstr ""
-"Starten Sie eine Suche und entdecken Sie viele weitere Karten und "
-"Informationen. Auf gehts!"
-
 #: useroperations/templates/feedback_form.html:5
 msgid "Feedback form"
 msgstr "Feedback Formular"
@@ -905,6 +877,64 @@ msgstr "Wechseln zwischen mobilem und Standard-Kartenviewer"
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
 
+#: useroperations/templates/landing_page.html:9
+msgid "Organizations and topics"
+msgstr "Organisationen und Themen"
+
+#: useroperations/templates/landing_page.html:13
+msgid "Data publishing organizations"
+msgstr "Datenveröffentlichende Organisationen"
+
+#: useroperations/templates/landing_page.html:17
+msgid "Categories and topics"
+msgstr "Kategorien und Themen"
+
+#: useroperations/templates/landing_page.html:21
+msgid "Most frequently used Map Combinations"
+msgstr "Meistgenutzte Kartenzusammenstellungen"
+
+#: useroperations/templates/landing_page.html:36
+msgid "Total views this week"
+msgstr "Anzahl Aufrufe diese Woche"
+
+#: useroperations/templates/landing_page.html:40
+msgid "Open in mobile viewer"
+msgstr "Kartenviewer öffnen/schließen"
+
+#: useroperations/templates/landing_page.html:46
+msgid "No description available"
+msgstr "Keine Beschreibung verfügbar"
+
+#: useroperations/templates/landing_page.html:56
+msgid "Show all"
+msgstr "Anzeigen"
+
+#: useroperations/templates/landing_page.html:66
+msgid "Start a search and explore all results. Let's go!"
+msgstr ""
+"Starten Sie eine Suche und entdecken Sie viele weitere Karten und "
+"Informationen. Auf gehts!"
+
+#: useroperations/templates/publishing_organizations.html:9
+msgid "Publishing Organizations"
+msgstr "Veröffentlichende Organisationen"
+
+#: useroperations/templates/publishing_organizations.html:24
+msgid "Published datasets"
+msgstr "Veröffentlichte Datensätze"
+
+#: useroperations/templates/publishing_organizations.html:28
+msgid "Published layers"
+msgstr "Veröffentlichte Kartenebenen"
+
+#: useroperations/templates/publishing_organizations.html:34
+msgid "Published featuretypes"
+msgstr "Veröffentlichte Objektarten"
+
+#: useroperations/templates/publishing_organizations.html:38
+msgid "Published wmcs"
+msgstr "Veröffentlichte Kartenzusammenstellungen"
+
 #: useroperations/views.py:62
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
@@ -917,11 +947,11 @@ msgstr "Anmeldung erfolgreich"
 msgid "Account not active"
 msgstr "Nicht aktiv"
 
-#: useroperations/views.py:116
+#: useroperations/views.py:150
 msgid "Forgot Password?"
 msgstr "Passwort vergessen?"
 
-#: useroperations/views.py:154
+#: useroperations/views.py:188
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
@@ -931,15 +961,15 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#: useroperations/views.py:171
+#: useroperations/views.py:205
 msgid "The Username"
 msgstr "Der Benutzername"
 
-#: useroperations/views.py:171
+#: useroperations/views.py:205
 msgid "is already taken"
 msgstr "wurde bereits verwendet"
 
-#: useroperations/views.py:175
+#: useroperations/views.py:209
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
@@ -949,20 +979,20 @@ msgstr ""
 "einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, außerdem müssen Sie "
 "mindestens 9 Zeichen verwenden"
 
-#: useroperations/views.py:196 useroperations/views.py:374
+#: useroperations/views.py:230 useroperations/views.py:412
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: useroperations/views.py:213
+#: useroperations/views.py:247
 msgid "Activation Mail"
 msgstr "Aktivierungsmail"
 
-#: useroperations/views.py:214 useroperations/views.py:297
-#: useroperations/views.py:466
+#: useroperations/views.py:248 useroperations/views.py:333
+#: useroperations/views.py:504
 msgid "Hello "
 msgstr "Hallo"
 
-#: useroperations/views.py:216
+#: useroperations/views.py:250
 msgid ""
 "This is your activation link. It will be valid until the end of the day, "
 "please click it!"
@@ -970,8 +1000,7 @@ msgstr ""
 "Dies ist ihr Aktivierungslink. Er wird für die nächsten 24 Stunden gültig "
 "sein. Bitte klicken um Aktivierung abzuschließen!"
 
-
-#: useroperations/views.py:235
+#: useroperations/views.py:271
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
@@ -979,64 +1008,63 @@ msgstr ""
 "Account wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link "
 "in der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
 
-
-#: useroperations/views.py:240 useroperations/views.py:670
+#: useroperations/views.py:276 useroperations/views.py:709
 msgid "Captcha was wrong! Please try again"
 msgstr "Captcha war falsch! Bitte erneut versuchen"
 
-#: useroperations/views.py:264
+#: useroperations/views.py:300
 msgid "Submit"
 msgstr "Bestätigen"
 
-#: useroperations/views.py:280
+#: useroperations/views.py:316
 msgid "No Account with this Username or Email found"
 msgstr "Kein Konto mit diesem Benutzernamen oder dieser Email Adresse gefunden"
 
-#: useroperations/views.py:296
+#: useroperations/views.py:332
 msgid "Lost Password"
 msgstr "Passwort vergessen"
 
-#: useroperations/views.py:299
+#: useroperations/views.py:335
 msgid ""
 "This is your new password, please change it immediately!\n"
 " Password: "
-msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich!\n"
+msgstr ""
+"Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich!\n"
 " Passwort: "
 
-
-#: useroperations/views.py:304
+#: useroperations/views.py:342
 msgid "Password reset was successful, check your mails. Password: "
 msgstr "Passwort erfolgreich zurückgesetzt, bitte prüfen Sie ihre Emails"
 
-#: useroperations/views.py:355 useroperations/views.py:365
+#: useroperations/views.py:393 useroperations/views.py:403
 msgid "Your old Password was wrong"
 msgstr "Ihr altes Passwort war falsch"
 
-#: useroperations/views.py:385
+#: useroperations/views.py:423
 msgid "Successfully changed data"
 msgstr "Daten erfolgreich geändert"
 
-#: useroperations/views.py:393
+#: useroperations/views.py:431
 msgid "Delete Profile"
 msgstr "Profil entfernen"
 
-#: useroperations/views.py:400
+#: useroperations/views.py:438
 msgid "Change data"
 msgstr "Daten ändern"
 
-#: useroperations/views.py:426
+#: useroperations/views.py:464
 msgid "Delete Profile!"
 msgstr "Profil entfernen!"
 
-#: useroperations/views.py:430
+#: useroperations/views.py:468
 msgid "Delete Profile?"
 msgstr "Profil entfernen?"
 
-#: useroperations/views.py:442 useroperations/views.py:508
+#: useroperations/views.py:480 useroperations/views.py:547
 msgid "You are not logged in"
 msgstr "Sie sind nicht angemeldet"
 
-#: useroperations/views.py:448
+#: useroperations/views.py:486
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
@@ -1044,7 +1072,7 @@ msgstr ""
 "Sie sind Besitzer von registrierten Diensten - Dienste löschen oder einem "
 "anderen Eigentümer übergeben"
 
-#: useroperations/views.py:451
+#: useroperations/views.py:489
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
@@ -1052,7 +1080,7 @@ msgstr ""
 "Sie sind Besitzer von Anwendungen - Anwendungen löschen doer einem anderen "
 "Besitzer übergeben"
 
-#: useroperations/views.py:454
+#: useroperations/views.py:492
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
@@ -1060,13 +1088,11 @@ msgstr ""
 "Für dieses Profile existieren gebührenpflichtige Dienste - Bitte "
 "kontaktieren Sie einen Administrator"
 
-#: useroperations/views.py:465
-#, fuzzy
-#| msgid "Activation Mail"
+#: useroperations/views.py:503
 msgid "Reactivation Mail"
 msgstr "Reaktivierungsmail"
 
-#: useroperations/views.py:469
+#: useroperations/views.py:506
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
@@ -1074,12 +1100,11 @@ msgstr ""
 "Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem "
 "folgenden Link reaktivieren!"
 
-
-#: useroperations/views.py:477
+#: useroperations/views.py:516
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:480
+#: useroperations/views.py:518
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
@@ -1087,33 +1112,33 @@ msgstr ""
 ". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
 "Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 
-#: useroperations/views.py:505
+#: useroperations/views.py:544
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
 
-#: useroperations/views.py:609
+#: useroperations/views.py:648
 msgid "Account already active"
 msgstr "Account bereits aktiviert"
 
-#: useroperations/views.py:614
+#: useroperations/views.py:653
 msgid "Invalid data"
 msgstr "Invalide Daten"
 
-#: useroperations/views.py:626
+#: useroperations/views.py:665
 msgid "Account activation"
 msgstr "Accountaktivierung"
 
-#: useroperations/views.py:652
+#: useroperations/views.py:691
 msgid "Feedback sent. Thank you!"
 msgstr "Feedback gesendet. Vielen Dank!"
 
-#: useroperations/views.py:668
+#: useroperations/views.py:707
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
 
-#: useroperations/views.py:676
+#: useroperations/views.py:715
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1125,23 +1150,17 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-msgid "Categories"
-msgstr "Kategorien"
+#~ msgid "Description:"
+#~ msgstr "Beschreibung:"
 
-msgid "Description:"
-msgstr "Beschreibung:"
+#~ msgid "bis"
+#~ msgstr "to"
 
-msgid "bis"
-msgstr "to"
-
-#msgid "Activation Mail"
-#msgstr "Aktivierungsmail"
-
-#msgid "Hello "
-#msgstr "Hallo"
-
-#msgid "Lost Password"
-#msgstr "Passwort vergessen"
-
-msgid "This is your new password, please change it immediately!"
-msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
+# msgid "Activation Mail"
+# msgstr "Aktivierungsmail"
+# msgid "Hello "
+# msgstr "Hallo"
+# msgid "Lost Password"
+# msgstr "Passwort vergessen"
+#~ msgid "This is your new password, please change it immediately!"
+#~ msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
