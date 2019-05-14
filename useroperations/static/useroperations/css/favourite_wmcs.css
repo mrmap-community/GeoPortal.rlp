@@ -31,7 +31,7 @@
     background-color: var(--rlp-gray);
 }
 .organizations .tile{
-    width: 150px;
+    width: 175px;
 }
 .tile:hover{
     transform: scale(1.05);
@@ -54,7 +54,7 @@
     object-fit: cover;
 }
 .organizations .tile-img{
-    width: 150px;
+    width: 175px;
     height: 50px;
     object-fit: contain;
 }
