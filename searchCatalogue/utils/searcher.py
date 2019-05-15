@@ -145,7 +145,7 @@ class Searcher:
         """
         # get overview of all organizations
         uri = URL_BASE + URL_GET_ORGANIZATIONS
-        response = requests.get(uri, {})
+        response = requests.get(uri, {}, verify=False)
         if response.status_code == 200:
             response = response.json().get("organizations")
             return response
@@ -161,7 +161,7 @@ class Searcher:
             "languageCode": language,
             "outputFormat": "json",
         }
-        response = requests.get(uri, params)
+        response = requests.get(uri, params, verify=False)
         if response.status_code == 200:
             response = response.json().get("tagCloud")
             return response
