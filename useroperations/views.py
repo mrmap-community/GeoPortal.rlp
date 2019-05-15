@@ -15,6 +15,7 @@ from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL
+from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import helper_functions
 
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -123,10 +124,11 @@ def categories_view(request: HttpRequest):
     Returns:
          A rendered view
     """
-    template = "publishing_organizations.html"
+    template = "inspire_topics.html"
     geoportal_context = GeoportalContext(request)
     context = {
-        "organizations": helper_functions.get_all_organizations()
+        "topics": helper_functions.get_all_inspire_topics(request.LANGUAGE_CODE),
+        "inspire_doc_uri": URL_INSPIRE_DOC,
     }
     geoportal_context.add_context(context)
     return render(request, template, geoportal_context.get_context())

@@ -183,3 +183,13 @@ def get_all_organizations():
     searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
 
     return searcher.get_all_organizations()
+
+def get_all_inspire_topics(language):
+    """ Returns a list of all inspire topics available
+
+    Returns:
+         A list of all organizations which publish data
+    """
+    searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
+
+    return searcher.get_all_topics(language)

@@ -3,7 +3,7 @@
 {% csrf_token %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<html>
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <title>Geoportal{% block title %} RLP {% endblock %}</title>

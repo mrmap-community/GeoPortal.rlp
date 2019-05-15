@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static i18n humanize %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+{% endblock %}
+
+{% block body %}
+<h2>{% trans 'Topics' %}</h2>
+<div class="tile-wrapper topics">
+    {% for result in topics.tags %}
+        <div class="tile">
+            <div class="tile-header">{{ result.title }}</div>
+            <div class="tile-content">
+                <div class="tile-content-img" data-id="{{ result.id }}" data-name="{{ result.title }}">
+                    {% if result.symbolUrl != '' %}
+                    <img class="tile-img" src="{{ result.symbolUrl }}">
+                    {% else  %}
+                    <img class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}">
+                    {% endif %}
+                </div>
+                <div class="tile-content-abstract">
+                    <div class="sub-tile-container">
+                        <div class="data-info-container" title="{% trans 'Number of data' %}">
+                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_search_results.png' %}">
+                            <span>{{ result.weight|intcomma }}</span>
+                        </div>
+                        <a href="https://inspire.ec.europa.eu/">
+                            <div class="data-info-container" title="{% trans 'INSPIRE Topic' %}">
+                                <img class="sub-tile-img only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
+                            </div>
+                        </a>
+                        <a href="{{ inspire_doc_uri }}{{ result.inspireThemeId }}" target="_blank">
+                            <div class="data-info-container" title="{% trans 'More information' %}">
+                                <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_queryable_hover.png' %}">
+                                <span>{% trans 'Information' %}</span>
+                            </div>                            
+                        </a>
+                    </div>
+                    <hr>
+                    {{ result.description|safe }}
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

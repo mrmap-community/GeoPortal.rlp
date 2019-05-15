@@ -151,6 +151,23 @@ class Searcher:
             return response
         return {}
 
+    def get_all_topics(self, language):
+        uri = URL_BASE + URL_GET_TOPICS
+        params = {
+            "type": "inspireCategories",
+            "scale": "absolute",
+            "maxObjects": 35,
+            "maxFontSize": 30,
+            "languageCode": language,
+            "outputFormat": "json",
+        }
+        response = requests.get(uri, params)
+        if response.status_code == 200:
+            response = response.json().get("tagCloud")
+            return response
+        return {}
+
+
     def get_search_results_rlp(self):
         """ Performs the search
 
