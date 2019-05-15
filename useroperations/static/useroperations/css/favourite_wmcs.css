@@ -113,7 +113,7 @@
     justify-content: space-between;
 }
 .organizations .sub-tile-container, .topics .sub-tile-container{
-    background-color: var(--rlp-red);
+    color: var(--rlp-gray);
 }
 
 .mobile-button{
@@ -141,6 +141,12 @@
 
 .sub-tile-img{
     padding: 0 10px 0 0;
+    -webkit-filter: invert(1.0);
+    filter: invert(1.0);
+}
+.sub-tile-img:hover{
+    -webkit-filter: invert(0.0);
+    filter: invert(0.0);
 }
 
 .sub-tile-img.only{
@@ -152,9 +158,10 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    color: white;
+    color: var(--rlp-gray-font);
 }
 .organizations .data-info-container:hover, .topics .data-info-container:hover{
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--rlp-red);
+    color: white;
     cursor: pointer;
 }
