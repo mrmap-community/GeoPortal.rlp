@@ -882,8 +882,8 @@ msgid "Organizations and topics"
 msgstr "Organisationen und Themen"
 
 #: useroperations/templates/landing_page.html:13
-msgid "Data publishing organizations"
-msgstr "Datenveröffentlichende Organisationen"
+msgid "Organizations"
+msgstr "Organisationen"
 
 #: useroperations/templates/landing_page.html:17
 msgid "Categories and topics"
