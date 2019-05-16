@@ -1431,6 +1431,26 @@ if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
 
+# In case of credentials being given as option for installation. 
+# Warn the user about the credentials potentially being logged in the bash history.
+if [[ "${proxyuser}" != "" ]] || [[ "${proxypassword}" != "" ]];then
+    cat << EOF
+#############################################
+#                                           #
+#               CAUTION!                    #
+#           security related                #
+#                                           #
+# You entered the credentials to your       #
+# secured proxy server. Please check        #
+# your command line history for remaining   #
+# login credentials.                        #
+#                                           #
+# We recommend deleting the entry.          #
+#                                           #
+#############################################
+EOF
+fi 
+
 }
 
 update(){
