@@ -170,7 +170,7 @@ class Searcher:
         return {}
 
 
-    def get_search_results_rlp(self):
+    def get_search_results_rlp(self, user_id=None):
         """ Performs the search
 
         Search parameters will be used from the Searcher object itself.
@@ -198,6 +198,7 @@ class Searcher:
             "languageCode": self.language_code,
             "restrictToOpenData": self.only_open_data,
             "hostName": HOSTNAME,
+            "userId": user_id,
         }
         if self.host is not None:
             params["hostName"] = self.host

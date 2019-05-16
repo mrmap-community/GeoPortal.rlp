@@ -328,6 +328,9 @@ def get_data_rlp(request: HttpRequest):
     }
     lang_code = request.LANGUAGE_CODE
 
+    # get user php session info
+    session_data = helper.get_mb_user_session_data(request)
+
     # prepare bbox parameter
     search_bbox = post_params.get("searchBbox", "")
     search_type_bbox = post_params.get("searchTypeBbox", "")
@@ -377,7 +380,7 @@ def get_data_rlp(request: HttpRequest):
                         language_code=lang_code,
                         catalogue_id=catalogue_id,
 			host=host)
-    search_results = searcher.get_search_results_rlp()
+    search_results = searcher.get_search_results_rlp(user_id=session_data.get("userid", ""))
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
@@ -421,9 +424,6 @@ def get_data_rlp(request: HttpRequest):
     # set state icon file paths
     search_results = viewHelper.set_iso3166_icon_path(search_results)
     print_debug(EXEC_TIME_PRINT % ("setting iso3166 icons", time.time() - start_time))
-
-    # get user php session info
-    session_data = helper.get_mb_user_session_data(request)
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
