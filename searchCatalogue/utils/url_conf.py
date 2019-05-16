@@ -9,7 +9,8 @@ Created on: 22.01.19
 """
 from Geoportal.settings import HOSTIP, HTTP_OR_SSL
 
-URL_BASE = HTTP_OR_SSL + HOSTIP + "/mapbender/"
+# URL_BASE = HTTP_OR_SSL + HOSTIP + "/mapbender/"
+URL_BASE = HTTP_OR_SSL + "localhost/mapbender/"
 URL_AUTO_COMPLETE_SUFFIX = "geoportal/mod_getCatalogueKeywordSuggestion.php"
 URL_SEARCH_RLP_SUFFIX = "php/mod_callMetadata.php"
 URL_SEARCH_DE_SUFFIX = "php/mod_callCswMetadata.php"

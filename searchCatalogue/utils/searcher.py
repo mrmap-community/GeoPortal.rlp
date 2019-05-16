@@ -20,7 +20,7 @@ import threading
 from copy import copy
 
 from Geoportal import helper
-from Geoportal.settings import RLP_CATALOGUE
+from Geoportal.settings import RLP_CATALOGUE, HOSTNAME
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
@@ -129,6 +129,7 @@ class Searcher:
             "searchResources": self.search_resources,
             "searchId": self.search_id,
             "languageCode": self.language_code,
+            "hostName": HOSTNAME,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -160,6 +161,7 @@ class Searcher:
             "maxFontSize": 30,
             "languageCode": language,
             "outputFormat": "json",
+            "hostName": HOSTNAME,
         }
         response = requests.get(uri, params, verify=False)
         if response.status_code == 200:
@@ -194,7 +196,8 @@ class Searcher:
             "searchBbox": self.bbox,
             "searchTypeBbox": self.typeBbox,
             "languageCode": self.language_code,
-            "restrictToOpenData": self.only_open_data
+            "restrictToOpenData": self.only_open_data,
+            "hostName": HOSTNAME,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -205,6 +208,7 @@ class Searcher:
         if len(self.search_resources) == 1 and self.search_resources[0] == '':
             return result
         for resource in self.search_resources:
+            _session = requests.Session()
             if resource == self.search_page_resource:
                 # use requested page
                 params["searchPages"] = self.search_pages
@@ -249,6 +253,7 @@ class Searcher:
             "searchResources": "",
             "searchPages": self.search_pages,
             "maxResults": 5,
+            "hostName": HOSTNAME,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -283,7 +288,8 @@ class Searcher:
                 "searchEPSG": 4326,
                 "maxResults": 15,
                 "maxRows": 15,
-                "searchText": search_text
+                "searchText": search_text,
+                "hostName": HOSTNAME,
             }
             if self.host is not None:
                 params["hostName"] = self.host
@@ -325,6 +331,7 @@ class Searcher:
             "action": "query",
             "format": "json",
             "prop": "categories",
+            "hostName": HOSTNAME,
         }
         response = requests.get(url=URL_SEARCH_INFO, params=params, verify=False)
         response = response.json()

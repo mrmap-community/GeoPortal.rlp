@@ -180,4 +180,4 @@ def print_debug(string: str):
     Returns:
     """
     if DEBUG:
-        print(str)
+        print(string)

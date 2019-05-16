@@ -437,7 +437,7 @@ def get_data_rlp(request: HttpRequest):
             "maxx": lat_lon[2],
             "maxy": lat_lon[3],
         }
-        write_gml_to_session(sessionId=session_id, lat_lon=lat_lon)
+        write_gml_to_session(session_id=session_id, lat_lon=lat_lon)
 
 
     # prepare data for rendering
@@ -638,4 +638,4 @@ def write_gml_session(request: HttpRequest):
     lat_lon = params_GET.get("latLon", "{}")
     lat_lon = json.loads(lat_lon)
     session_id = request.COOKIES.get("sessionid", "")
-    write_gml_to_session(lat_lon=lat_lon, sessionId=session_id)
+    write_gml_to_session(lat_lon=lat_lon, session_id=session_id)

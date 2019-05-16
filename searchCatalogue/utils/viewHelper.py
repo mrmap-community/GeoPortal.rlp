@@ -32,7 +32,7 @@ from searchCatalogue.settings import *
 
 
 ####    SINGLE HELPER FUNCTIONS
-from searchCatalogue.utils.searcher import Searcher
+from searchCatalogue.utils.searcher import Searcher, URL_BASE
 
 
 def parse_extended_params(params: dict):
@@ -517,7 +517,8 @@ def __dataset_single_layer_disclaimer(layer, language):
         service_id = layer.get("srv", {}).get("id", None)
         if service_id is None:
             return
-        url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
+        #url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
+        url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
             service_id) + "&languageCode=" + language + "&withHeader=true"
         layer["srv"]["disclaimer_html"] = requests.get(url, verify=False).content.decode()
 
@@ -551,7 +552,7 @@ def __wms_srv_disclaimer(layer, language, resource):
     service_id = layer.get("id", None)
     if service_id is None:
         return
-    url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     layer["disclaimer_html"] = requests.get(url, verify=False).content.decode()
 
 def __wfs_srv_disclaimer(srv, language, resource):
@@ -567,7 +568,7 @@ def __wfs_srv_disclaimer(srv, language, resource):
     service_id = srv.get("id", None)
     if service_id is None:
         return
-    url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     srv["disclaimer_html"] = requests.get(url, verify=False).content.decode()
 
 def generic_srv_disclaimer(resource, service_id, language):
@@ -580,7 +581,7 @@ def generic_srv_disclaimer(resource, service_id, language):
     Returns:
         nothing
     """
-    url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
     return requests.get(url, verify=False).content.decode()
 
 def __set_single_service_disclaimer_url(search_results, resource):
