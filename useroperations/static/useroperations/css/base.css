@@ -581,12 +581,12 @@ ul {
     font-size: 20px;
     border-radius: 10px;
 }
-.messages .success {
+.messages.success {
     background-color: var(--success-green);
 }
-.messages .error {
+.messages.error {
     background-color: var(--error-red);
 }
-.messages .success:hover, .messages .error:hover{
+.messages.success:hover, .messages.error:hover{
     cursor: default;
 }

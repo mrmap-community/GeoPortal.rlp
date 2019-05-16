@@ -147,16 +147,14 @@
 
         {% if messages %}
         <div class="messages-container">
-            <div class="messages">
-                {% for message in messages %}
-                <div class="{{ message.tags }}">
+            {% for message in messages %}
+            <div class="messages {{ message.tags }}">
                     <div class="message-toggler">
                         x
                     </div>
                     {{ message }}
-                </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
         {% endif %}
 

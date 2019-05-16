@@ -7,11 +7,13 @@
                 <div class="mobile-map-toggler">
 		        	<img width="50px" src="{% static 'useroperations/images/icn_switch.png' %}" title="{% trans 'Switch between default and mobile map viewer' %}">
 		        </div>
-		        <div class="map-application-selector">
-		        	<div class="map-applications-toggler">
-		        		<img width="50px" src="{% static 'useroperations/images/icn_map_application_toggler.png' %}" title="{% trans 'Select other map application' %}">
+				{% if guis|length > 1 %}
+		        	<div class="map-application-selector">
+		        		<div class="map-applications-toggler">
+		        			<img width="50px" src="{% static 'useroperations/images/icn_map_application_toggler.png' %}" title="{% trans 'Select other map application' %}">
+		        		</div>
 		        	</div>
-		        </div>
+				{% endif %}
             </div>
             <div class="map-applications-list">
                 {% for gui in guis %}
