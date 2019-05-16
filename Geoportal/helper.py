@@ -11,7 +11,7 @@ from copy import copy
 
 from django.http import HttpRequest
 
-from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL
+from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, DEBUG
 from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
@@ -171,3 +171,13 @@ def execute_threads(thread_list):
         thread.start()
     for thread in thread_list:
         thread.join()
+
+def print_debug(string: str):
+    """ Print only if we are in dev mode!
+
+    Args:
+        string:
+    Returns:
+    """
+    if DEBUG:
+        print(str)

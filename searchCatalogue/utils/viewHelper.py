@@ -21,6 +21,9 @@ import math
 
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+from Geoportal.helper import execute_threads
+
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from Geoportal import helper
@@ -332,7 +335,11 @@ def __type_inspire_url(uuid, option:dict):
         string: The url according to the option type of the resource
     """
     url = None
-    _type = option["type"]
+    try:
+        _type = option["type"]
+    except TypeError:
+        # there could be option variables which are no dicts but only contain a digit -> no idea what this should be!
+        return url
     # base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
     base_url = HTTP_OR_SSL + HOSTNAME + "/mapbender/plugins/mb_downloadFeedClient.php?url="
     if _type == "wmslayergetmap":
@@ -359,6 +366,7 @@ def gen_inspire_url(search_results):
 
     for resource in resources:
         results = search_results[resource][resource][resource]["srv"]
+        thread_list = []
         for result in results:
             if resource == "dataset":
                 try:
@@ -366,8 +374,12 @@ def gen_inspire_url(search_results):
                 except KeyError:
                     # this is quicker than checking if the key exists
                     continue
-                for feed in feeds:
-                    feed["download_url"] = __type_inspire_url(result["uuid"], feed)
+                if isinstance(feeds, dict):
+                    for feed_key, feed_val in feeds.items():
+                        feed_val["download_url"] = __type_inspire_url(result["uuid"], feed_val)
+                else:
+                    for feed in feeds:
+                        feed["download_url"] = __type_inspire_url(result["uuid"], feed)
             elif resource == "wms":
                 layers = result.get("layer", None)
                 if layers is None:
@@ -376,8 +388,12 @@ def gen_inspire_url(search_results):
                     if layer.get("downloadOptions", None) is None:
                         continue
                     for download_options_key, download_options_val in layer["downloadOptions"].items():
-                        opt = download_options_val["option"][0]
+                        try:
+                            opt = download_options_val["option"][0]
+                        except KeyError:
+                            opt = None
                         layer["download_url"] = __type_inspire_url(download_options_val["uuid"], opt)
+        execute_threads(thread_list)
     return search_results
 
 ####    EXTENT GRAPHICS

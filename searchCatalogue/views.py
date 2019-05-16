@@ -14,7 +14,7 @@ from collections import OrderedDict
 
 from django.core.mail import send_mail
 from django.http import HttpRequest, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils import translation
 from django_extensions import settings
@@ -23,7 +23,7 @@ from django.utils.translation import gettext as _
 from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.helper import write_gml_to_session, get_mb_user_session_data
+from Geoportal.helper import write_gml_to_session, print_debug
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
     EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
 from searchCatalogue.utils import viewHelper
@@ -251,7 +251,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
             "nonGeographicDataset": _("Miscellaneous Datasets"),
         }
 
-    print(EXEC_TIME_PRINT % ("extracting parameters", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("extracting parameters", time.time() - start_time))
 
     # run search DE
     searcher = Searcher(page_res=requested_page_res,
@@ -264,7 +264,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
                         )
     start_time = time.time()
     search_results = searcher.get_search_results_de()
-    print(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # split used searchFilters from searchResults
     search_filters = {}
@@ -275,19 +275,19 @@ def get_data_other(request: HttpRequest, catalogue_id):
     start_time = time.time()
     # prepare pages to render for all resources
     pages = viewHelper.calculate_pages_to_render_de(search_results, search_pages, requested_page_res)
-    print(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
 
     # ONLY FOR EU
     if is_eu_search:
         start_time = time.time()
         # hash inspire id, so we can use them in a better way with javascript
         search_results = viewHelper.hash_inspire_ids(search_results)
-        print(EXEC_TIME_PRINT % ("hash inspire ids", time.time() - start_time))
+        print_debug(EXEC_TIME_PRINT % ("hash inspire ids", time.time() - start_time))
 
     start_time = time.time()
     # prepare preview images
     search_results = viewHelper.check_previewUrls(search_results)
-    print(EXEC_TIME_PRINT % ("checking previewUrls", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("checking previewUrls", time.time() - start_time))
 
 
     results = {
@@ -304,7 +304,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     start_time = time.time()
     view_content = render_to_string(template_name, results)
-    print(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
     return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
 
@@ -342,7 +342,7 @@ def get_data_rlp(request: HttpRequest):
     # prepare extended search parameters
     extended_search_params = viewHelper.parse_extended_params(post_params)
     selected_facets = viewHelper.prepare_selected_facets(selected_facets)
-    print(EXEC_TIME_PRINT % ("prepare extended search params", float(time.time() - start_time)))
+    print_debug(EXEC_TIME_PRINT % ("prepare extended search params", float(time.time() - start_time)))
 
     # prepare search tags (keywords)
     keywords = post_params["terms"].split(",")
@@ -378,7 +378,7 @@ def get_data_rlp(request: HttpRequest):
                         catalogue_id=catalogue_id,
 			host=host)
     search_results = searcher.get_search_results_rlp()
-    print(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
     search_filters = viewHelper.get_search_filters(search_results)
@@ -389,38 +389,38 @@ def get_data_rlp(request: HttpRequest):
     facets = rehasher.get_rehashed_categories()
     search_filters = rehasher.get_rehashed_filters()
     del rehasher
-    print(EXEC_TIME_PRINT % ("rehashing of facets", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("rehashing of facets", time.time() - start_time))
 
     start_time = time.time()
     # prepare pages to render for all resources
     pages = viewHelper.calculate_pages_to_render(search_results, requested_page, requested_page_res)
-    print(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
 
     start_time = time.time()
     # generate inspire feed urls
     search_results = viewHelper.gen_inspire_url(search_results)
-    print(EXEC_TIME_PRINT % ("preparing inspire urls", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("preparing inspire urls", time.time() - start_time))
 
     start_time = time.time()
     # generate extent graphics url
     search_results = viewHelper.gen_extent_graphic_url(search_results)
-    print(EXEC_TIME_PRINT % ("generating extent graphic urls", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("generating extent graphic urls", time.time() - start_time))
 
     start_time = time.time()
     # set attributes for wfs child modules
     search_results = viewHelper.set_children_data_wfs(search_results)
-    print(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
 
     # ToDO: Keep an eye on the disclaimer behaviour. If something does not work and we need a quick solution, comment these lines back in
     #start_time = time.time()
     ## set disclaimer info
     #search_results = viewHelper.set_service_disclaimer_url(search_results)
-    #print(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
+    #print_debug(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
 
     start_time = time.time()
     # set state icon file paths
     search_results = viewHelper.set_iso3166_icon_path(search_results)
-    print(EXEC_TIME_PRINT % ("setting iso3166 icons", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("setting iso3166 icons", time.time() - start_time))
 
     # get user php session info
     session_data = helper.get_mb_user_session_data(request)
@@ -479,7 +479,7 @@ def get_data_rlp(request: HttpRequest):
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     start_time = time.time()
     view_content = render_to_string(template_name, results)
-    print(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
     return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
 
@@ -530,7 +530,7 @@ def get_data_info(request: HttpRequest):
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     #start_time = time.time()
     view_content = render_to_string(template_name, params)
-    #print(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
+    #print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
     return GeoportalJsonResponse(html=view_content, nresults=nresults).get_response()
 

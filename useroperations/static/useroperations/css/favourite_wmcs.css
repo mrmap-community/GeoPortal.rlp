@@ -141,13 +141,8 @@
 
 .sub-tile-img{
     padding: 0 10px 0 0;
-    -webkit-filter: invert(1.0);
-    filter: invert(1.0);
 }
-.sub-tile-img:hover{
-    -webkit-filter: invert(0.0);
-    filter: invert(0.0);
-}
+
 
 .sub-tile-img.only{
     padding: 0;

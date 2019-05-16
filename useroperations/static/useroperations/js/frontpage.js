@@ -213,6 +213,15 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
      searchButton.click();
  });
 
+ $(document).on("click", ".topics .tile-content-img", function(){
+     var elem = $(this);
+     var filterName = elem.attr("data-name");
+     var filterId = elem.attr("data-id");
+     var searchButton = $("#geoportal-search-button");
+     search.setParam("facet", ["INSPIRE", filterName, filterId].join(","));
+     searchButton.click();
+ });
+
  $(document).on("click", ".organizations .data-info-container", function(){
      var elem = $(this);
      var datatype = elem.attr("data-resource");
@@ -223,6 +232,7 @@ $(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function
      var tileContentImg = elem.parents(".tile").find(".tile-content-img");
      tileContentImg.click();
  });
+
 
  $(document).on("click", ".tile-content-img", function(event){
     event.preventDefault();
