@@ -1502,6 +1502,7 @@ old_database_host=`grep -wm 1 HOST  Geoportal/settings.py | cut -d "'" -f4 | cut
 old_database_port=`grep -wm 1 PORT  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
 
 mv /opt/GeoPortal.rlp/Geoportal/settings.py /opt/GeoPortal.rlp/Geoportal/settings.py_$(date +"%m_%d_%Y")
+git reset --hard
 git pull
 
 if [ ! -f /opt/GeoPortal.rlp/Geoportal/settings.py ]; then
