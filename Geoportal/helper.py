@@ -11,7 +11,7 @@ from copy import copy
 
 from django.http import HttpRequest
 
-from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, DEBUG
+from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, DEBUG, INTERNAL_SSL
 from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
@@ -77,7 +77,7 @@ def get_session_data(request):
                     gui = str(session_data[b'mb_user_gui'], 'utf-8')
                     loggedin = False
                 else:
-                    response = requests.post(HTTP_OR_SSL + '127.0.0.1/portal/guiapi.php',verify=False,data=session_data[b'mb_user_guis'])
+                    response = requests.post(HTTP_OR_SSL + '127.0.0.1/portal/guiapi.php',verify=INTERNAL_SSL,data=session_data[b'mb_user_guis'])
 
                     if session_data[b'mb_user_guis']:
 
@@ -158,7 +158,7 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
 
     uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&value={GML}"
 
-    response = requests.post(url=uri, data=post_content)
+    response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
 
 def execute_threads(thread_list):
     """ Executes a list of threads

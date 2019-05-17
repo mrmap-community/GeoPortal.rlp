@@ -20,7 +20,7 @@ import threading
 from copy import copy
 
 from Geoportal import helper
-from Geoportal.settings import RLP_CATALOGUE, HOSTNAME
+from Geoportal.settings import RLP_CATALOGUE, HOSTNAME, INTERNAL_SSL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
@@ -113,7 +113,7 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url, params, verify=False)
+        response = requests.get(url, params, verify=INTERNAL_SSL)
         result[resource] = response.json()
 
     def get_categories_list(self):
@@ -133,7 +133,7 @@ class Searcher:
         }
         if self.host is not None:
             params["hostName"] = self.host
-        response = requests.get(url, params, verify=False)
+        response = requests.get(url, params, verify=INTERNAL_SSL)
         response = response.json()
         categories = response["categories"]["searchMD"]["category"]
         return categories
@@ -146,7 +146,7 @@ class Searcher:
         """
         # get overview of all organizations
         uri = URL_BASE + URL_GET_ORGANIZATIONS
-        response = requests.get(uri, {}, verify=False)
+        response = requests.get(uri, {}, verify=INTERNAL_SSL)
         if response.status_code == 200:
             response = response.json().get("organizations")
             return response
@@ -163,7 +163,7 @@ class Searcher:
             "outputFormat": "json",
             "hostName": HOSTNAME,
         }
-        response = requests.get(uri, params, verify=False)
+        response = requests.get(uri, params, verify=INTERNAL_SSL)
         if response.status_code == 200:
             response = response.json().get("tagCloud")
             return response
@@ -234,7 +234,7 @@ class Searcher:
             nothing
         """
 
-        response = requests.get(url, params, verify=False)
+        response = requests.get(url, params, verify=INTERNAL_SSL)
         try:
             response = response.json()
             results[resource] = response
@@ -294,7 +294,7 @@ class Searcher:
             }
             if self.host is not None:
                 params["hostName"] = self.host
-            response = requests.get(url, params, proxies=PROXIES, verify=False)
+            response = requests.get(url, params, proxies=PROXIES, verify=INTERNAL_SSL)
             result = response.json()
             result["keyword"] = search_text
             ret_val.append(result)
@@ -311,7 +311,7 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=False)
+        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
         response = response.json()
         params["srsearch"] = params["srsearch"].replace("*", "")
         if results.get(params["srsearch"], None) is None:
@@ -334,7 +334,7 @@ class Searcher:
             "prop": "categories",
             "hostName": HOSTNAME,
         }
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=False)
+        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
         response = response.json()
         response = response["query"]["pages"]
         for resp_key, resp_val in response.items():
@@ -389,7 +389,7 @@ class Searcher:
             "aplimit": 500,
         }
         results = {}
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=False)
+        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
         response = response.json()
         results = response
         return results

@@ -42,6 +42,9 @@ INTERNAL_PAGES_CATEGORY = "Portalseite"
 IFRAME_HEIGHT = 700
 IFRAME_WIDTH = 2000
 
+# Set a bool flag if internal API calls shall be verifies via ssl or not
+INTERNAL_SSL = False
+
 # Search module settings
 RLP_CATALOGUE = 3
 RLP_SRC_IMG = "rlp_results.png"

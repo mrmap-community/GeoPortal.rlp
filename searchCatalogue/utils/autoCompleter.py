@@ -8,6 +8,9 @@ Created on: 22.01.19
 """
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+from Geoportal.settings import INTERNAL_SSL
+
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from searchCatalogue.settings import PROXIES
@@ -62,7 +65,7 @@ class AutoCompleter:
             "searchText": self.search_text,
             "maxResults": self.max_results,
         }
-        response = requests.get(url, params, verify=False)
+        response = requests.get(url, params, verify=INTERNAL_SSL)
         results = response.json()
         return results
 

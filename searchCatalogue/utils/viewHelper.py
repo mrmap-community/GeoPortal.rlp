@@ -27,7 +27,7 @@ from Geoportal.helper import execute_threads
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from Geoportal import helper
-from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP, HTTP_OR_SSL
+from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
 from searchCatalogue.settings import *
 
 
@@ -520,7 +520,7 @@ def __dataset_single_layer_disclaimer(layer, language):
         #url = HTTP_OR_SSL + HOSTIP + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
         url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
             service_id) + "&languageCode=" + language + "&withHeader=true"
-        layer["srv"]["disclaimer_html"] = requests.get(url, verify=False).content.decode()
+        layer["srv"]["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
 
 
 def __dataset_srv_disclaimer(srv, language):
@@ -553,7 +553,7 @@ def __wms_srv_disclaimer(layer, language, resource):
     if service_id is None:
         return
     url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    layer["disclaimer_html"] = requests.get(url, verify=False).content.decode()
+    layer["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
 
 def __wfs_srv_disclaimer(srv, language, resource):
     """ Handles a wfs srv set and sets the disclaimer info
@@ -569,7 +569,7 @@ def __wfs_srv_disclaimer(srv, language, resource):
     if service_id is None:
         return
     url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    srv["disclaimer_html"] = requests.get(url, verify=False).content.decode()
+    srv["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
 
 def generic_srv_disclaimer(resource, service_id, language):
     """ Handles a generic srv set and returns the fetched disclaimer html
@@ -582,7 +582,7 @@ def generic_srv_disclaimer(resource, service_id, language):
         nothing
     """
     url = URL_BASE + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    return requests.get(url, verify=False).content.decode()
+    return requests.get(url, verify=INTERNAL_SSL).content.decode()
 
 def __set_single_service_disclaimer_url(search_results, resource):
     """ Function handles a single resource from search_results. This function is needed for multithreading.
