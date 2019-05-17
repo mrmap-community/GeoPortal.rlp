@@ -229,14 +229,28 @@ def register_view(request):
                 bytepw = form.cleaned_data['password'].encode('utf-8')
                 user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)),'utf-8')
             else:
+                form = RegistrationForm(request.POST)
+                context = {
+                    'form': form,
+                    'headline': _("Registration"),
+                    "btn_label1": btn_label,
+                    "small_labels": small_labels,
+                    "disclaimer": disclaimer,
+                }
+                geoportal_context.add_context(context)
                 messages.error(request, _("Passwords do not match"))
-                return redirect('useroperations:register')
+                return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
             try:
+                realm = helper_functions.get_mapbender_config_value('REALM')
                 portaladmin = helper_functions.get_mapbender_config_value('PORTAL_ADMIN_USER_ID')
+                byte_aldigest = (form.cleaned_data['name'] + ":" + realm + ":" + form.cleaned_data['password']).encode('utf-8')
+                user.mb_user_aldigest = hashlib.md5(byte_aldigest).hexdigest()
                 user.mb_user_owner = portaladmin
             except KeyError:
                 user.mb_user_owner = 1
+                user.mb_user_aldigest = "Could not find realm"
+                print("Could not read from Mapbender Config")
 
 
             user.mb_user_login_count = 0
@@ -249,7 +263,7 @@ def register_view(request):
                  _("Activation Mail"),
                 _("Hello ") + user.mb_user_name +
                 ", \n \n" +
-                _("This is your activation link. It will be valid until the end of the day, please click it!") 
+                _("This is your activation link. It will be valid until the end of the day, please click it!")
               	+ "\n Link: "  + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
                 'kontakt@geoportal.de',
                 [user.mb_user_email],  # später email variable eintragen
@@ -275,8 +289,16 @@ def register_view(request):
 
             return redirect('useroperations:login')
         else:
+            form = RegistrationForm(request.POST)
+            context = {
+                'form': form,
+                'headline': _("Registration"),
+                "btn_label1": btn_label,
+                "small_labels": small_labels,
+                "disclaimer": disclaimer,
+            }
+            geoportal_context.add_context(context)
             messages.error(request, _("Captcha was wrong! Please try again"))
-
 
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
@@ -339,8 +361,8 @@ def pw_reset_view(request):
                         [user.mb_user_email],
                         fail_silently=False,
                 )
-	
-                
+
+
                 messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
                 return redirect('useroperations:login')
 

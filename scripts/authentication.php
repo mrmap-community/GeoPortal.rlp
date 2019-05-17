@@ -114,13 +114,6 @@ if ($row['is_active'] == "f"){
 		$t = array('s','i');
 		$res = db_prep_query($sql,$v,$t);
 
-		$e = new mb_exception('geoportal/authentication.php: user login: '.$row['mb_user_name']);
-		//update mb_user_aldigest
-		$sql = "UPDATE mb_user SET mb_user_aldigest = $1 WHERE mb_user_id = $2";
-		$v = array(md5($row['mb_user_name'].":".REALM.":".$pw),$row['mb_user_id']);
-		$t = array('s','i');
-		$res = db_prep_query($sql,$v,$t);
-
 		# delete md5
 		$sql = "UPDATE mb_user SET mb_user_password = $1 WHERE mb_user_id = $2";
 		$v = array('',$row['mb_user_id']);
