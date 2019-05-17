@@ -1336,7 +1336,7 @@ sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/a
 
 # django code
 sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$ipaddress\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 
 # enable php_serialize
 if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
@@ -1533,7 +1533,7 @@ fi
 
 # refill with old values
 sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$old_hostip\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$old_hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$old_hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"SEARCH_API_PROTOCOL = \"http\""/"SEARCH_API_PROTOCOL = \"$old_search_proto\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$old_database_name',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$old_database_user',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
