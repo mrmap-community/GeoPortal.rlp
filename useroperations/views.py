@@ -280,6 +280,15 @@ def register_view(request):
 
             return redirect('useroperations:login')
         else:
+            form = RegistrationForm(request.POST)
+            context = {
+                'form': form,
+                'headline': _("Registration"),
+                "btn_label1": btn_label,
+                "small_labels": small_labels,
+                "disclaimer": disclaimer,
+            }
+            geoportal_context.add_context(context)
             messages.error(request, _("Captcha was wrong! Please try again"))
 
     return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
