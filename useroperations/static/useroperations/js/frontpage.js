@@ -313,12 +313,17 @@ $(document).on('keyup', "#id_password", function(){
 
 $(document).on('click', "#change-form-button", function(){
 
+  var userLang = navigator.language || navigator.userLanguage;
   var PasswordInput = document.getElementById("id_password");
   var PasswordInputConfirm = document.getElementById("id_passwordconfirm");
 
 
   if(PasswordInput.value != PasswordInputConfirm.value) {
-    alert("Check Passwords");
+    if(userLang == "de") {
+      alert("Passwörter stimmen nicht überein");
+    } else {
+      alert("Passwords do not match");
+    }
     event.preventDefault();
   }
 
