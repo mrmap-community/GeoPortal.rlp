@@ -1431,7 +1431,7 @@ if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
 
-# In case of credentials being given as option for installation. 
+# In case of credentials being given as option for installation.
 # Warn the user about the credentials potentially being logged in the bash history.
 if [[ "${proxyuser}" != "" ]] || [[ "${proxypassword}" != "" ]];then
     cat << EOF
@@ -1449,7 +1449,7 @@ if [[ "${proxyuser}" != "" ]] || [[ "${proxypassword}" != "" ]];then
 #                                           #
 #############################################
 EOF
-fi 
+fi
 
 }
 
@@ -1516,6 +1516,7 @@ cd /opt/GeoPortal.rlp
 old_hostname=`grep -m 1 HOSTNAME  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
 old_hostip=`grep -m 1 HOSTIP  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
 old_ssl_conf=`grep -m 1 HTTP_OR_SSL  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
+old_search_proto=`grep -m 1 SEARCH_API_PROTOCOL  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
 old_database_name=`grep -wm 1 NAME  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
 old_database_user=`grep -wm 1 USER  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
 old_database_password=`grep -wm 1 PASSWORD  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
@@ -1533,6 +1534,7 @@ fi
 # refill with old values
 sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$old_hostip\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$old_hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"SEARCH_API_PROTOCOL = \"http\""/"SEARCH_API_PROTOCOL = \"$old_search_proto\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$old_database_name',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$old_database_user',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$old_database_password',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
