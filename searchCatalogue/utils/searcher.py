@@ -20,7 +20,7 @@ import threading
 from copy import copy
 
 from Geoportal import helper
-from Geoportal.settings import RLP_CATALOGUE, HOSTNAME, INTERNAL_SSL
+from Geoportal.settings import RLP_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
@@ -130,6 +130,7 @@ class Searcher:
             "searchId": self.search_id,
             "languageCode": self.language_code,
             "hostName": HOSTNAME,
+            "protocol": SEARCH_API_PROTOCOL,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -162,6 +163,7 @@ class Searcher:
             "languageCode": language,
             "outputFormat": "json",
             "hostName": HOSTNAME,
+            "protocol": SEARCH_API_PROTOCOL,
         }
         response = requests.get(uri, params, verify=INTERNAL_SSL)
         if response.status_code == 200:
@@ -199,6 +201,7 @@ class Searcher:
             "restrictToOpenData": self.only_open_data,
             "hostName": HOSTNAME,
             "userId": user_id,
+            "protocol": SEARCH_API_PROTOCOL,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -255,6 +258,7 @@ class Searcher:
             "searchPages": self.search_pages,
             "maxResults": 5,
             "hostName": HOSTNAME,
+            "protocol": SEARCH_API_PROTOCOL,
         }
         if self.host is not None:
             params["hostName"] = self.host
@@ -291,6 +295,7 @@ class Searcher:
                 "maxRows": 15,
                 "searchText": search_text,
                 "hostName": HOSTNAME,
+                "protocol": SEARCH_API_PROTOCOL,
             }
             if self.host is not None:
                 params["hostName"] = self.host
@@ -333,6 +338,7 @@ class Searcher:
             "format": "json",
             "prop": "categories",
             "hostName": HOSTNAME,
+            "protocol": SEARCH_API_PROTOCOL,
         }
         response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
         response = response.json()
