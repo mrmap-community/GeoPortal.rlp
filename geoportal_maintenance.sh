@@ -1467,7 +1467,7 @@ update(){
 #update mapbender
 echo update svn
 cd /data/svn/mapbender
-svn -q update
+su -c 'svn -q update'
 cd /data/svn/
 tar -czvf mapbender_trunk.tar.gz mapbender/
 mv mapbender_trunk.tar.gz /tmp/
@@ -1480,6 +1480,7 @@ cp /data/mapbender.conf /data/mapbender/conf/
 cp /data/geoportal.conf /data/mapbender/conf/
 cp /data/extents_geoportal_rlp.map /data/mapbender/tools/wms_extent/extents.map
 cp /data/extent_service_geoportal_rlp.conf /data/mapbender/tools/wms_extent/extent_service.conf
+cp /data/config.js /data/mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
 cd /data/mapbender/tools
 sh ./i18n_update_mo.sh
 cd /data/mapbender
@@ -1532,13 +1533,15 @@ fi
 # refill with old values
 sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$old_hostip\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"HOSTNAME = \"127.0.0.1\""/"HOSTNAME = \"$old_hostname\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"$old_ssl_conf\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$old_database_name',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$old_database_user',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$old_database_password',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'HOST':'127.0.0.1',"/"        'HOST':'$old_database_host',"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PORT':''"/"        'PORT':'$old_database_port'"/g /opt/GeoPortal.rlp/Geoportal/settings.py
 
+if [ $old_ssl_conf == "https://" ];then
+	sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"https:\/\/\""/g /opt/GeoPortal.rlp/Geoportal/settings.py
+fi
 
 
 cp -a /opt/GeoPortal.rlp/scripts/guiapi.php /data/portal
