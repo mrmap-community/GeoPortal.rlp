@@ -229,8 +229,17 @@ def register_view(request):
                 bytepw = form.cleaned_data['password'].encode('utf-8')
                 user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)),'utf-8')
             else:
+                form = RegistrationForm(request.POST)
+                context = {
+                    'form': form,
+                    'headline': _("Registration"),
+                    "btn_label1": btn_label,
+                    "small_labels": small_labels,
+                    "disclaimer": disclaimer,
+                }
+                geoportal_context.add_context(context)
                 messages.error(request, _("Passwords do not match"))
-                return redirect('useroperations:register')
+                return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
             try:
                 realm = helper_functions.get_mapbender_config_value('REALM')
