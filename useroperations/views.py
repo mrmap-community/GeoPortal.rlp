@@ -1,5 +1,6 @@
 import binascii
 import hashlib
+import bcrypt
 import smtplib
 import urllib.parse
 from urllib import error
@@ -224,10 +225,7 @@ def register_view(request):
 
             # check if passwords match
             if form.cleaned_data['password'] == form.cleaned_data['passwordconfirm']:
-                salt = binascii.hexlify(helper_functions.os.urandom(16))
-                user.salt = str(salt,'utf-8')
-                bytepw = form.cleaned_data['password'].encode('utf-8')
-                user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)),'utf-8')
+                user.password = (str(bcrypt.hashpw(form.cleaned_data['password'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
             else:
                 form = RegistrationForm(request.POST)
                 context = {

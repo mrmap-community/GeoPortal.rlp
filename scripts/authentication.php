@@ -1,6 +1,5 @@
 <?php
 include_once(dirname(__FILE__)."/../../core/globalSettings.php");
-
 $pw = $_REQUEST['password'];
 $name = $_REQUEST['name'];
 $e = new mb_exception('SESSION[mb_user_name]: '.Mapbender::session()->get("mb_user_name"));
@@ -103,14 +102,9 @@ if ($row['is_active'] == "f"){
 
 	if($row['password'] == ""){
 
-		$salt=random_bytes(16);
-		$sql = "UPDATE mb_user SET salt = $1 WHERE mb_user_id = $2";
-		$v = array(bin2hex($salt),$row['mb_user_id']);
-		$t = array('s','i');
-		$res = db_prep_query($sql,$v,$t);
-
+		# set bcrypt hash
 		$sql = "UPDATE mb_user SET password = $1 WHERE mb_user_id = $2";
-		$v = array(hash_pbkdf2("sha256", $pw , bin2hex($salt), 100000),$row['mb_user_id']);
+		$v = array(password_hash($pw, PASSWORD_BCRYPT),$row['mb_user_id']);
 		$t = array('s','i');
 		$res = db_prep_query($sql,$v,$t);
 
@@ -122,20 +116,26 @@ if ($row['is_active'] == "f"){
 		return $row;
 
 	}else{
-		$sql = "SELECT salt FROM mb_user WHERE mb_user_id = $1";
-		$v = array($row['mb_user_id']); // is md5 used really?
+
+
+		$sql = "SELECT password FROM mb_user WHERE mb_user_id = $1";
+		$v = array($row['mb_user_id']);
 		$t = array('s');
 		$res = db_prep_query($sql,$v,$t);
 		$row = db_fetch_array($res);
-		$salt = $row['salt'];
-		$hash = hash_pbkdf2("sha256", $pw , $salt , 100000);
+		# salt is includes in the hashed password
+		$salt = $row['password'];
 
-		$sql = "SELECT * FROM mb_user WHERE mb_user_name = $1 AND password = $2";
-		$v = array($name,$hash);
-		$t = array('s','s');
+		if (password_verify($pw,$salt)) {
+
+		$sql = "SELECT * FROM mb_user WHERE mb_user_name = $1";
+		$v = array($name);
+		$t = array('s');
 		$res = db_prep_query($sql,$v,$t);
 		$row = db_fetch_array($res);
 		return $row;
+
+		}
 	}
 
 	return false;
