@@ -1001,7 +1001,7 @@ EOF
                   Options +FollowSymLinks
                   ReWriteEngine On
                   RewriteBase /owsproxy
-                  RewriteRule  ^([\w\d]+)\/([\w\d]+)\/?$ http://127.0.0.1/owsproxy/http/index.php?sid=$1\&wms=$2\& [P,L,QSA,NE]
+                  RewriteRule  ^([\w\d]+)\/([\w\d]+)\/?$ http://127.0.0.1/owsproxy/http/index.php?sid=\$1\&wms=\$2\& [P,L,QSA,NE]
                   Options +Indexes
                   Allow from all
           </Directory>
@@ -1026,7 +1026,7 @@ EOF
                   Options +FollowSymLinks +Indexes
                   ReWriteEngine On
                   RewriteBase /http_auth
-                  RewriteRule  ^([\w\d]+)\/?$ http://127.0.0.1/http_auth/http/index.php?layer_id=$1 [P,L,QSA,NE]
+                  RewriteRule  ^([\w\d]+)\/?$ http://127.0.0.1/http_auth/http/index.php?layer_id=\$1 [P,L,QSA,NE]
                   Order allow,deny
                   Allow from all
           </Directory>
