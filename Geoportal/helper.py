@@ -6,18 +6,20 @@ Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
 Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 """
+import urllib
 from collections import OrderedDict
 from copy import copy
 
 from django.http import HttpRequest
 
 from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, DEBUG, INTERNAL_SSL
-from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD
+from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD, URL_ABSOLUTE
 from useroperations.models import Navigation, MbUser
 from useroperations.utils import helper_functions
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+from urllib import parse
 
 
 def get_navigation_items():
@@ -156,7 +158,11 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
     post_content += minx + "," + maxy + " " + minx + "," + miny
     post_content += "</coordinates></LinearRing></outerBoundaryIs></Polygon></polygonMember></MultiPolygon></the_geom></gemeinde></featureMember></FeatureCollection>"
 
-    uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&value={GML}"
+    data = {
+        "value": post_content
+    }
+
+    uri = URL_ABSOLUTE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML" + urllib.parse.urlencode(data)
 
     response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
 
