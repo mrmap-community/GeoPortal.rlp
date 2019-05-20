@@ -162,7 +162,7 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
         "value": post_content
     }
 
-    uri = URL_ABSOLUTE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML" + urllib.parse.urlencode(data)
+    uri = URL_ABSOLUTE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&" + urllib.parse.urlencode(data)
 
     response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
 
