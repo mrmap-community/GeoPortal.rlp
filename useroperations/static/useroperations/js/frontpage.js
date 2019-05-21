@@ -1,3 +1,4 @@
+
 /**
  * Returns the cookie if found
  */
@@ -187,10 +188,6 @@ $(document).on("click", "#geoportal-search-button", function(){
     }else{
         startSearch();
     }
-});
-
-$(document).on("DOMSubtreeModified", ".body-content, .sidebar-wrapper", function(){
-    resizeSidebar();
 });
 
 
@@ -397,12 +394,14 @@ $(window).on("load", function(param){
 
 });
 
+
 /*
  * Things that should start when the document is fully loaded
  */
 $(document).ready(function(){
     resizeSidebar();
     resizeMapOverlay();
+
 
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");

@@ -622,6 +622,17 @@ function checkForExternalMapviewerCall(){
  */
 jQuery(document).ready(function() {
 
+    var target = document.querySelector('.body-content');
+    var observer = window.MutationObserver;
+    observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        resizeSidebar();
+      });
+    });
+    var config = {attributes: true, subtree: true, childList: true, characterData: true};
+    observer.observe(target, config);
+
+
     checkForExternalMapviewerCall();
 
     var resources = search.resources_rlp;
@@ -1559,4 +1570,6 @@ jQuery(document).ready(function() {
             }
         }
     }());
+
+
 });
