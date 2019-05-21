@@ -102,18 +102,22 @@ if ($row['is_active'] == "f"){
 
 	if($row['password'] == ""){
 
-		# set bcrypt hash
-		$sql = "UPDATE mb_user SET password = $1 WHERE mb_user_id = $2";
-		$v = array(password_hash($pw, PASSWORD_BCRYPT),$row['mb_user_id']);
-		$t = array('s','i');
-		$res = db_prep_query($sql,$v,$t);
+		if($row['mb_user_password'] == md5($pw)){
 
-		# delete md5
-		$sql = "UPDATE mb_user SET mb_user_password = $1 WHERE mb_user_id = $2";
-		$v = array('',$row['mb_user_id']);
-		$t = array('s','i');
-		$res = db_prep_query($sql,$v,$t);
-		return $row;
+			# set bcrypt hash
+			$sql = "UPDATE mb_user SET password = $1 WHERE mb_user_id = $2";
+			$v = array(password_hash($pw, PASSWORD_BCRYPT),$row['mb_user_id']);
+			$t = array('s','i');
+			$res = db_prep_query($sql,$v,$t);
+
+			# delete md5
+			$sql = "UPDATE mb_user SET mb_user_password = $1 WHERE mb_user_id = $2";
+			$v = array('',$row['mb_user_id']);
+			$t = array('s','i');
+			$res = db_prep_query($sql,$v,$t);
+			return $row;
+
+		}
 
 	}else{
 
