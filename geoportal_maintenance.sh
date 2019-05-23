@@ -1475,6 +1475,7 @@ cp /data/geoportal.conf /data/mapbender/conf/
 cp /data/extents_geoportal_rlp.map /data/mapbender/tools/wms_extent/extents.map
 cp /data/extent_service_geoportal_rlp.conf /data/mapbender/tools/wms_extent/extent_service.conf
 cp /data/config.js /data/mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
+cp /data/atomFeedClient.conf /data/mapbender/conf/atomFeedClient.conf
 cd /data/mapbender/tools
 sh ./i18n_update_mo.sh
 cd /data/mapbender
