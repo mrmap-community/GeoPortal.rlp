@@ -66,8 +66,8 @@ http_proxy_host=""
 http_proxy_port=""
 https_proxy_host=""
 https_proxy_port=""
-proxyuser=""
-proxypassword=""
+http_proxy_user=""
+http_proxy_pass=""
 
 # misc
 webadmin_email="test@test.de"
@@ -126,17 +126,17 @@ install_full(){
 date
 
 # hexlify credentials for export
-if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
-  proxyuser_hex=`echo $proxyuser | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
-  proxyuser_hex=%$proxyuser_hex
-  proxyuser_hex=${proxyuser_hex::len-3}
+if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
+  http_proxy_user_hex=`echo $http_proxy_user | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
+  http_proxy_user_hex=%$http_proxy_user_hex
+  http_proxy_user_hex=${http_proxy_user_hex::len-3}
 
-  proxypassword_hex=`echo $proxypassword | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
-  proxypassword_hex=%$proxypassword_hex
-  proxypassword_hex=${proxypassword_hex::len-3}
+  http_proxy_pass_hex=`echo $http_proxy_pass | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
+  http_proxy_pass_hex=%$http_proxy_pass_hex
+  http_proxy_pass_hex=${http_proxy_pass_hex::len-3}
 else
-  proxyuser_hex=""
-  proxypassword_hex=""
+  http_proxy_user_hex=""
+  http_proxy_pass_hex=""
 fi
 
 
@@ -146,9 +146,9 @@ if [ $use_proxy_svn = 'true' ]; then
 fi
 if [ $use_proxy_system = 'true' ]; then
 
-    if [ "$proxyuser_hex" != "" ] && [ "$proxypassword_hex" != "" ];then
-    	export http_proxy="http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port"
-    	export https_proxy="http://$proxyuser_hex:$proxypassword_hex@$https_proxy_host:$https_proxy_port"
+    if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
+    	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
+    	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$https_proxy_host:$https_proxy_port"
     else
     	export http_proxy=http://$http_proxy_host:$http_proxy_port
     	export https_proxy=http://$https_proxy_host:$https_proxy_port
@@ -165,12 +165,12 @@ if [ $use_proxy_apt = 'true' ]; then
 	cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
   #echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
 
-  echo "Acquire::http::Proxy \"http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+  echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
     else
         echo "File does not exist"
 	touch /etc/apt/apt.conf
 	#echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
-  echo "Acquire::http::Proxy \"http://$proxyuser_hex:$proxypassword_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+  echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
     fi
     # first line should be: Acquire::http::Proxy "http://$http_proxy_host:$http_proxy_port";
     # for subversion alter /etc/subversion/servers - alter following lines
@@ -210,9 +210,9 @@ if [ $use_proxy_svn = 'true' ]; then
     sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
     # # http-proxy-port = 7000
 
-    if [ "$proxyuser" != "" ]  && [  "$proxypassword" != "" ];then
-      sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $proxyuser/g" /etc/subversion/servers
-      sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $proxypassword/g" /etc/subversion/servers
+    if [ "$http_proxy_user" != "" ]  && [  "$http_proxy_pass" != "" ];then
+      sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $http_proxy_user/g" /etc/subversion/servers
+      sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
     fi
  fi
 
@@ -707,9 +707,9 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
 
-        if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
-          sed -i "s/define(\"CONNECTION_USER\", \"\");/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
-          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
+        if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
+          sed -i "s/define(\"CONNECTION_USER\", \"\");/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
+          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
         fi
 
       fi
@@ -799,9 +799,9 @@ EOF
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
 
-        if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
-          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$proxyuser\");/g" ${installation_folder}conf/mapbender.conf
-          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$proxypassword\");/g" ${installation_folder}conf/mapbender.conf
+        if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
+          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}conf/mapbender.conf
+          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}conf/mapbender.conf
         fi
 
       fi
@@ -856,10 +856,10 @@ EOF
           sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-          if [ "$proxyuser" != "" ] && [ "$proxypassword" != "" ];then
+          if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
             sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-            sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$proxyuser\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-            sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$proxypassword\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+            sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+            sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           fi
 
 
@@ -1427,7 +1427,7 @@ fi
 
 # In case of credentials being given as option for installation.
 # Warn the user about the credentials potentially being logged in the bash history.
-if [[ "${proxyuser}" != "" ]] || [[ "${proxypassword}" != "" ]];then
+if [[ "${http_proxy_user}" != "" ]] || [[ "${http_proxy_pass}" != "" ]];then
     cat << EOF
 #############################################
 #                                           #
@@ -1694,9 +1694,9 @@ You can choose from the following options:
         --proxyuser=username                                    | Default \"\"
         --proxypw=password                                      | Default \"\"
     	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
-    	--mapbenderdbpw=Password for database access	| Default \"mapbenderdbpassword\"
+    	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
-    	--phppgadmin_pw=Password for PGAdmin web access	| Default \"postgresadmin_password\"
+    	--phppgadmin_pw=Password for PGAdmin web access   | Default \"postgresadmin_password\"
     	--mysqlpw=database password for MySQL			| Default \"root\"
     	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
 
@@ -1713,11 +1713,11 @@ while getopts h-: arg; do
 	   help				)  usage;;
      proxyip=?*     		)  http_proxy_host=$LONG_OPTARG;https_proxy_host=$LONG_OPTARG;;
      proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;https_proxy_port=$LONG_OPTARG;;
-     proxyuser=?*       )  proxyuser=$LONG_OPTARG;;
-     proxypw=?*       )  proxypassword=$LONG_OPTARG;;
+     proxyuser=?*       )  http_proxy_user=$LONG_OPTARG;;
+     proxypw=?*       )  http_proxy_pass=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
-	   mapbenderdbpw=?*	)  mapbenderdbpassword=$LONG_OPTARG;;
-	   phppgadmin_user=?*		)  mapbender_database_password=$LONG_OPTARG;;
+	   mapbenderdbpw=?*	)  mapbender_database_password=$LONG_OPTARG;;
+	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
 	   phppgadmin_pw=?*	)  phppgadmin_password=$LONG_OPTARG;;
 	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
      hostname=?*			)  hostname=$LONG_OPTARG;;
