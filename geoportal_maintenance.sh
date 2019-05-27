@@ -220,9 +220,9 @@ if [ $create_folders = 'true' ]; then
     ############################################################
     # create folder structure
     ############################################################
-    mkdir $installation_folder
-    mkdir ${installation_folder}svn/
-    mkdir ${installation_folder}access/
+    mkdir -pv $installation_folder
+    mkdir -pv ${installation_folder}svn/
+    mkdir -pv ${installation_folder}access/
 fi
 ############################################################
 # check out svn repositories initially
@@ -283,7 +283,7 @@ fi
 # configure and install mapbender
 ############################################################
 if [ $create_folders = 'true' ]; then
-    mkdir ${installation_folder}mapbender/http/tmp/wmc
+    mkdir -pv ${installation_folder}mapbender/http/tmp/wmc
 fi
 
 ############################################################
@@ -668,7 +668,7 @@ EOF
       cd ${installation_folder}mapbender/
       cp ${installation_folder}/mapbender/conf/mapbender.conf-dist ${installation_folder}/mapbender/conf/mapbender.conf
       # create folder to store generated metadata xml documents
-      mkdir ${installation_folder}mapbender/metadata
+      mkdir -pv ${installation_folder}mapbender/metadata
       #####################
       echo 'change more permissones ... '
       # alter owner of folders where webserver should be able to alter data
@@ -1227,7 +1227,7 @@ fi #end of apache configuration
   ############################################################
   if [ $configure_cronjobs = 'true' ]; then
 
-  mkdir ${installation_folder}cronjobs/
+  mkdir -pv ${installation_folder}cronjobs/
 
   # create script to call metadata via localhost
   cat << EOF > ${installation_folder}cronjobs/generateMetadata.sh
@@ -1335,7 +1335,7 @@ cd ${installation_folder}
 git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
-mkdir -p ${installation_folder}/portal
+mkdir -pv ${installation_folder}/portal
 
 # copy some mapbender related scripts
 cp -a ${installation_folder}/GeoPortal.rlp/scripts/guiapi.php ${installation_folder}/portal
@@ -1680,7 +1680,7 @@ if [ -d ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y") ]; th
   exit
 fi
 
-mkdir -p ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y")
+mkdir -pv ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 
 # Django Backup
