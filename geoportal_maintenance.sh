@@ -1336,7 +1336,6 @@ apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtu
 
 cd ${installation_folder}
 git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
-git checkout install_debug
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
 mkdir -p ${installation_folder}/portal
