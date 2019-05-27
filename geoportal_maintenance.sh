@@ -106,7 +106,10 @@ wms_2_url="'http://map.krz.de/cgi-bin/mapserv7?map=/opt/gdi/wms/overview_600.map
 wms_3_url="'http://map.krz.de/cgi-bin/mapserv7?map=/opt/gdi/wms/overview_owl.map&VERSION=1.1.1&REQUEST=GetCapabilities&SERVICE=WMS'"
 # demo wms
 wms_4_url="'https://gis.mffjiv.rlp.de/cgi-bin/mapserv?map=/data/mapserver/mapfiles/institutions_0601.map&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS'"
-##################### Geoportal-RLP
+
+install_full(){
+
+  ##################### Geoportal-RLP
 wms_1_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_1_url"
 wms_2_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_2_url"
 wms_3_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_3_url"
@@ -115,9 +118,6 @@ wms_4_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 wms_5_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$extended_search_default_gui_name' serviceType='wms' serviceAccessUrl=$wms_2_url"
 ##################### demo service -
 wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=3 guiId='service_container1_free' serviceType='wms' serviceAccessUrl=$wms_4_url"
-############################################################
-
-install_full(){
 
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 # Mapbender installation
@@ -1041,7 +1041,7 @@ EOF
   ############################################################
   # configure phppgadmin
   ############################################################
-  echo -n 'adopt phppgadmin default apache24 configuration'
+  echo 'adopt phppgadmin default apache24 configuration'
   cp /etc/apache2/conf-available/phppgadmin.conf /etc/apache2/conf-available/phppgadmin.conf_backup_geoportal
   cat << EOF > /etc/apache2/conf-available/phppgadmin.conf
   Alias /phppgadmin /usr/share/phppgadmin
@@ -1118,16 +1118,16 @@ if  ! grep -q "FileETag None"  /etc/apache2/apache2.conf ;then
   sed -i '/^MaxKeepAliveRequests*/a FileETag None' /etc/apache2/apache2.conf
 fi
 
-if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-enabled/security.conf
+if  ! grep -q "Header set X-XSS-Protection \"1; mode=block\""  /etc/apache2/conf-available/security.conf ;then
+  echo  "Header set X-XSS-Protection \"1; mode=block\"" >>/etc/apache2/conf-available/security.conf
 fi
 
 if  ! grep -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
   sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.0/apache2/php.ini
 fi
 
-if  ! grep -q "Timeout"  /etc/apache2/conf-enabled/security.conf ;then
-  echo  "Timeout 60" >>/etc/apache2/conf-enabled/security.conf
+if  ! grep -q "Timeout"  /etc/apache2/conf-available/security.conf ;then
+  echo  "Timeout 60" >>/etc/apache2/conf-available/security.conf
 fi
 
 #if  ! grep -q "Header always append X-Frame-Options SAMEORIGIN"  /etc/apache2/conf-enabled/security.conf ;then
@@ -1139,8 +1139,8 @@ fi
 #fi
 
 
-  sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-enabled/security.conf
-  sed -i s/"ServerSignature On"/"ServerSignature Off"/g /etc/apache2/conf-enabled/security.conf
+  sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-available/security.conf
+  sed -i s/"ServerSignature On"/"ServerSignature Off"/g /etc/apache2/conf-available/security.conf
   cp -a  /etc/modsecurity/modsecurity.conf-recommended  /etc/modsecurity/modsecurity.conf
   sed -i s/"SecRuleEngine DetectionOnly"/"SecRuleEngine On"/g /etc/modsecurity/modsecurity.conf
   rm -rf /usr/share/modsecurity-crs
@@ -1148,23 +1148,66 @@ fi
   cd /usr/share/modsecurity-crs
   mv crs-setup.conf.example crs-setup.conf
 
-  if [ ! -f "/etc/apache2/mods-enabled/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
-    mv /etc/apache2/mods-enabled/security2.conf /etc/apache2/mods-enabled/security2.conf_backup_$(date +"%d_%m_%Y")
+  if [ ! -f "/etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
+    mv /etc/apache2/mods-available/security2.conf /etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")
   fi
 
-  echo "<IfModule security2_module>" > /etc/apache2/mods-enabled/security2.conf
-  echo "SecDataDir /var/cache/modsecurity" >> /etc/apache2/mods-enabled/security2.conf
-  echo "IncludeOptional /etc/modsecurity/*.conf " >> /etc/apache2/mods-enabled/security2.conf
-  echo "IncludeOptional /usr/share/modsecurity-crs/*.conf" >> /etc/apache2/mods-enabled/security2.conf
-  echo "IncludeOptional /usr/share/modsecurity-crs/rules/*.conf " >> /etc/apache2/mods-enabled/security2.conf
-  echo "SecRequestBodyNoFilesLimit 10485760" >> /etc/apache2/mods-enabled/security2.conf
-  echo "SecRuleRemoveById 920350" >> /etc/apache2/mods-enabled/security2.conf
-  echo "</IfModule>" >> /etc/apache2/mods-enabled/security2.conf
+  echo "<IfModule security2_module>
+  SecDataDir /var/cache/modsecurity
+  IncludeOptional /etc/modsecurity/*.conf
+  IncludeOptional /usr/share/modsecurity-crs/*.conf
+  IncludeOptional /usr/share/modsecurity-crs/rules/*.conf
+  SecRequestBodyNoFilesLimit 10485760
+  SecRuleRemoveById 920350
+  </IfModule>
+
+  <LocationMatch '/mapbender/php/mod_savewmc_server.php'>
+  SecRuleRemoveById 932110 932115 941140 941160 942190
+  </LocationMatch>
+
+
+  <LocationMatch '/mapbender/php/wms.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+
+  <LocationMatch '/mapbender/php/wfs.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+
+  <LocationMatch '/mapbender/php/mod_sessionWrapper.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+  <LocationMatch '/search/search/'>
+  SecRuleRemoveById 959100
+  </LocationMatch>
+
+  <LocationMatch '/mapbender/print/printFactory.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+  <LocationMatch '/mapbender/php/mod_createJSObjFromXML.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+
+  <LocationMatch '/mapbender/php/mod_loadCapabilities.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+
+  <LocationMatch '/mapbender/php/mod_loadwms.php'>
+  SecRuleRemoveById 949110
+  </LocationMatch>
+  </IfModule>" > /etc/apache2/mods-available/security2.conf
+
 
 
   ############################################################
   # activate apache conf and reload
   ############################################################
+  a2enmod security2
   a2ensite geoportal-apache
   a2dissite 000-default
   service apache2 restart
@@ -1294,6 +1337,7 @@ apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtu
 
 cd ${installation_folder}
 git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
+git checkout install_debug
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
 mkdir -p ${installation_folder}/portal
@@ -1321,6 +1365,11 @@ sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$ipaddress\""/g ${installation_fol
 sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$hostname\""/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"PROJECT_DIR = \"\/data\/\""/"PROJECT_DIR = \"${installation_folder}\""/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 
+sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$mapbender_database_user',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$mapbender_database_password',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+#sed -i s/"        'HOST':'127.0.0.1',"/"        'HOST':'$old_database_host',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+#sed -i s/"        'PORT':''"/"        'PORT':'$old_database_port'"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+
 # enable php_serialize
 if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
 	sed -i s/"session.serialize_handler = php"/"session.serialize_handler = php_serialize"/g /etc/php/7.0/apache2/php.ini
@@ -1329,7 +1378,7 @@ fi
 # activate memcached
 sed -i s/"session.save_handler = files"/"session.save_handler = memcached"/g /etc/php/7.0/apache2/php.ini
 sed -i s"/;     session.save_path = \"N;\/path\""/"session.save_path = \"127.0.0.1:11211\""/g /etc/php/7.0/apache2/php.ini
-sed -i s/"Require ip 192.168.56.222"/"Require ip $ipaddress"/g /etc/apache2/sites-enabled/geoportal-apache.conf
+sed -i s/"Require ip 192.168.56.222"/"Require ip $ipaddress"/g /etc/apache2/sites-available/geoportal-apache.conf
 
 
 cd ${installation_folder}/GeoPortal.rlp/
@@ -1352,15 +1401,14 @@ python manage.py loaddata useroperations/fixtures/navigation.json
 
 # apache config
 if [ ! -f "/etc/apache2/conf-available/wsgi.conf"  ]; then
-	echo "WSGIScriptAlias / ${installation_folder}/GeoPortal.rlp/Geoportal/wsgi.py" >> /etc/apache2/conf-available/wsgi.conf
-	echo "WSGIPythonPath ${installation_folder}/GeoPortal.rlp" >> /etc/apache2/conf-available/wsgi.conf
-	echo "WSGIPythonHome ${installation_folder}/env" >> /etc/apache2/conf-available/wsgi.conf
-	echo "<Directory ${installation_folder}/GeoPortal.rlp/Geoportal>" >> /etc/apache2/conf-available/wsgi.conf
-	echo "<Files wsgi.py>" >> /etc/apache2/conf-available/wsgi.conf
-	echo "Require all Granted" >> /etc/apache2/conf-available/wsgi.conf
-	echo "</Files>" >> /etc/apache2/conf-available/wsgi.conf
-	echo "</Directory>" >> /etc/apache2/conf-available/wsgi.conf
-
+	echo "WSGIScriptAlias / ${installation_folder}/GeoPortal.rlp/Geoportal/wsgi.py
+	WSGIPythonPath ${installation_folder}/GeoPortal.rlp
+	WSGIPythonHome ${installation_folder}/env
+	<Directory ${installation_folder}/GeoPortal.rlp/Geoportal>
+	<Files wsgi.py>
+	Require all Granted
+	</Files>
+	</Directory>" > /etc/apache2/conf-available/wsgi.conf
 fi
 
 a2enconf wsgi
@@ -1556,7 +1604,7 @@ python manage.py collectstatic
 
 
 echo "\n"
-echo "You may have to check /etc/apache2/sites-enabled/geoportal-apache.conf for the right ip in the Require statement"
+echo "You may have to check /etc/apache2/sites-available/geoportal-apache.conf for the right ip in the Require statement"
 
 }
 
@@ -1686,6 +1734,7 @@ You can choose from the following options:
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
     	--phppgadmin_pw=Password for PGAdmin web access   | Default \"postgresadmin_password\"
+	--install_dir=Directory for installation		| Default \"/data/\"
     	--mysqlpw=database password for MySQL			| Default \"root\"
     	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
 
@@ -1708,6 +1757,7 @@ while getopts h-: arg; do
 	   mapbenderdbpw=?*	)  mapbender_database_password=$LONG_OPTARG;;
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
 	   phppgadmin_pw=?*	)  phppgadmin_password=$LONG_OPTARG;;
+	   install_dir=?*	)  installation_folder=$LONG_OPTARG;;
 	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
      hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
