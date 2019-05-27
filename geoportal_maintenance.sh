@@ -818,12 +818,11 @@ EOF
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
       #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
       # copy conf files to right places
-      echo "copy mapbender.conf from ${installation_folder}/mapbender.conf to ${installation_folder}mapbender/conf/ ..."
       cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
       # alter other conf files
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
       # copy conf file to right places
-      cp ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
+      cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
       # mapfile for metadata wms
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
