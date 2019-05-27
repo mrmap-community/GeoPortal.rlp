@@ -28,8 +28,8 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 DEBUG = True
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
-HOSTNAME = "192.168.56.101"
-HOSTIP = "192.168.56.101"
+HOSTNAME = "localhost"
+HOSTIP = "127.0.0.1"
 HTTP_OR_SSL = "http://"
 SEARCH_API_PROTOCOL = "http"
 # HTTPS will fail on self signed certs, uncomment all occurrences of "verify=False"
