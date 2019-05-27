@@ -1449,10 +1449,10 @@ composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev
 php maintenance/update.php --skip-external-dependencies
 
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgEmergencyContact = \"apache@192.168.56.222\";"/"$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"$wgPasswordSender = \"apache@192.168.56.222\";"/"$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 
-sed -i s/"$wgDBpassword = \"root\";"/"$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
 
 sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 
