@@ -139,11 +139,6 @@ else
   http_proxy_pass_hex=""
 fi
 
-
-if [ $use_proxy_svn = 'true' ]; then
-    # set proxy env for wget from shell
-    cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-fi
 if [ $use_proxy_system = 'true' ]; then
 
     if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
@@ -203,6 +198,9 @@ sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g"
 
 # set some environment variables
 ############################################################
+if [ $use_proxy_svn = 'true' ]; then
+    cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
+fi
 if [ $use_proxy_svn = 'true' ]; then
     # for subversion alter /etc/subversion/servers - alter following lines
     # # http-proxy-host = defaultproxy.whatever.com
