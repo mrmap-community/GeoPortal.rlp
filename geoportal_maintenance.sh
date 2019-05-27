@@ -1159,7 +1159,6 @@ fi
   IncludeOptional /usr/share/modsecurity-crs/rules/*.conf
   SecRequestBodyNoFilesLimit 10485760
   SecRuleRemoveById 920350
-  </IfModule>
 
   <LocationMatch '/mapbender/php/mod_savewmc_server.php'>
   SecRuleRemoveById 932110 932115 941140 941160 942190
