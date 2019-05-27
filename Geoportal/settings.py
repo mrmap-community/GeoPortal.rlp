@@ -14,8 +14,9 @@ import os
 from django.utils.translation import gettext_lazy as _
 from django.utils.log import DEFAULT_LOGGING
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = "/data/"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -27,8 +28,8 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 DEBUG = True
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
-HOSTNAME = "localhost"
-HOSTIP = "127.0.0.1"
+HOSTNAME = "192.168.56.101"
+HOSTIP = "192.168.56.101"
 HTTP_OR_SSL = "http://"
 SEARCH_API_PROTOCOL = "http"
 # HTTPS will fail on self signed certs, uncomment all occurrences of "verify=False"
