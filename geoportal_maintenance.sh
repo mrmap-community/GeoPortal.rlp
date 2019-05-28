@@ -139,11 +139,6 @@ else
   http_proxy_pass_hex=""
 fi
 
-
-if [ $use_proxy_svn = 'true' ]; then
-    # set proxy env for wget from shell
-    cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-fi
 if [ $use_proxy_system = 'true' ]; then
 
     if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
@@ -204,6 +199,9 @@ sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g"
 # set some environment variables
 ############################################################
 if [ $use_proxy_svn = 'true' ]; then
+    cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
+fi
+if [ $use_proxy_svn = 'true' ]; then
     # for subversion alter /etc/subversion/servers - alter following lines
     # # http-proxy-host = defaultproxy.whatever.com
     sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
@@ -222,9 +220,9 @@ if [ $create_folders = 'true' ]; then
     ############################################################
     # create folder structure
     ############################################################
-    mkdir $installation_folder
-    mkdir ${installation_folder}svn/
-    mkdir ${installation_folder}access/
+    mkdir -pv $installation_folder
+    mkdir -pv ${installation_folder}svn/
+    mkdir -pv ${installation_folder}access/
 fi
 ############################################################
 # check out svn repositories initially
@@ -285,7 +283,7 @@ fi
 # configure and install mapbender
 ############################################################
 if [ $create_folders = 'true' ]; then
-    mkdir ${installation_folder}mapbender/http/tmp/wmc
+    mkdir -pv ${installation_folder}mapbender/http/tmp/wmc
 fi
 
 ############################################################
@@ -670,7 +668,7 @@ EOF
       cd ${installation_folder}mapbender/
       cp ${installation_folder}/mapbender/conf/mapbender.conf-dist ${installation_folder}/mapbender/conf/mapbender.conf
       # create folder to store generated metadata xml documents
-      mkdir ${installation_folder}mapbender/metadata
+      mkdir -pv ${installation_folder}mapbender/metadata
       #####################
       echo 'change more permissones ... '
       # alter owner of folders where webserver should be able to alter data
@@ -820,12 +818,11 @@ EOF
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
       #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
       # copy conf files to right places
-      echo "copy mapbender.conf from ${installation_folder}/mapbender.conf to ${installation_folder}mapbender/conf/ ..."
       cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
       # alter other conf files
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
       # copy conf file to right places
-      cp ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
+      cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
       # mapfile for metadata wms
       sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
@@ -1230,7 +1227,7 @@ fi #end of apache configuration
   ############################################################
   if [ $configure_cronjobs = 'true' ]; then
 
-  mkdir ${installation_folder}cronjobs/
+  mkdir -pv ${installation_folder}cronjobs/
 
   # create script to call metadata via localhost
   cat << EOF > ${installation_folder}cronjobs/generateMetadata.sh
@@ -1338,7 +1335,7 @@ cd ${installation_folder}
 git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
-mkdir -p ${installation_folder}/portal
+mkdir -pv ${installation_folder}/portal
 
 # copy some mapbender related scripts
 cp -a ${installation_folder}/GeoPortal.rlp/scripts/guiapi.php ${installation_folder}/portal
@@ -1683,7 +1680,7 @@ if [ -d ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y") ]; th
   exit
 fi
 
-mkdir -p ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y")
+mkdir -pv ${installation_folder}/backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 
 # Django Backup

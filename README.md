@@ -42,7 +42,7 @@ http://www.geoportal.rlp.de/metadata/geoportal-live.iso
 Fast install on local system (only for testing, default passwords!):
     wget https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
     chmod +x geoportal_maintenance.sh
-    ./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [--proxyip=X.X.X.X --proxyport=XXXX]
+    ./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
 
 Documentation can be found, in the documentation directory in the project folder under documentation/_build/html/index.html.
 
@@ -54,37 +54,38 @@ Debian 9 with working internet connection.
 ./geoportal_maintenance.sh --help
 
 This script is for installing and maintaining your geoportal solution
-You can choose from the following options:
+You can choose from the following **options**:
 
+	--install_dir=Directory for installation                | Default "/data/"
 	--ipaddress=IPADDRESS                                   | Default "127.0.0.1"
 	--proxyip=Proxy IP                                      | Default "None"
 	--proxyport=Proxy Port                                  | Default "None"
-    --proxyuser=username                                    | Default ""
-    --proxypw=Password for proxy auth                       | Default ""
+	--proxyuser=username                                    | Default ""
+	--proxypw=Password for proxy auth                       | Default ""
 	--mapbenderdbuser=User for Database access              | Default "mapbenderdbuser"
 	--mapbenderdbpw=Password for database access            | Default "mapbenderdbpassword"
 	--phppgadmin_user=User for PGAdmin web access           | Default "postgresadmin"
 	--phppgadmin_pw=Password for PGAdmin web access         | Default "postgresadmin_password"
 	--mysqlpw=database password for MySQL                   | Default "root"
 	--mode=what you want to do                              | Default "none" [install,update,delete,backup]
-  
+
 Description:  
 
-mandatory:  
---ipaddress             -> The address of your external interface.  
---hostname              -> FQDN of your Server www.example.rlp.de  
---mode                  -> What you want to do. Choices are install | update | delete | backup.  
-  
-optional:  
---proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
---proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf  
---proxyuser             -> Username for proxy auth 
---proxypw               -> Passwort for proxy auth  
---mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.  
---mapbenderdbpw         -> Password for mapbenderdbuser.  
---phppgadmin_user       -> User for the PHPPgAdmin Webinterface.  
---phppgadmin_pw         -> Password for phppgadmin_user.  
---mysqlpw               -> Passwort for the MySql root user.  
+	mandatory:  
+	--ipaddress             -> The address of your external interface.
+	--hostname              -> FQDN of your Server www.example.rlp.de
+	--mode                  -> What you want to do. Choices are install | update | delete | backup.
+
+	optional:  
+	--proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
+	--proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
+	--proxyuser             -> Username for proxy auth
+	--proxypw               -> Passwort for proxy auth
+	--mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.
+	--mapbenderdbpw         -> Password for mapbenderdbuser.
+	--phppgadmin_user       -> User for the PHPPgAdmin Webinterface.
+	--phppgadmin_pw         -> Password for phppgadmin_user.
+	--mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
 Install:  
