@@ -14,7 +14,7 @@ URL_BASE = HTTP_OR_SSL + "localhost/mapbender/"
 URL_ABSOLUTE = HTTP_OR_SSL + "opendata.geoportal.rlp.de/mapbender/"
 
 URL_AUTO_COMPLETE_SUFFIX = "geoportal/mod_getCatalogueKeywordSuggestion.php"
-URL_SEARCH_RLP_SUFFIX = "php/mod_callMetadata.php"
+URL_SEARCH_PRIMARY_SUFFIX = "php/mod_callMetadata.php"
 URL_SEARCH_DE_SUFFIX = "php/mod_callCswMetadata.php"
 URL_SEARCH_INFO = HTTP_OR_SSL + HOSTIP + "/mediawiki/api.php"
 

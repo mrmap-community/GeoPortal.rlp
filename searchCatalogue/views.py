@@ -24,7 +24,7 @@ from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.helper import write_gml_to_session, print_debug
-from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, RLP_CATALOGUE, RLP_SRC_IMG, DE_SRC_IMG, \
+from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, PRIMARY_SRC_IMG, DE_SRC_IMG, \
     EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
@@ -79,9 +79,9 @@ def index(request: HttpRequest, external_call = False):
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
     sources = OrderedDict()
-    sources["rlp"] = {
+    sources["primary"] = {
         "key": _("State-wide"),
-        "img": RLP_SRC_IMG,
+        "img": PRIMARY_SRC_IMG,
     }
     if not external_call:
         sources["de"] = {
@@ -172,9 +172,9 @@ def get_data(request: HttpRequest):
     # Check which source is requested
     source = post_params.get("source", None)
     if source is not None:
-        if source == "rlp":
-            # call rlp search method
-            return get_data_rlp(request)
+        if source == "primary":
+            # call primary search method
+            return get_data_primary(request)
         elif source == "de":
             # call other search method
             return get_data_other(request, catalogue_id=DE_CATALOGUE)
@@ -212,7 +212,7 @@ def get_spatial_results(request: HttpRequest):
 
 @check_browser
 def get_data_other(request: HttpRequest, catalogue_id):
-    """ Returns data for other search catalogues than RLP.
+    """ Returns data for other search catalogues than the primary.
 
     Args:
         request (HttpRequest): The incoming request
@@ -309,8 +309,8 @@ def get_data_other(request: HttpRequest, catalogue_id):
     return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
 
 @check_browser
-def get_data_rlp(request: HttpRequest):
-    """ Returns data for the search catalogue of RLP
+def get_data_primary(request: HttpRequest):
+    """ Returns data for the primary search catalogue
 
     Args:
         request (HttpRequest): The incoming request
@@ -366,7 +366,7 @@ def get_data_rlp(request: HttpRequest):
 
     start_time = time.time()
     # run search
-    catalogue_id = RLP_CATALOGUE
+    catalogue_id = PRIMARY_CATALOGUE
     searcher = Searcher(",".join(keywords),
                         requested_resources,
                         extended_search_params,
@@ -380,7 +380,7 @@ def get_data_rlp(request: HttpRequest):
                         language_code=lang_code,
                         catalogue_id=catalogue_id,
 			host=host)
-    search_results = searcher.get_search_results_rlp(user_id=session_data.get("userid", ""))
+    search_results = searcher.get_search_results_primary(user_id=session_data.get("userid", ""))
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters

@@ -42,7 +42,7 @@ var Search = function() {
     this.timeoutDelay = 300;
     this.searchUrl = null;
 
-    this.resources_rlp = {
+    this.resources_primary = {
         wms: true,
         wfs: true,
         wmc: true,
@@ -635,7 +635,7 @@ jQuery(document).ready(function() {
 
     checkForExternalMapviewerCall();
 
-    var resources = search.resources_rlp;
+    var resources = search.resources_primary;
 
     var fixDateFormat = function(val) {
         var ms = val.match(/(\d\d).(\d\d).(\d\d\d\d)/);
@@ -658,8 +658,8 @@ jQuery(document).ready(function() {
 
 
     function toggleResources(){
-        if($(".-js-tab-item.active").attr("data-id") == "rlp"){
-            resources = search.resources_rlp;
+        if($(".-js-tab-item.active").attr("data-id") == "primary"){
+            resources = search.resources_primary;
         }else{
             resources = search.resources_de;
         }

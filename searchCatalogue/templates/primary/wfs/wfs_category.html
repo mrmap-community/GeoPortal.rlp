@@ -30,7 +30,7 @@
                 {% for result in search_results.wfs.wfs.wfs.srv %}
                     <div class="result--item -js-result-wmc">
                             {% with result.ftype.0 as ftype %}
-                                {% include 'rlp/wfs/wfs_search_result.html' %}
+                                {% include 'primary/wfs/wfs_search_result.html' %}
                             {% endwith %}
                     </div>
                 {% endfor %}

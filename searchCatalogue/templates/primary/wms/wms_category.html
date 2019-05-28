@@ -35,14 +35,14 @@
                     <div class="result--item -js-result-wms">
                         <!-- parent layer -->
                             {% with result_l as layer %}
-                                {% include 'rlp/wms/wms_search_result.html' %}
+                                {% include 'primary/wms/wms_search_result.html' %}
                             {% endwith %}
                             {% if result_l.layer is not None %}
                                 <!-- children layer -->
                                 {% for layer in result_l.layer %}
                                     {% with result_l as parent_result %}
                                     <div class="result-item-layer hide">
-                                        {% include 'rlp/wms/wms_search_result.html' %}
+                                        {% include 'primary/wms/wms_search_result.html' %}
                                     </div>
                                     {% endwith %}
                                 {% endfor %}

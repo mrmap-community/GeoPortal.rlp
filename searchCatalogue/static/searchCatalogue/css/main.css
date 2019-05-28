@@ -1,33 +1,7 @@
 @charset "UTF-8";
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
 
-/*
-DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
-*/
-:root{
-    --rlp-red: #871d33;
-    --rlp-red-hover: #b77784;
-    --rlp-gray: #eee;
-    --rlp-gray-hover: #aeaeae;
-}
-
-
-/*
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%; }
-
-body {
-  font-family: "Arial";
-  font-size: 15px;
-  color: #333;
-  width: 80%;
-  margin: auto; }
-
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
-  display: block; }
-*/
+@import "color_schema.css";
 
 audio, canvas, progress, video {
   display: inline-block; }
@@ -175,11 +149,11 @@ textarea {
 
 *::selection {
   color: #fff;
-  background: var(--rlp-red); }
+  background: var(--primary); }
 
 *::-moz-selection {
   color: #fff;
-  background: var(--rlp-red); }
+  background: var(--primary); }
 
 
 ul, li, button, label {
@@ -203,9 +177,9 @@ input, #geoportal-search-extended-when .hasDatepicker {
   color: #333;
   outline: 0;
   outline: none;
-  -webkit-box-shadow: inset 1px 1px 5px 1px var(--rlp-gray);
-  -moz-box-shadow: inset 1px 1px 5px 1px var(--rlp-gray);
-  box-shadow: inset 1px 1px 5px 1px var(--rlp-gray); }
+  -webkit-box-shadow: inset 1px 1px 5px 1px var(--secondary);
+  -moz-box-shadow: inset 1px 1px 5px 1px var(--secondary);
+  box-shadow: inset 1px 1px 5px 1px var(--secondary); }
 
 input:hover, #geoportal-search-extended-when .hasDatepicker:hover, input:active, #geoportal-search-extended-when .hasDatepicker:active, input:focus, #geoportal-search-extended-when .hasDatepicker:focus {
   outline: none;
@@ -249,7 +223,7 @@ dl dd {
 .button {
   font-weight: bold;
   height: 40px;
-  border: 1px solid var(--rlp-gray);
+  border: 1px solid var(--secondary);
   cursor: pointer;
   padding: 10px;
   /*
@@ -274,7 +248,7 @@ dl dd {
 .loading > div {
   width: 25px;
   height: 25px;
-  background-color: var(--rlp-red);
+  background-color: var(--primary);
   border: 1px solid #f2f2f2;
   border-radius: 0%;
   display: inline-block;
@@ -521,8 +495,8 @@ dl dd {
   display: inline-block; }
 
 .simple-search-field:focus{
-    border-color: var(--rlp-red);
-    box-shadow: 0 0 10px var(--rlp-red);
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .search-result-body{
@@ -582,7 +556,7 @@ dl dd {
   font-weight: bold;
   height: 40px;
   width: 15%;
-  border: 1px solid var(--rlp-gray);
+  border: 1px solid var(--secondary);
   right: 0;
   cursor: pointer;
   padding: 10px;
@@ -600,7 +574,7 @@ dl dd {
   padding-bottom: 1px;
   margin: 0;
   list-style: none;
-  border-bottom: 1px solid var(--rlp-red); }
+  border-bottom: 1px solid var(--primary); }
 
 .search-tabs > .tab-item, .content-tabs > .tab-item {
   cursor: pointer;
@@ -611,22 +585,22 @@ dl dd {
   align-items: center;
   justify-content: flex-start;
   margin-right: 10px;
-  color: var(--rlp-red);
+  color: var(--primary);
   border-width: 1px;
   border-style: solid;
-  border-color: var(--rlp-red);
+  border-color: var(--primary);
   background-color: #fff;
   border-radius: 10px 10px 0 0;
 }
 
 .search-tabs > .tab-item:hover, .content-tabs > .tab-item:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
     color: white;
 }
 .source-tab-img{
     width: 100px;
     width: 100px;
-    background-image: linear-gradient(white, var(--rlp-gray));
+    background-image: linear-gradient(white, var(--secondary));
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
     border-radius: 10px 10px 0 0;
@@ -637,7 +611,7 @@ dl dd {
 
 
 .search-tabs > .tab-item.active, .content-tabs > .tab-item.active {
-  background-color: var(--rlp-red);
+  background-color: var(--primary);
   margin-bottom: -1px;
   color: #fff; }
 
@@ -688,7 +662,7 @@ dl dd {
   height: 30px;
   padding: 5px 5px 5px 20px;
   color: white;
-  background-color: var(--rlp-red);
+  background-color: var(--primary);
 }
 
 .select-wrapper::before {
@@ -703,7 +677,7 @@ dl dd {
 }
 
 .select-wrapper select:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
 }
 .select-wrapper select::-ms-expand{
     /* For IE */
@@ -714,13 +688,13 @@ dl dd {
     font-size: 0.9em;
     padding: 5px;
     color: white;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     border-radius: 10px;
 }
 
 .content-tab-item.active #info-result-number{
     background-color: white;
-    color: var(--rlp-red);
+    color: var(--primary);
 }
 
 
@@ -728,22 +702,22 @@ dl dd {
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     padding: 10px;
 }
 .area-title:hover{
-    background-color: var(--rlp-red-hover);
-    border-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
 }
 
 #filter-area{
     background-color: white;
-    border: 1px solid var(--rlp-red);
-    color: var(--rlp-red);
+    border: 1px solid var(--primary);
+    color: var(--primary);
 }
 #filter-area:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
     color: white;
 }
 
@@ -779,7 +753,7 @@ dl dd {
 .search-extended {
     border-style: solid;
     border-width: 1px;
-    border-color:  var(--rlp-red);
+    border-color:  var(--primary);
     margin: 5px;
     padding: 5px;
   display: none; }
@@ -788,7 +762,7 @@ dl dd {
   margin-top: 10px;
   font-weight: bold;
   height: 40px;
-  border: 1px solid var(--rlp-gray);
+  border: 1px solid var(--secondary);
   cursor: pointer;
   padding: 10px;
   background-color: #f2f2f2;
@@ -818,17 +792,17 @@ dl dd {
     display: flex;
     align-vertical-items:center;
     background: white;
-    border: 1px solid var(--rlp-red);
+    border: 1px solid var(--primary);
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
-    color: var(--rlp-red);
+    color: var(--primary);
 }
 .spatial-result-header:hover{
     cursor: default;
 }
 .spatial-result-title:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
     cursor: pointer;
 }
 .spatial-search-result-wrapper{
@@ -850,7 +824,7 @@ dl dd {
     align-vertical-items:center;
     font-size: 16px;
     font-weight: bold;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     cursor: pointer;
     padding: 10px;
@@ -858,7 +832,7 @@ dl dd {
 }
 
 .spatial-search-result:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
 }
 
 .source--title{
@@ -867,17 +841,17 @@ dl dd {
   font-size: 18px;
   font-weight: bold;
   padding: 10px;
-  background-color: var(--rlp-red);
-  color: var(--rlp-gray);
+  background-color: var(--primary);
+  color: var(--secondary);
   cursor: pointer; }
 
 .source--title:hover {
   color: white;
-  background-color: var(--rlp-red-hover);}
+  background-color: var(--primary-hover);}
 
 .source--title--result {
   font-size: 24px;
-  color: var(--rlp-gray); }
+  color: var(--secondary); }
 
 .keywords{
  }
@@ -892,7 +866,7 @@ dl dd {
   cursor: pointer; }
 
 .keywords--headline:hover{
-  background:var(--rlp-gray-hover);
+  background:var(--secondary-hover);
   color:#fff !important;
   }
 
@@ -904,7 +878,7 @@ dl dd {
   cursor: pointer; }
 
 .keywords--item:hover {
-  color: var(--rlp-red);
+  color: var(--primary);
   font-weight: bold; }
 
 .pager {
@@ -916,17 +890,17 @@ dl dd {
 
 .pager--list--item {
   display: inline-block;
-  background: var(--rlp-gray);
+  background: var(--secondary);
   margin: 7px;
   padding: 10px;
   cursor: pointer; }
 
 .pager--list--item.active-Page {
-  background: var(--rlp-red);
-  color: var(--rlp-gray); }
+  background: var(--primary);
+  color: var(--secondary); }
 
 .pager--list--item:hover {
-  background: var(--rlp-gray-hover); }
+  background: var(--secondary-hover); }
 
 .pager--list--points {
   display: inline-block;
@@ -935,7 +909,7 @@ dl dd {
 
 .result--item {
   border: 1px solid #ddd;
-  background: var(--rlp-gray);
+  background: var(--secondary);
   padding: 15px 15px;
   margin-top: 20px; }
 
@@ -946,7 +920,7 @@ dl dd {
 .result-item {
   border: 1px solid #ddd;
   border-radius: 0px;
-  background: var(--rlp-gray);
+  background: var(--secondary);
   padding: 10px 10px;
   margin-top: 6px; }
 
@@ -963,8 +937,8 @@ dl dd {
 .-js-subfacet-toggle-button, .search--list .search--list--item, .search--list .resource--list--item, .resource--list .search--list--item, .resource--list .resource--list--item {
   display: inline-block;
   color: white;
-  background-color: var(--rlp-red);
-  border: 2px solid var(--rlp-red);
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
   border-radius: 0px;
   padding: 10px;
   margin: 5px;
@@ -977,12 +951,12 @@ dl dd {
 
 .-js-subfacet-toggle-button:hover, .search--list .search--list--item:hover, .search--list .resource--list--item:hover, .resource--list .search--list--item:hover, .resource--list .resource--list--item:hover {
   background-color: white;
-  color: var(--rlp-red); }
+  color: var(--primary); }
 
 .-js-subfacet-toggle-button.inactive:hover, .search--list .search--list--item.inactive:hover, .search--list .resource--list--item.inactive:hover, .resource--list .search--list--item.inactive:hover, .resource--list .resource--list--item.inactive:hover {
   color: white;
-  background-color: var(--rlp-red);
-  border-color: var(--rlp-red);
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .search--list .inactive, .resource--list .inactive {
@@ -1029,7 +1003,7 @@ dl dd {
   padding: 10px;
   border-width: 1px;
   border-style: solid;
-  border-color: var(--rlp-red);
+  border-color: var(--primary);
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px; }
 
@@ -1038,7 +1012,7 @@ dl dd {
   margin: 10px 0 0 4px; }
 
 .search-content-geoportal .search-extended .search-filter .map-wrapper .map {
-  border: var(--rlp-red) solid 1px; }
+  border: var(--primary) solid 1px; }
 
 .search-content-geoportal .search-extended .search-filter .block {
   display: block; }
@@ -1073,18 +1047,18 @@ dl dd {
   right: 0; }
 
 .reset-select{
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     padding: 5px;
 }
 .reset-select:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
     color: #000;
     cursor: pointer;
 }
 
 .img-area .img-preview {
-    border: 1px solid var(--rlp-red);
+    border: 1px solid var(--primary);
     height: 100px;
     margin: 0 10px 0 0;
 }
@@ -1094,7 +1068,7 @@ dl dd {
   max-width: 100px;}
 
 .img-logo:hover, .img-symbollink:hover, .img-open:hover{
-    border: 1px solid var(--rlp-red);
+    border: 1px solid var(--primary);
 }
 
 .img-area .img-symbollink {
@@ -1110,7 +1084,7 @@ dl dd {
 .thumbnail-preview, .thumbnail-extent{
     border-style: solid;
     border-width: 1px;
-    border-color: var(--rlp-red);
+    border-color: var(--primary);
 }
 
 .thumbnail-preview:hover, .thumbnail-extent:hover{
@@ -1128,11 +1102,11 @@ dl dd {
   padding: 0;
   cursor: pointer;
   font-weight: bold;
-  color: var(--rlp-red); }
+  color: var(--primary); }
 
 .extended-search-header.active {
   font-weight: bolder;
-  color: var(--rlp-red-hover); }
+  color: var(--primary-hover); }
 
 .extended-search-header:hover {
   font-weight: bolder;
@@ -1158,7 +1132,7 @@ dl dd {
   width: 100%; }
 
 .filter-group-title, .filter-title {
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     padding: 5px;
     color: white;
     margin: 5px 0 0 0;
@@ -1169,8 +1143,8 @@ dl dd {
 }
 .filter-title{
     background-color: white;
-    color: var(--rlp-red);
-    border: 1px solid var(--rlp-red);
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .filter-title:hover, .filter-group-title:hover{
@@ -1195,9 +1169,9 @@ dl dd {
 
 .selectCat option:hover, .selectCat option:active, .selectCat optionfocus, .selectCat option:checked {
   color: #fff;
-  background-color: var(--rlp-red);
-  background: var(--rlp-red) !important;
-  background: linear-gradient(var(--rlp-red), var(--rlp-red)); }
+  background-color: var(--primary);
+  background: var(--primary) !important;
+  background: linear-gradient(var(--primary), var(--primary)); }
 
 #chosen-facets > div{
     padding-left: 25px;
@@ -1206,15 +1180,15 @@ dl dd {
 .facet-list h4 {
   color: #fff;
   font-size: 18px;
-  background-color: var(--rlp-red);
-  background: var(--rlp-red) !important;
+  background-color: var(--primary);
+  background: var(--primary) !important;
   padding: 10px;
   }
 
 .facet-item{
     border-style: solid;
     border-width: 1px;
-    border-color: var(--rlp-red);
+    border-color: var(--primary);
     margin: 0 0 10px 0;
 }
 
@@ -1234,15 +1208,15 @@ dl dd {
 
 .facet-list ul li:hover, .facet-list ul li:active, .facet-list ul lifocus, .facet-list ul li:checked {
   color: #fff;
-  background-color: var(--rlp-red);
-  background: var(--rlp-red) !important;
-  background: linear-gradient(var(--rlp-red), var(--rlp-red)); }
+  background-color: var(--primary);
+  background: var(--primary) !important;
+  background: linear-gradient(var(--primary), var(--primary)); }
 
 .Zebra_DatePicker {
   font-size: 15px;
   color: #373737 !important;
-  background: var(--rlp-red) !important;
-  border: 1px solid var(--rlp-gray) !important;
+  background: var(--primary) !important;
+  border: 1px solid var(--secondary) !important;
   border-radius: 0px !important; }
 
 .Zebra_DatePicker:hover {

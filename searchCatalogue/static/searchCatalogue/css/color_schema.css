@@ -1,0 +1,9 @@
+/*
+DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
+*/
+:root{
+    --primary: #871d33;
+    --primary-hover: #b77784;
+    --secondary: #eee;
+    --secondary-hover: #aeaeae;
+}

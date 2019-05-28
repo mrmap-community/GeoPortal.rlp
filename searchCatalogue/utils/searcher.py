@@ -20,7 +20,7 @@ import threading
 from copy import copy
 
 from Geoportal import helper
-from Geoportal.settings import RLP_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
+from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
@@ -37,7 +37,7 @@ class Searcher:
                  bbox=None,
                  type_bbox=None,
                  language_code="de",
-                 catalogue_id=RLP_CATALOGUE,
+                 catalogue_id=PRIMARY_CATALOGUE,
                  only_open_data='false',
                  host=None):
         """ Constructor
@@ -122,7 +122,7 @@ class Searcher:
         Returns:
             Returns the categories which have been found during the search
         """
-        url = URL_BASE + URL_SEARCH_RLP_SUFFIX
+        url = URL_BASE + URL_SEARCH_PRIMARY_SUFFIX
         params = {
             "outputFormat": self.output_format,
             "resultTarget": self.result_target,
@@ -172,7 +172,7 @@ class Searcher:
         return {}
 
 
-    def get_search_results_rlp(self, user_id=None):
+    def get_search_results_primary(self, user_id=None):
         """ Performs the search
 
         Search parameters will be used from the Searcher object itself.
@@ -180,7 +180,7 @@ class Searcher:
         Returns:
             dict: Contains the search results
         """
-        url = URL_BASE + URL_SEARCH_RLP_SUFFIX
+        url = URL_BASE + URL_SEARCH_PRIMARY_SUFFIX
         self.__prepare_selected_facets()
         params = {
             "searchText": self.keywords,

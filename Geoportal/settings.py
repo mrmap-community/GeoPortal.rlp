@@ -48,8 +48,8 @@ IFRAME_WIDTH = 2000
 INTERNAL_SSL = False
 
 # Search module settings
-RLP_CATALOGUE = 3
-RLP_SRC_IMG = "rlp_results.png"
+PRIMARY_CATALOGUE = 3
+PRIMARY_SRC_IMG = "primary_results.png"
 DE_CATALOGUE = 4
 DE_SRC_IMG = "de_results.png"
 EU_CATALOGUE = 7
