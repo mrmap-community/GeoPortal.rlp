@@ -1358,8 +1358,7 @@ sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/a
 # django code
 sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$ipaddress\""/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$hostname\""/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"PROJECT_DIR = \"\/data\/\""/"PROJECT_DIR = \"${installation_folder}\""/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
-
+sed -i "s#PROJECT_DIR = \"/data/\"#PROJECT_DIR = \"${installation_folder}\"#g" ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$mapbender_database_user',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$mapbender_database_password',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
 #sed -i s/"        'HOST':'127.0.0.1',"/"        'HOST':'$old_database_host',"/g ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
@@ -1442,8 +1441,14 @@ rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 cp -a ${installation_folder}/GeoPortal.rlp/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
 
 cd /usr/share/mediawiki
-composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev
-php maintenance/update.php --skip-external-dependencies
+useradd composer
+mkdir -pv /usr/share/mediawiki/extensions/SemanticMediaWiki/
+touch /usr/share/mediawiki/composer.json
+chown composer /usr/share/mediawiki/extensions/SemanticMediaWiki/
+chown composer /usr/share/mediawiki/composer.json
+chown composer /usr/share/mediawiki/
+chown -R composer /usr/share/mediawiki/vendor/
+su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev"
 
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
@@ -1456,6 +1461,8 @@ sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
+
+php maintenance/update.php --skip-external-dependencies
 
 # In case of credentials being given as option for installation.
 # Warn the user about the credentials potentially being logged in the bash history.
