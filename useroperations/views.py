@@ -342,11 +342,7 @@ def pw_reset_view(request):
 
                 newpassword = helper_functions.random_string(20)
 
-                salt = binascii.hexlify(helper_functions.os.urandom(16))
-                user.salt = str(salt, 'utf-8')
-                bytepw = newpassword.encode('utf-8')
-                user.mb_user_password = hashlib.md5(newpassword.encode()).hexdigest()
-                user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)), 'utf-8')
+                user.password = (str(bcrypt.hashpw(newpassword.encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
 
                 user.save()
 
@@ -408,9 +404,8 @@ def change_profile_view(request):
         if form.is_valid():
             if request.POST['submit'] == 'Delete Profile' or request.POST['submit'] == 'Profil entfernen':
                 if form.cleaned_data['oldpassword']:
-                    salt = user.salt.encode('utf-8')
-                    password = str(binascii.hexlify(
-                        hashlib.pbkdf2_hmac('sha256', form.cleaned_data['oldpassword'].encode('utf-8'), salt, 100000)),'utf-8')
+                    user.password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
+                                     
                     if password != user.password:
                         messages.error(request, _("Your old Password was wrong"))
                         return redirect('useroperations:change_profile')
@@ -419,17 +414,14 @@ def change_profile_view(request):
 
             elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Profil bearbeiten':
                 if form.cleaned_data['oldpassword']:
-                    salt = user.salt.encode('utf-8')
-                    password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', form.cleaned_data['oldpassword'].encode('utf-8'), salt, 100000)), 'utf-8')
+                    user.password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
+                    
                     if password != user.password:
                         messages.error(request, _("Your old Password was wrong"))
                         return redirect('useroperations:change_profile')
                 if form.cleaned_data['password']:
                     if form.cleaned_data['password'] == form.cleaned_data['passwordconfirm']:
-                        salt = binascii.hexlify(helper_functions.os.urandom(16))
-                        user.salt = str(salt, 'utf-8')
-                        bytepw = form.cleaned_data['password'].encode('utf-8')
-                        user.password = str(binascii.hexlify(hashlib.pbkdf2_hmac('sha256', bytepw, salt, 100000)), 'utf-8')
+                        user.password = (str(bcrypt.hashpw(form.cleaned_data['password'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))                                         
                     else:
                         messages.error(request, _("Passwords do not match"))
                         return redirect('useroperations:change_profile')
