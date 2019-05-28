@@ -404,7 +404,7 @@ def change_profile_view(request):
         if form.is_valid():
             if request.POST['submit'] == 'Delete Profile' or request.POST['submit'] == 'Profil entfernen':
                 if form.cleaned_data['oldpassword']:
-                    user.password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
+                    password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
                                      
                     if password != user.password:
                         messages.error(request, _("Your old Password was wrong"))
@@ -414,7 +414,7 @@ def change_profile_view(request):
 
             elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Profil bearbeiten':
                 if form.cleaned_data['oldpassword']:
-                    user.password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
+                    password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
                     
                     if password != user.password:
                         messages.error(request, _("Your old Password was wrong"))
