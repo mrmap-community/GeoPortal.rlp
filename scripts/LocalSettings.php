@@ -157,3 +157,5 @@ $wgExtraLanguageNames['qqq'] = 'Message documentation'; # No linguistic content.
 
 wfLoadExtension( 'UniversalLanguageSelector' );
 enableSemantics( '192.168.56.222' );
+$wgShowExceptionDetails = true;
+$wgShowDBErrorBacktrace = true;
