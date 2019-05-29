@@ -123,11 +123,6 @@ phppgadmin  -> postgresadmin:postgresadmin_password
 ### Things that need to be done after installation:  
 
 #### Configuration
-##### Django
-Install your django related requirements first! Therefore navigate into your project folder where `requirements.txt` lives and run
-```shell
-pip install -r requirements.txt
-```
 Make sure all dependencies are installed properly.
 ##### Mapbender Whitelist
 To allow your django project to communicate with the mapbender functions, that are needed at certain points, open `/data/mapbender/conf/mapbender.conf` and add the following line or edit if it already exists
