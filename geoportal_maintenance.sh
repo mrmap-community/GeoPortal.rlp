@@ -809,6 +809,10 @@ EOF
       sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
       sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
+      #####################
+      # put hostname and ip in mapbender whitelist
+      #####################
+      sed -i "s#define(\"CORS_WHITELIST\", \"http://localhost http://127.0.0.1 http://localhost:5984 http://localhost:8099 http://localhost:8090 http://127.0.0.1:5984 http://127.0.0.1:8090 http://127.0.0.1:8099\");#define(\"CORS_WHITELIST\", \"http://localhost http://127.0.0.1 http://localhost:5984 http://localhost:8099 http://localhost:8090 http://127.0.0.1:5984 http://127.0.0.1:8090 http://127.0.0.1:8099 http://$hostname http://$hostip\");#g" ${installation_folder}conf/mapbender.conf
       #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
       # copy conf files to right places
       cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
