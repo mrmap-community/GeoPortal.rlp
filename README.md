@@ -40,18 +40,24 @@ http://www.geoportal.rlp.de/metadata/geoportal-live.iso
 ### Installation
 
 Fast install on local system (only for testing, default passwords!):
-    wget https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
-    chmod +x geoportal_maintenance.sh
-    ./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
+```shell
+wget https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
+chmod +x geoportal_maintenance.sh
+./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
+```
 
 Documentation can be found, in the documentation directory in the project folder under documentation/_build/html/index.html.
 
 
 Requirements:
 
-Debian 9 with working internet connection.
-
+* Debian 9 with working internet connection.
+* Python >= 3.5
+* pip
+* apache2
+```shell
 ./geoportal_maintenance.sh --help
+```
 
 This script is for installing and maintaining your geoportal solution
 You can choose from the following **options**:
@@ -89,16 +95,24 @@ Description:
 
 Examples:  
 Install:  
-    geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
-    
-Update:  
-    geoportal_maintenance.sh --mode=update
-    
+```shell
+geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
+```
+
+Update:
+```shell
+geoportal_maintenance.sh --mode=update
+```
+
 Delete:  
-    geoportal_maintenance.sh --mode=delete
+```shell
+geoportal_maintenance.sh --mode=delete
+```
 
 Backup:  
-    geoportal_maintenance.sh --mode=backup
+```shell
+geoportal_maintenance.sh --mode=backup
+```
 
 default credentials:  
 mysql       -> root:root  
@@ -106,21 +120,41 @@ wiki        -> root:rootroot
 postgres    -> postgres:  
 phppgadmin  -> postgresadmin:postgresadmin_password
 
-Things that need to be done after installation:  
+### Things that need to be done after installation:  
 
-Create Navigation:  
+#### Configuration
+##### Django
+Install your django related requirements first! Therefore navigate into your project folder where `requirements.txt` lives and run
+```shell
+pip install -r requirements.txt
+```
+Make sure all dependencies are installed properly.
+##### Mapbender Whitelist
+To allow your django project to communicate with the mapbender functions, that are needed at certain points, open `/data/mapbender/conf/mapbender.conf` and add the following line or edit if it already exists
+```shell
+# HOSTNAME WHITELIST
+define("HOSTNAME_WHITELIST","xxx");
+```
+Where `xxx` is your servers IP address.
+
+##### Geoportal settings.py
+Back into your project to `Geoportal/settings.py`. Edit both of these variables to match your needs:
+* `HOSTNAME`
+    * Declares the hostname of your webpage for deploying. For now just keep the IP address inside without protocol
+* `HOSTIP`
+    * Declares the host IP address without protocol
+    
+
+
+#### Create Navigation:  
 Nagivation items are stored in database and can be found in the table navigations under the django schema.
 An example navigation is created upon installation and can be used as reference.
 
-Create Content:  
-The content for the navigation items is stored in a mediawiki (http://IP/mediawiki) and is rendered transparently into the django interface. After creating the navigation items in the database, you can add the corresponding mediawiki pages with the same name as the database item. Examples are present in the database and mediawiki.
+#### Create Content:  
+The content for the navigation items is stored in a mediawiki (`http://IP/mediawiki`) and is rendered transparently into the django interface. After creating the navigation items in the database, you can add the corresponding mediawiki pages with the same name as the database item. Examples are present in the database and mediawiki.
 
 
 
-
-
-
-## Building
 
 ## License
 
