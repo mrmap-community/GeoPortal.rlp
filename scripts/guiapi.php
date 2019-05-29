@@ -1,10 +1,11 @@
 <?php
 //ini_set('error_reporting', 'E_ALL & ~ E_NOTICE');
-require_once("/data/mapbender/core/globalSettings.php");
-require_once("/data/mapbender/http/classes/class_mb_exception.php");
+require_once(dirname(__FILE__)."/../mapbender/core/globalSettings.php");
+require_once(dirname(__FILE__)."/../mapbender/http/classes/class_mb_exception.php");
+require_once(dirname(__FILE__)."/../mapbender/http/php/mb_getGUIs.php");
+
 $con = db_connect(DBSERVER,OWNER,PW);
 db_select_db(DB,$con);
-require_once("/data/mapbender/http/php/mb_getGUIs.php");
 $sql_list_guis = "SELECT DISTINCT gui.gui_id,gui.gui_name,gui.gui_description, gui_gui_category.fkey_gui_category_id FROM gui LEFT OUTER JOIN gui_gui_category ON (gui.gui_id=gui_gui_category.fkey_gui_id) WHERE gui_id IN (";
 function db_quote($str) {
     return "'".$str."'";
