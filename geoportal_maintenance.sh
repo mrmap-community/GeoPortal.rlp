@@ -56,12 +56,6 @@ map_extent_csv=$bbox_wgs84
 background_hybrid_tms_url="http://www.gdi-rp-dienste2.rlp.de/mapcache/tms/1.0.0/topplusbkg@UTM32"
 background_aerial_wms_url="http://geo4.service24.rlp.de/wms/dop_basis.fcgi"
 
-# proxy config
-use_proxy_system="true"
-use_proxy_svn="true"
-use_proxy_apt="true"
-use_proxy_mb="true"
-
 http_proxy_host=""
 http_proxy_port=""
 https_proxy_host=""
@@ -139,7 +133,7 @@ else
   http_proxy_pass_hex=""
 fi
 
-if [ $use_proxy_system = 'true' ]; then
+if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
 
     if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
     	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
@@ -153,7 +147,7 @@ if [ $use_proxy_system = 'true' ]; then
     # git config --global https.proxy http://$https_proxy_host:$https_proxy_port
 fi
 
-if [ $use_proxy_apt = 'true' ]; then
+if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
     # for apt alter or create /etc/apt/apt.conf
     if [ -e "/etc/apt/apt.conf" ]; then
         echo "File exists"
@@ -198,10 +192,9 @@ sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g"
 
 # set some environment variables
 ############################################################
-if [ $use_proxy_svn = 'true' ]; then
+if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
     cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-fi
-if [ $use_proxy_svn = 'true' ]; then
+
     # for subversion alter /etc/subversion/servers - alter following lines
     # # http-proxy-host = defaultproxy.whatever.com
     sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
@@ -688,7 +681,7 @@ EOF
       # define proxy settings
       #####################
       # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
-      if [ $use_proxy_mb = 'true' ]; then
+      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
@@ -780,7 +773,7 @@ EOF
       # define proxy settings
       #####################
       # sed -i "s///g" ${installation_folder}conf/mapbender.conf
-      if [ $use_proxy_mb = 'true' ]; then
+      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
@@ -834,7 +827,7 @@ EOF
       sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-      if [ $use_proxy_mb = 'true' ]; then
+      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
           #####################
           # integrated mapserver mapfile for metadata footprints
           #####################
@@ -1633,15 +1626,11 @@ rm ${installation_folder}geoportal_database_adoption_2.sql
 rm ${installation_folder}geoportal-apache.conf
 rm ${installation_folder}install.log
 
-if [ $use_proxy_apt = 'true' ]; then
-    if [ -e "/etc/apt/apt.conf_backup_geoportal" ]; then
+if [ -e "/etc/apt/apt.conf_backup_geoportal" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
         cp /etc/apt/apt.conf_backup_geoportal /etc/apt/apt.conf
-        #echo "File does not exist"
-        #touch /etc/apt/apt.conf
-        #echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
-    fi
 fi
+
 if [ -e "/etc/apache2/apache2.conf_backup_geoportal" ]; then
         echo "Backup version of file exists - overwrite it with the original one"
         cp /etc/apache2/apache2.conf_backup_geoportal /etc/apache2/apache2.conf
