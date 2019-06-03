@@ -1155,7 +1155,11 @@ fi
   SecRuleRemoveById 920350
 
   <LocationMatch '/mapbender/php/mod_savewmc_server.php'>
-  SecRuleRemoveById 932110 932115 941140 941160 942190
+  SecRuleRemoveById 932110 932115 941140 941160 942190 941350
+  </LocationMatch>
+
+  <LocationMatch "/mapbender/extensions/mobilemap/mod_mapbender/search_proxy.php">
+  SecRuleRemoveById 942360
   </LocationMatch>
 
 
