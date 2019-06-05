@@ -147,6 +147,7 @@ if [ "$http_proxy_host" != "" ];then
         http_proxy_port=`echo $apt_proxy | cut -d: -f2`
       else
         http_proxy_host=""
+        http_proxy_port=""
       fi
 
     fi
@@ -178,7 +179,7 @@ if [ "$http_proxy_host" != "" ];then
       http_proxy_port=`echo $svn_proxy | cut -d: -f2`
     else
       http_proxy_host=""
-      ttp_proxy_port=""
+      http_proxy_port=""
     fi
 
     if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
