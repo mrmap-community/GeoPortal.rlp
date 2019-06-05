@@ -84,6 +84,7 @@ Description:
 
 	optional:  
 	--proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
+                            Special case: --proxyip=custom lets you choose a different proxy for each service above
 	--proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
 	--proxyuser             -> Username for proxy auth
 	--proxypw               -> Passwort for proxy auth
