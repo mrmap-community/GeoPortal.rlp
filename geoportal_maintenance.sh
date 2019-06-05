@@ -118,7 +118,7 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 
 date
-
+# proxy config
 # hexlify credentials for export
 if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
   http_proxy_user_hex=`echo $http_proxy_user | xxd -ps -c 200 | tr -d '\n' |  fold -w2 | paste -sd'%' -`
@@ -133,41 +133,72 @@ else
   http_proxy_pass_hex=""
 fi
 
-if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
+# proxy configuration
+if [ "$http_proxy_host" != "" ];then
+    # special case, if you need seperate for proxies for apt,svn,mapbender
+    if [ $http_proxy_host == "custom" ];then
+      echo "You have chosen custom proxy config, please enter your proxies one after another, leave blank for none, syntax ipaddress:port"
+      read  -p "APT Proxy: " apt_proxy
+      read  -p "SVN Proxy: " svn_proxy
+      read  -p "Mapbender Proxy: " mb_proxy
 
-    if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
-    	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
-    	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$https_proxy_host:$https_proxy_port"
-    else
-    	export http_proxy=http://$http_proxy_host:$http_proxy_port
-    	export https_proxy=http://$https_proxy_host:$https_proxy_port
+      if [ $apt_proxy != "" ];then
+        http_proxy_host=`echo $apt_proxy | cut -d: -f1`
+        http_proxy_port=`echo $apt_proxy | cut -d: -f2`
+      else
+        http_proxy_host=""
+      fi
+
     fi
-    # for git access behind proxy
-    # git config --global http.proxy http://$http_proxy_host:$http_proxy_port
-    # git config --global https.proxy http://$https_proxy_host:$https_proxy_port
+
+    if [ "$http_proxy_host" != "" ] && [  "$http_proxy_port" != "" ];then
+
+    # system proxy
+      if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
+      	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
+      	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$https_proxy_host:$https_proxy_port"
+      else
+      	export http_proxy=http://$http_proxy_host:$http_proxy_port
+      	export https_proxy=http://$https_proxy_host:$https_proxy_port
+      fi
+      # apt_proxy
+      if [ -e "/etc/apt/apt.conf" ]; then
+          echo "File exists"
+          cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
+          echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+      else
+          echo "File does not exist"
+          touch /etc/apt/apt.conf
+          echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+      fi
+    fi
+
+    if [ "$custom_proxy" == true ] && [ "$svn_proxy" != "" ];then
+      http_proxy_host=`echo $svn_proxy | cut -d: -f1`
+      http_proxy_port=`echo $svn_proxy | cut -d: -f2`
+    else
+      http_proxy_host=""
+    fi
+
+    if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
+      # svn proxy
+      cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
+      sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
+      sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
+      if [ "$http_proxy_user" != "" ]  && [  "$http_proxy_pass" != "" ];then
+        sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $http_proxy_user/g" /etc/subversion/servers
+        sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
+      fi
+    fi
+
 fi
 
-if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
-    # for apt alter or create /etc/apt/apt.conf
-    if [ -e "/etc/apt/apt.conf" ]; then
-        echo "File exists"
-	cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
-  #echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
+if  ! grep "no_proxy"  /etc/environment ;then
+    echo no_proxy="localhost,127.0.0.1" >> /etc/environment
+else
+    echo "Environment variable no_proxy was found in /etc/environment, check if no_proxy includes localhost!"
+ fi
 
-  echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
-    else
-        echo "File does not exist"
-	touch /etc/apt/apt.conf
-	#echo "Acquire::http::Proxy \"http://$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
-  echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
-    fi
-    # first line should be: Acquire::http::Proxy "http://$http_proxy_host:$http_proxy_port";
-    # for subversion alter /etc/subversion/servers - alter following lines
-    # # http-proxy-host = defaultproxy.whatever.com
-    # sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
-    # sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
-    # # http-proxy-port = 7000
-fi
 
 ############################################################
 if [ $install_system_packages = 'true' ]; then
@@ -189,23 +220,6 @@ cp /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini_geoportal_backup
 sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.0/cli/php.ini
 sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g" /etc/php/7.0/cli/php.ini
 
-
-# set some environment variables
-############################################################
-if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
-    cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-
-    # for subversion alter /etc/subversion/servers - alter following lines
-    # # http-proxy-host = defaultproxy.whatever.com
-    sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
-    sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
-    # # http-proxy-port = 7000
-
-    if [ "$http_proxy_user" != "" ]  && [  "$http_proxy_pass" != "" ];then
-      sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $http_proxy_user/g" /etc/subversion/servers
-      sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
-    fi
- fi
 
 ############################################################
 if [ $create_folders = 'true' ]; then
@@ -681,6 +695,12 @@ EOF
       # define proxy settings
       #####################
       # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
+
+      if [ $custom_proxy == true ] && [ "$mb_proxy" != "" ];then
+        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      fi
+
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}mapbender/conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
@@ -690,7 +710,6 @@ EOF
           sed -i "s/define(\"CONNECTION_USER\", \"\");/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
           sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}/mapbender/conf/mapbender.conf
         fi
-
       fi
       #####################
       # set database connection
@@ -773,6 +792,12 @@ EOF
       # define proxy settings
       #####################
       # sed -i "s///g" ${installation_folder}conf/mapbender.conf
+
+      if [ $custom_proxy == true ] && [ "$mb_proxy" != "" ];then
+        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      fi
+
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
   	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
@@ -782,7 +807,6 @@ EOF
           sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}conf/mapbender.conf
           sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}conf/mapbender.conf
         fi
-
       fi
       #####################
       # set database connection
@@ -812,7 +836,8 @@ EOF
       #####################
       # put hostname and ip in mapbender whitelist
       #####################
-      sed -i "s#define(\"CORS_WHITELIST\", \"http://localhost http://127.0.0.1 http://localhost:5984 http://localhost:8099 http://localhost:8090 http://127.0.0.1:5984 http://127.0.0.1:8090 http://127.0.0.1:8099\");#define(\"CORS_WHITELIST\", \"http://localhost http://127.0.0.1 http://localhost:5984 http://localhost:8099 http://localhost:8090 http://127.0.0.1:5984 http://127.0.0.1:8090 http://127.0.0.1:8099 http://$hostname http://$hostip\");#g" ${installation_folder}conf/mapbender.conf
+
+      sed -i "s#define(\"HOSTNAME_WHITELIST\", \"\");#define(\"HOSTNAME_WHITELIST\", \"http://$hostname http://$hostip\");#g" ${installation_folder}conf/mapbender.conf
       #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
       # copy conf files to right places
       cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
@@ -831,6 +856,11 @@ EOF
       sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
+      if [ "$http_proxy_host" == "custom" ] && ["$mb_proxy" != ""] ;then
+        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      fi
+
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
           #####################
           # integrated mapserver mapfile for metadata footprints
@@ -843,9 +873,6 @@ EOF
             sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
             sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
           fi
-
-
-
       fi
 
       cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
