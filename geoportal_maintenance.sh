@@ -173,11 +173,12 @@ if [ "$http_proxy_host" != "" ];then
       fi
     fi
 
-    if [ "$custom_proxy" == true ] && [ "$svn_proxy" != "" ];then
+    if [ "$svn_proxy" != "" ];then
       http_proxy_host=`echo $svn_proxy | cut -d: -f1`
       http_proxy_port=`echo $svn_proxy | cut -d: -f2`
     else
       http_proxy_host=""
+      ttp_proxy_port=""
     fi
 
     if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
@@ -696,9 +697,12 @@ EOF
       #####################
       # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
 
-      if [ $custom_proxy == true ] && [ "$mb_proxy" != "" ];then
+      if [ "$mb_proxy" != "" ];then
         http_proxy_host=`echo $mb_proxy | cut -d: -f1`
         http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      else
+      	http_proxy_host=""
+        http_proxy_port=""
       fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
@@ -793,9 +797,12 @@ EOF
       #####################
       # sed -i "s///g" ${installation_folder}conf/mapbender.conf
 
-      if [ $custom_proxy == true ] && [ "$mb_proxy" != "" ];then
+      if [ "$mb_proxy" != "" ];then
         http_proxy_host=`echo $mb_proxy | cut -d: -f1`
         http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      else
+      	http_proxy_host=""
+        http_proxy_port=""
       fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
@@ -856,9 +863,12 @@ EOF
       sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-      if [ "$http_proxy_host" == "custom" ] && ["$mb_proxy" != ""] ;then
+      if ["$mb_proxy" != ""] ;then
         http_proxy_host=`echo $mb_proxy | cut -d: -f1`
         http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      else
+      	http_proxy_host=""
+        http_proxy_port=""
       fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
