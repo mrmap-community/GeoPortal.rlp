@@ -872,7 +872,7 @@ EOF
       sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents_geoportal_rlp.map
       #sed -i "s/%%http_proxy_host%%/$http_proxy_host/g" ${installation_folder}conf/extents_geoportal_rlp.map
       #sed -i "s/%%http_proxy_port%%/$http_proxy_port/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84_space/g" ${installation_folder}conf/extents_geoportal_rlp.map
+      sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
@@ -1366,6 +1366,7 @@ EOF
   eval $croncmd8
   eval $croncmd9
   eval $croncmd10
+  eval $croncmd12
   ############################################################
   # things after cli
   ############################################################
