@@ -8,6 +8,7 @@
 # Michel Peltriaux
 ############################################################
 
+
 # Variables
 ipaddress="127.0.0.1"
 hostname="127.0.0.1"
@@ -116,6 +117,10 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 
 date
+#set hostname to ipaddress if no hostname was given
+if [ $ipaddress != "127.0.0.1" ] && [ $hostname == "127.0.0.1" ] ;then
+hostname=$ipaddress
+fi
 
 if [ "$http_proxy_user" != "" ];then
   echo "Please enter your proxy password"
@@ -1756,17 +1761,17 @@ echo "
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-    	--ipaddress=ipaddress             			| Default \"127.0.0.1\"
-      --hostname=hostname              			| Default \"127.0.0.1\"
-    	--proxy=Proxy IP     	 			           | Default \"None\" ; Syntax --proxy=1.2.3.4:5555
-      --proxyuser=username                                    | Default \"\" ; Password will be prompted
-    	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
+    	--ipaddress=ipaddress             		| Default \"127.0.0.1\"
+        --hostname=hostname              		| Default \"127.0.0.1\"
+    	--proxy=Proxy IP:Port  	 			| Default \"None\" ; Syntax --proxy=1.2.3.4:5555
+        --proxyuser=username                            | Default \"\" ; Password will be prompted
+    	--mapbenderdbuser=User for Database access	| Default \"mapbenderdbuser\"
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
-    	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
-    	--phppgadmin_pw=Password for PGAdmin web access   | Default \"postgresadmin_password\"
-	--install_dir=Directory for installation		| Default \"/data/\"
-    	--mysqlpw=database password for MySQL			| Default \"root\"
-    	--mode=what you want to do				| Default \"none\" [install,update,delete,backup]
+    	--phppgadmin_user=User for PGAdmin web access	| Default \"postgresadmin\"
+    	--phppgadmin_pw=Password for PGAdmin web access | Default \"postgresadmin_password\"
+	--install_dir=Directory for installation	| Default \"/data/\"
+    	--mysqlpw=database password for MySQL		| Default \"root\"
+    	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
 
 "
 
@@ -1779,15 +1784,15 @@ while getopts h-: arg; do
     - )  LONG_OPTARG="${OPTARG#*=}"
          case $OPTARG in
 	   help				)  usage;;
-     proxy=?*     		)  http_proxy=$LONG_OPTARG;;
-     proxyuser=?*       )  http_proxy_user=$LONG_OPTARG;;
+     	   proxy=?*     		)  http_proxy=$LONG_OPTARG;;
+     	   proxyuser=?*       		)  http_proxy_user=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
-	   mapbenderdbpw=?*	)  mapbender_database_password=$LONG_OPTARG;;
+	   mapbenderdbpw=?*		)  mapbender_database_password=$LONG_OPTARG;;
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
-	   phppgadmin_pw=?*	)  phppgadmin_password=$LONG_OPTARG;;
-	   install_dir=?*	)  installation_folder=$LONG_OPTARG;;
+	   phppgadmin_pw=?*		)  phppgadmin_password=$LONG_OPTARG;;
+	   install_dir=?*		)  installation_folder=$LONG_OPTARG;;
 	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
-     hostname=?*			)  hostname=$LONG_OPTARG;;
+     	   hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
            '' 				)  break ;; # "--" terminates argument processing
