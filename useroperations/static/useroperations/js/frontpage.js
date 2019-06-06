@@ -18,6 +18,10 @@ function getCookie(cname) {
     return "";
 }
 
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
+
 function setCookie(cname, cvalue){
     document.cookie = cname + "=" + cvalue + ";";
 }
@@ -406,3 +410,4 @@ $(document).ready(function(){
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");
 });
+
