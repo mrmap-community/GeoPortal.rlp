@@ -50,6 +50,7 @@ extended_search_default_gui_name="Geoportal-RLP_erwSuche2"
 center_x_i="385000"
 center_y_i="5543000"
 # config.js - mm2_config.js
+bbox_wgs84="6.05 48.9 8.6 50.96"
 initial_scale_i="1500000"
 map_extent_csv=$bbox_wgs84
 
@@ -90,7 +91,6 @@ fi
 dhm_wms_url="http://www.gdi-rp-dienste2.rlp.de/cgi-bin/mapserv.fcgi?map=/data/umn/geoportal/dhm_query/dhm.map&"
 catalogue_interface=$server_url"/mapbender/php/mod_callMetadata.php?"
 background_wms_csv="1819,1382,1635"
-bbox_wgs84="6.05 48.9 8.6 50.96"
 
 # initial services
 wms_1_url="'http://www.geoportal.rlp.de/mapbender/php/wms.php?layer_id=55468&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS'"
