@@ -132,7 +132,6 @@ fi
 
 # proxy configuration
 if [ "$http_proxy_host" != "" ];then
-    echo "proxy host yes"
     # special case, if you need seperate for proxies for apt,svn,mapbender
     if [ $http_proxy_host == "custom" ];then
       echo "You have chosen custom proxy config, please enter your proxies one after another, leave blank for none, syntax ipaddress:port"
@@ -163,11 +162,11 @@ if [ "$http_proxy_host" != "" ];then
       fi
       # apt_proxy
       if [ -e "/etc/apt/apt.conf" ]; then
-          echo "File exists"
+          echo "Apt Config File exists, Backing it up"
           cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       else
-          echo "File does not exist"
+          echo "Apt Conf File does not exist, creating it"
           touch /etc/apt/apt.conf
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       fi
@@ -176,11 +175,9 @@ if [ "$http_proxy_host" != "" ];then
 
     if [ "$custom_proxy" == true ];then
       if [ "$svn_proxy" != "" ];then
-        echo "customsvn"
         http_proxy_host=`echo $svn_proxy | cut -d: -f1`
         http_proxy_port=`echo $svn_proxy | cut -d: -f2`
       else
-        echo "clearing proxy"
         http_proxy_host=""
         http_proxy_port=""
       fi
@@ -188,7 +185,6 @@ if [ "$http_proxy_host" != "" ];then
 
     if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
       # svn proxy
-      echo "svn proxy"
       cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
       sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
       sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
