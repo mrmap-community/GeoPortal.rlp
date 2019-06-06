@@ -156,7 +156,6 @@ if [ "$http_proxy_host" != "" ];then
       	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
       	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
       else
-        echo "exporting proxy withouth auth"
       	export http_proxy="http://$http_proxy_host:$http_proxy_port"
       	export https_proxy="http://$http_proxy_host:$http_proxy_port"
       fi
