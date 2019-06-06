@@ -93,7 +93,7 @@
                 {% if loggedin %}
                 <div>{% trans 'Hello' %}, {{ user }}!</div>
                     <a href="{% url 'useroperations:change_profile' %}"><div class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</div></a>
-                    <a href="article/ServiceAbo"><div class="sidebar-list-element {% if request.session.current_page == 'service_abo' %}current-page{% endif %}">{% trans 'Show subscription' %}</div></a>
+                    <a href="{% url 'useroperations:service_abo' %}"><div class="sidebar-list-element {% if request.session.current_page == 'service_abo' %}current-page{% endif %}">{% trans 'Show subscription' %}</div></a>
                     <a href="{% url 'useroperations:logout' %}"><div class="sidebar-list-element {% if request.session.current_page == 'logout' %}current-page{% endif %}">{% trans 'Logout' %}</div></a>
                 {% else %}
                 <div>{% trans 'Not signed in' %}</div>
