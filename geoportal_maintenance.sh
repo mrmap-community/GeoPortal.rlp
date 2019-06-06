@@ -58,11 +58,8 @@ background_aerial_wms_url="http://geo4.service24.rlp.de/wms/dop_basis.fcgi"
 
 http_proxy_host=""
 http_proxy_port=""
-https_proxy_host=""
-https_proxy_port=""
 http_proxy_user=""
 http_proxy_pass=""
-
 # misc
 webadmin_email="test@test.de"
 use_ssl="false"
@@ -135,32 +132,34 @@ fi
 
 # proxy configuration
 if [ "$http_proxy_host" != "" ];then
+    echo "proxy host yes"
     # special case, if you need seperate for proxies for apt,svn,mapbender
     if [ $http_proxy_host == "custom" ];then
       echo "You have chosen custom proxy config, please enter your proxies one after another, leave blank for none, syntax ipaddress:port"
       read  -p "APT Proxy: " apt_proxy
       read  -p "SVN Proxy: " svn_proxy
       read  -p "Mapbender Proxy: " mb_proxy
-
-      if [ $apt_proxy != "" ];then
+      custom_proxy= true
+      if [ "$apt_proxy" != "" ];then
         http_proxy_host=`echo $apt_proxy | cut -d: -f1`
         http_proxy_port=`echo $apt_proxy | cut -d: -f2`
       else
         http_proxy_host=""
         http_proxy_port=""
       fi
-
     fi
+
 
     if [ "$http_proxy_host" != "" ] && [  "$http_proxy_port" != "" ];then
 
     # system proxy
       if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
       	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
-      	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$https_proxy_host:$https_proxy_port"
+      	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
       else
-      	export http_proxy=http://$http_proxy_host:$http_proxy_port
-      	export https_proxy=http://$https_proxy_host:$https_proxy_port
+        echo "exporting proxy withouth auth"
+      	export http_proxy="http://$http_proxy_host:$http_proxy_port"
+      	export https_proxy="http://$http_proxy_host:$http_proxy_port"
       fi
       # apt_proxy
       if [ -e "/etc/apt/apt.conf" ]; then
@@ -174,16 +173,22 @@ if [ "$http_proxy_host" != "" ];then
       fi
     fi
 
-    if [ "$svn_proxy" != "" ];then
-      http_proxy_host=`echo $svn_proxy | cut -d: -f1`
-      http_proxy_port=`echo $svn_proxy | cut -d: -f2`
-    else
-      http_proxy_host=""
-      http_proxy_port=""
+
+    if [ "$custom_proxy" == true ];then
+      if [ "$svn_proxy" != "" ];then
+        echo "customsvn"
+        http_proxy_host=`echo $svn_proxy | cut -d: -f1`
+        http_proxy_port=`echo $svn_proxy | cut -d: -f2`
+      else
+        echo "clearing proxy"
+        http_proxy_host=""
+        http_proxy_port=""
+      fi
     fi
 
     if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
       # svn proxy
+      echo "svn proxy"
       cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
       sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
       sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
@@ -192,9 +197,7 @@ if [ "$http_proxy_host" != "" ];then
         sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
       fi
     fi
-
 fi
-
 if  ! grep "no_proxy"  /etc/environment ;then
     echo no_proxy="localhost,127.0.0.1" >> /etc/environment
 else
@@ -210,6 +213,7 @@ if [ $install_system_packages = 'true' ]; then
 apt update
 apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2
 fi
+##git config --global http.proxy http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port
 # +655MB
 # mysql root password: mysqlroot - normally debian-sys-maint
 # after install - 1.9GB!!!
@@ -697,14 +701,15 @@ EOF
       # define proxy settings
       #####################
       # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
-
-      if [ "$mb_proxy" != "" ];then
-        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-      else
-      	http_proxy_host=""
-        http_proxy_port=""
-      fi
+      if [ "$custom_proxy" == true ];then
+        if [ "$mb_proxy" != "" ];then
+          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+        else
+        	http_proxy_host=""
+          http_proxy_port=""
+        fi
+    fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}mapbender/conf/mapbender.conf
@@ -798,13 +803,15 @@ EOF
       #####################
       # sed -i "s///g" ${installation_folder}conf/mapbender.conf
 
-      if [ "$mb_proxy" != "" ];then
-        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-      else
-      	http_proxy_host=""
-        http_proxy_port=""
-      fi
+      if [ "$custom_proxy" == true ];then
+        if [ "$mb_proxy" != "" ];then
+          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+        else
+        	http_proxy_host=""
+          http_proxy_port=""
+        fi
+    fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
   	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
@@ -864,12 +871,14 @@ EOF
       sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
       sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-      if ["$mb_proxy" != ""] ;then
-        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-      else
-      	http_proxy_host=""
-        http_proxy_port=""
+      if [ "$custom_proxy" == true ];then
+        if [ "$mb_proxy" != "" ];then
+          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+        else
+        	http_proxy_host=""
+          http_proxy_port=""
+        fi
       fi
 
       if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
@@ -1786,8 +1795,8 @@ while getopts h-: arg; do
     - )  LONG_OPTARG="${OPTARG#*=}"
          case $OPTARG in
 	   help				)  usage;;
-     proxyip=?*     		)  http_proxy_host=$LONG_OPTARG;https_proxy_host=$LONG_OPTARG;;
-     proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;https_proxy_port=$LONG_OPTARG;;
+     proxyip=?*     		)  http_proxy_host=$LONG_OPTARG;;
+     proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;;
      proxyuser=?*       )  http_proxy_user=$LONG_OPTARG;;
      proxypw=?*       )  http_proxy_pass=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
