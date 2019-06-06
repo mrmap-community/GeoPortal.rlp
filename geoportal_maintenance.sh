@@ -56,6 +56,7 @@ map_extent_csv=$bbox_wgs84
 background_hybrid_tms_url="http://www.gdi-rp-dienste2.rlp.de/mapcache/tms/1.0.0/topplusbkg@UTM32"
 background_aerial_wms_url="http://geo4.service24.rlp.de/wms/dop_basis.fcgi"
 
+http_proxy=""
 http_proxy_host=""
 http_proxy_port=""
 http_proxy_user=""
@@ -115,6 +116,12 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 
 date
+
+if [ "$http_proxy_user" != "" ];then
+  echo "Please enter your proxy password"
+  read  -sp "Password for $http_proxy_user: " http_proxy_pass
+fi
+
 # proxy config
 # hexlify credentials for export
 if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
@@ -130,10 +137,11 @@ else
   http_proxy_pass_hex=""
 fi
 
+
 # proxy configuration
-if [ "$http_proxy_host" != "" ];then
+if [ "$http_proxy" != "" ];then
     # special case, if you need seperate for proxies for apt,svn,mapbender
-    if [ $http_proxy_host == "custom" ];then
+    if [ $http_proxy == "custom" ];then
       echo "You have chosen custom proxy config, please enter your proxies one after another, leave blank for none, syntax ipaddress:port"
       read  -p "APT Proxy: " apt_proxy
       read  -p "SVN Proxy: " svn_proxy
@@ -146,8 +154,10 @@ if [ "$http_proxy_host" != "" ];then
         http_proxy_host=""
         http_proxy_port=""
       fi
+    else
+      http_proxy_host=`echo $http_proxy | cut -d: -f1`
+      http_proxy_port=`echo $http_proxy | cut -d: -f2`
     fi
-
 
     if [ "$http_proxy_host" != "" ] && [  "$http_proxy_port" != "" ];then
 
@@ -1507,26 +1517,6 @@ fi
 
 php maintenance/update.php --skip-external-dependencies
 
-# In case of credentials being given as option for installation.
-# Warn the user about the credentials potentially being logged in the bash history.
-if [[ "${http_proxy_user}" != "" ]] || [[ "${http_proxy_pass}" != "" ]];then
-    cat << EOF
-#############################################
-#                                           #
-#               CAUTION!                    #
-#           security related                #
-#                                           #
-# You entered the credentials to your       #
-# secured proxy server. Please check        #
-# your command line history for remaining   #
-# login credentials.                        #
-#                                           #
-# We recommend deleting the entry.          #
-#                                           #
-#############################################
-EOF
-fi
-
 }
 
 update(){
@@ -1766,11 +1756,9 @@ This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
     	--ipaddress=ipaddress             			| Default \"127.0.0.1\"
-        --hostname=hostname              			| Default \"127.0.0.1\"
-    	--proxyip=Proxy IP     	 			        | Default \"None\"
-    	--proxyport=Proxy Port		  		        | Default \"None\"
-        --proxyuser=username                                    | Default \"\"
-        --proxypw=password                                      | Default \"\"
+      --hostname=hostname              			| Default \"127.0.0.1\"
+    	--proxy=Proxy IP     	 			           | Default \"None\" ; Syntax --proxy=1.2.3.4:5555
+      --proxyuser=username                                    | Default \"\" ; Password will be prompted
     	--mapbenderdbuser=User for Database access		| Default \"mapbenderdbuser\"
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access		| Default \"postgresadmin\"
@@ -1790,10 +1778,8 @@ while getopts h-: arg; do
     - )  LONG_OPTARG="${OPTARG#*=}"
          case $OPTARG in
 	   help				)  usage;;
-     proxyip=?*     		)  http_proxy_host=$LONG_OPTARG;;
-     proxyport=?*   		)  http_proxy_port=$LONG_OPTARG;;
+     proxy=?*     		)  http_proxy=$LONG_OPTARG;;
      proxyuser=?*       )  http_proxy_user=$LONG_OPTARG;;
-     proxypw=?*       )  http_proxy_pass=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
 	   mapbenderdbpw=?*	)  mapbender_database_password=$LONG_OPTARG;;
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
@@ -1804,7 +1790,7 @@ while getopts h-: arg; do
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
            '' 				)  break ;; # "--" terminates argument processing
-           * 				)  echo "Illegal option --$OPTARG" >&2; exit 2 ;;
+           * 				)  echo "Illegal option --$OPTARG" >&2; usage; exit 2 ;;
          esac ;;
     \? ) exit 2 ;;  # getopts already reported the illegal option
   esac
