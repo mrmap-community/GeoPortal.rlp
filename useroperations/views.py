@@ -383,7 +383,7 @@ def change_profile_view(request):
     if request.COOKIES.get('PHPSESSID') is not None:
         session_data = helper_functions.get_mapbender_session_by_memcache(request.COOKIES.get('PHPSESSID'))
         if session_data != None:
-            if b'mb_user_id' in session_data:
+            if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
                 userid = session_data[b'mb_user_id']
                 user = MbUser.objects.get(mb_user_id=userid)
 
@@ -398,6 +398,9 @@ def change_profile_view(request):
                                 'survey': user.mb_user_allow_survey,
                                 }
                     form = ChangeProfileForm(userdata)
+            else:
+                return redirect('useroperations:index')
+
     else:
         return redirect('useroperations:index')
 
