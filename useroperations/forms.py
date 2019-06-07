@@ -41,6 +41,7 @@ class ChangeProfileForm(forms.Form):
     organization = forms.CharField(max_length=15, label=_("Organization "),required=False)
     newsletter = forms.BooleanField(initial=True, label=_("I want to sign up for the newsletter "),required=False)
     survey = forms.BooleanField(initial=True, label=_("I want to participate in surveys "),required=False)
+    create_digest = forms.BooleanField(initial=False, label=_("Use HTTP Digest Authentication for secured Services "), required=False)
 
 class PasswordResetForm(forms.Form):
     name = forms.CharField(max_length=25, label=_("Username"))
