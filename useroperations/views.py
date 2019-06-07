@@ -436,6 +436,7 @@ def change_profile_view(request):
                 user.mb_user_organisation_name = form.cleaned_data['organization']
                 user.mb_user_newsletter = form.cleaned_data['newsletter']
                 user.mb_user_allow_survey = form.cleaned_data['survey']
+                user.create_digest = form.cleaned_data['create_digest']
 
                 user.save()
                 messages.success(request, _("Successfully changed data"))
@@ -443,7 +444,8 @@ def change_profile_view(request):
 
     small_labels = [
         "id_newsletter",
-        "id_survey"
+        "id_survey",
+        "id_create_digest"
     ]
     btn_label_change = _("Change Profile")
     btn_label_delete = _("Delete Profile")
