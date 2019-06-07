@@ -13,6 +13,9 @@
                 <tr class="field-wrapper">
                     <td class="field-label">
                         {{ field.label_tag }}
+                        {% if field.field.required %}
+                        *
+                        {% endif %}
                     </td>
                     <td class="field-value">
                         {{ field }}

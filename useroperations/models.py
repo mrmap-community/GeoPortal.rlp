@@ -58,6 +58,8 @@ class MbUser(models.Model):
     activation_key = models.CharField(max_length=250, blank=True, null=True)
     timestamp_delete = models.BigIntegerField(blank=True, null=True)
     timestamp_dsgvo_accepted = models.BigIntegerField(blank=True, null=True)
+    create_digest = models.BooleanField(blank=True, null=True)
+
 
 
 
