@@ -750,6 +750,10 @@ msgstr "Ich möchte den Newsletter abonnieren "
 #: useroperations/forms.py:24
 msgid "I want to participate in surveys"
 msgstr "Ich möchte an Umfragen teilnehmen"
+  
+#: useroperations/forms.py:44
+msgid "Use HTTP Digest Authentication for secured Services "
+msgstr "Verwendung von HTTP Digest Authentifizierung für abgesicherte Dienste"
 
 #: useroperations/forms.py:25
 msgid ""
