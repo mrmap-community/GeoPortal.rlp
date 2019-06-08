@@ -59,6 +59,27 @@ form input[type=text], form input[type=password], form input[type=email]{
     font-weight: bold;
     background-color: var(--rlp-red);
 }
+
+.form-delete-submit-button{
+    padding: 10px;
+    font-size: 1.2em;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background-color: var(--rlp-red);
+    order:-1;
+}
+
+.form-change-submit-button{
+    padding: 10px;
+    font-size: 1.2em;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background-color: var(--rlp-red);
+
+    }
+
 .form-submit-button:hover, .form-cancel-button:hover{
     cursor: pointer;
     background-color: var(--rlp-red-light-hover);
