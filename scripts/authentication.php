@@ -1,5 +1,6 @@
 <?php
 include_once(dirname(__FILE__)."/../../core/globalSettings.php");
+require_once(dirname(__FILE__)."/../classes/class_user.php");
 $pw = $_REQUEST['password'];
 $name = $_REQUEST['name'];
 $e = new mb_exception('SESSION[mb_user_name]: '.Mapbender::session()->get("mb_user_name"));
@@ -55,7 +56,6 @@ if($isAuthenticated != false) {
 	$arrayGUIs = mb_getGUIs($isAuthenticated["mb_user_id"]);
 	Mapbender::session()->set("mb_user_guis",$arrayGUIs);
 
-
 	$URLAdd="?status=success";
 	if($isAuthenticated["timestamp_dsgvo_accepted"] == ""){
 		Mapbender::session()->set("dsgvo","no");
@@ -83,78 +83,23 @@ if($isAuthenticated != false) {
 }
 
 function authenticate ($name,$pw){
-
-$con = db_connect(DBSERVER,OWNER,PW);
-db_select_db(DB,$con);
-$sql = "SELECT * FROM mb_user WHERE mb_user_name = $1";
-$v = array($name);
-$t = array('s');
-$res = db_prep_query($sql,$v,$t);
-$row = db_fetch_array($res);
-
-#first login on new system, set salt and new password when password column is empty, delete md5 hash
-if ($row['is_active'] == "f"){
-
-	$URLAdd="?status=notactive";
-
-	if($_SERVER["HTTPS"] != "on") {
-		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
-	} else  {
-		header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
-	}
-
-	exit();
-
-}else if ($row['is_active'] == "t" or $row['is_active'] == ""){
-
-	if($row['password'] == ""){
-
-		if($row['mb_user_password'] == md5($pw)){
-
-			# set bcrypt hash
-			$sql = "UPDATE mb_user SET password = $1 WHERE mb_user_id = $2";
-			$v = array(password_hash($pw, PASSWORD_BCRYPT),$row['mb_user_id']);
-			$t = array('s','i');
-			$res = db_prep_query($sql,$v,$t);
-
-			# delete md5
-			$sql = "UPDATE mb_user SET mb_user_password = $1 WHERE mb_user_id = $2";
-			$v = array('',$row['mb_user_id']);
-			$t = array('s','i');
-			$res = db_prep_query($sql,$v,$t);
-			return $row;
-
+	$user = new User();
+	$returnObject = json_decode($user->authenticateUserByName($name, $pw));
+	if ($returnObject->success !== false) {
+		return json_decode(json_encode($returnObject->result), JSON_OBJECT_AS_ARRAY);
+	} else {
+	        $message = $returnObject->error->message;
+		if (strpos($message,'Account for') == 0) {
+			$URLAdd="?status=notactive";
+			if($_SERVER["HTTPS"] != "on") {
+				header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+			} else {
+				header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+			}
 		}
-
-	}else{
-
-
-		$sql = "SELECT password FROM mb_user WHERE mb_user_id = $1";
-		$v = array($row['mb_user_id']);
-		$t = array('s');
-		$res = db_prep_query($sql,$v,$t);
-		$row = db_fetch_array($res);
-		# salt is includes in the hashed password
-		$salt = $row['password'];
-
-		if (password_verify($pw,$salt)) {
-
-		$sql = "SELECT * FROM mb_user WHERE mb_user_name = $1";
-		$v = array($name);
-		$t = array('s');
-		$res = db_prep_query($sql,$v,$t);
-		$row = db_fetch_array($res);
-		return $row;
-
-		}
-	}
-
-	return false;
-
+		return false;
 	}
 }
-
-
 function setSession(){
 	session_start(); //function is ok cause the session will be closed directly after starting it!
 	session_write_close();
