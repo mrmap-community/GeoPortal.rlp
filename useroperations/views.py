@@ -481,8 +481,10 @@ def change_profile_view(request):
 
                 if form.cleaned_data['dsgvo'] == True:
                     user.timestamp_dsgvo_accepted = time.time()
+                    # set session variable dsgvo via session wrapper php script
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true')
                 else:
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false')
                     user.timestamp_dsgvo_accepted = ""
 
 
