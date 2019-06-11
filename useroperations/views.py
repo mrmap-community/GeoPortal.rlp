@@ -751,6 +751,23 @@ def feedback_view(request: HttpRequest):
         geoportal_context.add_context(params)
         return render(request=request, context=geoportal_context.get_context(), template_name=template)
 
+@check_browser
+def service_abo(request: HttpRequest):
+
+    """ Displays the serice abos of a user
+
+    Args:
+        request:
+    Returns:
+
+    """
+
+
+    template = "show_abo.html"
+
+    geoportal_context = GeoportalContext(request=request)
+    return render(request=request, context=geoportal_context.get_context(), template_name=template)
+
 
 def incompatible_browser(request: HttpRequest):
     """ Renders a template about how the user's browser is a filthy peasants tool.
