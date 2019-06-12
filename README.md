@@ -58,17 +58,17 @@ Requirements:
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-    	--ipaddress=ipaddress             			| Default "127.0.0.1"
-      	--hostname=hostname              			| Default "127.0.0.1"
-    	--proxy=Proxy IP     	 			        | Default "None" ; Syntax --proxy=1.2.3.4:5555
-      	--proxyuser=username                                   	| Default "" ; Password will be prompted
-    	--mapbenderdbuser=User for Database access		| Default "mapbenderdbuser"
+        --ipaddress=ipaddress             			        | Default "127.0.0.1"
+        --hostname=hostname              			        | Default "127.0.0.1"
+        --proxy=Proxy IP     	 			                | Default "None" ; Syntax --proxy=1.2.3.4:5555
+        --proxyuser=username                      	        | Default "" ; Password will be prompted
+        --mapbenderdbuser=User for Database access	        | Default "mapbenderdbuser"
     	--mapbenderdbpw=Password for database access    	| Default "mapbenderdbpassword"
     	--phppgadmin_user=User for PGAdmin web access		| Default "postgresadmin"
     	--phppgadmin_pw=Password for PGAdmin web access   	| Default "postgresadmin_password"
-	--install_dir=Directory for installation		| Default "/data/"
-    	--mysqlpw=database password for MySQL			| Default "root"
-    	--mode=what you want to do				| Default "none" [install,update,delete,backup]
+	    --install_dir=Directory for installation		    | Default "/data/"
+    	--mysqlpw=database password for MySQL		     	| Default "root"
+    	--mode=what you want to do				            | Default "none" [install,update,delete,backup]
 
 
 
