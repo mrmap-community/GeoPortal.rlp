@@ -123,6 +123,24 @@ phppgadmin  -> postgresadmin:postgresadmin_password
 
 ### Things that need to be done after installation:  
 
+If everything goes fine, you dont have to do anything else on the command line than executing the script.
+Upon successful installation the system should be ready to use, to verify that, point your browser at the IP or Hostname of your GeoPortal instance. If you dont see the Geoportal design, something might have gone wrong, in this case write an issue or go to
+the debugging section.
+
+The navigation is located on the left side and its items come from the database. To change the content in the navigation bar, you go to http://IP-ADDRESS/admin, which is the django admin interface. Now login with the default credentials root:root and change them. To do so,  you click on Users and select the root user as its the only entry. The Password field refers to a form where you can change your password. 
+
+Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. ...
+
+
+At this point the database contains three users which are 
+(root:root; -> superdamin, can do everything
+bereichsadmin1:bereichsadmin1; -> subadmin, can register&publish services
+guest:AUTOMATIC_SESSION) -> guest session, mostly for just viewing 
+
+The navigation is located on the left side and its items come from the database.
+
+
+
 #### Configuration
 Make sure all dependencies are installed properly.
 ##### Mapbender Whitelist
