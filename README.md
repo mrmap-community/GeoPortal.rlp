@@ -46,33 +46,31 @@ chmod +x geoportal_maintenance.sh
 ./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
 ```
 
-Documentation can be found, in the documentation directory in the project folder under documentation/_build/html/index.html.
-
 
 Requirements:
 
-* Debian 9 with working internet connection.
-* Python >= 3.5
-* pip
-* apache2
+* Debian 9 with working internet connection.   
+
 ```shell
 ./geoportal_maintenance.sh --help
 ```
 
 This script is for installing and maintaining your geoportal solution
-You can choose from the following **options**:
+You can choose from the following options:
 
-	--install_dir=Directory for installation                | Default "/data/"
-	--ipaddress=IPADDRESS                                   | Default "127.0.0.1"
-	--proxy=ProxyIP:Port                                    | Default "None" ; Syntax --proxy=1.2.3.4:8080
-	--proxyuser=username                                    | Default ""
-	--proxypw=Password for proxy auth                       | Default ""
-	--mapbenderdbuser=User for Database access              | Default "mapbenderdbuser"
-	--mapbenderdbpw=Password for database access            | Default "mapbenderdbpassword"
-	--phppgadmin_user=User for PGAdmin web access           | Default "postgresadmin"
-	--phppgadmin_pw=Password for PGAdmin web access         | Default "postgresadmin_password"
-	--mysqlpw=database password for MySQL                   | Default "root"
-	--mode=what you want to do                              | Default "none" [install,update,delete,backup]
+    	--ipaddress=ipaddress             			| Default "127.0.0.1"
+      	--hostname=hostname              			| Default "127.0.0.1"
+    	--proxy=Proxy IP     	 			        | Default "None" ; Syntax --proxy=1.2.3.4:5555
+      	--proxyuser=username                                   	| Default "" ; Password will be prompted
+    	--mapbenderdbuser=User for Database access		| Default "mapbenderdbuser"
+    	--mapbenderdbpw=Password for database access    	| Default "mapbenderdbpassword"
+    	--phppgadmin_user=User for PGAdmin web access		| Default "postgresadmin"
+    	--phppgadmin_pw=Password for PGAdmin web access   	| Default "postgresadmin_password"
+	--install_dir=Directory for installation		| Default "/data/"
+    	--mysqlpw=database password for MySQL			| Default "root"
+    	--mode=what you want to do				| Default "none" [install,update,delete,backup]
+
+
 
 Description:  
 
@@ -93,9 +91,10 @@ Description:
 	--mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
+
 Install:  
 ```shell
-geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
+geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/
 ```
 
 Update:
@@ -157,20 +156,60 @@ To do so, login as root or bereichsadmin1 and again, change password first. Afte
 
 ##### Important files and variables
 
-`/data/mapbender/conf/mapbender.conf` 
+* /data(default)/mapbender/conf/mapbender.conf  
 
 ```shell
 # HOSTNAME WHITELIST
-define("HOSTNAME_WHITELIST","xxx");
-```
-Where `xxx` is your servers IP address.
+define("HOSTNAME_WHITELIST","xxx"); # Where `xxx` is your servers IP address.
 
-##### Geoportal settings.py
-Back into your project to `Geoportal/settings.py`. Edit both of these variables to match your needs:
-* `HOSTNAME`
-    * Declares the hostname of your webpage for deploying. For now just keep the IP address inside without protocol
-* `HOSTIP`
-    * Declares the host IP address without protocol
+# HOSTs not for Proxy (curl)
+define("NOT_PROXY_HOSTS", "localhost,127.0.0.1,192.168.56.111");
+
+# database information
+define("DBSERVER", "localhost");
+define("PORT", "5432");
+define("DB", "mapbender");
+define("OWNER", "mapbenderdbuser");
+define("PW", "mapbenderdbpassword");
+
+```
+
+* /data(default)/GeoPortal.rlp/Geoportal/settings.py
+
+```shell
+
+HOSTNAME = "192.168.56.111"
+HOSTIP = "192.168.56.111"
+HTTP_OR_SSL = "http://"
+
+# Mailing settings
+ROOT_EMAIL_ADDRESS = "root@debian"
+
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'OPTIONS' : {
+                    'options': '-c search_path=django,mapbender,public'
+                    },
+        'NAME':'mapbender',
+        'USER':'mapbenderdbuser',
+        'PASSWORD':'mapbenderdbpassword',
+        'HOST':'127.0.0.1',
+        'PORT':''
+    }
+}
+
+# email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False / True
+EMAIL_HOST = 'IP OF YOUR SMTP SERVER'
+EMAIL_HOST_USER = 'kontakt@geoportal.de'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_PORT = 25 / 456 / 587
+ROOT_EMAIL_ADDRESS = "root@debian"
+
+```
     
 
 
