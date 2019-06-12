@@ -64,8 +64,7 @@ You can choose from the following **options**:
 
 	--install_dir=Directory for installation                | Default "/data/"
 	--ipaddress=IPADDRESS                                   | Default "127.0.0.1"
-	--proxyip=Proxy IP                                      | Default "None"
-	--proxyport=Proxy Port                                  | Default "None"
+	--proxy=ProxyIP:Port                                    | Default "None" ; Syntax --proxy=1.2.3.4:8080
 	--proxyuser=username                                    | Default ""
 	--proxypw=Password for proxy auth                       | Default ""
 	--mapbenderdbuser=User for Database access              | Default "mapbenderdbuser"
@@ -83,9 +82,8 @@ Description:
 	--mode                  -> What you want to do. Choices are install | update | delete | backup.
 
 	optional:  
-	--proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
+	--proxy                 -> IP Address:Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
                             Special case: --proxyip=custom lets you choose a different proxy for each service above
-	--proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
 	--proxyuser             -> Username for proxy auth
 	--proxypw               -> Passwort for proxy auth
 	--mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.
@@ -129,7 +127,7 @@ the debugging section.
 
 The navigation is located on the left side and its items come from the database. To change the content in the navigation bar, you go to http://IP-ADDRESS/admin, which is the django admin interface. Now login with the default credentials root:root and change them. To do so,  you click on Users and select the root user as its the only entry. The Password field refers to a form where you can change your password. 
 
-Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL field and have no parent.
+Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL and parent field.
 
 Fields:
 
@@ -141,12 +139,13 @@ Fields:
 * ICON_NAME -> Only for parent items, the icon you see in the navigation bar
 * PARENT -> Only needed for child items, see examples
 
-At this point the database contains three users which are 
-(root:root; -> superdamin, can do everything
+At this point the mapbender database contains three users which are: 
+root:root; -> superdamin, can do everything
 bereichsadmin1:bereichsadmin1; -> subadmin, can register&publish services
-guest:AUTOMATIC_SESSION) -> guest session, mostly for just viewing 
+guest:AUTOMATIC_SESSION -> guest session, mostly for just viewing 
 
-The navigation is located on the left side and its items come from the database.
+When your content and navigation is ready you can go ahead and start registering services.
+To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in another gui. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE and PortalAdmin_DE 
 
 
 
