@@ -163,7 +163,7 @@ To do so, login as root or bereichsadmin1 and again, change password first. Afte
 define("HOSTNAME_WHITELIST","xxx"); # Where `xxx` is your servers IP address.
 
 # HOSTs not for Proxy (curl)
-define("NOT_PROXY_HOSTS", "localhost,127.0.0.1,192.168.56.111");
+define("NOT_PROXY_HOSTS", "localhost,127.0.0.1,$HOSTNAME");
 
 # database information
 define("DBSERVER", "localhost");
@@ -181,9 +181,6 @@ define("PW", "mapbenderdbpassword");
 HOSTNAME = "192.168.56.111"
 HOSTIP = "192.168.56.111"
 HTTP_OR_SSL = "http://"
-
-# Mailing settings
-ROOT_EMAIL_ADDRESS = "root@debian"
 
 # Database
 DATABASES = {
