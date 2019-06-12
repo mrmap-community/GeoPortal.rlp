@@ -129,8 +129,17 @@ the debugging section.
 
 The navigation is located on the left side and its items come from the database. To change the content in the navigation bar, you go to http://IP-ADDRESS/admin, which is the django admin interface. Now login with the default credentials root:root and change them. To do so,  you click on Users and select the root user as its the only entry. The Password field refers to a form where you can change your password. 
 
-Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. ...
+Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL field and have no parent.
 
+Fields:
+
+* POSITION -> Order in the navigation bar, use 
+* NAME -> Name that will be displayed in the navigation bar.
+* PAGE_IDENTIFIER -> internal string, use NAME without upper chars and spaces
+* URL -> Only for child items, dont change the wiki entry as it points to your mediawiki
+        * use /article/NAME to create an item that refers to a mediawiki page, if you create the corresponding page in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
+* ICON_NAME -> Only for parent items, the icon you see in the navigation bar
+* PARENT -> Only needed for child items, see examples
 
 At this point the database contains three users which are 
 (root:root; -> superdamin, can do everything
