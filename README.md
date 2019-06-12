@@ -116,8 +116,8 @@ default credentials:
 mysql        -> root:root  
 wiki         -> root:rootroot  
 postgres     -> postgres:  
-phppgadmin   -> postgresadmin:postgresadmin_password
-django-admin -> root:root
+phppgadmin   -> postgresadmin:postgresadmin_password  
+django-admin -> root:root  
 
 ### Things that need to be done after installation:  
 
