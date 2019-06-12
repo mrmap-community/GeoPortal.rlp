@@ -113,10 +113,11 @@ geoportal_maintenance.sh --mode=backup
 ```
 
 default credentials:  
-mysql       -> root:root  
-wiki        -> root:rootroot  
-postgres    -> postgres:  
-phppgadmin  -> postgresadmin:postgresadmin_password
+mysql        -> root:root  
+wiki         -> root:rootroot  
+postgres     -> postgres:  
+phppgadmin   -> postgresadmin:postgresadmin_password
+django-admin -> root:root
 
 ### Things that need to be done after installation:  
 
@@ -130,13 +131,13 @@ Now you can alter the content of the navigation bar to your needs, it can be fou
 
 Fields of the navigation table:
 
-* POSITION -> Order in the navigation bar, use 
-* NAME -> Name that will be displayed in the navigation bar.
+* POSITION        -> Order in the navigation bar, use 
+* NAME            -> Name that will be displayed in the navigation bar.
 * PAGE_IDENTIFIER -> internal string, use NAME without upper chars and spaces
-* URL -> Only for child items, dont change the "wiki" entry as it points to your mediawiki
-        * use /article/NAME to create an item with NAME that refers to the mediawiki page, if you create the corresponding page in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
-* ICON_NAME -> Only for parent items, the icon you see in the navigation bar
-* PARENT -> Only needed for child items, see examples
+* URL             -> Only for child items, dont change the "wiki" entry as it points to your mediawiki
+                  * use /article/NAME to create an item with NAME that refers to the mediawiki page, if you create the corresponding page  in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
+* ICON_NAME       -> Only for parent items, the icon you see in the navigation bar
+* PARENT          -> Only needed for child items, see examples
 
 At this point the mapbender database contains three users which are: 
 root:root; -> superdamin, can do everything
