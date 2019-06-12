@@ -127,15 +127,15 @@ the debugging section.
 
 The navigation is located on the left side and its items come from the database. To change the content in the navigation bar, you go to http://IP-ADDRESS/admin, which is the django admin interface. Now login with the default credentials root:root and change them. To do so,  you click on Users and select the root user as its the only entry. The Password field refers to a form where you can change your password. 
 
-Now you can change the content of the navigation bar, it can be found in the table Navigations. After opening the table you should arrage the listings by Position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL and parent field.
+Now you can alter the content of the navigation bar to your needs, it can be found in the table Navigations. After opening the table you should arrage the listing by position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL and parent field.
 
-Fields:
+Fields of the navigation table:
 
 * POSITION -> Order in the navigation bar, use 
 * NAME -> Name that will be displayed in the navigation bar.
 * PAGE_IDENTIFIER -> internal string, use NAME without upper chars and spaces
-* URL -> Only for child items, dont change the wiki entry as it points to your mediawiki
-        * use /article/NAME to create an item that refers to a mediawiki page, if you create the corresponding page in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
+* URL -> Only for child items, dont change the "wiki" entry as it points to your mediawiki
+        * use /article/NAME to create an item with NAME that refers to the mediawiki page, if you create the corresponding page in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
 * ICON_NAME -> Only for parent items, the icon you see in the navigation bar
 * PARENT -> Only needed for child items, see examples
 
@@ -145,14 +145,20 @@ bereichsadmin1:bereichsadmin1; -> subadmin, can register&publish services
 guest:AUTOMATIC_SESSION -> guest session, mostly for just viewing 
 
 When your content and navigation is ready you can go ahead and start registering services.
-To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in another gui. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE and PortalAdmin_DE 
+To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in other guis. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE for service management (WMS, WFS, WMC, Metadata) and PortalAdmin_DE for user, group, role, category management and some maintenance functions. Documentation on Mapbender is currently only available in German and is located on the old portal http://www.geoportal.rlp.de/portal/hilfe/.
 
 
 
-#### Configuration
-Make sure all dependencies are installed properly.
-##### Mapbender Whitelist
-To allow your django project to communicate with the mapbender functions, that are needed at certain points, open `/data/mapbender/conf/mapbender.conf` and add the following line or edit if it already exists
+#### Debugging - Places to look
+
+* /var/log/apache2/error.log -> Apache and Django errors
+* /data(default)/mapbender/log/mb_err_log_* -> Mapbender specific errors
+
+
+##### Important files and variables
+
+`/data/mapbender/conf/mapbender.conf` 
+
 ```shell
 # HOSTNAME WHITELIST
 define("HOSTNAME_WHITELIST","xxx");
