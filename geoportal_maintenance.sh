@@ -1444,7 +1444,7 @@ python manage.py migrate --fake-initial
 python manage.py makemigrations useroperations
 python manage.py migrate useroperations
 python manage.py loaddata useroperations/fixtures/navigation.json
-
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('root', 'admin@example.com', 'root')" | python manage.py shell
 
 
 # apache config
