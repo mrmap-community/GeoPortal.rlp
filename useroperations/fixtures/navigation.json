@@ -52,7 +52,7 @@
       "pk":9,
       "fields":{  
          "name":"Hilfe",
-         "url":"/Hilfe",
+         "url":"",
          "page_identifier":"hilfe",
          "parent":null,
          "icon_name":"icn_help.png",
@@ -64,7 +64,7 @@
       "pk":11,
       "fields":{  
          "name":"Geoportal",
-         "url":"/Geoportal",
+         "url":"",
          "page_identifier":"geoportal",
          "parent":null,
          "icon_name":"icn_geoportal.png",
