@@ -63,6 +63,7 @@
                         <img class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
                     </div>
                 </div>
+
             {% endif %}
             <!-- Body content -->
             <div class="content-tabs -js-tabs">
@@ -105,5 +106,13 @@
     </div>
 
     </body>
+    {% if start_search is True %}
+    <script>
+        $(document).ready(function(){
+            var button = $("#geoportal-search-button");
+            button.click();
+        });
+    </script>
+    {% endif %}
 </html>
 {% endblock %}

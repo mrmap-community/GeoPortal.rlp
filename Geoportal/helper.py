@@ -166,6 +166,7 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
 
     response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
 
+
 def execute_threads(thread_list):
     """ Executes a list of threads
 
@@ -178,6 +179,7 @@ def execute_threads(thread_list):
     for thread in thread_list:
         thread.join()
 
+
 def print_debug(string: str):
     """ Print only if we are in dev mode!
 
@@ -187,3 +189,20 @@ def print_debug(string: str):
     """
     if DEBUG:
         print(string)
+
+
+def resolve_boolean_value(val: str):
+    """ Resolve a string which represents a boolean value
+
+    Args:
+        val: The value
+    Returns:
+         True, False or None
+    """
+    val = val.upper()
+    if val == "TRUE":
+        return True
+    elif val == "FALSE":
+        return False
+    else:
+        return None
