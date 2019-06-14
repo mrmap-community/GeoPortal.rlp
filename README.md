@@ -46,34 +46,31 @@ chmod +x geoportal_maintenance.sh
 ./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
 ```
 
-Documentation can be found, in the documentation directory in the project folder under documentation/_build/html/index.html.
-
 
 Requirements:
 
-* Debian 9 with working internet connection.
-* Python >= 3.5
-* pip
-* apache2
+* Debian 9 with working internet connection.   
+
 ```shell
 ./geoportal_maintenance.sh --help
 ```
 
 This script is for installing and maintaining your geoportal solution
-You can choose from the following **options**:
+You can choose from the following options:
 
-	--install_dir=Directory for installation                | Default "/data/"
-	--ipaddress=IPADDRESS                                   | Default "127.0.0.1"
-	--proxyip=Proxy IP                                      | Default "None"
-	--proxyport=Proxy Port                                  | Default "None"
-	--proxyuser=username                                    | Default ""
-	--proxypw=Password for proxy auth                       | Default ""
-	--mapbenderdbuser=User for Database access              | Default "mapbenderdbuser"
-	--mapbenderdbpw=Password for database access            | Default "mapbenderdbpassword"
-	--phppgadmin_user=User for PGAdmin web access           | Default "postgresadmin"
-	--phppgadmin_pw=Password for PGAdmin web access         | Default "postgresadmin_password"
-	--mysqlpw=database password for MySQL                   | Default "root"
-	--mode=what you want to do                              | Default "none" [install,update,delete,backup]
+        --ipaddress=ipaddress             			        | Default "127.0.0.1"
+        --hostname=hostname              			        | Default "127.0.0.1"
+        --proxy=Proxy IP     	 			                | Default "None" ; Syntax --proxy=1.2.3.4:5555
+        --proxyuser=username                      	        | Default "" ; Password will be prompted
+        --mapbenderdbuser=User for Database access	        | Default "mapbenderdbuser"
+    	--mapbenderdbpw=Password for database access    	| Default "mapbenderdbpassword"
+    	--phppgadmin_user=User for PGAdmin web access		| Default "postgresadmin"
+    	--phppgadmin_pw=Password for PGAdmin web access   	| Default "postgresadmin_password"
+	    --install_dir=Directory for installation		    | Default "/data/"
+    	--mysqlpw=database password for MySQL		     	| Default "root"
+    	--mode=what you want to do				            | Default "none" [install,update,delete,backup]
+
+
 
 Description:  
 
@@ -83,9 +80,8 @@ Description:
 	--mode                  -> What you want to do. Choices are install | update | delete | backup.
 
 	optional:  
-	--proxyip               -> IP Address of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
+	--proxy                 -> IP Address:Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
                             Special case: --proxyip=custom lets you choose a different proxy for each service above
-	--proxyport             -> Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
 	--proxyuser             -> Username for proxy auth
 	--proxypw               -> Passwort for proxy auth
 	--mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.
@@ -95,9 +91,10 @@ Description:
 	--mysqlpw               -> Passwort for the MySql root user.
 
 Examples:  
+
 Install:  
 ```shell
-geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxyip=192.168.0.254 --proxyport=3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install
+geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/
 ```
 
 Update:
@@ -116,40 +113,101 @@ geoportal_maintenance.sh --mode=backup
 ```
 
 default credentials:  
-mysql       -> root:root  
-wiki        -> root:rootroot  
-postgres    -> postgres:  
-phppgadmin  -> postgresadmin:postgresadmin_password
+mysql        -> root:root  
+wiki         -> root:rootroot  
+postgres     -> postgres:  
+phppgadmin   -> postgresadmin:postgresadmin_password  
+django-admin -> root:root  
 
 ### Things that need to be done after installation:  
 
-#### Configuration
-Make sure all dependencies are installed properly.
-##### Mapbender Whitelist
-To allow your django project to communicate with the mapbender functions, that are needed at certain points, open `/data/mapbender/conf/mapbender.conf` and add the following line or edit if it already exists
+If everything goes fine, you dont have to do anything else on the command line than executing the script.
+Upon successful installation the system should be ready to use, to verify that, point your browser at the IP or Hostname of your GeoPortal instance. If you dont see the Geoportal design, something might have gone wrong, in this case write an issue or go to
+the debugging section.
+
+The navigation is located on the left side and its items come from the database. To change the content in the navigation bar, you go to http://IP-ADDRESS/admin, which is the django admin interface. Now login with the default credentials root:root and change them. To do so,  you click on Users and select the root user as its the only entry. The Password field refers to a form where you can change your password. 
+
+Now you can alter the content of the navigation bar to your needs, it can be found in the table Navigations. After opening the table you should arrage the listing by position ascending, as this is the order they will be seen on the web interface. There are parent and child items. Parent items have a empty URL and parent field.
+
+Fields of the navigation table:
+
+* POSITION        -> Order in the navigation bar, use 
+* NAME            -> Name that will be displayed in the navigation bar.
+* PAGE_IDENTIFIER -> internal string, use NAME without upper chars and spaces
+* URL             -> Only for child items, dont change the "wiki" entry as it points to your mediawiki
+                  * use /article/NAME to create an item with NAME that refers to the mediawiki page, if you create the corresponding page  in the mediawiki itself, it will be rendered transparently into the webinterface. One example is the "Meldungen" article.
+* ICON_NAME       -> Only for parent items, the icon you see in the navigation bar
+* PARENT          -> Only needed for child items, see examples
+
+At this point the mapbender database contains three users which are: 
+root:root; -> superdamin, can do everything
+bereichsadmin1:bereichsadmin1; -> subadmin, can register&publish services
+guest:AUTOMATIC_SESSION -> guest session, mostly for just viewing 
+
+When your content and navigation is ready you can go ahead and start registering services.
+To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in other guis. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE for service management (WMS, WFS, WMC, Metadata) and PortalAdmin_DE for user, group, role, category management and some maintenance functions. Documentation on Mapbender is currently only available in German and is located on the old portal http://www.geoportal.rlp.de/portal/hilfe/.
+
+
+
+#### Debugging - Places to look
+
+* /var/log/apache2/error.log -> Apache and Django errors
+* /data(default)/mapbender/log/mb_err_log_* -> Mapbender specific errors
+
+
+##### Important files and variables
+
+* /data(default)/mapbender/conf/mapbender.conf  
+
 ```shell
 # HOSTNAME WHITELIST
-define("HOSTNAME_WHITELIST","xxx");
+define("HOSTNAME_WHITELIST","xxx"); # Where `xxx` is your servers IP address.
+
+# HOSTs not for Proxy (curl)
+define("NOT_PROXY_HOSTS", "localhost,127.0.0.1,$HOSTNAME");
+
+# database information
+define("DBSERVER", "localhost");
+define("PORT", "5432");
+define("DB", "mapbender");
+define("OWNER", "mapbenderdbuser");
+define("PW", "mapbenderdbpassword");
+
 ```
-Where `xxx` is your servers IP address.
 
-##### Geoportal settings.py
-Back into your project to `Geoportal/settings.py`. Edit both of these variables to match your needs:
-* `HOSTNAME`
-    * Declares the hostname of your webpage for deploying. For now just keep the IP address inside without protocol
-* `HOSTIP`
-    * Declares the host IP address without protocol
-    
+* /data(default)/GeoPortal.rlp/Geoportal/settings.py
 
+```shell
 
-#### Create Navigation:  
-Nagivation items are stored in database and can be found in the table navigations under the django schema.
-An example navigation is created upon installation and can be used as reference.
+HOSTNAME = "192.168.56.111"
+HOSTIP = "192.168.56.111"
+HTTP_OR_SSL = "http://"
 
-#### Create Content:  
-The content for the navigation items is stored in a mediawiki (`http://IP/mediawiki`) and is rendered transparently into the django interface. After creating the navigation items in the database, you can add the corresponding mediawiki pages with the same name as the database item. Examples are present in the database and mediawiki.
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'OPTIONS' : {
+                    'options': '-c search_path=django,mapbender,public'
+                    },
+        'NAME':'mapbender',
+        'USER':'mapbenderdbuser',
+        'PASSWORD':'mapbenderdbpassword',
+        'HOST':'127.0.0.1',
+        'PORT':''
+    }
+}
 
+# email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False / True
+EMAIL_HOST = 'IP OF YOUR SMTP SERVER'
+EMAIL_HOST_USER = 'kontakt@geoportal.de'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_PORT = 25 / 456 / 587
+ROOT_EMAIL_ADDRESS = "root@debian"
 
+```
 
 
 ## License

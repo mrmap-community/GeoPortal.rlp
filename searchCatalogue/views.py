@@ -39,7 +39,7 @@ app_name = ""
 logger = logging.getLogger(__name__)
 
 @check_browser
-def  index_external(request: HttpRequest):
+def index_external(request: HttpRequest):
     """ Renders the index template for external embedded calls.
 
     This route is for external embedded calls in iFrames and so on.
@@ -51,10 +51,10 @@ def  index_external(request: HttpRequest):
         Redirect: Redirect to the real render functionality with a flag for external_call
     """
     external_call = True
-    return index(request, external_call)
+    return index(request=request, external_call=external_call)
 
 @check_browser
-def index(request: HttpRequest, external_call = False):
+def index(request: HttpRequest, external_call=False):
     """ Renders the index template for all calls.
 
     If the external_call flag is set to True, this function will change the template to be rendered.

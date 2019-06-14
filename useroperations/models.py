@@ -8,7 +8,8 @@ class Navigation(models.Model):
     icon_name = models.CharField(max_length=200, blank=True)
     position = models.IntegerField(unique=True)
 
-
+    def __str__(self): 
+        return self.name
 
 
 class MbUser(models.Model):
