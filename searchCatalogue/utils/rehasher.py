@@ -7,6 +7,7 @@ Created on: 22.01.19
 
 """
 import threading
+from collections import OrderedDict
 
 from Geoportal import helper
 
@@ -26,8 +27,8 @@ class Rehasher:
         self.all_filters = filters
         for category_key, category_val in categories.items():
             self.all_categories.append(categories[category_key]["categories"]["searchMD"]["category"])
-        self.rehashed_categories = {}
-        self.rehashed_filters = {}
+        self.rehashed_categories = OrderedDict()
+        self.rehashed_filters = OrderedDict()
         self.__parent_categories = []
         self.__rehash()
         self.__sort_by_count()

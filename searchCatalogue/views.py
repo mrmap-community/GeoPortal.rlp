@@ -394,6 +394,14 @@ def get_data_primary(request: HttpRequest):
     # rehash facets
     rehasher = Rehasher(search_results, search_filters)
     facets = rehasher.get_rehashed_categories()
+    # set flag to indicate that the facet is one of the selected
+    for facet_key, facet_val in selected_facets.items():
+        for chosen_facet in facet_val:
+            _id = chosen_facet["id"]
+            for facet in facets[facet_key]:
+                if facet["id"] == _id:
+                    facet["is_selected"] = True
+                    break
     search_filters = rehasher.get_rehashed_filters()
     del rehasher
     print_debug(EXEC_TIME_PRINT % ("rehashing of facets", time.time() - start_time))
