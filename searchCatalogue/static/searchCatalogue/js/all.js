@@ -196,6 +196,7 @@ Search.prototype = {
                 self.setParam("searchBbox", "");
                 self.setParam("searchTypeBbox", "");
                 toggleSearchArea();
+                toggleFilterArea();
                 openSpatialArea();
                 enableSearchInputField();
                 //focus_on_search_input();
@@ -879,12 +880,20 @@ jQuery(document).ready(function() {
      */
      $(document).on("click", ".-js-subfacet", function(){
         var elem = $(this);
-        var facetKeyword = elem.attr("data-name").trim();
-        var facetId = elem.attr("data-id");
-        var facetParent = elem.attr("data-parent").trim();
-        var facetData = [facetParent, facetKeyword, facetId].join(",");
-        search.setParam("facet", facetData);
-        prepareAndSearch();
+        if(elem.hasClass("chosen-subfacet")){
+            // we want to remove this from the selection!
+            var id = elem.attr("data-id");
+            var item = $(".chosen-facet-item[data-id=" + id + "]")
+            item.click();
+        }else{
+            // we want to add it as a selection
+            var facetKeyword = elem.attr("data-name").trim();
+            var facetId = elem.attr("data-id");
+            var facetParent = elem.attr("data-parent").trim();
+            var facetData = [facetParent, facetKeyword, facetId].join(",");
+            search.setParam("facet", facetData);
+            prepareAndSearch();
+        }
      });
 
      /**
@@ -977,18 +986,6 @@ jQuery(document).ready(function() {
         elem.attr("src", "/static/searchCatalogue/images/icons/icn_permission_email.png");
     });
 
-
-
-    $(document).on("mouseover", "#filter-area", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_filter_hover.png");
-    });
-    $(document).on("mouseout", "#filter-area", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_filter.png");
-    });
 
     $(document).on("mouseover", "#add-map-button-div", function(){
         var elem = $(this);

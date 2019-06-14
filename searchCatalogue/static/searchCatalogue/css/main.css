@@ -511,11 +511,18 @@ dl dd {
 }
 
 #search-categories-sidebar{
-    width: 200px;
+    width: 250px;
 }
 
 .subfacet{
     font-size: 0.8em;
+    padding: 5px;
+    cursor: pointer;
+}
+.subfacet:hover{
+    cursor: pointer;
+    background-color: var(--primary);
+    color: white;
 }
 
 .searchbar .simple-search-field {
@@ -712,9 +719,9 @@ dl dd {
 }
 
 #filter-area{
-    background-color: white;
+    background-color: var(--primary);
     border: 1px solid var(--primary);
-    color: var(--primary);
+    color: white;
 }
 #filter-area:hover{
     background-color: var(--primary-hover);
@@ -942,7 +949,8 @@ dl dd {
   border-radius: 0px;
   padding: 10px;
   margin: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+  }
 
 .search--list .search--list--item.inactive, .search--list .resource--list--item.inactive, .resource--list .search--list--item.inactive, .resource--list .resource--list--item.inactive {
   color: #666;
@@ -1201,16 +1209,51 @@ dl dd {
 .facet-list ul {
   padding: 5px;
   list-style-type: none; }
-
-.facet-list ul li {
-  padding: 5px;
-  cursor: pointer; }
-
+/*
 .facet-list ul li:hover, .facet-list ul li:active, .facet-list ul lifocus, .facet-list ul li:checked {
   color: #fff;
   background-color: var(--primary);
   background: var(--primary) !important;
   background: linear-gradient(var(--primary), var(--primary)); }
+*/
+
+#chosen-facets{
+    display: flex;
+    flex-direction: row;
+}
+
+.single-chosen-facet{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.chosen-facet-items{
+    display: flex;
+    flex-direction: row;
+}
+
+.chosen-facet-item{
+  padding: 2px 10px 2px !important;
+  border-radius: 100px !important;
+  font-size: 0.95em !important;
+}
+
+.chosen-subfacet{
+    border-radius: 100px;
+    background-color: var(--primary);
+    color: white;
+    padding: 2px 10px 2px 10px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.chosen-subfacet:hover{
+    color: var(--primary);
+    background-color: white;
+    border: 1px solid var(--primary);
+}
 
 .Zebra_DatePicker {
   font-size: 15px;

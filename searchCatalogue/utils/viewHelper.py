@@ -732,6 +732,7 @@ def get_preselected_facets(params, all_categories):
         dict: Contains all sorted facets
     """
     ret_arr = {}
+
     iso_cat = params.get("isoCategories", "")
     custom_cat = params.get("customCategories", "")
     inspire_cat = params.get("inspireThemes", "")

@@ -6,8 +6,11 @@
          <h4>{{ facet_key }}</h4>
          <ul>
              {% for subcat in facet_val %}
-                <li class='-js-subfacet subfacet' data-name='{{ subcat.title }}' data-id='{{ subcat.id }}' data-parent="{{ facet_key }}" title="{{ subcat.title }} ({{ subcat.count }})">
-                    {{ subcat.title }} ({{ subcat.count }})
+                <li class='-js-subfacet subfacet {% if subcat.is_selected %}chosen-subfacet{% endif %}' data-name='{{ subcat.title }}' data-id='{{ subcat.id }}' data-parent="{{ facet_key }}" title="{{ subcat.title }} ({{ subcat.count }})">
+                    <span>{{ subcat.title }} ({{ subcat.count }})</span>
+                    {% if subcat.is_selected %}
+                        <span class="icon-cross fs-10px"></span>
+                    {% endif %}
                 </li>
              {% empty %}
                 {% trans 'No Categories found for this search configuration' %}
