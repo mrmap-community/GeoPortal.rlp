@@ -56,6 +56,7 @@ class GeoportalContext:
             'userid': session_data.get("userid", ""),
             'gui': session_data.get("gui", None),
             'guis': session_data.get("guis", ""),
+            'dsgvo': session_data.get("dsgvo", "no"),
             'lang': request.LANGUAGE_CODE,
             "HOSTNAME": HOSTNAME,
             "HTTP_OR_SSL": HTTP_OR_SSL,
