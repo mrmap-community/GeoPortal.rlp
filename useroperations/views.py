@@ -481,7 +481,7 @@ def change_profile_view(request):
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true', verify=INTERNAL_SSL)
                 else:
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
-                    user.timestamp_dsgvo_accepted = ""
+                    user.timestamp_dsgvo_accepted = None
 
 
                 user.save()
