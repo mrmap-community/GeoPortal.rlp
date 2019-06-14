@@ -51,10 +51,13 @@ def index_external(request: HttpRequest):
         Redirect: Redirect to the real render functionality with a flag for external_call
     """
     external_call = True
-    return index(request=request, external_call=external_call)
+    params_get = request.GET
+    start_search = helper.resolve_boolean_value(params_get.get("start", "False"))
+
+    return index(request=request, external_call=external_call, start_search=start_search)
 
 @check_browser
-def index(request: HttpRequest, external_call=False):
+def index(request: HttpRequest, external_call=False, start_search=False):
     """ Renders the index template for all calls.
 
     If the external_call flag is set to True, this function will change the template to be rendered.
@@ -106,6 +109,7 @@ def index(request: HttpRequest, external_call=False):
         "value_form_map_as_json": "",
         "selected_facets": preselected_facets,
         "external_call": external_call,
+        "start_search": start_search,
     }
     geoportal_context = GeoportalContext(request=request)
     geoportal_context.add_context(params)

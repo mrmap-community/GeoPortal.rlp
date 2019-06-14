@@ -647,7 +647,7 @@ def map_viewer_view(request):
         return render(request, template, geoportal_context.get_context())
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTIP, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTNAME, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
