@@ -132,8 +132,6 @@ $(document).on("keypress", "#id_message", function(){
 
 $(document).on("click", ".map-viewer-toggler, #mapviewer-sidebar", function(){
     // for dsgvo not accepted
-    var dsgvo = $("#dsgvo").val();
-
     if ($("#dsgvo").val() == "False"){
     window.location.href = "/change_profile";
     return;
@@ -187,6 +185,11 @@ $(document).on("click", ".sidebar-area-title", function(){
 });
 
 $(document).on("click", "#geoportal-search-button", function(){
+    // for dsgvo not accepted
+    if ($("#dsgvo").val() == "False"){
+        window.location.href = "/change_profile";
+        return;
+    }
     var elem = $(this);
     // check if the index page is already opened
     var index = $(".content-tabs.-js-tabs");

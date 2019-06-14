@@ -16,7 +16,7 @@ from django.shortcuts import render, redirect
 from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import helper_functions
 
@@ -73,7 +73,6 @@ def index_view(request, wiki_keyword=""):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True and wiki_keyword not in dsgvo_list:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
 
@@ -120,7 +119,6 @@ def organizations_view(request: HttpRequest):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
     template = "publishing_organizations.html"
@@ -144,7 +142,6 @@ def categories_view(request: HttpRequest):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
     template = "inspire_topics.html"
@@ -410,8 +407,7 @@ def change_profile_view(request):
 
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
         dsgvo_flag = False
-        #if request.META.get('HTTP_REFERER') == HTTP_OR_SSL + HOSTNAME + "/change_profile/":
-        #    messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
+        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
 
 
     request.session["current_page"] = "change_profile"
@@ -482,9 +478,9 @@ def change_profile_view(request):
                 if form.cleaned_data['dsgvo'] == True:
                     user.timestamp_dsgvo_accepted = time.time()
                     # set session variable dsgvo via session wrapper php script
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true')
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true', verify=INTERNAL_SSL)
                 else:
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false')
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
                     user.timestamp_dsgvo_accepted = ""
 
 
@@ -648,7 +644,6 @@ def map_viewer_view(request):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
     lang = request.LANGUAGE_CODE
@@ -773,7 +768,6 @@ def feedback_view(request: HttpRequest):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
     if request.method == 'POST':
@@ -830,7 +824,6 @@ def service_abo(request: HttpRequest):
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
         return redirect('useroperations:change_profile')
 
     template = "show_abo.html"

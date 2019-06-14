@@ -44,7 +44,7 @@ class ChangeProfileForm(forms.Form):
     newsletter = forms.BooleanField(initial=True, label=_("I want to sign up for the newsletter"),required=False)
     survey = forms.BooleanField(initial=True, label=_("I want to participate in surveys"),required=False)
     create_digest = forms.BooleanField(initial=False, label=_("Use HTTP Digest Authentication for secured Services"), required=False)
-    dsgvo = forms.BooleanField(initial=False, label=mark_safe(_("I understand and accept that my data will be automatically processed and securely stored, as it is stated in the general data protection regulation (GDPR).") + '(<a href="/article/Datenschutz" target="_blank">'+str(_("privacy policy"))+'</a>)'))
+    dsgvo = forms.BooleanField(initial=False, label=mark_safe(_("I understand and accept that my data will be automatically processed and securely stored, as it is stated in the general data protection regulation (GDPR).") + '(<a href="/article/Datenschutz" target="_blank">'+str(_("privacy policy"))+'</a>)'), required=False)
 
 class PasswordResetForm(forms.Form):
     name = forms.CharField(max_length=25, label=_("Username"))
