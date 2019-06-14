@@ -55,7 +55,13 @@ if($isAuthenticated != false) {
 	require_once(dirname(__FILE__)."/../php/mb_getGUIs.php");
 	$arrayGUIs = mb_getGUIs($isAuthenticated["mb_user_id"]);
 	Mapbender::session()->set("mb_user_guis",$arrayGUIs);
+
 	$URLAdd="?status=success";
+	if($isAuthenticated["timestamp_dsgvo_accepted"] == ""){
+		Mapbender::session()->set("dsgvo","no");
+	}else{
+		Mapbender::session()->set("dsgvo","yes");
+	}
 
 	if($_SERVER["HTTPS"] != "on") {
 		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
