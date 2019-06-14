@@ -16,7 +16,7 @@ from django.shortcuts import render, redirect
 from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import helper_functions
 
@@ -482,9 +482,9 @@ def change_profile_view(request):
                 if form.cleaned_data['dsgvo'] == True:
                     user.timestamp_dsgvo_accepted = time.time()
                     # set session variable dsgvo via session wrapper php script
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true')
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true', verify=INTERNAL_SSL)
                 else:
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false')
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
                     user.timestamp_dsgvo_accepted = ""
 
 
