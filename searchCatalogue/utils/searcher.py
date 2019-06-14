@@ -28,7 +28,7 @@ from searchCatalogue.utils.url_conf import *
 class Searcher:
 
     def __init__(self, keywords="",
-                 resource_set="dataset",
+                 resource_set="wms",
                  extended_search_params="",
                  page=1,
                  page_res="",
