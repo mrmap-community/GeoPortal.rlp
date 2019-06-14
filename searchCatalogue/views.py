@@ -133,10 +133,19 @@ def auto_completion(request: HttpRequest):
     Returns:
         JsonResponse: Contains auto-completion suggestions
     """
-    max_results = 3
+    max_results = 7
 
     if request.method == 'POST' and request.POST.dict()["type"] == "autocomplete":
         search_text = request.POST.dict()["terms"]
+        # clean for UMLAUTE!
+        search_text = search_text.replace("ö", "oe")
+        search_text = search_text.replace("Ö", "Oe")
+        search_text = search_text.replace("ä", "ae")
+        search_text = search_text.replace("Ä", "Ae")
+        search_text = search_text.replace("ü", "ue")
+        search_text = search_text.replace("U", "Ue")
+        search_text = search_text.replace("ß", "ss")
+
         auto_completer = AutoCompleter(search_text, max_results)
         results = auto_completer.get_auto_completion_suggestions()
     elif request.method == 'GET':
