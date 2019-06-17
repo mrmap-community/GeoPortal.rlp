@@ -1,9 +1,9 @@
 """
 Constants for the search catalogue app
 """
-from Geoportal.settings import HOSTNAME, HTTP_OR_SSL
+from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR
 
-EXTENT_SERVICE_URL = HTTP_OR_SSL + HOSTNAME + "/cgi-bin/mapserv?map=/data/mapbender/tools/wms_extent/extents.map&"
+EXTENT_SERVICE_URL = HTTP_OR_SSL + HOSTNAME + "/cgi-bin/mapserv?map=" + PROJECT_DIR + "/mapbender/tools/wms_extent/extents.map&"
 EXTENT_SERVICE_LAYER = "demis,ows_layer_target,extent,metadata_polygon"
 EXTENT_SERVICE_BBOX = "6.05,48.9,8.6,50.96"
 
