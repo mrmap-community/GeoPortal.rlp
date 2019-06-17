@@ -402,13 +402,6 @@ def change_profile_view(request):
 
     """
     dsgvo_flag = True # guest
-    geoportal_context = GeoportalContext(request)
-    context_data = geoportal_context.get_context()
-
-    if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
-        dsgvo_flag = False
-        messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
-
 
     request.session["current_page"] = "change_profile"
     form = ChangeProfileForm()
@@ -439,6 +432,14 @@ def change_profile_view(request):
 
     else:
         return redirect('useroperations:index')
+
+    if request.method == 'GET':
+        geoportal_context = GeoportalContext(request)
+        context_data = geoportal_context.get_context()
+
+        if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
+            dsgvo_flag = False
+            messages.error(request, _("Please accept the General Data Protection Regulation or delete your account!"))
 
     if request.method == 'POST':
         form = ChangeProfileForm(request.POST)
