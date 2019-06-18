@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Navigation(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -44,8 +45,8 @@ class MbUser(models.Model):
     mb_user_firstname = models.CharField(max_length=255, blank=True, null=True)
     mb_user_lastname = models.CharField(max_length=255, blank=True, null=True)
     mb_user_academictitle = models.CharField(max_length=255, blank=True, null=True)
-    timestamp_create = models.DateTimeField(auto_now_add=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp_create = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.now)
     mb_user_newsletter = models.BooleanField(blank=True, null=True)
     mb_user_allow_survey = models.BooleanField(blank=True, null=True)
     mb_user_aldigest = models.TextField(blank=True, null=True)
@@ -97,8 +98,8 @@ class MbGroup(models.Model):
     mb_group_logo_path = models.TextField(blank=True, null=True)
     mb_group_homepage = models.CharField(max_length=255, blank=True, null=True)
     mb_group_admin_code = models.CharField(max_length=255, blank=True, null=True)
-    timestamp_create = models.DateTimeField(auto_now_add=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp_create = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.now)
     mb_group_address_location = models.TextField(blank=True, null=True)  # This field type is a guess.
     uuid = models.UUIDField(blank=True, null=True)
     mb_group_ckan_uuid = models.UUIDField(blank=True, null=True)
