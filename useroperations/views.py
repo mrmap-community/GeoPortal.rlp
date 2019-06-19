@@ -372,7 +372,7 @@ def pw_reset_view(request):
                 send_mail(
                         _("Lost Password"),
                         _("Hello ") + user.mb_user_name +
-                        +", \n\n" +
+                        ", \n\n" +
                         _("This is your new password, please change it immediately!\n Password: ") + newpassword ,
                         'kontakt@geoportal.de',
                         [user.mb_user_email],
