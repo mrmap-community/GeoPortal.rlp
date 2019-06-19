@@ -381,7 +381,7 @@ var Autocomplete = function(search) {
             _input.val(keyword);
             self.hide();
             search.setParam("terms", keyword);
-            prepareAndSearch(true);
+            $("#geoportal-search-button").click();
         }
     };
 

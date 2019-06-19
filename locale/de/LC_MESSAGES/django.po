@@ -563,7 +563,7 @@ msgstr "Kartenviewer öffnen/schließen"
 
 #: templates/base.html:68
 msgid "Open and close menu"
-msgstr "Menü öffnen/schließen"
+msgstr "Menü ein-/ausklappen"
 
 #: templates/base.html:72
 msgid "Menu"

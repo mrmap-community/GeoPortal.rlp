@@ -19,19 +19,19 @@
 }
 
 h1 .mw-headline{
-    color: var(--rlp-red);
+    color: var(--primary);
 }
 
 h2 .mw-headline{
-    color: var(--rlp-red);
+    color: var(--primary);
 }
 
 h3 .mw-headline{
-    color: var(--rlp-red);
+    color: var(--primary);
 }
 
 .mediawiki-article ul{
-    list-style: square var(--rlp-red);
+    list-style: square var(--primary);
     padding: 0 0 0 20px;
 }
 
@@ -46,7 +46,7 @@ h3 .mw-headline{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid var(--rlp-gray);
+    border: 1px solid var(--secondary);
     padding: 5px;
 }
 .thumbcaption{
@@ -54,11 +54,11 @@ h3 .mw-headline{
 }
 
 .external, a{
-    color: var(--rlp-red);
+    color: var(--primary);
     text-decoration: none;
 }
 .external:hover, a:hover{
-    color: var(--rlp-red-light-hover);
+    color: var(--primary-light-hover);
     text-decoration: underline;
 }
 

@@ -131,7 +131,11 @@
                                     <a href="{% url 'useroperations:map_viewer' %}?g={{ gui }}"><div class="sidebar-list-element">{{ gui }}</div></a>
                                 {% endfor %}
                             {% else %}
-                                <a href="{{ sub_page.url }}"><div class="sidebar-list-element">{% trans sub_page.name %}</div></a>
+                                {% if selected_navigation == sub_page.url %}
+                                    <a href="{{ sub_page.url }}"><div class="sidebar-list-element current-page">{% trans sub_page.name %}</div></a>
+                                {% else %}
+                                    <a href="{{ sub_page.url }}"><div class="sidebar-list-element">{% trans sub_page.name %}</div></a>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </div>

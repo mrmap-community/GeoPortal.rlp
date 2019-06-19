@@ -2,19 +2,23 @@
 DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
 */
 :root{
-    --rlp-red: #871d33;
-    --rlp-red-hover: #b77784;
-    --rlp-red-light: #a7233f;
-    --rlp-red-light-hover: #c82a4b;
-    --rlp-gray: #e2e2e2;
-    --rlp-gray-font: #666;
-    /* --rlp-gray: #eee; */
-    --rlp-gray-hover: #aeaeae;
-    --rlp-gray-placeholder: #868686;
-    --rlp-gray-light: #EFEFEF;
+    --primary: #871d33;
+    --primary-invert: #78e2cc;
+    --primary-hover: #b77784;
+    --primary-light: #a7233f;
+    --primary-light-hover: #c82a4b;
 
-    --rlp-red-invert: #78E2CC;
+    --secondary: #e2e2e2;
+    --secondary-font: #666;
+    --secondary-hover: #aeaeae;
+    --secondary-placeholder: #868686;
+    --secondary-light: #EFEFEF;
 
     --success-green: #2e9b2e;
     --error-red: #D70000;
+
+    /*
+    --secondary: #eee;
+    --secondary-hover: #aeaeae;
+    */
 }

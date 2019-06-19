@@ -420,5 +420,6 @@ $(document).ready(function(){
 
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");
+    $(".messages-container").delay(5000).slideToggle("medium");
 });
 

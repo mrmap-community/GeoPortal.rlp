@@ -48,9 +48,10 @@ class GeoportalContext:
     """
 
     def __init__(self, request):
-        session_data=helper.get_mb_user_session_data(request)
+        session_data = helper.get_mb_user_session_data(request)
         self.data = {
             "navigation": helper.get_navigation_items(),
+            "selected_navigation": request.path,
             "loggedin": session_data.get("loggedin"),
             'user': session_data.get("user", ""),
             'userid': session_data.get("userid", ""),
