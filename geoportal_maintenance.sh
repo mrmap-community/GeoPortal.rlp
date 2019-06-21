@@ -102,7 +102,15 @@ wms_4_url="'https://gis.mffjiv.rlp.de/cgi-bin/mapserv?map=/data/mapserver/mapfil
 
 install_full(){
 
-  ##################### Geoportal-RLP
+if [[ ${installation_folder} =~ ^/.+/$ ]] ; then
+  echo "Installing into '${installation_folder}' ..."
+else
+  echo "Invalid installation folder '${installation_folder}'!"
+  installation_folder="/data/"
+  echo "Installing into '${installation_folder}' ..."
+fi
+
+##################### Geoportal-RLP
 wms_1_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_1_url"
 wms_2_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_2_url"
 wms_3_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_3_url"
