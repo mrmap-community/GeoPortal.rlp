@@ -733,7 +733,7 @@ msgstr "Benutzername"
 #: useroperations/forms.py:17 useroperations/forms.py:31
 #: useroperations/forms.py:50
 msgid "Please enter your username."
-msgstr "Bitte geben Sie Ihren Benutzernamen an."
+msgstr "Bitte geben Sie Ihren Benutzernamen ein."
 
 #: useroperations/forms.py:18 useroperations/forms.py:37
 msgid "Please enter your password with at least 9 characters."
@@ -749,7 +749,7 @@ msgstr "Passwort"
 
 #: useroperations/forms.py:19 useroperations/forms.py:38
 msgid "Password confirmation."
-msgstr "Passwort bestätigen."
+msgstr "Bitte bestätigen Sie Ihr Passwort."
 
 #: useroperations/forms.py:19
 msgid "PasswordConfirmation"
