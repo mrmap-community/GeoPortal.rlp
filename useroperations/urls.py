@@ -17,7 +17,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('article/<slug:wiki_keyword>/', index_view, name='index'),
     path('activate/<slug:activation_key>', activation_view, name='activation'),
-    path('viewer/', index_view, name='index'),
+    #path('viewer/', index_view, name='index'),
     path('incompatible/', incompatible_browser, name='incompatible-browser'),
     path('service_abo/', service_abo, name='service_abo'),
 ]

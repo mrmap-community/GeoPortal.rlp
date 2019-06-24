@@ -116,6 +116,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 .button-clickable{background:var(--primary);color:#fff !important; padding: 5px 5px 5px 5px}
 .button-clickable:hover{background:var(--primary-hover);}
 .active-button{
+    -ms-filter: invert(1.0);
     -webkit-filter: invert(1.0);
     filter: invert(1.0);
     background:var(--primary-invert);
@@ -328,7 +329,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     -webkit-filter: invert(1.0);
     filter: invert(1.0);
     color: black;
-    background: var(--primary-invert);
+    background-color: var(--primary-invert);
     cursor: pointer;
     border: 1px solid black;
 

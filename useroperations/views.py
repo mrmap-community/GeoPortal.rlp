@@ -765,6 +765,7 @@ def feedback_view(request: HttpRequest):
     Returns:
 
     """
+    request.session["current_page"] = "feedback"
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
@@ -821,6 +822,7 @@ def service_abo(request: HttpRequest):
     Returns:
 
     """
+    request.session["current_page"] = "show_abo"
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
@@ -841,6 +843,7 @@ def incompatible_browser(request: HttpRequest):
     Returns:
          A rendered view
     """
+    request.session["current_page"] = "incompatible"
     template = "unsupported_browser.html"
     params = {
 

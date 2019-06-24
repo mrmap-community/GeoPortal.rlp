@@ -23,7 +23,7 @@ function resizeIframe(obj) {
 }
 
 function setCookie(cname, cvalue){
-    document.cookie = cname + "=" + cvalue + ";";
+    document.cookie = cname + "=" + cvalue + ";path=/;";
 }
 
 function startSearch(){
@@ -73,8 +73,8 @@ function toggleMapViewers(target){
 
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
-    var elem = $(this).parents(".tile-content").find(".tile-content-img");
-    var id = elem.find("a").attr("href").split("=")[1];
+    var elem = $(this).parents(".tile").find(".tile-header");
+    var id = elem.attr("data-id");
     openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
 });
 
@@ -164,6 +164,8 @@ $(document).on("click", ".sidebar-toggler", function(){
     var sidebar = $(".sidebar-wrapper");
     var bodyContent = $("#body-content");
     sidebar.toggleClass("closed");
+    var isClosed = sidebar.hasClass("closed");
+    setCookie("sidebarClosed", isClosed);
     bodyContent.toggleClass("sidebar-open");
 });
 
@@ -215,7 +217,7 @@ $(document).on("click", "#geoportal-search-button", function(){
     popup.toggle();
  });
 
- $(document).on("click", ".organizations .tile-content-img", function(){
+ $(document).on("click", ".organizations .tile-header-img", function(){
      var elem = $(this);
      var id = elem.attr("data-id");
      var name = elem.attr("data-name");
@@ -225,7 +227,7 @@ $(document).on("click", "#geoportal-search-button", function(){
      searchButton.click();
  });
 
- $(document).on("click", ".topics .tile-content-img", function(){
+ $(document).on("click", ".topics .tile-header-img", function(){
      var elem = $(this);
      var filterName = elem.attr("data-name");
      var filterId = elem.attr("data-id");
@@ -241,19 +243,19 @@ $(document).on("click", "#geoportal-search-button", function(){
      /*
      * ToDo: THis does not work yet due to the 'great' structure of the search engine...
      */
-     var tileContentImg = elem.parents(".tile").find(".tile-content-img");
+     var tileContentImg = elem.parents(".tile").find(".tile-header-img");
      tileContentImg.click();
  });
 
 
- $(document).on("click", ".tile-content-img", function(event){
+ $(document).on("click", ".tile-header", function(event){
     event.preventDefault();
     var elem = $(this);
     if(elem.attr("id") == "show-all-tile-content"){
         $("#geoportal-search-button").click();
         return;
     }
-    href = elem.children("a").attr("href");
+    href = elem.attr("data-id");
     startAjaxMapviewerCall(href);
 
  });
@@ -420,5 +422,6 @@ $(document).ready(function(){
 
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");
+    $(".messages-container").delay(5000).slideToggle("medium");
 });
 

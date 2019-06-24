@@ -236,6 +236,7 @@ dl dd {
     }
 
 .button:hover {
+  cursor: pointer;
   background-color: #e6e6e6;
   border-color: #6f6f6f; }
 
@@ -447,20 +448,23 @@ dl dd {
 }
 .flag-selector{
     -webkit-filter: grayscale(1);
+    -ms-filter: grayscale(1);
     filter: grayscale(1);
 }
 .flag-selector:hover{
     -webkit-filter: grayscale(0);
+    -ms-filter: grayscale(0);
     filter: grayscale(0);
     opacity: 0.5;
     cursor: pointer;
 }
 .active-language{
     -webkit-filter: grayscale(0);
+    -ms-filter: grayscale(0);
     filter: grayscale(0);
 }
 
-.right-header-top{
+.upper-header{
     position: absolute;
     top: 0;
     right: 0;
@@ -609,6 +613,7 @@ dl dd {
     width: 100px;
     background-image: linear-gradient(white, var(--secondary));
     -webkit-filter: grayscale(1);
+    -ms-filter: grayscale(1);
     filter: grayscale(1);
     border-radius: 10px 10px 0 0;
 }
@@ -623,6 +628,7 @@ dl dd {
   color: #fff; }
 
 .source-tab-img:hover{
+    -ms-filter: grayscale(0);
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
     opacity: 0.5;
@@ -729,18 +735,21 @@ dl dd {
 }
 
 .filter-onlyOpenData-img{
+    -ms-filter: grayscale(1);
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
 }
 
 .filter-onlyOpenData-img:hover{
     opacity: 0.5;
+    -ms-filter: grayscale(0);
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
     cursor:pointer;
 }
 
 .active-img{
+    -ms-filter: grayscale(0);
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
 }
@@ -943,6 +952,7 @@ dl dd {
 
 .-js-subfacet-toggle-button, .search--list .search--list--item, .search--list .resource--list--item, .resource--list .search--list--item, .resource--list .resource--list--item {
   display: inline-block;
+  vertical-align: middle;
   color: white;
   background-color: var(--primary);
   border: 2px solid var(--primary);
@@ -1067,7 +1077,10 @@ dl dd {
 
 .img-area .img-preview {
     border: 1px solid var(--primary);
+    /*
     height: 100px;
+    */
+    height: 5em;
     margin: 0 10px 0 0;
 }
 
@@ -1082,6 +1095,11 @@ dl dd {
 .img-area .img-symbollink {
   max-height: 40px;
   }
+
+.result-overview{
+    display: flex;
+    flex-direction: row;
+}
 
 .img-symbollink{
     padding: 5px;
@@ -1282,3 +1300,29 @@ dl dd {
 
 .Zebra_DatePicker_Icon_Inside_Right {
   margin: 0 10px 0 0 !important; }
+
+
+@media screen and (max-width: 800px){
+    #search-results{
+        font-size: 1.0em;
+    }
+
+    .filter-onlyOpenData-img{
+        height: 1.5em;
+    }
+
+    .area-elements{
+        padding-left: 1em;
+    }
+
+    .result-overview{
+        flex-direction: column;
+    }
+    .search-result-detail{
+        padding: 2em 0;
+    }
+
+    .resource-element-data{
+        flex-direction: column;
+    }
+}

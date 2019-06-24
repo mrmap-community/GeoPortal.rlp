@@ -6,6 +6,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Geoportal{% block title %} RLP {% endblock %}</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'useroperations/images/favicon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base.css' %}" media="all" />
@@ -25,6 +26,12 @@
 <header>
 
 <div class="header">
+    <div class="upper-header">
+        <div class="language-selector-wrapper">
+            <img class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
+            <img class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
+        </div>
+    </div>
     <div class="left-header">
         <a href="/"><img id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="Geoportal Rheinland Pfalz" /></a>
     </div>
@@ -42,12 +49,6 @@
         </div>
     </div>
     <div class="right-header">
-        <div class="right-header-top">
-            <div class="language-selector-wrapper">
-                <img class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
-                <img class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
-            </div>
-        </div>
         <div class="right-header-bottom">
             <!--<a href="/"><img id="logo-gdi-rp" src="{% static 'useroperations/images/logo-gdi.png' %}" title="GDI-RP Rheinland Pfalz"/></a>-->
             <!--<a href="http://www.rlp.de" target="_blank"><img id="logo-country" src="{% static 'useroperations/images/logo-rlp.png' %}" title="Rheinland Pfalz"/></a>-->
@@ -67,11 +68,21 @@
     <div class="sidebar-toggler">
         <img width="50px" src="{% static 'useroperations/images/icn_toggler.png' %}" title="{% trans 'Open and close menu' %}">
     </div>
-    <div id="sidebar" class="sidebar-wrapper">
+    <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
         <div class="sidebar-title">
             {% trans 'Menu' %}
         </div>
         <div class="sidebar-content">
+            <a href="{% url 'useroperations:index' %}">
+                <div class="sidebar-area-title">
+                    <div class="sidebar-area-title-icon">
+                        <img width="40px" src="{% static 'useroperations/images/icn_home.png' %}">
+                    </div>
+                    <div class="sidebar-area-title-text">
+                        {% trans 'Home' %}
+                    </div>
+                </div>
+            </a>
         <div class="sidebar-area login-status">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
@@ -131,7 +142,11 @@
                                     <a href="{% url 'useroperations:map_viewer' %}?g={{ gui }}"><div class="sidebar-list-element">{{ gui }}</div></a>
                                 {% endfor %}
                             {% else %}
-                                <a href="{{ sub_page.url }}"><div class="sidebar-list-element">{% trans sub_page.name %}</div></a>
+                                {% if selected_navigation == sub_page.url %}
+                                    <a href="{{ sub_page.url }}"><div class="sidebar-list-element current-page">{% trans sub_page.name %}</div></a>
+                                {% else %}
+                                    <a href="{{ sub_page.url }}"><div class="sidebar-list-element">{% trans sub_page.name %}</div></a>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -143,7 +158,7 @@
     <div id="info-overlay" class="modalDialog">
 
     </div>
-    <div id="body-content" class="body-content sidebar-open">
+    <div id="body-content" class="body-content {% if not sidebar_closed %} sidebar-open {% endif %}">
 
         {% if messages %}
         <div class="messages-container">

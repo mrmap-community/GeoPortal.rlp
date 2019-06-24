@@ -13,17 +13,17 @@
 CHANGE PLACEHOLDER COLORS
 */
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--rlp-gray-placeholder);
+  color: var(--secondary-placeholder);
   text-align: center;
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: var(--rlp-gray-placeholder);
+  color: var(--secondary-placeholder);
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-  color: var(--rlp-gray-placeholder);
+  color: var(--secondary-placeholder);
 }
 
 *{font-family:Arial,Helvetica,"Sans Serif" !important;}
@@ -36,7 +36,7 @@ html{
 body{
     margin: 0;
     /*
-    background-color: var(--rlp-gray-light);
+    background-color: var(--secondary-light);
     */
     height: 100%;
     position: relative;
@@ -52,7 +52,7 @@ body{
     /*width: 70%;*/
     transition-duration: 0.8s;
     padding: 10px 50px 10px 50px;
-    color: var(--rlp-gray-font);
+    color: var(--secondary-font);
     /*
     margin: 0 200px 0 200px;
     */
@@ -63,9 +63,9 @@ body{
 }
 
 footer{
-    border-top: 5px solid var(--rlp-red);
+    border-top: 5px solid var(--primary);
     padding: 20px;
-    background-image: linear-gradient(var(--rlp-gray), white);
+    background-image: linear-gradient(var(--secondary), white);
     display: flex;
     justify-content: space-evenly;
 }
@@ -88,17 +88,20 @@ footer{
     position: fixed;
     font-size: 1.2em;
     bottom: 0;
-    height: 25vh;
     min-height:200px;
     width: 100%;
-    background-image: linear-gradient(var(--rlp-gray), white);
-    color: var(--rlp-red);
+    background-image: linear-gradient(var(--secondary), white);
+    color: var(--primary);
     padding: 10px;
     -webkit-box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     text-align: center;
     opacity: 0.95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .cookie-text{
@@ -106,7 +109,7 @@ footer{
 }
 
 .cookie-button{
-    margin: 0 40% 0 40%;
+    max-width: 400px;
 }
 
 .message-container{
@@ -118,7 +121,7 @@ footer{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     font-weight: bold;
     padding: 20px;
@@ -145,9 +148,9 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items:center;
-    background-image: linear-gradient(to bottom left, white, var(--rlp-gray));
-    border-bottom: 5px solid var(--rlp-red);
-    /*background-color: var(--rlp-gray);*/
+    background-image: linear-gradient(to bottom left, white, var(--secondary));
+    border-bottom: 5px solid var(--primary);
+    /*background-color: var(--secondary);*/
 }
 
 .logo-geoportal-wrapper{
@@ -191,7 +194,7 @@ footer{
     flex-grow: 1;
 }
 
-.right-header-top{
+.upper-header{
     position: absolute;
     top: 0;
     right: 0;
@@ -229,25 +232,25 @@ footer{
 }
 
 .simple-search-field:focus{
-    border-color: var(--rlp-red);
-    box-shadow: 0 0 10px var(--rlp-red);
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .search-submit-button{
     display: flex;
     align-items: center;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     padding: 10px;
 }
 .search-submit-button:hover{
-    background-color: var(--rlp-red-hover);
+    background-color: var(--primary-hover);
     cursor: pointer;
 }
 
 .simple-search-autocomplete {
 
-    box-shadow: 0px 5px 5px 0px var(--rlp-red);
+    box-shadow: 0px 5px 5px 0px var(--primary);
     border-left: 1px solid #d5d5d5;
     border-right: 1px solid #d5d5d5;
     border-bottom: 1px solid #d5d5d5;
@@ -268,7 +271,7 @@ footer{
 
 .simple-search-autocomplete div:hover, .simple-search-autocomplete div.active {
   /*background-color: #f2f2f2; */
-  background-color: var(--rlp-red);
+  background-color: var(--primary);
   color: white;
   }
 
@@ -277,6 +280,7 @@ footer{
 
 /* LANGUAGE SELECTOR */
 .flag-selector{
+    -ms-filter: grayscale(1);
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
 }
@@ -287,6 +291,7 @@ footer{
     cursor: pointer;
 }
 .active-language{
+    -ms-filter: grayscale(0);
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
 }
@@ -307,7 +312,7 @@ ul {
 .map-viewer-overlay{
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(var(--rlp-gray), white);
+    background-image: linear-gradient(var(--secondary), white);
     position: absolute;
     margin: 0;
     /*
@@ -358,11 +363,11 @@ ul {
     font-weight: bold;
     padding: 10px;
     margin-top: 5px;
-    background-color: var(--rlp-red-light);
+    background-color: var(--primary-light);
     border-radius: 10px;
 }
 .map-applications-list-entry:hover{
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
     cursor: pointer;
 }
 
@@ -377,11 +382,14 @@ ul {
 }
 
 .quickstart{
+    /*
     max-width: 500px;
+    */
+    max-width: 50em;
     display: flex;
     align-items: center;
     margin: 5px;
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     font-size: 1.05em;
     padding: 20px;
@@ -389,7 +397,7 @@ ul {
     text-decoration: none;
 }
 .quickstart:hover{
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
 }
 .quickstart img{
     margin: 0 20px 0 0;
@@ -415,8 +423,8 @@ ul {
 }
 
 .sidebar-wrapper {
-    background-color: var(--rlp-red);
-    /* background-image: linear-gradient(var(--rlp-red), white); */
+    background-color: var(--primary);
+    /* background-image: linear-gradient(var(--primary), white); */
     list-style-type: none;
     width: 200px;
     margin: 0;
@@ -439,6 +447,11 @@ ul {
     padding: 20px 0 0 0;
     color: white;
 }
+.sidebar-content a{
+    color: white;
+    outline: none;
+    text-decoration: none;
+}
 
 .sidebar-title{
     text-align: center;
@@ -459,19 +472,21 @@ ul {
     align-items: center;
     /*justify-content: space-evenly;*/
     font-weight: bold;
-    background-color: var(--rlp-red-light);
+    background-color: var(--primary-light);
     padding: 20px;
 }
 
 .sidebar-area-title-text{
-    text-align: middle;
+    text-align: left;
+    padding: 0 0 0 20px;
     width: 100%;
     height: 100%;
 }
 
 .sidebar-area-title:hover{
     cursor: pointer;
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
+    color: white;
 }
 
 .sidebar-area-content{
@@ -479,7 +494,7 @@ ul {
 }
 
 .sidebar-area-content > div{
-    background-color: var(--rlp-red-light);
+    background-color: var(--primary-light);
     font-weight: bold;
     padding: 10px 0 10px 0;
 }
@@ -492,19 +507,25 @@ ul {
 
 .sidebar-list-element{
     color: white;
-    padding: 15px 0px 15px 0px;
+    padding: 15px 0px 15px 15px;
     cursor: pointer;
+    text-align: left;
 }
 
 .current-page{
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
+    color: white;
+    /*
+    padding: 15px 0 15px 45px;
+    */
 }
 
 .sidebar-list-element:hover{
     text-decoration: none;
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
     color: white;
 }
+
 
 #map-viewer-selector{
     display: none;
@@ -521,7 +542,7 @@ ul {
 }
 
 .footer-col > h6{
-    color: var(--rlp-red);
+    color: var(--primary);
     font-weight: bold;
 }
 
@@ -531,10 +552,10 @@ ul {
 
 .footer-col a{
     text-decoration: none;
-    color: var(--rlp-gray-placeholder);
+    color: var(--secondary-placeholder);
 }
 .footer-col a:hover{
-    color: var(--rlp-red-hover);
+    color: var(--primary-hover);
 }
 
 .search-form-text-input{
@@ -551,7 +572,14 @@ ul {
 }
 .messages{
     width: 100%;
+    -ms-filter: drop-shadow(2px 2px 2px black);
+    -webkit-filter: drop-shadow(2px 2px 2px black);
     filter: drop-shadow(2px 2px 2px black);
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
 }
 
 .message-toggler{
@@ -559,28 +587,31 @@ ul {
     color: white;
     font-weight: bold;
     position: absolute;
-    top: 5px;
-    right: 1px;
+    right: 10px;
     border-radius: 10px;
+    border: 2px solid white;
 }
 .success .message-toggler{
     background-color: var(--success-green);
 }
+.success .message-toggler:hover{
+    border: 2px solid var(--success-green);
+    background-color: white;
+    color: var(--success-green);
+}
 .error .message-toggler{
     background-color: var(--error-red);
 }
-.message-toggler:hover{
-    cursor:pointer;
-    filter: drop-shadow(2px 2px 2px black);
+.error .message-toggler:hover{
+    border: 2px solid var(--error-red);
+    background-color: white;
+    color: var(--error-red);
 }
 
-.messages{
-    padding: 15px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 10px;
+.message-toggler:hover{
+    cursor:pointer;
 }
+
 .messages.success {
     background-color: var(--success-green);
 }
@@ -589,4 +620,87 @@ ul {
 }
 .messages.success:hover, .messages.error:hover{
     cursor: default;
+}
+
+
+@media screen and (max-width: 800px){
+
+    #logo_gdi{
+        display: none;
+    }
+
+    .body-content{
+        padding: 5em 0;
+    }
+
+    header{
+        font-size: 1em;
+    }
+
+    .middle-header{
+        margin: 3em 0;
+        width: 30em;
+    }
+
+    #geoportal-search-field{
+        height: 4em;
+    }
+
+    #middle-header-bottom{
+        display: none;
+    }
+
+    #sidebar{
+        font-size: 1em;
+        width: 12em;
+    }
+
+    .sidebar-toggler img, .map-viewer-toggler img{
+        width: 3em;
+    }
+
+    .sidebar-area-title-icon img{
+        width: 2em;
+    }
+
+    .sidebar-title{
+        font-size: 1em;
+    }
+
+    .quickstart{
+        font-size: 1em;
+    }
+    .quickstart-container{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer{
+        font-size: 1.25em;
+    }
+    .footer-col-wrapper{
+        flex-direction: column;
+    }
+    .right-footer{
+        display: none;
+    }
+    #footer-legal{
+        margin: 0 0 1em 0;
+    }
+    #footer-news-api{
+        margin: 0;
+    }
+
+    .sidebar-wrapper.closed{
+        transform: translateX(-12em);
+    }
+
+    .cookie-container{
+        top: 0;
+        bottom: unset;
+    }
+    .mobile-advice{
+        font-weight: bold;
+    }
+
 }

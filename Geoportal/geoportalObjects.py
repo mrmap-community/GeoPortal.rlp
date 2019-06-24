@@ -48,9 +48,10 @@ class GeoportalContext:
     """
 
     def __init__(self, request):
-        session_data=helper.get_mb_user_session_data(request)
+        session_data = helper.get_mb_user_session_data(request)
         self.data = {
             "navigation": helper.get_navigation_items(),
+            "selected_navigation": request.path,
             "loggedin": session_data.get("loggedin"),
             'user': session_data.get("user", ""),
             'userid': session_data.get("userid", ""),
@@ -64,6 +65,8 @@ class GeoportalContext:
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,
             "cookie": request.COOKIES.get("Geoportal-RLP", None),
+            "sidebar_closed": helper.resolve_boolean_value(request.COOKIES.get("sidebarClosed", 'False')),
+            "is_mobile": request.user_agent.is_mobile,
             "IFRAME_HEIGHT": IFRAME_HEIGHT,
             "IFRAME_WIDTH": IFRAME_WIDTH,
         }

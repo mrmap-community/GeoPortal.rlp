@@ -26,16 +26,19 @@
     display: flex;
     flex-direction: column;
     margin: 10px;
+    /*
     width: 250px;
+    */
+    width: 15em;
     transition: all 0.1s ease-in-out;
-    background-color: var(--rlp-gray);
+    background-color: var(--secondary);
 }
 .organizations .tile{
     width: 175px;
 }
 .tile:hover{
     transform: scale(1.05);
-    box-shadow: 0 0 10px var(--rlp-red);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .tile-header{
@@ -43,25 +46,50 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    color: var(--rlp-red);
+    color: var(--primary);
     font-weight: bold;
+    flex-direction: column;
+    /*
     height: 70px;
+    */
+
+    height: 15em;
 
     -webkit-hyphens: auto;
        -moz-hyphens: auto;
         -ms-hyphens: auto;
             hyphens: auto;
+    /*
     text-align: justify;
+    */
+}
+
+.tile-header:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.tile-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px 10px 10px;
 }
 
 .tile-img{
+    /*
     width: 250px;
     height: 150px;
+    */
+    width: 15em;
+    height: 7em;
     object-fit: cover;
 }
 .organizations .tile-img, .topics .tile-img{
-    width: 175px;
+    width: 7em;
+    /*
     height: 50px;
+    */
     object-fit: contain;
 }
 
@@ -69,11 +97,6 @@
     transition: all 0.1s ease-in-out;
     -webkit-filter: grayscale(1.0);
     filter: grayscale(1.0);
-}
-
-.tile-img:hover{
-    cursor: pointer;
-    opacity: 0.5;
 }
 .topics .tile-img:hover, .topics .sub-tile-img.only:hover{
     opacity: 1.0;
@@ -98,22 +121,23 @@
     padding: 10px 0;
 }
 
-.tile-content-img{
+.tile-header-img{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
 .tile-body:hover{
-    background-color: var(--rlp-red-light-hover);
+    background-color: var(--primary-light-hover);
 }
 
 .sub-tile-container{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .organizations .sub-tile-container, .topics .sub-tile-container{
-    color: var(--rlp-gray);
+    color: var(--secondary);
 }
 
 .mobile-button{
@@ -136,7 +160,7 @@
 }
 
 #show-all-tile{
-    border: 2px solid var(--rlp-red);
+    border: 2px solid var(--primary);
 }
 
 .sub-tile-img{
@@ -153,10 +177,54 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    color: var(--rlp-gray-font);
+    color: var(--secondary-font);
 }
 .organizations .data-info-container:hover, .topics .data-info-container:hover{
-    background-color: var(--rlp-red);
+    background-color: var(--primary);
     color: white;
     cursor: pointer;
+}
+
+@media screen and (max-width: 800px){
+
+.
+    .tile-wrapper{
+        width: 90vw;
+    }
+
+    .tile{
+        width: 90vw;
+    }
+
+    .tile:hover{
+        transform: unset;
+    }
+
+    .tile-header{
+        font-size: 1.5em;
+        height: 10em;
+    }
+    .tile-img{
+        width: 90vw;
+        height: 8em;
+    }
+    .tile-content{
+        font-size: 1.25em;
+    }
+
+    .mobile-button{
+        padding: 1em;
+    }
+
+    .mobile-button img{
+        height: 3em;
+    }
+
+    .view-count{
+        padding: 1em;
+    }
+
+    .view-count img{
+        width: 2em;
+    }
 }
