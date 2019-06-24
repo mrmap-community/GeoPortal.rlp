@@ -10,9 +10,9 @@
 <div class="tile-wrapper topics">
     {% for result in topics.tags %}
         <div class="tile">
-            <div class="tile-header">
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}">
                 <div class="tile-title">{{ result.title }}</div>
-                <div class="tile-header-img" data-id="{{ result.id }}" data-name="{{ result.title }}">
+                <div class="tile-header-img">
                     {% if result.symbolUrl != '' %}
                     <img class="tile-img" src="{{ result.symbolUrl }}">
                     {% else  %}

@@ -10,9 +10,9 @@
 <div class="tile-wrapper organizations">
     {% for result in organizations %}
         <div class="tile">
-            <div class="tile-header">
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.name }}">
                 <div class="tile-title">{{ result.name }}</div>
-                <div class="tile-header-img" data-id="{{ result.id }}" data-name="{{ result.name }}">
+                <div class="tile-header-img">
                     {% if result.image_display_url != '' %}
                     <img class="tile-img" src="{{ result.image_display_url }}">
                     {% else  %}

@@ -970,7 +970,7 @@ msgstr "Keine Beschreibung verfügbar"
 
 #: useroperations/templates/landing_page.html:56
 msgid "Show all"
-msgstr "Anzeigen"
+msgstr "Alle anzeigen"
 
 #: useroperations/templates/landing_page.html:66
 msgid "Start a search and explore all results. Let's go!"
@@ -1009,15 +1009,6 @@ msgstr "Anmeldung erfolgreich"
 #: useroperations/views.py:70
 msgid "Account not active"
 msgstr "Nicht aktiv"
-
-#: useroperations/views.py:75 useroperations/views.py:122
-#: useroperations/views.py:146 useroperations/views.py:413
-#: useroperations/views.py:642 useroperations/views.py:767
-#: useroperations/views.py:824
-msgid ""
-"Please accept the General Data Protection Regulation or delete your account!"
-msgstr ""
-"Bitte akzeptieren Sie die Datenschutzerklärung oder löschen Sie Ihr Konto!"
 
 #: useroperations/views.py:173
 msgid "Forgot Password?"
@@ -1234,17 +1225,11 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-msgid "Organizations and topics"
-msgstr "Organisationen und Themen"
-
 msgid "Departement "
 msgstr "Abteilung"
 
 msgid "Description "
 msgstr "Beschreibung"
-
-msgid "I want to sign up for the newsletter "
-msgstr "Ich möchte den Newsletter abonnieren "
 
 msgid "I want to participate in surveys "
 msgstr "Ich möchte an Umfragen teilnehmen "

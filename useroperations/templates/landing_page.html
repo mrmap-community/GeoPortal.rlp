@@ -18,7 +18,7 @@
 </div>
 
 <h2>{% trans 'Most frequently used Map Combinations' %}</h2>
-<div class="tile-wrapper">
+<div class="tile-wrapper favourite-wmcs">
     {% for result in results.wmc %}
         <div class="tile">
             <div class="tile-header" data-id="{{result.id}}">
@@ -51,15 +51,13 @@
         </div>
     {% endfor %}
         <div id="show-all-tile" class="tile">
-            <div class="tile-header">
-                {% trans 'Show all' %}
+            <div id="show-all-tile-content" class="tile-header">
+                <div class="tile-title">{% trans 'Show all' %}</div>
+                <div class="tile-header-img">
+                    <img class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
+                </div>
             </div>
             <div class="tile-content">
-                <div id="show-all-tile-content" class="tile-header-img">
-                    <a href="" target="_blank">
-                        <img class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
-                    </a>
-                </div>
                 <div class="tile-content-abstract">
                     <hr>
                     {% trans "Start a search and explore all results. Let's go!" %}
