@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block body %}
-<h2>{% trans 'Organizations and topics' %}</h2>
 <div class="quickstart-container">
     <a class="quickstart" href="{% url 'useroperations:organizations' %}">
         <img src="{% static 'searchCatalogue/images/icons/icn_organization_hover.png' %}">
@@ -22,15 +21,15 @@
 <div class="tile-wrapper">
     {% for result in results.wmc %}
         <div class="tile">
-            <div class="tile-header">
-                {{ result.title|safe }}
+            <div class="tile-header" data-id="{{result.id}}">
+                <div class="tile-title">
+                    {{ result.title|safe }}
+                </div>
+                <div class="tile-header-img">
+                    <img class="tile-img" src="{{ result.previewURL }}">
+                </div>
             </div>
             <div class="tile-content">
-                <div class="tile-content-img">
-                    <a href="WMC={{ result.id }}" target="_blank">
-                        <img class="tile-img" src="{{ result.previewURL }}">
-                    </a>
-                </div>
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div title="{% trans 'Total views this week' %}" class="view-count">
@@ -56,7 +55,7 @@
                 {% trans 'Show all' %}
             </div>
             <div class="tile-content">
-                <div id="show-all-tile-content" class="tile-content-img">
+                <div id="show-all-tile-content" class="tile-header-img">
                     <a href="" target="_blank">
                         <img class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
                     </a>

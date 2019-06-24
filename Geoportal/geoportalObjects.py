@@ -65,6 +65,8 @@ class GeoportalContext:
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,
             "cookie": request.COOKIES.get("Geoportal-RLP", None),
+            "sidebar_closed": helper.resolve_boolean_value(request.COOKIES.get("sidebarClosed", 'False')),
+            "is_mobile": request.user_agent.is_mobile,
             "IFRAME_HEIGHT": IFRAME_HEIGHT,
             "IFRAME_WIDTH": IFRAME_WIDTH,
         }

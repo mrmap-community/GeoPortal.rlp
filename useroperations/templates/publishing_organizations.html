@@ -10,15 +10,17 @@
 <div class="tile-wrapper organizations">
     {% for result in organizations %}
         <div class="tile">
-            <div class="tile-header">{{ result.name }}</div>
-            <div class="tile-content">
-                <div class="tile-content-img" data-id="{{ result.id }}" data-name="{{ result.name }}">
+            <div class="tile-header">
+                <div class="tile-title">{{ result.name }}</div>
+                <div class="tile-header-img" data-id="{{ result.id }}" data-name="{{ result.name }}">
                     {% if result.image_display_url != '' %}
                     <img class="tile-img" src="{{ result.image_display_url }}">
                     {% else  %}
                     <img class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}">
                     {% endif %}
                 </div>
+            </div>
+            <div class="tile-content">
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Published datasets' %}" data-resource="dataset">

@@ -88,7 +88,6 @@ footer{
     position: fixed;
     font-size: 1.2em;
     bottom: 0;
-    height: 25vh;
     min-height:200px;
     width: 100%;
     background-image: linear-gradient(var(--secondary), white);
@@ -99,6 +98,10 @@ footer{
     box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     text-align: center;
     opacity: 0.95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .cookie-text{
@@ -106,7 +109,7 @@ footer{
 }
 
 .cookie-button{
-    margin: 0 40% 0 40%;
+    max-width: 400px;
 }
 
 .message-container{
@@ -191,7 +194,7 @@ footer{
     flex-grow: 1;
 }
 
-.right-header-top{
+.upper-header{
     position: absolute;
     top: 0;
     right: 0;
@@ -379,7 +382,10 @@ ul {
 }
 
 .quickstart{
+    /*
     max-width: 500px;
+    */
+    max-width: 50em;
     display: flex;
     align-items: center;
     margin: 5px;
@@ -480,6 +486,7 @@ ul {
 .sidebar-area-title:hover{
     cursor: pointer;
     background-color: var(--primary-light-hover);
+    color: white;
 }
 
 .sidebar-area-content{
@@ -613,4 +620,87 @@ ul {
 }
 .messages.success:hover, .messages.error:hover{
     cursor: default;
+}
+
+
+@media screen and (max-width: 800px){
+
+    #logo_gdi{
+        display: none;
+    }
+
+    .body-content{
+        padding: 5em 0;
+    }
+
+    header{
+        font-size: 1em;
+    }
+
+    .middle-header{
+        margin: 3em 0;
+        width: 30em;
+    }
+
+    #geoportal-search-field{
+        height: 4em;
+    }
+
+    #middle-header-bottom{
+        display: none;
+    }
+
+    #sidebar{
+        font-size: 1em;
+        width: 12em;
+    }
+
+    .sidebar-toggler img, .map-viewer-toggler img{
+        width: 3em;
+    }
+
+    .sidebar-area-title-icon img{
+        width: 2em;
+    }
+
+    .sidebar-title{
+        font-size: 1em;
+    }
+
+    .quickstart{
+        font-size: 1em;
+    }
+    .quickstart-container{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer{
+        font-size: 1.25em;
+    }
+    .footer-col-wrapper{
+        flex-direction: column;
+    }
+    .right-footer{
+        display: none;
+    }
+    #footer-legal{
+        margin: 0 0 1em 0;
+    }
+    #footer-news-api{
+        margin: 0;
+    }
+
+    .sidebar-wrapper.closed{
+        transform: translateX(-12em);
+    }
+
+    .cookie-container{
+        top: 0;
+        bottom: unset;
+    }
+    .mobile-advice{
+        font-weight: bold;
+    }
+
 }

@@ -464,7 +464,7 @@ dl dd {
     filter: grayscale(0);
 }
 
-.right-header-top{
+.upper-header{
     position: absolute;
     top: 0;
     right: 0;
@@ -952,6 +952,7 @@ dl dd {
 
 .-js-subfacet-toggle-button, .search--list .search--list--item, .search--list .resource--list--item, .resource--list .search--list--item, .resource--list .resource--list--item {
   display: inline-block;
+  vertical-align: middle;
   color: white;
   background-color: var(--primary);
   border: 2px solid var(--primary);
@@ -1076,7 +1077,10 @@ dl dd {
 
 .img-area .img-preview {
     border: 1px solid var(--primary);
+    /*
     height: 100px;
+    */
+    height: 5em;
     margin: 0 10px 0 0;
 }
 
@@ -1091,6 +1095,11 @@ dl dd {
 .img-area .img-symbollink {
   max-height: 40px;
   }
+
+.result-overview{
+    display: flex;
+    flex-direction: row;
+}
 
 .img-symbollink{
     padding: 5px;
@@ -1291,3 +1300,29 @@ dl dd {
 
 .Zebra_DatePicker_Icon_Inside_Right {
   margin: 0 10px 0 0 !important; }
+
+
+@media screen and (max-width: 800px){
+    #search-results{
+        font-size: 1.0em;
+    }
+
+    .filter-onlyOpenData-img{
+        height: 1.5em;
+    }
+
+    .area-elements{
+        padding-left: 1em;
+    }
+
+    .result-overview{
+        flex-direction: column;
+    }
+    .search-result-detail{
+        padding: 2em 0;
+    }
+
+    .resource-element-data{
+        flex-direction: column;
+    }
+}

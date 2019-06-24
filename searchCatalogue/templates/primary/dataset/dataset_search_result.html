@@ -6,7 +6,7 @@
         </div>
     </a>
     <div class="search-result-area">
-        <div class="img-area flex-row">
+        <div class="img-area result-overview">
             <div class="flex-row">
                 <img class="img-preview" style="max-width:100px;" src="{% if result.previewURL is not None %}{{ result.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
                 <img class="img-preview" style="max-width:100px;" src="{% if result.extent_url is not None or result.extent_url|length == 0 %}{{ result.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
