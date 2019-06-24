@@ -441,6 +441,11 @@ ul {
     padding: 20px 0 0 0;
     color: white;
 }
+.sidebar-content a{
+    color: white;
+    outline: none;
+    text-decoration: none;
+}
 
 .sidebar-title{
     text-align: center;

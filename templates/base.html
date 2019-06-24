@@ -72,6 +72,16 @@
             {% trans 'Menu' %}
         </div>
         <div class="sidebar-content">
+            <a href="{% url 'useroperations:index' %}">
+                <div class="sidebar-area-title">
+                    <div class="sidebar-area-title-icon">
+                        <img width="40px" src="{% static 'useroperations/images/icn_home.png' %}">
+                    </div>
+                    <div class="sidebar-area-title-text">
+                        {% trans 'Home' %}
+                    </div>
+                </div>
+            </a>
         <div class="sidebar-area login-status">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
