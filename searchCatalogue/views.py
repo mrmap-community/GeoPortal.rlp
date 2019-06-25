@@ -338,12 +338,6 @@ def get_data_primary(request: HttpRequest):
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
 
-    start_time = time.time()
-    # prepare extended search parameters
-    extended_search_params = viewHelper.parse_extended_params(post_params)
-    selected_facets = viewHelper.prepare_selected_facets(selected_facets)
-    print_debug(EXEC_TIME_PRINT % ("prepare extended search params", float(time.time() - start_time)))
-
     # prepare search tags (keywords)
     keywords = post_params["terms"].split(",")
 
@@ -351,6 +345,9 @@ def get_data_primary(request: HttpRequest):
     # requested_resources: str
     requested_resources = viewHelper.prepare_requested_resources(post_params["resources"])
 
+    # prepare extended search parameters
+    extended_search_params = viewHelper.parse_extended_params(post_params)
+    selected_facets = viewHelper.prepare_selected_facets(selected_facets, requested_resources, resources)
     # get requested page and for which resource it is requested
     requested_page = int(post_params["page-geoportal"])
     requested_page_res = post_params["data-geoportal"]
@@ -390,9 +387,11 @@ def get_data_primary(request: HttpRequest):
     # set flag to indicate that the facet is one of the selected
     for facet_key, facet_val in selected_facets.items():
         for chosen_facet in facet_val:
-            _id = chosen_facet["id"]
+            _id = int(chosen_facet["id"])
+            if _id < 0:
+                continue
             for facet in facets[facet_key]:
-                if facet["id"] == _id:
+                if int(facet["id"]) == _id:
                     facet["is_selected"] = True
                     break
     search_filters = rehasher.get_rehashed_filters()

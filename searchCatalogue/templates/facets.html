@@ -1,6 +1,18 @@
 {% load i18n %}
 <div class='-js-facets facet-list'>
 
+    <!-- New catalogue selector location -->
+    <div class="-js-facet facet-item" data-name="{{ resource_key }}">
+        <h4>{% trans 'Search in ' %}</h4>
+        <form class="catalogue-form">
+        {% for source_key, source_val in sources.items %}
+            <input class="radio-button-catalogue" type="radio" name="catalogue" id="radio-{{ source_key }}" value="{{ source_key }}" {% if source == source_key %}checked="checked"{% endif %}/>
+            <label for="radio-{{ source_key }}">{{ source_val.key }}</label>
+            <br>
+        {% endfor %}
+        </form>
+    </div>
+
     {% for facet_key, facet_val in facets.items %}
     <div class='-js-facet facet-item' data-name='{{ facet_key }}'>
          <h4>{{ facet_key }}</h4>
@@ -35,16 +47,4 @@
         </ul>
     </div>
     {% endif %}
-
-    <!-- New catalogue selector location -->
-    <div class="-js-facet facet-item" data-name="{{ resource_key }}">
-        <h4>{% trans 'Search in ' %}</h4>
-        <form>
-        {% for source_key, source_val in sources.items %}
-            <input class="radio-button-catalogue" type="radio" name="catalogue" id="radio-{{ source_key }}" value="{{ source_key }}" {% if source == source_key %}checked="checked"{% endif %}/>
-            <label for="radio-{{ source_key }}">{{ source_val.key }}</label>
-            <br>
-        {% endfor %}
-        </form>
-    </div>
 </div>

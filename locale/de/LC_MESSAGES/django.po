@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 12:37+0000\n"
+"POT-Creation-Date: 2019-06-25 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,13 +34,19 @@ msgstr "Lade Folgen Button..."
 msgid "Loading tweets..."
 msgstr "Lade Tweets..."
 
-#: searchCatalogue/templates/facets.html:17
+#: searchCatalogue/templates/facets.html:6
+#, fuzzy
+#| msgid "Search"
+msgid "Search in "
+msgstr "Suche in"
+
+#: searchCatalogue/templates/facets.html:28
 msgid "No Categories found for this search configuration"
 msgstr "Keine Kategorien für die verwendeten Sucheinstellungen gefunden"
 
-#: searchCatalogue/templates/facets.html:23
+#: searchCatalogue/templates/facets.html:37
 msgid "Resource types"
-msgstr "Resourcentyp"
+msgstr "Ressourcentyp"
 
 #: searchCatalogue/templates/filterarea.html:6
 msgid "Chosen Categories:"
@@ -56,7 +62,7 @@ msgstr "Treffer pro Seite:"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:26
 #: searchCatalogue/templates/search_forms.html:8
-#: searchCatalogue/utils/viewHelper.py:258
+#: searchCatalogue/utils/viewHelper.py:287
 msgid "Sort by:"
 msgstr "Sortieren nach:"
 
@@ -77,7 +83,7 @@ msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:104
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:87
 #: templates/base.html:41
 msgid "Search"
 msgstr "Suche"
@@ -90,7 +96,7 @@ msgstr "Räumlicher Filter"
 msgid "Use spatial filter"
 msgstr "Räumlichen Filter benutzen"
 
-#: searchCatalogue/templates/index.html:88
+#: searchCatalogue/templates/index.html:90
 msgid "Extended Search"
 msgstr "Erweiterte Suche"
 
@@ -108,7 +114,7 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:5
 #: searchCatalogue/templates/other/application/application_category.html:6
-#: searchCatalogue/views.py:263
+#: searchCatalogue/views.py:246
 msgid "Applications"
 msgstr "Applikationen"
 
@@ -126,14 +132,14 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:5
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
-#: searchCatalogue/views.py:254 searchCatalogue/views.py:260
-#: searchCatalogue/views.py:337
+#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
+#: searchCatalogue/views.py:321
 msgid "Datasets"
 msgstr "Datensätze"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:5
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
-#: searchCatalogue/views.py:264
+#: searchCatalogue/views.py:247
 msgid "Miscellaneous Datasets"
 msgstr "Sonstige Datensätze"
 
@@ -155,13 +161,13 @@ msgstr "Datum der Metadaten:"
 
 #: searchCatalogue/templates/other/series/series_category.html:5
 #: searchCatalogue/templates/other/series/series_category.html:6
-#: searchCatalogue/views.py:255 searchCatalogue/views.py:261
+#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
 msgid "Series"
 msgstr "Serien"
 
 #: searchCatalogue/templates/other/service/service_category.html:5
 #: searchCatalogue/templates/other/service/service_category.html:6
-#: searchCatalogue/views.py:256 searchCatalogue/views.py:262
+#: searchCatalogue/views.py:239 searchCatalogue/views.py:245
 msgid "Services"
 msgstr "Dienste"
 
@@ -433,11 +439,11 @@ msgstr "Kartenviewer hinzufügen"
 msgid "Add to mapviewer with zoom"
 msgstr "Kartenviewer hinzufügen mit Zoom"
 
-#: searchCatalogue/templates/search_results.html:13
+#: searchCatalogue/templates/search_results.html:11
 msgid "Filter"
 msgstr "Filter"
 
-#: searchCatalogue/templates/search_results.html:26
+#: searchCatalogue/templates/search_results.html:24
 msgid "Results"
 msgstr "Ergebnisse"
 
@@ -465,59 +471,59 @@ msgstr "Akzeptieren"
 msgid "Decline"
 msgstr "Ablehnen"
 
-#: searchCatalogue/utils/viewHelper.py:252
-msgid "Search terms(e):"
-msgstr "Suchbegriffe:"
+#: searchCatalogue/utils/viewHelper.py:49
+msgid "Own catalogue"
+msgstr "Eigener Katalog"
 
-#: searchCatalogue/utils/viewHelper.py:254
-msgid "Spatial Restriction:"
-msgstr "Räumliche Einschränkung:"
-
-#: searchCatalogue/utils/viewHelper.py:256
-msgid "Hits per Page:"
-msgstr "Treffer pro Seite"
-
-#: searchCatalogue/views.py:86
-msgid "State-wide"
-msgstr "Landesweit"
-
-#: searchCatalogue/views.py:91
+#: searchCatalogue/utils/viewHelper.py:54
 msgid "Germany"
-msgstr "Deutschlandweit"
+msgstr "Deutschland"
 
-#: searchCatalogue/views.py:95
+#: searchCatalogue/utils/viewHelper.py:58
 msgid "Europe"
-msgstr "Europaweit"
+msgstr "Europa"
 
-#: searchCatalogue/views.py:99
+#: searchCatalogue/utils/viewHelper.py:62
 msgid "Info"
 msgstr ""
 
-#: searchCatalogue/views.py:100
+#: searchCatalogue/utils/viewHelper.py:63
 msgid "Info pages"
 msgstr "Infoseiten"
 
-#: searchCatalogue/views.py:338
+#: searchCatalogue/utils/viewHelper.py:281
+msgid "Search terms(e):"
+msgstr "Suchbegriffe:"
+
+#: searchCatalogue/utils/viewHelper.py:283
+msgid "Spatial Restriction:"
+msgstr "Räumliche Einschränkung:"
+
+#: searchCatalogue/utils/viewHelper.py:285
+msgid "Hits per Page:"
+msgstr "Treffer pro Seite"
+
+#: searchCatalogue/views.py:322
 msgid "Web Map Services"
 msgstr "Darstellungsdienste"
 
-#: searchCatalogue/views.py:339
+#: searchCatalogue/views.py:323
 msgid "Search-, Download-,Gathering-modules"
 msgstr "Such-, Download-, Erfassungsmodule"
 
-#: searchCatalogue/views.py:340
+#: searchCatalogue/views.py:324
 msgid "Map Combinations"
 msgstr "Kartenzusammenstellungen"
 
-#: searchCatalogue/views.py:577
+#: searchCatalogue/views.py:558
 msgid "Send permission request"
 msgstr "Berechtigungsanfrage senden"
 
-#: searchCatalogue/views.py:578
+#: searchCatalogue/views.py:559
 msgid "[Geoportal.RLP] Permission request for "
 msgstr "[Geoportal.RLP] Berechtigungsanfrage für "
 
-#: searchCatalogue/views.py:579
+#: searchCatalogue/views.py:560
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
@@ -525,7 +531,7 @@ msgstr ""
 "Bitte geben Sie mir die Berechtigung die folgende Ressource zu verwenden \n"
 "'"
 
-#: searchCatalogue/views.py:580
+#: searchCatalogue/views.py:561
 msgid ""
 "'\n"
 " It has the ID "
@@ -533,7 +539,7 @@ msgstr ""
 "' \n"
 "Die Ressource verwendet die ID "
 
-#: searchCatalogue/views.py:581
+#: searchCatalogue/views.py:562
 msgid ""
 ".\n"
 "\n"
@@ -1254,23 +1260,23 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-msgid "Organizations and topics"
-msgstr "Organisationen und Themen"
+#~ msgid "Organizations and topics"
+#~ msgstr "Organisationen und Themen"
 
-msgid "Departement "
-msgstr "Abteilung"
+#~ msgid "Departement "
+#~ msgstr "Abteilung"
 
-msgid "Description "
-msgstr "Beschreibung"
+#~ msgid "Description "
+#~ msgstr "Beschreibung"
 
-msgid "I want to participate in surveys "
-msgstr "Ich möchte an Umfragen teilnehmen "
+#~ msgid "I want to participate in surveys "
+#~ msgstr "Ich möchte an Umfragen teilnehmen "
 
-msgid "Description:"
-msgstr "Beschreibung:"
+#~ msgid "Description:"
+#~ msgstr "Beschreibung:"
 
-msgid "bis"
-msgstr "to"
+#~ msgid "bis"
+#~ msgstr "to"
 
 # msgid "Activation Mail"
 # msgstr "Aktivierungsmail"

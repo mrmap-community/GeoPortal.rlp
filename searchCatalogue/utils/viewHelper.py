@@ -46,7 +46,7 @@ def get_source_catalogues(external_call: bool=False):
     """
     sources = OrderedDict()
     sources["primary"] = {
-        "key": _("State-wide"),
+        "key": _("Own catalogue"),
         "img": PRIMARY_SRC_IMG,
     }
     if not external_call:
@@ -701,11 +701,13 @@ def set_iso3166_icon_path(search_results):
 
 
 ####    FACETS/CATEGORIES
-def prepare_selected_facets(selected_facets):
+def prepare_selected_facets(selected_facets, requested_resources, resources):
     """ Selected facets are sent as a triple of (parentCategory, title, id) which needs to be transformed into a dict for better handling
 
     Args:
         selected_facets: An array of facets which were selected by the user
+        requested_resources: An array of all requested resources
+        resources: An array of all available resources with human readable translations
     Returns:
         dict: Contains (parentCategory, title, id)
     """
@@ -722,6 +724,7 @@ def prepare_selected_facets(selected_facets):
         if facet_dict.get("parent_category") not in ret_dict:
             ret_dict[(facet_dict.get("parent_category"))] = []
         ret_dict[facet_dict.get("parent_category")].append(facet_dict)
+
     return ret_dict
 
 def __resolve_single_facet(preselected_categories, all_categories):
