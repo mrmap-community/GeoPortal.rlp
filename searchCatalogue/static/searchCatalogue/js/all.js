@@ -42,6 +42,8 @@ var Search = function() {
     this.timeoutDelay = 300;
     this.searchUrl = null;
 
+    this.source = null;
+
     this.resources_primary = {
         wms: true,
         wfs: true,
@@ -637,8 +639,8 @@ jQuery(document).ready(function() {
 
 
     checkForExternalMapviewerCall();
-
-    var resources = search.resources_primary;
+    var resources = null;
+    toggleCataloguesResources()
 
     var fixDateFormat = function(val) {
         var ms = val.match(/(\d\d).(\d\d).(\d\d\d\d)/);
@@ -660,8 +662,8 @@ jQuery(document).ready(function() {
      focus_on_search_input();
 
 
-    function toggleResources(){
-        if($(".-js-tab-item.active").attr("data-id") == "primary"){
+    function toggleCataloguesResources(){
+        if(search.getParam("source") === null || search.getParam("source") == "primary"){
             resources = search.resources_primary;
         }else{
             resources = search.resources_de;
@@ -684,7 +686,7 @@ jQuery(document).ready(function() {
         if(!mapOverlay.hasClass("closed")){
             $(".map-viewer-toggler").click();
         }
-        toggleResources();
+        //toggleCataloguesResources();
         var $current  = jQuery('.-js-content.active');
         var reslist = [];
         var keywords  = [];
@@ -729,8 +731,6 @@ jQuery(document).ready(function() {
 
         search.hide();
 
-        var source = $(".content-tab-item.active").attr("data-id");
-        search.setParam('source', source);
         var extended = $current.find('.-js-extended-search-form').serializeArray();
         var toEncode = {};
         $.each(extended, function(_, item) {
@@ -741,7 +741,7 @@ jQuery(document).ready(function() {
             }
         });
         //fixDateFormats(toEncode);
-
+        toggleCataloguesResources();
         var rs = [];
         $.each(resources, function(res, send) {
             if(send) {
@@ -1259,18 +1259,13 @@ jQuery(document).ready(function() {
     /**
      * Navigate through tabs in content selection header
      */
-     $(document).on("click", ".content-tabs > .-js-tab-item", function(){
-        var newTab = $(this);                                           // get new tab
-        var oldTab = newTab.parent().find("> .-js-tab-item.active");    // get old tab
-        oldTab.toggleClass("active");                                   // set inactive
-        oldTab.find("img").toggleClass("active-img");
-        newTab.toggleClass("active");                                   // set active
-        newTab.find("img").toggleClass("active-img");
-        search.setParam("source", newTab.attr("data-id"));
+     $(document).on("click", ".radio-button-catalogue", function(){
+        var elem = $(this);
+        search.setParam("source", elem.val());
         // make sure to drop the spatial search if it is still enabled
         disableSpatialCheckbox();
         // run search as always
-        $("#geoportal-search-button").click();
+        prepareAndSearch();
 
      });
 
@@ -1393,42 +1388,12 @@ jQuery(document).ready(function() {
         $('[data-resource=' + v + ']').click();
     });
 
-    /*
-     * Event listener for language changing
-    $(document).on("change", "#lang-code", function(){
-        var value = $(this).val();
-        jQuery.ajax({
-            url: "/i18n/setlang/",
-            headers: {
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            data: {
-                'language': value
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(data) {
-                //location.reload();
-            },
-            timeout: 60000,
-            error: function(jqXHR, textStatus, errorThrown){
-                if(textStatus === "timeout"){
-                    alert("A timeout occured.");
-                }else{
-                    alert(errorThrown);
-                    console.log(errorThrown);
-                }
-            }
-        })
-    });
-     */
-
     /**
      * Activates, deactivates resources
      */
     jQuery(document).on("click", ".-js-filterarea .-js-resource", function() {
         // check that the correct resources are globally available
-        toggleResources();
+        toggleCataloguesResources();
 
         var $self = jQuery(this);
 
@@ -1444,7 +1409,7 @@ jQuery(document).ready(function() {
 
     $(document).on("click", ".subfacet.-js-resource", function() {
         // check that the correct resources are globally available
-        toggleResources();
+        toggleCataloguesResources();
 
         var elem = $(this);
         elem.toggleClass("chosen-subfacet");
@@ -1559,7 +1524,8 @@ jQuery(document).ready(function() {
         prepareAndSearch(undefined, true);
     });
     
-    search.setParam('source', jQuery('.-js-content-tab-item.active').attr('data-source'));
+    // set default source value
+    //search.setParam('source', 'primary');
     autocomplete = new Autocomplete(search);
 
     // Avoid `console` errors in browsers that lack a console.

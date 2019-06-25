@@ -81,24 +81,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     facets = searcher.get_categories_list()
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
-    sources = OrderedDict()
-    sources["primary"] = {
-        "key": _("State-wide"),
-        "img": PRIMARY_SRC_IMG,
-    }
-    if not external_call:
-        sources["de"] = {
-            "key": _("Germany"),
-            "img": DE_SRC_IMG,
-        }
-        sources["eu"] = {
-            "key": _("Europe"),
-            "img": EU_SRC_IMG,
-        }
-        sources["info"] = {
-            "key": _("Info"),
-            "title": _("Info pages"),
-        }
+    sources = viewHelper.get_source_catalogues(external_call)
 
     params = {
         "title": _("Search"),
@@ -313,6 +296,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
         "pages": pages,
         "all_resources": all_resources,
         "OPEN_DATA_URL": OPEN_DATA_URL,
+        "sources": viewHelper.get_source_catalogues(False)
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     start_time = time.time()
@@ -435,12 +419,6 @@ def get_data_primary(request: HttpRequest):
     search_results = viewHelper.set_children_data_wfs(search_results)
     print_debug(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
 
-    # ToDO: Keep an eye on the disclaimer behaviour. If something does not work and we need a quick solution, comment these lines back in
-    #start_time = time.time()
-    ## set disclaimer info
-    #search_results = viewHelper.set_service_disclaimer_url(search_results)
-    #print_debug(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
-
     start_time = time.time()
     # set state icon file paths
     search_results = viewHelper.set_iso3166_icon_path(search_results)
@@ -495,6 +473,7 @@ def get_data_primary(request: HttpRequest):
         "view_map_url": "//localhost/portal/karten.html?",
         "wms_action_url": HTTP_OR_SSL + HOSTNAME + "/mapbender/php/wms.php?",
         "OPEN_DATA_URL": OPEN_DATA_URL,
+        "sources": viewHelper.get_source_catalogues(False)
     }
 
     # since we need to return plain text to the ajax handler, we need to use render_to_string
@@ -547,6 +526,8 @@ def get_data_info(request: HttpRequest):
         "HOSTNAME": host,
         "search_results": search_results,
         "is_info_search": True,
+        "source": "info",
+        "sources": viewHelper.get_source_catalogues(False),
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     #start_time = time.time()

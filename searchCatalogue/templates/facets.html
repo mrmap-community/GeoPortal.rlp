@@ -1,5 +1,4 @@
 {% load i18n %}
-{% if not is_de_search and not is_eu_search  %}
 <div class='-js-facets facet-list'>
 
     {% for facet_key, facet_val in facets.items %}
@@ -21,6 +20,7 @@
     {% endfor %}
 
     <!-- New resource type location -->
+    {% if not is_info_search %}
     <div class="-js-facet facet-item" data-name="{{ resource_key }}">
         <h4>{% trans 'Resource types' %}</h4>
         <ul>
@@ -34,5 +34,17 @@
         {% endfor %}
         </ul>
     </div>
+    {% endif %}
+
+    <!-- New catalogue selector location -->
+    <div class="-js-facet facet-item" data-name="{{ resource_key }}">
+        <h4>{% trans 'Search in ' %}</h4>
+        <form>
+        {% for source_key, source_val in sources.items %}
+            <input class="radio-button-catalogue" type="radio" name="catalogue" id="radio-{{ source_key }}" value="{{ source_key }}" {% if source == source_key %}checked="checked"{% endif %}/>
+            <label for="radio-{{ source_key }}">{{ source_val.key }}</label>
+            <br>
+        {% endfor %}
+        </form>
+    </div>
 </div>
-{% endif %}

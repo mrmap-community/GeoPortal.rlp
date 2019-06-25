@@ -1,10 +1,8 @@
 {% load static i18n %}
     <div class="search-result-body">
-        {% if not is_de_search and not is_eu_search and not is_info_search %}
         <div id="search-categories-sidebar">
             {% include 'facets.html' %}
         </div>
-        {% endif %}
         <div id="search-main-content">
             {% if not is_info_search %}
             <div class="area-wrapper">
