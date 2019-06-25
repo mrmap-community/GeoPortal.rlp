@@ -74,8 +74,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
         default_language = "de"
         translation.activate(default_language)
         request.LANGUAGE_CODE = translation.get_language()
-    #template_name = "search_forms.html"    # comment this in to enable extended search
-    template_name = "index.html"            # comment this out if you comment the upper line in
+    template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
     facets = searcher.get_categories_list()
@@ -338,6 +337,10 @@ def get_data_primary(request: HttpRequest):
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
 
+    # prepare extended search parameters
+    extended_search_params = viewHelper.parse_extended_params(post_params)
+    selected_facets = viewHelper.prepare_selected_facets(selected_facets)
+
     # prepare search tags (keywords)
     keywords = post_params["terms"].split(",")
 
@@ -345,9 +348,6 @@ def get_data_primary(request: HttpRequest):
     # requested_resources: str
     requested_resources = viewHelper.prepare_requested_resources(post_params["resources"])
 
-    # prepare extended search parameters
-    extended_search_params = viewHelper.parse_extended_params(post_params)
-    selected_facets = viewHelper.prepare_selected_facets(selected_facets, requested_resources, resources)
     # get requested page and for which resource it is requested
     requested_page = int(post_params["page-geoportal"])
     requested_page_res = post_params["data-geoportal"]

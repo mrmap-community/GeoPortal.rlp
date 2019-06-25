@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-25 08:40+0000\n"
+"POT-Creation-Date: 2019-06-25 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:87
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:86
 #: templates/base.html:41
 msgid "Search"
 msgstr "Suche"
@@ -114,7 +114,7 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:5
 #: searchCatalogue/templates/other/application/application_category.html:6
-#: searchCatalogue/views.py:246
+#: searchCatalogue/views.py:245
 msgid "Applications"
 msgstr "Applikationen"
 
@@ -132,14 +132,14 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:5
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
-#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
-#: searchCatalogue/views.py:321
+#: searchCatalogue/views.py:236 searchCatalogue/views.py:242
+#: searchCatalogue/views.py:320 useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr "Datensätze"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:5
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
-#: searchCatalogue/views.py:247
+#: searchCatalogue/views.py:246
 msgid "Miscellaneous Datasets"
 msgstr "Sonstige Datensätze"
 
@@ -161,13 +161,13 @@ msgstr "Datum der Metadaten:"
 
 #: searchCatalogue/templates/other/series/series_category.html:5
 #: searchCatalogue/templates/other/series/series_category.html:6
-#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
+#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
 msgid "Series"
 msgstr "Serien"
 
 #: searchCatalogue/templates/other/service/service_category.html:5
 #: searchCatalogue/templates/other/service/service_category.html:6
-#: searchCatalogue/views.py:239 searchCatalogue/views.py:245
+#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
 msgid "Services"
 msgstr "Dienste"
 
@@ -358,6 +358,7 @@ msgid "Search/Download/Gathering modules"
 msgstr "Such/Download/Erfassungsmodule"
 
 #: searchCatalogue/templates/search_forms.html:895
+#: useroperations/templates/landing_page.html:41
 msgid "Map collections"
 msgstr "Kartenzusammenstellungen"
 
@@ -503,27 +504,27 @@ msgstr "Räumliche Einschränkung:"
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
 
-#: searchCatalogue/views.py:322
+#: searchCatalogue/views.py:321
 msgid "Web Map Services"
 msgstr "Darstellungsdienste"
 
-#: searchCatalogue/views.py:323
+#: searchCatalogue/views.py:322
 msgid "Search-, Download-,Gathering-modules"
 msgstr "Such-, Download-, Erfassungsmodule"
 
-#: searchCatalogue/views.py:324
+#: searchCatalogue/views.py:323
 msgid "Map Combinations"
 msgstr "Kartenzusammenstellungen"
 
-#: searchCatalogue/views.py:558
+#: searchCatalogue/views.py:557
 msgid "Send permission request"
 msgstr "Berechtigungsanfrage senden"
 
-#: searchCatalogue/views.py:559
+#: searchCatalogue/views.py:558
 msgid "[Geoportal.RLP] Permission request for "
 msgstr "[Geoportal.RLP] Berechtigungsanfrage für "
 
-#: searchCatalogue/views.py:560
+#: searchCatalogue/views.py:559
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
@@ -531,7 +532,7 @@ msgstr ""
 "Bitte geben Sie mir die Berechtigung die folgende Ressource zu verwenden \n"
 "'"
 
-#: searchCatalogue/views.py:561
+#: searchCatalogue/views.py:560
 msgid ""
 "'\n"
 " It has the ID "
@@ -539,7 +540,7 @@ msgstr ""
 "' \n"
 "Die Ressource verwendet die ID "
 
-#: searchCatalogue/views.py:562
+#: searchCatalogue/views.py:561
 msgid ""
 ".\n"
 "\n"
@@ -968,46 +969,66 @@ msgid "INSPIRE Topic"
 msgstr ""
 
 #: useroperations/templates/inspire_topics.html:36
-#, fuzzy
-#| msgid "Layer has information"
 msgid "More information"
 msgstr "Layer trägt Informationen"
 
 #: useroperations/templates/inspire_topics.html:38
-#, fuzzy
-#| msgid "Layer has information"
 msgid "Information"
-msgstr "Layer trägt Informationen"
+msgstr "Informationen"
 
-#: useroperations/templates/landing_page.html:12
+#: useroperations/templates/landing_page.html:10
+msgid "Show all organizations"
+msgstr "Suche nach allen Organisationen starten"
+
+#: useroperations/templates/landing_page.html:13
 msgid "Organizations"
 msgstr "Organisationen"
 
-#: useroperations/templates/landing_page.html:16
+#: useroperations/templates/landing_page.html:17
+msgid "Show all topics"
+msgstr "Alle anzeigen"
+
+#: useroperations/templates/landing_page.html:20
 msgid "Categories and topics"
 msgstr "Kategorien und Themen"
 
-#: useroperations/templates/landing_page.html:20
-msgid "Most frequently used Map Combinations"
+#: useroperations/templates/landing_page.html:24
+msgid "Search for all datasets"
+msgstr "Suche nach allen Datensätzen"
+
+#: useroperations/templates/landing_page.html:31
+msgid "Search for all map layers"
+msgstr "Suche nach allen Kartenebenen"
+
+#: useroperations/templates/landing_page.html:34
+msgid "Map layers"
+msgstr "Kartenebenen"
+
+#: useroperations/templates/landing_page.html:38
+msgid "Search for all map collections"
+msgstr "Suche nach allen Kartenzusammenstellungen starten"
+
+#: useroperations/templates/landing_page.html:48
+msgid "Most frequently used map combinations"
 msgstr "Meistgenutzte Kartenzusammenstellungen"
 
-#: useroperations/templates/landing_page.html:35
+#: useroperations/templates/landing_page.html:64
 msgid "Total views this week"
 msgstr "Anzahl Aufrufe diese Woche"
 
-#: useroperations/templates/landing_page.html:39
+#: useroperations/templates/landing_page.html:68
 msgid "Open in mobile viewer"
 msgstr "Kartenviewer öffnen/schließen"
 
-#: useroperations/templates/landing_page.html:45
+#: useroperations/templates/landing_page.html:74
 msgid "No description available"
 msgstr "Keine Beschreibung verfügbar"
 
-#: useroperations/templates/landing_page.html:55
+#: useroperations/templates/landing_page.html:84
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: useroperations/templates/landing_page.html:63
+#: useroperations/templates/landing_page.html:92
 msgid "Start a search and explore all results. Let's go!"
 msgstr ""
 "Starten Sie eine Suche und entdecken Sie viele weitere Karten und "
@@ -1259,6 +1280,9 @@ msgstr ""
 "die Sie während des Feedbacks angeben, dienen einzig und allein der erneuten "
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
+
+#~ msgid "Most frequently used Map Combinations"
+#~ msgstr "Meistgenutzte Kartenzusammenstellungen"
 
 #~ msgid "Organizations and topics"
 #~ msgstr "Organisationen und Themen"

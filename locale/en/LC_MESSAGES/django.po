@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-25 08:40+0000\n"
+"POT-Creation-Date: 2019-06-25 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgid "Insert search term here"
 msgstr ""
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:87
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:86
 #: templates/base.html:41
 msgid "Search"
 msgstr ""
@@ -112,7 +112,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/application/application_category.html:5
 #: searchCatalogue/templates/other/application/application_category.html:6
-#: searchCatalogue/views.py:246
+#: searchCatalogue/views.py:245
 msgid "Applications"
 msgstr ""
 
@@ -129,14 +129,14 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:5
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
-#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
-#: searchCatalogue/views.py:321
+#: searchCatalogue/views.py:236 searchCatalogue/views.py:242
+#: searchCatalogue/views.py:320 useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr ""
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:5
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
-#: searchCatalogue/views.py:247
+#: searchCatalogue/views.py:246
 msgid "Miscellaneous Datasets"
 msgstr ""
 
@@ -158,13 +158,13 @@ msgstr ""
 
 #: searchCatalogue/templates/other/series/series_category.html:5
 #: searchCatalogue/templates/other/series/series_category.html:6
-#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
+#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
 msgid "Series"
 msgstr ""
 
 #: searchCatalogue/templates/other/service/service_category.html:5
 #: searchCatalogue/templates/other/service/service_category.html:6
-#: searchCatalogue/views.py:239 searchCatalogue/views.py:245
+#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
 msgid "Services"
 msgstr ""
 
@@ -355,6 +355,7 @@ msgid "Search/Download/Gathering modules"
 msgstr ""
 
 #: searchCatalogue/templates/search_forms.html:895
+#: useroperations/templates/landing_page.html:41
 msgid "Map collections"
 msgstr ""
 
@@ -500,39 +501,39 @@ msgstr ""
 msgid "Hits per Page:"
 msgstr ""
 
-#: searchCatalogue/views.py:322
+#: searchCatalogue/views.py:321
 msgid "Web Map Services"
 msgstr ""
 
-#: searchCatalogue/views.py:323
+#: searchCatalogue/views.py:322
 msgid "Search-, Download-,Gathering-modules"
 msgstr ""
 
-#: searchCatalogue/views.py:324
+#: searchCatalogue/views.py:323
 msgid "Map Combinations"
 msgstr ""
 
-#: searchCatalogue/views.py:558
+#: searchCatalogue/views.py:557
 msgid "Send permission request"
 msgstr ""
 
-#: searchCatalogue/views.py:559
+#: searchCatalogue/views.py:558
 msgid "[Geoportal.RLP] Permission request for "
 msgstr ""
 
-#: searchCatalogue/views.py:560
+#: searchCatalogue/views.py:559
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
 msgstr ""
 
-#: searchCatalogue/views.py:561
+#: searchCatalogue/views.py:560
 msgid ""
 "'\n"
 " It has the ID "
 msgstr ""
 
-#: searchCatalogue/views.py:562
+#: searchCatalogue/views.py:561
 msgid ""
 ".\n"
 "\n"
@@ -942,35 +943,59 @@ msgstr "Information"
 msgid "Information"
 msgstr "Information"
 
-#: useroperations/templates/landing_page.html:12
+#: useroperations/templates/landing_page.html:10
+msgid "Show all organizations"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:13
 msgid "Organizations"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:16
-msgid "Categories and topics"
+#: useroperations/templates/landing_page.html:17
+msgid "Show all topics"
 msgstr ""
 
 #: useroperations/templates/landing_page.html:20
-msgid "Most frequently used Map Combinations"
+msgid "Categories and topics"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:35
+#: useroperations/templates/landing_page.html:24
+msgid "Search for all datasets"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:31
+msgid "Search for all map layers"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:34
+msgid "Map layers"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:38
+msgid "Search for all map collections"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:48
+msgid "MOST FREQUENTLY USED MAP COMBINATIONS"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:64
 msgid "Total views this week"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:39
+#: useroperations/templates/landing_page.html:68
 msgid "Open in mobile viewer"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:45
+#: useroperations/templates/landing_page.html:74
 msgid "No description available"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:55
+#: useroperations/templates/landing_page.html:84
 msgid "Show all"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:63
+#: useroperations/templates/landing_page.html:92
 msgid "Start a search and explore all results. Let's go!"
 msgstr ""
 

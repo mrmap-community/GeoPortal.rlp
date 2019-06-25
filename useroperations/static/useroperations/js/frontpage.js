@@ -208,6 +208,16 @@ $(document).on("click", "#geoportal-search-button", function(){
 });
 
 
+ $(document).on("click", ".quickstart.search", function(event){
+     event.preventDefault();
+     var elem = $(this);
+     var resource = elem.attr("data-resource");
+     var searchButton = $("#geoportal-search-button");
+     search.setParam("singleResourceRequest", resource);
+     search.setParam("source", "primary");
+     searchButton.click();
+ });
+
  $(document).on("click", ".organizations .tile-header", function(){
      var elem = $(this);
      var id = elem.attr("data-id");

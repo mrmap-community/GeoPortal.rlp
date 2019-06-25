@@ -374,33 +374,65 @@ ul {
 .quickstart-container{
     display: flex;
     justify-content: center;
-
+    flex-wrap: wrap;
+    width: 85vw;
+    margin: auto;
 }
 
 .quickstart{
-    display: flex;
-}
-
-.quickstart{
-    /*
-    max-width: 500px;
-    */
     max-width: 50em;
+    height: 10em;
     display: flex;
-    align-items: center;
-    margin: 5px;
+    align-items: space-between;
+    flex-direction: column;
+    margin: 0.5em;
     background-color: var(--primary);
     color: white;
     font-size: 1.05em;
     padding: 20px;
     font-weight: bold;
     text-decoration: none;
+    transition: all 0.1s ease-in-out;
 }
+
 .quickstart:hover{
     background-color: var(--primary-light-hover);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--primary);
+    cursor: pointer;
 }
-.quickstart img{
+
+.quickstart-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.quickstart-body{
+    font-size: 3em;
+    font-weight: bold;
+    padding: 0 1em 0 1em;
+    margin: auto;
+}
+
+.quickstart-header img{
     margin: 0 20px 0 0;
+    width: 1.5em;
+}
+
+.landing-page-headline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--primary);
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0 0 0;
+}
+.landing-page-headline h2{
+    margin: 0;
+    text-align: center;
 }
 
 .sidebar-toggler{
@@ -670,9 +702,19 @@ ul {
     .quickstart{
         font-size: 1em;
     }
+
+    .quickstart:hover{
+        transform: unset;
+    }
+
     .quickstart-container{
         flex-direction: column;
         justify-content: center;
+        width: 90vw;
+    }
+
+    .quickstart-header{
+        font-size: 1.5em;
     }
 
     footer{
@@ -699,6 +741,7 @@ ul {
         top: 0;
         bottom: unset;
     }
+
     .mobile-advice{
         font-weight: bold;
     }

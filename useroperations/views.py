@@ -92,7 +92,7 @@ def index_view(request, wiki_keyword=""):
         results = helper_functions.get_landing_page(lang)
 
     context = {
-               'content': output,
+               "content": output,
                "results": results,
                }
 

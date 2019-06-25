@@ -39,7 +39,8 @@ class Searcher:
                  language_code="de",
                  catalogue_id=PRIMARY_CATALOGUE,
                  only_open_data='false',
-                 host=None):
+                 host=None,
+                 result_target="webclient",):
         """ Constructor
 
         Args:
@@ -57,7 +58,7 @@ class Searcher:
         """
         self.keywords = keywords
         self.output_format = "json"
-        self.result_target = "webclient"
+        self.result_target = result_target
         self.search_pages = page
         self.search_resources = resource_set
         self.extended_params = extended_search_params

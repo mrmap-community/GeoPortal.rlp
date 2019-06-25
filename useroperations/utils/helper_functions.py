@@ -167,9 +167,28 @@ def get_landing_page(lang):
     """
     ret_dict = {}
     # get favourite wmcs
-    searcher = Searcher(keywords="", resource_set=["wmc"],page=1,order_by="rank",host=HOSTNAME)
+    searcher = Searcher(keywords="", result_target="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
     search_results = searcher.get_search_results_primary()
-    ret_dict["wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("wmc", {}).get("srv", [])
+    ret_dict["wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("srv", [])
+
+    # get number of wmc's
+    ret_dict["num_wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("md", {}).get("nresults")
+
+    # get number of organizations
+    ret_dict["num_orgs"] = len(get_all_organizations())
+
+    # get number of topics
+    ret_dict["num_topics"] = len(get_all_inspire_topics(lang).get("tags", []))
+
+    # get number of datasets and layers
+    tmp = {
+        "dataset": "num_dataset",
+        "wms": "num_wms",
+    }
+    for key, val in tmp.items():
+        searcher = Searcher(keywords="", result_target="", resource_set=[key], host=HOSTNAME)
+        search_results = searcher.get_search_results_primary()
+        ret_dict[val] = search_results.get(key, {}).get(key, {}).get("md", {}).get("nresults")
 
     return ret_dict
 

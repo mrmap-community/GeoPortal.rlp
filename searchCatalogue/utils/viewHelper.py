@@ -701,13 +701,11 @@ def set_iso3166_icon_path(search_results):
 
 
 ####    FACETS/CATEGORIES
-def prepare_selected_facets(selected_facets, requested_resources, resources):
+def prepare_selected_facets(selected_facets):
     """ Selected facets are sent as a triple of (parentCategory, title, id) which needs to be transformed into a dict for better handling
 
     Args:
         selected_facets: An array of facets which were selected by the user
-        requested_resources: An array of all requested resources
-        resources: An array of all available resources with human readable translations
     Returns:
         dict: Contains (parentCategory, title, id)
     """
