@@ -209,6 +209,27 @@ ROOT_EMAIL_ADDRESS = "root@debian"
 
 ```
 
+# Customization
+Always remember: always change the images, scripts or style sheets which are located in the subfolders of the project
+such as `useroperations`. All of these so called static files will be automatically copied into `static` folder when the command
+```commandline
+python manage.py collectstatic
+```
+is called.
+## Colours
+Surely you are not interested in using the default colours or images. 
+All colours can be found in `useroperations/static/useroperations/css/color_schema.css`
+You will find e.g. `primary_color` and `secondary_color` as well as their related colors `xyz_hover`, `xyz_light` and so on.
+Changing these colours will affect the whole web app since all usages of colours are referenced onto these
+settings. For the best user expierence you may take a look on https://www.colorhexa.com/ which provides rich
+information about harmonizing and related or complementary colours of your choice. 
+
+## Images
+All organization related images can be found in `useroperations/static/useroperations/images/` and have the prefix
+`logo-`. Simply changing these (while keeping the same name) will directly change the appearance on the pages.
+All other images that have the prefix `icn_` are used as icons and can be changed the same way.
+
+
 
 ## License
 
