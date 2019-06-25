@@ -1439,7 +1439,21 @@ jQuery(document).ready(function() {
         resources[v] = active;
         v = v.charAt(0).toUpperCase() + v.slice(1);
         $('#geoportal-checkResources' + v).prop('checked', active);
+        prepareAndSearch();
+    });
 
+    $(document).on("click", ".subfacet.-js-resource", function() {
+        // check that the correct resources are globally available
+        toggleResources();
+
+        var elem = $(this);
+        elem.toggleClass("chosen-subfacet");
+
+        var v = elem.attr('data-resource');
+        var active = elem.hasClass('chosen-subfacet');
+        resources[v] = active;
+        v = v.charAt(0).toUpperCase() + v.slice(1);
+        $('#geoportal-checkResources' + v).prop('checked', active);
         prepareAndSearch();
     });
 
