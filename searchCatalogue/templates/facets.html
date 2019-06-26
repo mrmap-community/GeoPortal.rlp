@@ -13,6 +13,23 @@
         </form>
     </div>
 
+    <!-- New resource type location -->
+    {% if not is_info_search %}
+    <div class="-js-facet facet-item" data-name="{{ resource_key }}">
+        <h4>{% trans 'Resource types' %}</h4>
+        <ul>
+        {% for resource_key, resource_val in all_resources.items %}
+            <li class="subfacet -js-resource {% if resource_key in resources %} chosen-subfacet {% endif %}" data-resource="{{ resource_key }}">
+                <span>{{ resource_val }}</span>
+                {% if resource_key in resources %}
+                        <span class="icon-cross fs-10px"></span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     {% for facet_key, facet_val in facets.items %}
     <div class='-js-facet facet-item' data-name='{{ facet_key }}'>
          <h4>{{ facet_key }}</h4>
@@ -30,21 +47,4 @@
          </ul>
     </div>
     {% endfor %}
-
-    <!-- New resource type location -->
-    {% if not is_info_search %}
-    <div class="-js-facet facet-item" data-name="{{ resource_key }}">
-        <h4>{% trans 'Resource types' %}</h4>
-        <ul>
-        {% for resource_key, resource_val in all_resources.items %}
-            <li class="subfacet -js-resource {% if resource_key in resources %} chosen-subfacet {% endif %}" data-resource="{{ resource_key }}">
-                <span>{{ resource_val }}</span>
-                {% if resource_key in resources %}
-                        <span class="icon-cross fs-10px"></span>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
 </div>

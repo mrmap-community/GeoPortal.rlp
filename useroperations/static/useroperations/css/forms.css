@@ -48,7 +48,7 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 .forgot-pw-button:hover{
     cursor: pointer;
-    color: var(--rlp-light-hover);
+    color: var(--primary-light-hover);
 }
 
 .form-submit-button, .form-cancel-button{

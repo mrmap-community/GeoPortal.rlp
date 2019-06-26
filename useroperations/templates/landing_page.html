@@ -7,30 +7,16 @@
 
 {% block body %}
 <div class="quickstart-container">
-    <a class="quickstart" href="{% url 'useroperations:organizations' %}" title="{% trans 'Show all organizations' %}">
-        <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_organization_hover.png' %}">
-            <span>{% trans 'Organizations' %}</span>
-        </div>
-        <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
-    </a>
-    <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
-        <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}">
-            <span>{% trans 'Categories and topics' %}</span>
-        </div>
-        <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
-    </a>
     <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}">
+            <img src="{% static 'searchCatalogue/images/icons/icn_dataset_primary.png' %}">
             <span>{% trans 'Datasets' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
     </a>
     <a class="quickstart search" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_wms.png' %}">
+            <img src="{% static 'searchCatalogue/images/icons/icn_wms_primary.png' %}">
             <span>{% trans 'Map layers' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
@@ -41,6 +27,22 @@
             <span>{% trans 'Map collections' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
+    </a>
+</div>
+<div class="quickstart-container">
+    <a class="quickstart" href="{% url 'useroperations:organizations' %}" title="{% trans 'Show all organizations' %}">
+        <div class="quickstart-header">
+            <img src="{% static 'searchCatalogue/images/icons/icn_organization_primary.png' %}">
+            <span>{% trans 'Organizations' %}</span>
+        </div>
+        <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
+    </a>
+    <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
+        <div class="quickstart-header">
+            <img src="{% static 'searchCatalogue/images/icons/icn_filter.png' %}">
+            <span>{% trans 'Categories and topics' %}</span>
+        </div>
+        <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
     </a>
 </div>
 

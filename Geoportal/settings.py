@@ -25,7 +25,7 @@ PROJECT_DIR = "/data/"
 SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
 HOSTNAME = "localhost"

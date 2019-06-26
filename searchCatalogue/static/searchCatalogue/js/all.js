@@ -42,8 +42,6 @@ var Search = function() {
     this.timeoutDelay = 300;
     this.searchUrl = null;
 
-    this.source = null;
-
     this.resources_primary = {
         wms: true,
         wfs: true,
@@ -697,6 +695,11 @@ jQuery(document).ready(function() {
             return;
         }
 
+        // check if there is already a source selected, otherwise set it to default 'primary'
+        if(search.getParam("source") === null || search.getParam("source").length == 0){
+            search.setParam("source", "primary");
+        }
+
         // Check if there is a single resource request. This happens when a user selects the related button on the landing page
         if (search.getParam("singleResourceRequest") !== null){
             var singleResource = search.getParam("singleResourceRequest");
@@ -921,6 +924,11 @@ jQuery(document).ready(function() {
             search.setParam("facet", facetData);
             prepareAndSearch();
         }
+        window.scrollTo({
+            top:150,
+            left:0,
+            behavior:'smooth'
+        });
      });
 
      /**
@@ -1451,6 +1459,11 @@ jQuery(document).ready(function() {
         var v = elem.attr('data-resource');
         var active = elem.hasClass('chosen-subfacet');
         toggleResourceUsage(v, active);
+        window.scrollTo({
+            top:150,
+            left:0,
+            behavior:'smooth'
+        });
         prepareAndSearch();
     });
 
@@ -1555,9 +1568,7 @@ jQuery(document).ready(function() {
         });
         prepareAndSearch(undefined, true);
     });
-    
-    // set default source value
-    //search.setParam('source', 'primary');
+
     autocomplete = new Autocomplete(search);
 
     // Avoid `console` errors in browsers that lack a console.

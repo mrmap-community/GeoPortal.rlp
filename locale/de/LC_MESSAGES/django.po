@@ -35,8 +35,6 @@ msgid "Loading tweets..."
 msgstr "Lade Tweets..."
 
 #: searchCatalogue/templates/facets.html:6
-#, fuzzy
-#| msgid "Search"
 msgid "Search in "
 msgstr "Suche in"
 
@@ -360,7 +358,7 @@ msgstr "Such/Download/Erfassungsmodule"
 #: searchCatalogue/templates/search_forms.html:895
 #: useroperations/templates/landing_page.html:41
 msgid "Map collections"
-msgstr "Kartenzusammenstellungen"
+msgstr "Karten"
 
 #: searchCatalogue/templates/search_forms.html:899
 msgid "GeoRSS Newsfeeds"
@@ -514,7 +512,7 @@ msgstr "Such-, Download-, Erfassungsmodule"
 
 #: searchCatalogue/views.py:323
 msgid "Map Combinations"
-msgstr "Kartenzusammenstellungen"
+msgstr "Karten"
 
 #: searchCatalogue/views.py:557
 msgid "Send permission request"
@@ -1006,11 +1004,11 @@ msgstr "Kartenebenen"
 
 #: useroperations/templates/landing_page.html:38
 msgid "Search for all map collections"
-msgstr "Suche nach allen Kartenzusammenstellungen starten"
+msgstr "Suche nach allen Karten starten"
 
 #: useroperations/templates/landing_page.html:48
 msgid "Most frequently used map combinations"
-msgstr "Meistgenutzte Kartenzusammenstellungen"
+msgstr "Meistgenutzte Karten"
 
 #: useroperations/templates/landing_page.html:64
 msgid "Total views this week"
@@ -1052,7 +1050,7 @@ msgstr "Veröffentlichte Objektarten"
 
 #: useroperations/templates/publishing_organizations.html:40
 msgid "Published wmcs"
-msgstr "Veröffentlichte Kartenzusammenstellungen"
+msgstr "Veröffentlichte Karten"
 
 #: useroperations/views.py:66
 msgid "Login failed"
@@ -1281,26 +1279,6 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#~ msgid "Most frequently used Map Combinations"
-#~ msgstr "Meistgenutzte Kartenzusammenstellungen"
-
-#~ msgid "Organizations and topics"
-#~ msgstr "Organisationen und Themen"
-
-#~ msgid "Departement "
-#~ msgstr "Abteilung"
-
-#~ msgid "Description "
-#~ msgstr "Beschreibung"
-
-#~ msgid "I want to participate in surveys "
-#~ msgstr "Ich möchte an Umfragen teilnehmen "
-
-#~ msgid "Description:"
-#~ msgstr "Beschreibung:"
-
-#~ msgid "bis"
-#~ msgstr "to"
 
 # msgid "Activation Mail"
 # msgstr "Aktivierungsmail"

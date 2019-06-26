@@ -375,28 +375,27 @@ ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 85vw;
+    max-width: 85vw;
     margin: auto;
 }
 
 .quickstart{
-    max-width: 50em;
-    height: 10em;
+    height: 6em;
     display: flex;
     align-items: space-between;
     flex-direction: column;
     margin: 0.5em;
-    background-color: var(--primary);
-    color: white;
+    background-color: var(--secondary);
+    color: var(--primary);
     font-size: 1.05em;
     padding: 20px;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.1s ease-in-out;
+    flex-grow: 1;
 }
 
 .quickstart:hover{
-    background-color: var(--primary-light-hover);
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--primary);
     cursor: pointer;
@@ -410,7 +409,7 @@ ul {
 }
 
 .quickstart-body{
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
     padding: 0 1em 0 1em;
     margin: auto;
@@ -418,7 +417,7 @@ ul {
 
 .quickstart-header img{
     margin: 0 20px 0 0;
-    width: 1.5em;
+    width: 1.25em;
 }
 
 .landing-page-headline{
@@ -426,9 +425,10 @@ ul {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid var(--primary);
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     margin: 1em 0 0 0;
+    color: var(--primary);
 }
 .landing-page-headline h2{
     margin: 0;
@@ -699,18 +699,21 @@ ul {
         font-size: 1em;
     }
 
+    .quickstart-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+        flex-wrap: unset;
+    }
+
     .quickstart{
         font-size: 1em;
+        width: 80vw;
     }
 
     .quickstart:hover{
         transform: unset;
-    }
-
-    .quickstart-container{
-        flex-direction: column;
-        justify-content: center;
-        width: 90vw;
     }
 
     .quickstart-header{
