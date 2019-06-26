@@ -22,3 +22,11 @@
     </article>
     <div class="cookie-button form-submit-button">{% trans 'I understand!' %}</div>
 </div>
+<script>
+    $(document).on("click", ".cookie-button", function(){
+        var cookieBanner = $(".cookie-container");
+        cookieBanner.toggle();
+        // set cookie, so we know that the user already accepted on the next visit
+        setCookie('{{ COOKIE_VALUE }}', true)
+    });
+</script>
