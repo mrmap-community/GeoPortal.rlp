@@ -79,7 +79,7 @@ footer{
     height: auto;
 }
 
-#logo_rlp{
+#logo_country{
     max-height: 75px;
 }
 
@@ -166,7 +166,7 @@ footer{
         margin: 0 0 0 0;
         padding: 20px;
     }
-    #logo_rlp{
+    #logo_country{
         width: 100%;
     }
     #logo_geoportal{

@@ -2,11 +2,15 @@
 {% load static i18n humanize %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+    <script type="text/javascript" src="{% static 'useroperations/js/frontpage.js' %}"></script>
+    <script type="text/javascript" src="{% static 'useroperations/js/organizations.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-<h2>{% trans 'Publishing Organizations' %}</h2>
+<div class="landing-page-headline">
+    <h2>{% trans 'Publishing Organizations' %}</h2>
+</div>
 <div class="tile-wrapper organizations">
     {% for result in organizations %}
         <div class="tile">

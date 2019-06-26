@@ -526,6 +526,7 @@ dl dd {
 .subfacet:hover{
     cursor: pointer;
     background-color: var(--primary);
+    border-radius: 100px;
     color: white;
 }
 
@@ -657,8 +658,8 @@ dl dd {
 }
 
 .tab-icn{
-  margin-right: 10px;
-  max-height: 25px;
+  margin-right: 1em;
+  width: 1.0em;
 }
 
 .select-wrapper{
@@ -674,8 +675,8 @@ dl dd {
   /* Add new style */
   height: 30px;
   padding: 5px 5px 5px 20px;
-  color: white;
-  background-color: var(--primary);
+  color: black;
+  background-color: var(--secondary);
 }
 
 .select-wrapper::before {
@@ -685,7 +686,7 @@ dl dd {
   position: absolute;
   left: 1px;
   top: 5px;
-  color: #fff;
+  color: black;
   pointer-events: none;
 }
 

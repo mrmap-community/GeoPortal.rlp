@@ -7,12 +7,12 @@
 
 {% block body %}
 <div class="quickstart-container">
-    <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
+    <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_dataset_primary.png' %}">
-            <span>{% trans 'Datasets' %}</span>
+            <img src="{% static 'searchCatalogue/images/icons/icn_wmc.png' %}">
+            <span>{% trans 'Map collections' %}</span>
         </div>
-        <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
+        <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
     </a>
     <a class="quickstart search" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
@@ -21,12 +21,12 @@
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
     </a>
-    <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
+    <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
-            <img src="{% static 'searchCatalogue/images/icons/icn_wmc.png' %}">
-            <span>{% trans 'Map collections' %}</span>
+            <img src="{% static 'searchCatalogue/images/icons/icn_dataset_primary.png' %}">
+            <span>{% trans 'Datasets' %}</span>
         </div>
-        <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
+        <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
     </a>
 </div>
 <div class="quickstart-container">
@@ -52,7 +52,7 @@
 <div class="tile-wrapper favourite-wmcs">
     {% for result in results.wmc %}
         <div class="tile">
-            <div class="tile-header" data-id="{{result.id}}">
+            <div class="tile-header" data-id="WMC={{result.id}}">
                 <div class="tile-title">
                     {{ result.title|safe }}
                 </div>

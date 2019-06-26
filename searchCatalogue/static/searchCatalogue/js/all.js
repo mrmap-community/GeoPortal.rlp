@@ -633,7 +633,7 @@ function checkForExternalMapviewerCall(){
 }
 
 
-jQuery(document).ready(function() {
+$(document).ready(function() {
 
     /**
      * Observe for changes in body content and resize sidebar if needed
@@ -654,6 +654,10 @@ jQuery(document).ready(function() {
 
     checkForExternalMapviewerCall();
     var resources = null;
+    // check if there is already a source selected, otherwise set it to default 'primary'
+    if(search.getParam("source") === null || search.getParam("source").length == 0){
+        search.setParam("source", "primary");
+    }
     toggleCataloguesResources()
 
     var fixDateFormat = function(val) {
@@ -683,21 +687,15 @@ jQuery(document).ready(function() {
             resources = search.resources_de;
         }
     }
-
     /**
      * Function that does the search
      * @param fromField
      */
-    prepareAndSearch  = function(fromField, noPageReset) {
+    prepareAndSearch = function(fromField, noPageReset) {
         // Check if there is already a running search
         if (search.searching){
             // if a search is already running - leave!
             return;
-        }
-
-        // check if there is already a source selected, otherwise set it to default 'primary'
-        if(search.getParam("source") === null || search.getParam("source").length == 0){
-            search.setParam("source", "primary");
         }
 
         // Check if there is a single resource request. This happens when a user selects the related button on the landing page
