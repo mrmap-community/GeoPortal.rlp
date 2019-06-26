@@ -1227,13 +1227,6 @@ dl dd {
 .facet-list ul {
   padding: 5px;
   list-style-type: none; }
-/*
-.facet-list ul li:hover, .facet-list ul li:active, .facet-list ul lifocus, .facet-list ul li:checked {
-  color: #fff;
-  background-color: var(--primary);
-  background: var(--primary) !important;
-  background: linear-gradient(var(--primary), var(--primary)); }
-*/
 
 #chosen-facets{
     display: flex;
@@ -1271,6 +1264,10 @@ dl dd {
     color: var(--primary);
     background-color: white;
     border: 1px solid var(--primary);
+}
+
+.catalogue-form{
+    padding: 5px;
 }
 
 .Zebra_DatePicker {

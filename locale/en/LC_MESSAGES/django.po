@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 10:04+0000\n"
+"POT-Creation-Date: 2019-06-25 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,8 +34,16 @@ msgstr ""
 msgid "Loading tweets..."
 msgstr ""
 
-#: searchCatalogue/templates/facets.html:16
+#: searchCatalogue/templates/facets.html:6
+msgid "Search in "
+msgstr ""
+
+#: searchCatalogue/templates/facets.html:28
 msgid "No Categories found for this search configuration"
+msgstr ""
+
+#: searchCatalogue/templates/facets.html:37
+msgid "Resource types"
 msgstr ""
 
 #: searchCatalogue/templates/filterarea.html:6
@@ -52,7 +60,7 @@ msgstr ""
 
 #: searchCatalogue/templates/hits_and_sort_option.html:26
 #: searchCatalogue/templates/search_forms.html:8
-#: searchCatalogue/utils/viewHelper.py:258
+#: searchCatalogue/utils/viewHelper.py:287
 msgid "Sort by:"
 msgstr ""
 
@@ -73,7 +81,7 @@ msgid "Insert search term here"
 msgstr ""
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:104
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:86
 #: templates/base.html:41
 msgid "Search"
 msgstr ""
@@ -86,7 +94,7 @@ msgstr ""
 msgid "Use spatial filter"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:88
+#: searchCatalogue/templates/index.html:90
 msgid "Extended Search"
 msgstr ""
 
@@ -104,7 +112,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/application/application_category.html:5
 #: searchCatalogue/templates/other/application/application_category.html:6
-#: searchCatalogue/views.py:263
+#: searchCatalogue/views.py:245
 msgid "Applications"
 msgstr ""
 
@@ -121,14 +129,14 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:5
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
-#: searchCatalogue/views.py:254 searchCatalogue/views.py:260
-#: searchCatalogue/views.py:337
+#: searchCatalogue/views.py:236 searchCatalogue/views.py:242
+#: searchCatalogue/views.py:320 useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr ""
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:5
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
-#: searchCatalogue/views.py:264
+#: searchCatalogue/views.py:246
 msgid "Miscellaneous Datasets"
 msgstr ""
 
@@ -150,13 +158,13 @@ msgstr ""
 
 #: searchCatalogue/templates/other/series/series_category.html:5
 #: searchCatalogue/templates/other/series/series_category.html:6
-#: searchCatalogue/views.py:255 searchCatalogue/views.py:261
+#: searchCatalogue/views.py:237 searchCatalogue/views.py:243
 msgid "Series"
 msgstr ""
 
 #: searchCatalogue/templates/other/service/service_category.html:5
 #: searchCatalogue/templates/other/service/service_category.html:6
-#: searchCatalogue/views.py:256 searchCatalogue/views.py:262
+#: searchCatalogue/views.py:238 searchCatalogue/views.py:244
 msgid "Services"
 msgstr ""
 
@@ -187,7 +195,7 @@ msgid "Cancel"
 msgstr ""
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:807
+#: useroperations/views.py:808
 msgid "Send"
 msgstr ""
 
@@ -347,6 +355,7 @@ msgid "Search/Download/Gathering modules"
 msgstr ""
 
 #: searchCatalogue/templates/search_forms.html:895
+#: useroperations/templates/landing_page.html:41
 msgid "Map collections"
 msgstr ""
 
@@ -428,11 +437,11 @@ msgstr ""
 msgid "Add to mapviewer with zoom"
 msgstr ""
 
-#: searchCatalogue/templates/search_results.html:13
+#: searchCatalogue/templates/search_results.html:11
 msgid "Filter"
 msgstr ""
 
-#: searchCatalogue/templates/search_results.html:26
+#: searchCatalogue/templates/search_results.html:24
 msgid "Results"
 msgstr ""
 
@@ -460,71 +469,71 @@ msgstr ""
 msgid "Decline"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:252
-msgid "Search terms(e):"
+#: searchCatalogue/utils/viewHelper.py:49
+msgid "Own catalogue"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:254
-msgid "Spatial Restriction:"
-msgstr ""
-
-#: searchCatalogue/utils/viewHelper.py:256
-msgid "Hits per Page:"
-msgstr ""
-
-#: searchCatalogue/views.py:86
-msgid "State-wide"
-msgstr ""
-
-#: searchCatalogue/views.py:91
+#: searchCatalogue/utils/viewHelper.py:54
 msgid "Germany"
 msgstr ""
 
-#: searchCatalogue/views.py:95
+#: searchCatalogue/utils/viewHelper.py:58
 msgid "Europe"
 msgstr ""
 
-#: searchCatalogue/views.py:99
+#: searchCatalogue/utils/viewHelper.py:62
 msgid "Info"
 msgstr ""
 
-#: searchCatalogue/views.py:100
+#: searchCatalogue/utils/viewHelper.py:63
 msgid "Info pages"
 msgstr ""
 
-#: searchCatalogue/views.py:338
+#: searchCatalogue/utils/viewHelper.py:281
+msgid "Search terms(e):"
+msgstr ""
+
+#: searchCatalogue/utils/viewHelper.py:283
+msgid "Spatial Restriction:"
+msgstr ""
+
+#: searchCatalogue/utils/viewHelper.py:285
+msgid "Hits per Page:"
+msgstr ""
+
+#: searchCatalogue/views.py:321
 msgid "Web Map Services"
 msgstr ""
 
-#: searchCatalogue/views.py:339
+#: searchCatalogue/views.py:322
 msgid "Search-, Download-,Gathering-modules"
 msgstr ""
 
-#: searchCatalogue/views.py:340
+#: searchCatalogue/views.py:323
 msgid "Map Combinations"
 msgstr ""
 
-#: searchCatalogue/views.py:577
+#: searchCatalogue/views.py:557
 msgid "Send permission request"
 msgstr ""
 
-#: searchCatalogue/views.py:578
+#: searchCatalogue/views.py:558
 msgid "[Geoportal.RLP] Permission request for "
 msgstr ""
 
-#: searchCatalogue/views.py:579
+#: searchCatalogue/views.py:559
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
 msgstr ""
 
-#: searchCatalogue/views.py:580
+#: searchCatalogue/views.py:560
 msgid ""
 "'\n"
 " It has the ID "
 msgstr ""
 
-#: searchCatalogue/views.py:581
+#: searchCatalogue/views.py:561
 msgid ""
 ".\n"
 "\n"
@@ -570,7 +579,7 @@ msgstr ""
 msgid "Hello"
 msgstr ""
 
-#: templates/base.html:106 useroperations/views.py:497
+#: templates/base.html:106 useroperations/views.py:498
 msgid "Change Profile"
 msgstr ""
 
@@ -684,107 +693,164 @@ msgstr ""
 msgid "Thank you for your understanding!"
 msgstr ""
 
-#: useroperations/forms.py:10
+#: useroperations/forms.py:8
 msgid "First name"
 msgstr ""
 
-#: useroperations/forms.py:11
+#: useroperations/forms.py:8
+msgid "Please enter your first name."
+msgstr ""
+
+#: useroperations/forms.py:9
 msgid "Family name"
 msgstr ""
 
-#: useroperations/forms.py:12
+#: useroperations/forms.py:9
+msgid "Please enter your last name."
+msgstr ""
+
+#: useroperations/forms.py:10
 msgid "E-Mail address"
 msgstr ""
 
-#: useroperations/forms.py:13
+#: useroperations/forms.py:10 useroperations/forms.py:18
+#: useroperations/forms.py:37 useroperations/forms.py:49
+msgid "Please enter your email."
+msgstr ""
+
+#: useroperations/forms.py:11
 msgid "Your Message"
 msgstr ""
 
-#: useroperations/forms.py:14 useroperations/forms.py:28
+#: useroperations/forms.py:11
+msgid "Please enter your message."
+msgstr ""
+
+#: useroperations/forms.py:12 useroperations/forms.py:26
 msgid "I'm not a robot"
 msgstr ""
 
-#: useroperations/forms.py:17 useroperations/forms.py:31
-#: useroperations/forms.py:50
+#: useroperations/forms.py:15 useroperations/forms.py:29
+#: useroperations/forms.py:48
 msgid "Username"
 msgstr ""
 
-#: useroperations/forms.py:18
-msgid ""
-"Must contain at least one number and one uppercase and lowercase letter, and "
-"at least 8 or more characters"
+#: useroperations/forms.py:15 useroperations/forms.py:29
+#: useroperations/forms.py:48
+msgid "Please enter your username."
 msgstr ""
 
-#: useroperations/forms.py:18 useroperations/forms.py:32
+#: useroperations/forms.py:16 useroperations/forms.py:35
+msgid "Please enter your password with at least 9 characters."
+msgstr ""
+
+#: useroperations/forms.py:16
+msgid "Please use at least 9 characters."
+msgstr ""
+
+#: useroperations/forms.py:16 useroperations/forms.py:30
 msgid "Password"
 msgstr ""
 
-#: useroperations/forms.py:19
+# Navigation items
+#: useroperations/forms.py:17 useroperations/forms.py:36
+#, fuzzy
+#| msgid "Informationen"
+msgid "Password confirmation."
+msgstr "Information"
+
+#: useroperations/forms.py:17
 msgid "PasswordConfirmation"
 msgstr ""
 
-#: useroperations/forms.py:21 useroperations/forms.py:40
+#: useroperations/forms.py:19 useroperations/forms.py:38
+msgid "Organization"
+msgstr ""
+
+#: useroperations/forms.py:19 useroperations/forms.py:38
+msgid "Please enter the organization you are working for."
+msgstr ""
+
+#: useroperations/forms.py:20 useroperations/forms.py:39
 msgid "Departement"
+msgstr ""
+
+#: useroperations/forms.py:20 useroperations/forms.py:39
+msgid "Please enter the departement you are working in."
+msgstr ""
+
+#: useroperations/forms.py:21
+msgid "Phone"
+msgstr ""
+
+#: useroperations/forms.py:21 useroperations/forms.py:40
+msgid "Please enter your phone number."
 msgstr ""
 
 #: useroperations/forms.py:22 useroperations/forms.py:41
 msgid "Description"
 msgstr ""
 
-#: useroperations/forms.py:23
-msgid "Phone"
+#: useroperations/forms.py:22 useroperations/forms.py:41
+msgid "Please enter a description."
 msgstr ""
 
-#: useroperations/forms.py:24
-msgid "Organization"
-msgstr ""
-
-#: useroperations/forms.py:25 useroperations/forms.py:44
+#: useroperations/forms.py:23 useroperations/forms.py:42
 msgid "I want to sign up for the newsletter"
 msgstr ""
 
-#: useroperations/forms.py:26 useroperations/forms.py:45
+#: useroperations/forms.py:23 useroperations/forms.py:42
+msgid "Sign up for the newsletter."
+msgstr ""
+
+#: useroperations/forms.py:24 useroperations/forms.py:43
 msgid "I want to participate in surveys"
 msgstr ""
 
-#: useroperations/forms.py:27 useroperations/forms.py:47
+#: useroperations/forms.py:24 useroperations/forms.py:43
+msgid "Participate in surveys."
+msgstr ""
+
+#: useroperations/forms.py:25 useroperations/forms.py:45
 msgid ""
 "I understand and accept that my data will be automatically processed and "
 "securely stored, as it is stated in the general data protection regulation "
 "(GDPR)."
 msgstr ""
 
-#: useroperations/forms.py:36
-msgid "Old password "
+#: useroperations/forms.py:25 useroperations/forms.py:45
+msgid "Accept privacy policy."
 msgstr ""
 
-#: useroperations/forms.py:37
-msgid ""
-"Must contain at least one number and one uppercase and lowercase letter, and "
-"at least 9 or more characters"
+#: useroperations/forms.py:30 useroperations/forms.py:34
+msgid "Please enter your password."
 msgstr ""
 
-#: useroperations/forms.py:37
+#: useroperations/forms.py:34
+msgid "Old password"
+msgstr ""
+
+#: useroperations/forms.py:35
 msgid "New password "
 msgstr ""
 
-#: useroperations/forms.py:38
+#: useroperations/forms.py:36
 msgid "Password confirmation"
 msgstr ""
 
-#: useroperations/forms.py:42
+#: useroperations/forms.py:40
 msgid "Phone "
 msgstr ""
 
-#: useroperations/forms.py:43
-msgid "Organization "
-msgstr ""
-
-#: useroperations/forms.py:46
+#: useroperations/forms.py:44
 msgid "Use HTTP Digest Authentication for secured Services"
 msgstr ""
 
-#: useroperations/forms.py:47
+#: useroperations/forms.py:44
+msgid "Use HTTP Digest Authentication for secured Services."
+msgstr ""
+
+#: useroperations/forms.py:45
 msgid "privacy policy"
 msgstr ""
 
@@ -877,35 +943,59 @@ msgstr "Information"
 msgid "Information"
 msgstr "Information"
 
-#: useroperations/templates/landing_page.html:12
+#: useroperations/templates/landing_page.html:10
+msgid "Show all organizations"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:13
 msgid "Organizations"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:16
-msgid "Categories and topics"
+#: useroperations/templates/landing_page.html:17
+msgid "Show all topics"
 msgstr ""
 
 #: useroperations/templates/landing_page.html:20
-msgid "Most frequently used Map Combinations"
+msgid "Categories and topics"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:35
+#: useroperations/templates/landing_page.html:24
+msgid "Search for all datasets"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:31
+msgid "Search for all map layers"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:34
+msgid "Map layers"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:38
+msgid "Search for all map collections"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:48
+msgid "MOST FREQUENTLY USED MAP COMBINATIONS"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:64
 msgid "Total views this week"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:39
+#: useroperations/templates/landing_page.html:68
 msgid "Open in mobile viewer"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:45
+#: useroperations/templates/landing_page.html:74
 msgid "No description available"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:55
+#: useroperations/templates/landing_page.html:84
 msgid "Show all"
 msgstr ""
 
-#: useroperations/templates/landing_page.html:65
+#: useroperations/templates/landing_page.html:92
 msgid "Start a search and explore all results. Let's go!"
 msgstr ""
 
@@ -970,7 +1060,7 @@ msgid ""
 "characters, allowed special chars are: @#$%&+=!"
 msgstr ""
 
-#: useroperations/views.py:262 useroperations/views.py:466
+#: useroperations/views.py:262 useroperations/views.py:467
 msgid "Passwords do not match"
 msgstr ""
 
@@ -979,7 +1069,7 @@ msgid "Activation Mail"
 msgstr ""
 
 #: useroperations/views.py:285 useroperations/views.py:374
-#: useroperations/views.py:575
+#: useroperations/views.py:576
 msgid "Hello "
 msgstr ""
 
@@ -995,7 +1085,7 @@ msgid ""
 "before you can login!"
 msgstr ""
 
-#: useroperations/views.py:322 useroperations/views.py:796
+#: useroperations/views.py:322 useroperations/views.py:797
 msgid "Captcha was wrong! Please try again"
 msgstr ""
 
@@ -1021,102 +1111,102 @@ msgstr ""
 msgid "Password reset was successful, check your mails. Password: "
 msgstr ""
 
-#: useroperations/views.py:410
+#: useroperations/views.py:442
 msgid ""
 "Please accept the General Data Protection Regulation or delete your account!"
 msgstr ""
 
-#: useroperations/views.py:451 useroperations/views.py:460
+#: useroperations/views.py:452 useroperations/views.py:461
 msgid "Your old Password was wrong"
 msgstr ""
 
-#: useroperations/views.py:488
+#: useroperations/views.py:489
 msgid "Successfully changed data"
 msgstr ""
 
-#: useroperations/views.py:498
+#: useroperations/views.py:499
 msgid "Delete Profile"
 msgstr ""
 
-#: useroperations/views.py:505
+#: useroperations/views.py:506
 msgid "Change data"
 msgstr ""
 
-#: useroperations/views.py:536
+#: useroperations/views.py:537
 msgid "Delete Profile!"
 msgstr ""
 
-#: useroperations/views.py:540
+#: useroperations/views.py:541
 msgid "Delete Profile?"
 msgstr ""
 
-#: useroperations/views.py:551 useroperations/views.py:622
+#: useroperations/views.py:552 useroperations/views.py:623
 msgid "You are not logged in"
 msgstr ""
 
-#: useroperations/views.py:557
+#: useroperations/views.py:558
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:560
+#: useroperations/views.py:561
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:563
+#: useroperations/views.py:564
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
 msgstr ""
 
-#: useroperations/views.py:574
+#: useroperations/views.py:575
 msgid "Reactivation Mail"
 msgstr ""
 
-#: useroperations/views.py:577
+#: useroperations/views.py:578
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
 msgstr ""
 
-#: useroperations/views.py:587
+#: useroperations/views.py:588
 msgid "Successfully deleted the user:"
 msgstr ""
 
-#: useroperations/views.py:589
+#: useroperations/views.py:590
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
 msgstr ""
 
-#: useroperations/views.py:619
+#: useroperations/views.py:620
 msgid "Successfully logged out"
 msgstr ""
 
-#: useroperations/views.py:728
+#: useroperations/views.py:729
 msgid "Account already active"
 msgstr ""
 
-#: useroperations/views.py:733
+#: useroperations/views.py:734
 msgid "Invalid data"
 msgstr ""
 
-#: useroperations/views.py:745
+#: useroperations/views.py:746
 msgid "Account activation"
 msgstr ""
 
-#: useroperations/views.py:778
+#: useroperations/views.py:779
 msgid "Feedback sent. Thank you!"
 msgstr ""
 
-#: useroperations/views.py:794
+#: useroperations/views.py:795
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 
-#: useroperations/views.py:802
+#: useroperations/views.py:803
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "

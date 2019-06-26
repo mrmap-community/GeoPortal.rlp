@@ -208,16 +208,17 @@ $(document).on("click", "#geoportal-search-button", function(){
 });
 
 
-/**
- * Display info for favourite wmc tiles
- */
- $(document).on("mouseover mouseleave", ".tile-body", function(){
-    var elem = $(this);
-    var popup = elem.parents().children(".tile-info-popup");
-    popup.toggle();
+ $(document).on("click", ".quickstart.search", function(event){
+     event.preventDefault();
+     var elem = $(this);
+     var resource = elem.attr("data-resource");
+     var searchButton = $("#geoportal-search-button");
+     search.setParam("singleResourceRequest", resource);
+     search.setParam("source", "primary");
+     searchButton.click();
  });
 
- $(document).on("click", ".organizations .tile-header-img", function(){
+ $(document).on("click", ".organizations .tile-header", function(){
      var elem = $(this);
      var id = elem.attr("data-id");
      var name = elem.attr("data-name");
@@ -227,13 +228,18 @@ $(document).on("click", "#geoportal-search-button", function(){
      searchButton.click();
  });
 
- $(document).on("click", ".topics .tile-header-img", function(){
+ $(document).on("click", ".topics .tile-header", function(){
      var elem = $(this);
      var filterName = elem.attr("data-name");
      var filterId = elem.attr("data-id");
      var searchButton = $("#geoportal-search-button");
      search.setParam("facet", ["INSPIRE", filterName, filterId].join(","));
      searchButton.click();
+ });
+
+ $(document).on("hover", ".topics .tile-header", function(){
+     var elem = $(this).children(".tile-header-img").children(".tile-img");
+     elem.toggleClass("highlight");
  });
 
  $(document).on("click", ".organizations .data-info-container", function(){
@@ -248,7 +254,7 @@ $(document).on("click", "#geoportal-search-button", function(){
  });
 
 
- $(document).on("click", ".tile-header", function(event){
+ $(document).on("click", ".favourite-wmcs .tile-header", function(event){
     event.preventDefault();
     var elem = $(this);
     if(elem.attr("id") == "show-all-tile-content"){
@@ -259,6 +265,7 @@ $(document).on("click", "#geoportal-search-button", function(){
     startAjaxMapviewerCall(href);
 
  });
+
 $(document).on("click", ".message-toggler", function(){
     var elem = $(this);
     elem.toggle();

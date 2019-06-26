@@ -74,31 +74,13 @@ def index(request: HttpRequest, external_call=False, start_search=False):
         default_language = "de"
         translation.activate(default_language)
         request.LANGUAGE_CODE = translation.get_language()
-    #template_name = "search_forms.html"    # comment this in to enable extended search
-    template_name = "index.html"            # comment this out if you comment the upper line in
+    template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
     facets = searcher.get_categories_list()
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
-    sources = OrderedDict()
-    sources["primary"] = {
-        "key": _("State-wide"),
-        "img": PRIMARY_SRC_IMG,
-    }
-    if not external_call:
-        sources["de"] = {
-            "key": _("Germany"),
-            "img": DE_SRC_IMG,
-        }
-        sources["eu"] = {
-            "key": _("Europe"),
-            "img": EU_SRC_IMG,
-        }
-        sources["info"] = {
-            "key": _("Info"),
-            "title": _("Info pages"),
-        }
+    sources = viewHelper.get_source_catalogues(external_call)
 
     params = {
         "title": _("Search"),
@@ -313,6 +295,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
         "pages": pages,
         "all_resources": all_resources,
         "OPEN_DATA_URL": OPEN_DATA_URL,
+        "sources": viewHelper.get_source_catalogues(False)
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     start_time = time.time()
@@ -354,11 +337,9 @@ def get_data_primary(request: HttpRequest):
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
 
-    start_time = time.time()
     # prepare extended search parameters
     extended_search_params = viewHelper.parse_extended_params(post_params)
     selected_facets = viewHelper.prepare_selected_facets(selected_facets)
-    print_debug(EXEC_TIME_PRINT % ("prepare extended search params", float(time.time() - start_time)))
 
     # prepare search tags (keywords)
     keywords = post_params["terms"].split(",")
@@ -406,9 +387,11 @@ def get_data_primary(request: HttpRequest):
     # set flag to indicate that the facet is one of the selected
     for facet_key, facet_val in selected_facets.items():
         for chosen_facet in facet_val:
-            _id = chosen_facet["id"]
+            _id = int(chosen_facet["id"])
+            if _id < 0:
+                continue
             for facet in facets[facet_key]:
-                if facet["id"] == _id:
+                if int(facet["id"]) == _id:
                     facet["is_selected"] = True
                     break
     search_filters = rehasher.get_rehashed_filters()
@@ -434,12 +417,6 @@ def get_data_primary(request: HttpRequest):
     # set attributes for wfs child modules
     search_results = viewHelper.set_children_data_wfs(search_results)
     print_debug(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
-
-    # ToDO: Keep an eye on the disclaimer behaviour. If something does not work and we need a quick solution, comment these lines back in
-    #start_time = time.time()
-    ## set disclaimer info
-    #search_results = viewHelper.set_service_disclaimer_url(search_results)
-    #print_debug(EXEC_TIME_PRINT % ("setting disclaimer info", time.time() - start_time))
 
     start_time = time.time()
     # set state icon file paths
@@ -495,6 +472,7 @@ def get_data_primary(request: HttpRequest):
         "view_map_url": "//localhost/portal/karten.html?",
         "wms_action_url": HTTP_OR_SSL + HOSTNAME + "/mapbender/php/wms.php?",
         "OPEN_DATA_URL": OPEN_DATA_URL,
+        "sources": viewHelper.get_source_catalogues(False)
     }
 
     # since we need to return plain text to the ajax handler, we need to use render_to_string
@@ -547,6 +525,8 @@ def get_data_info(request: HttpRequest):
         "HOSTNAME": host,
         "search_results": search_results,
         "is_info_search": True,
+        "source": "info",
+        "sources": viewHelper.get_source_catalogues(False),
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     #start_time = time.time()

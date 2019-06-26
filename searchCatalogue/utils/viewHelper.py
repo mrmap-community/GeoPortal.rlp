@@ -27,13 +27,42 @@ from Geoportal.helper import execute_threads
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 from Geoportal import helper
-from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
+from Geoportal.settings import INTERNAL_PAGES_CATEGORY, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, PRIMARY_SRC_IMG, \
+    DE_SRC_IMG, EU_SRC_IMG
 from searchCatalogue.settings import *
 
 
 ####    SINGLE HELPER FUNCTIONS
 from searchCatalogue.utils.searcher import Searcher, URL_BASE
 
+
+def get_source_catalogues(external_call: bool=False):
+    """ Returns a dict which holds all valid catalogue sources
+
+    Args:
+        external_call (bool): States whether the call is internal or external
+    Returns:
+         sources (OrderedDict): Contains all catalogues as key-value pairs
+    """
+    sources = OrderedDict()
+    sources["primary"] = {
+        "key": _("Own catalogue"),
+        "img": PRIMARY_SRC_IMG,
+    }
+    if not external_call:
+        sources["de"] = {
+            "key": _("Germany"),
+            "img": DE_SRC_IMG,
+        }
+        sources["eu"] = {
+            "key": _("Europe"),
+            "img": EU_SRC_IMG,
+        }
+        sources["info"] = {
+            "key": _("Info"),
+            "title": _("Info pages"),
+        }
+    return sources
 
 def parse_extended_params(params: dict):
     """ Convert one long GET url parameter into a well formed dict.
@@ -693,6 +722,7 @@ def prepare_selected_facets(selected_facets):
         if facet_dict.get("parent_category") not in ret_dict:
             ret_dict[(facet_dict.get("parent_category"))] = []
         ret_dict[facet_dict.get("parent_category")].append(facet_dict)
+
     return ret_dict
 
 def __resolve_single_facet(preselected_categories, all_categories):
