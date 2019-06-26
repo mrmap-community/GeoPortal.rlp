@@ -30,6 +30,7 @@ from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
 from searchCatalogue.utils.searcher import Searcher
+from searchCatalogue.utils.viewHelper import check_search_bbox
 from useroperations.models import MbUser
 
 EXEC_TIME_PRINT = "Exec time for %s: %1.5fs"
@@ -228,6 +229,11 @@ def get_data_other(request: HttpRequest, catalogue_id):
     search_pages = int(post_params.get("page-geoportal"))
     requested_page_res = post_params.get("data-geoportal")
     requested_resources = viewHelper.prepare_requested_resources(post_params.get("resources"))
+
+    # prepare bbox parameter
+    search_bbox = post_params.get("searchBbox", "")
+    search_type_bbox = post_params.get("searchTypeBbox", "")
+
     source = post_params.get("source", "")
     if source == 'eu':
         is_eu_search = True
@@ -252,14 +258,22 @@ def get_data_other(request: HttpRequest, catalogue_id):
     searcher = Searcher(page_res=requested_page_res,
                         keywords=search_words,
                         page=search_pages,
+                        bbox=search_bbox,
+                        type_bbox=search_type_bbox,
                         resource_set=requested_resources,
                         language_code=request.LANGUAGE_CODE,
                         catalogue_id=catalogue_id,
-			host=host,
+			            host=host,
                         )
     start_time = time.time()
     search_results = searcher.get_search_results_de()
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
+
+    # prepare search filters
+    # search_filters = viewHelper.get_search_filters(search_results)
+
+    # rehasher = Rehasher(search_results, search_filters)
+    # search_filters = rehasher.get_rehashed_filters()
 
     # split used searchFilters from searchResults
     search_filters = {}
@@ -284,6 +298,10 @@ def get_data_other(request: HttpRequest, catalogue_id):
     search_results = viewHelper.check_previewUrls(search_results)
     print_debug(EXEC_TIME_PRINT % ("checking previewUrls", time.time() - start_time))
 
+    # check for bounding box
+    bbox = post_params.get("searchBbox", '')
+    session_id = request.COOKIES.get("PHPSESSID", "")
+    check_search_bbox(session_id, bbox)
 
     results = {
         "source": source,
@@ -373,7 +391,8 @@ def get_data_primary(request: HttpRequest):
                         only_open_data=only_open_data,
                         language_code=lang_code,
                         catalogue_id=catalogue_id,
-			host=host)
+                        host=host
+                        )
     search_results = searcher.get_search_results_primary(user_id=session_data.get("userid", ""))
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
@@ -426,18 +445,8 @@ def get_data_primary(request: HttpRequest):
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
-    if bbox != '':
-        # set glm to session
-        session_id = request.COOKIES.get("PHPSESSID", "")
-        lat_lon = bbox.split(",")
-        lat_lon = {
-            "minx": lat_lon[0],
-            "miny": lat_lon[1],
-            "maxx": lat_lon[2],
-            "maxy": lat_lon[3],
-        }
-        write_gml_to_session(session_id=session_id, lat_lon=lat_lon)
-
+    session_id = request.COOKIES.get("PHPSESSID", "")
+    check_search_bbox(session_id, bbox)
 
     # prepare data for rendering
     types = {

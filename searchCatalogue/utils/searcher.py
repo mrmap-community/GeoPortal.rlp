@@ -257,6 +257,8 @@ class Searcher:
             "searchText": self.keywords,
             "searchResources": "",
             "searchPages": self.search_pages,
+            "bbox": self.bbox,
+            "typeBbox": self.typeBbox,
             "maxResults": 5,
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,

@@ -166,7 +166,7 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
     uri = URL_BASE + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&" + urllib.parse.urlencode(data)
 
     response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
-
+    i = 0
 
 def execute_threads(thread_list):
     """ Executes a list of threads

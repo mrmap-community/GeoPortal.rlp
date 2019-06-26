@@ -22,7 +22,7 @@ import math
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from Geoportal.helper import execute_threads
+from Geoportal.helper import execute_threads, write_gml_to_session
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -930,3 +930,16 @@ def check_previewUrls(search_results):
             if len(result.get("previewUrl", "")) == 0:
                 result["previewUrl"] = None
     return search_results
+
+
+def check_search_bbox(session_id, bbox):
+    if bbox != '':
+        # set glm to session
+        lat_lon = bbox.split(",")
+        lat_lon = {
+            "minx": lat_lon[0],
+            "miny": lat_lon[1],
+            "maxx": lat_lon[2],
+            "maxy": lat_lon[3],
+        }
+        write_gml_to_session(session_id=session_id, lat_lon=lat_lon)
