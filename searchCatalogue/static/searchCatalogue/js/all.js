@@ -901,7 +901,7 @@ $(document).ready(function() {
         var elem = $(this);
         // deselect spatial search field
         var checkbox = $("#spatial-checkbox");
-        checkbox.attr("checked", false);
+        checkbox.prop("checked", false);
         // now remove spatial restriction and start a new search
         elem.remove();
         prepareAndSearch();
@@ -961,7 +961,7 @@ $(document).ready(function() {
         // remove locationParam from searchfield input!
         var searchField = $("#geoportal-search-field");
         var checkbox = $("#spatial-checkbox");
-        checkbox.attr("checked", false);
+        checkbox.prop("checked", false);
         searchField.val(searchField.val().replace(locationParam, "").trim());
         search.setParam("terms", termsParams);
         search.setParam("searchBbox", bboxParams);
