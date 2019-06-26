@@ -538,11 +538,16 @@ function enableSearchInputField(){
 
 function changeMapviewerIframeSrc(srcSuffix){
     // replace the src from "Geoportal-RLP" on
-    var src = $("#mapviewer").attr("data-params");
+    var mapviewer = $("#mapviewer");
+    var src = mapviewer.attr("data-params");
     if(src != null){
-        var srcArr = src.split("mb_user_myGui")
+        var srcArr = src.split("mb_user_myGui");
         var newSrc = srcArr[0] + "mb_user_myGui=" + srcSuffix;
-        $("#mapviewer").attr("data-params", newSrc);
+        if(mapviewer.hasClass("mobile-viewer")){
+            toggleMapViewers();
+        }
+        mapviewer.attr("data-params", newSrc);
+        mapviewer.attr("src", newSrc);
     }
 }
 
