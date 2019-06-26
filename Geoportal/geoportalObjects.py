@@ -10,6 +10,8 @@ from django.http.response import JsonResponse
 
 from Geoportal import helper, settings
 from Geoportal.settings import DEFAULT_GUI, RSS_FILE, HOSTNAME, HTTP_OR_SSL, IFRAME_HEIGHT, IFRAME_WIDTH
+from useroperations.conf import COOKIE_VALUE, GEOPORTAL_IDENTIFIER, LOGO_GEOPORTAL_TITLE, LOGO_COUNTRY_LINK_DE, \
+    LOGO_COUNTRY_LINK_EN
 
 
 class GeoportalJsonResponse:
@@ -64,11 +66,16 @@ class GeoportalContext:
             "DEFAULT_GUI": DEFAULT_GUI,
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,
-            "cookie": request.COOKIES.get("Geoportal-RLP", None),
-            "sidebar_closed": helper.resolve_boolean_value(request.COOKIES.get("sidebarClosed", 'False')),
+            "cookie": request.COOKIES.get(COOKIE_VALUE, None),
+            "sidebar_closed": helper.resolve_boolean_value(request.COOKIES.get("sdbr-clsd", 'False')),
             "is_mobile": request.user_agent.is_mobile,
             "IFRAME_HEIGHT": IFRAME_HEIGHT,
             "IFRAME_WIDTH": IFRAME_WIDTH,
+            "COOKIE_VALUE": COOKIE_VALUE,
+            "GEOPORTAL_IDENTIFIER": GEOPORTAL_IDENTIFIER,
+            "LOGO_GEOPORTAL_TITLE": LOGO_GEOPORTAL_TITLE,
+            "LOGO_COUNTRY_LINK_DE": LOGO_COUNTRY_LINK_DE,
+            "LOGO_COUNTRY_LINK_EN": LOGO_COUNTRY_LINK_EN,
         }
 
     def add_context(self, context: dict):

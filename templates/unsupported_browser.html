@@ -3,7 +3,7 @@
 {% load static i18n %}
 <head>
     <meta charset="UTF-8">
-    <title>Geoportal{% block title %} RLP {% endblock %}</title>
+    <title>Geoportal{% block title %} {{ GEOPORTAL_IDENTIFIER }} {% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/unsupported.css' %}" media="all" />
 </head>
 <body class="unsupported-browser">
@@ -19,7 +19,7 @@
 </body>
 
 <footer class="unsupported-browser">
-    <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-gdi.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+    <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
 </footer>
 
 </html>

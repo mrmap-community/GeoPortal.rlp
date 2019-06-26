@@ -386,6 +386,7 @@ def get_data_primary(request: HttpRequest):
     facets = rehasher.get_rehashed_categories()
     # set flag to indicate that the facet is one of the selected
     for facet_key, facet_val in selected_facets.items():
+        facet_key = _(facet_key)
         for chosen_facet in facet_val:
             _id = int(chosen_facet["id"])
             if _id < 0:

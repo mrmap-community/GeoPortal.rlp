@@ -7,17 +7,18 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Geoportal{% block title %} RLP {% endblock %}</title>
+    <title>Geoportal{% block title %} {{ GEOPORTAL_IDENTIFIER }} {% endblock %}</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'useroperations/images/favicon.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base.css' %}" media="all" />
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/forms.css' %}" media="all" />
         <script>
             var BASEDIR = '{{ basedir }}'
         </script>
-    <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-1.12.4.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-1.12.4.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'searchCatalogue/vendor/leaflet/leaflet.js' %}"></script>
     <script type="text/javascript" src="{% static 'searchCatalogue/vendor/zebra/javascript/zebra_datepicker.js' %}"></script>
-    <script type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
+    <script id="all-script" type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
     <script type="text/javascript" src="{% static 'useroperations/js/frontpage.js' %}"></script>
     {% block head %}
     {% endblock %}
@@ -33,7 +34,7 @@
         </div>
     </div>
     <div class="left-header">
-        <a href="/"><img id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+        <a href="/"><img id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
     <div class="middle-header">
         <div class="middle-header-top">
@@ -179,11 +180,20 @@
     {% if cookie is None %}
         {% include 'cookie_banner.html' %}
     {% endif %}
+
+<script>
+    $(document).on("click", ".cookie-button", function(){
+        var cookieBanner = $(".cookie-container");
+        cookieBanner.toggle();
+        // set cookie, so we know that the user already accepted on the next visit
+        setCookie({{ COOKIE_VALUE }}, true)
+    });
+</script>
 </body>
 
 <footer>
     <div class="left-footer">
-        <a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}https://www.rlp.de/de/startseite/{% else %}https://www.rlp.de/en/english/{% endif %}"><img id="logo_rlp" src="{% static 'useroperations/images/logo-country.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+        <a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}{{ LOGO_COUNTRY_LINK_DE }}{% else %}{{ LOGO_COUNTRY_LINK_EN }}{% endif %}"><img id="logo_country" src="{% static 'useroperations/images/logo-country.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
     <div class="footer-col-wrapper">
         <div id="footer-legal" class="footer-col">
@@ -209,6 +219,6 @@
         </div>
     </div>
     <div class="right-footer">
-        <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-geoportal.png' %}" title="Geoportal Rheinland Pfalz" /></a>
+        <a href="/"><img id="logo_geoportal" src="{% static 'useroperations/images/logo-geoportal.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
 </footer>
