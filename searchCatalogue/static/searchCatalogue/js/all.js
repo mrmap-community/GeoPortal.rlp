@@ -166,7 +166,6 @@ Search.prototype = {
             return val !== '';
         });
         terms = terms.join(',');
-
         this.showLoading();
         jQuery.ajax({
             url: "/search/search/",
@@ -192,12 +191,10 @@ Search.prototype = {
             type: 'post',
             dataType: 'json',
             success: function(data) {
-                self.hideLoadingAfterLoad();
                 self.parseSearchResult(data);
             },
             timeout: 60000,
             error: function(jqXHR, textStatus, errorThrown){
-                self.hideLoadingAfterLoad();
                 if(textStatus === "timeout"){
                     alert("A timeout occured.");
                 }else{
@@ -205,6 +202,7 @@ Search.prototype = {
             },
         })
             .always(function() {
+                self.hideLoadingAfterLoad();
                 self.searching = false;
                 self.setParam("facet", "");
                 self.setParam("keywords", "");
@@ -682,7 +680,9 @@ $(document).ready(function() {
     */
 
      // set the focus on the search bar
-     focus_on_search_input();
+     if(window.location.pathname == "/"){
+        focus_on_search_input();
+     }
 
 
     function toggleCataloguesResources(){
@@ -947,6 +947,7 @@ $(document).ready(function() {
       */
       $(document).on("click", ".area-title", function(){
         var elem = $(this);
+        elem.find('.accordion').toggleClass('closed').toggleClass('open');
         elem.parent().find(".area-elements").slideToggle("slow");
       });
 
@@ -1452,6 +1453,62 @@ $(document).ready(function() {
         prepareAndSearch();
     });
 
+    /*
+    * Toggles the facet search/filter input
+    */
+    function toggleFacetInput(elem){
+        var button = elem.children(".facet-search-icon");
+        var title = elem.children(".facet-search-title");
+        var input = elem.children(".facet-search-input");
+        var filterIcon = elem.children(".facet-search-filter");
+        title.toggleClass("hide");
+        input.toggleClass("hide");
+        button.toggleClass("active");
+        if(!input.hasClass("hide")){
+            input.focus();
+            filterIcon.addClass("hide");
+        }else{
+            if(input.val().length == 0){
+                // show icon that the facets are filtered
+                filterIcon.addClass("hide");
+            }else{
+                filterIcon.removeClass("hide");
+            }
+        }
+    }
+    /*
+    * Show or hide the filter input field for facets when search icon is clicked
+    */
+    $(document).on("click", ".facet-search-icon", function(){
+        var elem = $(this);
+        toggleFacetInput(elem.parent());
+    });
+    /*
+    * Show or hide the filter input field for facets when search icon is clicked
+    */
+    $(document).on("focusout", ".facet-search-input", function(){
+        var elem = $(this);
+        toggleFacetInput(elem.parent());
+    });
+
+    /*
+    * Filter facets
+    */
+    $(document).on("input", ".facet-search-input", function(){
+        var elem = $(this);
+        var val = elem.val();
+        var facets = elem.closest(".facet-header").siblings("ul").find(".subfacet");
+        facets.each(function(i, elem){
+            var facetObj = $(elem);
+            var facet = facetObj.find("span").text();
+            if(!facet.includes(val)){
+                facetObj.addClass("hide");
+            }else{
+                facetObj.removeClass("hide");
+            }
+        });
+    });
+
     $(document).on("click", ".subfacet.-js-resource", function() {
         // check that the correct resources are globally available
         toggleCataloguesResources();
@@ -1549,8 +1606,9 @@ $(document).ready(function() {
      * Show and Hide (toggle) results in resources/categories e.g. dataset, services, modules, mapsummary
      */
     jQuery(document).on("click", '.search-header .-js-title', function(e) {
-        var $this = jQuery(this);
-        var thisBody = $this.parents(".search-cat").find(".search--body");
+        var elem = $(this);
+        elem.find('.accordion').toggleClass('closed').toggleClass('open');
+        var thisBody = elem.parents(".search-cat").find(".search--body");
         thisBody.toggle("slow");
         thisBody.toggleClass("hide");
     });

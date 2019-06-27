@@ -39,7 +39,9 @@
     <div class="middle-header">
         <div class="middle-header-top">
             <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
-            <div id="geoportal-search-button" class="search-submit-button">{% trans 'Search' %}</div>
+            <div id="geoportal-search-button" class="search-submit-button">
+                <img id="geoportal-search-button-icon" src="{% static 'searchCatalogue/images/icons/icn_search_hover.png' %}">
+            </div>
             <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
         </div>
         <div id="middle-header-bottom">

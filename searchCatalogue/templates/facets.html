@@ -1,9 +1,11 @@
-{% load i18n %}
+{% load i18n static %}
 <div class='-js-facets facet-list'>
 
     <!-- New catalogue selector location -->
     <div class="-js-facet facet-item" data-name="{{ resource_key }}">
-        <h4>{% trans 'Search in ' %}</h4>
+        <div class="facet-header">
+            <span>{% trans 'Search in ' %}</span>
+        </div>
         <form class="catalogue-form">
         {% for source_key, source_val in sources.items %}
             <input class="radio-button-catalogue" type="radio" name="catalogue" id="radio-{{ source_key }}" value="{{ source_key }}" {% if source == source_key %}checked="checked"{% endif %}/>
@@ -16,7 +18,9 @@
     <!-- New resource type location -->
     {% if not is_info_search %}
     <div class="-js-facet facet-item" data-name="{{ resource_key }}">
-        <h4>{% trans 'Resource types' %}</h4>
+        <div class="facet-header">
+            <span>{% trans 'Resource types' %}</span>
+        </div>
         <ul>
         {% for resource_key, resource_val in all_resources.items %}
             <li class="subfacet -js-resource {% if resource_key in resources %} chosen-subfacet {% endif %}" data-resource="{{ resource_key }}">
@@ -31,8 +35,13 @@
     {% endif %}
 
     {% for facet_key, facet_val in facets.items %}
-    <div class='-js-facet facet-item' data-name='{{ facet_key }}'>
-         <h4>{{ facet_key }}</h4>
+    <div class='-js-facet facet-item' data-name='{{ facet_key }}' >
+        <div class="facet-header">
+            <span class="facet-search-title">{{ facet_key }}</span>
+            <input type="text" class="facet-search-input hide" placeholder="{% trans 'Filter by' %}">
+            <img class="facet-search-filter hide" src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}" title="{% trans 'Is filtered' %}">
+            <img class="facet-search-icon" src="{% static 'searchCatalogue/images/icons/icn_search_hover.png' %}" title="{% trans 'Open filter' %}">
+        </div>
          <ul>
              {% for subcat in facet_val %}
                 <li class='-js-subfacet subfacet {% if subcat.is_selected %}chosen-subfacet{% endif %}' data-name='{{ subcat.title }}' data-id='{{ subcat.id }}' data-parent="{{ facet_key }}" title="{{ subcat.title }} ({{ subcat.count }})">

@@ -3,11 +3,18 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+    <script type="text/javascript" src="{% static 'useroperations/js/filter.js' %}"></script>
 {% endblock %}
 
 {% block body %}
 <div class="landing-page-headline">
     <h2>{% trans 'Topics' %}</h2>
+</div>
+<div class="tile-filter-options">
+    <div class="tile-filter-input-wrapper">
+        <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
+        <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+    </div>
 </div>
 <div class="tile-wrapper topics">
     {% for result in topics.tags %}
@@ -42,7 +49,9 @@
                         </a>
                     </div>
                     <hr>
-                    {{ result.description|safe }}
+                    <span class="tile-content-abstract-text">
+                        {{ result.description|safe }}
+                    </span>
                 </div>
             </div>
         </div>

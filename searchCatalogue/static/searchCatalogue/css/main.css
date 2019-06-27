@@ -173,7 +173,7 @@ a:hover, a:active, a:focus, button:hover, button:active, button:focus {
   outline: none;
   outline: 0; }
 
-input, #geoportal-search-extended-when .hasDatepicker {
+#geoportal-search-extended-when .hasDatepicker {
   color: #333;
   outline: 0;
   outline: none;
@@ -515,7 +515,7 @@ dl dd {
 }
 
 #search-categories-sidebar{
-    width: 250px;
+    width: 15em;
 }
 
 .subfacet{
@@ -658,7 +658,7 @@ dl dd {
 }
 
 .tab-icn{
-  margin-right: 1em;
+  margin: 0 0.5em 0 0.5em;
   width: 1.0em;
 }
 
@@ -1204,13 +1204,60 @@ dl dd {
     padding-left: 25px;
 }
 
-.facet-list h4 {
-  color: #fff;
-  font-size: 18px;
-  background-color: var(--primary);
-  background: var(--primary) !important;
-  padding: 10px;
-  }
+.facet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 18px;
+    background-color: var(--primary);
+    background: var(--primary) !important;
+    padding: 10px;
+    height: 2em;
+}
+
+.facet-search-title{
+    flex-shrink: 1;
+}
+
+.facet-search-input{
+    flex-grow: 1;
+    background-color: var(--primary);
+    opacity: 0.8;
+    border: 1px solid var(--primary-hover);
+    border-radius: 100px;
+    padding: 5px;
+    outline: none;
+    color: white;
+    max-width: 75%;
+    font-size: 0.9em;
+}
+.facet-search-input::placeholder{
+    text-align: left;
+    color: white;
+    opacity: 0.5;
+}
+.facet-search-input::selection{
+    color: var(--primary-hover) !important;
+}
+.facet-search-input:focus{
+    box-shadow: 0 0 10px white;
+}
+
+.facet-search-icon, .facet-search-filter{
+    flex-grow: 1;
+    max-width: 1.0em;
+}
+.facet-search-icon{
+    opacity: 0.5;
+}
+.facet-search-icon.active{
+    opacity: 1.0;
+}
+.facet-search-icon:hover{
+    opacity: 1.0;
+    cursor: pointer;
+}
 
 .facet-item{
     border-style: solid;

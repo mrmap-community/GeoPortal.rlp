@@ -3,9 +3,10 @@
 <div class="search-cat {% if 'dataset' in search_results %} active {% endif %}">
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
+            <span class="accordion icon closed"></span>
             <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
-            {{ all_resources.dataset }}
-            ({{ search_results.dataset.dataset.dataset.md.nresults|intcomma }})
+            <span>{{ all_resources.dataset }} ({{ search_results.dataset.dataset.dataset.md.nresults|intcomma }})</span>
+
         </div>
     </div><!-- end .search-header -->
     <div class="dataset search--body hide">

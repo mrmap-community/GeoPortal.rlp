@@ -7,6 +7,7 @@
             {% if not is_info_search %}
             <div class="area-wrapper">
                 <h2 id="filter-area" class="area-title -js-accordion">
+                    <span class="accordion icon closed"></span>
                     <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}">
                     {% trans 'Filter' %}
                 </h2>
@@ -20,6 +21,7 @@
             {% endif %}
             <div class="area-wrapper">
                 <h2 id="search-area" class="area-title">
+                    <span class="accordion icon closed"></span>
                     <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_search_results.png' %}">
                     {% trans 'Results' %}
                 </h2>
