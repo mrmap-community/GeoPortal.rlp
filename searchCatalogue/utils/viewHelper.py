@@ -933,6 +933,14 @@ def check_previewUrls(search_results):
 
 
 def check_search_bbox(session_id, bbox):
+    """ Checks whether a bounding box exists for this search and writes the bounding box geometry into the session
+
+    Args:
+        session_id: Which session shall be written to
+        bbox: The bounding box as comma separated string
+    Returns:
+         nothing
+    """
     if bbox != '':
         # set glm to session
         lat_lon = bbox.split(",")
@@ -943,3 +951,27 @@ def check_search_bbox(session_id, bbox):
             "maxy": lat_lon[3],
         }
         write_gml_to_session(session_id=session_id, lat_lon=lat_lon)
+
+
+def resolve_coupled_resources(search_results: dict):
+    """ Resolves series and dataset coupled resources for secondary catalogues such as DE and EU
+
+    Args:
+        search_results: The search results
+    Returns:
+         search_results: The modified search results
+    """
+    results = [
+        search_results.get("series", {}),
+        search_results.get("dataset", {}),
+    ]
+    searcher = Searcher(host=HOSTNAME)
+    for result in results:
+        for key, val in result.items():
+            for srv in val.get("srv", []):
+                md_link = srv.get("mdLink")
+                # get response object from searcher
+                searcher.get_coupled_resource(md_link)
+                val["download_links"] = []
+                val["view_links"] = []
+    return search_results
