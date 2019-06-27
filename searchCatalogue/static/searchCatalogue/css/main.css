@@ -1102,8 +1102,8 @@ dl dd {
     flex-direction: row;
 }
 
-.img-symbollink{
-    padding: 5px;
+.img-symbollink, .img-open{
+    border: 1px solid rgba(0, 0, 0, 0.0);
 }
 
 
