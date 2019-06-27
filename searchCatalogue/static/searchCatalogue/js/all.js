@@ -1496,11 +1496,11 @@ $(document).ready(function() {
     */
     $(document).on("input", ".facet-search-input", function(){
         var elem = $(this);
-        var val = elem.val();
+        var val = elem.val().toUpperCase();
         var facets = elem.closest(".facet-header").siblings("ul").find(".subfacet");
         facets.each(function(i, elem){
             var facetObj = $(elem);
-            var facet = facetObj.find("span").text();
+            var facet = facetObj.find("span").text().trim().toUpperCase();
             if(!facet.includes(val)){
                 facetObj.addClass("hide");
             }else{

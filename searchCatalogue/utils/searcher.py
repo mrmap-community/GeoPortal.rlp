@@ -8,6 +8,7 @@ Created on: 22.01.19
 """
 import hashlib
 import random
+import urllib
 from collections import OrderedDict
 from json import JSONDecodeError
 
@@ -155,6 +156,11 @@ class Searcher:
         return {}
 
     def get_all_topics(self, language):
+        """ Get a list of all topics that can be found in the database
+
+        Returns:
+             dict: Contains a json list of all topics
+        """
         uri = URL_BASE + URL_GET_TOPICS
         params = {
             "type": "inspireCategories",
@@ -172,6 +178,24 @@ class Searcher:
             return response
         return {}
 
+    def get_coupled_resource(self, md_link):
+        """ Resolve coupled dataset/series resources for secondary catalogues
+
+        Args:
+            md_link: The metadata link of the resource that needs to be resolved
+        Returns:
+            response(dict): The response body as json
+        """
+        uri = URL_BASE + URL_RESOLVE_COUPLED_RESOURCES
+        params = {
+            "getRecordByIdUrl": urllib.parse.quote(md_link),
+            "hostName": self.host,
+        }
+        response = requests.get(uri, params, verify=INTERNAL_SSL)
+        if response.status_code == 200:
+            response = response.json()
+            return response
+        return {}
 
     def get_search_results_primary(self, user_id=None):
         """ Performs the search

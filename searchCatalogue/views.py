@@ -303,6 +303,9 @@ def get_data_other(request: HttpRequest, catalogue_id):
     session_id = request.COOKIES.get("PHPSESSID", "")
     check_search_bbox(session_id, bbox)
 
+    # check dataset/series for coupled resources
+    search_results = viewHelper.resolve_coupled_resources(search_results)
+
     results = {
         "source": source,
         "search_results": search_results,
