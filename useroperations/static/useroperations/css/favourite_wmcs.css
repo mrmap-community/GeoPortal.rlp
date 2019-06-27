@@ -5,8 +5,6 @@
 
 */
 
-
-
 @import 'color_schema.css';
 
 .tile-wrapper{
@@ -32,9 +30,6 @@
     width: 15em;
     transition: all 0.1s ease-in-out;
     background-color: var(--secondary);
-}
-.organizations .tile{
-    width: 175px;
 }
 .tile:hover{
     transform: scale(1.05);
@@ -86,23 +81,20 @@
     height: 7em;
     object-fit: cover;
 }
-.organizations .tile-img, .topics .tile-img{
-    width: 7em;
-    /*
-    height: 50px;
-    */
-    object-fit: contain;
-}
 
 .topics .tile-img, .topics .sub-tile-img.only{
     transition: all 0.1s ease-in-out;
+    /*
     -webkit-filter: grayscale(1.0);
     filter: grayscale(1.0);
+    */
 }
 .topics .tile-img:hover, .topics .sub-tile-img.only:hover{
     opacity: 1.0;
+    /*
     -webkit-filter: grayscale(0.0);
     filter: grayscale(0.0);
+    */
 }
 
 .tile-content{
@@ -136,9 +128,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.organizations .sub-tile-container, .topics .sub-tile-container{
-    color: var(--secondary);
 }
 
 .mobile-button{
@@ -174,6 +163,65 @@
     padding: 0;
 }
 
+/*      Tiles       */
+
+.tile-filter-options{
+    display: flex;
+    align-items;
+    justify-content: center;
+    margin: 1em 0;
+}
+
+.tile-filter-input-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+#tile-filter-input-icon{
+    width: 2em;
+    opacity: 0.2;
+    -webkit-filter: grayscale(1.0);
+    filter: grayscale(1.0);
+    position: relative;
+    right: 2.5em;
+}
+#tile-filter-input-icon:hover{
+    pointer-events: none;
+}
+
+.tile-filter-input::placeholder{
+    text-align: left;
+}
+.tile-filter-input{
+    border: 1px solid var(--secondary-font);
+    line-height: 2em;
+    padding: 5px 10px 5px 10px;
+    background-color: white;
+    color: var(--primary);
+    outline: none;
+    font-size: 1em;
+    flex-grow: 1;
+    max-width: 15em;
+}
+.tile-filter-input:focus{
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.organizations .tile{
+    width: 175px;
+}
+.organizations .tile-img, .topics .tile-img{
+    width: 7em;
+    /*
+    height: 50px;
+    */
+    object-fit: contain;
+}
+
+.organizations .sub-tile-container, .topics .sub-tile-container{
+    color: var(--secondary);
+}
 
 .organizations .data-info-container, .topics .data-info-container{
     display: flex;
@@ -206,7 +254,7 @@
 
     .tile-header{
         font-size: 1.5em;
-        height: 12em;
+        height: 15em;
     }
     .tile-img{
         width: 90vw;
