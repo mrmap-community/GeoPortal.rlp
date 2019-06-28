@@ -28,7 +28,7 @@ SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 DEBUG = True
 DEFAULT_LOGGING['handlers']['console']['filters'] = []
 
-HOSTNAME = "127.0.0.1"
+HOSTNAME = "localhost"
 HOSTIP = "127.0.0.1"
 HTTP_OR_SSL = "http://"
 SEARCH_API_PROTOCOL = "http"
