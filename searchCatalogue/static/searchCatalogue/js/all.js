@@ -587,6 +587,7 @@ function startInfoCall(){
 }
 
 function startAjaxMapviewerCall(value){
+    //console.log(value);
     $.ajax({
         url: "/map-viewer/",
         headers: {
@@ -600,6 +601,7 @@ function startAjaxMapviewerCall(value){
         success: function(data) {
             if(data["mapviewer_params"] != "" && data["url"] == ""){
             // internal mapviewer call
+                //console.log(data["mapviewer_params"]);
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
                 window.scrollTo({
                     top:150,
@@ -848,6 +850,10 @@ $(document).ready(function() {
      */
     $(document).on("click", '.download-button', function(){
         var btn_id = $(this).attr('id');
+        if(typeof(btn_id) == 'undefined'){
+            return;
+            // ToDo: Make better!!!
+        }
         var id_raw = btn_id.split("_")[1];
         var btn = $(this)
         var group = $(".resource-list." + btn_id);
@@ -1602,11 +1608,50 @@ $(document).ready(function() {
         })
     });
 
+    function resolveCoupledResources(resourceArea){
+        var checkAttr = "coupled-resources-loaded";
+        if(resourceArea.attr(checkAttr)){
+            return;
+        }
+        var results = resourceArea.find(".result--item");
+        results.each(function(i, result){
+            result = $(result);
+            var a = result.children("a");
+            var link = a.attr("data-parent");
+            if(link === null){
+                return;
+            }
+            link = encodeURIComponent(link);
+            // start ajax call for resolving coupled resources
+            $.ajax({
+                url: "/search/coupled-resources/",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                data: {
+                    "mdLink": link
+                },
+                type: 'get',
+                dataType: 'json',
+                }).done(function(data){
+                    var html = data["html"];
+                    result.find(".metadata-links").after(html);
+                }).always(function(data){
+
+                });
+         });
+         resourceArea.attr(checkAttr, true);
+     }
+
+
     /**
      * Show and Hide (toggle) results in resources/categories e.g. dataset, services, modules, mapsummary
      */
     jQuery(document).on("click", '.search-header .-js-title', function(e) {
         var elem = $(this);
+        if(search.getParam("source") !== 'primary' && elem.hasClass("resources-coupled")){
+            resolveCoupledResources(elem.closest(".search-cat"));
+        }
         elem.find('.accordion').toggleClass('closed').toggleClass('open');
         var thisBody = elem.parents(".search-cat").find(".search--body");
         thisBody.toggle("slow");

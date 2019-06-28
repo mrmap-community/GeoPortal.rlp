@@ -2,6 +2,7 @@
 <div class="search-cat {% if 'application' in search_results %} active {% endif %}">
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
+            <span class="accordion icon closed"></span>
             <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_application.png' %}" title="{% trans 'Applications' %}">
             {% trans 'Applications' %}
             ({{ application.md.nresults|intcomma }})

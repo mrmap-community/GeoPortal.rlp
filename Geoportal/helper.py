@@ -6,6 +6,7 @@ Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
 Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 """
+import hashlib
 import urllib
 from collections import OrderedDict
 from copy import copy
@@ -207,3 +208,16 @@ def resolve_boolean_value(val: str):
         return False
     else:
         return None
+
+
+def sha256(_input: str):
+    """ Creates a sha256 hash from the input
+
+    Args:
+        _input (str): A string
+    Returns:
+         A sha256 hash string
+    """
+    m = hashlib.sha256()
+    m.update(_input.encode("UTF-8"))
+    return m.hexdigest()
