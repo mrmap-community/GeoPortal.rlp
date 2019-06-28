@@ -1,7 +1,8 @@
 {% load static i18n humanize %}
 <div class="search-cat {% if 'series' in search_results %} active {% endif %}">
     <div class="search-header">
-        <div class="source--title -js-title -js-accordion">
+        <div class="source--title -js-title -js-accordion resources-coupled">
+            <span class="accordion icon closed"></span>
             <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}" title="{% trans 'Series' %}">
             {% trans 'Series' %}
             ({{ series.md.nresults|intcomma }})

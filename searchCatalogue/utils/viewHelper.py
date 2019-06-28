@@ -22,7 +22,7 @@ import math
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from Geoportal.helper import execute_threads, write_gml_to_session
+from Geoportal.helper import execute_threads, write_gml_to_session, sha256
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -953,25 +953,35 @@ def check_search_bbox(session_id, bbox):
         write_gml_to_session(session_id=session_id, lat_lon=lat_lon)
 
 
-def resolve_coupled_resources(search_results: dict):
+def resolve_coupled_resources(md_link: str):
     """ Resolves series and dataset coupled resources for secondary catalogues such as DE and EU
 
     Args:
-        search_results: The search results
+        uri: The metadata uri for which coupled resources shall be resolved
     Returns:
-         search_results: The modified search results
+         resources (dict): Contains the accessUrl and serviceTitle
     """
-    results = [
-        search_results.get("series", {}),
-        search_results.get("dataset", {}),
-    ]
+    val = {
+        "view_links": None,
+        "download_links": None,
+    }
     searcher = Searcher(host=HOSTNAME)
-    for result in results:
-        for key, val in result.items():
-            for srv in val.get("srv", []):
-                md_link = srv.get("mdLink")
-                # get response object from searcher
-                searcher.get_coupled_resource(md_link)
-                val["download_links"] = []
-                val["view_links"] = []
-    return search_results
+    resources = searcher.get_coupled_resource(md_link).get("result", {}).get("service", [])
+    if resources is not None:
+        for resource in resources:
+            _type = resource.get("serviceType", "")
+            uri = resource.get("accessUrl", None)
+            data = {
+                    "uri": uri,
+                    "showMapUrl": uri,
+                    "title": resource.get("serviceTitle", None),
+                    "id": sha256(md_link),
+                    "mdLink": resource.get("htmlLink", None),
+                }
+            if _type == "view":
+                val["view_links"] = data
+            elif _type == "download":
+                val["download_links"] = data
+            else:
+                pass
+    return val

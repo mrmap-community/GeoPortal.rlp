@@ -1,6 +1,6 @@
 {% load static i18n %}
 <div class="result--item -js-result-dataset">
-    <a title='zu {{ result.title }}' href='{{ result.htmlLink }}' target="_blank" style="text-decoration: none">
+    <a title='zu {{ result.title }}' href='{{ result.htmlLink }}' data-parent="{{ result.mdLink }}" target="_blank" style="text-decoration: none">
         <div class="search-result-title">
             {{ result.title }}
         </div>

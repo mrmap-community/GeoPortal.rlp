@@ -188,12 +188,15 @@ class Searcher:
         """
         uri = URL_BASE + URL_RESOLVE_COUPLED_RESOURCES
         params = {
-            "getRecordByIdUrl": urllib.parse.quote(md_link),
+            "getRecordByIdUrl": md_link,
             "hostName": self.host,
         }
         response = requests.get(uri, params, verify=INTERNAL_SSL)
         if response.status_code == 200:
-            response = response.json()
+            try:
+                response = response.json()
+            except JSONDecodeError:
+                return {}
             return response
         return {}
 

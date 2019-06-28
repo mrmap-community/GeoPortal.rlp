@@ -141,6 +141,28 @@ def auto_completion(request: HttpRequest):
 
     return GeoportalJsonResponse(results=results["results"], resultList=results["resultList"]).get_response()
 
+
+def resolve_coupled_resources(request: HttpRequest):
+    """ Find coupled resources for DE/EU catalogue search results
+
+    Args:
+        request: The incoming request
+        uri: The metadata link
+    Returns:
+         An ajax response
+    """
+    GET_params = request.GET.dict()
+    uri = GET_params.get("mdLink", "")
+    template = "other/coupled_resources.html"
+    coupled_resources = viewHelper.resolve_coupled_resources(uri)
+    params = {
+        "coupled_resources": coupled_resources,
+        "type": "service_DE",
+    }
+    html = render_to_string(template, params, request)
+    return GeoportalJsonResponse(html=html, data=params).get_response()
+
+
 @check_browser
 def get_data(request: HttpRequest):
     """ Redistributor for general get_data requests.
@@ -302,9 +324,6 @@ def get_data_other(request: HttpRequest, catalogue_id):
     bbox = post_params.get("searchBbox", '')
     session_id = request.COOKIES.get("PHPSESSID", "")
     check_search_bbox(session_id, bbox)
-
-    # check dataset/series for coupled resources
-    search_results = viewHelper.resolve_coupled_resources(search_results)
 
     results = {
         "source": source,
