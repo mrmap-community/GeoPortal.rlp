@@ -81,7 +81,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'searchCatalogue',
     'captcha',
-    'evaluation',
     'django_user_agents',
 ]
 
