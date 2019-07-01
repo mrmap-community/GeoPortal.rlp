@@ -962,8 +962,8 @@ def resolve_coupled_resources(md_link: str):
          resources (dict): Contains the accessUrl and serviceTitle
     """
     val = {
-        "view_links": None,
-        "download_links": None,
+        "view_links": [],
+        "download_links": [],
     }
     searcher = Searcher(host=HOSTNAME)
     resources = searcher.get_coupled_resource(md_link).get("result", {}).get("service", [])
@@ -979,9 +979,10 @@ def resolve_coupled_resources(md_link: str):
                     "mdLink": resource.get("htmlLink", None),
                 }
             if _type == "view":
-                val["view_links"] = data
+                val["view_links"].append(data)
             elif _type == "download":
-                val["download_links"] = data
+                val["download_links"].append(data)
             else:
                 pass
+    val["id"] = sha256(str(val["view_links"]) + str(val["download_links"]))
     return val
