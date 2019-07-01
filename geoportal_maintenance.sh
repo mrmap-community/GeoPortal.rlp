@@ -68,6 +68,8 @@ webadmin_email="test@test.de"
 use_ssl="false"
 not_proxy_hosts="localhost,127.0.0.1"
 installation_folder="/data/"
+installation_log="/tmp/geoportal_install_$(date +"%m_%d_%Y").log"
+# | tee $installation_log
 
 # what should be done
 install_system_packages="true"
@@ -102,14 +104,6 @@ wms_4_url="'https://gis.mffjiv.rlp.de/cgi-bin/mapserv?map=/data/mapserver/mapfil
 
 install_full(){
 
-if [[ ${installation_folder} =~ ^/.+/$ ]] ; then
-  echo "Installing into '${installation_folder}' ..."
-else
-  echo "Invalid installation folder '${installation_folder}'!"
-  installation_folder="/data/"
-  echo "Installing into '${installation_folder}' ..."
-fi
-
 ##################### Geoportal-RLP
 wms_1_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_1_url"
 wms_2_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/registerOwsCli.php userId=1 guiId='$default_gui_name' serviceType='wms' serviceAccessUrl=$wms_2_url"
@@ -124,7 +118,6 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 # Mapbender installation
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 
-date
 #set hostname to ipaddress if no hostname was given
 if [ $ipaddress != "127.0.0.1" ] && [ $hostname == "127.0.0.1" ] ;then
 hostname=$ipaddress
@@ -184,11 +177,11 @@ if [ "$http_proxy" != "" ];then
       fi
       # apt_proxy
       if [ -e "/etc/apt/apt.conf" ]; then
-          echo "Apt Config File exists, Backing it up"
+          echo -e "\n Apt Config File exists, Backing it up \n"
           cp /etc/apt/apt.conf /etc/apt/apt.conf_backup_geoportal
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       else
-          echo "Apt Conf File does not exist, creating it"
+          echo -e "\n Apt Conf File does not exist, creating it \n"
           touch /etc/apt/apt.conf
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       fi
@@ -216,44 +209,65 @@ if [ "$http_proxy" != "" ];then
       fi
     fi
 fi
-if  ! grep "no_proxy"  /etc/environment ;then
-    echo no_proxy="localhost,127.0.0.1" >> /etc/environment
-else
-    echo "Environment variable no_proxy was found in /etc/environment, check if no_proxy includes localhost!"
- fi
 
+export no_proxy="localhost,127.0.0.1"
+#echo no_proxy="localhost,127.0.0.1" >> /etc/environment
+#source /etc/environment
+
+echo -e "
+Geoportal Installation $(date).\n
+Parameters:\n
+--hostname=$hostname\n
+--ipaddress=$ipaddress\n
+--proxy=$http_proxy\n
+--mapbender_database_name=$mapbender_database_name\n
+--mapbender_database_user=$mapbender_database_user\n
+--mapbender_database_password=$mapbender_database_password\n
+--phppgadmin_user=$phppgadmin_user\n
+--phppgadmin_password=$phppgadmin_password\n"  > $installation_log
+
+
+if [[ ${installation_folder} =~ ^/.+/$ ]] ; then
+  echo -e "\n Installing into '${installation_folder}' ... \n"  | tee -a $installation_log
+else
+  echo -e "\n Invalid installation folder '${installation_folder}'! \n Please use preceding and trailing slashed! eg: /data/"  | tee -a $installation_log
+  exit
+fi
 
 ############################################################
 if [ $install_system_packages = 'true' ]; then
     ############################################################
     # install needed debian packages
     ############################################################
-apt update
-apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2
+echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
+apt-get update >> $installation_log 2>&1
+apt-get -qq install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
+echo -e "\n Successfully installed Debian packages for Mapbender! \n" | tee -a $installation_log
 fi
 ##git config --global http.proxy http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port
 # +655MB
 # mysql root password: mysqlroot - normally debian-sys-maint
 # after install - 1.9GB!!!
 ############################################################
-# adopt php logging - only log errors
+# adopt php logging - only log errors - needed here, else the installation will throw many notices
 ############################################################
 cp /etc/php/7.0/cli/php.ini /etc/php/7.0/cli/php.ini_geoportal_backup
 cp /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini_geoportal_backup
 
 sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.0/cli/php.ini
 sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g" /etc/php/7.0/cli/php.ini
-
-
 ############################################################
 if [ $create_folders = 'true' ]; then
+    echo -e "\n Creating directories for Mapbender! \n" | tee -a $installation_log
     # initial installation of geoportal.rlp on debian 9
     ############################################################
     # create folder structure
     ############################################################
-    mkdir -pv $installation_folder
-    mkdir -pv ${installation_folder}svn/
-    mkdir -pv ${installation_folder}access/
+    mkdir -pv $installation_folder | tee -a $installation_log
+    mkdir -pv ${installation_folder}svn/ | tee -a $installation_log
+    mkdir -pv ${installation_folder}access/ | tee -a $installation_log
+
+    echo -e "\n Successfully created directories! \n" | tee -a $installation_log
 fi
 ############################################################
 # check out svn repositories initially
@@ -262,59 +276,52 @@ cd ${installation_folder}svn/
 
 
 if [ $checkout_mapbender_svn = 'true' ]; then
-    svn co -q https://svn.osgeo.org/mapbender/trunk/mapbender
+    echo -e "\n Downloading Mapbender Sources from SVN! \n" | tee -a $installation_log
+    svn co https://svn.osgeo.org/mapbender/trunk/mapbender >> $installation_log 2>&1 || (echo "Downloading of Mapbender failed! Check internet connection and proxy settings!" | tee -a $installation_log;exit;)
+    echo -e "\n Successfully downloaded Mapbender Source! \n"  | tee -a $installation_log
 fi
 
 if [ $checkout_mapbender_conf = 'true' ]; then
-    echo "checkout mapbender conf folder for geoportal ..."
-    svn co -q http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf
+    echo -e "\n Download Mapbender conf from SVN \n"  | tee -a $installation_log
+    svn co http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf >> $installation_log 2>&1 || (echo "Downloading of Mapbender Conf failed! Check internet connection and proxy settings!" | tee -a $installation_log;exit;)
+    echo -e "\n Successfully downloaded Mapbender Conf! \n"  | tee -a $installation_log
 fi
 
 ############################################################
 # compress and create mapbender
 ############################################################
 if [ $install_mapbender_source = 'true' ]; then
-    cd ${installation_folder}svn/
-    tar -czf mapbender_trunk.tar.gz mapbender/
-    mv mapbender_trunk.tar.gz /tmp/
-    cd ${installation_folder}
-    mv /tmp/mapbender_trunk.tar.gz .
-    tar -xzf mapbender_trunk.tar.gz
+    echo -e "\n Copying Mapbender Source to ${installation_folder} \n"  | tee -a $installation_log
+    cp -a ${installation_folder}svn/mapbender ${installation_folder}
     svn info https://svn.osgeo.org/mapbender/trunk/mapbender | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}mapbender/lastinstalled
-    rm mapbender_trunk.tar.gz
-    echo 'done.'
+    echo -e "\n Successfully copied Mapbender Source to ${installation_folder}! \n"  | tee -a $installation_log
 fi
 
 ############################################################
 # compress and create geoportal default conf from /data/conf
 ############################################################
 if [ $install_mapbender_conf = 'true' ]; then
-    echo "install default geoportal configuration files ..."
-    cd ${installation_folder}svn/
-    tar -czf conf.tar.gz conf/
-    mv conf.tar.gz /tmp/
-    cd ${installation_folder}
-    mv /tmp/conf.tar.gz .
-    tar -xzf conf.tar.gz
+    echo -e "\n Copying Mapbender Conf to ${installation_folder} \n"  | tee -a $installation_log
+    cp -a ${installation_folder}svn/conf ${installation_folder}
     svn info http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}conf/lastinstalled
-    rm conf.tar.gz
-    echo 'done.'
+    echo -e "\n Successfully copied Mapbender Conf to ${installation_folder}! \n"  | tee -a $installation_log
 fi
 
 ############################################################
 # cleanup .svn relicts
 ############################################################
-echo 'delete .svn files ... '
 if [ $install_mapbender_source = 'true' ]; then
+    echo -e '\n Delete .svn files \n '
     cd ${installation_folder}mapbender/
     rm -rf $(find . -type d -name .svn)
+    echo -e '\n Successfully deleted .svn files! \n '
 fi
 
 ############################################################
 # configure and install mapbender
 ############################################################
 if [ $create_folders = 'true' ]; then
-    mkdir -pv ${installation_folder}mapbender/http/tmp/wmc
+    mkdir -p ${installation_folder}mapbender/http/tmp/wmc
 fi
 
 ############################################################
@@ -322,34 +329,36 @@ fi
 ############################################################
 if [ $install_mapbender_database = 'true' ]; then
 
-  echo 'install mapbender database ... '
+  echo -e "\n Installing Mapbender database \n" | tee -a $installation_log
+
+
   # su postgres
   # createuser  -S -D -R -P $mapbender_database_user #mapbenderdbpassword
   # CREATE DATABASE yourdbname;
   # CREATE USER youruser WITH ENCRYPTED PASSWORD 'yourpass';
   # GRANT ALL PRIVILEGES ON DATABASE yourdbname TO youruser;
 
-  su - postgres -c "dropdb -p $mapbender_database_port $mapbender_database_name"
-  su - postgres -c "createdb -p $mapbender_database_port -E UTF8 $mapbender_database_name -T template0"
+  su - postgres -c "dropdb --if-exists -p $mapbender_database_port $mapbender_database_name" >> $installation_log 2>&1
+  su - postgres -c "createdb -p $mapbender_database_port -E UTF8 $mapbender_database_name -T template0" >> $installation_log 2>&1
 
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "DROP USER $mapbender_database_user"
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "CREATE USER $mapbender_database_user WITH ENCRYPTED PASSWORD '$mapbender_database_password'"
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "DROP USER IF EXISTS $mapbender_database_user" >> $installation_log 2>&1
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "CREATE USER $mapbender_database_user WITH ENCRYPTED PASSWORD '$mapbender_database_password'" >> $installation_log 2>&1
 
   # su -c - postgres "createlang plpgsql -d $mapbender_database_name" - not needed for debian 8+
 
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/postgis.sql"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/spatial_ref_sys.sql"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/legacy.sql"
-  su - postgres -c "PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/topology.sql"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/postgis.sql" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/spatial_ref_sys.sql" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/legacy.sql" >> $installation_log 2>&1
+  su - postgres -c "PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/topology.sql" >> $installation_log 2>&1
 
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'" >> $installation_log 2>&1
 
   # su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'grant all on geometry_columns to $mapbender_database_user;'"
   #maybe new to postgis 2.x
   # su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'grant all on geography_columns to $mapbender_database_user;'"
   # su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'grant all on spatial_ref_sys to $mapbender_database_user;'"
 
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE $mapbender_database_name OWNER TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE $mapbender_database_name OWNER TO $mapbender_database_user'" >> $installation_log 2>&1
 
   #overwrite default pg_hba.conf of main - default cluster
   cp /etc/postgresql/9.6/main/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf_backup
@@ -378,29 +387,29 @@ EOF
   cp /etc/phppgadmin/config.inc.php /etc/phppgadmin/config.inc.php_geoportal_backup
   sed -i "s/conf\['extra_login_security'\] = true/conf\['extra_login_security'\] = false/g" /etc/phppgadmin/config.inc.php
   #####################
-  sudo -u postgres psql -p $mapbender_database_port -d $mapbender_database_name -c "CREATE SCHEMA django AUTHORIZATION $mapbender_database_user"
-  sudo -u postgres psql -p $mapbender_database_port -d $mapbender_database_name -c 'CREATE SCHEMA mapbender'
-  sudo -u postgres psql -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE mapbender SET search_path TO mapbender,public,pg_catalog,topology'
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "CREATE SCHEMA django AUTHORIZATION $mapbender_database_user" >> $installation_log 2>&1
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'CREATE SCHEMA mapbender' >> $installation_log 2>&1
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE mapbender SET search_path TO mapbender,public,pg_catalog,topology' >> $installation_log 2>&1
   #####################
-  sudo -u postgres psql -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_schema_2.5.sql
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql  -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_schema_2.5.sql >> $installation_log 2>&1
 
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/pgsql_data_2.5.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.5.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5_to_2.5.1rc1_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5.1rc1_to_2.5.1_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5.1_to_2.6rc1_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6rc1_to_2.6_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6_to_2.6.1_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6.1_to_2.6.2_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6.2_to_2.7rc1_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7rc1_to_2.7rc2_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.1_to_2.7.2_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.2_to_2.7.3_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.3_to_2.7.4_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.4_to_2.8_pgsql_UTF-8.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.8_pgsql_UTF-8.sql
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/pgsql_data_2.5.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.5.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5_to_2.5.1rc1_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5.1rc1_to_2.5.1_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.5.1_to_2.6rc1_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6rc1_to_2.6_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6_to_2.6.1_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6.1_to_2.6.2_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.6.2_to_2.7rc1_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7rc1_to_2.7rc2_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.1_to_2.7.2_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.2_to_2.7.3_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.3_to_2.7.4_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.7.4_to_2.8_pgsql_UTF-8.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/update/update_2.8_pgsql_UTF-8.sql >> $installation_log 2>&1
   #####################
-  echo 'adopting mapbenders default database to geoportal default options  ... '
+  echo  -e '\n Adopting mapbenders default database to geoportal default options. \n'
 
   cat << EOF > ${installation_folder}geoportal_database_adoption_1.sql
   --create new database content
@@ -618,7 +627,7 @@ EOF
 EOF
 
   #####################
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}geoportal_database_adoption_1.sql
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}geoportal_database_adoption_1.sql >> $installation_log 2>&1
   #####################
 
   # recreate the guis via psql
@@ -626,52 +635,52 @@ EOF
   # exchange all occurences of old default gui name in sql
   sed -i "s/Geoportal-RLP/${default_gui_name}/g" ${installation_folder}gui_${default_gui_name}.sql
   # recreate the guis via psql - default gui definition is in installation folder!
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}gui_${default_gui_name}.sql
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}gui_${default_gui_name}.sql >> $installation_log 2>&1
   # do the same for extended search gui
   # alter the name of the default extended search gui in the gui definition
   cp ${installation_folder}mapbender/resources/db/gui_Geoportal-RLP_erwSuche2.sql ${installation_folder}gui_${extended_search_default_gui_name}.sql
   # exchange all occurences of old default gui name in sql
   sed -i "s/Geoportal-RLP_erwSuche2/${extended_search_default_gui_name}/g" ${installation_folder}gui_${extended_search_default_gui_name}.sql
   # recreate the guis via psql - default gui definition is in installation folder!
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}gui_${extended_search_default_gui_name}.sql
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}gui_${extended_search_default_gui_name}.sql >> $installation_log 2>&1
   #####################
   # fix invocation of javascript functions for digitize module
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element SET e_pos = '3' where e_id = 'kml' AND fkey_gui_id = '${default_gui_name}'"
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element SET e_pos = '3' where e_id = 'kml' AND fkey_gui_id = '${default_gui_name}'" >> $installation_log 2>&1
 
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_Owsproxy_csv.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wms_metadata.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wfs_metadata.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wmc_metadata.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_metadata.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_ows_scheduler.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_PortalAdmin_DE.sql
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_Administration_DE.sql
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_Owsproxy_csv.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wms_metadata.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wfs_metadata.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_wmc_metadata.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_metadata.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_admin_ows_scheduler.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_PortalAdmin_DE.sql >> $installation_log 2>&1
+  sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/gui_Administration_DE.sql >> $installation_log 2>&1
   #####################
 
   #####################
-  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_adoption_2.sql
+  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_adoption_2.sql >> $installation_log 2>&1
 
   # add privilegs for mapbenderdbuser
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE ON SCHEMA mapbender TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE ON SCHEMA public TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE ON SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE ON SCHEMA public TO $mapbender_database_user'" >> $installation_log 2>&1
 
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapbender TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
 
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT CREATE ON DATABASE mapbender TO $mapbender_database_user'"
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT CREATE ON SCHEMA mapbender TO $mapbender_database_user'"
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT CREATE ON DATABASE mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT CREATE ON SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
 
 
   #su - postgres -c "psql -q -p 5432 -d mapbender -c 'GRANT CREATE ON DATABASE mapbender TO $mapbender_database_user'"
   #####################
   # add precise coordinate transformation to proj and postgis extension
   #####################
-  wget http://crs.bkg.bund.de/crseu/crs/descrtrans/BeTA/BETA2007.gsb
+  wget -q http://crs.bkg.bund.de/crseu/crs/descrtrans/BeTA/BETA2007.gsb || (echo "Failed to Download BETA2007.gsb" | tee -a $installation_log;exit;)
   cp BETA2007.gsb /usr/share/proj/
   cp /usr/share/proj/epsg /usr/share/proj/epsg_backup_geoportal
   sed -i "s/<31466> +proj=tmerc +lat_0=0 +lon_0=6 +k=1 +x_0=2500000 +y_0=0 +datum=potsdam +units=m +no_defs  <>/<31466> +proj=tmerc +lat_0=0 +lon_0=6 +k=1 +x_0=2500000 +y_0=0 +datum=potsdam +ellps=bessel +nadgrids=@BETA2007.gsb,null +units=m +no_defs  <>/g" /usr/share/proj/epsg
@@ -685,266 +694,196 @@ EOF
   UPDATE spatial_ref_sys SET proj4text='+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +datum=potsdam +ellps=bessel +nadgrids=@BETA2007.gsb,null +units=m +no_defs' WHERE srid = 31468;
   UPDATE spatial_ref_sys SET proj4text='+proj=tmerc +lat_0=0 +lon_0=15 +k=1 +x_0=5500000 +y_0=0 +datum=potsdam +ellps=bessel +nadgrids=@BETA2007.gsb,null +units=m +no_defs' WHERE srid = 31469;
 EOF
-  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_proj_adaption.sql
+  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_proj_adaption.sql >> $installation_log 2>&1
   fi
 
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql >> $installation_log 2>&1
 
-  if [ $configure_mapbender = 'true' ]; then
-      echo 'configure mapbender ... '
-      echo 'language compiling ... '
-      cd ${installation_folder}mapbender/tools
-      sh ./i18n_update_mo.sh
-      #####################
-      cd ${installation_folder}mapbender/
-      cp ${installation_folder}mapbender/conf/mapbender.conf-dist ${installation_folder}mapbender/conf/mapbender.conf
-      # create folder to store generated metadata xml documents
-      mkdir -pv ${installation_folder}mapbender/metadata
-      #####################
-      echo 'change more permissones ... '
-      # alter owner of folders where webserver should be able to alter data
-      chown -R www-data:www-data ${installation_folder}mapbender/http/tmp/
-      chown -R www-data:www-data ${installation_folder}mapbender/log/
-      chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/preview/
-      chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/news/
-      chown -R www-data:www-data ${installation_folder}mapbender/metadata/
-      #####################
-      echo 'adopt mapbender.conf ... '
-      #####################
-      # alter connection type to use curl
-      #####################
-      sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      #####################
-      # define proxy settings
-      #####################
-      # sed -i "s///g" ${installation_folder}mapbender/conf/mapbender.conf
-      if [ "$custom_proxy" == true ];then
-        if [ "$mb_proxy" != "" ];then
-          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-        else
-        	http_proxy_host=""
-          http_proxy_port=""
-        fi
-    fi
-
-      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
-  	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-  	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-  	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-
-        if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
-          sed -i "s/define(\"CONNECTION_USER\", \"\");/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-        fi
-      fi
-      #####################
-      # set database connection
-      #####################
-      sed -i "s/%%DBSERVER%%/localhost/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/%%DBPORT%%/$mapbender_database_port/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/%%DBNAME%%/$mapbender_database_name/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/%%DBOWNER%%/$mapbender_database_user/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/%%DBPASSWORD%%/$mapbender_database_password/g" ${installation_folder}mapbender/conf/mapbender.conf
-      # maybe problematic!:
-      sed -i "s#/data/#$installation_folder#g" ${installation_folder}mapbender/conf/mapbender.conf
-      #####################
-      # special users & groups
-      #####################
-      sed -i "s/#define(\"PUBLIC_USER\", \"\");/define(\"PUBLIC_USER\", \"${mapbender_guest_user_id}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"REGISTRATING_GROUP\",36);/define(\"REGISTRATING_GROUP\",${mapbender_subadmin_group_id});/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"PORTAL_ADMIN_USER_ID\",\"1\");/define(\"PORTAL_ADMIN_USER_ID\",\"1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"CATALOGUE_MAINTENANCE_USER\",\"1\");/define(\"CATALOGUE_MAINTENANCE_USER\",\"1\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      #####################
-      # enable public user auto session
-      #####################
-      sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-      #####################
-      # metadata management
-      #####################
-      sed -i "s/define(\"MD_OVERWRITE\", true);/define(\"MD_OVERWRITE\", false);/g" ${installation_folder}mapbender/conf/mapbender.conf
-      #####################
-      # default language
-      #####################
-      sed -i "s/define(\"USE_I18N\", false);/define(\"USE_I18N\", true);/g" ${installation_folder}mapbender/conf/mapbender.conf
-      sed -i "s/define(\"LANGUAGE\", \"en\");/define(\"LANGUAGE\", \"de\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-
-      # alter group id for subadministrators in monitoring tool - use group_id 21 - this is the subadmin mb_group_id
-  cat << EOF > ${installation_folder}mapbender/tools/monitorCapabilities.sh
-  . /etc/profile
-  [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.0 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null
-EOF
-      #####################
-      # register initial services for default and extended search GUIs
-      #####################
-    cd ${installation_folder}mapbender/tools/
-  echo 'register initial default services ... '
-      ##################### Geoportal-RLP
-  eval $wms_1_register_cmd
-  eval $wms_2_register_cmd
-  eval $wms_3_register_cmd
-      ##################### Geoportal-RLP_erwSuche2
-  eval $wms_4_register_cmd
-  eval $wms_5_register_cmd
-      ##################### demo service
-  eval $wms_6_register_cmd
-      #####################
-  # qualify the main gui
-  # update database to set initial extent and epsg for Main GUI: TODO: maybe use a hidden layer !
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_wms SET gui_wms_epsg = '$epsg' WHERE fkey_gui_id = '${default_gui_name}'"
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE layer_epsg SET minx = '$minx', miny = '$miny', maxx = '$maxx', maxy = '$maxy' WHERE fkey_layer_id IN (SELECT layer_id FROM layer WHERE fkey_wms_id IN (SELECT fkey_wms_id FROM gui_wms WHERE fkey_gui_id = '${default_gui_name}' AND gui_wms_position = 0) AND layer_parent='') AND epsg = '$epsg'"
-  # set first wms to be seen in the overview mapframe
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element_vars SET var_value = '0' WHERE fkey_gui_id='${default_gui_name}' AND fkey_e_id='overview' AND var_name = 'overview_wms'"
-  # set resize option to auto
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element_vars SET var_value = 'auto' WHERE fkey_gui_id='${default_gui_name}' AND fkey_e_id='resizeMapsize' AND var_name = 'resize_option'"
-  # set max height and width for resize
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_width', '1000', 'define a max mapframe width (units pixel) f.e. 700 or false' ,'var')"
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_height', '600', 'define a max mapframe height (units pixel) f.e. 700 or false' ,'var')"
-  #####################
-  fi
+  echo -e "\n Successfully installed Mapbender Database! \n" | tee -a $installation_log
 
   if [ $checkout_mapbender_conf = 'true' ]; then
-      # override information in custom conf files
-      # mapbender.conf
-      #####################
-      echo 'adopt mapbender.conf from default geoportal conf files ... '
-      #####################
-      # alter connection type to use curl
-      #####################
-      sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # define proxy settings
-      #####################
-      # sed -i "s///g" ${installation_folder}conf/mapbender.conf
 
-      if [ "$custom_proxy" == true ];then
-        if [ "$mb_proxy" != "" ];then
-          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-        else
-        	http_proxy_host=""
-          http_proxy_port=""
+    echo -e "\n Configuring Mapbender. \n" | tee -a $installation_log
+
+    cd ${installation_folder}mapbender/tools
+    sh ./i18n_update_mo.sh
+
+    ###################
+    # create folder to store generated metadata xml documents
+    mkdir -p ${installation_folder}mapbender/metadata
+    #####################
+    echo -e "\n Change owner of ${installation_folder} to www-data... \n" | tee -a $installation_log
+    # alter owner of folders where webserver should be able to alter data
+    chown -R www-data:www-data ${installation_folder}mapbender/http/tmp/
+    chown -R www-data:www-data ${installation_folder}mapbender/log/
+    chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/preview/
+    chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/news/
+    chown -R www-data:www-data ${installation_folder}mapbender/metadata/
+
+    # alter connection type to use curl
+    #####################
+    sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}conf/mapbender.conf
+    ####################
+
+    #####################
+    # define proxy settings
+    #####################
+
+    if [ "$custom_proxy" == true ];then
+      if [ "$mb_proxy" != "" ];then
+        http_proxy_host=`echo $mb_proxy | cut -d: -f1`
+        http_proxy_port=`echo $mb_proxy | cut -d: -f2`
+      else
+        http_proxy_host=""
+        http_proxy_port=""
+      fi
+    fi
+
+    if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
+      sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
+      sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
+      sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
+
+      if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
+        sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}conf/mapbender.conf
+        sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}conf/mapbender.conf
+      fi
+    fi
+
+    if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
+        #####################
+        # integrated mapserver mapfile for metadata footprints
+        #####################
+        sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+        sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+
+        if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
+          sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+          sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+          sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
         fi
     fi
 
-      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
-  	    sed -i "s/define(\"CONNECTION_PROXY\", \"\");/define(\"CONNECTION_PROXY\", \"$http_proxy_host\");/g" ${installation_folder}conf/mapbender.conf
-  	    sed -i "s/define(\"CONNECTION_PORT\", \"\");/define(\"CONNECTION_PORT\", \"$http_proxy_port\");/g" ${installation_folder}conf/mapbender.conf
-  	    sed -i "s/define(\"NOT_PROXY_HOSTS\", \"<ip>,<ip>,<ip>\");/define(\"NOT_PROXY_HOSTS\", \"localhost,127.0.0.1\");/g" ${installation_folder}conf/mapbender.conf
+    #####################
+    # set database connection
+    #####################
+    sed -i "s/%%DBSERVER%%/localhost/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%DBPORT%%/$mapbender_database_port/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%DBNAME%%/$mapbender_database_name/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%DBOWNER%%/$mapbender_database_user/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%DBPASSWORD%%/$mapbender_database_password/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%DOMAINNAME%%/$hostname,$hostip,127.0.0.1/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%WEBADMINMAIL%%/$webadmin_email/g" ${installation_folder}conf/mapbender.conf
 
-        if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
-          sed -i "s/define(\"CONNECTION_USER\", \"\");/ s/define(\"CONNECTION_USER\", \"$http_proxy_user\");/g" ${installation_folder}conf/mapbender.conf
-          sed -i "s/define(\"CONNECTION_PASSWORD\", \"\");/ s/define(\"CONNECTION_PASSWORD\", \"$http_proxy_pass\");/g" ${installation_folder}conf/mapbender.conf
-        fi
-      fi
-      #####################
-      # set database connection
-      #####################
-      sed -i "s/%%DBSERVER%%/localhost/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBPORT%%/$mapbender_database_port/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBNAME%%/$mapbender_database_name/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBOWNER%%/$mapbender_database_user/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DBPASSWORD%%/$mapbender_database_password/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%DOMAINNAME%%/$hostname/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%WEBADMINMAIL%%/$webadmin_email/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # special users & groups%%INSTALLATIONFOLDER%%
-      #####################
-      sed -i "s/%%PUBLICUSERID%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%PORTALADMINUSERID%%/1/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%ANONYMOUSUSER%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%ANONYMOUSGROUP%%/$mapbender_guest_group_id/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/%%REGISTRATINGGROUP%%/$mapbender_subadmin_group_id/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # enable public user auto session
-      #####################
-      sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
-      sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
-      #####################
-      # put hostname and ip in mapbender whitelist
-      #####################
+    #####################
+    # special users & groups%%INSTALLATIONFOLDER%%
+    #####################
+    sed -i "s/%%PUBLICUSERID%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%PORTALADMINUSERID%%/1/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%ANONYMOUSUSER%%/$mapbender_guest_user_id/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%ANONYMOUSGROUP%%/$mapbender_guest_group_id/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/%%REGISTRATINGGROUP%%/$mapbender_subadmin_group_id/g" ${installation_folder}conf/mapbender.conf
 
-      sed -i "s#define(\"HOSTNAME_WHITELIST\", \"\");#define(\"HOSTNAME_WHITELIST\", \"http://$hostname http://$hostip\");#g" ${installation_folder}conf/mapbender.conf
-      #sed -i "s/%%INSTALLATIONFOLDER%%/$installation_folder/g" ${installation_folder}conf/mapbender.conf
-      # copy conf files to right places
-      cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
-      # alter other conf files
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
-      # copy conf file to right places
-      cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
-      # mapfile for metadata wms
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents_geoportal_rlp.map
-      #sed -i "s/%%http_proxy_host%%/$http_proxy_host/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      #sed -i "s/%%http_proxy_port%%/$http_proxy_port/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-      sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+    #####################
+    # enable public user auto session
+    #####################
+    sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
 
-      if [ "$custom_proxy" == true ];then
-        if [ "$mb_proxy" != "" ];then
-          http_proxy_host=`echo $mb_proxy | cut -d: -f1`
-          http_proxy_port=`echo $mb_proxy | cut -d: -f2`
-        else
-        	http_proxy_host=""
-          http_proxy_port=""
-        fi
-      fi
+    echo -e "\n Copying configurations! \n"
+    # copy conf files to right places
+    cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
+    # alter other conf files
+    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
+    # copy conf file to right places
+    cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
+    # mapfile for metadata wms
+    echo -e "\n Successfully copied configurations! \n"
+    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84/g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+    sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
 
-      if [ "$http_proxy_host" != "" ]  && [  "$http_proxy_port" != "" ];then
-          #####################
-          # integrated mapserver mapfile for metadata footprints
-          #####################
-          sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-          sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+    cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
+    # conf file for invocation of metadata wms
+    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
+    sed -i "s/%%BBOXWGS84%%/$bbox_wgs84/g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
+    cp ${installation_folder}conf/extent_service_geoportal_rlp.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
 
-          if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
-            sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-            sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-            sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-          fi
-      fi
+    # conf file for atomFeedClient
+    sed -i "s#%%center_x_i%%#${center_x_i}#g" ${installation_folder}conf/atomFeedClient.conf
+    sed -i "s#%%center_y_i%%#${center_y_i}#g" ${installation_folder}conf/atomFeedClient.conf
+    cp ${installation_folder}conf/atomFeedClient.conf ${installation_folder}mapbender/conf/atomFeedClient.conf
 
-      cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
-      # conf file for invocation of metadata wms
-      sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-      sed -i "s/%%BBOXWGS84%%/$bbox_wgs84/g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-      cp ${installation_folder}conf/extent_service_geoportal_rlp.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
+    # conf file for mobilemap client
+    sed -i "s#%%center_x_i%%#${center_x_i}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%center_y_i%%#${center_y_i}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%initial_scale_i%%#${initial_scale_i}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%map_extent_csv%%#${bbox_current_epsg_csv}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%server_url%%#${server_url}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%background_hybrid_tms_url%%#${background_hybrid_tms_url}#g" ${installation_folder}conf/config.js
+    sed -i "s#%%background_aerial_wms_url%%#${background_aerial_wms_url}#g" ${installation_folder}conf/config.js
+    cp ${installation_folder}conf/config.js ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
 
-      # conf file for atomFeedClient
-      sed -i "s#%%center_x_i%%#${center_x_i}#g" ${installation_folder}conf/atomFeedClient.conf
-      sed -i "s#%%center_y_i%%#${center_y_i}#g" ${installation_folder}conf/atomFeedClient.conf
-      cp ${installation_folder}conf/atomFeedClient.conf ${installation_folder}mapbender/conf/atomFeedClient.conf
-      # conf file for mobilemap client
-      sed -i "s#%%center_x_i%%#${center_x_i}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%center_y_i%%#${center_y_i}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%initial_scale_i%%#${initial_scale_i}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%map_extent_csv%%#${bbox_current_epsg_csv}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%server_url%%#${server_url}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%background_hybrid_tms_url%%#${background_hybrid_tms_url}#g" ${installation_folder}conf/config.js
-      sed -i "s#%%background_aerial_wms_url%%#${background_aerial_wms_url}#g" ${installation_folder}conf/config.js
-      cp ${installation_folder}conf/config.js ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
-      # conf file for mobilemap.conf
-      sed -i "s#%%dhm_wms_url%%#${dhm_wms_url}#g" ${installation_folder}conf/mobilemap.conf
-      sed -i "s#%%catalogue_interface%%#${catalogue_interface}#g" ${installation_folder}conf/mobilemap.conf
-      sed -i "s#%%background_wms_csv%%#${background_wms_csv}#g" ${installation_folder}conf/mobilemap.conf
-      cp ${installation_folder}conf/mobilemap.conf ${installation_folder}mapbender/conf/mobilemap.conf
+    # conf file for mobilemap.conf
+    sed -i "s#%%dhm_wms_url%%#${dhm_wms_url}#g" ${installation_folder}conf/mobilemap.conf
+    sed -i "s#%%catalogue_interface%%#${catalogue_interface}#g" ${installation_folder}conf/mobilemap.conf
+    sed -i "s#%%background_wms_csv%%#${background_wms_csv}#g" ${installation_folder}conf/mobilemap.conf
+    cp ${installation_folder}conf/mobilemap.conf ${installation_folder}mapbender/conf/mobilemap.conf
 
-  fi
+  # alter group id for subadministrators in monitoring tool - use group_id 21 - this is the subadmin mb_group_id
+      echo ". /etc/profile
+  [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.0 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null" >> ${installation_folder}mapbender/tools/monitorCapabilities.sh
+
+  #####################
+    # register initial services for default and extended search GUIs
+    #####################
+  cd ${installation_folder}mapbender/tools/
+echo -e '\n Register initial default services. \n' | tee -a $installation_log
+    ##################### Geoportal-RLP
+eval $wms_1_register_cmd | tee -a $installation_log
+echo -e "\n"
+eval $wms_2_register_cmd | tee -a $installation_log
+echo -e "\n"
+eval $wms_3_register_cmd | tee -a $installation_log
+echo -e "\n"
+    ##################### Geoportal-RLP_erwSuche2
+eval $wms_4_register_cmd | tee -a $installation_log
+echo -e "\n"
+eval $wms_5_register_cmd | tee -a $installation_log
+echo -e "\n"
+    ##################### demo service
+eval $wms_6_register_cmd | tee -a $installation_log
+
+echo -e "\n\n Successfully registered services! \n" | tee -a $installation_log
+    #####################
+# qualify the main gui
+# update database to set initial extent and epsg for Main GUI: TODO: maybe use a hidden layer !
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_wms SET gui_wms_epsg = '$epsg' WHERE fkey_gui_id = '${default_gui_name}'" >> $installation_log 2>&1
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE layer_epsg SET minx = '$minx', miny = '$miny', maxx = '$maxx', maxy = '$maxy' WHERE fkey_layer_id IN (SELECT layer_id FROM layer WHERE fkey_wms_id IN (SELECT fkey_wms_id FROM gui_wms WHERE fkey_gui_id = '${default_gui_name}' AND gui_wms_position = 0) AND layer_parent='') AND epsg = '$epsg'" >> $installation_log 2>&1
+# set first wms to be seen in the overview mapframe
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element_vars SET var_value = '0' WHERE fkey_gui_id='${default_gui_name}' AND fkey_e_id='overview' AND var_name = 'overview_wms'" >> $installation_log 2>&1
+# set resize option to auto
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "UPDATE gui_element_vars SET var_value = 'auto' WHERE fkey_gui_id='${default_gui_name}' AND fkey_e_id='resizeMapsize' AND var_name = 'resize_option'" >> $installation_log 2>&1
+# set max height and width for resize
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_width', '1000', 'define a max mapframe width (units pixel) f.e. 700 or false' ,'var')" >> $installation_log 2>&1
+sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_height', '600', 'define a max mapframe height (units pixel) f.e. 700 or false' ,'var')" >> $installation_log 2>&1
+
+echo -e "\n\n Successfully configured Mapbender! \n" | tee -a $installation_log
+
+fi
 
   if [ $configure_apache = 'true' ]; then
   ############################################################
   # create apache configuration for mapbender
   ############################################################
-  echo 'create apache configuration ...'
+  echo -e  "\n Creating apache configuration. \n" | tee -a $installation_log
   cat << EOF > ${installation_folder}geoportal-apache.conf
   <VirtualHost *:80>
           ServerAdmin $webadmin_email
@@ -1076,31 +1015,33 @@ EOF
   ############################################################
   # copy conf to apache directory and configure apache24+
   ############################################################
-  cp ${installation_folder}geoportal-apache.conf /etc/apache2/sites-available/
+  cp -av ${installation_folder}geoportal-apache.conf /etc/apache2/sites-available/ | tee -a $installation_log
   ############################################################
   # activate modules
   ############################################################
-  a2enmod rewrite
-  a2enmod cgi
+  echo -e "\n Enabling apache2 modules. \n" | tee -a $installation_log
+  a2enmod rewrite >> $installation_log 2>&1
+  a2enmod cgi >> $installation_log 2>&1
   # a2enmod serv-cgi-bin
-  a2enmod proxy_http
-  a2enmod headers
-  a2enmod auth_digest
+  a2enmod proxy_http >> $installation_log 2>&1
+  a2enmod headers >> $installation_log 2>&1
+  a2enmod auth_digest >> $installation_log 2>&1
   # to be compatible to older apache2.2 directives:
-  a2enmod access_compat
+  a2enmod access_compat >> $installation_log 2>&1
   ############################################################
   # alter central apache2 conf to allow access to /
   ############################################################
   cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf_backup_geoportal
   # replace only the first occurence of Require all denied - this is the entry for /
   sed -i "0,/Require all denied/{s/Require all denied/Require all granted/}" /etc/apache2/apache2.conf
+  sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" /etc/php/7.0/apache2/php.ini
   ############################################################
   #
   ############################################################
   ############################################################
   # configure phppgadmin
   ############################################################
-  echo 'adopt phppgadmin default apache24 configuration'
+  echo -e '\n Adopt phppgadmin default apache24 configuration. \n' | tee -a $installation_log
   cp /etc/apache2/conf-available/phppgadmin.conf /etc/apache2/conf-available/phppgadmin.conf_backup_geoportal
   cat << EOF > /etc/apache2/conf-available/phppgadmin.conf
   Alias /phppgadmin /usr/share/phppgadmin
@@ -1193,17 +1134,15 @@ fi
 #  echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
 #fi
 
-#if  ! grep -q "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly"  /etc/apache2/conf-enabled/security.conf ;then
-#  echo  "Header edit Set-Cookie ^(.*)\$ \$1;HttpOnly" >>/etc/apache2/conf-enabled/security.conf
-#fi
-
 
   sed -i s/"ServerTokens OS"/"ServerTokens Prod"/g /etc/apache2/conf-available/security.conf
   sed -i s/"ServerSignature On"/"ServerSignature Off"/g /etc/apache2/conf-available/security.conf
   cp -a  /etc/modsecurity/modsecurity.conf-recommended  /etc/modsecurity/modsecurity.conf
   sed -i s/"SecRuleEngine DetectionOnly"/"SecRuleEngine On"/g /etc/modsecurity/modsecurity.conf
   rm -rf /usr/share/modsecurity-crs
-  git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs
+  echo -e "\n Downloading Modsecurity Ruleset! \n" | tee -a $installation_log
+  git clone --progress https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs >> $installation_log 2>&1 || (echo "Downloading Modsecurity Ruleset failed! Check internet connection or proxy!" | tee -a $installation_log;exit;)
+  echo -e "\n Successfully downloaded Modsecurity Ruleset! \n" | tee -a $installation_log
   cd /usr/share/modsecurity-crs
   mv crs-setup.conf.example crs-setup.conf
 
@@ -1223,7 +1162,7 @@ fi
   SecRuleRemoveById 932110 932115 941140 941160 942190 941350
   </LocationMatch>
 
-  <LocationMatch "/mapbender/extensions/mobilemap/mod_mapbender/search_proxy.php">
+  <LocationMatch '/mapbender/extensions/mobilemap/mod_mapbender/search_proxy.php'>
   SecRuleRemoveById 942360
   </LocationMatch>
 
@@ -1269,10 +1208,12 @@ fi
   ############################################################
   # activate apache conf and reload
   ############################################################
-  a2enmod security2
-  a2ensite geoportal-apache
-  a2dissite 000-default
-  service apache2 restart
+  a2enmod security2 >> $installation_log 2>&1
+  a2ensite geoportal-apache >> $installation_log 2>&1
+  a2dissite 000-default >> $installation_log 2>&1
+  service apache2 restart >> $installation_log 2>&1
+
+  echo -e  "\n Successfully configured Apache! \n" | tee -a $installation_log
 fi #end of apache configuration
   ############################################################
   # add privileges on search tables to mapbender database user from installation
@@ -1293,7 +1234,7 @@ fi #end of apache configuration
   ############################################################
   if [ $configure_cronjobs = 'true' ]; then
 
-  mkdir -pv ${installation_folder}cronjobs/
+  mkdir -p ${installation_folder}cronjobs/
 
   # create script to call metadata via localhost
   cat << EOF > ${installation_folder}cronjobs/generateMetadata.sh
@@ -1309,7 +1250,11 @@ EOF
   # 1. delete old monitoring xmls
   croncmd1="find ${installation_folder}mapbender/tools/tmp -type f -print | xargs rm -f"
   cronjob1="25 1,3,5,7,9,11,13,15,17,19,21,23 * * * $croncmd1"
-  ( crontab -l | grep -v -F "$croncmd1" ; echo "$cronjob1" ) | crontab -
+  if [ -f "/var/spool/cron/crontabs/root" ];then
+    ( crontab -l | grep -v -F "$croncmd1" ; echo "$cronjob1" ) | crontab -
+  else
+    echo "$cronjob1" | crontab -
+  fi
   ############################################################
   # 2. delete mapbender tmp files
   croncmd2="find ${installation_folder}mapbender/http/tmp  -name '*.*' -mmin +40 -type f | xargs rm -f"
@@ -1337,17 +1282,17 @@ EOF
   ( crontab -l | grep -v -F "$croncmd6" ; echo "$cronjob6" ) | crontab -
   ############################################################
   # 8. materialize wms search view
-  croncmd8="su - postgres -c \"psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wms_view.sql\""
+  croncmd8="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wms_view.sql\""
   cronjob8="0,30 * * * * $croncmd8"
   ( crontab -l | grep -v -F "$croncmd8" ; echo "$cronjob8" ) | crontab -
   ############################################################
   # 9. materialize dataset search view
-  croncmd9="su - postgres -c \"psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_dataset_view.sql\""
+  croncmd9="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_dataset_view.sql\""
   cronjob9="1,31 * * * * $croncmd9"
   ( crontab -l | grep -v -F "$croncmd9" ; echo "$cronjob9" ) | crontab -
   ############################################################
   # 10. materialize wfs search view
-  croncmd10="su - postgres -c \"psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wfs_view.sql\""
+  croncmd10="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wfs_view.sql\""
   cronjob10="2,32 * * * * $croncmd10"
   ( crontab -l | grep -v -F "$croncmd10" ; echo "$cronjob10" ) | crontab -
   ############################################################
@@ -1357,7 +1302,7 @@ EOF
   ( crontab -l | grep -v -F "$croncmd11" ; echo "$cronjob11" ) | crontab -
   ############################################################
   # 12. materialize wmc search view
-  croncmd12="su - postgres -c \"psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wmc_view.sql\""
+  croncmd12="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wmc_view.sql\""
   cronjob12="3,13,23,33,43,53 * * * * $croncmd12"
   ( crontab -l | grep -v -F "$croncmd12" ; echo "$cronjob12" ) | crontab -
   ############################################################
@@ -1394,15 +1339,19 @@ EOF
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 #                                       Django Installation
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
-
-apt-get update
-apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev
-
+echo -e "\n Installing needed Debian packages for Django \n" | tee -a $installation_log
+apt-get update >> $installation_log 2>&1
+apt-get -qq install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev | tee -a $installation_log
+echo -e "\n Successfully installed Debian packages for Django! \n" | tee -a $installation_log
 cd ${installation_folder}
-git clone https://git.osgeo.org/gitea/armin11/GeoPortal.rlp
+echo -e "\n Downloading Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
+git clone --progress https://git.osgeo.org/gitea/armin11/GeoPortal.rlp >> $installation_log 2>&1 || (echo "Downloading Geoportal Source faild! Check internet connection or proxy!" | tee -a $installation_log;exit;)
+echo -e "\n Successfully downloaded Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
+
+echo -e "\n Configuring Django. \n" | tee -a $installation_log
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
-mkdir -pv ${installation_folder}portal
+mkdir -p ${installation_folder}portal | tee -a $installation_log
 
 # copy some mapbender related scripts
 cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}portal
@@ -1444,20 +1393,27 @@ sed -i s/"Require ip 192.168.56.222"/"Require ip $ipaddress"/g /etc/apache2/site
 
 cd ${installation_folder}GeoPortal.rlp/
 
+echo -e "\n Creating Virtualenv in ${installation_folder}env. \n"
 # create and activate virtualenv
-virtualenv -ppython3 ${installation_folder}env
+virtualenv -ppython3 ${installation_folder}env >> $installation_log 2>&1
 source ${installation_folder}env/bin/activate
+echo -e "\n Successfully created virtualenv in ${installation_folder}env! \n" | tee -a $installation_log
 
 # install needed python packages
-pip install -r requirements.txt
-rm -r ${installation_folder}GeoPortal.rlp/static
-python manage.py collectstatic
-python manage.py migrate --fake sessions zero
-python manage.py migrate --fake-initial
-python manage.py makemigrations useroperations
-python manage.py migrate useroperations
-python manage.py loaddata useroperations/fixtures/navigation.json
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('root', 'admin@example.com', 'root')" | python manage.py shell
+echo -e "\n Installing needed python libraries. \n" | tee -a $installation_log
+pip install -r requirements.txt >> $installation_log 2>&1
+echo -e "\n Successfully installed python libraries! \n" | tee -a $installation_log
+
+rm -r ${installation_folder}GeoPortal.rlp/static >> $installation_log 2>&1
+python manage.py collectstatic >> $installation_log 2>&1
+python manage.py migrate --fake sessions zero >> $installation_log 2>&1
+python manage.py migrate --fake-initial >> $installation_log 2>&1
+python manage.py makemigrations useroperations >> $installation_log 2>&1
+python manage.py migrate useroperations >> $installation_log 2>&1
+python manage.py makemessages >> $installation_log 2>&1
+python manage.py compilemessages >> $installation_log 2>&1
+python manage.py loaddata useroperations/fixtures/navigation.json >> $installation_log 2>&1
+#echo "from django.contrib.auth.models import User; User.objects.create_superuser('root', 'admin@example.com', 'root')" | python manage.py shell
 
 
 # apache config
@@ -1472,19 +1428,23 @@ if [ ! -f "/etc/apache2/conf-available/wsgi.conf"  ]; then
 	</Directory>" > /etc/apache2/conf-available/wsgi.conf
 fi
 
-a2enconf wsgi
-/etc/init.d/apache2 restart
+a2enconf wsgi >> $installation_log 2>&1
+/etc/init.d/apache2 restart >> $installation_log 2>&1
+
+echo -e "\n Successfully configured Django! \n" | tee -a $installation_log
 
 # mediawiki
 # repo for backports
 if [ ! -f "/etc/apt/sources.list.d/backports.list"  ]; then
 	echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list.d/backports.list
 fi
-apt update
-apt-get install -y -t stretch-backports mediawiki
-
+echo -e "\n Installing Mediawiki! \n" | tee -a $installation_log
+apt update >> $installation_log 2>&1
+apt-get -qq install -y -t stretch-backports mediawiki | tee -a $installation_log
+echo -e "\n Successfully installed Mediawiki ! \n" | tee -a $installation_log
 #mysql_secure_installation
 
+echo -e "\n Configuring Mysql! \n" | tee -a $installation_log
 mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysqlpw') WHERE User='root';"
 mysql -uroot -e "update mysql.user set plugin='' where user='root';"
 mysql -uroot -e "flush privileges;"
@@ -1498,24 +1458,32 @@ mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
 mysql -uroot -p$mysqlpw -e "create database Geoportal;"
 mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
+echo -e "\n Successfully configured Mysql! \n" | tee -a $installation_log
+
+echo -e "\n Downloading MediaWikiLanguageExtensionBundle! \n" | tee -a $installation_log
 cd /tmp/
-wget https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
+wget -q https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2 || (echo "Failed to Download MediawikiLanguageExtensionBundle! Check connection or proxy!" | tee -a $installation_log;exit;)
 tar -kxjf MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
+rm /usr/share/mediawiki/extensions/LocalisationUpdate
 cp -a /tmp/extensions/* /usr/share/mediawiki/extensions
 rm -r /tmp/extensions
 rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 
 cp -a ${installation_folder}GeoPortal.rlp/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
+echo -e "\n Successfully downloaded MediaWikiLanguageExtensionBundle! \n" | tee -a $installation_log
 
+echo -e "\n Configuring Composer for SemanticMediaWiki extension! \n" | tee -a $installation_log
 cd /usr/share/mediawiki
 useradd composer
-mkdir -pv /usr/share/mediawiki/extensions/SemanticMediaWiki/
+mkdir -p /usr/share/mediawiki/extensions/SemanticMediaWiki/
 touch /usr/share/mediawiki/composer.json
 chown composer /usr/share/mediawiki/extensions/SemanticMediaWiki/
 chown composer /usr/share/mediawiki/composer.json
 chown composer /usr/share/mediawiki/
 chown -R composer /usr/share/mediawiki/vendor/
-su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev"
+su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev" >> $installation_log 2>&1
+
+echo -e "\n Successfully configured composer! \n" | tee -a $installation_log
 
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
@@ -1529,7 +1497,34 @@ if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
 
-php maintenance/update.php --skip-external-dependencies
+php maintenance/update.php --quiet --skip-external-dependencies >> $installation_log 2>&1
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+echo -e "\n Installation Complete! Doing some checks! \n" | tee -a $installation_log
+
+pgrep apache2 > /dev/null
+if [ $? -ne 0 ];then
+  echo -e "\n ${red}Apache is not running! Going to check syntax and restart it! \n${reset}" | tee -a $installation_log
+  apachectl configtest
+  service apache2 restart
+else
+  echo -e "\n ${green}Apache is up and running! \n${reset}" | tee -a $installation_log
+fi
+
+echo -e "\n Trying to reach the index page! \n" | tee -a $installation_log
+
+curl -s 127.0.0.1 | grep "Geoportal RLP" >> /dev/null
+
+if [ $? -ne 0 ];then
+  echo -e "\n ${red}Index page does not look right! Check /var/log/apache2/error.log \n${reset}" | tee -a $installation_log
+else
+  echo -e "\n ${green}Index pages seems ok! Have Fun! \n${reset}" | tee -a $installation_log
+fi
+
+echo -e "\n Details can be found in $installation_log \n" | tee -a $installation_log
 
 }
 
@@ -1545,7 +1540,7 @@ update(){
   done
 
 #update mapbender
-echo update svn
+echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
 su -c 'svn -q update'
 cd ${installation_folder}svn/
@@ -1589,8 +1584,9 @@ sed -i 's/\/\/metadataUrlPlaceholder/$metadataUrl="http:\/\/www.geoportal.rlp.de
 sed -i 's/http:\/\/ws.geonames.org\/searchJSON?lang=de&/http:\/\/www.geoportal.rlp.de\/mapbender\/geoportal\/gaz_geom_mobile.php/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 sed -i 's/options.isGeonames = true;/options.isGeonames = false;/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sind bei der Adresssuche mit einem Komma voneinander zu trennen!<br><br>Auch Textfragmente der gesuchten Adresse reichen hierbei aus.<br><br>\&nbsp\&nbsp\&nbsp\&nbsp Beispiel:<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"Am Zehnthof 10 , St. Goar\\" oder<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"zehnt 10 , goar\\"<br><br>Der passende Treffer muss in der erscheinenden Auswahlliste per Mausklick ausgewählt werden!";/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
-
+echo "Mapbender Update Done"
 #update django
+echo "Updating Geoportal Project"
 cd ${installation_folder}GeoPortal.rlp
 
 # save settings
@@ -1648,12 +1644,11 @@ cd ${installation_folder}GeoPortal.rlp
 pip install -r requirements.txt
 rm -r ${installation_folder}GeoPortal.rlp/static
 python manage.py collectstatic
-
+python manage.py compilemessages
 /etc/init.d/apache2 restart
 
+echo "Update Complete"
 
-echo "\n"
-echo "You may have to check /etc/apache2/sites-available/geoportal-apache.conf for the right ip in the Require statement"
 
 }
 
@@ -1730,6 +1725,7 @@ if [ -d ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y") ]; the
   exit
 fi
 
+echo "Creating backup in ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")"
 mkdir -pv ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")
 
 
@@ -1747,16 +1743,21 @@ mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_b
 check_mode() {
 
 if [ $mode = "install" ]; then
-  echo "Performing complete installation"
+  echo -n " "
+  date | tee -a /tmp/geoportal_$(date +"%m_%d_%Y")install_.log
+  echo -e "\n Performing complete installation \n"
 	install_full
 elif [ $mode = "update" ];then
-  echo "Updating your geoportal solution"
+  date
+  echo -e "\n Updating your geoportal solution \n"
 	update
 elif [ $mode = "delete" ];then
-  echo "Deleting your geoportal solution"
+  date
+  echo -e "\n Deleting your geoportal solution \n"
 	delete
 elif [ $mode = "backup" ];then
-  echo "Backing up your geoportal solution"
+  date
+  echo -e "\n Backing up your geoportal solution \n"
   backup
 fi
 
