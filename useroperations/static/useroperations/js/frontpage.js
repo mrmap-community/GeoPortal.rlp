@@ -83,6 +83,8 @@ $(document).on("click", ".mobile-button", function(){
     // get wmc id
     var elem = $(this).parents(".tile").find(".tile-header");
     var id = elem.attr("data-id");
+    // get rid of 'WMC=' which is needed for the usual call
+    id = id.split("=")[1];
     openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
 });
 

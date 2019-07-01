@@ -45,12 +45,11 @@
 
 
             {% if btn_label1 %}
-            <button id="change-form-button" class="form-submit-button" type="submit">{{ btn_label1 }}</button>
+          		<input id="change-form-button" class="form-change-submit-button" name="submit" type="submit" value="{{ btn_label1 }}">
             {% endif %}
 
             {% if btn_label2 %}
-                <!--<input id="change-form-button" class="hidden-form-submit-button" name="submit" type="submit" value="{{ btn_label1 }}">-->
-            <button id="delete-form-button" class="form-delete-submit-button" type="submit">{{ btn_label2 }}</button>
+          		<input id="delete-form-button" class="form-delete-submit-button" name="submit" type="submit" value="{{ btn_label2 }}">
             {% endif %}
 
         </div>
