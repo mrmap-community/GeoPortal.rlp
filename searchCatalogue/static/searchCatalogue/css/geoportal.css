@@ -253,9 +253,22 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     justify-content: space-between;
     padding: 5px;
 }
-.feed-download:hover{
+
+.feed-download-wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.feed-download-button, .atom-feed-button{
+    border:1px solid var(--primary);
+    padding: 5px 10px 5px 10px;
+    margin: 0 5px 0 0;
+}
+
+.feed-download-button:hover, .atom-feed-button:hover{
     color: #fff;
-    background: var(--primary);
+    background-color: var(--primary);
 }
 
 

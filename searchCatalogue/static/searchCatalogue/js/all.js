@@ -1066,13 +1066,13 @@ $(document).ready(function() {
         elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
     });
 
-    $(document).on("mouseover", ".feed-download", function(){
+    $(document).on("mouseover", ".feed-download-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
         elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
     });
 
-    $(document).on("mouseout", ".feed-download", function(){
+    $(document).on("mouseout", ".feed-download-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
         elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download.png");

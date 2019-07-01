@@ -971,8 +971,10 @@ def resolve_coupled_resources(md_link: str):
         for resource in resources:
             _type = resource.get("serviceType", "")
             uri = resource.get("accessUrl", None)
+            uri_atom = resource.get("accessClient", None)
             data = {
                     "uri": uri,
+                    "atom_uri": uri_atom,
                     "showMapUrl": uri,
                     "title": resource.get("serviceTitle", None),
                     "id": sha256(md_link),

@@ -31,15 +31,25 @@
         {% if coupled_resources.download_links|length > 0 %}
         <div class="resource-list download_{{ coupled_resources.id }}" style="display:none;">
             <ul style="overflow: hidden;">
-                <li class="resource-category-header">{% trans 'Download services' %}</li>
                 {% for download in coupled_resources.download_links %}
                 <li class="resource-element">
-                    <a href="{{ download.uri }}" target="_blank" >
-                        <div id="download_button_{{ download.id }}" class="feed-download">
-                            <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
-                            <strong>{{ download.title }}</strong>
-                            <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                    <a href="{{ download.mdLink }}" target="_blank">
+                        <div class="resource-view-title" title="{% trans 'Download' %}">
+                            {{ download.title }}
                         </div></a>
+                    <div id="download_button_{{ download.id }}" class="feed-download resource-element-data">
+                        <div class="resource-element-info"></div>
+                        <div class="feed-download-wrapper">
+                            <a class="feed-download-button" href="{{ download.uri }}" target="_blank" title="{% trans 'Download' %}">
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                            </a>
+                            {% if download.atom_uri is not None %}
+                                <a class="atom-feed-button" href="{{ download.atom_uri }}" target="_blank" title="{% trans 'Open atom client' %}">
+                                    <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="{% trans 'Open atom client' %}"/>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
