@@ -1201,6 +1201,12 @@ fi
   <LocationMatch '/mapbender/php/mod_loadwms.php'>
   SecRuleRemoveById 949110
   </LocationMatch>
+  
+  <LocationMatch '/mapbender/plugins/mb_metadata_server.php'>
+  SecRuleRemoveById 949110 
+  </LocationMatch>
+
+  
   </IfModule>" > /etc/apache2/mods-available/security2.conf
 
 
