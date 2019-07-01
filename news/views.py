@@ -1,9 +1,14 @@
 from django.http import HttpRequest
 from django.shortcuts import render
+
+from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalContext
 from Geoportal.settings import TWITTER_NAME
+from evaluation.decorator import log_access
 
 
+@log_access
+@check_browser
 def twitter_view(request: HttpRequest):
     """ Renders the view for the twitter API.
 
