@@ -577,11 +577,7 @@ function startInfoCall(){
         format: "json",
         success: function(data){
             var numInfoResults = data["nresults"];
-            var infoTabNumber = $("#info-result-number");
-            infoTabNumber.text(numInfoResults);
-            if(!infoTabNumber.is(":visible")){
-                infoTabNumber.toggleClass("hide");
-            }
+
         }
     })
 }

@@ -12,7 +12,7 @@
             <span class="accordion icon closed"></span>
             <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_info.png' %}" title="{{ search_result_key }}">
             {% if list_all %}
-            {% trans 'All articles' %}
+            {% trans 'All articles' %} ({{ search_result_val|length }})
             {% else %}
             "{{ search_result_key }}"
             {% endif %}
