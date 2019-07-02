@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, SESSION_NAME
 from Geoportal.utils import general_helper, php_session_data, get_config_values
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import useroperations_helper
@@ -403,8 +403,8 @@ def change_profile_view(request):
 
     request.session["current_page"] = "change_profile"
     form = ChangeProfileForm()
-    if request.COOKIES.get('PHPSESSID') is not None:
-        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get('PHPSESSID'))
+    if request.COOKIES.get(SESSION_NAME) is not None:
+        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
                 userid = session_data[b'mb_user_id']
@@ -477,9 +477,9 @@ def change_profile_view(request):
                 if form.cleaned_data['dsgvo'] == True:
                     user.timestamp_dsgvo_accepted = time.time()
                     # set session variable dsgvo via session wrapper php script
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID')+'&operation=set&key=dsgvo&value=true', verify=INTERNAL_SSL)
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME)+'&operation=set&key=dsgvo&value=true', verify=INTERNAL_SSL)
                 else:
-                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get('PHPSESSID') +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME) +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
                     user.timestamp_dsgvo_accepted = None
 
 
@@ -522,8 +522,8 @@ def delete_profile_view(request):
         DeleteProfileForm
     """
     geoportal_context = GeoportalContext(request=request)
-    if request.COOKIES.get('PHPSESSID') is not None:
-        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get('PHPSESSID'))
+    if request.COOKIES.get(SESSION_NAME) is not None:
+        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
 
@@ -542,7 +542,7 @@ def delete_profile_view(request):
                 geoportal_context.add_context(context)
 
                 if request.method == 'POST':
-                    session_id = request.COOKIES.get('PHPSESSID')
+                    session_id = request.COOKIES.get(SESSION_NAME)
                     session_data = php_session_data.get_mapbender_session_by_memcache(session_id)
                     try:
                         userid = session_data[b'mb_user_id']
@@ -612,8 +612,8 @@ def logout_view(request):
     request.session["current_page"] = "logout"
     geoportal_context = GeoportalContext(request=request)
 
-    if request.COOKIES.get('PHPSESSID') is not None:
-        session_id = request.COOKIES.get('PHPSESSID')
+    if request.COOKIES.get(SESSION_NAME) is not None:
+        session_id = request.COOKIES.get(SESSION_NAME)
         useroperations_helper.delete_mapbender_session_by_memcache(session_id)
         messages.success(request, _("Successfully logged out"))
         return redirect('useroperations:index')
