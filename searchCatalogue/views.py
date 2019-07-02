@@ -7,25 +7,23 @@ Created on: 22.01.19
 
 """
 import json
+import logging
 import smtplib
 import time
-import logging
-from collections import OrderedDict
 
 from django.core.mail import send_mail
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils import translation
-from django_extensions import settings
 from django.utils.translation import gettext as _
+from django_extensions import settings
 
-from Geoportal import helper
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.helper import write_gml_to_session, print_debug
-from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, PRIMARY_SRC_IMG, DE_SRC_IMG, \
-    EU_SRC_IMG, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
+from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
+from Geoportal.utils import gerneral_helper
+from Geoportal.utils.gerneral_helper import write_gml_to_session, print_debug
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
@@ -54,7 +52,7 @@ def index_external(request: HttpRequest):
     """
     external_call = True
     params_get = request.GET
-    start_search = helper.resolve_boolean_value(params_get.get("start", "False"))
+    start_search = gerneral_helper.resolve_boolean_value(params_get.get("start", "False"))
 
     return index(request=request, external_call=external_call, start_search=start_search)
 
@@ -372,7 +370,7 @@ def get_data_primary(request: HttpRequest):
     lang_code = request.LANGUAGE_CODE
 
     # get user php session info
-    session_data = helper.get_mb_user_session_data(request)
+    session_data = gerneral_helper.get_mb_user_session_data(request)
 
     # prepare bbox parameter
     search_bbox = post_params.get("searchBbox", "")
@@ -585,7 +583,7 @@ def get_permission_email_form(request: HttpRequest):
     """
     template = "permission_email_form.html"
     params_GET = request.GET.dict()
-    session_data = helper.get_mb_user_session_data(request)
+    session_data = gerneral_helper.get_mb_user_session_data(request)
     user = session_data.get("user", "")
     mb_user = MbUser.objects.get(mb_user_name=user)
     mb_user_mail = mb_user.mb_user_email

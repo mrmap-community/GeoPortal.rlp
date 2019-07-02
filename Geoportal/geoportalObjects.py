@@ -8,8 +8,9 @@ Created on: 11.03.19
 """
 from django.http.response import JsonResponse
 
-from Geoportal import helper, settings
+from Geoportal import settings
 from Geoportal.settings import DEFAULT_GUI, RSS_FILE, HOSTNAME, HTTP_OR_SSL, IFRAME_HEIGHT, IFRAME_WIDTH
+from Geoportal.utils import gerneral_helper, php_session_data
 from useroperations.conf import COOKIE_VALUE, GEOPORTAL_IDENTIFIER, LOGO_GEOPORTAL_TITLE, LOGO_COUNTRY_LINK_DE, \
     LOGO_COUNTRY_LINK_EN
 
@@ -50,9 +51,9 @@ class GeoportalContext:
     """
 
     def __init__(self, request):
-        session_data = helper.get_mb_user_session_data(request)
+        session_data = php_session_data.get_mb_user_session_data(request)
         self.data = {
-            "navigation": helper.get_navigation_items(),
+            "navigation": gerneral_helper.get_navigation_items(),
             "selected_navigation": request.path,
             "loggedin": session_data.get("loggedin"),
             'user': session_data.get("user", ""),
@@ -67,7 +68,7 @@ class GeoportalContext:
             "basedir": settings.BASE_DIR,
             "rss_file": RSS_FILE,
             "cookie": request.COOKIES.get(COOKIE_VALUE, None),
-            "sidebar_closed": helper.resolve_boolean_value(request.COOKIES.get("sdbr-clsd", 'False')),
+            "sidebar_closed": gerneral_helper.resolve_boolean_value(request.COOKIES.get("sdbr-clsd", 'False')),
             "is_mobile": request.user_agent.is_mobile,
             "IFRAME_HEIGHT": IFRAME_HEIGHT,
             "IFRAME_WIDTH": IFRAME_WIDTH,
