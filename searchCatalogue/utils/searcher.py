@@ -20,7 +20,7 @@ import threading
 
 from copy import copy
 
-from Geoportal.utils import gerneral_helper
+from Geoportal.utils import general_helper
 from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
@@ -250,7 +250,7 @@ class Searcher:
             thread = threading.Thread(target=self.__get_resource_results, args=(url, copy(params), resource, result))
             thread_list.append(thread)
             #self.__get_resource_results(url, params, resource, result)
-        gerneral_helper.execute_threads(thread_list)
+        general_helper.execute_threads(thread_list)
         return result
 
     def __get_resource_results_de(self, resource, params: dict, results: dict, url):
@@ -302,7 +302,7 @@ class Searcher:
                 params["searchPages"] = 1
             params["searchResources"] = resource
             thread_list.append(threading.Thread(target=self.__get_resource_results_de, args=(resource, copy(params), results, url)))
-        gerneral_helper.execute_threads(thread_list)
+        general_helper.execute_threads(thread_list)
 
         return results
 
@@ -413,7 +413,7 @@ class Searcher:
                 params_cp["srwhat"] = what
                 # create thread
                 thread_list.append(threading.Thread(target=self.__get_single_info_result, args=(params_cp, results)))
-        gerneral_helper.execute_threads(thread_list)
+        general_helper.execute_threads(thread_list)
         return results
 
     def get_info_all_pages(self):

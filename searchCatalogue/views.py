@@ -22,8 +22,8 @@ from django_extensions import settings
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL
-from Geoportal.utils import gerneral_helper
-from Geoportal.utils.gerneral_helper import write_gml_to_session, print_debug
+from Geoportal.utils.php_session_data import get_mb_user_session_data
+from Geoportal.utils.general_helper import write_gml_to_session, print_debug
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
@@ -370,7 +370,7 @@ def get_data_primary(request: HttpRequest):
     lang_code = request.LANGUAGE_CODE
 
     # get user php session info
-    session_data = gerneral_helper.get_mb_user_session_data(request)
+    session_data = get_mb_user_session_data(request)
 
     # prepare bbox parameter
     search_bbox = post_params.get("searchBbox", "")
@@ -583,7 +583,7 @@ def get_permission_email_form(request: HttpRequest):
     """
     template = "permission_email_form.html"
     params_GET = request.GET.dict()
-    session_data = gerneral_helper.get_mb_user_session_data(request)
+    session_data = get_mb_user_session_data(request)
     user = session_data.get("user", "")
     mb_user = MbUser.objects.get(mb_user_name=user)
     mb_user_mail = mb_user.mb_user_email
