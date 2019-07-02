@@ -20,7 +20,8 @@ html{
 body{
     margin: 0;
     min-height: 100%;
-    background-image: linear-gradient(white, var(--secondary));
+    background: -ms-linear-gradient(top, white 0%, #e2e2e2 100%); /*--secondary*/
+    background-image: linear-gradient (white, var(--secondary));
 }
 
 h1{
@@ -35,6 +36,7 @@ h1{
 
 footer{
     border-top: 1px solid gray;
+    background-image: -ms-linear-gradient(#e2e2e2, white); /*--secondary*/
     background-image: linear-gradient(var(--secondary), white);
     width: 100%;
     text-align: center;
@@ -43,4 +45,5 @@ footer img{
     max-height: 7vw;
     min-height: 100px;
     padding: 20px;
+    border: 0px solid;
 }

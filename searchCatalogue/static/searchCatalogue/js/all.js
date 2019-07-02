@@ -705,6 +705,9 @@ $(document).ready(function() {
             return;
         }
 
+        // remove '*' from search line, since it would not be necessary!
+        clearAsterisk();
+
         // Check if there is a single resource request. This happens when a user selects the related button on the landing page
         if (search.getParam("singleResourceRequest") !== null){
             var singleResource = search.getParam("singleResourceRequest");
@@ -713,9 +716,6 @@ $(document).ready(function() {
             setAllPrimaryResources(false);
             search.resources_primary[singleResource] = true;
         }
-
-        // remove '*' from search line, since it would not be necessary!
-        clearAsterisk();
 
         // collapse map overlay if open
         var mapOverlay = $(".map-viewer-overlay");
@@ -759,6 +759,17 @@ $(document).ready(function() {
         }
         // overwrite facet parameter
         search.setParam("facet", allFacets.join(";"));
+
+        // if a spatial restriction is set, we need to get it and send back to the backend
+        var spatialRestriction = $(".-js-spatial-restriction");
+        console.log(spatialRestriction);
+        if(spatialRestriction.length > 0){
+            spatialRestriction = spatialRestriction.text().replace("\n", "");
+            search.setParam("searchTypeBbox", spatialRestriction.split(" ")[0]);
+            search.setParam("searchBbox", spatialRestriction.split(" ")[1]);
+        }
+        console.log(search.getParam("searchTypeBbox"));
+        console.log(search.getParam("searchBbox"));
 
         var prepareTerm = function(terms) {
            return terms.trim();
