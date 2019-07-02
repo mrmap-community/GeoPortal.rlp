@@ -21,28 +21,27 @@
     <div class="dataset search--body hide">
         <div class="search-results">
             {% for result in search_result_val %}
-                <div class="result--item -js-result-info">
-                    {% if result.is_intern %}
-                        <div class="info-search-result" data-target="{{ result.title|drop_translation:lang }}">
-                            <div class="search-result-title">
-                                {{ result.title|drop_translation:lang }}
-                            </div>
-                        </div>
-                    {% else %}
-                        <a target="_blank" href="{{ HOSTNAME }}/mediawiki/index.php/{{ result.title }}">
-                            <div class="search-result-title">
-                                {{ result.title|drop_translation:lang }}
-                            </div>
-                        </a>
-                    {% endif %}
-                    <div class="search-result-area">
-                        {% if result.snippet|length > 0 %}
-                            {% autoescape off %}
-                            "{{ result.snippet|bold:search_result_key|safe }}"
-                            {% endautoescape %}
+                {% if not result.is_intern %}
+                <a href="/mediawiki/index.php/{{ result.title }}" target="_blank">
+                {% endif %}
+                <div class="">
+                    <div class="result--item info-result-header {% if result.is_intern %}info-search-result{% endif %}" data-target="{{ result.title|drop_translation:lang }}" title="{% trans 'Open article' %}">
+                        <span class="info-result-title">{{ result.title|drop_translation:lang }}</span>
+                        {% if not result.is_intern %}
+                            <img class="external-link-img" src="{% static 'searchCatalogue/images/icons/icn_open_external.png' %}" title="{% trans 'Link opened in a new tab' %}">
                         {% endif %}
                     </div>
                 </div>
+                {% if not result.is_intern %}
+                </a>
+                {% endif %}
+            {% if result.snippet|length > 0 %}
+                <div class="search-result-area">
+                    {% autoescape off %}
+                    "{{ result.snippet|bold:search_result_key|safe }}"
+                    {% endautoescape %}
+                </div>
+            {% endif %}
             {% empty %}
                 {% trans 'No hits found for this search configuration' %}
             {% endfor %}
