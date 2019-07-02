@@ -9,7 +9,7 @@ Created on: 22.01.19
 import threading
 from collections import OrderedDict
 
-from Geoportal import helper
+from Geoportal.utils import gerneral_helper
 
 
 class Rehasher:
@@ -113,7 +113,7 @@ class Rehasher:
         # 1) Rehash categories
         for datatype in self.all_categories:
             thread_list.append(threading.Thread(target=self.__rehash_single_thread, args=(datatype,)))
-        helper.execute_threads(thread_list)
+        gerneral_helper.execute_threads(thread_list)
         # 2) Reorganize filter
         # Reorganize means we need to get rid of certain elements, which are useless in this system and would disturb the handling in a later process
         # only searchResources, orderFilter, maxResults and searchText from one datatype are needed, the rest is irrelevant
