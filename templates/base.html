@@ -20,6 +20,10 @@
     <script type="text/javascript" src="{% static 'searchCatalogue/vendor/zebra/javascript/zebra_datepicker.js' %}"></script>
     <script id="all-script" type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
     <script type="text/javascript" src="{% static 'useroperations/js/frontpage.js' %}"></script>
+    <!--[if lt IE 9]>
+	<script src="{% static 'useroperations/js/html5shiv.js' %}"></script>
+	<script src="{% static 'useroperations/js/html5shiv-printshiv.js' %}"></script>
+    <![endif]-->
     {% block head %}
     {% endblock %}
 </head>
