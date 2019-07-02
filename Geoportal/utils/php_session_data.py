@@ -2,7 +2,7 @@ import requests
 from pymemcache.client import base
 from phpserialize import *
 from django.http import HttpRequest
-from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, INTERNAL_SSL, PROJECT_DIR
+from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, INTERNAL_SSL, PROJECT_DIR, SESSION_NAME
 from Geoportal.utils.get_config_values import get_mapbender_config_value
 from useroperations.models import MbUser
 
@@ -46,8 +46,8 @@ def get_session_data(request):
 
 
 
-    if request.COOKIES.get('PHPSESSID') is not None:
-        session_data = get_mapbender_session_by_memcache(request.COOKIES.get('PHPSESSID'))
+    if request.COOKIES.get(SESSION_NAME) is not None:
+        session_data = get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:
             if b'mb_user_id' in session_data:
                 guest_id = get_mapbender_config_value(PROJECT_DIR,'ANONYMOUS_USER')
