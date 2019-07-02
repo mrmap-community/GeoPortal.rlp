@@ -970,7 +970,7 @@ def resolve_coupled_resources(md_link: str):
     if resources is not None:
         for resource in resources:
             _type = resource.get("serviceType", "")
-            uri = resource.get("accessUrl", None)
+            uri = urllib.parse.quote_plus(resource.get("accessUrl", None))
             uri_atom = resource.get("accessClient", None)
             data = {
                     "uri": uri,

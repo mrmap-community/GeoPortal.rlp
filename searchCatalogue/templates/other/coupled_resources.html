@@ -40,12 +40,12 @@
                     <div id="download_button_{{ download.id }}" class="feed-download resource-element-data">
                         <div class="resource-element-info"></div>
                         <div class="feed-download-wrapper">
-                            <a class="feed-download-button" href="{{ download.uri }}" target="_blank" title="{% trans 'Download' %}">
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                            <a class="feed-download-button" href="{{ download.uri }}" target="_blank" title="{% trans 'Original atom feed' %}">
+                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
                             </a>
                             {% if download.atom_uri is not None %}
-                                <a class="atom-feed-button" href="{{ download.atom_uri }}" target="_blank" title="{% trans 'Open atom client' %}">
-                                    <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="{% trans 'Open atom client' %}"/>
+                                <a class="atom-feed-button" href="{{ download.atom_uri }}" target="_blank" title="{% trans 'Open atom feed client' %}">
+                                    <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Open atom client' %}"/>
                                 </a>
                             {% endif %}
                         </div>

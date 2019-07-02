@@ -1075,10 +1075,22 @@ $(document).ready(function() {
     $(document).on("mouseover", ".feed-download-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_hover.png");
     });
 
     $(document).on("mouseout", ".feed-download-button", function(){
+        var elem = $(this);
+        var elem_img = elem.find(".feed-download-img");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
+    });
+
+    $(document).on("mouseover", ".atom-feed-button", function(){
+        var elem = $(this);
+        var elem_img = elem.find(".feed-download-img");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
+    });
+
+    $(document).on("mouseout", ".atom-feed-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
         elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download.png");
