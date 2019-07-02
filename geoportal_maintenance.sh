@@ -1401,7 +1401,7 @@ cd ${installation_folder}GeoPortal.rlp/
 
 echo -e "\n Creating Virtualenv in ${installation_folder}env. \n"
 # create and activate virtualenv
-virtualenv -ppython3 ${installation_folder}env >> $installation_log 2>&1
+virtualenv -ppython3.5 ${installation_folder}env >> $installation_log 2>&1
 source ${installation_folder}env/bin/activate
 echo -e "\n Successfully created virtualenv in ${installation_folder}env! \n" | tee -a $installation_log
 
