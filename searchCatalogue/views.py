@@ -452,10 +452,10 @@ def get_data_primary(request: HttpRequest):
     pages = viewHelper.calculate_pages_to_render(search_results, requested_page, requested_page_res)
     print_debug(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
 
-    start_time = time.time()
-    # generate inspire feed urls
-    search_results = viewHelper.gen_inspire_url(search_results)
-    print_debug(EXEC_TIME_PRINT % ("preparing inspire urls", time.time() - start_time))
+    # start_time = time.time()
+    # # generate inspire feed urls
+    # search_results = viewHelper.gen_inspire_url(search_results)
+    # print_debug(EXEC_TIME_PRINT % ("preparing inspire urls", time.time() - start_time))
 
     start_time = time.time()
     # generate extent graphics url

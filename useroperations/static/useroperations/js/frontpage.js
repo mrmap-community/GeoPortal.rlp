@@ -404,11 +404,10 @@ $(window).on("load", function(param){
 
 });
 
-
 $(document).on("scroll", function(){
     var searchbar = $(".middle-header-top");
     // check if searchbar is out of viewport
-    var searchbarPositionHeight = searchbar.outerHeight();
+    var searchbarPositionHeight = searchbar.outerHeight() + searchbar.innerHeight();
     // get viewport Y offset
     var viewportOffset = window.pageYOffset;
     if(searchbarPositionHeight <= viewportOffset){
