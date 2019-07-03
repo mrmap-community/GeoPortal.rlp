@@ -326,7 +326,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
-    session_id = request.COOKIES.get("PHPSESSID", "")
+    session_id = request.COOKIES.get(SESSION_NAME, "")
     check_search_bbox(session_id, bbox)
 
     results = {
@@ -472,7 +472,7 @@ def get_data_primary(request: HttpRequest):
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
-    session_id = request.COOKIES.get("PHPSESSID", "")
+    session_id = request.COOKIES.get(SESSION_NAME, "")
     check_search_bbox(session_id, bbox)
 
     # prepare data for rendering
