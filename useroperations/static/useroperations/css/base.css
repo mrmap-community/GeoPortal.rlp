@@ -175,13 +175,17 @@ footer{
 }
 
 .left-header{
+    display: flex;
+    justify-content: center;
+    /*
     flex-grow: 1;
-    padding: 0 0 0 5%;
+    */
+    padding: 0 4em 0 2em;
 }
 
 .middle-header{
     display: block;
-    flex-grow: 2;
+    flex-grow: 5;
 }
 
 .middle-header-top{
@@ -212,8 +216,8 @@ footer{
     top: 0;
     right: 0;
     margin: 5px;
-
 }
+
 .right-header-bottom{
     display: flex;
     align-items: flex-end;
@@ -685,6 +689,10 @@ ul {
 
     header{
         font-size: 1em;
+    }
+
+    .left-header{
+        padding: 0 3em 0 0;
     }
 
     .middle-header{

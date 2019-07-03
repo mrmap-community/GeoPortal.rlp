@@ -970,17 +970,20 @@ def resolve_coupled_resources(md_link: str):
     if resources is not None:
         for resource in resources:
             _type = resource.get("serviceType", "")
-            uri = urllib.parse.quote_plus(resource.get("accessUrl", None))
+            uri = resource.get("accessUrl", None)
             uri_atom = resource.get("accessClient", None)
             data = {
                     "uri": uri,
                     "atom_uri": uri_atom,
-                    "showMapUrl": uri,
+                    "showMapUrl": urllib.parse.quote_plus(uri),
                     "title": resource.get("serviceTitle", None),
                     "id": sha256(md_link),
-                    "mdLink": resource.get("htmlLink", None),
+                    "mdLink": resource.get("mdLink", None),
+                    "htmlLink": resource.get("htmlLink", None),
                 }
             if _type == "view":
+                # to match the expected variable name in 'search_result_list_entry.html' we need to move some variables around
+                data["mdLink"] = data["htmlLink"]
                 val["view_links"].append(data)
             elif _type == "download":
                 val["download_links"].append(data)

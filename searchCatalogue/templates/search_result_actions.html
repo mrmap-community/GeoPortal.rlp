@@ -74,14 +74,17 @@
                 <ul style="overflow: hidden;">
                     {% for feed in feeds %}
                         <li class="resource-element">
-                            <a href="{{ feed.download_url }}" target="_blank">
-                                <div class="resource-view-title" title="{% trans 'Download' %}">
-                                    {{ feed.serviceUuid }}
+                            <a href="{{ feed.htmlLink }}" target="_blank">
+                                <div class="resource-view-title" title="{% trans 'Metadata' %}">
+                                    {{ feed.serviceTitle }}
                                 </div></a>
                             <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
                                 <div class="resource-element-info"></div>
                                 <div class="feed-download-wrapper">
-                                    <a class="atom-feed-button" href="{{ feed.download_url }}" target="_blank" title="{% trans 'Original atom feed' %}">
+                                    <a class="feed-download-button" href="{{ feed.accessUrl }}" target="_blank" title="{% trans 'Original atom feed' %}">
+                                        <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
+                                    </a>
+                                    <a class="atom-feed-button" href="{{ feed.accessClient }}" target="_blank" title="{% trans 'Open in atom feed viewer' %}">
                                         <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
                                     </a>
                                 </div>
