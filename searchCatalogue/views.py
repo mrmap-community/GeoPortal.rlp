@@ -52,7 +52,7 @@ def index_external(request: HttpRequest):
     """
     external_call = True
     params_get = request.GET
-    start_search = gerneral_helper.resolve_boolean_value(params_get.get("start", "False"))
+    start_search = general_helper.resolve_boolean_value(params_get.get("start", "False"))
 
     return index(request=request, external_call=external_call, start_search=start_search)
 
