@@ -102,6 +102,11 @@ wms_3_url="'http://map.krz.de/cgi-bin/mapserv7?map=/opt/gdi/wms/overview_owl.map
 # demo wms
 wms_4_url="'https://gis.mffjiv.rlp.de/cgi-bin/mapserv?map=/data/mapserver/mapfiles/institutions_0601.map&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS'"
 
+#colors for install
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
 install_full(){
 
 ##################### Geoportal-RLP
@@ -187,6 +192,8 @@ if [ "$http_proxy" != "" ];then
       fi
     fi
 
+apt -qq update
+apt-get -qq install subversion
 
     if [ "$custom_proxy" == true ];then
       if [ "$svn_proxy" != "" ];then
@@ -242,7 +249,7 @@ if [ $install_system_packages = 'true' ]; then
 echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
 apt-get update >> $installation_log 2>&1
 apt-get -qq install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
-echo -e "\n Successfully installed Debian packages for Mapbender! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully installed Debian packages for Mapbender!${reset} \n" | tee -a $installation_log
 fi
 ##git config --global http.proxy http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port
 # +655MB
@@ -267,7 +274,7 @@ if [ $create_folders = 'true' ]; then
     mkdir -pv ${installation_folder}svn/ | tee -a $installation_log
     mkdir -pv ${installation_folder}access/ | tee -a $installation_log
 
-    echo -e "\n Successfully created directories! \n" | tee -a $installation_log
+    echo -e "\n${green} Successfully created directories! ${reset}\n" | tee -a $installation_log
 fi
 ############################################################
 # check out svn repositories initially
@@ -277,14 +284,24 @@ cd ${installation_folder}svn/
 
 if [ $checkout_mapbender_svn = 'true' ]; then
     echo -e "\n Downloading Mapbender Sources from SVN! \n" | tee -a $installation_log
-    svn co https://svn.osgeo.org/mapbender/trunk/mapbender >> $installation_log 2>&1 || (echo "Downloading of Mapbender failed! Check internet connection and proxy settings!" | tee -a $installation_log;exit;)
-    echo -e "\n Successfully downloaded Mapbender Source! \n"  | tee -a $installation_log
+    svn co https://svn.osgeo.org/mapbender/trunk/mapbender >> $installation_log 2>&1
+    if [ $? -eq 0 ];then
+      echo -e "\n ${green}Successfully downloaded Mapbender Source!${reset} \n"  | tee -a $installation_log
+    else
+      echo -e "\n ${red}Downloading of Mapbender failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      exit
+    fi
 fi
 
 if [ $checkout_mapbender_conf = 'true' ]; then
     echo -e "\n Download Mapbender conf from SVN \n"  | tee -a $installation_log
-    svn co http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf >> $installation_log 2>&1 || (echo "Downloading of Mapbender Conf failed! Check internet connection and proxy settings!" | tee -a $installation_log;exit;)
-    echo -e "\n Successfully downloaded Mapbender Conf! \n"  | tee -a $installation_log
+    svn co http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf >> $installation_log 2>&1
+    if [ $? -eq 0 ];then
+      echo -e "\n ${green}Successfully downloaded Mapbender Conf!${reset} \n"  | tee -a $installation_log
+    else
+      echo -e "\n ${red}Downloading of Mapbender Conf failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      exit
+    fi
 fi
 
 ############################################################
@@ -294,7 +311,7 @@ if [ $install_mapbender_source = 'true' ]; then
     echo -e "\n Copying Mapbender Source to ${installation_folder} \n"  | tee -a $installation_log
     cp -a ${installation_folder}svn/mapbender ${installation_folder}
     svn info https://svn.osgeo.org/mapbender/trunk/mapbender | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}mapbender/lastinstalled
-    echo -e "\n Successfully copied Mapbender Source to ${installation_folder}! \n"  | tee -a $installation_log
+    echo -e "\n ${green}Successfully copied Mapbender Source to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
 ############################################################
@@ -304,17 +321,17 @@ if [ $install_mapbender_conf = 'true' ]; then
     echo -e "\n Copying Mapbender Conf to ${installation_folder} \n"  | tee -a $installation_log
     cp -a ${installation_folder}svn/conf ${installation_folder}
     svn info http://www.gdi-rp-dienste.rlp.de/svn/de-rp/data/conf | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}conf/lastinstalled
-    echo -e "\n Successfully copied Mapbender Conf to ${installation_folder}! \n"  | tee -a $installation_log
+    echo -e "\n ${green}Successfully copied Mapbender Conf to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
 ############################################################
 # cleanup .svn relicts
 ############################################################
 if [ $install_mapbender_source = 'true' ]; then
-    echo -e '\n Delete .svn files \n '
+    echo -e "\n Delete .svn files \n "
     cd ${installation_folder}mapbender/
     rm -rf $(find . -type d -name .svn)
-    echo -e '\n Successfully deleted .svn files! \n '
+    echo -e "\n ${green} Successfully deleted .svn files! ${reset}\n "
 fi
 
 ############################################################
@@ -699,7 +716,7 @@ EOF
 
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql >> $installation_log 2>&1
 
-  echo -e "\n Successfully installed Mapbender Database! \n" | tee -a $installation_log
+  echo -e "\n ${green}Successfully installed Mapbender Database!${reset} \n" | tee -a $installation_log
 
   if [ $checkout_mapbender_conf = 'true' ]; then
 
@@ -799,9 +816,15 @@ EOF
     # alter other conf files
     sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
     # copy conf file to right places
+
+    if  ! grep -q "SESSION_NAME"  ${installation_folder}conf/mapbender.conf ;then
+      echo >> 'define("SESSION_NAME", "PHPSESSID")'; ${installation_folder}conf/mapbender.conf
+    fi
+
+
     cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
     # mapfile for metadata wms
-    echo -e "\n Successfully copied configurations! \n"
+    echo -e "\n ${green}Successfully copied configurations! ${reset}\n"
     sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
     sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
     sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents_geoportal_rlp.map
@@ -861,7 +884,7 @@ echo -e "\n"
     ##################### demo service
 eval $wms_6_register_cmd | tee -a $installation_log
 
-echo -e "\n\n Successfully registered services! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
     #####################
 # qualify the main gui
 # update database to set initial extent and epsg for Main GUI: TODO: maybe use a hidden layer !
@@ -875,7 +898,7 @@ sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name
 sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_width', '1000', 'define a max mapframe width (units pixel) f.e. 700 or false' ,'var')" >> $installation_log 2>&1
 sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "INSERT INTO gui_element_vars(fkey_gui_id, fkey_e_id, var_name, var_value, context, var_type) VALUES('${default_gui_name}', 'resizeMapsize', 'max_height', '600', 'define a max mapframe height (units pixel) f.e. 700 or false' ,'var')" >> $installation_log 2>&1
 
-echo -e "\n\n Successfully configured Mapbender! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully configured Mapbender! ${reset}\n" | tee -a $installation_log
 
 fi
 
@@ -1141,8 +1164,13 @@ fi
   sed -i s/"SecRuleEngine DetectionOnly"/"SecRuleEngine On"/g /etc/modsecurity/modsecurity.conf
   rm -rf /usr/share/modsecurity-crs
   echo -e "\n Downloading Modsecurity Ruleset! \n" | tee -a $installation_log
-  git clone --progress https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs >> $installation_log 2>&1 || (echo "Downloading Modsecurity Ruleset failed! Check internet connection or proxy!" | tee -a $installation_log;exit;)
-  echo -e "\n Successfully downloaded Modsecurity Ruleset! \n" | tee -a $installation_log
+  git clone --progress https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs >> $installation_log 2>&1
+  if [ $? -eq 0 ];then
+    echo -e "\n ${green}Successfully downloaded Modsecurity Ruleset! ${reset}\n" | tee -a $installation_log
+  else
+    echo -e "\n ${red}Downloading Modsecurity Ruleset failed! Check internet connection or proxy!${reset}\n" | tee -a $installation_log
+    exit
+  fi
   cd /usr/share/modsecurity-crs
   mv crs-setup.conf.example crs-setup.conf
 
@@ -1213,7 +1241,7 @@ fi
   a2dissite 000-default >> $installation_log 2>&1
   service apache2 restart >> $installation_log 2>&1
 
-  echo -e  "\n Successfully configured Apache! \n" | tee -a $installation_log
+  echo -e  "\n ${green}Successfully configured Apache! ${reset}\n" | tee -a $installation_log
 fi #end of apache configuration
   ############################################################
   # add privileges on search tables to mapbender database user from installation
@@ -1342,11 +1370,18 @@ EOF
 echo -e "\n Installing needed Debian packages for Django \n" | tee -a $installation_log
 apt-get update >> $installation_log 2>&1
 apt-get -qq install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev | tee -a $installation_log
-echo -e "\n Successfully installed Debian packages for Django! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully installed Debian packages for Django! ${reset}\n" | tee -a $installation_log
 cd ${installation_folder}
 echo -e "\n Downloading Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
-git clone --progress https://git.osgeo.org/gitea/armin11/GeoPortal.rlp >> $installation_log 2>&1 || (echo "Downloading Geoportal Source faild! Check internet connection or proxy!" | tee -a $installation_log;exit;)
-echo -e "\n Successfully downloaded Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
+git clone --progress https://git.osgeo.org/gitea/armin11/GeoPortal.rlp >> $installation_log 2>&1
+if [ $? -eq 0 ];then
+  echo -e "\n ${green}Successfully downloaded Modsecurity Ruleset! ${reset}\n" | tee -a $installation_log
+else
+  echo -e "\n ${red}Downloading Geoportal Source faild! Check internet connection or proxy!${reset}\n" | tee -a $installation_log
+  exit
+fi
+
+echo -e "\n ${green}Successfully downloaded Geoportal Source to ${installation_folder}! ${reset}\n" | tee -a $installation_log
 
 echo -e "\n Configuring Django. \n" | tee -a $installation_log
 
@@ -1396,13 +1431,20 @@ cd ${installation_folder}GeoPortal.rlp/
 echo -e "\n Creating Virtualenv in ${installation_folder}env. \n"
 # create and activate virtualenv
 virtualenv -ppython3 ${installation_folder}env >> $installation_log 2>&1
+
+if [ $? -eq 0 ];then
+  echo -e "\n ${green} Successfully created virtualenv in ${installation_folder}env! ${reset}\n" | tee -a $installation_log
+else
+  echo -e "\n ${green} Creation of virtualenv in ${installation_folder}env failed! ${reset}\n" | tee -a $installation_log
+  exit
+fi
+
 source ${installation_folder}env/bin/activate
-echo -e "\n Successfully created virtualenv in ${installation_folder}env! \n" | tee -a $installation_log
 
 # install needed python packages
 echo -e "\n Installing needed python libraries. \n" | tee -a $installation_log
 pip install -r requirements.txt >> $installation_log 2>&1
-echo -e "\n Successfully installed python libraries! \n" | tee -a $installation_log
+echo -e "\n ${green} Successfully installed python libraries!${reset} \n" | tee -a $installation_log
 
 rm -r ${installation_folder}GeoPortal.rlp/static >> $installation_log 2>&1
 python manage.py collectstatic >> $installation_log 2>&1
@@ -1441,7 +1483,7 @@ fi
 echo -e "\n Installing Mediawiki! \n" | tee -a $installation_log
 apt update >> $installation_log 2>&1
 apt-get -qq install -y -t stretch-backports mediawiki | tee -a $installation_log
-echo -e "\n Successfully installed Mediawiki ! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully installed Mediawiki${reset} ! \n" | tee -a $installation_log
 #mysql_secure_installation
 
 echo -e "\n Configuring Mysql! \n" | tee -a $installation_log
@@ -1458,11 +1500,17 @@ mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
 mysql -uroot -p$mysqlpw -e "create database Geoportal;"
 mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
-echo -e "\n Successfully configured Mysql! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
 
 echo -e "\n Downloading MediaWikiLanguageExtensionBundle! \n" | tee -a $installation_log
 cd /tmp/
-wget -q https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2 || (echo "Failed to Download MediawikiLanguageExtensionBundle! Check connection or proxy!" | tee -a $installation_log;exit;)
+wget -q https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2 | tee -a $installation_log
+if [ $? -eq 0 ];then
+  echo -e "\n ${green}Successfully downloaded MediaWikiLanguageExtensionBundle! ${reset}\n" | tee -a $installation_log
+else
+  echo -e "\n ${red}Failed to Download MediawikiLanguageExtensionBundle! Check connection or proxy!${reset}\n" | tee -a $installation_log
+  exit
+fi
 tar -kxjf MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 rm /usr/share/mediawiki/extensions/LocalisationUpdate
 cp -a /tmp/extensions/* /usr/share/mediawiki/extensions
@@ -1470,7 +1518,6 @@ rm -r /tmp/extensions
 rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 
 cp -a ${installation_folder}GeoPortal.rlp/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
-echo -e "\n Successfully downloaded MediaWikiLanguageExtensionBundle! \n" | tee -a $installation_log
 
 echo -e "\n Configuring Composer for SemanticMediaWiki extension! \n" | tee -a $installation_log
 cd /usr/share/mediawiki
@@ -1483,7 +1530,7 @@ chown composer /usr/share/mediawiki/
 chown -R composer /usr/share/mediawiki/vendor/
 su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev" >> $installation_log 2>&1
 
-echo -e "\n Successfully configured composer! \n" | tee -a $installation_log
+echo -e "\n ${green}Successfully configured composer!${reset} \n" | tee -a $installation_log
 
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
@@ -1499,10 +1546,6 @@ fi
 
 php maintenance/update.php --quiet --skip-external-dependencies >> $installation_log 2>&1
 
-red=`tput setaf 1`
-green=`tput setaf 2`
-reset=`tput sgr0`
-
 echo -e "\n Installation Complete! Doing some checks! \n" | tee -a $installation_log
 
 pgrep apache2 > /dev/null
@@ -1516,7 +1559,7 @@ fi
 
 echo -e "\n Trying to reach the index page! \n" | tee -a $installation_log
 
-curl -s 127.0.0.1 | grep "Geoportal RLP" >> /dev/null
+curl --noproxy 127.0.0.1 -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36" -s -L 127.0.0.1 | grep "Geoportal RLP" >> /dev/null
 
 if [ $? -ne 0 ];then
   echo -e "\n ${red}Index page does not look right! Check /var/log/apache2/error.log \n${reset}" | tee -a $installation_log
@@ -1744,7 +1787,7 @@ check_mode() {
 
 if [ $mode = "install" ]; then
   echo -n " "
-  date | tee -a /tmp/geoportal_$(date +"%m_%d_%Y")install_.log
+  date | tee -a /tmp/geoportal_install_$(date +"%m_%d_%Y").log
   echo -e "\n Performing complete installation \n"
 	install_full
 elif [ $mode = "update" ];then
@@ -1770,7 +1813,7 @@ echo "
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-    	--ipaddress=ipaddress             		| Default \"127.0.0.1\"
+    	--ip=ipaddress             		| Default \"127.0.0.1\"
         --hostname=hostname              		| Default \"127.0.0.1\"
     	--proxy=Proxy IP:Port  	 			| Default \"None\" ; Syntax --proxy=1.2.3.4:5555
         --proxyuser=username                            | Default \"\" ; Password will be prompted
@@ -1800,7 +1843,7 @@ while getopts h-: arg; do
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
 	   phppgadmin_pw=?*		)  phppgadmin_password=$LONG_OPTARG;;
 	   install_dir=?*		)  installation_folder=$LONG_OPTARG;;
-	   ipaddress=?*			)  ipaddress=$LONG_OPTARG;;
+	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
