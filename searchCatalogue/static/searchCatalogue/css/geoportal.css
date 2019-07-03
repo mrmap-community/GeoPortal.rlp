@@ -576,6 +576,30 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 .info-search-result:hover{
     cursor: pointer;
 }
+
+.info-result-title{
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.info-result-header{
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+}
+
+.info-result-header:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    color: white;
+}
+
+.external-link-img{
+    max-width: 1em;
+    max-height: 1em;
+    margin: 0 0 0 1em;
+}
+
 .result--item a:hover{
     text-decoration: none;
 }

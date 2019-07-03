@@ -228,6 +228,9 @@ Search.prototype = {
                 $("#search-results").toggleClass("active");
             }
             jQuery('#search-results .-js-result').html(data.html);
+            if(data.params.directly_open){
+                $(".source--title").click();
+            }
         }
 
         // see if pagination was used than display the current resource the user has used the paginator
@@ -577,11 +580,6 @@ function startInfoCall(){
         format: "json",
         success: function(data){
             var numInfoResults = data["nresults"];
-            var infoTabNumber = $("#info-result-number");
-            infoTabNumber.text(numInfoResults);
-            if(!infoTabNumber.is(":visible")){
-                infoTabNumber.toggleClass("hide");
-            }
         }
     })
 }
@@ -762,14 +760,11 @@ $(document).ready(function() {
 
         // if a spatial restriction is set, we need to get it and send back to the backend
         var spatialRestriction = $(".-js-spatial-restriction");
-        console.log(spatialRestriction);
         if(spatialRestriction.length > 0){
             spatialRestriction = spatialRestriction.text().replace("\n", "");
             search.setParam("searchTypeBbox", spatialRestriction.split(" ")[0]);
             search.setParam("searchBbox", spatialRestriction.split(" ")[1]);
         }
-        console.log(search.getParam("searchTypeBbox"));
-        console.log(search.getParam("searchBbox"));
 
         var prepareTerm = function(terms) {
            return terms.trim();
@@ -1080,10 +1075,22 @@ $(document).ready(function() {
     $(document).on("mouseover", ".feed-download-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_hover.png");
     });
 
     $(document).on("mouseout", ".feed-download-button", function(){
+        var elem = $(this);
+        var elem_img = elem.find(".feed-download-img");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
+    });
+
+    $(document).on("mouseover", ".atom-feed-button", function(){
+        var elem = $(this);
+        var elem_img = elem.find(".feed-download-img");
+        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
+    });
+
+    $(document).on("mouseout", ".atom-feed-button", function(){
         var elem = $(this);
         var elem_img = elem.find(".feed-download-img");
         elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download.png");
@@ -1615,6 +1622,11 @@ $(document).ready(function() {
                 article.slideToggle("slow");
                 // collapse all search results
                 var wrapper = $(".source--title.-js-title").click();
+                window.scrollTo({
+                    top:150,
+                    left:0,
+                    behavior:'smooth'
+                });
             }
         })
     });

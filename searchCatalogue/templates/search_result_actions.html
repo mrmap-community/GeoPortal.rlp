@@ -72,17 +72,34 @@
             {% if feeds is not None and feeds|length > 0 %}
             <div class="resource-list download_{{ result.id }}" style="display:none;">
                 <ul style="overflow: hidden;">
-                    <li class="resource-category-header">{% trans 'Download services' %}</li>
                     {% for feed in feeds %}
+                        <li class="resource-element">
+                            <a href="{{ feed.download_url }}" target="_blank">
+                                <div class="resource-view-title" title="{% trans 'Download' %}">
+                                    {{ feed.serviceUuid }}
+                                </div></a>
+                            <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
+                                <div class="resource-element-info"></div>
+                                <div class="feed-download-wrapper">
+                                    <a class="atom-feed-button" href="{{ feed.download_url }}" target="_blank" title="{% trans 'Original atom feed' %}">
+                                        <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                    <!--
                     <li class="resource-element">
                         <a href="{{ feed.download_url }}" target="_blank" >
-                            <div id="download_button_{{ feed.serviceUuid }}" class="feed-download">
-                                <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
-                                <strong>{{ feed.serviceUuid }}</strong>
-                                <!-- ToDo: Replace the type here with a title -->
+                            <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
+                                <div class="resource-element-info">
+                                    <strong>{{ feed.serviceUuid }}</strong>
+                                    <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
+                                </div>
                                 <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
                             </div></a>
                     </li>
+                    -->
                     {% endfor %}
                 </ul>
             </div>

@@ -348,7 +348,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     view_content = render_to_string(template_name, results)
     print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
-    return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
+    return GeoportalJsonResponse(html=view_content, params={}).get_response()
 
 
 @check_browser
@@ -519,7 +519,7 @@ def get_data_primary(request: HttpRequest):
     view_content = render_to_string(template_name, results)
     print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
-    return GeoportalJsonResponse(resources=requested_resources, html=view_content).get_response()
+    return GeoportalJsonResponse(html=view_content, params={}).get_response()
 
 
 @check_browser
@@ -554,10 +554,6 @@ def get_data_info(request: HttpRequest):
         search_results = searcher.get_info_search_results()
     search_results = viewHelper.prepare_info_search_results(search_results, list_all, lang)
     search_results = viewHelper.resolve_internal_external_info(search_results, searcher)
-    # calculate number of all info hits
-    nresults = 0
-    for res_val in search_results.values():
-        nresults += len(res_val)
 
     params = {
         "lang": lang,
@@ -573,7 +569,7 @@ def get_data_info(request: HttpRequest):
     view_content = render_to_string(template_name, params)
     #print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
-    return GeoportalJsonResponse(html=view_content, nresults=nresults).get_response()
+    return GeoportalJsonResponse(html=view_content, params={"directly_open": True}).get_response()
 
 
 @check_browser
