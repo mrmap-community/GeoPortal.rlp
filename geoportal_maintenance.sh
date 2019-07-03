@@ -187,6 +187,8 @@ if [ "$http_proxy" != "" ];then
       fi
     fi
 
+apt-get update >> $installation_log 2>&1
+apt-get -qq install -y subversion 
 
     if [ "$custom_proxy" == true ];then
       if [ "$svn_proxy" != "" ];then
