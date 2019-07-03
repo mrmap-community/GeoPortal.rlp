@@ -190,6 +190,19 @@ footer{
     position:relative;
 }
 
+.sticky-top{
+    min-width: 50vw;
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 25%;
+	-webkit-filter: drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-moz-filter:    drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-ms-filter:     drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-o-filter:      drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	filter:         drop-shadow(0 5px 2px rgba(0,0,0,.5));
+}
+
 .right-header{
     flex-grow: 1;
 }
@@ -676,7 +689,12 @@ ul {
 
     .middle-header{
         margin: 3em 0;
-        width: 30em;
+    }
+
+    .sticky-top{
+        min-width: 100vw;
+        left: 0;
+        margin: 0 0 0 0;
     }
 
     #geoportal-search-field{

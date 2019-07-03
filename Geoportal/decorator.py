@@ -9,8 +9,16 @@ from django.shortcuts import redirect
 
 allowed_browsers = [
     "Firefox",
+    "Firefox Mobile",
     "Opera",
     "Chrome",  # Edge user agent has 'Chrome' as well
+    "Chrome Mobile",
+    "Edge",
+    "Edge Mobile",
+    "Chrome Mobile WebView",
+    "Mobile Safari",
+    "Safari",
+    "Amazon Silk",
 ]
 
 def check_browser(function):

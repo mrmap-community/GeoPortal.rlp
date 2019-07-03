@@ -405,6 +405,21 @@ $(window).on("load", function(param){
 });
 
 
+$(document).on("scroll", function(){
+    var searchbar = $(".middle-header-top");
+    // check if searchbar is out of viewport
+    var searchbarPositionHeight = searchbar.outerHeight();
+    // get viewport Y offset
+    var viewportOffset = window.pageYOffset;
+    if(searchbarPositionHeight <= viewportOffset){
+        // make searchbar sticky to the viewport top
+        searchbar.addClass("sticky-top");
+    }else{
+        // revert this effect
+        searchbar.removeClass("sticky-top");
+    }
+})
+
 /*
  * Things that should start when the document is fully loaded
  */
