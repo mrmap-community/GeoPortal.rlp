@@ -1524,7 +1524,7 @@ fi
 
 echo -e "\n Trying to reach the index page! \n" | tee -a $installation_log
 
-curl -s 127.0.0.1 | grep "Geoportal RLP" >> /dev/null
+curl -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36" -L -s 127.0.0.1 | grep "Geoportal RLP" >> /dev/null
 
 if [ $? -ne 0 ];then
   echo -e "\n ${red}Index page does not look right! Check /var/log/apache2/error.log \n${reset}" | tee -a $installation_log
