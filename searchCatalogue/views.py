@@ -23,7 +23,7 @@ from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL, SESSION_NAME
 from Geoportal.utils.php_session_data import get_mb_user_session_data
-from Geoportal.utils.general_helper import write_gml_to_session, print_debug
+from Geoportal.utils.utils import write_gml_to_session, print_debug
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher

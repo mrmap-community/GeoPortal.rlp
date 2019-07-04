@@ -18,7 +18,7 @@ from django.utils.translation import gettext as _
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, SESSION_NAME
-from Geoportal.utils import general_helper, php_session_data, get_config_values
+from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import useroperations_helper
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -266,8 +266,8 @@ def register_view(request):
                 return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
             try:
-                realm = get_config_values.get_mapbender_config_value('REALM')
-                portaladmin = get_config_values.get_mapbender_config_value('PORTAL_ADMIN_USER_ID')
+                realm = mbConfReader.get_mapbender_config_value('REALM')
+                portaladmin = mbConfReader.get_mapbender_config_value('PORTAL_ADMIN_USER_ID')
                 byte_aldigest = (form.cleaned_data['name'] + ":" + realm + ":" + form.cleaned_data['password']).encode('utf-8')
                 user.mb_user_aldigest = hashlib.md5(byte_aldigest).hexdigest()
                 user.mb_user_owner = portaladmin
@@ -535,7 +535,7 @@ def delete_profile_view(request):
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
 
-                session_data = general_helper.get_mb_user_session_data(request)
+                session_data = utils.get_mb_user_session_data(request)
 
                 request.session["current_page"] = "delete_profile"
 
@@ -754,7 +754,7 @@ def activation_view(request, activation_key=""):
     context = {
         "headline": _('Account activation'),
         "activated": activated,
-        "navigation": general_helper.get_navigation_items(),
+        "navigation": utils.get_navigation_items(),
     }
 
     #geoportal_context = GeoportalContext(request=request)
