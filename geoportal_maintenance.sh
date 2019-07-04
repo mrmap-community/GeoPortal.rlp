@@ -125,7 +125,7 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 
 #set hostname to ipaddress if no hostname was given
 if [ $ipaddress != "127.0.0.1" ] && [ $hostname == "127.0.0.1" ] ;then
-hostname=$ipaddress
+  hostname=$ipaddress
 fi
 
 if [ "$http_proxy_user" != "" ];then
@@ -147,7 +147,6 @@ else
   http_proxy_user_hex=""
   http_proxy_pass_hex=""
 fi
-
 
 # proxy configuration
 if [ "$http_proxy" != "" ];then
@@ -192,8 +191,8 @@ if [ "$http_proxy" != "" ];then
       fi
     fi
 
-apt -qq update
-apt-get -qq install subversion
+apt-get update | tee -a $installation_log
+apt-get -qq install subversion | tee -a $installation_log
 
     if [ "$custom_proxy" == true ];then
       if [ "$svn_proxy" != "" ];then
@@ -243,7 +242,7 @@ fi
 ############################################################
 if [ $install_system_packages = 'true' ]; then
   echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
-  apt-get update >> $installation_log 2>&1
+  apt-get -qq update | tee -a $installation_log
   apt-get -qq install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
   echo -e "\n ${green}Successfully installed Debian packages for Mapbender!${reset} \n" | tee -a $installation_log
 fi
@@ -780,16 +779,16 @@ fi
     sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
     sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
 
-    echo -e "\n Copying configurations! \n"
+    echo -e "\n Copying configurations! \n" | tee -a $installation_log
     # copy conf files to right places
-    cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/
-    cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/
+    cp -v ${installation_folder}conf/geoportal.conf ${installation_folder}mapbender/conf/ | tee -a $installation_log
+    cp -v ${installation_folder}conf/mapbender.conf ${installation_folder}mapbender/conf/ | tee -a $installation_log
     # alter other conf files
     sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/geoportal.conf
     if  ! grep -q "SESSION_NAME"  ${installation_folder}conf/mapbender.conf ;then
       echo 'define("SESSION_NAME", "PHPSESSID");' >> ${installation_folder}conf/mapbender.conf
     fi
-    echo -e "\n ${green}Successfully copied configurations! ${reset}\n"
+    echo -e "\n ${green}Successfully copied configurations! ${reset}\n" | tee -a $installation_log
 
     # mapfile for metadata wms
     sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
@@ -1222,7 +1221,7 @@ echo "GRANT ALL ON TABLE wmc_search_table TO $mapbender_database_user;" >> ${ins
 echo "ALTER TABLE wmc_search_table OWNER TO $mapbender_database_user;" >> ${installation_folder}mapbender/resources/db/materialize_wmc_view.sql
 ############################################################
 if [ $configure_cronjobs = 'true' ]; then
-  mkdir -p ${installation_folder}cronjobs/
+  mkdir -pv ${installation_folder}cronjobs/ | tee -a $installation_log
   # create script to call metadata via localhost
   cat << EOF > ${installation_folder}cronjobs/generateMetadata.sh
 #!/bin/bash
@@ -1322,7 +1321,7 @@ printf "%s:%s:%s\n" "$phppgadmin_user" "$phppgadmin_realm" "$digest_phppgadmin" 
 #                                       Django Installation
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 echo -e "\n Installing needed Debian packages for Django \n" | tee -a $installation_log
-apt-get update >> $installation_log 2>&1
+apt-get -qq update | tee -a $installation_log
 apt-get -qq install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev | tee -a $installation_log
 echo -e "\n ${green}Successfully installed Debian packages for Django! ${reset}\n" | tee -a $installation_log
 cd ${installation_folder}
@@ -1339,7 +1338,7 @@ echo -e "\n ${green}Successfully downloaded Geoportal Source to ${installation_f
 echo -e "\n Configuring Django. \n" | tee -a $installation_log
 
 # this directory is used to store php helper scripts for the intermediate geoportal solution
-mkdir -p ${installation_folder}portal | tee -a $installation_log
+mkdir -pv ${installation_folder}portal | tee -a $installation_log
 
 # copy some mapbender related scripts
 cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}portal
@@ -1421,7 +1420,7 @@ if [ ! -f "/etc/apt/sources.list.d/backports.list"  ]; then
 	echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list.d/backports.list
 fi
 echo -e "\n Installing Mediawiki! \n" | tee -a $installation_log
-apt update >> $installation_log 2>&1
+apt-get -qq update | tee -a $installation_log
 apt-get -qq install -y -t stretch-backports mediawiki | tee -a $installation_log
 echo -e "\n ${green}Successfully installed Mediawiki${reset} ! \n" | tee -a $installation_log
 #mysql_secure_installation
@@ -1468,7 +1467,7 @@ chown composer /usr/share/mediawiki/extensions/SemanticMediaWiki/
 chown composer /usr/share/mediawiki/composer.json
 chown composer /usr/share/mediawiki/
 chown -R composer /usr/share/mediawiki/vendor/
-su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev" >> $installation_log 2>&1
+su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev" | tee -a $installation_log
 
 echo -e "\n ${green}Successfully configured composer!${reset} \n" | tee -a $installation_log
 
@@ -1481,7 +1480,7 @@ if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
 
-php maintenance/update.php --quiet --skip-external-dependencies >> $installation_log 2>&1
+php maintenance/update.php --quiet --skip-external-dependencies | tee -a $installation_log
 
 echo -e "\n Installation Complete! Doing some checks! \n" | tee -a $installation_log
 
