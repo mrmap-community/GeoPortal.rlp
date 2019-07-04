@@ -228,7 +228,7 @@ Search.prototype = {
                 $("#search-results").toggleClass("active");
             }
             jQuery('#search-results .-js-result').html(data.html);
-            if(data.params.directly_open){
+            if(typeof(data.params) != "undefined" && data.params.directly_open){
                 $(".source--title").click();
             }
         }
