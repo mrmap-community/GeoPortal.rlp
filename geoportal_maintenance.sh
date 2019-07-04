@@ -1,10 +1,10 @@
 #!/bin/bash
 ############################################################
 # Geoportal-RLP install script for debian 9 server environment
-# 2019-02-25
+# 2019-07-04
 # debian netinstall 9
 # André Holl
-# Armin RetterathSESS
+# Armin Retterath
 # Michel Peltriaux
 ############################################################
 
