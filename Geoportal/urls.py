@@ -14,10 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http import HttpResponseRedirect
 from django.urls import path, include
 
+from Geoportal.settings import STATIC_URL
 
 urlpatterns = [
+    path('favicon.ico', lambda x: HttpResponseRedirect(STATIC_URL + "useroperations/images/favicon.ico")),
     path('admin/', admin.site.urls),
     path('search/', include('searchCatalogue.urls')),
     path('captcha/', include('captcha.urls')),

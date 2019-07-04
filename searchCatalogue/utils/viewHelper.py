@@ -21,11 +21,11 @@ import requests
 from django.utils.translation import gettext as _
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from Geoportal.utils.general_helper import execute_threads, write_gml_to_session, sha256
+from Geoportal.utils.utils import execute_threads, write_gml_to_session, sha256
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-from Geoportal.utils import general_helper
+from Geoportal.utils import utils
 from Geoportal.settings import INTERNAL_PAGES_CATEGORY, INTERNAL_SSL, PRIMARY_SRC_IMG, \
     DE_SRC_IMG, EU_SRC_IMG
 from searchCatalogue.settings import *
@@ -564,7 +564,7 @@ def __dataset_srv_disclaimer(srv, language):
     if srv.get("coupledResources", None) is not None:
         for layer in srv["coupledResources"].get("layer", []):
             thread_list.append(threading.Thread(target=__dataset_single_layer_disclaimer, args=(layer, language)))
-    general_helper.execute_threads(thread_list)
+    utils.execute_threads(thread_list)
 
 
 def __wms_srv_disclaimer(layer, language, resource):
@@ -638,7 +638,7 @@ def __set_single_service_disclaimer_url(search_results, resource):
             thread_list.append(threading.Thread(target=__wfs_srv_disclaimer, args=(srv, language, resource)))
 
     # Run threads
-    general_helper.execute_threads(thread_list)
+    utils.execute_threads(thread_list)
 
 
 def set_service_disclaimer_url(search_results):
@@ -654,7 +654,7 @@ def set_service_disclaimer_url(search_results):
     for resource in resources:
         #__set_single_service_disclaimer_url(search_results, resource)
         thread_list.append(threading.Thread(target=__set_single_service_disclaimer_url, args=(search_results, resource)))
-    general_helper.execute_threads(thread_list)
+    utils.execute_threads(thread_list)
     return search_results
 
 
@@ -910,7 +910,7 @@ def hash_inspire_ids(search_results):
                 target=__hash_single_inspire_id, args=(search_result_val[search_result_key],)
             )
         )
-    general_helper.execute_threads(thread_list)
+    utils.execute_threads(thread_list)
     return search_results
 
 def check_previewUrls(search_results):

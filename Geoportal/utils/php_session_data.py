@@ -1,9 +1,19 @@
+"""
+This file contains methods that are needed in all apps.
+
+Author: André Holl
+Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
+Contact: andre.holl@vermkv.rlp.de
+Created on: 02.05.19
+"""
+
+
 import requests
 from pymemcache.client import base
 from phpserialize import *
 from django.http import HttpRequest
 from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, INTERNAL_SSL, PROJECT_DIR, SESSION_NAME
-from Geoportal.utils.get_config_values import get_mapbender_config_value
+from Geoportal.utils.mbConfReader import get_mapbender_config_value
 from useroperations.models import MbUser
 
 def get_mapbender_session_by_memcache(session_id):
