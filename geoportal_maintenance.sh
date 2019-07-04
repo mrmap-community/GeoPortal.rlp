@@ -4,7 +4,7 @@
 # 2019-02-25
 # debian netinstall 9
 # André Holl
-# Armin Retterath
+# Armin RetterathSESS
 # Michel Peltriaux
 ############################################################
 
@@ -818,7 +818,7 @@ EOF
     # copy conf file to right places
 
     if  ! grep -q "SESSION_NAME"  ${installation_folder}conf/mapbender.conf ;then
-      echo >> 'define("SESSION_NAME", "PHPSESSID")'; ${installation_folder}conf/mapbender.conf
+      echo 'define("SESSION_NAME", "PHPSESSID");' >> ${installation_folder}conf/mapbender.conf
     fi
 
 
