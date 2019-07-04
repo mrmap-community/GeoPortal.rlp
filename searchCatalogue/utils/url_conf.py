@@ -10,7 +10,7 @@ Created on: 22.01.19
 from Geoportal.settings import HOSTIP, HTTP_OR_SSL
 
 URL_BASE = HTTP_OR_SSL + HOSTIP + "/mapbender/"
-#URL_BASE = HTTP_OR_SSL + "localhost/mapbender/"
+URL_BASE_LOCALHOST = HTTP_OR_SSL + "127.0.0.1/mapbender/"
 URL_ABSOLUTE = HTTP_OR_SSL + "opendata.geoportal.rlp.de/mapbender/"
 
 URL_AUTO_COMPLETE_SUFFIX = "geoportal/mod_getCatalogueKeywordSuggestion.php"
