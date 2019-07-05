@@ -58,7 +58,7 @@ Requirements:
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-        --ipaddress=ipaddress             			        | Default "127.0.0.1"
+        --ip=ipaddress             			                | Default "127.0.0.1"
         --hostname=hostname              			        | Default "127.0.0.1"
         --proxy=Proxy IP     	 			                | Default "None" ; Syntax --proxy=1.2.3.4:5555
         --proxyuser=username                      	        | Default "" ; Password will be prompted
@@ -75,7 +75,7 @@ You can choose from the following options:
 Description:  
 
 	mandatory:  
-	--ipaddress             -> The address of your external interface.
+	--ip                    -> The address of your external interface.
 	--hostname              -> FQDN of your Server www.example.rlp.de
 	--mode                  -> What you want to do. Choices are install | update | delete | backup.
 
@@ -94,7 +94,7 @@ Examples:
 
 Install:  
 ```shell
-geoportal_maintenance.sh --ipaddress=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/
+geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/
 ```
 
 Update:
