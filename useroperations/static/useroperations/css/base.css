@@ -684,7 +684,7 @@ ul {
     }
 
     .body-content{
-        padding: 5em 0;
+        padding: 5em 5vw 0 5vw;
     }
 
     header{
@@ -714,13 +714,22 @@ ul {
     }
 
     #sidebar{
-        font-size: 1em;
-        width: 12em;
+        font-size: 1.5em;
+        width: 75vw;
+    }
+    .sidebar-list-element{
+        font-size: 0.9em;
+    }
+
+    .body-content.sidebar-open{
+        transform: unset;
+        margin-right: unset;
     }
 
     .sidebar-toggler img, .map-viewer-toggler img{
-        width: 3em;
+        width: 4em;
     }
+
 
     .sidebar-area-title-icon img{
         width: 2em;
@@ -768,7 +777,7 @@ ul {
     }
 
     .sidebar-wrapper.closed{
-        transform: translateX(-12em);
+        transform: translateX(-75vw);
     }
 
     .cookie-container{
