@@ -623,7 +623,7 @@ def logout_view(request):
 
     if request.COOKIES.get(SESSION_NAME) is not None:
         session_id = request.COOKIES.get(SESSION_NAME)
-        useroperations_helper.delete_mapbender_session_by_memcache(session_id)
+        php_session_data.delete_mapbender_session_by_memcache(session_id)
         messages.success(request, _("Successfully logged out"))
         return redirect('useroperations:index')
     else:
