@@ -24,6 +24,7 @@ from Geoportal.utils import utils
 from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
+from django.utils.translation import gettext as _
 
 
 class Searcher:
@@ -94,13 +95,13 @@ class Searcher:
         # prepare registrating departments facets
         for facet_key, facet_val in self.selected_facets.items():
             for facet in facet_val:
-                if facet.get("parent_category") == "ISO 19115":
+                if facet.get("parent_category") == _("ISO 19115"):
                     self.iso_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == "INSPIRE":
+                elif facet.get("parent_category") == _("INSPIRE"):
                     self.inspire_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == "Sonstige":
+                elif facet.get("parent_category") == _("Custom"):
                     self.custom_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == "Organisationen":
+                elif facet.get("parent_category") == _("Organizations"):
                     self.org_ids.append(facet.get("id"))
 
 
@@ -118,7 +119,7 @@ class Searcher:
         response = requests.get(url, params, verify=INTERNAL_SSL)
         result[resource] = response.json()
 
-    def get_categories_list(self):
+    def get_categories_list(self, lang):
         """ Get a list of all categories/facets from the database using a GET request
 
         Returns:
@@ -130,7 +131,7 @@ class Searcher:
             "resultTarget": self.result_target,
             "searchResources": self.search_resources,
             "searchId": self.search_id,
-            "languageCode": self.language_code,
+            "languageCode": lang,
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
@@ -289,6 +290,7 @@ class Searcher:
             "maxResults": 5,
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
+            "languageCode": self.language_code,
         }
         if self.host is not None:
             params["hostName"] = self.host
