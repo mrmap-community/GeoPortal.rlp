@@ -95,13 +95,13 @@ class Searcher:
         # prepare registrating departments facets
         for facet_key, facet_val in self.selected_facets.items():
             for facet in facet_val:
-                if facet.get("parent_category") == _("ISO 19115"):
+                if facet.get("parent_category") == "ISO 19115":
                     self.iso_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == _("INSPIRE"):
+                elif facet.get("parent_category") == "INSPIRE":
                     self.inspire_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == _("Custom"):
+                elif facet.get("parent_category") == "Custom":
                     self.custom_ids.append(facet.get("id"))
-                elif facet.get("parent_category") == _("Organizations"):
+                elif facet.get("parent_category") == "Organizations":
                     self.org_ids.append(facet.get("id"))
 
 
