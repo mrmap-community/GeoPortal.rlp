@@ -458,8 +458,11 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 
 .modalDialog > div {
 	width: 75%;
-	position: relative;
-	margin: 10px auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 	padding: 5px 20px 13px 20px;
 	border-radius: 10px;
 	background: #fff;
@@ -467,6 +470,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999);
 	overflow-y: auto;
+	max-height: 80vh;
 }
 .modalDialog > div > a{
   color: var(--primary);
@@ -494,6 +498,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .modalDialog div .close:hover {
+  cursor: pointer;
   background: var(--primary);
 }
 
