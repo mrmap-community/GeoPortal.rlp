@@ -172,10 +172,10 @@
         <div class="messages-container">
             {% for message in messages %}
             <div class="messages {{ message.tags }}">
+                    {{ message }}
                     <div class="message-toggler">
                         x
                     </div>
-                    {{ message }}
             </div>
             {% endfor %}
         </div>

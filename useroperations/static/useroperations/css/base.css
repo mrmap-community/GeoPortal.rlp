@@ -623,6 +623,7 @@ ul {
     left: 50%;
     margin-left: -150px;
     width: 300px;
+    z-index: 3;
 }
 .messages{
     width: 100%;
@@ -634,14 +635,15 @@ ul {
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .message-toggler{
     padding: 10px;
     color: white;
     font-weight: bold;
-    position: absolute;
-    right: 10px;
     border-radius: 10px;
     border: 2px solid white;
 }
