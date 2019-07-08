@@ -7,7 +7,7 @@ $(document).ready(function(){
         var id = elem.attr("data-id");
         var name = elem.attr("data-name");
         var searchButton = $("#geoportal-search-button");
-        var facet = ["Organisationen", name, id].join(",");
+        var facet = ["Organizations", name, id].join(",");
         search.setParam("facet", facet);
         searchButton.click();
     });
