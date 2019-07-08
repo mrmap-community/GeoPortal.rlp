@@ -783,9 +783,9 @@ def get_preselected_facets(params, all_categories):
     if len(inspire_preselect) > 0:
         ret_arr["INSPIRE"] = inspire_preselect
     if len(custom_preselect) > 0:
-        ret_arr["Sonstige"] = custom_preselect
+        ret_arr["Custom"] = custom_preselect
     if len(org_preselect) > 0:
-        ret_arr["Organisationen"] = org_preselect
+        ret_arr["Organizations"] = org_preselect
 
     return ret_arr
 

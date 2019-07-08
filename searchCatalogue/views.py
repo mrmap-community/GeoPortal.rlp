@@ -79,8 +79,16 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
-    facets = searcher.get_categories_list()
+    facets = searcher.get_categories_list(lang=request.LANGUAGE_CODE)
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
+
+    # renaming facet variables for dynamical reasons!
+    for key, value in preselected_facets.items():
+        key_trans = _(key)
+        del preselected_facets[key]
+        for v in value:
+            v["parent_category"] = _(v["parent_category"])
+        preselected_facets[key_trans] = value
 
     sources = viewHelper.get_source_catalogues(external_call)
 
