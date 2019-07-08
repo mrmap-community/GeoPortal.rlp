@@ -590,7 +590,7 @@ def delete_profile_view(request):
 
 
                         # user.delete()
-                        useroperations_helper.delete_mapbender_session_by_memcache(session_id)
+                        php_session_data.delete_mapbender_session_by_memcache(session_id)
                         messages.success(request, _("Successfully deleted the user:")
                                          + " {str_name} ".format(str_name=user.mb_user_name)
                                          + _(". In case this was an accident, we sent you a link where you can reactivate "
