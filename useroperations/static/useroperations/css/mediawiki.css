@@ -14,6 +14,8 @@
 
 .mediawiki-article p, .mediawiki-article li{
     font-size: 1.0em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
     hyphens: auto;
     text-align: justify
 }
