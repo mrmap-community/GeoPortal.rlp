@@ -108,12 +108,12 @@ def get_mb_user_session_data(request: HttpRequest):
     guest_name = MbUser.objects.get(mb_user_id=guest_id)
     # USER
     if session_data['loggedin'] != False:
-        ret_dict["user"] = str(session_data['session_data'][b'mb_user_name'], "utf-8")
-        ret_dict["userid"] = int(session_data['session_data'][b'mb_user_id'])
+        ret_dict["user"] = str(session_data['session_data'].get(b'mb_user_name', b""), "utf-8")
+        ret_dict["userid"] = int(session_data['session_data'].get(b'mb_user_id', b""))
         ret_dict["gui"] = session_data['gui']
         ret_dict["guis"] = session_data['guis']
         ret_dict["loggedin"] = session_data['loggedin']
-        ret_dict["dsgvo"] = str(session_data['session_data'][b'dsgvo'], "utf-8")
+        ret_dict["dsgvo"] = str(session_data['session_data'].get(b'dsgvo', b""), "utf-8")
     # GUEST
     else:
         ret_dict["username"] = guest_name.mb_user_name

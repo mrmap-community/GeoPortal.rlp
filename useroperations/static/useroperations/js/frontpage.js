@@ -106,6 +106,13 @@ $(document).on("click", ".map-applications-list-entry", function(){
         toggleMapViewers();
     }
 
+    // move viewport for user
+    window.scrollTo({
+        top:150,
+        left:0,
+        behavior:'smooth'
+    });
+
     iframeSrc = iframe.attr("src").toString();
     iframeDataParams = iframe.attr("data-params").toString();
 
