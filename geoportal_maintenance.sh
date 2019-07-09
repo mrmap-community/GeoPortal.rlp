@@ -17,8 +17,10 @@ mode="none"
 
 # mapbender/phppgadmin database config
 mapbender_database_name="mapbender"
+mapbender_database_host="127.0.0.1"
 mapbender_database_port="5432"
 mapbender_database_user="mapbenderdbuser"
+mapbender_database_superuser="postgres"
 mapbender_database_password="mapbenderdbpassword"
 phppgadmin_user="postgresadmin"
 phppgadmin_password="postgresadmin_password"
@@ -1509,6 +1511,27 @@ echo -e "\n Details can be found in $installation_log \n" | tee -a $installation
 
 update(){
 
+  external_db_update(){
+
+  psql \
+    -X \
+    -U $mapbender_database_superuser \
+    -h $mapbender_database_host \
+    -p $mapbender_database_port \
+    -f ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql \
+    --echo-all \
+     $mapbender_database_name
+
+     psql_exit_status=$?
+
+     if [ $psql_exit_status != 0 ]; then
+       echo "Update of remote Database failed! Exiting." 1>&2
+       exit $psql_exit_status
+     fi
+     echo "sql script successful"
+
+  }
+
 while true; do
     read -p "Do you want me to make a backup before updating y/n?" yn
     case $yn in
@@ -1564,6 +1587,20 @@ sed -i 's/http:\/\/ws.geonames.org\/searchJSON?lang=de&/http:\/\/www.geoportal.r
 sed -i 's/options.isGeonames = true;/options.isGeonames = false;/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sind bei der Adresssuche mit einem Komma voneinander zu trennen!<br><br>Auch Textfragmente der gesuchten Adresse reichen hierbei aus.<br><br>\&nbsp\&nbsp\&nbsp\&nbsp Beispiel:<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"Am Zehnthof 10 , St. Goar\\" oder<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"zehnt 10 , goar\\"<br><br>Der passende Treffer muss in der erscheinenden Auswahlliste per Mausklick ausgewählt werden!";/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 echo "Mapbender Update Done"
+
+echo "Updating Mapbender Database"
+sed -i "s/set group_id 36/set g_id $mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+sed -i "s/set db_owner \"postgres\"/set owner $mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+
+while true; do
+    read -p "Do you use an external Database Server. Be sure to specify mapbender_database_host and superuser if yes. y/n?" yn
+    case $yn in
+        [Yy]* ) external_db_update; break;;
+        [Nn]* ) sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 #update django
 echo "Updating Geoportal Project"
 cd ${installation_folder}GeoPortal.rlp
