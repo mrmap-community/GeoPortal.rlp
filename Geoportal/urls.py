@@ -21,7 +21,7 @@ from Geoportal.settings import STATIC_URL
 
 urlpatterns = [
     path('favicon.ico', lambda x: HttpResponseRedirect(STATIC_URL + "useroperations/images/favicon.ico")),
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('search/', include('searchCatalogue.urls')),
     path('captcha/', include('captcha.urls')),
     path('', include('useroperations.urls')),
