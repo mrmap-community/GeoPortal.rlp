@@ -183,6 +183,7 @@ Search.prototype = {
                 'resources': self.getParam('resources'),
                 'facet': self.getParam('facet'),
                 'orderBy': self.getParam('orderBy'),
+                'maxResults': self.getParam('maxResults'),
                 'spatial': self.getParam('spatialSearch'),
                 'searchBbox': self.getParam('searchBbox'),
                 'searchTypeBbox': self.getParam('searchTypeBbox'),
@@ -795,9 +796,9 @@ $(document).ready(function() {
         $.each(toEncode, function(key, values) {
             extended += '&' + key + '=' + values.join(',');
         });
-        if (search.getParam('maxResults')) {
-            extended += '&maxResults=' + search.getParam('maxResults');;
-        }
+        //if (search.getParam('maxResults')) {
+        //    extended += '&maxResults=' + search.getParam('maxResults');;
+        //}
 
         extended = encodeURIComponent(extended);
         search.setParam('extended', extended);
