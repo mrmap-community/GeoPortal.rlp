@@ -204,7 +204,7 @@ Search.prototype = {
             .always(function() {
                 self.hideLoadingAfterLoad();
                 self.searching = false;
-                self.setParam("facet", "");
+                //self.setParam("facet", "");
                 self.setParam("keywords", "");
                 self.setParam("searchBbox", "");
                 self.setParam("searchTypeBbox", "");
@@ -950,7 +950,15 @@ $(document).ready(function() {
      * Handle facet removing
      */
      $(document).on("click", ".-js-facet-item", function(){
-        $(this).remove();
+        var elem = $(this);
+        var id = elem.attr("data-id").trim();
+        var dataParent = elem.attr("data-parent").trim();
+        var text = elem.text().trim();
+        var facets = search.getParam("facet").split(";");
+        var removedFacet = [dataParent,text,id].join(",");
+        facets.splice(facets.indexOf(removedFacet));
+        search.setParam("facet", facets);
+        elem.remove();
         prepareAndSearch();
      });
 
