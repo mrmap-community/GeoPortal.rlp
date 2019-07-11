@@ -388,6 +388,13 @@ def get_data_primary(request: HttpRequest):
     # prepare order parameter
     order_by = post_params.get("orderBy")
 
+    # prepare rpp parameter
+    max_results = post_params.get("maxResults", 5)
+    if max_results == "":
+        max_results = 5
+    elif isinstance(max_results, str):
+        max_results = int(max_results)
+
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
 
@@ -422,6 +429,7 @@ def get_data_primary(request: HttpRequest):
                         requested_page_res,
                         selected_facets,
                         order_by,
+                        max_results,
                         search_bbox,
                         search_type_bbox,
                         only_open_data=only_open_data,
