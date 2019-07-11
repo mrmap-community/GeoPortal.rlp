@@ -713,6 +713,12 @@ def prepare_selected_facets(selected_facets):
         if facet == "":
             break
         facet = facet.split(",")
+        # ToDo: Nasty trick here! Since we have german values from the API we need to internationalize them
+        # Change the API asap!!!
+        if facet[0] == "Organisationen":
+            facet[0] = "Organizations"
+        if facet[0] == "Sonstige":
+            facet[0] = "Custom"
         facet_dict = {
             "parent_category": facet[0],
             "title": facet[1],

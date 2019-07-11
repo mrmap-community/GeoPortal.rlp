@@ -24,7 +24,6 @@ from Geoportal.utils import utils
 from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
-from django.utils.translation import gettext as _
 
 
 class Searcher:
