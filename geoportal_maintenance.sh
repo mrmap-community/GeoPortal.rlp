@@ -282,7 +282,7 @@ if [ $checkout_mapbender_svn = 'true' ]; then
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Source!${reset} \n"  | tee -a $installation_log
     else
-      echo -e "\n ${red}Downloading of Mapbender failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      echo -e "\n ${red}Downloading of Mapbender failed! Check internet connection and proxy settings in /etc/subversion/servers!${reset} \n" | tee -a $installation_log
       exit
     fi
 fi
@@ -293,7 +293,7 @@ if [ $checkout_mapbender_conf = 'true' ]; then
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Conf!${reset} \n"  | tee -a $installation_log
     else
-      echo -e "\n ${red}Downloading of Mapbender Conf failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      echo -e "\n ${red}Downloading of Mapbender Conf failed! Check internet connection and proxy settings in /etc/subversion/servers!${reset} \n" | tee -a $installation_log
       exit
     fi
 fi
