@@ -36,6 +36,7 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 
 #delete-form-button:hover{
+    cursor: pointer;
     background-color: white;
     border: 1px solid red;
     color: red;
@@ -65,6 +66,7 @@ form input[type=text], form input[type=password], form input[type=email]{
     font-size: 1.2em;
     color: white;
     border: none;
+    border: 1px solid;
     font-weight: bold;
     background-color: var(--primary);
     order:-1;
@@ -77,8 +79,12 @@ form input[type=text], form input[type=password], form input[type=email]{
     border: none;
     font-weight: bold;
     background-color: var(--primary);
-
     }
+
+.form-change-submit-button:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+}
 
 .form-submit-button:hover, .form-cancel-button:hover{
     cursor: pointer;

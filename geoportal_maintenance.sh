@@ -282,7 +282,7 @@ if [ $checkout_mapbender_svn = 'true' ]; then
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Source!${reset} \n"  | tee -a $installation_log
     else
-      echo -e "\n ${red}Downloading of Mapbender failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      echo -e "\n ${red}Downloading of Mapbender failed! Check internet connection and proxy settings in /etc/subversion/servers!${reset} \n" | tee -a $installation_log
       exit
     fi
 fi
@@ -293,7 +293,7 @@ if [ $checkout_mapbender_conf = 'true' ]; then
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Conf!${reset} \n"  | tee -a $installation_log
     else
-      echo -e "\n ${red}Downloading of Mapbender Conf failed! Check internet connection and proxy settings!${reset} \n" | tee -a $installation_log
+      echo -e "\n ${red}Downloading of Mapbender Conf failed! Check internet connection and proxy settings in /etc/subversion/servers!${reset} \n" | tee -a $installation_log
       exit
     fi
 fi
@@ -1332,8 +1332,12 @@ git clone --progress https://git.osgeo.org/gitea/armin11/GeoPortal.rlp >> $insta
 if [ $? -eq 0 ];then
   echo -e "\n ${green}Successfully downloaded Modsecurity Ruleset! ${reset}\n" | tee -a $installation_log
 else
-  echo -e "\n ${red}Downloading Geoportal Source faild! Check internet connection or proxy!${reset}\n" | tee -a $installation_log
-  exit
+	if [ -d "${installation_folder}GeoPortal.rlp" ];then
+    	echo -e "\n ${red} Folder ${installation_folder}GeoPortal.rlp found, please remove it!${reset}\n" | tee -a $installation_log
+    else
+  		echo -e "\n ${red}Downloading Geoportal Source faild! Check internet connection or proxy!${reset}\n" | tee -a $installation_log
+  	fi
+  	exit
 fi
 echo -e "\n ${green}Successfully downloaded Geoportal Source to ${installation_folder}! ${reset}\n" | tee -a $installation_log
 

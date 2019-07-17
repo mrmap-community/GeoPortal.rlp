@@ -62,9 +62,6 @@ class MbUser(models.Model):
     timestamp_dsgvo_accepted = models.BigIntegerField(blank=True, null=True)
     create_digest = models.BooleanField(blank=True, null=True)
 
-
-
-
     class Meta:
         managed = False
         db_table = 'mb_user'
