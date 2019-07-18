@@ -6,19 +6,19 @@
             {% if type == 'service_DE' %}
                 {% if layer.showMapUrl %}
                     <a class='button view-button' id="view_{{ layer.id }}">
-                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                         {% trans 'Show' %}
                     </a>
                 {% endif %}
                 {% if layer.downloadFeedClientUrl %}
                     <a class='button download-button' target="_blank" href="{{ layer.downloadFeedClientUrl }}">
-                        <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                        <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
                         {% trans 'Download' %}
                     </a>
                 {% endif %}
             {% else %}
                 <a class='button view-button' id="view_{{ layer.id }}">
-                    <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                    <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                     {% trans 'Show' %}
                 </a>
             {% endif %}
@@ -27,7 +27,7 @@
         <!-- WMS and DATASET -->
             {% if feeds is not None and feeds|length > 0 %}
                 <a class="button download-button" id="download_{{ result.id }}">
-                    <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                    <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
                     {% trans 'Download' %} ({{ feeds|length }})
                 </a>
             {% endif %}
@@ -35,17 +35,17 @@
                 {% if type == 'wms' %}
                     {% if layer.download_url is not None and layer.download_url|length > 0%}
                         <a class="button download-button" id="download_{{ layer.id }}">
-                            <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                            <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
                             {% trans 'Download' %}
                         </a>
                     {% endif %}
                     <a class='button view-button' id="view_{{ layer.id }}">
-                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                         {% trans 'Show' %}
                     </a>
                 {% elif type == 'dataset' %}
                     <a class='button view-button' id="view_{{ result.id }}">
-                        <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                         {% trans 'Show' %} ({{ layers|length }})
                     </a>
                 {% endif %}
@@ -82,10 +82,10 @@
                                 <div class="resource-element-info"></div>
                                 <div class="feed-download-wrapper">
                                     <a class="feed-download-button" href="{{ feed.accessUrl }}" target="_blank" title="{% trans 'Original atom feed' %}">
-                                        <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
+                                        <img alt="{% trans 'A document icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
                                     </a>
                                     <a class="atom-feed-button" href="{{ feed.accessClient }}" target="_blank" title="{% trans 'Open in atom feed viewer' %}">
-                                        <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                                        <img alt="{% trans 'A download icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
                                     </a>
                                 </div>
                             </div>
@@ -115,9 +115,9 @@
                     <li class="resource-element">
                         <a href="{{ layer.download_url }}" target="_blank" >
                             <div id="download_button_{{ layer.id }}" class="feed-download">
-                                <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
+                                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
                                 <strong>{{ layer.name }}</strong>
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                                <img alt="{% trans 'A download icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
                             </div></a>
                     </li>
                 </ul>
@@ -151,10 +151,10 @@
 {% else %}
     <div class="not-allowed-wrapper">
             {% if loggedin %}
-            <img class="ask-permission-img" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" src="{% static 'searchCatalogue/images/icons/icn_permission_email.png' %}" title="{% trans 'Ask data provider for permission' %}">
+            <img alt="{% trans 'A key above an envelope' %}"  class="ask-permission-img" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" src="{% static 'searchCatalogue/images/icons/icn_permission_email.png' %}" title="{% trans 'Ask data provider for permission' %}">
             {% else %}
             <a href="/login">
-                <img class="not-allowed-img" src="{% static 'searchCatalogue/images/icons/icn_permission_restricted.png' %}" title="{% trans 'Only for registered users' %}">
+                <img alt="{% trans 'A black closed padlock' %}" class="not-allowed-img" src="{% static 'searchCatalogue/images/icons/icn_permission_restricted.png' %}" title="{% trans 'Only for registered users' %}">
             </a>
             {% endif %}
     </div>

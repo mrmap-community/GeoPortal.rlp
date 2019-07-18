@@ -4,7 +4,7 @@
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
             <span class="accordion icon closed"></span>
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wms.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            <img alt="{% trans 'A web map service icon, shaped as a lying map' %}" class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wms.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
             <span>{{ all_resources.wms }} ({{ search_results.wms.wms.wms.md.nresults|intcomma }})</span>
         </div>
     </div><!-- end .search-header -->

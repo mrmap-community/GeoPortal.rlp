@@ -4,7 +4,7 @@
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
             <span class="accordion icon closed"></span>
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            <img alt="{% trans 'A stylized globe' %}" class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
             <span>{{ all_resources.dataset }} ({{ search_results.dataset.dataset.dataset.md.nresults|intcomma }})</span>
 
         </div>

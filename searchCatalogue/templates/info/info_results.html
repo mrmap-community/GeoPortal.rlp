@@ -10,7 +10,7 @@
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
             <span class="accordion icon closed"></span>
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_info.png' %}" title="{{ search_result_key }}">
+            <img alt="{% trans 'The letter W, as used for wikipedia' %}" class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_info.png' %}" title="{{ search_result_key }}">
             {% if list_all %}
             {% trans 'All articles' %} ({{ search_result_val|length }})
             {% else %}
@@ -28,7 +28,7 @@
                     <div class="result--item info-result-header {% if result.is_intern %}info-search-result{% endif %}" data-target="{{ result.title|drop_translation:lang }}" title="{% trans 'Open article' %}">
                         <span class="info-result-title">{{ result.title|drop_translation:lang }}</span>
                         {% if not result.is_intern %}
-                            <img class="external-link-img" src="{% static 'searchCatalogue/images/icons/icn_open_external.png' %}" title="{% trans 'Link opened in a new tab' %}">
+                            <img alt="{% trans 'An arrow pointing out of a box' %}" class="external-link-img" src="{% static 'searchCatalogue/images/icons/icn_open_external.png' %}" title="{% trans 'Link opens in a new tab' %}">
                         {% endif %}
                     </div>
                 </div>

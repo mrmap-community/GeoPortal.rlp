@@ -2,13 +2,13 @@
     <div class="search-result-action-buttons">
         {% if coupled_resources.view_links|length > 0 %}
             <a class='button view-button' id="view_{{ coupled_resources.id }}">
-                <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
                 {% trans 'Show' %}
             </a>
         {% endif %}
         {% if coupled_resources.download_links|length > 0 %}
             <a id="download_{{ coupled_resources.id }}" class='button download-button'>
-                <img src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
                 {% trans 'Download' %}
             </a>
         {% endif %}
@@ -41,11 +41,11 @@
                         <div class="resource-element-info"></div>
                         <div class="feed-download-wrapper">
                             <a class="feed-download-button" href="{{ download.uri }}" target="_blank" title="{% trans 'Original atom feed' %}">
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
+                                <img alt="{% trans 'A document icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}" title="{% trans 'Download' %}"/>
                             </a>
                             {% if download.atom_uri is not None %}
                                 <a class="atom-feed-button" href="{{ download.atom_uri }}" target="_blank" title="{% trans 'Open atom feed client' %}">
-                                    <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Open atom client' %}"/>
+                                    <img alt="{% trans 'A download icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Open atom client' %}"/>
                                 </a>
                             {% endif %}
                         </div>

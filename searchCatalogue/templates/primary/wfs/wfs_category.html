@@ -3,7 +3,7 @@
     <div class="search-header">
         <div class="source--title -js-title -js-accordion">
             <span class="accordion icon closed"></span>
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wfs.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
+            <img alt="{% trans 'A web feature service icon, shaped as a magnifying glass over a map' %}" class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_wfs.png' %}" title="{{ search_results.dataset.filter.searchFilter.classes.0.title }}">
             <span>{{ all_resources.wfs }} ({{ search_results.wfs.wfs.wfs.md.nresults|intcomma }})</span>
         </div><!-- end .source--title -->
     </div><!-- end .search-header -->

@@ -8,13 +8,13 @@
 <div class="search-result-area">
         <div class="img-area result-overview">
             <div class="flex-row">
-                <img class="img-preview" style="max-width:100px;" src="{% if layer.previewURL is not None %}{{ layer.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
-                <img class="img-preview" style="max-width:100px;" src="{% if layer.extent_url is not None or layer.extent_url|length == 0 %}{{ layer.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
+                <img alt="{% trans 'Smaller version of map preview' %}" title="{% trans 'Click for large image' %}" class="img-preview" style="max-width:100px;" src="{% if layer.previewURL is not None %}{{ layer.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
+                <img alt="{% trans 'Bounding box around area of interest on a map' %}" title="{% trans 'Click for large image' %}" class="img-preview" style="max-width:100px;" src="{% if layer.extent_url is not None or layer.extent_url|length == 0 %}{{ layer.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
             </div>
             <article class="search-result-detail">{{ layer.abstract }}</article>
         </div>
         <div title="{% trans 'Total view count' %}" class="view-count">
-            <img src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+            <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
             <span>{{ layer.loadCount|intcomma }}</span>
         </div>
         <hr>
@@ -22,21 +22,21 @@
         </div>
         <div class="flex-row metadata-links">
             <a class="metadata-link-element" href="{{ layer.mdLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
-                <img class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                <img alt="{% trans 'An organization icon' %}" class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
                 {{ result.respOrg }}
             </span></a>
             <a class="metadata-link-element"  href="{{ layer.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
-                <img class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <img alt="{% trans 'A calendar icon' %}" class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
                 {{ result.date }}
             </span></a>
             <a class="metadata-link-element"  href="{{ layer.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %} {% static 'searchCatalogue/images/icons/icn_warn.png' %} {% endif %}"></a>
             {% if result.isopen is not None %}
                 <a class="metadata-link-element"  href="{{ OPEN_DATA_URL }}" target="_blank">
-                    <img class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
+                    <img alt="{% trans 'An open data icon' %}" class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
                 </a>
             {% endif %}
             {% if result.logged is True or result.logged == "1" %}
-                <img class="metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+                <img alt="{% trans 'A fingerprint icon, which indicates that this service usage will be logged' %}" class="metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
             {% endif %}
         </div>
 
