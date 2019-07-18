@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-03 08:14+0000\n"
+"POT-Creation-Date: 2019-07-18 12:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: Geoportal/settings.py:176 Geoportal/settings.py:195
+#: Geoportal/settings.py:171 Geoportal/settings.py:190
 msgid "German"
 msgstr "Deutsch"
 
-#: Geoportal/settings.py:177 Geoportal/settings.py:194
+#: Geoportal/settings.py:172 Geoportal/settings.py:189
 msgid "English"
 msgstr "Englisch"
 
@@ -49,8 +49,18 @@ msgid "Filter by"
 msgstr "Filtern nach"
 
 #: searchCatalogue/templates/facets.html:42
+#: searchCatalogue/templates/search_results.html:11
+#: useroperations/templates/landing_page.html:42
+msgid "A filter icon"
+msgstr "Ein Filtersymbol"
+
+#: searchCatalogue/templates/facets.html:42
 msgid "Is filtered"
 msgstr "Filter gesetzt"
+
+#: searchCatalogue/templates/facets.html:43 templates/base.html:48
+msgid "A magnifying glass"
+msgstr "Eine Lupe"
 
 #: searchCatalogue/templates/facets.html:43
 msgid "Open filter"
@@ -74,12 +84,21 @@ msgstr "Treffer pro Seite:"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:26
 #: searchCatalogue/templates/search_forms.html:8
-#: searchCatalogue/utils/viewHelper.py:287
+#: searchCatalogue/utils/viewHelper.py:286
 msgid "Sort by:"
 msgstr "Sortieren nach:"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:45
 msgid "Only open data"
+msgstr "Nur freie Daten"
+
+#: searchCatalogue/templates/hits_and_sort_option.html:49
+#: searchCatalogue/templates/hits_and_sort_option.html:51
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:39
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:28
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:36
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:35
+msgid "An open data icon"
 msgstr "Nur freie Daten"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:49
@@ -95,21 +114,33 @@ msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:89
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:96
 msgid "Search"
 msgstr "Suche"
 
-#: searchCatalogue/templates/index.html:54 templates/base.html:53
+#: searchCatalogue/templates/index.html:54 templates/base.html:54
 msgid "Spatial Filter"
 msgstr "Räumlicher Filter"
 
-#: searchCatalogue/templates/index.html:55 templates/base.html:54
+#: searchCatalogue/templates/index.html:55 templates/base.html:55
 msgid "Use spatial filter"
 msgstr "Räumlichen Filter benutzen"
+
+#: searchCatalogue/templates/index.html:62 templates/base.html:37
+msgid "The german flag, indicating the german language"
+msgstr "Die deutsche Flagge, stellt die deutsche Sprache dar"
+
+#: searchCatalogue/templates/index.html:63 templates/base.html:38
+msgid "The United Kingdoms`s flag, indicating the english language"
+msgstr "Die Flagge des vereinigten Königreiches, stellt die englische Sprache dar"
 
 #: searchCatalogue/templates/index.html:90
 msgid "Extended Search"
 msgstr "Erweiterte Suche"
+
+#: searchCatalogue/templates/info/info_results.html:13
+msgid "The letter W, as used for wikipedia"
+msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"
 
 #: searchCatalogue/templates/info/info_results.html:15
 msgid "All articles"
@@ -120,7 +151,11 @@ msgid "Open article"
 msgstr "Artikel öffnen"
 
 #: searchCatalogue/templates/info/info_results.html:31
-msgid "Link opened in a new tab"
+msgid "An arrow pointing out of a box"
+msgstr "Ein Pfeil, der aus einer Box hinaus deutet"
+
+#: searchCatalogue/templates/info/info_results.html:31
+msgid "Link opens in a new tab"
 msgstr "Link öffnet im neuen Tab"
 
 #: searchCatalogue/templates/info/info_results.html:46
@@ -133,7 +168,7 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:6
 #: searchCatalogue/templates/other/application/application_category.html:7
-#: searchCatalogue/views.py:279
+#: searchCatalogue/views.py:286
 msgid "Applications"
 msgstr "Applikationen"
 
@@ -149,6 +184,18 @@ msgid "No results found, please use another search term..."
 msgstr ""
 "Keine Ergebnisse gefunden, bitte versuchen Sie einen anderen Suchbegriff..."
 
+#: searchCatalogue/templates/other/coupled_resources.html:5
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:17
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:18
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:17
+#: searchCatalogue/templates/search_result_actions.html:9
+#: searchCatalogue/templates/search_result_actions.html:21
+#: searchCatalogue/templates/search_result_actions.html:43
+#: searchCatalogue/templates/search_result_actions.html:48
+#: useroperations/templates/landing_page.html:67
+msgid "An eye icon"
+msgstr "Ein Augensymbol"
+
 #: searchCatalogue/templates/other/coupled_resources.html:6
 #: searchCatalogue/templates/search_result_actions.html:10
 #: searchCatalogue/templates/search_result_actions.html:22
@@ -156,6 +203,16 @@ msgstr ""
 #: searchCatalogue/templates/search_result_actions.html:49
 msgid "Show"
 msgstr "Anzeigen"
+
+#: searchCatalogue/templates/other/coupled_resources.html:11
+#: searchCatalogue/templates/other/coupled_resources.html:48
+#: searchCatalogue/templates/search_result_actions.html:15
+#: searchCatalogue/templates/search_result_actions.html:30
+#: searchCatalogue/templates/search_result_actions.html:38
+#: searchCatalogue/templates/search_result_actions.html:88
+#: searchCatalogue/templates/search_result_actions.html:120
+msgid "A download icon"
+msgstr "Ein Downloadsymbol"
 
 #: searchCatalogue/templates/other/coupled_resources.html:12
 #: searchCatalogue/templates/other/coupled_resources.html:37
@@ -175,6 +232,12 @@ msgstr ""
 msgid "Original atom feed"
 msgstr "Originaler Atom Feed"
 
+#: searchCatalogue/templates/other/coupled_resources.html:44
+#: searchCatalogue/templates/search_result_actions.html:85
+#: useroperations/templates/inspire_topics.html:36
+msgid "A document icon"
+msgstr "Ein Dokumentensymbol"
+
 #: searchCatalogue/templates/other/coupled_resources.html:47
 msgid "Open atom feed client"
 msgstr "Öffne Atom Feed Client"
@@ -184,15 +247,27 @@ msgid "Open atom client"
 msgstr "Öffne Atom Client"
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
+#: searchCatalogue/templates/other/series/series_category.html:6
+#: searchCatalogue/templates/primary/dataset/dataset_category.html:7
+#: useroperations/templates/landing_page.html:26
+msgid "A stylized globe"
+msgstr "Ein stylisierter Globus"
+
+#: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/dataset/dataset_category.html:7
-#: searchCatalogue/views.py:270 searchCatalogue/views.py:276
-#: searchCatalogue/views.py:367 useroperations/templates/landing_page.html:27
+#: searchCatalogue/views.py:277 searchCatalogue/views.py:283
+#: searchCatalogue/views.py:374 useroperations/templates/landing_page.html:26
+#: useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr "Datensätze"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
+msgid "Three dots in a row"
+msgstr "Drei Punkte in einer Reihe"
+
+#: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:7
-#: searchCatalogue/views.py:280
+#: searchCatalogue/views.py:287
 msgid "Miscellaneous Datasets"
 msgstr "Sonstige Datensätze"
 
@@ -204,6 +279,10 @@ msgstr "Sonstige Datensätze"
 msgid "Competent authority"
 msgstr "Zuständige Stelle:"
 
+#: searchCatalogue/templates/other/search_result.html:20
+msgid "An organization"
+msgstr "Eine Organisation"
+
 #: searchCatalogue/templates/other/search_result.html:24
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:21
@@ -212,15 +291,28 @@ msgstr "Zuständige Stelle:"
 msgid "Date of metadata"
 msgstr "Datum der Metadaten:"
 
+#: searchCatalogue/templates/other/search_result.html:25
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:29
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:33
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:22
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:30
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:29
+msgid "A calendar icon"
+msgstr "Ein Kalendarsymbol"
+
 #: searchCatalogue/templates/other/series/series_category.html:6
 #: searchCatalogue/templates/other/series/series_category.html:7
-#: searchCatalogue/views.py:271 searchCatalogue/views.py:277
+#: searchCatalogue/views.py:278 searchCatalogue/views.py:284
 msgid "Series"
 msgstr "Serien"
 
 #: searchCatalogue/templates/other/service/service_category.html:6
+msgid "A service icon, shaped as two arrows pointing in opposite directions"
+msgstr "Ein Dienstesymbol in der Form zweier Pfeile, die in entgegengesetzte Richtungen zeigen"
+
+#: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
-#: searchCatalogue/views.py:272 searchCatalogue/views.py:278
+#: searchCatalogue/views.py:279 searchCatalogue/views.py:285
 msgid "Services"
 msgstr "Dienste"
 
@@ -251,7 +343,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:820
+#: useroperations/views.py:819
 msgid "Send"
 msgstr "Senden"
 
@@ -265,6 +357,14 @@ msgstr "Metadaten öffnen für"
 msgid "Total view count"
 msgstr "Anzahl Aufrufe"
 
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:25
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:18
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:26
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: useroperations/templates/landing_page.html:35
+msgid "An organization icon"
+msgstr "Ein Organisationssymbol"
+
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:32
 msgid "Time of metadata"
 msgstr "Zeitliche Ausdehnung:"
@@ -277,13 +377,43 @@ msgstr "bis"
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:39
+msgid ""
+"A fingerprint icon, which indicates that this service usage will be logged"
+msgstr ""
+"Ein Fingerabdrucksymbol. Die Nutzung dieses Dienstes wird protokolliert"
+
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:39
 #: searchCatalogue/templates/search_result_list_entry.html:16
 msgid "Access will be logged"
 msgstr "Der Zugriff wird protokolliert"
 
+#: searchCatalogue/templates/primary/wfs/wfs_category.html:6
+msgid "A web feature service icon, shaped as a magnifying glass over a map"
+msgstr "Ein Web Feature Service Symbol, in der Form einer Lupe über einer Karte"
+
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:47
 msgid "More"
 msgstr "Weitere"
+
+#: searchCatalogue/templates/primary/wms/wms_category.html:7
+msgid "A web map service icon, shaped as a lying map"
+msgstr "Ein Web Map Service Symbol, in der Form einer liegenden Karte"
+
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:11
+msgid "Smaller version of map preview"
+msgstr "Kleinere Version der Kartenvorschau"
+
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:11
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:12
+msgid "Click for large image"
+msgstr "Für großes Bild anklicken"
+
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:12
+msgid "Bounding box around area of interest on a map"
+msgstr "Umrissgrenzen um das Gebiet auf der Karte"
 
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:55
 msgid "Sublayers"
@@ -436,13 +566,26 @@ msgstr "Öffne im Atom Feed Viewer"
 msgid "Download services"
 msgstr "Downloaddienste"
 
+#: searchCatalogue/templates/search_result_actions.html:118
+#: useroperations/templates/inspire_topics.html:41
+msgid "The INSPIRE icon, shaped like a pineapple"
+msgstr "Das INSPIRE Symbol in der Form einer Ananas"
+
 #: searchCatalogue/templates/search_result_actions.html:130
 msgid "Layers"
 msgstr "Ebenen"
 
 #: searchCatalogue/templates/search_result_actions.html:154
+msgid "A key above an envelope"
+msgstr "Ein Schlüssel über einem Briefumschlag"
+
+#: searchCatalogue/templates/search_result_actions.html:154
 msgid "Ask data provider for permission"
 msgstr "Datenanbieter um Berechtigung bitten"
+
+#: searchCatalogue/templates/search_result_actions.html:157
+msgid "A black closed padlock"
+msgstr "Ein schwarzes, geschlossenes Vorhängeschloss"
 
 #: searchCatalogue/templates/search_result_actions.html:157
 msgid "Only for registered users"
@@ -472,7 +615,7 @@ msgstr "Letzter Monitoring Status"
 #: searchCatalogue/templates/search_result_list_entry.html:50
 #: searchCatalogue/templates/search_result_list_entry.html:53
 #: searchCatalogue/templates/search_result_list_entry.html:56
-#: searchCatalogue/templates/search_result_list_entry.html:61
+#: searchCatalogue/templates/search_result_list_entry.html:62
 msgid "Add to mapviewer"
 msgstr "Kartenviewer hinzufügen"
 
@@ -485,6 +628,10 @@ msgstr "Kartenviewer hinzufügen mit Zoom"
 #: searchCatalogue/templates/search_results.html:12
 msgid "Filter"
 msgstr "Filter"
+
+#: searchCatalogue/templates/search_results.html:25
+msgid "A magnifying class"
+msgstr "Ein Ver"
 
 #: searchCatalogue/templates/search_results.html:26
 msgid "Results"
@@ -514,59 +661,59 @@ msgstr "Akzeptieren"
 msgid "Decline"
 msgstr "Ablehnen"
 
-#: searchCatalogue/utils/viewHelper.py:49
+#: searchCatalogue/utils/viewHelper.py:48
 msgid "Own catalogue"
 msgstr "Eigener Katalog"
 
-#: searchCatalogue/utils/viewHelper.py:54
+#: searchCatalogue/utils/viewHelper.py:53
 msgid "Germany"
 msgstr "Deutschland"
 
-#: searchCatalogue/utils/viewHelper.py:58
+#: searchCatalogue/utils/viewHelper.py:57
 msgid "Europe"
 msgstr "Europa"
 
-#: searchCatalogue/utils/viewHelper.py:62
+#: searchCatalogue/utils/viewHelper.py:61
 msgid "Info"
 msgstr ""
 
-#: searchCatalogue/utils/viewHelper.py:63
+#: searchCatalogue/utils/viewHelper.py:62
 msgid "Info pages"
 msgstr "Infoseiten"
 
-#: searchCatalogue/utils/viewHelper.py:281
+#: searchCatalogue/utils/viewHelper.py:280
 msgid "Search terms(e):"
 msgstr "Suchbegriffe:"
 
-#: searchCatalogue/utils/viewHelper.py:283
+#: searchCatalogue/utils/viewHelper.py:282
 msgid "Spatial Restriction:"
 msgstr "Räumliche Einschränkung:"
 
-#: searchCatalogue/utils/viewHelper.py:285
+#: searchCatalogue/utils/viewHelper.py:284
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
 
-#: searchCatalogue/views.py:368
+#: searchCatalogue/views.py:375 useroperations/templates/landing_page.html:19
 msgid "Web Map Services"
 msgstr "Darstellungsdienste"
 
-#: searchCatalogue/views.py:369
+#: searchCatalogue/views.py:376
 msgid "Search-, Download-,Gathering-modules"
 msgstr "Such-, Download-, Erfassungsmodule"
 
-#: searchCatalogue/views.py:370
+#: searchCatalogue/views.py:377
 msgid "Map Combinations"
 msgstr "Karten"
 
-#: searchCatalogue/views.py:594
+#: searchCatalogue/views.py:613
 msgid "Send permission request"
 msgstr "Berechtigungsanfrage senden"
 
-#: searchCatalogue/views.py:595
+#: searchCatalogue/views.py:614
 msgid "[Geoportal.RLP] Permission request for "
 msgstr "[Geoportal.RLP] Berechtigungsanfrage für "
 
-#: searchCatalogue/views.py:596
+#: searchCatalogue/views.py:615
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
@@ -574,7 +721,7 @@ msgstr ""
 "Bitte geben Sie mir die Berechtigung die folgende Ressource zu verwenden \n"
 "'"
 
-#: searchCatalogue/views.py:597
+#: searchCatalogue/views.py:616
 msgid ""
 "'\n"
 " It has the ID "
@@ -582,7 +729,7 @@ msgstr ""
 "' \n"
 "Die Ressource verwendet die ID "
 
-#: searchCatalogue/views.py:598
+#: searchCatalogue/views.py:617
 msgid ""
 ".\n"
 "\n"
@@ -593,6 +740,10 @@ msgstr ""
 "\n"
 "Vielen Dank\n"
 "\n"
+
+#: templates/404.html:11
+msgid "A warning triangle with an exclamation mark inside"
+msgstr ""
 
 #: templates/404.html:12
 msgid "Something went wrong..."
@@ -606,96 +757,144 @@ msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator"
 
-#: templates/base.html:45
+#: templates/base.html:42 useroperations/templates/landing_page.html:88
+msgid "Logo of the spatial data infrastructure organization"
+msgstr ""
+
+#: templates/base.html:46
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: templates/base.html:70
+#: templates/base.html:71
+msgid "A lying map icon"
+msgstr "Eine liegende Karte"
+
+#: templates/base.html:71
 msgid "Open and close map viewer"
 msgstr "Kartenviewer öffnen/schließen"
 
-#: templates/base.html:76
+#: templates/base.html:77
+msgid "Three horizontal lines, one below the other"
+msgstr "Drei horizontale Linien untereinander"
+
+#: templates/base.html:77
 msgid "Open and close menu"
 msgstr "Menü ein-/ausklappen"
 
-#: templates/base.html:80
+#: templates/base.html:81
 msgid "Menu"
 msgstr "Menü"
 
-#: templates/base.html:89
+#: templates/base.html:87
+msgid "A stylized house"
+msgstr "Ein stilisiertes Haus"
+
+#: templates/base.html:90
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:106
+#: templates/base.html:98
+msgid "A filled stylized person shape in a circle"
+msgstr "Eine farblich ausgefüllte stilisierte Person in einem Kreis"
+
+#: templates/base.html:100
+msgid "An empty stylized person shape in a circle"
+msgstr "Eine nicht ausgefüllte stilisierte Person in einem Kreis"
+
+#: templates/base.html:107
 msgid "My Profile"
 msgstr "Mein Profil"
 
-#: templates/base.html:112
+#: templates/base.html:113
 msgid "Hello"
 msgstr "Hallo"
 
-#: templates/base.html:113 useroperations/views.py:505
+#: templates/base.html:114 useroperations/views.py:504
 msgid "Change Profile"
 msgstr "Profil bearbeiten"
 
-#: templates/base.html:114 useroperations/templates/show_abo.html:5
+#: templates/base.html:115 useroperations/templates/show_abo.html:5
 msgid "Show subscription"
 msgstr "Abos anzeigen"
 
-#: templates/base.html:115
+#: templates/base.html:116
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/base.html:117
+#: templates/base.html:118
 msgid "Not signed in"
 msgstr "Nicht angemeldet"
 
-#: templates/base.html:118 useroperations/views.py:176
-#: useroperations/views.py:182
+#: templates/base.html:119 useroperations/views.py:174
+#: useroperations/views.py:180
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/base.html:119 useroperations/views.py:206
-#: useroperations/views.py:218 useroperations/views.py:261
-#: useroperations/views.py:321
+#: templates/base.html:120 useroperations/views.py:204
+#: useroperations/views.py:216 useroperations/views.py:259
+#: useroperations/views.py:319
 msgid "Registration"
 msgstr "Registrierung"
 
-#: templates/base.html:120
+#: templates/base.html:121
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: templates/base.html:130
+#: templates/base.html:128 useroperations/templates/landing_page.html:19
+msgid "A lying map"
+msgstr "Eine liegende Karte"
+
+#: templates/base.html:131
 msgid "Mapviewer"
 msgstr "Kartenviewer"
 
-#: templates/base.html:199
+#: templates/base.html:140
+msgid "A navigation menu icon"
+msgstr "Ein Navigationsmenüsymbol"
+
+#: templates/base.html:195
+msgid "State coat of arms of Rhineland-Palatinate"
+msgstr "Wappen von Rheinland-Pfalz"
+
+#: templates/base.html:200
 msgid "Contact"
 msgstr "Kontakt"
 
-#: templates/base.html:200
+#: templates/base.html:201
 msgid "Legal Disclosure"
 msgstr "Impressum"
 
-#: templates/base.html:201
+#: templates/base.html:202
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: templates/base.html:202
+#: templates/base.html:203
 msgid "Legal Notice"
 msgstr "Rechtshinweis"
 
-#: templates/base.html:203
+#: templates/base.html:204
 msgid "Transparency law"
 msgstr "Transparenzgesetz"
 
 #: templates/base.html:210
+msgid "Signal waves emerging from a single point"
+msgstr "Signalwellen strahlen aus einem einzelnen Punkt"
+
+#: templates/base.html:210 templates/base.html:211
 msgid "RSS Newsfeed"
 msgstr ""
 
 #: templates/base.html:214
+msgid "A white stylized bird in front of a blue background"
+msgstr "Ein weißer stilisierter Vogel vor blauem Hintergrund"
+
+#: templates/base.html:214 templates/base.html:215
 msgid "Twitter"
 msgstr ""
+
+#: templates/base.html:221 templates/unsupported_browser.html:22
+msgid "The logo of Geoportal Rhineland-Palatinate"
+msgstr "Das Logo des Geoportals Rheinland-Pfalz"
 
 #: templates/cookie_banner.html:7
 msgid ""
@@ -960,23 +1159,23 @@ msgstr ""
 msgid "privacy rules"
 msgstr "Datenschutzerklärung"
 
-#: useroperations/templates/crispy_form_no_action.html:57
+#: useroperations/templates/crispy_form_no_action.html:58
 msgid "Password must contain the following:"
 msgstr "Passwort muss folgendes beinhalten:"
 
-#: useroperations/templates/crispy_form_no_action.html:58
+#: useroperations/templates/crispy_form_no_action.html:59
 msgid "A lowercase letter"
 msgstr "Einen Kleinbuchstaben"
 
-#: useroperations/templates/crispy_form_no_action.html:59
+#: useroperations/templates/crispy_form_no_action.html:60
 msgid "A uppercase letter"
 msgstr "Einen Großbuchstaben"
 
-#: useroperations/templates/crispy_form_no_action.html:60
+#: useroperations/templates/crispy_form_no_action.html:61
 msgid "A number"
 msgstr "Eine Zahl"
 
-#: useroperations/templates/crispy_form_no_action.html:61
+#: useroperations/templates/crispy_form_no_action.html:62
 msgid "Minimum 9 characters"
 msgstr "Mindestens 9 Zeichen"
 
@@ -989,12 +1188,31 @@ msgid "Remaining characters: "
 msgstr "Verbleibende Zeichen: "
 
 #: useroperations/templates/geoportal.html:8
+msgid ""
+"A mapviewer switcher icon, shaped as two arrows pointing in opposite "
+"directions"
+msgstr ""
+"Ein Wechselsymbol für den Kartenviewer, in der Form zweier Pfeile, welche in entgegengesetzte Richtungen zeigen"
+
+#: useroperations/templates/geoportal.html:8
 msgid "Switch between default and mobile map viewer"
 msgstr "Wechseln zwischen mobilem und Standard-Kartenviewer"
 
 #: useroperations/templates/geoportal.html:13
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
+
+#: useroperations/templates/inspire_topics.html:16
+msgid "A magnifying glass icon"
+msgstr "Ein Lupensymbol"
+
+#: useroperations/templates/inspire_topics.html:26
+msgid "An INSPIRE topic symbol"
+msgstr "Ein INSPIRE Themen Symbol"
+
+#: useroperations/templates/inspire_topics.html:28
+msgid "Placeholder INSPIRE topic symbol, since no topic symbol is available"
+msgstr "Platzhaltersymbol für INSPIRE Themen, da kein richtiges Bild verfügbar ist"
 
 #: useroperations/templates/inspire_topics.html:35
 msgid "Number of data"
@@ -1008,6 +1226,10 @@ msgstr "INSPIRE Thema"
 msgid "More information"
 msgstr "Layer trägt Informationen"
 
+#: useroperations/templates/inspire_topics.html:46
+msgid "An information icon, shaped like the letter i"
+msgstr "Ein Informationssymbol in Form des Buchstabens i"
+
 #: useroperations/templates/inspire_topics.html:47
 msgid "Information"
 msgstr "Informationen"
@@ -1015,6 +1237,14 @@ msgstr "Informationen"
 #: useroperations/templates/landing_page.html:10
 msgid "Search for all map collections"
 msgstr "Suche nach allen Karten starten"
+
+#: useroperations/templates/landing_page.html:12
+msgid "A lying map in the background. A large plus in the foreground."
+msgstr "Eine liegende Karte im Hintergrund. Ein großes Plus im Vordergrund."
+
+#: useroperations/templates/landing_page.html:12
+msgid "Web Map Context"
+msgstr ""
 
 #: useroperations/templates/landing_page.html:17
 msgid "Search for all map layers"
@@ -1032,6 +1262,7 @@ msgstr "Suche nach allen Datensätzen"
 msgid "Show all organizations"
 msgstr "Suche nach allen Organisationen starten"
 
+#: useroperations/templates/landing_page.html:35
 #: useroperations/templates/landing_page.html:36
 msgid "Organizations"
 msgstr "Organisationen"
@@ -1039,6 +1270,10 @@ msgstr "Organisationen"
 #: useroperations/templates/landing_page.html:40
 msgid "Show all topics"
 msgstr "Alle anzeigen"
+
+#: useroperations/templates/landing_page.html:42
+msgid "Filter by categories and topics"
+msgstr "Filtern mittels Kategorien und Themen"
 
 #: useroperations/templates/landing_page.html:43
 msgid "Categories and topics"
@@ -1048,6 +1283,10 @@ msgstr "Kategorien und Themen"
 msgid "Most frequently used map combinations"
 msgstr "Meistgenutzte Karten"
 
+#: useroperations/templates/landing_page.html:60
+msgid "Preview of the map combination"
+msgstr "Vorschau der Kartenzusammenstellung"
+
 #: useroperations/templates/landing_page.html:66
 msgid "Total views this week"
 msgstr "Anzahl Aufrufe diese Woche"
@@ -1055,6 +1294,14 @@ msgstr "Anzahl Aufrufe diese Woche"
 #: useroperations/templates/landing_page.html:70
 msgid "Open in mobile viewer"
 msgstr "Kartenviewer öffnen/schließen"
+
+#: useroperations/templates/landing_page.html:71
+msgid "A stylized mobile phone"
+msgstr "Ein stilisiertes Smartphone"
+
+#: useroperations/templates/landing_page.html:71
+msgid "Open directly in the mobile map viewer"
+msgstr "Im mobilen Kartenviewer öffnen"
 
 #: useroperations/templates/landing_page.html:76
 msgid "No description available"
@@ -1090,23 +1337,23 @@ msgstr "Veröffentlichte Objektarten"
 msgid "Published wmcs"
 msgstr "Veröffentlichte Karten"
 
-#: useroperations/views.py:67
+#: useroperations/views.py:65
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: useroperations/views.py:70
+#: useroperations/views.py:68
 msgid "Successfully logged in"
 msgstr "Anmeldung erfolgreich"
 
-#: useroperations/views.py:72
+#: useroperations/views.py:70
 msgid "Account not active"
 msgstr "Nicht aktiv"
 
-#: useroperations/views.py:175
+#: useroperations/views.py:173
 msgid "Forgot Password?"
 msgstr "Passwort vergessen?"
 
-#: useroperations/views.py:214
+#: useroperations/views.py:212
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
@@ -1116,19 +1363,19 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#: useroperations/views.py:228
+#: useroperations/views.py:226
 msgid "Log out to register a new user"
 msgstr "Ausloggen um neuen Benutzer zu registrieren"
 
-#: useroperations/views.py:236
+#: useroperations/views.py:234
 msgid "The Username"
 msgstr "Der Benutzername"
 
-#: useroperations/views.py:236
+#: useroperations/views.py:234
 msgid "is already taken"
 msgstr "wurde bereits verwendet"
 
-#: useroperations/views.py:240
+#: useroperations/views.py:238
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
@@ -1138,20 +1385,20 @@ msgstr ""
 "einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, außerdem müssen Sie "
 "mindestens 9 Zeichen verwenden"
 
-#: useroperations/views.py:267 useroperations/views.py:474
+#: useroperations/views.py:265 useroperations/views.py:474
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: useroperations/views.py:289
+#: useroperations/views.py:287
 msgid "Activation Mail"
 msgstr "Aktivierungsmail"
 
-#: useroperations/views.py:290 useroperations/views.py:380
-#: useroperations/views.py:584
+#: useroperations/views.py:288 useroperations/views.py:378
+#: useroperations/views.py:583
 msgid "Hello "
 msgstr "Hallo"
 
-#: useroperations/views.py:292
+#: useroperations/views.py:290
 msgid ""
 "This is your activation link. It will be valid until the end of the day, "
 "please click it!"
@@ -1159,7 +1406,7 @@ msgstr ""
 "Dies ist ihr Aktivierungslink. Er wird für die nächsten 24 Stunden gültig "
 "sein. Bitte klicken um Aktivierung abzuschließen!"
 
-#: useroperations/views.py:313
+#: useroperations/views.py:311
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
@@ -1167,23 +1414,23 @@ msgstr ""
 "Konto wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link in "
 "der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
 
-#: useroperations/views.py:327 useroperations/views.py:809
+#: useroperations/views.py:325 useroperations/views.py:808
 msgid "Captcha was wrong! Please try again"
 msgstr "Captcha war falsch! Bitte erneut versuchen"
 
-#: useroperations/views.py:351
+#: useroperations/views.py:349
 msgid "Submit"
 msgstr "Bestätigen"
 
-#: useroperations/views.py:367
+#: useroperations/views.py:365
 msgid "No Account with this Username or Email found"
 msgstr "Kein Konto mit diesem Benutzernamen oder dieser Email Adresse gefunden"
 
-#: useroperations/views.py:379
+#: useroperations/views.py:377
 msgid "Lost Password"
 msgstr "Passwort vergessen"
 
-#: useroperations/views.py:382
+#: useroperations/views.py:380
 msgid ""
 "This is your new password, please change it immediately!\n"
 " Password: "
@@ -1191,9 +1438,14 @@ msgstr ""
 "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich!\n"
 " Passwort: "
 
-#: useroperations/views.py:389
+#: useroperations/views.py:387
 msgid "Password reset was successful, check your mails. Password: "
 msgstr "Passwort erfolgreich zurückgesetzt, bitte prüfen Sie ihre Emails"
+
+#: useroperations/views.py:427
+msgid "The user could not be found. Please contact an administrator!"
+msgstr ""
+"Aktivierung fehlgeschlagen. Bitte kontaktieren Sie einen Administrator!"
 
 #: useroperations/views.py:449
 msgid ""
@@ -1205,31 +1457,31 @@ msgstr ""
 msgid "Your old Password was wrong"
 msgstr "Ihr altes Passwort war falsch"
 
-#: useroperations/views.py:496
+#: useroperations/views.py:495
 msgid "Successfully changed data"
 msgstr "Daten erfolgreich geändert"
 
-#: useroperations/views.py:506
+#: useroperations/views.py:505
 msgid "Delete Profile"
 msgstr "Profil entfernen"
 
-#: useroperations/views.py:513
+#: useroperations/views.py:512
 msgid "Change data"
 msgstr "Daten ändern"
 
-#: useroperations/views.py:545
+#: useroperations/views.py:544
 msgid "Delete Profile!"
 msgstr "Profil entfernen!"
 
-#: useroperations/views.py:549
+#: useroperations/views.py:548
 msgid "Delete Profile?"
 msgstr "Profil entfernen?"
 
-#: useroperations/views.py:560 useroperations/views.py:632
+#: useroperations/views.py:559 useroperations/views.py:631
 msgid "You are not logged in"
 msgstr "Sie sind nicht angemeldet"
 
-#: useroperations/views.py:566
+#: useroperations/views.py:565
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
@@ -1237,7 +1489,7 @@ msgstr ""
 "Sie sind Besitzer von registrierten Diensten - Dienste löschen oder einem "
 "anderen Eigentümer übergeben"
 
-#: useroperations/views.py:569
+#: useroperations/views.py:568
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
@@ -1245,7 +1497,7 @@ msgstr ""
 "Sie sind Besitzer von Anwendungen - Anwendungen löschen doer einem anderen "
 "Besitzer übergeben"
 
-#: useroperations/views.py:572
+#: useroperations/views.py:571
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
@@ -1253,11 +1505,11 @@ msgstr ""
 "Für dieses Profile existieren gebührenpflichtige Dienste - Bitte "
 "kontaktieren Sie einen Administrator"
 
-#: useroperations/views.py:583
+#: useroperations/views.py:582
 msgid "Reactivation Mail"
 msgstr "Reaktivierungsmail"
 
-#: useroperations/views.py:586
+#: useroperations/views.py:585
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
@@ -1265,11 +1517,11 @@ msgstr ""
 "Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem "
 "folgenden Link reaktivieren!"
 
-#: useroperations/views.py:596
+#: useroperations/views.py:595
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:598
+#: useroperations/views.py:597
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
@@ -1277,33 +1529,33 @@ msgstr ""
 ". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
 "Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 
-#: useroperations/views.py:629
+#: useroperations/views.py:628
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
 
-#: useroperations/views.py:740
+#: useroperations/views.py:739
 msgid "Account already active"
 msgstr "Konto bereits aktiviert"
 
-#: useroperations/views.py:745
+#: useroperations/views.py:744
 msgid "Invalid data"
 msgstr "Invalide Daten"
 
-#: useroperations/views.py:757
+#: useroperations/views.py:756
 msgid "Account activation"
 msgstr "Kontoaktivierung"
 
-#: useroperations/views.py:791
+#: useroperations/views.py:790
 msgid "Feedback sent. Thank you!"
 msgstr "Feedback gesendet. Vielen Dank!"
 
-#: useroperations/views.py:807
+#: useroperations/views.py:806
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
 
-#: useroperations/views.py:815
+#: useroperations/views.py:814
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "

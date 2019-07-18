@@ -39,8 +39,8 @@
         <div class="facet-header">
             <span class="facet-search-title">{{ facet_key }}</span>
             <input type="text" class="facet-search-input hide" placeholder="{% trans 'Filter by' %}">
-            <img class="facet-search-filter hide" src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}" title="{% trans 'Is filtered' %}">
-            <img class="facet-search-icon" src="{% static 'searchCatalogue/images/icons/icn_search_hover.png' %}" title="{% trans 'Open filter' %}">
+            <img alt="{% trans 'A filter icon' %}" class="facet-search-filter hide" src="{% static 'searchCatalogue/images/icons/icn_filter_hover.png' %}" title="{% trans 'Is filtered' %}">
+            <img alt="{% trans 'A magnifying glass' %}" class="facet-search-icon" src="{% static 'searchCatalogue/images/icons/icn_search_hover.png' %}" title="{% trans 'Open filter' %}">
         </div>
          <ul>
              {% for subcat in facet_val %}

@@ -5,12 +5,12 @@
         <div class="map-sidebar">
             <div class="map-sidebar-actions">
                 <div class="mobile-map-toggler">
-		        	<img width="50px" src="{% static 'useroperations/images/icn_switch.png' %}" title="{% trans 'Switch between default and mobile map viewer' %}">
+		        	<img alt="{% trans 'A mapviewer switcher icon, shaped as two arrows pointing in opposite directions' %}" width="50px" src="{% static 'useroperations/images/icn_switch.png' %}" title="{% trans 'Switch between default and mobile map viewer' %}">
 		        </div>
 				{% if guis|length > 1 %}
 		        	<div class="map-application-selector">
 		        		<div class="map-applications-toggler">
-		        			<img width="50px" src="{% static 'useroperations/images/icn_map_application_toggler.png' %}" title="{% trans 'Select other map application' %}">
+		        			<img alt="An arrow pointing from one map to another above" width="50px" src="{% static 'useroperations/images/icn_map_application_toggler.png' %}" title="{% trans 'Select other map application' %}">
 		        		</div>
 		        	</div>
 				{% endif %}
