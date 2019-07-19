@@ -102,7 +102,7 @@ def get_landing_page(lang):
     """
     ret_dict = {}
     # get favourite wmcs
-    searcher = Searcher(keywords="", result_target="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
+    searcher = Searcher(keywords="", result_target="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME, max_results=10)
     search_results = searcher.get_search_results_primary()
     ret_dict["wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("srv", [])
 
