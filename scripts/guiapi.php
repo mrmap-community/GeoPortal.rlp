@@ -1,8 +1,8 @@
 <?php
 //ini_set('error_reporting', 'E_ALL & ~ E_NOTICE');
-require_once(dirname(__FILE__)."/../mapbender/core/globalSettings.php");
-require_once(dirname(__FILE__)."/../mapbender/http/classes/class_mb_exception.php");
-require_once(dirname(__FILE__)."/../mapbender/http/php/mb_getGUIs.php");
+require_once(dirname(__FILE__)."/../../core/globalSettings.php");
+require_once(dirname(__FILE__)."/../../http/classes/class_mb_exception.php");
+require_once(dirname(__FILE__)."/../../http/php/mb_getGUIs.php");
 
 $con = db_connect(DBSERVER,OWNER,PW);
 db_select_db(DB,$con);
