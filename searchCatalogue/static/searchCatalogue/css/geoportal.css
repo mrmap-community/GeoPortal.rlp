@@ -333,8 +333,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .metadata-links img{
-    max-height: 50px;
-    max-width: 100px;
+    height: 3em;
 }
 
 .metadata-button{
