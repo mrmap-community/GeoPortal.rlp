@@ -1621,8 +1621,9 @@ sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sin
 echo "Mapbender Update Done"
 
 echo "Updating Mapbender Database"
-sed -i "s/set group_id 36/set g_id $mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
-sed -i "s/set db_owner \"postgres\"/set owner $mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+
+sed -i "s/:group_id/$mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+sed -i "s/:db_owner/$mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
 
 while true; do
     read -p "Do you use an external Database Server. Be sure to specify mapbender_database_host and superuser if yes. y/n?" yn
