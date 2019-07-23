@@ -1200,10 +1200,6 @@ dl dd {
   background: var(--primary) !important;
   background: linear-gradient(var(--primary), var(--primary)); }
 
-#chosen-facets > div{
-    padding-left: 25px;
-}
-
 .facet-header {
     display: flex;
     align-items: center;
@@ -1277,9 +1273,15 @@ dl dd {
   list-style-type: none; }
 
 #chosen-facets{
+    -webkit-display: flex;
     display: flex;
-    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
+#chosen-facets > div{
+    padding-left: 1em;
+}
+
 
 .single-chosen-facet{
     display: flex;
