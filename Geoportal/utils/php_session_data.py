@@ -54,8 +54,6 @@ def get_session_data(request):
     loggedin = False
     session_data = None
 
-
-
     if request.COOKIES.get(SESSION_NAME) is not None:
         session_data = get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:

@@ -360,6 +360,13 @@ ul {
     z-index: 2;
 }
 
+.map-viewer-toggler img, .sidebar-toggler img, .mobile-map-toggler img, .map-applications-toggler img{
+    background-color: var(--primary);
+    padding: 0.1em;
+    border-radius: 100%;
+    width: 3em;
+}
+
 .mobile-map-toggler{
     margin: 5px 0 0 0;
 }
@@ -464,6 +471,7 @@ ul {
     left: 0px;
     z-index: 2;
 }
+
 
 .sidebar-toggler:hover, .map-viewer-toggler:hover, .map-applications-toggler:hover, .mobile-map-toggler:hover{
     transform: scale(1.05);

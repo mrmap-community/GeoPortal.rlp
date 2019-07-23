@@ -68,13 +68,13 @@
 <body>
     <nav>
     <div class="map-viewer-toggler">
-        <img alt="{% trans 'A lying map icon' %}" width="50px" src="{% static 'useroperations/images/icn_map_viewer_toggler.png' %}" title="{% trans 'Open and close map viewer' %}">
+        <img alt="{% trans 'A lying map icon' %}" src="{% static 'useroperations/images/icn_map_viewer_toggler_transp.png' %}" title="{% trans 'Open and close map viewer' %}">
     </div>
     <div class="map-viewer-overlay closed">
         {% include 'geoportal.html' %}
     </div>
     <div class="sidebar-toggler">
-        <img alt="{% trans 'Three horizontal lines, one below the other' %}" width="50px" src="{% static 'useroperations/images/icn_toggler.png' %}" title="{% trans 'Open and close menu' %}">
+        <img alt="{% trans 'Three horizontal lines, one below the other' %}" src="{% static 'useroperations/images/icn_toggler_transp.png' %}" title="{% trans 'Open and close menu' %}">
     </div>
     <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
         <div class="sidebar-title">
