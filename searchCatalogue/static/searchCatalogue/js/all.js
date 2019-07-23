@@ -753,7 +753,8 @@ $(document).ready(function() {
             allFacets.push(facetData);
         });
         // add new selected facet, if not yet selected
-        if(allFacets.indexOf(search.getParam("facet")) === -1){
+        // only perform this on search catalogues that support facets
+        if(allFacets.indexOf(search.getParam("facet")) === -1 && search.getParam("source") == "primary"){
             allFacets.push(search.getParam("facet"));
         }
         // overwrite facet parameter
@@ -920,6 +921,18 @@ $(document).ready(function() {
         prepareAndSearch();
 
      });
+
+     /*
+      * Remove all facets at once
+      */
+      $(document).on("click", ".filter-remover", function(){
+        search.setParam("facet", "");
+        var facets = $("#chosen-facets .chosen-facet-items");
+        facets.each(function(i, facet){
+            facet.remove();
+        });
+        prepareAndSearch();
+      });
 
     /**
      * Handle facet selection
