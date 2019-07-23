@@ -1670,7 +1670,7 @@ if [ $old_ssl_conf == "https://" ];then
 	sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"https:\/\/\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 fi
 
-cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}portal
+cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}mapbender/http/local
 cp -a ${installation_folder}GeoPortal.rlp/scripts/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php
 cp -a ${installation_folder}GeoPortal.rlp/scripts/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 
