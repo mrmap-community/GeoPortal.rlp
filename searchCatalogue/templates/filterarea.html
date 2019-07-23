@@ -1,6 +1,11 @@
 {% load i18n %}
 <div class="filterarea -js-filterarea">
     <div>
+        {% if is_de_search or is_eu_search %}
+            <div class="filters-not-supported">
+                {% trans 'Filter categories are not supported for this catalogue.' %}
+            </div>
+        {% endif %}
         {% if selected_facets.keys|length > 0 %}
         <div>
             <h4>{% trans 'Chosen Categories:' %}</h4>
@@ -23,6 +28,7 @@
                 </div>
                 {% endfor %}
             </div>
+            <span class="filter-remover icon-cross fs-10px" title="{% trans 'Remove all filters' %}"></span>
         </div>
         {% endif %}
         <!-- Search tags -->

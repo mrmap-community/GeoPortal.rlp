@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-18 12:05+0000\n"
+"POT-Creation-Date: 2019-07-23 05:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,10 +71,18 @@ msgid "No Categories found for this search configuration"
 msgstr ""
 
 #: searchCatalogue/templates/filterarea.html:6
+msgid "Filter categories are not supported for this catalogue."
+msgstr ""
+
+#: searchCatalogue/templates/filterarea.html:11
 msgid "Chosen Categories:"
 msgstr ""
 
-#: searchCatalogue/templates/filterarea.html:44
+#: searchCatalogue/templates/filterarea.html:31
+msgid "Remove all filters"
+msgstr ""
+
+#: searchCatalogue/templates/filterarea.html:50
 msgid "Type of resource:"
 msgstr ""
 
@@ -282,7 +290,7 @@ msgstr ""
 #: searchCatalogue/templates/other/search_result.html:20
 #, fuzzy
 #| msgid "Informationen"
-msgid "An organization"
+msgid "An organization logo"
 msgstr "Information"
 
 #: searchCatalogue/templates/other/search_result.html:24

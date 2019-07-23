@@ -1621,8 +1621,9 @@ sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sin
 echo "Mapbender Update Done"
 
 echo "Updating Mapbender Database"
-sed -i "s/set group_id 36/set g_id $mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
-sed -i "s/set db_owner \"postgres\"/set owner $mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+
+sed -i "s/:group_id/$mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
+sed -i "s/:db_owner/$mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
 
 while true; do
     read -p "Do you use an external Database Server. Be sure to specify mapbender_database_host and superuser if yes. y/n?" yn
@@ -1670,7 +1671,7 @@ if [ $old_ssl_conf == "https://" ];then
 	sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"https:\/\/\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 fi
 
-cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}portal
+cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}mapbender/http/local
 cp -a ${installation_folder}GeoPortal.rlp/scripts/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php
 cp -a ${installation_folder}GeoPortal.rlp/scripts/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 

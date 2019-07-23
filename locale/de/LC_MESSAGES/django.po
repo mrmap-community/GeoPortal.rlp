@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-18 12:05+0000\n"
+"POT-Creation-Date: 2019-07-23 05:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,10 +71,18 @@ msgid "No Categories found for this search configuration"
 msgstr "Keine Kategorien für die verwendeten Sucheinstellungen gefunden"
 
 #: searchCatalogue/templates/filterarea.html:6
+msgid "Filter categories are not supported for this catalogue."
+msgstr "Filtern nach Kategorien wird von diesem Katalog nicht unterstützt."
+
+#: searchCatalogue/templates/filterarea.html:11
 msgid "Chosen Categories:"
 msgstr "Gewählte Kategorien:"
 
-#: searchCatalogue/templates/filterarea.html:44
+#: searchCatalogue/templates/filterarea.html:31
+msgid "Remove all filters"
+msgstr "Lösche alle Filter"
+
+#: searchCatalogue/templates/filterarea.html:50
 msgid "Type of resource:"
 msgstr "Art der Ressource:"
 
@@ -132,7 +140,8 @@ msgstr "Die deutsche Flagge, stellt die deutsche Sprache dar"
 
 #: searchCatalogue/templates/index.html:63 templates/base.html:38
 msgid "The United Kingdoms`s flag, indicating the english language"
-msgstr "Die Flagge des vereinigten Königreiches, stellt die englische Sprache dar"
+msgstr ""
+"Die Flagge des vereinigten Königreiches, stellt die englische Sprache dar"
 
 #: searchCatalogue/templates/index.html:90
 msgid "Extended Search"
@@ -280,8 +289,8 @@ msgid "Competent authority"
 msgstr "Zuständige Stelle:"
 
 #: searchCatalogue/templates/other/search_result.html:20
-msgid "An organization"
-msgstr "Eine Organisation"
+msgid "An organization logo"
+msgstr "Ein Organisationslogo"
 
 #: searchCatalogue/templates/other/search_result.html:24
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
@@ -308,7 +317,9 @@ msgstr "Serien"
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 msgid "A service icon, shaped as two arrows pointing in opposite directions"
-msgstr "Ein Dienstesymbol in der Form zweier Pfeile, die in entgegengesetzte Richtungen zeigen"
+msgstr ""
+"Ein Dienstesymbol in der Form zweier Pfeile, die in entgegengesetzte "
+"Richtungen zeigen"
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
@@ -392,7 +403,8 @@ msgstr "Der Zugriff wird protokolliert"
 
 #: searchCatalogue/templates/primary/wfs/wfs_category.html:6
 msgid "A web feature service icon, shaped as a magnifying glass over a map"
-msgstr "Ein Web Feature Service Symbol, in der Form einer Lupe über einer Karte"
+msgstr ""
+"Ein Web Feature Service Symbol, in der Form einer Lupe über einer Karte"
 
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:47
 msgid "More"
@@ -1192,7 +1204,8 @@ msgid ""
 "A mapviewer switcher icon, shaped as two arrows pointing in opposite "
 "directions"
 msgstr ""
-"Ein Wechselsymbol für den Kartenviewer, in der Form zweier Pfeile, welche in entgegengesetzte Richtungen zeigen"
+"Ein Wechselsymbol für den Kartenviewer, in der Form zweier Pfeile, welche in "
+"entgegengesetzte Richtungen zeigen"
 
 #: useroperations/templates/geoportal.html:8
 msgid "Switch between default and mobile map viewer"
@@ -1212,7 +1225,8 @@ msgstr "Ein INSPIRE Themen Symbol"
 
 #: useroperations/templates/inspire_topics.html:28
 msgid "Placeholder INSPIRE topic symbol, since no topic symbol is available"
-msgstr "Platzhaltersymbol für INSPIRE Themen, da kein richtiges Bild verfügbar ist"
+msgstr ""
+"Platzhaltersymbol für INSPIRE Themen, da kein richtiges Bild verfügbar ist"
 
 #: useroperations/templates/inspire_topics.html:35
 msgid "Number of data"
