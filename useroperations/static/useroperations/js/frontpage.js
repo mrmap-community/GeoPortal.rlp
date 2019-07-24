@@ -79,6 +79,12 @@ function toggleMapViewers(target){
     }
 }
 
+function toggleSubMenu(elem){
+    var elem = $(elem);
+    elem.parents().children(".sidebar-area-content").slideToggle("slow");
+}
+
+
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
     var elem = $(this).parents(".tile").find(".tile-header");
@@ -197,11 +203,6 @@ $(document).on("click", ".map-viewer-button", function(){
 });
 
 $(".body-content").change(function(){
-});
-
-$(document).on("click", ".sidebar-area-title", function(){
-    var elem = $(this);
-    elem.parents().children(".sidebar-area-content").slideToggle("slow");
 });
 
 $(document).on("click", "#geoportal-search-button", function(){
