@@ -791,6 +791,8 @@ ul {
     }
 
     .cookie-container{
+        position: absolute;
+        z-index: 100;
         top: 0;
         bottom: unset;
     }
