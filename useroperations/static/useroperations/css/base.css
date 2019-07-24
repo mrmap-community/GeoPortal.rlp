@@ -736,7 +736,7 @@ ul {
         margin-right: unset;
     }
 
-    .sidebar-toggler img, .map-viewer-toggler img{
+    .sidebar-toggler img, .map-viewer-toggler img, .mobile-map-toggler img{
         width: 4em;
     }
 

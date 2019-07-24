@@ -84,6 +84,33 @@ function toggleSubMenu(elem){
     elem.parents().children(".sidebar-area-content").slideToggle("slow");
 }
 
+function toggleMapviewer(){
+    // for dsgvo not accepted
+    if ($("#dsgvo").val() == "False"){
+    window.location.href = "/change-profile";
+    return;
+    }
+
+    // start loading the iframe content
+    var iframe = $("#mapviewer");
+    var src = iframe.attr("src");
+    var dataParams = iframe.attr("data-params");
+    var dataToggler = iframe.attr("data-toggle");
+    if(dataParams !== src && (dataToggler == src || src == "about:blank")){
+        iframe.attr("src", dataParams);
+    }
+    // resize the overlay
+    var mapLayer = $(".map-viewer-overlay");
+    resizeMapOverlay();
+    // let the overlay slide in
+    mapLayer.slideToggle("slow")
+    mapLayer.toggleClass("closed");
+    // close the sidebar
+    if(!$(".sidebar-wrapper").hasClass("closed")){
+        $(".sidebar-toggler").click();
+    }
+}
+
 
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
@@ -151,33 +178,6 @@ $(document).on("keypress", "#id_message", function(){
         out.toggleClass("warning");
     }
     out.html(restLength);
-});
-
-$(document).on("click", ".map-viewer-toggler, #mapviewer-sidebar", function(){
-    // for dsgvo not accepted
-    if ($("#dsgvo").val() == "False"){
-    window.location.href = "/change_profile";
-    return;
-    }
-
-    // start loading the iframe content
-    var iframe = $("#mapviewer");
-    var src = iframe.attr("src");
-    var dataParams = iframe.attr("data-params");
-    var dataToggler = iframe.attr("data-toggle");
-    if(dataParams !== src && (dataToggler == src || src == "about:blank")){
-        iframe.attr("src", dataParams);
-    }
-    // resize the overlay
-    var mapLayer = $(".map-viewer-overlay");
-    resizeMapOverlay();
-    // let the overlay slide in
-    mapLayer.slideToggle("slow")
-    mapLayer.toggleClass("closed");
-    // close the sidebar
-    if(!$(".sidebar-wrapper").hasClass("closed")){
-        $(".sidebar-toggler").click();
-    }
 });
 
 /*
