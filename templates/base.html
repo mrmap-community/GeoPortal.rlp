@@ -67,7 +67,7 @@
 
 <body>
     <nav>
-    <div class="map-viewer-toggler">
+    <div class="map-viewer-toggler" onclick="toggleMapviewer()">
         <img alt="{% trans 'A lying map icon' %}" src="{% static 'useroperations/images/icn_map_viewer_toggler_transp.png' %}" title="{% trans 'Open and close map viewer' %}">
     </div>
     <div class="map-viewer-overlay closed">
@@ -122,7 +122,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="sidebar-area" id="mapviewer-sidebar">
+        <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
                     <img alt="{% trans 'A lying map' %}" width="40px" src="{% static 'useroperations/images/icn_map_viewer.png' %}">
