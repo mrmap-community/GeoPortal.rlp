@@ -1104,6 +1104,7 @@ dl dd {
 
 .img-symbollink, .img-open{
     border: 1px solid rgba(0, 0, 0, 0.0);
+    max-height: 3em;
 }
 
 
