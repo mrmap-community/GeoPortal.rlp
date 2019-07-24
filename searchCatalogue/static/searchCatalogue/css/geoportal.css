@@ -329,11 +329,11 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .metadata-link-element{
+    height: 3em;
     margin: 0 10px 0 0;
 }
 
 .metadata-links img{
-    height: 3em;
 }
 
 .metadata-button{
