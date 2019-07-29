@@ -194,10 +194,10 @@ Search.prototype = {
             success: function(data) {
                 self.parseSearchResult(data);
             },
-            timeout: 60000,
+            timeout: 10000,
             error: function(jqXHR, textStatus, errorThrown){
                 if(textStatus === "timeout"){
-                    alert("A timeout occured.");
+                    alert("The catalogue provider didn't respond. Please try again later.");
                 }else{
                 }
             },
@@ -1229,10 +1229,10 @@ $(document).ready(function() {
             success: function(data) {
                 location.reload();
             },
-            timeout: 60000,
+            timeout: 10000,
             error: function(jqXHR, textStatus, errorThrown){
                 if(textStatus === "timeout"){
-                    alert("A timeout occured.");
+                    alert("The catalogue provider didn't respond. Please try again later.");
                 }
                 /*else{
                     alert(errorThrown);
