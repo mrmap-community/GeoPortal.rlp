@@ -15,7 +15,7 @@ $sql_list_guis .= ") ";
 $sql_list_guis .= " AND gui_public=1 AND ";
 $sql_list_guis .= " (gui_gui_category.fkey_gui_category_id = 2)  "; 
 $sql_list_guis .= "ORDER BY gui_name";
-$e = new mb_exception($sql_list_guis);
+$e = new mb_notice($sql_list_guis);
 $res_list_guis = db_query($sql_list_guis);
 
 

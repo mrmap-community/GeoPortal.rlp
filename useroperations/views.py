@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, SESSION_NAME
+from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, SESSION_NAME, PROJECT_DIR
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import useroperations_helper
@@ -266,8 +266,8 @@ def register_view(request):
                 return render(request, 'crispy_form_no_action.html', geoportal_context.get_context())
 
             try:
-                realm = mbConfReader.get_mapbender_config_value('REALM')
-                portaladmin = mbConfReader.get_mapbender_config_value('PORTAL_ADMIN_USER_ID')
+                realm = mbConfReader.get_mapbender_config_value(PROJECT_DIR,'REALM')
+                portaladmin = mbConfReader.get_mapbender_config_value(PROJECT_DIR,'PORTAL_ADMIN_USER_ID')
                 byte_aldigest = (form.cleaned_data['name'] + ":" + realm + ":" + form.cleaned_data['password']).encode('utf-8')
                 user.mb_user_aldigest = hashlib.md5(byte_aldigest).hexdigest()
                 user.mb_user_owner = portaladmin
