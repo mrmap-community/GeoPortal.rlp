@@ -111,6 +111,32 @@ function toggleMapviewer(){
     }
 }
 
+/**
+ * Reset the search catalogue source back to 'primary'.
+ * If a user selects e.g. the european search catalogue, goes back to the landing page
+ * and reopens the search module again, the european catalogue will still be selected. This is not the
+ * behaviour we want.
+ */
+function resetSearchCatalogue(src){
+    // reset catalogue source to primary if we are not in the search module
+    if(!location.pathname.includes("search") && search.getParam("source") != src){
+        search.setParam("source", src)
+    }
+}
+
+/**
+ * If the search page is reloaded, e.g. due to language changing or normal F5 reload,
+ * we need to make sure the search starts again automatically. Otherwise the users will be confused and cry.
+ */
+function startAutomaticSearch(){
+    if(location.pathname.includes("search")){
+        var searchBody = $(".search-overlay-content");
+        if(searchBody.html().trim().length == 0){
+            prepareAndSearch();
+        }
+    }
+}
+
 
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
@@ -427,12 +453,16 @@ $(document).on("scroll", function(){
     }
 })
 
+
 /*
  * Things that should start when the document is fully loaded
  */
 $(document).ready(function(){
     resizeSidebar();
     resizeMapOverlay();
+
+    resetSearchCatalogue("primary");
+    startAutomaticSearch();
 
 
     // show and auto hide messages
