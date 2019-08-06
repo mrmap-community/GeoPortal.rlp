@@ -1602,24 +1602,11 @@ $(document).ready(function() {
             }
         });
         var searchTextNew = searchTextArrNew.join(" ");
-
+        searchField.val(searchTextNew);
         // remove search word from search.keyword
         if (search.keyword == text){
             search.keyword = null;
         }
-
-        // remove search word from search parameter
-        var searchParam = search.getParam("terms");
-        var searchTextArr = searchParam.split(" ");
-        var searchTextArrNew = []
-        $.each(searchTextArr, function(i, elem){
-            if (elem.trim() != text){
-                searchTextArrNew.push(elem);
-            }
-        });
-        var searchTextNew = searchTextArrNew.join(" ");
-        search.setParam("terms", searchTextNew);
-        searchField.val(searchTextNew);
 
         $this.remove();
         prepareAndSearch();
