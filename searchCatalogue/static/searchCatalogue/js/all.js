@@ -586,7 +586,6 @@ function startInfoCall(){
 }
 
 function startAjaxMapviewerCall(value){
-    //console.log(value);
     $.ajax({
         url: "/map-viewer/",
         headers: {
@@ -600,7 +599,6 @@ function startAjaxMapviewerCall(value){
         success: function(data) {
             if(data["mapviewer_params"] != "" && data["url"] == ""){
             // internal mapviewer call
-                //console.log(data["mapviewer_params"]);
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
                 window.scrollTo({
                     top:150,
@@ -831,6 +829,7 @@ $(document).ready(function() {
      */
     // start search if search button clicked
     jQuery(document).on("click", '.-js-search-start', function() {
+                    alert("TTT");
         var elem = $(this);
         var inputTerms = $(".-js-simple-search-field").val().trim();
         search.setParam("terms", inputTerms);
