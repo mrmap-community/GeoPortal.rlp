@@ -397,7 +397,6 @@ var Autocomplete = function(search) {
         if (keyword) {
             _input.val(keyword);
             self.hide();
-            search.setParam("terms", keyword);
             $("#geoportal-search-button").click();
         }
     };
@@ -559,7 +558,6 @@ function changeMapviewerIframeSrc(srcSuffix){
 function clearAsterisk(){
     var searchbar = $(".simple-search-field");
     searchbar.val(searchbar.val().replace("*", ""));
-    search.setParam("terms", search.getParam("terms").replace("*",""));
 }
 
 /*
@@ -735,6 +733,11 @@ $(document).ready(function() {
             toggleFilterArea();
         }
 
+        // get terms from search input field
+        var searchField = $(".simple-search-field");
+        var terms = searchField.val();
+        search.setParam("terms", terms);
+
         // disable input field during search
         disableSearchInputField();
 
@@ -805,10 +808,12 @@ $(document).ready(function() {
             $farea.find('.-js-keyword').each(function() {
                 keywords.push($(this).text().trim());
             });
+            /*
             $farea.find('.-js-term').each(function() {
                 var term = $(this).text();
                 terms.push(prepareTerm(term.trim()));
             });
+            */
         }
         search.setParam('resources', JSON.stringify(reslist));
         var input = jQuery('.-js-simple-search-field');
@@ -826,10 +831,9 @@ $(document).ready(function() {
 
     /**
      * Start search if search button was clicked
+     * This function is needed for the external search page!
      */
-    // start search if search button clicked
     jQuery(document).on("click", '.-js-search-start', function() {
-                    alert("TTT");
         var elem = $(this);
         var inputTerms = $(".-js-simple-search-field").val().trim();
         search.setParam("terms", inputTerms);
@@ -840,6 +844,7 @@ $(document).ready(function() {
         }
         prepareAndSearch(true); // search and render
     });
+
 
     /**
      *  Hide autocomplete form if body, outside was clicked
@@ -997,7 +1002,7 @@ $(document).ready(function() {
         var checkbox = $("#spatial-checkbox");
         checkbox.prop("checked", false);
         searchField.val(searchField.val().replace(locationParam, "").trim());
-        search.setParam("terms", termsParams);
+        //search.setParam("terms", termsParams);
         search.setParam("searchBbox", bboxParams);
         search.setParam("searchTypeBbox", "intersects");
         prepareAndSearch();
@@ -1461,7 +1466,7 @@ $(document).ready(function() {
         var $self = jQuery(this);
         var keyword = $self.text().trim();
         var searchInput = $(".simple-search-field");
-        searchInput.val(searchInput.val() + " " + keyword);
+        searchInput.val(keyword);
         search.setParam("terms", keyword);
         prepareAndSearch();
     });

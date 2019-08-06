@@ -27,18 +27,18 @@ function setCookie(cname, cvalue){
 }
 
 function startSearch(){
-    var inputTerms = $(".-js-simple-search-field").val().trim();
-    search.setParam("terms", inputTerms);
-    // collapse extended search if open
-    var extendedSearchHeader = $(".-js-extended-search-header");
-    if(extendedSearchHeader.hasClass("active")){
-        extendedSearchHeader.click();
-    }
     // since the all.js might be loaded slower or faster, we need to make sure it exists before we call prepareAndSearch()
     // which lives in all.js
     var script = $("#all-script");
     $(script).ready(function(){
-        //prepareAndSearch(); // search and render
+        var inputTerms = $(".-js-simple-search-field").val().trim();
+        search.setParam("terms", inputTerms);
+        // collapse extended search if open
+        var extendedSearchHeader = $(".-js-extended-search-header");
+        if(extendedSearchHeader.hasClass("active")){
+            extendedSearchHeader.click();
+        }
+        prepareAndSearch(); // search and render
     });
 
 }
@@ -129,12 +129,16 @@ function resetSearchCatalogue(src){
  * we need to make sure the search starts again automatically. Otherwise the users will be confused and cry.
  */
 function startAutomaticSearch(){
-    if(location.pathname.includes("search")){
-        var searchBody = $(".search-overlay-content");
-        if(searchBody.html().trim().length == 0){
-            prepareAndSearch();
+    // wait until the document is loaded completely, then start the automatic search!
+    $(document).ready(function(){
+        if(location.pathname.includes("search")){
+            var searchBody = $(".search-overlay-content");
+            if(searchBody.html().trim().length == 0){
+                prepareAndSearch();
+            }
         }
-    }
+
+    });
 }
 
 
@@ -239,17 +243,17 @@ $(document).on("click", "#geoportal-search-button", function(){
     }
     var elem = $(this);
     // check if the index page is already opened
-    var index = $(".content-tabs.-js-tabs");
-    if(index.length == 0){
+    if(!window.location.pathname.includes("/search")){
         // no index page loaded for search -> load it!
         // we lose all searchbar data on reloading, so we need to save it until the page is reloaded
-        window.sessionStorage.setItem("startSearch", true);
+        //window.sessionStorage.setItem("startSearch", true);
         window.sessionStorage.setItem("searchbarBackup", $(".-js-simple-search-field").val().trim());
         window.sessionStorage.setItem("isSpatialCheckboxChecked", $("#spatial-checkbox").is(":checked"));
         window.location.pathname = "/search";
     }else{
         startSearch();
     }
+
 });
 
 
@@ -417,7 +421,17 @@ $(window).on("load", function(param){
     resizeSidebar();
     resizeMapOverlay();
 
+    var searchbar = $(".-js-simple-search-field");
+    var checkbox = $("#spatial-checkbox");
+    if (window.sessionStorage.getItem("isSpatialCheckboxChecked") == 'true'){
+        checkbox.prop("checked", true);
+    }
+    searchbar.val(window.sessionStorage.getItem("searchbarBackup"));
+    window.sessionStorage.removeItem("searchbarBackup");
+    window.sessionStorage.removeItem("isSpatialCheckboxChecked");
+
     // check if there was a search call from a non-search-index page on the geoportal
+    /*
     var checkForSearchStart = window.sessionStorage.getItem("startSearch");
     window.sessionStorage.removeItem("startSearch");
     if(checkForSearchStart){
@@ -432,6 +446,7 @@ $(window).on("load", function(param){
         window.sessionStorage.removeItem("isSpatialCheckboxChecked");
         startSearch();
     }
+    */
 
     var current_page_area = $(".current-page").parents(".sidebar-area-content");
     current_page_area.show();
