@@ -77,6 +77,8 @@
                             <a href="{{ feed.htmlLink }}" target="_blank">
                                 <div class="resource-view-title" title="{% trans 'Metadata' %}">
                                     {{ feed.serviceTitle }}
+                                    <br>
+                                    ({{ feed.serviceUuid }})
                                 </div></a>
                             <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
                                 <div class="resource-element-info"></div>
