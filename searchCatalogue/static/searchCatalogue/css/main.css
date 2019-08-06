@@ -1,7 +1,6 @@
 @charset "UTF-8";
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
 
-@import "color_schema.css";
 
 audio, canvas, progress, video {
   display: inline-block; }
@@ -660,6 +659,7 @@ dl dd {
 .tab-icn{
   margin: 0 0.5em 0 0.5em;
   width: 1.0em;
+  max-height: 1.0em;
 }
 
 .select-wrapper{

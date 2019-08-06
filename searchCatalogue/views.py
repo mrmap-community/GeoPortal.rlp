@@ -70,12 +70,6 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     Returns:
         The rendered page
     """
-    language_cookie = request.COOKIES.get("django_language", None)
-    if language_cookie is None:
-        # user needs to see the default language!
-        default_language = "de"
-        translation.activate(default_language)
-        request.LANGUAGE_CODE = translation.get_language()
     template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
@@ -194,7 +188,7 @@ def get_data(request: HttpRequest):
     spatial = post_params.get("spatial", "") == "true"
     search_box = post_params.get("searchBbox", "")
     if spatial is not None:
-        if spatial and search_box == '':
+        if spatial:
             # spatial is selected but there are no search_bbox parameters yet -> A spatial search result was not selected yet -> Show them!
             return get_spatial_results(request)
 
