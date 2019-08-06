@@ -38,7 +38,7 @@ function startSearch(){
     // which lives in all.js
     var script = $("#all-script");
     $(script).ready(function(){
-        prepareAndSearch(); // search and render
+        //prepareAndSearch(); // search and render
     });
 
 }
