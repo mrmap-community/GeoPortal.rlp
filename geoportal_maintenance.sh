@@ -1142,14 +1142,6 @@ EOF
     sed -i s/"session.hash_function = 0"/"session.hash_function = 1"/g /etc/php/7.0/apache2/php.ini
   fi
 
-  if  ! grep -w "doc_root = ${installation_folder}/mapbender/http/"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i s@"doc_root ="@"doc_root = ${installation_folder}/mapbender/http/"@g /etc/php/7.0/apache2/php.ini
-  fi
-
-  if  ! grep -w "open_basedir = ${installation_folder}/mapbender"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i "/^doc_root*/a open_basedir = ${installation_folder}/mapbender/" /etc/php/7.0/apache2/php.ini
-  fi
-
   if  ! grep -w "allow_webdav_methods = Off"  /etc/php/7.0/apache2/php.ini ;then
     sed -i "/^doc_root*/a allow_webdav_methods = Off" /etc/php/7.0/apache2/php.ini
   fi
