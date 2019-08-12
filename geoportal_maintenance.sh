@@ -851,7 +851,14 @@ fi
     echo -e "\n"
     ##################### demo service
     eval $wms_6_register_cmd | tee -a $installation_log
-    echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
+    
+    
+    if [ $? -eq 0 ];then
+  		echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
+	else
+    	echo -e "\n ${red}Registering services failed! ${reset}\n" | tee -a $installation_log
+    fi
+
     #####################
     # qualify the main gui
     # update database to set initial extent and epsg for Main GUI: TODO: maybe use a hidden layer !
