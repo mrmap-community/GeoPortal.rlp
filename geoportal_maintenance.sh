@@ -1708,6 +1708,7 @@ rm -R ${installation_folder}svn
 rm -R ${installation_folder}conf
 rm -R ${installation_folder}access
 rm -R ${installation_folder}db_backup
+rm -r /var/spool/cron/crontabs/root
 
 rm ${installation_folder}geoportal_database_adoption_1.sql
 rm ${installation_folder}geoportal_database_adoption_2.sql
