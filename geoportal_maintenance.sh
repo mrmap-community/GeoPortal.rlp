@@ -1390,6 +1390,8 @@ sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$hostname\""/g ${installation_
 sed -i "s#PROJECT_DIR = \"/data/\"#PROJECT_DIR = \"${installation_folder}\"#g" ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$mapbender_database_user',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$mapbender_database_password',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$mapbender_database_name',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+
 
 # enable php_serialize
 if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
