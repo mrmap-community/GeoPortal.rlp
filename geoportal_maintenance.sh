@@ -1492,6 +1492,7 @@ rm -r /tmp/extensions
 rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
 
 cp -a ${installation_folder}GeoPortal.rlp/scripts/LocalSettings.php /etc/mediawiki/LocalSettings.php
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mediawiki_css/* /usr/share/mediawiki/skins/
 
 echo -e "\n Configuring Composer for SemanticMediaWiki extension! \n" | tee -a $installation_log
 cd /usr/share/mediawiki
@@ -1506,6 +1507,7 @@ su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-n
 
 echo -e "\n ${green}Successfully configured composer!${reset} \n" | tee -a $installation_log
 
+sed -i s/"\$wgDefaultSkin = \"vector\";/\$wgDefaultSkin = \"timeless\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
