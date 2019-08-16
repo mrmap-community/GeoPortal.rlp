@@ -650,7 +650,7 @@ EOF
   #####################
 
   #####################
-  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_adoption_2.sql >> $installation_log 2>&1
+  sudo -u postgres psql -q -d $mapbender_database_name -f ${installation_folder}geoportal_database_adoption_2.sql >> $installation_log 2>&1
 
   # add privilegs for mapbenderdbuser
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE ON SCHEMA mapbender TO $mapbender_database_user'" >> $installation_log 2>&1
