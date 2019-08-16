@@ -382,7 +382,7 @@ EOF
   #####################
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "CREATE SCHEMA django AUTHORIZATION $mapbender_database_user" >> $installation_log 2>&1
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'CREATE SCHEMA mapbender' >> $installation_log 2>&1
-  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE mapbender SET search_path TO mapbender,public,pg_catalog,topology' >> $installation_log 2>&1
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "ALTER DATABASE $mapbender_database_name SET search_path TO mapbender,public,pg_catalog,topology" >> $installation_log 2>&1
   #####################
   sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_schema_2.5.sql >> $installation_log 2>&1
   sudo -u postgres PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/UTF-8/pgsql_data_2.5.sql >> $installation_log 2>&1
