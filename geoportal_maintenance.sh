@@ -683,7 +683,7 @@ EOF
   UPDATE spatial_ref_sys SET proj4text='+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=4500000 +y_0=0 +datum=potsdam +ellps=bessel +nadgrids=@BETA2007.gsb,null +units=m +no_defs' WHERE srid = 31468;
   UPDATE spatial_ref_sys SET proj4text='+proj=tmerc +lat_0=0 +lon_0=15 +k=1 +x_0=5500000 +y_0=0 +datum=potsdam +ellps=bessel +nadgrids=@BETA2007.gsb,null +units=m +no_defs' WHERE srid = 31469;
 EOF
-  sudo -u postgres psql -q -d mapbender -f ${installation_folder}geoportal_database_proj_adaption.sql >> $installation_log 2>&1
+  sudo -u postgres psql -q -d $mapbender_database_name -f ${installation_folder}geoportal_database_proj_adaption.sql >> $installation_log 2>&1
 fi
 
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql >> $installation_log 2>&1
