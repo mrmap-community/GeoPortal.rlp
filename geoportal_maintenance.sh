@@ -1815,6 +1815,7 @@ You can choose from the following options:
         --hostname=hostname              		| Default \"127.0.0.1\"
     	--proxy=Proxy IP:Port  	 			| Default \"None\" ; Syntax --proxy=1.2.3.4:5555
         --proxyuser=username                            | Default \"\" ; Password will be prompted
+        --mapbenderdbname=mapbender						| Default \"mapbender\" 
     	--mapbenderdbuser=User for Database access	| Default \"mapbenderdbuser\"
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access	| Default \"postgresadmin\"
@@ -1835,6 +1836,7 @@ while getopts h-: arg; do
 	   help				)  usage;;
      	   proxy=?*     		)  http_proxy=$LONG_OPTARG;;
      	   proxyuser=?*       		)  http_proxy_user=$LONG_OPTARG;;
+           mapbenderdbname=?*		)  mapbender_database_name=$LONG_OPTARG;;
 	   mapbenderdbuser=?*		)  mapbender_database_user=$LONG_OPTARG;;
 	   mapbenderdbpw=?*		)  mapbender_database_password=$LONG_OPTARG;;
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
