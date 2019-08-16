@@ -1358,7 +1358,7 @@ cd ${installation_folder}
 echo -e "\n Downloading Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
 git clone --progress https://git.osgeo.org/gitea/armin11/GeoPortal.rlp >> $installation_log 2>&1
 if [ $? -eq 0 ];then
-  echo -e "\n ${green}Successfully downloaded Modsecurity Ruleset! ${reset}\n" | tee -a $installation_log
+  echo -e "\n ${green}Successfully downloaded Geoportal Source! ${reset}\n" | tee -a $installation_log
 else
 	if [ -d "${installation_folder}GeoPortal.rlp" ];then
     	echo -e "\n ${red} Folder ${installation_folder}GeoPortal.rlp found, please remove it!${reset}\n" | tee -a $installation_log
@@ -1367,7 +1367,6 @@ else
   	fi
   	exit
 fi
-echo -e "\n ${green}Successfully downloaded Geoportal Source to ${installation_folder}! ${reset}\n" | tee -a $installation_log
 
 echo -e "\n Configuring Django. \n" | tee -a $installation_log
 
