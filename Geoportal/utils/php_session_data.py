@@ -74,7 +74,7 @@ def get_session_data(request):
                         guistring = guistring.replace('"', '')
                         guistring = guistring.replace('[', '')
                         guistring = guistring.replace(']', '')
-                        guistring = guistring.replace('\\u00e4', 'ae')
+                        guistring = guistring.replace('\\u00e4', 'ä')
                         guis = guistring.split(",")
                         loggedin = True
                     else:

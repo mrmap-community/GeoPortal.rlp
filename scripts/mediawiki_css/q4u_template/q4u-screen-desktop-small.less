@@ -1,0 +1,139 @@
+@import "../Timeless/resources/variables.less";
+
+#site-navigation {
+  background-color: transparent  !important;
+
+  a {
+    color: @red;
+  }
+
+  h3 {
+    color: @text;
+  }
+
+  .pokey::after {
+    border-bottom-color: #fff;
+  }
+}
+
+#mw-header-nav-hack {
+  display: none !important;
+}
+
+#mw-site-navigation {
+  height: 40px;
+}
+
+#mw-content {
+  margin-top: 0 !important;
+}
+
+.sidebar-chunk,
+.dropdown {
+  padding: 0 !important;
+
+  background-color: transparent !important;
+
+  h2 {
+    margin-top: -1px !important;
+    padding: 0 !important;
+    padding-top: 1px !important;
+
+    &::after {
+      transform: translateY(-3px);
+
+      width: 0 !important;
+      height: 0 !important;
+      margin-left: 4px;
+      border-top: 6px solid @text;
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+
+      background: transparent !important;
+    }
+
+    span {
+      display: inline-block;
+
+      height: 40px;
+
+      line-height: 40px;
+    }
+  }
+}
+
+#p-search {
+  margin-left: 0;
+}
+
+#mw-related-navigation #page-tools .sidebar-inner,
+.sidebar-inner {
+  top: 40px !important;
+}
+
+.sidebar-chunk .pokey {
+  top: 30px !important;
+  right: -4px;
+}
+
+.dropdown {
+  background-color: #ffffff !important;
+}
+
+.sidebar-inner,
+#p-personal-inner {
+  padding: 2em 2em 1em !important;
+  border: none !important;
+  border-radius: 2px;
+
+  box-shadow: 0 4px 48px -8px rgba(0, 0, 0, .25) !important;
+
+  a {
+    font-size: 1em !important;
+  }
+}
+
+#page-tools,
+#site-navigation,
+#site-tools {
+  &:hover {
+    .sidebar-inner,
+    .pokey {
+      opacity: 1;
+      transform: translateY(0);
+
+      pointer-events: all;
+    }
+  }
+
+  .sidebar-inner,
+  .pokey {
+    display: block !important;
+
+    opacity: 0;
+    transform: translateY(-4px);
+
+    box-shadow: 0 0 48px -12px rgba(0, 0, 0, .2) !important;
+
+    transition: transform .3s, opacity .3s;
+
+    pointer-events: none;
+  }
+}
+
+#site-navigation .sidebar-inner {
+  &::before {
+    display: block;
+    content: '';
+    z-index: -1;
+
+    width: 200px;
+    height: 150px;
+    margin-bottom: 2em;
+
+    background-image: url('logo-gdi.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}

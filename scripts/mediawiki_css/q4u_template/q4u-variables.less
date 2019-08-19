@@ -1,0 +1,63 @@
+@text: #222222;
+@background: #fff;
+@background2: #f3f3f3;
+@background3: #e2e2e2;
+
+@background-dark: #777;
+@background-dark2: #555;
+@text-inverse: #fff;
+
+@link: @blue;
+@link-red: @red;
+
+@grey: #ccc;
+@grey-bright: #eee;
+@grey-dark: #666;
+
+@red: #871d33;
+@red-bright: #a7233f;
+@red-dark: #680404;
+@red-light: #f1d2d2;
+
+@green: #1d873c;
+@green-bright: #1d873c;
+@green-dark: #1d873c;
+
+@blue: #2E66AB;
+@blue-bright: #578fd4;
+@blue-dark: #133661;
+
+@yellow: #E8E4C5;
+@yellow-bright: #F5F1D7;
+@yellow-dark: #858059;
+
+@link: @blue;
+@link-red: @red;
+
+// Flair
+
+// Fonts are chosen for consistent metrics, not necessarily overall prettiness.
+// This will NEED fixes for different languages.
+@fonts-secondary: Arial, Helvetica, sans-serif;
+@fonts: Arial, Helvetica, sans-serif
+;
+@border: .2em;
+@radius: .2em;
+
+@font-size: .95em;
+
+// Widths
+
+@column-left-size: 14em;
+@column-right-size: 16em;
+
+@content-width: 100em;
+@content-padding: 2em;
+
+@fixed-header-height: 3.125em;
+
+.dropdown-header() {
+  &:after {
+    .background-image-svg('../../q4u_template/images/arrow-down-grey.svg', 'images/arrow-down-grey.png');
+  }
+}
