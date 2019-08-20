@@ -1131,21 +1131,26 @@ EOF
     echo  "Timeout 60" >>/etc/apache2/conf-available/security.conf
   fi
 
-  if  ! grep -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
+  if  ! grep -q -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
     sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.0/apache2/php.ini
   fi
 
-  if  ! grep -w "session.cookie_lifetime = 14400"  /etc/php/7.0/apache2/php.ini ;then
+  if  ! grep -q -w "session.cookie_lifetime = 14400"  /etc/php/7.0/apache2/php.ini ;then
     sed -i s/"session.cookie_lifetime = 0"/"session.cookie_lifetime = 14400"/g /etc/php/7.0/apache2/php.ini
   fi
 
-  if  ! grep -w "session.hash_function = 0"  /etc/php/7.0/apache2/php.ini ;then
+  if  ! grep -q -w "session.hash_function = 0"  /etc/php/7.0/apache2/php.ini ;then
     sed -i s/"session.hash_function = 0"/"session.hash_function = 1"/g /etc/php/7.0/apache2/php.ini
   fi
 
-  if  ! grep -w "allow_webdav_methods = Off"  /etc/php/7.0/apache2/php.ini ;then
+  if  ! grep -q -w "allow_webdav_methods = Off"  /etc/php/7.0/apache2/php.ini ;then
     sed -i "/^doc_root*/a allow_webdav_methods = Off" /etc/php/7.0/apache2/php.ini
   fi
+
+  if  ! grep -q "\-I"  /etc/memcached.conf ;then
+	echo  "-I 10m" >>/etc/memcached.conf
+  fi
+
 
   #if  ! grep -q "Header always append X-Frame-Options SAMEORIGIN"  /etc/apache2/conf-enabled/security.conf ;then
   #  echo  "Header always append X-Frame-Options SAMEORIGIN" >>/etc/apache2/conf-enabled/security.conf
