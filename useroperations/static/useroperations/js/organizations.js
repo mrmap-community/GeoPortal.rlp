@@ -3,11 +3,18 @@
 $(document).ready(function(){
 
     $(document).on("click", ".organizations .tile-header", function(){
+        var userLang = navigator.language || navigator.userLanguage;
         var elem = $(this);
         var id = elem.attr("data-id");
         var name = elem.attr("data-name");
         var searchButton = $("#geoportal-search-button");
-        var facet = ["Organizations", name, id].join(",");
+      
+        if(userLang == "de"){
+        	var facet = ["Organisationen", name, id].join(",");
+		}else{
+        	var facet = ["Organizations", name, id].join(",");
+		}
+      
         search.setParam("facet", facet);
         searchButton.click();
     });
