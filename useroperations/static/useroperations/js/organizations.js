@@ -10,9 +10,9 @@ $(document).ready(function(){
         var searchButton = $("#geoportal-search-button");
       
         if(userLang == "de"){
-        	var facet = ["Organisationen", name, id].join(",");
+           var facet = ["Organisationen", name, id].join(",");
 		}else{
-        	var facet = ["Organizations", name, id].join(",");
+           var facet = ["Organizations", name, id].join(",");
 		}
       
         search.setParam("facet", facet);
