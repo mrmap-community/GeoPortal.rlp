@@ -3,7 +3,7 @@ include_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/../classes/class_user.php");
 $pw = $_REQUEST['password'];
 $name = $_REQUEST['name'];
-$e = new mb_exception('SESSION[mb_user_name]: '.Mapbender::session()->get("mb_user_name"));
+$e = new mb_notice('SESSION[mb_user_name]: '.Mapbender::session()->get("mb_user_name"));
 
 # Q4U - Michael Spitz - 16.08.2006 - Falls Cookies deaktiviert sind, muss die Session-ID an die Folgeseiten weitergereicht werden
 $URLAdd="";
@@ -27,7 +27,7 @@ if($isAuthenticated != false) {
 	Mapbender::session()->set("Textsize",$isAuthenticated["mb_user_textsize"]);
 	Mapbender::session()->set("Glossar",$isAuthenticated["mb_user_glossar"]);
 	Mapbender::session()->set("mb_user_spatial_suggest",$isAuthenticated["mb_user_spatial_suggest"]);
-	$e = new mb_exception('geoportal/authentication.php: mb_user_newsletter: '.$isAuthenticated["mb_user_newsletter"]);
+	$e = new mb_notice('geoportal/authentication.php: mb_user_newsletter: '.$isAuthenticated["mb_user_newsletter"]);
 	if ($isAuthenticated["mb_user_newsletter"] == "t") {
 		Mapbender::session()->set("mb_user_newsletter","ja");
 	} else {
