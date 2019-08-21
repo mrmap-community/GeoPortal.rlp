@@ -334,7 +334,7 @@ ul {
 .map-viewer-overlay{
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(var(--secondary), white);
+    background-color: #e2e2e2;
     position: absolute;
     margin: 0;
     /*
