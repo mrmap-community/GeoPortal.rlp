@@ -181,7 +181,7 @@ Search.prototype = {
                 'data-geoportal': self.getParam('data-id'),
                 'keywords':  self.getParam('keywords'),
                 'resources': self.getParam('resources'),
-                'facet': self.getParam('facet'),
+				'facet': (self.getParam('facet').split(";").unique()).join(";"),
                 'orderBy': self.getParam('orderBy'),
                 'maxResults': self.getParam('maxResults'),
                 'spatial': self.getParam('spatialSearch'),
@@ -680,7 +680,12 @@ $(document).ready(function() {
      if(window.location.pathname == "/"){
         focus_on_search_input();
      }
-
+    //fix for michel ;-)
+    Array.prototype.unique = function() {
+      return this.filter(function (value, index, self) { 
+        return self.indexOf(value) === index;
+      });
+    }
 
     function toggleCataloguesResources(){
         if(search.getParam("source") === null || search.getParam("source") == "primary"){
@@ -1644,6 +1649,8 @@ $(document).ready(function() {
         })
     });
 
+  
+  
     function resolveCoupledResources(resourceArea){
         var checkAttr = "coupled-resources-loaded";
         if(resourceArea.attr(checkAttr)){
