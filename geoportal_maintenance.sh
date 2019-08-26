@@ -852,8 +852,8 @@ fi
     echo -e "\n"
     ##################### demo service
     eval $wms_6_register_cmd | tee -a $installation_log
-    
-    
+
+
     if [ $? -eq 0 ];then
   		echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
 	else
@@ -883,6 +883,7 @@ fi
   echo -e  "\n Creating apache configuration. \n" | tee -a $installation_log
   cat << EOF > ${installation_folder}geoportal-apache.conf
   <VirtualHost *:80>
+          ServerName $hostname
           ServerAdmin $webadmin_email
           ReWriteEngine On
           RewriteRule ^/registry/wfs/([\d]+)\/?$ ${REQUEST_SCHEME}://127.0.0.1/http_auth/http/index.php?wfs_id=\$1 [P,L,QSA,NE]
@@ -1015,6 +1016,17 @@ fi
                   Order allow,deny
                   Allow from all
           </Directory>
+
+          #wsgi config
+          WSGIDaemonProcess $hostname  python-path=${installation_folder}GeoPortal.rlp/ python-home=${installation_folder}env processes=2 threads=15 display-name=%{GROUP}
+          WSGIProcessGroup $hostname
+          WSGIScriptAlias / ${installation_folder}GeoPortal.rlp/Geoportal/wsgi.py
+          <Directory ${installation_folder}GeoPortal.rlp/Geoportal>
+          Options +ExecCGI
+          Require all granted
+          </Directory>
+
+
   </VirtualHost>
 EOF
   ############################################################
@@ -1437,19 +1449,7 @@ python manage.py makemessages >> $installation_log 2>&1
 python manage.py compilemessages >> $installation_log 2>&1
 python manage.py loaddata useroperations/fixtures/navigation.json >> $installation_log 2>&1
 
-# apache config
-if [ ! -f "/etc/apache2/conf-available/wsgi.conf"  ]; then
-	echo "WSGIScriptAlias / ${installation_folder}GeoPortal.rlp/Geoportal/wsgi.py
-	WSGIPythonPath ${installation_folder}GeoPortal.rlp
-	WSGIPythonHome ${installation_folder}env
-	<Directory ${installation_folder}GeoPortal.rlp/Geoportal>
-	<Files wsgi.py>
-	Require all Granted
-	</Files>
-	</Directory>" > /etc/apache2/conf-available/wsgi.conf
-fi
 
-a2enconf wsgi >> $installation_log 2>&1
 /etc/init.d/apache2 restart >> $installation_log 2>&1
 
 echo -e "\n Successfully configured Django! \n" | tee -a $installation_log
@@ -1821,7 +1821,7 @@ You can choose from the following options:
         --hostname=hostname              		| Default \"127.0.0.1\"
     	--proxy=Proxy IP:Port  	 			| Default \"None\" ; Syntax --proxy=1.2.3.4:5555
         --proxyuser=username                            | Default \"\" ; Password will be prompted
-        --mapbenderdbname=mapbender						| Default \"mapbender\" 
+        --mapbenderdbname=mapbender						| Default \"mapbender\"
     	--mapbenderdbuser=User for Database access	| Default \"mapbenderdbuser\"
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access	| Default \"postgresadmin\"
