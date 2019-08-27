@@ -24,6 +24,7 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('search/', include('searchCatalogue.urls')),
     path('captcha/', include('captcha.urls')),
+    path('manage/', include('resourceManager.urls')),
     path('', include('useroperations.urls')),
     path('news/', include('news.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
