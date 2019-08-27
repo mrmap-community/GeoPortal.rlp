@@ -847,6 +847,28 @@ def service_abo(request: HttpRequest):
     geoportal_context = GeoportalContext(request=request)
     return render(request=request, context=geoportal_context.get_context(), template_name=template)
 
+@check_browser
+def open_linked_data(request: HttpRequest):
+
+    """ Open Linked Data Page
+
+    Args:
+        request:
+    Returns:
+
+    """
+    request.session["current_page"] = "open_linked_data"
+
+    geoportal_context = GeoportalContext(request)
+    context_data = geoportal_context.get_context()
+    if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
+        return redirect('useroperations:change_profile')
+
+    template = "open_linked_data.html"
+
+    geoportal_context = GeoportalContext(request=request)
+    return render(request=request, context=geoportal_context.get_context(), template_name=template)
+
 def incompatible_browser(request: HttpRequest):
     """ Renders a template about how the user's browser is a filthy peasants tool.
 
