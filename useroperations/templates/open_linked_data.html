@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h1>{% trans 'OpenLinkedData' %}</h1>
+<hr>
+<div class="form-wrapper">
+
+<iframe src="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/php/mod_linkedDataProxy.php" name="OpenLinkedData" frameborder="0" scrolling="no" width="100%" onload="resizeIframe(this);">
+</iframe>
+</div>
+
+{% endblock %}
