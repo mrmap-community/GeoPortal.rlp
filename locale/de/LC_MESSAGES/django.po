@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 05:17+0000\n"
+"POT-Creation-Date: 2019-08-23 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,7 +122,7 @@ msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
 #: searchCatalogue/templates/index.html:49
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:96
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:90
 msgid "Search"
 msgstr "Suche"
 
@@ -177,7 +177,7 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:6
 #: searchCatalogue/templates/other/application/application_category.html:7
-#: searchCatalogue/views.py:286
+#: searchCatalogue/views.py:280
 msgid "Applications"
 msgstr "Applikationen"
 
@@ -218,8 +218,8 @@ msgstr "Anzeigen"
 #: searchCatalogue/templates/search_result_actions.html:15
 #: searchCatalogue/templates/search_result_actions.html:30
 #: searchCatalogue/templates/search_result_actions.html:38
-#: searchCatalogue/templates/search_result_actions.html:88
-#: searchCatalogue/templates/search_result_actions.html:120
+#: searchCatalogue/templates/search_result_actions.html:90
+#: searchCatalogue/templates/search_result_actions.html:122
 msgid "A download icon"
 msgstr "Ein Downloadsymbol"
 
@@ -229,20 +229,18 @@ msgstr "Ein Downloadsymbol"
 #: searchCatalogue/templates/search_result_actions.html:16
 #: searchCatalogue/templates/search_result_actions.html:31
 #: searchCatalogue/templates/search_result_actions.html:39
-#: searchCatalogue/templates/search_result_actions.html:85
-#: searchCatalogue/templates/search_result_actions.html:88
-#: searchCatalogue/templates/search_result_actions.html:102
-#: searchCatalogue/templates/search_result_actions.html:120
+#: searchCatalogue/templates/search_result_actions.html:104
+#: searchCatalogue/templates/search_result_actions.html:122
 msgid "Download"
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:43
-#: searchCatalogue/templates/search_result_actions.html:84
+#: searchCatalogue/templates/search_result_actions.html:86
 msgid "Original atom feed"
 msgstr "Originaler Atom Feed"
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
-#: searchCatalogue/templates/search_result_actions.html:85
+#: searchCatalogue/templates/search_result_actions.html:87
 #: useroperations/templates/inspire_topics.html:36
 msgid "A document icon"
 msgstr "Ein Dokumentensymbol"
@@ -264,8 +262,8 @@ msgstr "Ein stylisierter Globus"
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/dataset/dataset_category.html:7
-#: searchCatalogue/views.py:277 searchCatalogue/views.py:283
-#: searchCatalogue/views.py:374 useroperations/templates/landing_page.html:26
+#: searchCatalogue/views.py:271 searchCatalogue/views.py:277
+#: searchCatalogue/views.py:368 useroperations/templates/landing_page.html:26
 #: useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr "Datensätze"
@@ -276,7 +274,7 @@ msgstr "Drei Punkte in einer Reihe"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:7
-#: searchCatalogue/views.py:287
+#: searchCatalogue/views.py:281
 msgid "Miscellaneous Datasets"
 msgstr "Sonstige Datensätze"
 
@@ -311,7 +309,7 @@ msgstr "Ein Kalendarsymbol"
 
 #: searchCatalogue/templates/other/series/series_category.html:6
 #: searchCatalogue/templates/other/series/series_category.html:7
-#: searchCatalogue/views.py:278 searchCatalogue/views.py:284
+#: searchCatalogue/views.py:272 searchCatalogue/views.py:278
 msgid "Series"
 msgstr "Serien"
 
@@ -323,7 +321,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
-#: searchCatalogue/views.py:279 searchCatalogue/views.py:285
+#: searchCatalogue/views.py:273 searchCatalogue/views.py:279
 msgid "Services"
 msgstr "Dienste"
 
@@ -570,36 +568,36 @@ msgstr "Zusammenstellungen"
 msgid "Metadata"
 msgstr "Metadaten"
 
-#: searchCatalogue/templates/search_result_actions.html:87
+#: searchCatalogue/templates/search_result_actions.html:89
 msgid "Open in atom feed viewer"
 msgstr "Öffne im Atom Feed Viewer"
 
-#: searchCatalogue/templates/search_result_actions.html:114
+#: searchCatalogue/templates/search_result_actions.html:116
 msgid "Download services"
 msgstr "Downloaddienste"
 
-#: searchCatalogue/templates/search_result_actions.html:118
+#: searchCatalogue/templates/search_result_actions.html:120
 #: useroperations/templates/inspire_topics.html:41
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr "Das INSPIRE Symbol in der Form einer Ananas"
 
-#: searchCatalogue/templates/search_result_actions.html:130
+#: searchCatalogue/templates/search_result_actions.html:132
 msgid "Layers"
 msgstr "Ebenen"
 
-#: searchCatalogue/templates/search_result_actions.html:154
+#: searchCatalogue/templates/search_result_actions.html:156
 msgid "A key above an envelope"
 msgstr "Ein Schlüssel über einem Briefumschlag"
 
-#: searchCatalogue/templates/search_result_actions.html:154
+#: searchCatalogue/templates/search_result_actions.html:156
 msgid "Ask data provider for permission"
 msgstr "Datenanbieter um Berechtigung bitten"
 
-#: searchCatalogue/templates/search_result_actions.html:157
+#: searchCatalogue/templates/search_result_actions.html:159
 msgid "A black closed padlock"
 msgstr "Ein schwarzes, geschlossenes Vorhängeschloss"
 
-#: searchCatalogue/templates/search_result_actions.html:157
+#: searchCatalogue/templates/search_result_actions.html:159
 msgid "Only for registered users"
 msgstr "Nur für registrierte Nutzer"
 
@@ -705,27 +703,27 @@ msgstr "Räumliche Einschränkung:"
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
 
-#: searchCatalogue/views.py:375 useroperations/templates/landing_page.html:19
+#: searchCatalogue/views.py:369 useroperations/templates/landing_page.html:19
 msgid "Web Map Services"
 msgstr "Darstellungsdienste"
 
-#: searchCatalogue/views.py:376
+#: searchCatalogue/views.py:370
 msgid "Search-, Download-,Gathering-modules"
 msgstr "Such-, Download-, Erfassungsmodule"
 
-#: searchCatalogue/views.py:377
+#: searchCatalogue/views.py:371
 msgid "Map Combinations"
 msgstr "Karten"
 
-#: searchCatalogue/views.py:613
+#: searchCatalogue/views.py:607
 msgid "Send permission request"
 msgstr "Berechtigungsanfrage senden"
 
-#: searchCatalogue/views.py:614
+#: searchCatalogue/views.py:608
 msgid "[Geoportal.RLP] Permission request for "
 msgstr "[Geoportal.RLP] Berechtigungsanfrage für "
 
-#: searchCatalogue/views.py:615
+#: searchCatalogue/views.py:609
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
@@ -733,7 +731,7 @@ msgstr ""
 "Bitte geben Sie mir die Berechtigung die folgende Ressource zu verwenden \n"
 "'"
 
-#: searchCatalogue/views.py:616
+#: searchCatalogue/views.py:610
 msgid ""
 "'\n"
 " It has the ID "
@@ -741,7 +739,7 @@ msgstr ""
 "' \n"
 "Die Ressource verwendet die ID "
 
-#: searchCatalogue/views.py:617
+#: searchCatalogue/views.py:611
 msgid ""
 ".\n"
 "\n"
@@ -904,7 +902,7 @@ msgstr "Ein weißer stilisierter Vogel vor blauem Hintergrund"
 msgid "Twitter"
 msgstr ""
 
-#: templates/base.html:221 templates/unsupported_browser.html:22
+#: templates/base.html:221 templates/unsupported_browser.html:24
 msgid "The logo of Geoportal Rhineland-Palatinate"
 msgstr "Das Logo des Geoportals Rheinland-Pfalz"
 
@@ -971,7 +969,15 @@ msgstr ""
 msgid "such as Microsoft Edge, Mozilla Firefox, Google Chrome or Opera."
 msgstr "wie Microsoft Edge, Mozilla Firefox, Google Chrome oder Opera."
 
+#: templates/unsupported_browser.html:16
+msgid "Additional information can be found on the following page:"
+msgstr "Auf der folgenden Seite finden Sie zusätzliche Informationen:"
+
 #: templates/unsupported_browser.html:17
+msgid "Compatibility"
+msgstr "Kompatibilität"
+
+#: templates/unsupported_browser.html:19
 msgid "Thank you for your understanding!"
 msgstr "Vielen Dank für Ihr Verständnis!"
 
@@ -1580,6 +1586,7 @@ msgstr ""
 "die Sie während des Feedbacks angeben, dienen einzig und allein der erneuten "
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
+
 
 # msgid "Activation Mail"
 # msgstr "Aktivierungsmail"

@@ -438,6 +438,7 @@ def change_profile_view(request):
                     'organization': user.mb_user_organisation_name,
                     'newsletter': user.mb_user_newsletter,
                     'survey': user.mb_user_allow_survey,
+                    'create_digest' : user.create_digest,
                     }
         if user.timestamp_dsgvo_accepted:
             userdata["dsgvo"] = True
