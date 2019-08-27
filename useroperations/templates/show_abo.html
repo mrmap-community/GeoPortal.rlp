@@ -4,7 +4,7 @@
 {% block body %}
 <h1>{% trans 'Show subscription' %}</h1>
 <hr>
-<a href="https://www.geoportal.rlp.de/mediawiki/index.php/Monitoring">Hier finden Sie weitere Informationen zum Monitoring.</a><br><br>
+<a href="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mediawiki/index.php/Monitoring">Hier finden Sie weitere Informationen zum Monitoring.</a><br><br>
 <div class="form-wrapper">
 <iframe src="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/php/mod_subscribersServiceList.php?languageCode={{ lang }}" name="Show Abo" frameborder="0" scrolling="no" width="100%" onload="resizeIframe(this);">
 </iframe>
