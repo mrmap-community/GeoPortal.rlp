@@ -669,6 +669,13 @@ def map_viewer_view(request):
     template = "geoportal_external.html"
     gui_id = request_get_params_dict.get("g", DEFAULT_GUI) # get selected gui from params, use default gui otherwise!
 
+    # check if the request comes from a mobile device
+    is_mobile = geoportal_context.get_context().get("is_mobile")
+    if is_mobile:
+        # if so, just call the mobile map viewer in a new window
+        mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?wmc_id={}".format(HTTP_OR_SSL, HOSTNAME, request_get_params.get("WMC",""))
+        return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
+
     # if the call targets a DE catalogue result, we need to adjust a little thing here to restore the previously splitted url
     if request_get_params.get("WMS", None) is not None:
         # yes, this happens when we have a DE catalogue call! Now merge the stuff back into "WMS" again!
