@@ -537,7 +537,7 @@ def delete_profile_view(request):
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
 
-                session_data = utils.get_mb_user_session_data(request)
+                session_data = php_session_data.get_mb_user_session_data(request)
 
                 request.session["current_page"] = "delete_profile"
 
