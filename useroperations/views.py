@@ -502,7 +502,7 @@ def change_profile_view(request):
         "id_create_digest",
         "id_dsgvo"
     ]
-    btn_label_change = _("Change Profile")
+    btn_label_change = _("Save")
     btn_label_delete = _("Delete Profile")
 
     geoportal_context = GeoportalContext(request=request)
@@ -784,6 +784,9 @@ def feedback_view(request: HttpRequest):
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
         return redirect('useroperations:change_profile')
 
+    disclaimer = _("Personal data will not be transmitted to other parties or services. "
+                   "The data, you provided during the feedback process, will only be used to stay in contact regarding your feedback.\n"
+                   "Further information can be found in our ")
     if request.method == 'POST':
         # form is returning
         form = FeedbackForm(request.POST)
@@ -805,16 +808,21 @@ def feedback_view(request: HttpRequest):
             except smtplib.SMTPException:
                 logger.error("Could not send feedback mail!")
                 messages.error(request, _("An error occured during sending. Please inform an administrator."))
+            return index_view(request=request)
         else:
             messages.error(request, _("Captcha was wrong! Please try again"))
-        return index_view(request=request)
+            template = "feedback_form.html"
+            params = {
+                "form": form,
+                "btn_send": _("Send"),
+                "disclaimer": disclaimer,
+            }
+            geoportal_context.add_context(params)
+            return render(request=request, context=geoportal_context.get_context(), template_name=template)
     else:
         # create the form
         template = "feedback_form.html"
         feedback_form = FeedbackForm()
-        disclaimer = _("Personal data will not be transmitted to other parties or services. "
-                       "The data, you provided during the feedback process, will only be used to stay in contact regarding your feedback.\n"
-                       "Further information can be found in our ")
         params = {
             "form": feedback_form,
             "btn_send": _("Send"),
