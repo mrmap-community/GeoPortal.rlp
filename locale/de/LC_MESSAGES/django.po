@@ -1115,8 +1115,8 @@ msgid "Please enter your password."
 msgstr "Bitte Passwort eingeben."
 
 #: useroperations/forms.py:34
-msgid "Old password"
-msgstr "Altes Passwort"
+msgid "Current password"
+msgstr "Aktuelles Passwort"
 
 #: useroperations/forms.py:35
 msgid "New password "
@@ -1416,7 +1416,7 @@ msgstr "Aktivierungsmail"
 #: useroperations/views.py:288 useroperations/views.py:378
 #: useroperations/views.py:583
 msgid "Hello "
-msgstr "Hallo"
+msgstr "Hallo "
 
 #: useroperations/views.py:290
 msgid ""
