@@ -457,12 +457,11 @@ def change_profile_view(request):
             if request.POST['submit'] == 'Delete Profile' or request.POST['submit'] == 'Profil entfernen':
                 return redirect('useroperations:delete_profile')
 
-<<<<<<< HEAD
-                    if password != user.password:
-                        messages.error(request, _("Your old Password was wrong"))
-                        return redirect('useroperations:change_profile')
-                    else:
-                        return redirect('useroperations:delete_profile')
+                if password != user.password:
+                    messages.error(request, _("Your old Password was wrong"))
+                    return redirect('useroperations:change_profile')
+                else:
+                    return redirect('useroperations:delete_profile')
 
             elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Speichern':
                 if form.cleaned_data['oldpassword']:
@@ -470,10 +469,8 @@ def change_profile_view(request):
                     if password != user.password:
                         messages.error(request, _("Your old Password was wrong"))
                         return redirect('useroperations:change_profile')
-=======
             # Save profile process
             elif request.POST['submit'] == 'Save' or request.POST['submit'] == 'Speichern':
->>>>>>> 39f1f8fb26517d77863c55b2ec0c29cc6f9f2040
                 if form.cleaned_data['password']:
 
                     # user wants to change the password
