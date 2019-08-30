@@ -1425,7 +1425,7 @@ msgstr "Aktivierungsmail"
 #: useroperations/views.py:288 useroperations/views.py:378
 #: useroperations/views.py:602
 msgid "Hello "
-msgstr "Hallo"
+msgstr "Hallo "
 
 #: useroperations/views.py:290
 msgid ""
