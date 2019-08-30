@@ -463,12 +463,6 @@ def change_profile_view(request):
                 else:
                     return redirect('useroperations:delete_profile')
 
-            elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Speichern':
-                if form.cleaned_data['oldpassword']:
-                    password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), user.password.encode('utf-8')),'utf-8'))
-                    if password != user.password:
-                        messages.error(request, _("Your old Password was wrong"))
-                        return redirect('useroperations:change_profile')
             # Save profile process
             elif request.POST['submit'] == 'Save' or request.POST['submit'] == 'Speichern':
                 if form.cleaned_data['password']:
