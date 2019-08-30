@@ -537,7 +537,7 @@ def delete_profile_view(request):
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
 
-                session_data = utils.get_mb_user_session_data(request)
+                session_data = php_session_data.get_mb_user_session_data(request)
 
                 request.session["current_page"] = "delete_profile"
 
@@ -795,12 +795,15 @@ def feedback_view(request: HttpRequest):
                 "message": form.cleaned_data["message"],
             }
             try:
+            
                 send_mail(
-                    subject="[Geoportal] Feedback",
-                    message=msg["message"],
-                    from_email=msg["address"],
-                    recipient_list=[ROOT_EMAIL_ADDRESS],
-                    fail_silently=False
+                    _("Geoportal Feedback"),
+                    _("Feedback from ") + form.cleaned_data["first_name"] + " " + form.cleaned_data["family_name"]
+                    + ", \n \n" +
+                    form.cleaned_data["message"],
+                    form.cleaned_data["email"],
+                    ['kontakt@geoportal.rlp.de'],  # später email variable eintragen
+                    fail_silently=False,
                 )
             except smtplib.SMTPException:
                 logger.error("Could not send feedback mail!")
