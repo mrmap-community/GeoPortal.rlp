@@ -139,6 +139,7 @@ footer{
     align-items: center;
 }
 
+
 .show{
     display: block;
 }
@@ -628,9 +629,9 @@ ul {
 .messages-container{
     display: none;
     position: absolute;
-    left: 50%;
-    margin-left: -150px;
-    width: 300px;
+    right: 0;
+    left: 0;
+    margin: 0 10rem;
     z-index: 3;
 }
 .messages{
@@ -638,22 +639,25 @@ ul {
     -ms-filter: drop-shadow(2px 2px 2px black);
     -webkit-filter: drop-shadow(2px 2px 2px black);
     filter: drop-shadow(2px 2px 2px black);
-    padding: 15px;
+    padding: 0 0 0 15px;
     color: white;
     font-weight: bold;
-    font-size: 20px;
-    border-radius: 10px;
+    font-size: 1.2rem;
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    min-height: 45px;
 }
 
 .message-toggler{
     padding: 10px;
     color: white;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 0.25rem;
     border: 2px solid white;
+    position: absolute;
+    right: 0;
 }
 .success .message-toggler{
     background-color: var(--success-green);

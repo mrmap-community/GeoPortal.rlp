@@ -4,9 +4,12 @@ import string
 import ssl
 
 from urllib import request
+
+import bcrypt
 from lxml import html
 from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL
 from searchCatalogue.utils.searcher import Searcher
+from useroperations.models import MbUser
 
 
 def random_string(stringLength=15):
@@ -147,3 +150,17 @@ def get_all_inspire_topics(language):
     searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
 
     return searcher.get_all_topics(language)
+
+
+def bcrypt_password(pw: str, user: MbUser):
+    """ Encrypts the given password using a user salt.
+
+    Needed for checking if a given password matches a user's password
+
+    Args:
+        pw (str): The given password
+        user (MbUser): The MbUser object
+    Returns:
+         The encrypted password string
+    """
+    return (str(bcrypt.hashpw(pw.encode('utf-8'), user.password.encode('utf-8')), 'utf-8'))

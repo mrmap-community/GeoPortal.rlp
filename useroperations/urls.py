@@ -21,4 +21,8 @@ urlpatterns = [
     path('incompatible/', incompatible_browser, name='incompatible-browser'),
     path('service_abo/', service_abo, name='service_abo'),
     path('linked_open_data/', open_linked_data, name='open_linked_data'),
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> 39f1f8fb26517d77863c55b2ec0c29cc6f9f2040

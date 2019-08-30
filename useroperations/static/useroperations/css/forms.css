@@ -10,6 +10,7 @@
     padding: 5px;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .warning{
@@ -119,12 +120,18 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 
 #password_message {
-  display:none;
   background: #f1f1f1;
   color: #000;
-  position: relative;
-  padding:   20px;
-  margin-top: 10px;
+}
+
+.sliding{
+  transition: height 0.66s ease-out;
+  height: 0;
+  overflow: hidden;
+}
+
+.sliding.in{
+    height: 200px;
 }
 
 .valid {

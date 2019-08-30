@@ -31,7 +31,7 @@ class LoginForm(forms.Form):
 
 class ChangeProfileForm(forms.Form):
     #name = forms.CharField(max_length=25, label=_("Username"),disabled=True)
-    oldpassword = forms.CharField(widget=forms.PasswordInput(attrs={'title': _("Please enter your password.")}), label=_("Current password"))
+    oldpassword = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'title': _("Please enter your password.")}), label=_("Current password"))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'title': _("Please enter your password with at least 9 characters."), 'pattern': ".{9,}"}), label=_("New password "), required=False)
     passwordconfirm = forms.CharField(widget=forms.PasswordInput(attrs={'title': _("Password confirmation."), 'pattern':".{9,}"}), label=_("Password confirmation"), required=False)
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'title':_("Please enter your email.")}) )
@@ -49,4 +49,5 @@ class PasswordResetForm(forms.Form):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'title':_("Please enter your email.")}))
 
 class DeleteProfileForm(forms.Form):
+    confirmation_password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'title': _("Please enter your password.")}), label=_("Confirm with password"))
     helper = FormHelper()
