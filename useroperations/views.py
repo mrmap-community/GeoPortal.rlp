@@ -584,7 +584,7 @@ def delete_profile_view(request):
                                 messages.error(request, _("There are logged service accesses for this user profile. Please connect the service administrators for the billing first."))
                                 error = True
 
-                            if error is False:
+                            if not error:
                                 user.is_active = False
                                 user.activation_key = useroperations_helper.random_string(50)
                                 user.timestamp_delete = time.time()
@@ -601,15 +601,13 @@ def delete_profile_view(request):
                                     fail_silently=False,
                                 )
 
-
-                                # user.delete()
                                 php_session_data.delete_mapbender_session_by_memcache(session_id)
                                 messages.success(request, _("Successfully deleted the user:")
                                                  + " {str_name} ".format(str_name=user.mb_user_name)
                                                  + _(". In case this was an accident, we sent you a link where you can reactivate "
                                                      "your account for 24 hours!"))
 
-                                return redirect('useroperations:index')
+                                return redirect('useroperations:logout')
                         else:
                             messages.error(request, _("Password invalid. Profile not deleted."))
                             return redirect("useroperations:change_profile")
@@ -779,8 +777,6 @@ def activation_view(request, activation_key=""):
         "activated": activated,
         "navigation": utils.get_navigation_items(),
     }
-
-    #geoportal_context = GeoportalContext(request=request)
     geoportal_context.add_context(context=context)
 
     pprint(geoportal_context)

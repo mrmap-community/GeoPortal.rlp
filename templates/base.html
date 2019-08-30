@@ -163,23 +163,23 @@
     </div>
     </div>
     </nav>
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="messages {{ message.tags }}">
+            {{ message }}
+            <div class="message-toggler">
+                x
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div id="info-overlay" class="modalDialog">
 
     </div>
     <div id="body-content" class="body-content {% if not sidebar_closed %} sidebar-open {% endif %}">
-
-        {% if messages %}
-        <div class="messages-container">
-            {% for message in messages %}
-            <div class="messages {{ message.tags }}">
-                    {{ message }}
-                    <div class="message-toggler">
-                        x
-                    </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
 
     {% block body %}
     {% endblock %}

@@ -238,7 +238,7 @@ $(".body-content").change(function(){
 $(document).on("click", "#geoportal-search-button", function(){
     // for dsgvo not accepted
     if ($("#dsgvo").val() == "False"){
-        window.location.href = "/change_profile";
+        window.location.href = "/change-profile";
         return;
     }
     var elem = $(this);
@@ -305,15 +305,13 @@ $(document).on("click", ".message-toggler", function(){
 
 
 // Password message popup
-$(document).on('focus', "#id_password", function(){
-    $("#password_message").fadeIn("slow");
-    //document.getElementById("password_message").style.display = "block";
+$(document).on('focus blur', "#id_password", function(){
+    // use nice transition css hack from
+    // https://css-tricks.com/content-jumping-avoid/
+    $("#password_message").toggleClass("in");
+    setTimeout(resizeSidebar, 1000);
 });
 
-$(document).on('blur', "#id_password", function(){
-    $("#password_message").fadeOut("slow");
-    //document.getElementById("password_message").style.display = "none";
-});
 
 // Client side password validation
 $(document).on('keyup', "#id_password", function(){

@@ -14,9 +14,16 @@
 
 <hr>
 
-<div class="form-wrapper">
+<div class="wrapper form-wrapper">
     <form method="post">
         {% csrf_token %}
+            <div class="sliding" id="password_message">
+                <h3>{% trans 'Password must contain the following:' %}</h3>
+                <p id="letter" class="invalid"><b>{% trans 'A lowercase letter' %}</b> </p>
+                <p id="capital" class="invalid"><b>{% trans 'A uppercase letter' %}</b> </p>
+                <p id="number" class="invalid"><b>{% trans 'A number' %}</b></p>
+                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
+            </div>
             <table>
             {% for field in form %}
             <tr class="field-wrapper {% if field.id_for_label in small_labels %}small-label{% endif %}">
@@ -54,13 +61,6 @@
             {% endif %}
 
         </div>
-            <div id="password_message">
-                <h3>{% trans 'Password must contain the following:' %}</h3>
-                <p id="letter" class="invalid"><b>{% trans 'A lowercase letter' %}</b> </p>
-                <p id="capital" class="invalid"><b>{% trans 'A uppercase letter' %}</b> </p>
-                <p id="number" class="invalid"><b>{% trans 'A number' %}</b></p>
-                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
-            </div>
     </form>
 </div>
 <input type="hidden" id="dsgvo" value="{{ dsgvo_flag }}">
