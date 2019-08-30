@@ -20,5 +20,5 @@ urlpatterns = [
     #path('viewer/', index_view, name='index'),
     path('incompatible/', incompatible_browser, name='incompatible-browser'),
     path('service_abo/', service_abo, name='service_abo'),
-    path('open_linked_data/', open_linked_data, name='open_linked_data'),
+    path('linked_open_data/', open_linked_data, name='open_linked_data'),
 ]
