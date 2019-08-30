@@ -462,7 +462,7 @@ def change_profile_view(request):
                     else:
                         return redirect('useroperations:delete_profile')
 
-            elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Profil bearbeiten':
+            elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Speichern':
                 if form.cleaned_data['oldpassword']:
                     password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), user.password.encode('utf-8')),'utf-8'))
                     if password != user.password:
