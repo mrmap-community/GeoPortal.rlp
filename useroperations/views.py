@@ -452,28 +452,34 @@ def change_profile_view(request):
     if request.method == 'POST':
         form = ChangeProfileForm(request.POST)
         if form.is_valid():
+
+            # Delete profile process
             if request.POST['submit'] == 'Delete Profile' or request.POST['submit'] == 'Profil entfernen':
-                if form.cleaned_data['oldpassword']:
-                    password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), user.password.encode('utf-8')),'utf-8'))
+                return redirect('useroperations:delete_profile')
 
-                    if password != user.password:
-                        messages.error(request, _("Your old Password was wrong"))
-                        return redirect('useroperations:change_profile')
-                    else:
-                        return redirect('useroperations:delete_profile')
-
-            elif request.POST['submit'] == 'Change Profile' or request.POST['submit'] == 'Profil bearbeiten':
-                if form.cleaned_data['oldpassword']:
-                    password = (str(bcrypt.hashpw(form.cleaned_data['oldpassword'].encode('utf-8'), user.password.encode('utf-8')),'utf-8'))
-                    if password != user.password:
-                        messages.error(request, _("Your old Password was wrong"))
-                        return redirect('useroperations:change_profile')
+            # Save profile process
+            elif request.POST['submit'] == 'Save' or request.POST['submit'] == 'Speichern':
                 if form.cleaned_data['password']:
-                    if form.cleaned_data['password'] == form.cleaned_data['passwordconfirm']:
-                        user.password = (str(bcrypt.hashpw(form.cleaned_data['password'].encode('utf-8'), bcrypt.gensalt(12)),'utf-8'))
+
+                    # user wants to change the password
+                    # first, the old pasword has to be checked
+                    if form.cleaned_data['oldpassword']:
+                        password = useroperations_helper.bcrypt_password(form.cleaned_data["oldpassword"], user)
+                        # if the old password didn't match with the one associated to the user, we can abort here!
+                        if password != user.password:
+                            messages.error(request, _("Your current password was wrong"))
+                            return redirect('useroperations:change_profile')
+                        else:
+                            # if the old password is fine, we can continue with checking the new provided one
+                            if form.cleaned_data['password'] == form.cleaned_data['passwordconfirm']:
+                                user.password = (str(bcrypt.hashpw(form.cleaned_data['password'].encode('utf-8'), bcrypt.gensalt(12)), 'utf-8'))
+                            else:
+                                messages.error(request, _("Passwords do not match"))
+                                return redirect('useroperations:change_profile')
                     else:
-                        messages.error(request, _("Passwords do not match"))
-                        return redirect('useroperations:change_profile')
+                        # user provided a new password but not the old one!
+                        messages.error(request, _("For changing your password, you have to enter your current password as well."))
+                        return redirect("useroperations:change_profile")
                 user.mb_user_email = form.cleaned_data['email']
                 user.mb_user_department = form.cleaned_data['department']
                 user.mb_user_description = form.cleaned_data['description']
@@ -541,7 +547,7 @@ def delete_profile_view(request):
 
                 request.session["current_page"] = "delete_profile"
 
-                form = DeleteProfileForm()
+                form = DeleteProfileForm(request.POST)
                 btn_label = _("Delete Profile!")
                 geoportal_context = GeoportalContext(request=request)
                 context = {
@@ -552,53 +558,61 @@ def delete_profile_view(request):
                 geoportal_context.add_context(context)
 
                 if request.method == 'POST':
-                    session_id = request.COOKIES.get(SESSION_NAME)
-                    session_data = php_session_data.get_mapbender_session_by_memcache(session_id)
-                    try:
+                    if form.is_valid():
+                        # get user
+                        session_id = request.COOKIES.get(SESSION_NAME)
+                        session_data = php_session_data.get_mapbender_session_by_memcache(session_id)
+                        try:
+                            userid = session_data[b'mb_user_id']
+                        except KeyError:
+                            messages.error(request, _("You are not logged in"))
+                            return redirect('useroperations:index')
                         userid = session_data[b'mb_user_id']
-                    except KeyError:
-                        messages.error(request, _("You are not logged in"))
-                        return redirect('useroperations:index')
-
-                    userid = session_data[b'mb_user_id']
-                    error = False
-                    if Wms.objects.filter(wms_owner=userid).exists() or Wfs.objects.filter(wfs_owner=userid).exists():
-                        messages.error(request, _("You are owner of registrated services - please delete them or give the ownership to another user."))
-                        error = True
-                    if GuiMbUser.objects.filter(fkey_mb_user_id=userid).exists() and GuiMbUser.objects.filter(mb_user_type='owner'):
-                        messages.error(request, _("You are owner of guis/applications - please delete them or give the ownership to another user."))
-                        error = True
-                    if MbProxyLog.objects.filter(fkey_mb_user_id=userid).exists():
-                        messages.error(request, _("There are logged service accesses for this user profile. Please connect the service administrators for the billing first."))
-                        error = True
-
-                    if error is False:
                         user = MbUser.objects.get(mb_user_id=userid)
-                        user.is_active = False
-                        user.activation_key = useroperations_helper.random_string(50)
-                        user.timestamp_delete = time.time()
-                        user.save()
 
-                        send_mail(
-                            _("Reactivation Mail"),
-                            _("Hello ") + user.mb_user_name +
-                            ", \n \n" +
-                            _("In case the deletion of your account was a mistake, you can reactivate it by clicking this link!")
-                            + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
-                            'kontakt@geoportal.de',
-                            [user.mb_user_email],  # später email variable eintragen
-                            fail_silently=False,
-                        )
+                        # check if password is correct!
+                        pw = form.cleaned_data.get("confirmation_password", None)
+                        if pw is not None and user.password == useroperations_helper.bcrypt_password(pw, user):
+                            error = False
+                            if Wms.objects.filter(wms_owner=userid).exists() or Wfs.objects.filter(wfs_owner=userid).exists():
+                                messages.error(request, _("You are owner of registrated services - please delete them or give the ownership to another user."))
+                                error = True
+                            if GuiMbUser.objects.filter(fkey_mb_user_id=userid).exists() and GuiMbUser.objects.filter(mb_user_type='owner'):
+                                messages.error(request, _("You are owner of guis/applications - please delete them or give the ownership to another user."))
+                                error = True
+                            if MbProxyLog.objects.filter(fkey_mb_user_id=userid).exists():
+                                messages.error(request, _("There are logged service accesses for this user profile. Please connect the service administrators for the billing first."))
+                                error = True
+
+                            if error is False:
+                                user.is_active = False
+                                user.activation_key = useroperations_helper.random_string(50)
+                                user.timestamp_delete = time.time()
+                                user.save()
+
+                                send_mail(
+                                    _("Reactivation Mail"),
+                                    _("Hello ") + user.mb_user_name +
+                                    ", \n \n" +
+                                    _("In case the deletion of your account was a mistake, you can reactivate it by clicking this link!")
+                                    + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
+                                    'kontakt@geoportal.de',
+                                    [user.mb_user_email],  # später email variable eintragen
+                                    fail_silently=False,
+                                )
 
 
-                        # user.delete()
-                        php_session_data.delete_mapbender_session_by_memcache(session_id)
-                        messages.success(request, _("Successfully deleted the user:")
-                                         + " {str_name} ".format(str_name=user.mb_user_name)
-                                         + _(". In case this was an accident, we sent you a link where you can reactivate "
-                                             "your account for 24 hours!"))
+                                # user.delete()
+                                php_session_data.delete_mapbender_session_by_memcache(session_id)
+                                messages.success(request, _("Successfully deleted the user:")
+                                                 + " {str_name} ".format(str_name=user.mb_user_name)
+                                                 + _(". In case this was an accident, we sent you a link where you can reactivate "
+                                                     "your account for 24 hours!"))
 
-                        return redirect('useroperations:index')
+                                return redirect('useroperations:index')
+                        else:
+                            messages.error(request, _("Password invalid. Profile not deleted."))
+                            return redirect("useroperations:change_profile")
             else:
                 return redirect('useroperations:index')
     else:

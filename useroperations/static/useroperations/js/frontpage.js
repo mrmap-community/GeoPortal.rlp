@@ -369,7 +369,7 @@ $(document).on('click', "#change-form-button", function(){
   var PasswordInput = document.getElementById("id_password");
   var PasswordInputConfirm = document.getElementById("id_passwordconfirm");
 
-
+  /*
   if(PasswordInput.value != PasswordInputConfirm.value) {
     if(userLang == "de") {
       alert("Passwörter stimmen nicht überein");
@@ -377,7 +377,9 @@ $(document).on('click', "#change-form-button", function(){
       alert("Passwords do not match");
     }
     event.preventDefault();
+
   }
+  */
 
 });
 

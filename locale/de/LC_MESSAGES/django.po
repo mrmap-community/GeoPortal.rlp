@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-29 12:32+0000\n"
+"POT-Creation-Date: 2019-08-30 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -352,7 +352,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:817 useroperations/views.py:828
+#: useroperations/views.py:845 useroperations/views.py:856
 msgid "Send"
 msgstr "Senden"
 
@@ -769,7 +769,7 @@ msgstr ""
 
 #: templates/base.html:42 useroperations/templates/landing_page.html:88
 msgid "Logo of the spatial data infrastructure organization"
-msgstr ""
+msgstr "Logo der Geodateninfrastruktur"
 
 #: templates/base.html:46
 msgid "Search term"
@@ -1111,12 +1111,13 @@ msgid "Accept privacy policy."
 msgstr "Datenschutzerklärung akzeptieren."
 
 #: useroperations/forms.py:30 useroperations/forms.py:34
+#: useroperations/forms.py:52
 msgid "Please enter your password."
 msgstr "Bitte Passwort eingeben."
 
 #: useroperations/forms.py:34
-msgid "Old password"
-msgstr "Altes Passwort"
+msgid "Current password"
+msgstr "Aktuelles Passwort"
 
 #: useroperations/forms.py:35
 msgid "New password "
@@ -1141,6 +1142,10 @@ msgstr "Verwendung von HTTP Digest Authentifizierung für abgesicherte Dienste"
 #: useroperations/forms.py:45
 msgid "privacy policy"
 msgstr "Datenschutzerklärung"
+
+#: useroperations/forms.py:52
+msgid "Confirm with password"
+msgstr "Mit Passwort bestätigen"
 
 #: useroperations/templates/activation.html:13
 msgid "Account successfully activated!"
@@ -1409,7 +1414,7 @@ msgstr ""
 "einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, außerdem müssen Sie "
 "mindestens 9 Zeichen verwenden"
 
-#: useroperations/views.py:265 useroperations/views.py:475
+#: useroperations/views.py:265 useroperations/views.py:484
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
@@ -1418,7 +1423,7 @@ msgid "Activation Mail"
 msgstr "Aktivierungsmail"
 
 #: useroperations/views.py:288 useroperations/views.py:378
-#: useroperations/views.py:584
+#: useroperations/views.py:602
 msgid "Hello "
 msgstr "Hallo"
 
@@ -1438,7 +1443,7 @@ msgstr ""
 "Konto wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link in "
 "der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
 
-#: useroperations/views.py:325 useroperations/views.py:813
+#: useroperations/views.py:325 useroperations/views.py:841
 msgid "Captcha was wrong! Please try again"
 msgstr "Captcha war falsch! Bitte erneut versuchen"
 
@@ -1477,39 +1482,46 @@ msgid ""
 msgstr ""
 "Bitte akzeptieren Sie die Datenschutzerklärung oder löschen Sie Ihr Konto!"
 
-#: useroperations/views.py:460 useroperations/views.py:469
-msgid "Your old Password was wrong"
-msgstr "Ihr altes Passwort war falsch"
+#: useroperations/views.py:477
+msgid "Your current password was wrong"
+msgstr "Ihr aktuelles Passwort war falsch"
 
-#: useroperations/views.py:496
+#: useroperations/views.py:488
+msgid ""
+"For changing your password, you have to enter your current password as well."
+msgstr ""
+"Um Ihr Passwort zu ändern, müssen Sie Ihr aktuelles Passwort ebenfalls "
+"angeben."
+
+#: useroperations/views.py:509
 msgid "Successfully changed data"
 msgstr "Daten erfolgreich geändert"
 
-#: useroperations/views.py:505
+#: useroperations/views.py:518
 msgid "Save"
 msgstr "Speichern"
 
-#: useroperations/views.py:506
+#: useroperations/views.py:519
 msgid "Delete Profile"
 msgstr "Profil entfernen"
 
-#: useroperations/views.py:513
+#: useroperations/views.py:526
 msgid "Change data"
 msgstr "Daten ändern"
 
-#: useroperations/views.py:545
+#: useroperations/views.py:558
 msgid "Delete Profile!"
 msgstr "Profil entfernen!"
 
-#: useroperations/views.py:549
+#: useroperations/views.py:562
 msgid "Delete Profile?"
 msgstr "Profil entfernen?"
 
-#: useroperations/views.py:560 useroperations/views.py:632
+#: useroperations/views.py:575 useroperations/views.py:653
 msgid "You are not logged in"
 msgstr "Sie sind nicht angemeldet"
 
-#: useroperations/views.py:566
+#: useroperations/views.py:585
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
@@ -1517,7 +1529,7 @@ msgstr ""
 "Sie sind Besitzer von registrierten Diensten - Dienste löschen oder einem "
 "anderen Eigentümer übergeben"
 
-#: useroperations/views.py:569
+#: useroperations/views.py:588
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
@@ -1525,7 +1537,7 @@ msgstr ""
 "Sie sind Besitzer von Anwendungen - Anwendungen löschen doer einem anderen "
 "Besitzer übergeben"
 
-#: useroperations/views.py:572
+#: useroperations/views.py:591
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
@@ -1533,11 +1545,11 @@ msgstr ""
 "Für dieses Profile existieren gebührenpflichtige Dienste - Bitte "
 "kontaktieren Sie einen Administrator"
 
-#: useroperations/views.py:583
+#: useroperations/views.py:601
 msgid "Reactivation Mail"
 msgstr "Reaktivierungsmail"
 
-#: useroperations/views.py:586
+#: useroperations/views.py:604
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
@@ -1545,11 +1557,11 @@ msgstr ""
 "Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem "
 "folgenden Link reaktivieren!"
 
-#: useroperations/views.py:596
+#: useroperations/views.py:614
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:598
+#: useroperations/views.py:616
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
@@ -1557,23 +1569,27 @@ msgstr ""
 ". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
 "Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 
-#: useroperations/views.py:629
+#: useroperations/views.py:621
+msgid "Password invalid. Profile not deleted."
+msgstr ""
+
+#: useroperations/views.py:650
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
 
-#: useroperations/views.py:740
+#: useroperations/views.py:768
 msgid "Account already active"
 msgstr "Konto bereits aktiviert"
 
-#: useroperations/views.py:745
+#: useroperations/views.py:773
 msgid "Invalid data"
 msgstr "Invalide Daten"
 
-#: useroperations/views.py:757
+#: useroperations/views.py:785
 msgid "Account activation"
 msgstr "Kontoaktivierung"
 
-#: useroperations/views.py:787
+#: useroperations/views.py:815
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1585,15 +1601,21 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#: useroperations/views.py:794
+#: useroperations/views.py:822
 msgid "Feedback sent. Thank you!"
 msgstr "Feedback gesendet. Vielen Dank!"
 
-#: useroperations/views.py:810
+#: useroperations/views.py:838
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
+
+#~ msgid "Your old Password was wrong"
+#~ msgstr "Ihr altes Passwort war falsch"
+
+#~ msgid "Old password"
+#~ msgstr "Altes Passwort"
 
 # msgid "Activation Mail"
 # msgstr "Aktivierungsmail"

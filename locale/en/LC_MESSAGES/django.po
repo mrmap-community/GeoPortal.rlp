@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-29 12:32+0000\n"
+"POT-Creation-Date: 2019-08-30 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -351,7 +351,7 @@ msgid "Cancel"
 msgstr ""
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:817 useroperations/views.py:828
+#: useroperations/views.py:845 useroperations/views.py:856
 msgid "Send"
 msgstr ""
 
@@ -1082,11 +1082,12 @@ msgid "Accept privacy policy."
 msgstr ""
 
 #: useroperations/forms.py:30 useroperations/forms.py:34
+#: useroperations/forms.py:52
 msgid "Please enter your password."
 msgstr ""
 
 #: useroperations/forms.py:34
-msgid "Old password"
+msgid "Current password"
 msgstr ""
 
 #: useroperations/forms.py:35
@@ -1111,6 +1112,10 @@ msgstr ""
 
 #: useroperations/forms.py:45
 msgid "privacy policy"
+msgstr ""
+
+#: useroperations/forms.py:52
+msgid "Confirm with password"
 msgstr ""
 
 #: useroperations/templates/activation.html:13
@@ -1370,7 +1375,7 @@ msgid ""
 "characters, allowed special chars are: @#$%&+=!"
 msgstr ""
 
-#: useroperations/views.py:265 useroperations/views.py:475
+#: useroperations/views.py:265 useroperations/views.py:484
 msgid "Passwords do not match"
 msgstr ""
 
@@ -1379,7 +1384,7 @@ msgid "Activation Mail"
 msgstr ""
 
 #: useroperations/views.py:288 useroperations/views.py:378
-#: useroperations/views.py:584
+#: useroperations/views.py:602
 msgid "Hello "
 msgstr ""
 
@@ -1395,7 +1400,7 @@ msgid ""
 "before you can login!"
 msgstr ""
 
-#: useroperations/views.py:325 useroperations/views.py:813
+#: useroperations/views.py:325 useroperations/views.py:841
 msgid "Captcha was wrong! Please try again"
 msgstr ""
 
@@ -1430,93 +1435,102 @@ msgid ""
 "Please accept the General Data Protection Regulation or delete your account!"
 msgstr ""
 
-#: useroperations/views.py:460 useroperations/views.py:469
-msgid "Your old Password was wrong"
+#: useroperations/views.py:477
+msgid "Your current password was wrong"
 msgstr ""
 
-#: useroperations/views.py:496
+#: useroperations/views.py:488
+msgid ""
+"For changing your password, you have to enter your current password as well."
+msgstr ""
+
+#: useroperations/views.py:509
 msgid "Successfully changed data"
 msgstr ""
 
-#: useroperations/views.py:505
+#: useroperations/views.py:518
 msgid "Save"
 msgstr ""
 
-#: useroperations/views.py:506
+#: useroperations/views.py:519
 msgid "Delete Profile"
 msgstr ""
 
-#: useroperations/views.py:513
+#: useroperations/views.py:526
 msgid "Change data"
 msgstr ""
 
-#: useroperations/views.py:545
+#: useroperations/views.py:558
 msgid "Delete Profile!"
 msgstr ""
 
-#: useroperations/views.py:549
+#: useroperations/views.py:562
 msgid "Delete Profile?"
 msgstr ""
 
-#: useroperations/views.py:560 useroperations/views.py:632
+#: useroperations/views.py:575 useroperations/views.py:653
 msgid "You are not logged in"
 msgstr ""
 
-#: useroperations/views.py:566
+#: useroperations/views.py:585
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:569
+#: useroperations/views.py:588
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:572
+#: useroperations/views.py:591
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
 msgstr ""
 
-#: useroperations/views.py:583
+#: useroperations/views.py:601
 msgid "Reactivation Mail"
 msgstr ""
 
-#: useroperations/views.py:586
+#: useroperations/views.py:604
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
 msgstr ""
 
-#: useroperations/views.py:596
+#: useroperations/views.py:614
 msgid "Successfully deleted the user:"
 msgstr ""
 
-#: useroperations/views.py:598
+#: useroperations/views.py:616
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
 msgstr ""
 
-#: useroperations/views.py:629
+#: useroperations/views.py:621
+msgid "Password invalid. Profile not deleted."
+msgstr ""
+
+#: useroperations/views.py:650
 msgid "Successfully logged out"
 msgstr ""
 
-#: useroperations/views.py:740
+#: useroperations/views.py:768
 msgid "Account already active"
 msgstr ""
 
-#: useroperations/views.py:745
+#: useroperations/views.py:773
 msgid "Invalid data"
 msgstr ""
 
-#: useroperations/views.py:757
+#: useroperations/views.py:785
 msgid "Account activation"
 msgstr ""
 
-#: useroperations/views.py:787
+#: useroperations/views.py:815
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1524,11 +1538,11 @@ msgid ""
 "Further information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:794
+#: useroperations/views.py:822
 msgid "Feedback sent. Thank you!"
 msgstr ""
 
-#: useroperations/views.py:810
+#: useroperations/views.py:838
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 
