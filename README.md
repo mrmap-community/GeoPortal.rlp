@@ -27,9 +27,9 @@ Existing mapbender2 installations with a great amount of resources and users:
 
 ## Get Started
 
-### Prototype
+### Example Websites
 
-https://opendata.geoportal.rlp.de
+https://www.geoportal.rlp.de/
 
 ### Try it out!
 
