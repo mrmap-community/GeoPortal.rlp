@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
@@ -687,6 +688,7 @@ def map_viewer_view(request):
     template = "geoportal_external.html"
     gui_id = request_get_params_dict.get("g", DEFAULT_GUI) # get selected gui from params, use default gui otherwise!
 
+
     # check if the request comes from a mobile device
     is_mobile = geoportal_context.get_context().get("is_mobile")
     if is_mobile:
@@ -708,8 +710,8 @@ def map_viewer_view(request):
         "LAYER[zoom]": request_get_params.get("LAYER[zoom]", None),
         "LAYER[visible]": request_get_params.get("LAYER[visible]", 1),
         "LAYER[querylayer]": request_get_params.get("LAYER[querylayer]", 1),
-        "WMS": urllib.parse.quote(request_get_params.get("WMS", ""), safe=""),
-        "WMC": request_get_params.get("WMC", ""),
+        "WMS": urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe=""),
+        "WMC": request_get_params.get("WMC", "") or request_get_params.get("wmc", ""),
         "GEORSS": urllib.parse.urlencode(request_get_params.get("GEORSS", "")),
         "KML": urllib.parse.urlencode(request_get_params.get("KML", "")),
         "FEATURETYPE": request_get_params.get("FEATURETYPE[id]", ""),
@@ -740,6 +742,21 @@ def map_viewer_view(request):
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
+
+
+@check_browser
+def get_map_view(request):
+    """ Calls a service directly using GET parameters
+
+    There is no logic inside this function. Since all the service loading is on javascript controlled client side
+    we only call the usual index page and keep the GET parameters which will be processed by the javascript.
+
+    Args:
+        request (HttpRequest):  The incoming HttpRequest
+    Returns:
+         the index view
+    """
+    return index_view(request)
 
 
 @check_browser

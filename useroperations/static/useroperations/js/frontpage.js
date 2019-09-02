@@ -430,26 +430,27 @@ $(window).on("load", function(param){
     window.sessionStorage.removeItem("searchbarBackup");
     window.sessionStorage.removeItem("isSpatialCheckboxChecked");
 
-    // check if there was a search call from a non-search-index page on the geoportal
-    /*
-    var checkForSearchStart = window.sessionStorage.getItem("startSearch");
-    window.sessionStorage.removeItem("startSearch");
-    if(checkForSearchStart){
-        // use and remove backup data from last page
-        var searchbar = $(".-js-simple-search-field");
-        var checkbox = $("#spatial-checkbox");
-        if (window.sessionStorage.getItem("isSpatialCheckboxChecked") == 'true'){
-            checkbox.prop("checked", true);
-        }
-        searchbar.val(window.sessionStorage.getItem("searchbarBackup"));
-        window.sessionStorage.removeItem("searchbarBackup");
-        window.sessionStorage.removeItem("isSpatialCheckboxChecked");
-        startSearch();
-    }
-    */
-
     var current_page_area = $(".current-page").parents(".sidebar-area-content");
     current_page_area.show();
+
+    // check if a service is called via GET (wmc or wms)
+    var route = location.pathname;
+    var params = location.search;
+    if(route.includes("/map")){
+        var params = location.search;
+        /*
+        * ToDo: THIS IS STUPID! BUT AS LONG AS WE ONLY HAVE A DEFAULT VIEWER AND A MOBILE VIEWER, THERE IS NO NEED TO
+        * ToDo: DETERMINE DIFFERENT IDS OF VIEWERS
+        *
+        * v=0 --> default viewer
+        * v=1 --> mobile viewer
+        */
+        var isMobile = params.includes("v=1");
+        if(params.length > 0 ){
+            params = params.replace("?", "");
+            startAjaxMapviewerCall(params, isMobile);
+        }
+    }
 
 });
 
