@@ -9,6 +9,8 @@ urlpatterns = [
     path('categories/', categories_view, name='categories'),
     path('feedback/', feedback_view, name='feedback'),
     path('map-viewer/', map_viewer_view, name='map_viewer'),
+    path('map', get_map_view, name='map'),
+
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
     path('password_reset/', pw_reset_view, name='pw_reset'),
