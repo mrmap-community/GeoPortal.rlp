@@ -728,8 +728,8 @@ ul {
     }
 
     #sidebar{
-        font-size: 1.5em;
-        width: 75vw;
+        font-size: 1.25em;
+        width: 60vw;
     }
     .sidebar-list-element{
         font-size: 0.9em;
@@ -741,7 +741,7 @@ ul {
     }
 
     .sidebar-toggler img, .map-viewer-toggler img, .mobile-map-toggler img{
-        width: 4em;
+        width: 3.5em;
     }
 
 

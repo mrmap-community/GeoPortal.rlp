@@ -254,19 +254,19 @@
     }
 
     .tile-header{
-        font-size: 1.5em;
-        height: 15em;
+        font-size: 1.25em;
+        height: 12em;
     }
     .tile-img{
         width: 90vw;
-        height: 8em;
+        height: 7em;
     }
     .tile-content{
-        font-size: 1.25em;
+        font-size: 1.05em;
     }
 
     .mobile-button{
-        padding: 1em;
+        padding: 0 1em;
     }
 
     .mobile-button img{
