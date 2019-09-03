@@ -1030,7 +1030,7 @@ msgstr "Bitte geben Sie Ihren Benutzernamen ein."
 
 #: useroperations/forms.py:16 useroperations/forms.py:35
 msgid "Please enter your password with at least 9 characters."
-msgstr "Bitte geben Sie Ihr Passwort mit mindestens 9 Zeichen ein."
+msgstr "Bitte geben Sie Ihr Passwort mit mindestens 9 Zeichen ein"
 
 #: useroperations/forms.py:16
 msgid "Please use at least 9 characters."
