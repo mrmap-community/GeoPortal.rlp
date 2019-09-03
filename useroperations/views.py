@@ -385,7 +385,7 @@ def pw_reset_view(request):
                 )
 
 
-                messages.success(request, _("Password reset was successful, check your mails. Password: " + newpassword))
+                messages.success(request, _("Password reset was successful, check your mails."))
                 return redirect('useroperations:login')
 
     return render(request, "crispy_form_no_action.html", geoportal_context.get_context())
