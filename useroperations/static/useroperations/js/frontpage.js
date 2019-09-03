@@ -303,7 +303,7 @@ $(document).on("click", ".message-toggler", function(){
     elem.parent().toggle();
 });
 
-
+/*
 // Password message popup
 $(document).on('focus blur', "#id_password", function(){
     // use nice transition css hack from
@@ -311,6 +311,10 @@ $(document).on('focus blur', "#id_password", function(){
     $("#password_message").toggleClass("in");
     setTimeout(resizeSidebar, 1000);
 });
+*/
+
+/*
+DEPRECATED - REMOVE WHEN SURE THAT EVERYTHING IS SAFE
 
 
 // Client side password validation
@@ -359,6 +363,8 @@ $(document).on('keyup', "#id_password", function(){
   }
 
 });
+
+*/
 
 
 $(document).on('click', "#change-form-button", function(){
