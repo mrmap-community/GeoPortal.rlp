@@ -129,7 +129,7 @@ def download(request):
         ", \n \n" +
         message,
         'kontakt@geoportal.rlp.de',
-        ['root@holla'],  # später email variable eintragen
+        [body['user_email']],  # später email variable eintragen
         fail_silently=False,
     )
 
