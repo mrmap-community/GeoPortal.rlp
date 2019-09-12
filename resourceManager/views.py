@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from pprint import pprint
 from django.views.decorators.csrf import csrf_exempt
-from useroperations.models import Wfs
+from useroperations.models import Wfs, Wms
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
 from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, HOSTIP
@@ -28,7 +28,8 @@ def download(request):
     # somehow uses ascii by default which is not changeable in binary mode (wb)
     body_decoded = request.body.decode('ascii','ignore')
 
-    wfslist = Wfs.objects.values('wfs_getcapabilities').distinct()
+    wfslist = Wfs.objects.values('wfs_getfeature').distinct()
+    wmslist = Wms.objects.values('wms_getmap').distinct()
     whitelist = []
     response = ""
     message = ""
@@ -57,7 +58,12 @@ def download(request):
 
     # build whitelist
     for url in wfslist:
-        parsed = urllib.parse.urlparse(url['wfs_getcapabilities'])
+        parsed = urllib.parse.urlparse(url['wfs_getfeature'])
+        host = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed)
+        whitelist.append(host)
+
+    for url in wmslist:
+        parsed = urllib.parse.urlparse(url['wms_getmap'])
         host = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed)
         whitelist.append(host)
 
