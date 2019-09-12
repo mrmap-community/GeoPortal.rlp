@@ -264,3 +264,9 @@ class Gui(models.Model):
         managed = False
         db_table = 'gui'
 
+class InspireDownloads(models.Model):
+    user_id = models.IntegerField()
+    user_email = models.EmailField(max_length=255)
+    service_name = models.CharField(max_length=250)
+    no_of_tiles = models.IntegerField()
+    date = models.DateTimeField(default=timezone.now)

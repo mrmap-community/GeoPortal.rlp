@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from pprint import pprint
 from django.views.decorators.csrf import csrf_exempt
-from useroperations.models import Wfs, Wms
+from useroperations.models import Wfs, Wms, InspireDownloads
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
 from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, HOSTIP
@@ -30,6 +30,7 @@ def download(request):
 
     wfslist = Wfs.objects.values('wfs_getfeature').distinct()
     wmslist = Wms.objects.values('wms_getmap').distinct()
+    download_request = InspireDownloads()
     whitelist = []
     response = ""
     message = ""
@@ -117,7 +118,11 @@ def download(request):
         message = _("This is your Inspire Download request! The Link will be valid  for 24 hours!") + "\n Link: " \
                   + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
 
-
+        download_request.user_id = body['user_id']
+        download_request.user_email = body['user_email']
+        download_request.service_name = body['names'][0].split("Teil",1)[0]
+        download_request.no_of_tiles = numURLs
+        download_request.save()
 
 
 
