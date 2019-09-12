@@ -28,6 +28,8 @@ def download(request):
 
     #body = (json.loads(request.body.decode('utf-8')))
 
+    # this needs to be ascii because then open function in line 104
+    # somehow uses ascii by default which is not changeable in binary mode (wb)
     body_decoded = request.body.decode('ascii','ignore')
 
     wfslist = Wfs.objects.values('wfs_getcapabilities').distinct()
