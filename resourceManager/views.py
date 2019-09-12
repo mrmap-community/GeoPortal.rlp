@@ -69,6 +69,9 @@ def download(request):
         if host not in whitelist:
             response = HttpResponse("host not in whitelist",status=418)
 
+    if numURLs > 20:
+        response = HttpResponse("maximum 20 tiles allowed", status=409)
+
     # check if directory has space left
     disk = shutil.disk_usage(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/")
 
