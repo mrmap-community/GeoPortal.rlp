@@ -3,12 +3,12 @@ from django.contrib.admin import register
 from .models import MbUser, Navigation
 
 
-@register(MbUser)
-class MbUserAdmin(admin.ModelAdmin):
-
-    list_display = ('mb_user_name','mb_user_email') # tupel mit 1 elemente x = ( ele1 ,)
-
-    pass
+#@register(MbUser)
+#class MbUserAdmin(admin.ModelAdmin):
+#
+#    list_display = ('mb_user_name','mb_user_email') # tupel mit 1 elemente x = ( ele1 ,)
+#
+#    pass
 
 @register(Navigation)
 class NavigationAdmin(admin.ModelAdmin):
