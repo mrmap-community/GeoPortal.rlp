@@ -83,11 +83,11 @@ def download(request):
     disk = shutil.disk_usage(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/")
 
     if "image" in body['urls'][0]:
-        format = "tiff"
+        format = ".tiff"
     else:
-        format = "other"
+        format = ""
 
-    if format == "tiff":
+    if format == ".tiff":
         if disk.free < numURLs * 60000000:
             response = HttpResponse("No space left please try again later!",status=400)
             message = _("No space left please try again later!")
@@ -108,7 +108,7 @@ def download(request):
 
             response = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
 
-            with open(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'] + '/' + body['names'][id], mode='wb') as out_file:
+            with open(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)
             del response
 
