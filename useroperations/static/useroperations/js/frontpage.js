@@ -91,9 +91,9 @@ function toggleMapviewer(){
     return;
     }
 
-    // get default gui
+    // get preferred gui
     var toggler = $(".map-viewer-toggler");
-    var default_gui = toggler.attr("data-gui");
+    var preferred_gui = toggler.attr("data-gui");
 
     // start loading the iframe content
     var iframe = $("#mapviewer");
@@ -103,10 +103,10 @@ function toggleMapviewer(){
     // change mb_user_gui Parameter if default gui  differs
     var url = new URL(dataParams)
     var params = new URLSearchParams(url.search);
-    if(default_gui == "Geoportal-RLP-Classic" || default_gui == "Geoportal-RLP" || default_gui.length == 0 ){
+    if(preferred_gui == "Geoportal-RLP-Classic" || preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
         params.set('mb_user_myGui',"Geoportal-RLP")
     }else{
-        params.set('mb_user_myGui', default_gui)
+        params.set('mb_user_myGui', preferred_gui)
     }
     url.search = params.toString();
     dataParams = url.toString();

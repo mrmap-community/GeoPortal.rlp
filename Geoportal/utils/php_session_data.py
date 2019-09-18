@@ -112,7 +112,7 @@ def get_mb_user_session_data(request: HttpRequest):
         ret_dict["guis"] = session_data['guis']
         ret_dict["loggedin"] = session_data['loggedin']
         ret_dict["dsgvo"] = str(session_data['session_data'].get(b'dsgvo', b""), "utf-8")
-        ret_dict["default_gui"] = str(session_data['session_data'].get(b'default_gui', b""), "utf-8")
+        ret_dict["preferred_gui"] = str(session_data['session_data'].get(b'preferred_gui', b""), "utf-8")
     # GUEST
     else:
         ret_dict["username"] = guest_name.mb_user_name

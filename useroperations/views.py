@@ -438,7 +438,7 @@ def change_profile_view(request):
                     'newsletter': user.mb_user_newsletter,
                     'survey': user.mb_user_allow_survey,
                     'create_digest' : user.create_digest,
-                    'default_gui' : user.default_gui,
+                    'preferred_gui' : user.fkey_prefered_gui_id,
                     }
         if user.timestamp_dsgvo_accepted:
             userdata["dsgvo"] = True
@@ -494,7 +494,7 @@ def change_profile_view(request):
                 user.mb_user_newsletter = form.cleaned_data['newsletter']
                 user.mb_user_allow_survey = form.cleaned_data['survey']
                 user.create_digest = form.cleaned_data['create_digest']
-                user.default_gui = form.cleaned_data['default_gui']
+                user.fkey_prefered_gui_id = form.cleaned_data['preferred_gui']
 
 
                 if form.cleaned_data['dsgvo'] == True:
