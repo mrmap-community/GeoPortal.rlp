@@ -61,6 +61,7 @@ class MbUser(models.Model):
     timestamp_delete = models.BigIntegerField(blank=True, null=True)
     timestamp_dsgvo_accepted = models.BigIntegerField(blank=True, null=True)
     create_digest = models.BooleanField(blank=True, null=True)
+    default_gui = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False

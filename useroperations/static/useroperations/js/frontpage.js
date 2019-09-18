@@ -91,11 +91,27 @@ function toggleMapviewer(){
     return;
     }
 
+    // get default gui
+    var toggler = $(".map-viewer-toggler");
+    var default_gui = toggler.attr("data-gui");
+
     // start loading the iframe content
     var iframe = $("#mapviewer");
     var src = iframe.attr("src");
     var dataParams = iframe.attr("data-params");
+
+    // change mb_user_gui Parameter if default gui  differs
+    var url = new URL(dataParams)
+    var params = new URLSearchParams(url.search);
+    if(default_gui == "Geoportal-RLP-Classic"){
+        params.set('mb_user_myGui',"Geoportal-RLP")
+    }else{
+        params.set('mb_user_myGui',default_gui)
+    }
+    url.search = params.toString();
+    dataParams = url.toString();
     var dataToggler = iframe.attr("data-toggle");
+
     if(dataParams !== src && (dataToggler == src || src == "about:blank")){
         iframe.attr("src", dataParams);
     }

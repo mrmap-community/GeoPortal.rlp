@@ -75,7 +75,6 @@ def index_view(request, wiki_keyword=""):
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True and wiki_keyword not in dsgvo_list:
         return redirect('useroperations:change_profile')
 
-
     if wiki_keyword == "viewer":
         template = "geoportal.html"
     elif wiki_keyword != "":
@@ -95,7 +94,6 @@ def index_view(request, wiki_keyword=""):
                "content": output,
                "results": results,
                }
-
     geoportal_context.add_context(context=context)
 
     # check if this is an ajax call from info search
@@ -440,6 +438,7 @@ def change_profile_view(request):
                     'newsletter': user.mb_user_newsletter,
                     'survey': user.mb_user_allow_survey,
                     'create_digest' : user.create_digest,
+                    'default_gui' : user.default_gui,
                     }
         if user.timestamp_dsgvo_accepted:
             userdata["dsgvo"] = True
@@ -495,6 +494,7 @@ def change_profile_view(request):
                 user.mb_user_newsletter = form.cleaned_data['newsletter']
                 user.mb_user_allow_survey = form.cleaned_data['survey']
                 user.create_digest = form.cleaned_data['create_digest']
+                user.default_gui = form.cleaned_data['default_gui']
 
 
                 if form.cleaned_data['dsgvo'] == True:
@@ -681,6 +681,9 @@ def map_viewer_view(request):
 
     is_external_search = "external" in request.META.get("HTTP_REFERER", "")
     request_get_params_dict = request.GET.dict()
+
+    # get default gui
+    #user = MbUser.objects.get(mb_user_id=context_data['userid'])
 
     # is regular call means the request comes directly from the navigation menu in the page, without selecting a search result
     is_regular_call = len(request_get_params_dict) == 0 or request_get_params_dict.get("searchResultParam", None) is None

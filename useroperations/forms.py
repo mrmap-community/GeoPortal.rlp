@@ -43,6 +43,8 @@ class ChangeProfileForm(forms.Form):
     survey = forms.BooleanField(initial=True, label=_("I want to participate in surveys"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Participate in surveys.")}))
     create_digest = forms.BooleanField(initial=False, label=_("Use HTTP Digest Authentication for secured Services"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Use HTTP Digest Authentication for secured Services.")}))
     dsgvo = forms.BooleanField(initial=False, label=mark_safe(_("I understand and accept that my data will be automatically processed and securely stored, as it is stated in the general data protection regulation (GDPR).") + '(<a href="/article/Datenschutz" target="_blank">' + str(_("privacy policy")) + '</a>)'), required=False, widget=forms.CheckboxInput(attrs={'title':_("Accept privacy policy.")}))
+    default_gui = forms.CharField(max_length=1000, label=_("Default Gui"), required=False, widget=forms.Select(choices=[('Geoportal-RLP-Classic','Geoportal-RLP-Classic'),('Geoportal-RLP-2019','Geoportal-RLP-2019')]))
+
 
 class PasswordResetForm(forms.Form):
     name = forms.CharField(max_length=100, label=_("Username"), widget=forms.TextInput(attrs={'title':_("Please enter your username.")}))
