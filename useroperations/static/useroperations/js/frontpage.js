@@ -84,12 +84,6 @@ function toggleSubMenu(elem){
     elem.parents().children(".sidebar-area-content").slideToggle("slow");
 }
 
-function guiPreview(){
-    alert("test")
-    form = $(".form-wrapper");
-    console.log(form)
-}
-
 function toggleMapviewer(){
     // for dsgvo not accepted
     if ($("#dsgvo").val() == "False"){
