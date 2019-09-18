@@ -103,10 +103,10 @@ function toggleMapviewer(){
     // change mb_user_gui Parameter if default gui  differs
     var url = new URL(dataParams)
     var params = new URLSearchParams(url.search);
-    if(default_gui == "Geoportal-RLP-Classic"){
+    if(default_gui == "Geoportal-RLP-Classic" || default_gui == "Geoportal-RLP" || default_gui.length == 0 ){
         params.set('mb_user_myGui',"Geoportal-RLP")
     }else{
-        params.set('mb_user_myGui',default_gui)
+        params.set('mb_user_myGui', default_gui)
     }
     url.search = params.toString();
     dataParams = url.toString();
