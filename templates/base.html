@@ -67,7 +67,7 @@
 
 <body>
     <nav>
-    <div class="map-viewer-toggler" onclick="toggleMapviewer()">
+    <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
         <img alt="{% trans 'A lying map icon' %}" src="{% static 'useroperations/images/icn_map_viewer_toggler_transp.png' %}" title="{% trans 'Open and close map viewer' %}">
     </div>
     <div class="map-viewer-overlay closed">

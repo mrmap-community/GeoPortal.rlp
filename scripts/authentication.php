@@ -43,6 +43,8 @@ if($isAuthenticated != false) {
 	Mapbender::session()->set("mb_user_postal_code",$isAuthenticated["mb_user_postal_code"]);
 	Mapbender::session()->set("epsg","EPSG:31466");
 	Mapbender::session()->set("HTTP_HOST",$_SERVER["HTTP_HOST"]);
+	Mapbender::session()->set("preferred_gui",$isAuthenticated["fkey_prefered_gui_id"]);
+	Mapbender::session()->set("django","true");
 //INSERT LAST LOGIN DATE AND TIME
 //NEW Filed required "ALTER TABLE mapbender.mb_user ADD COLUMN mb_user_last_login_date date;"
 	$sql = "UPDATE mb_user SET";
