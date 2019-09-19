@@ -1184,63 +1184,9 @@ EOF
   cd /usr/share/modsecurity-crs
   mv crs-setup.conf.example crs-setup.conf
 
-  if [ ! -f "/etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
-    mv /etc/apache2/mods-available/security2.conf /etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")
-  fi
-
-  echo "<IfModule security2_module>
-  SecDataDir /var/cache/modsecurity
-  IncludeOptional /etc/modsecurity/*.conf
-  IncludeOptional /usr/share/modsecurity-crs/*.conf
-  IncludeOptional /usr/share/modsecurity-crs/rules/*.conf
-  SecRequestBodyNoFilesLimit 10485760
-  SecRuleRemoveById 920350
-
-  <LocationMatch '/mapbender/php/mod_savewmc_server.php'>
-  SecRuleRemoveById 932110 932115 941140 941160 942190 941350
-  </LocationMatch>
-
-  <LocationMatch '/mapbender/extensions/mobilemap/mod_mapbender/search_proxy.php'>
-  SecRuleRemoveById 942360
-  </LocationMatch>
-
-
-  <LocationMatch '/mapbender/php/wms.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-
-  <LocationMatch '/mapbender/php/wfs.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-
-  <LocationMatch '/mapbender/php/mod_sessionWrapper.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-  <LocationMatch '/search/search/'>
-  SecRuleRemoveById 959100
-  </LocationMatch>
-
-  <LocationMatch '/mapbender/print/printFactory.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-  <LocationMatch '/mapbender/php/mod_createJSObjFromXML.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-
-  <LocationMatch '/mapbender/php/mod_loadCapabilities.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-
-  <LocationMatch '/mapbender/php/mod_loadwms.php'>
-  SecRuleRemoveById 949110
-  </LocationMatch>
-  </IfModule>" > /etc/apache2/mods-available/security2.conf
-
+  #if [ ! -f "/etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
+  #  mv /etc/apache2/mods-available/security2.conf /etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")
+  #fi
 
 
   ############################################################
