@@ -39,6 +39,7 @@ ISO3166_FILES = {
     "DE": __DE_DE,
 
     "Baden-Württemberg": __DE_BW,
+    "Baden-Wuerttemberg": __DE_BW,
     "DE-BW": __DE_BW,
     "BW": __DE_BW,
 
