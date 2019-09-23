@@ -43,7 +43,7 @@ if($isAuthenticated != false) {
 	Mapbender::session()->set("mb_user_postal_code",$isAuthenticated["mb_user_postal_code"]);
 	Mapbender::session()->set("epsg","EPSG:31466");
 	Mapbender::session()->set("HTTP_HOST",$_SERVER["HTTP_HOST"]);
-	Mapbender::session()->set("preferred_gui",$isAuthenticated["fkey_prefered_gui_id"]);
+	Mapbender::session()->set("preferred_gui",$isAuthenticated["fkey_preferred_gui_id"]);
 	Mapbender::session()->set("django","true");
 //INSERT LAST LOGIN DATE AND TIME
 //NEW Filed required "ALTER TABLE mapbender.mb_user ADD COLUMN mb_user_last_login_date date;"
@@ -73,13 +73,23 @@ if($isAuthenticated != false) {
 	session_write_close();
 
 } else {
+	if($isAuthenticated["is_active"] == false){
 
-	$URLAdd="?status=fail";
+		$URLAdd="?status=notactive";
+		if($_SERVER["HTTPS"] != "on") {
+			header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+		} else {
+			header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+		}
+	}else{
+		
+		$URLAdd="?status=fail";
 
-	if($_SERVER["HTTPS"] != "on") {
-		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
-	} else  {
-		header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+		if($_SERVER["HTTPS"] != "on") {
+			header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
+		} else  {
+			header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
+		}
 	}
 
 }
@@ -90,15 +100,6 @@ function authenticate ($name,$pw){
 	if ($returnObject->success !== false) {
 		return json_decode(json_encode($returnObject->result), JSON_OBJECT_AS_ARRAY);
 	} else {
-	        $message = $returnObject->error->message;
-		if (strpos($message,'Account for') == 0) {
-			$URLAdd="?status=notactive";
-			if($_SERVER["HTTPS"] != "on") {
-				header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
-			} else {
-				header ("Location: https://".$_SERVER['HTTP_HOST'].$URLAdd);
-			}
-		}
 		return false;
 	}
 }
