@@ -122,17 +122,18 @@
                 {% endif %}
             </div>
         </div>
-	
-	<div class="sidebar-area" id="news">
-            <div class="sidebar-area-title">
-                <div class="sidebar-area-title-icon">
-                    <img alt="{% trans 'A newspaper' %}" width="40px" src="{% static 'useroperations/images/icn_news.png' %}">
-                </div>
-                <div class="sidebar-area-title-text">
-                    <a style="color:white;text-decoration:none;" href="/article/Meldungen/">{% trans 'News' %}</a>
+
+        <a style="color:white;text-decoration:none;" href="/article/Meldungen/">
+	        <div class="sidebar-area" id="news">
+                <div class="sidebar-area-title">
+                    <div class="sidebar-area-title-icon">
+                        <img alt="{% trans 'A newspaper' %}" width="40px" src="{% static 'useroperations/images/icn_news.png' %}">
+                    </div>
+                    <div class="sidebar-area-title-text">{% trans 'News' %}
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
 	
         <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()">
             <div class="sidebar-area-title">
