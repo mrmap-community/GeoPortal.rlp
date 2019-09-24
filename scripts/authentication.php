@@ -1,9 +1,6 @@
 <?php
 include_once(dirname(__FILE__)."/../../core/globalSettings.php");
 require_once(dirname(__FILE__)."/../classes/class_user.php");
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 $pw = $_REQUEST['password'];
 $name = $_REQUEST['name'];
 $e = new mb_notice('SESSION[mb_user_name]: '.Mapbender::session()->get("mb_user_name"));
