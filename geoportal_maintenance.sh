@@ -1184,10 +1184,20 @@ EOF
   cd /usr/share/modsecurity-crs
   mv crs-setup.conf.example crs-setup.conf
 
-  #if [ ! -f "/etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
-  #  mv /etc/apache2/mods-available/security2.conf /etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")
-  #fi
+  
+  if [ ! -f "/etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")"  ]; then
+    mv /etc/apache2/mods-available/security2.conf /etc/apache2/mods-available/security2.conf_backup_$(date +"%d_%m_%Y")
+  fi
 
+  echo "<IfModule security2_module>
+  SecDataDir /var/cache/modsecurity
+  IncludeOptional /etc/modsecurity/*.conf
+  IncludeOptional /usr/share/modsecurity-crs/*.conf
+  IncludeOptional /usr/share/modsecurity-crs/rules/*.conf
+  SecRequestBodyNoFilesLimit 10485760
+  SecRuleRemoveById 920350
+
+  </IfModule>" > /etc/apache2/mods-available/security2.conf
 
   ############################################################
   # activate apache conf and reload
