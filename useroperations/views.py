@@ -505,6 +505,12 @@ def change_profile_view(request):
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME) +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
                     user.timestamp_dsgvo_accepted = None
 
+                if form.cleaned_data['preferred_gui'] == 'Geoportal-RLP':
+                    user.timestamp_dsgvo_accepted = time.time()
+                    # set session variable preferred_gui via session wrapper php script
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME)+'&operation=set&key=preferred_gui&value=Geoportal-RLP', verify=INTERNAL_SSL)
+                elif form.cleaned_data['preferred_gui'] == 'Geoportal-RLP_2019':
+                    response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME) +'&operation=set&key=preferred_gui&value=Geoportal_2019', verify=INTERNAL_SSL)
                 user.save()
                 messages.success(request, _("Successfully changed data"))
                 return redirect('useroperations:index')
@@ -689,8 +695,7 @@ def map_viewer_view(request):
     is_regular_call = len(request_get_params_dict) == 0 or request_get_params_dict.get("searchResultParam", None) is None
     request_get_params = dict(urllib.parse.parse_qsl(request_get_params_dict.get("searchResultParam")))
     template = "geoportal_external.html"
-    gui_id = request_get_params_dict.get("g", DEFAULT_GUI) # get selected gui from params, use default gui otherwise!
-
+    gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
     # check if the request comes from a mobile device
     is_mobile = geoportal_context.get_context().get("is_mobile")
