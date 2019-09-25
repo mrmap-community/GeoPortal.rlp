@@ -21,10 +21,14 @@ allowed_browsers = [
     "Amazon Silk",
 ]
 
+disallowed_browsers = [
+    "IE",
+]
+
 def check_browser(function):
     def wrap(request, *args, **kwargs):
         browser_type = request.user_agent.browser.family
-        if browser_type not in allowed_browsers:
+        if browser_type in disallowed_browsers:
             return redirect("useroperations:incompatible-browser")
         return function(request=request, *args, **kwargs)
 
