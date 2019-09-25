@@ -30,9 +30,11 @@ def get_mapbender_session_by_memcache(session_id):
         session_data = None
     return session_data
 
+
 def delete_mapbender_session_by_memcache(session_id):
     client = base.Client(('localhost', 11211))
     client.delete('memc.sess.' + session_id)
+
 
 def get_session_data(request):
     """ Parses the PHP session file
@@ -58,7 +60,7 @@ def get_session_data(request):
         session_data = get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:
             if b'mb_user_id' in session_data:
-                guest_id = get_mapbender_config_value(PROJECT_DIR,'ANONYMOUS_USER')
+                guest_id = get_mapbender_config_value(PROJECT_DIR, 'ANONYMOUS_USER')
                 user = session_data[b'mb_user_name']
                 userid = session_data[b'mb_user_id']
 
@@ -99,20 +101,20 @@ def get_mb_user_session_data(request: HttpRequest):
     Returns:
         dict: Contains only user relevant data
     """
-    session_data=get_session_data(request)
+    session_data = get_session_data(request)
     ret_dict = {}
     guest_gui = [DEFAULT_GUI]
-    guest_id = get_mapbender_config_value(PROJECT_DIR,'ANONYMOUS_USER')
+    guest_id = get_mapbender_config_value(PROJECT_DIR, 'ANONYMOUS_USER')
     guest_name = MbUser.objects.get(mb_user_id=guest_id)
     # USER
-    if session_data['loggedin'] != False:
+    if session_data['loggedin']:
         ret_dict["user"] = str(session_data['session_data'].get(b'mb_user_name', b""), "utf-8")
         ret_dict["userid"] = int(session_data['session_data'].get(b'mb_user_id', b""))
         ret_dict["gui"] = session_data['gui']
         ret_dict["guis"] = session_data['guis']
         ret_dict["loggedin"] = session_data['loggedin']
         ret_dict["dsgvo"] = str(session_data['session_data'].get(b'dsgvo', b""), "utf-8")
-        ret_dict["preferred_gui"] = str(session_data['session_data'].get(b'preferred_gui', b""), "utf-8")
+        ret_dict["preferred_gui"] = str(session_data['session_data'].get(b'preferred_gui', b"") or DEFAULT_GUI.encode("utf-8"), "utf-8")
     # GUEST
     else:
         ret_dict["username"] = guest_name.mb_user_name
