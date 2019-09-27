@@ -72,7 +72,7 @@ if(is_array($isAuthenticated) != false) {
 	}
 	session_write_close();
 
-} else if (strpos($isAuthenticated,'Account for') !== false){
+} else if (strpos($isAuthenticated,'Account for user with name') !== false){
 
 	$URLAdd="?status=notactive";
 	if($_SERVER["HTTPS"] != "on") {
