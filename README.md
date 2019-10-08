@@ -76,8 +76,7 @@ Description:
 	optional:  
 	--proxy                 -> IP Address:Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
                             Special case: --proxyip=custom lets you choose a different proxy for each service above
-	--proxyuser             -> Username for proxy auth
-	--proxypw               -> Passwort for proxy auth
+	--proxyuser             -> Username for proxy auth, Password will be prompted
 	--mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.
 	--mapbenderdbpw         -> Password for mapbenderdbuser.
 	--phppgadmin_user       -> User for the PHPPgAdmin Webinterface.
@@ -139,7 +138,7 @@ bereichsadmin1:bereichsadmin1; -> subadmin, can register&publish services
 guest:AUTOMATIC_SESSION -> guest session, mostly for just viewing 
 
 When your content and navigation is ready you can go ahead and start registering services.
-To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in other guis. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE for service management (WMS, WFS, WMC, Metadata) and PortalAdmin_DE for user, group, role, category management and some maintenance functions. Documentation on Mapbender is currently only available in German and is located on the old portal http://www.geoportal.rlp.de/portal/hilfe/.
+To do so, login as root or bereichsadmin1 and again, change password first. After successful login and password change you can click on the little grid sign on the right to open the default gui, which is the mapviewer. Configuration of Mapbender and registration of services can be found in other guis. To change the gui, click on the sign with the grid and the arrow pointing upwards. Here you can select Administration_DE for service management (WMS, WFS, WMC, Metadata) and PortalAdmin_DE for user, group, role, category management and some maintenance functions. Documentation on Mapbender is currently only available in German and is located on the wiki https://www.geoportal.rlp.de/mediawiki/index.php/Hilfe.
 
 
 
