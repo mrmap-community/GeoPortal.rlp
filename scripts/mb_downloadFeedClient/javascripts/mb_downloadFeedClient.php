@@ -544,9 +544,11 @@ function sendtodjango(){
   DlSet.uuid = uuidv4();
   DlSet.timestamp = Date.now();
   DlSet.scriptname = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
+  DlSet.lang = navigator.language || navigator.userLanguage;
+  host = location.protocol.concat("//").concat(window.location.hostname);
 
-  var DlJSON = {user_id: DlSet.user_id, user_name:DlSet.user_name , user_email: DlSet.user_email, uuid: DlSet.uuid, timestamp: DlSet.timestamp, scriptname: DlSet.scriptname, names:DlSet.names, urls:DlSet.urls};
-  url = "https://www.geoportal.rlp.de/manage/download"
+  var DlJSON = {user_id: DlSet.user_id, user_name:DlSet.user_name , user_email: DlSet.user_email, uuid: DlSet.uuid, timestamp: DlSet.timestamp, scriptname: DlSet.scriptname, names:DlSet.names, urls:DlSet.urls, lang:DlSet.lang};
+  url = host.concat("/manage/download")
   data = JSON.stringify(DlJSON)
   //console.log(data)
 
