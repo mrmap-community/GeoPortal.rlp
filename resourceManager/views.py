@@ -115,8 +115,13 @@ def download(request):
         shutil.make_archive(PROJECT_DIR + '/mapbender/http/tmp/InspireDownload/InspireDownload_' + body['uuid'], 'zip',
                             PROJECT_DIR + '/mapbender/http/tmp/InspireDownload/' + body['uuid'])
         shutil.rmtree(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'])
-        message = _("This is your Inspire Download request! The Link will be valid  for 24 hours!") + "\n Link: " \
-                  + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
+
+        if body['lang'] == 'de':
+            message = "Dies ist Ihre Inspire Download Anfrage! Der Link wird für 24 Stunden gültig sein!" + "\n Link: " \
+                      + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
+        else:
+            message = "This is your Inspire Download request! The Link will be valid  for 24 hours!" + "\n Link: " \
+                      + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
 
         download_request.user_id = body['user_id']
         download_request.user_email = body['user_email']
