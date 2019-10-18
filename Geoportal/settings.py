@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'searchCatalogue',
     'captcha',
     'django_user_agents',
+    'resourceManager',
 ]
 
 MIDDLEWARE = [
