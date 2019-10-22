@@ -1373,6 +1373,7 @@ cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/plugins/
 cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/style.css ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
 cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/move.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/img/
 cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/select.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/img/
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
 
 # change mapbender login path
 sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/g" ${installation_folder}mapbender/conf/mapbender.conf
@@ -1549,6 +1550,40 @@ update(){
 
   }
 
+  check_django_settings(){
+     missing_items=()
+
+     rm /tmp/settings.py
+     cd /tmp/
+     wget https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/Geoportal/settings.py
+
+     while IFS="" read -r p || [ -n "$p" ]
+       do
+          h=`printf '%s\n' "$p" | cut -d = -f 1`
+          if ! grep -Fq "$h" ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+          then
+              missing_items+=("$h")
+           fi
+
+     done < /tmp/settings.py
+
+     if [ ${#missing_items[@]} -ne 0 ]; then
+       echo "The following items are present in the masters settings.py but are missing in your local settings.py!"
+       printf '%s\n' "${missing_items[@]}"
+
+       while true; do
+           read -p "Do you want to continue y/n?" yn
+           case $yn in
+               [Yy]* ) break;;
+               [Nn]* ) exit;break;;
+               * ) echo "Please answer yes or no.";;
+           esac
+       done
+    fi
+
+}
+
+# check for backup
 while true; do
     read -p "Do you want me to make a backup before updating y/n?" yn
     case $yn in
@@ -1558,18 +1593,14 @@ while true; do
     esac
 done
 
+echo "Checking differences in config files"
+check_django_settings
+
 #update mapbender
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
 su -c 'svn -q update'
-cd ${installation_folder}svn/
-tar -czvf mapbender_trunk.tar.gz mapbender/
-mv mapbender_trunk.tar.gz /tmp/
-echo copying...
-cd ${installation_folder}
-mv /tmp/mapbender_trunk.tar.gz .
-echo untar...
-tar -xzvf mapbender_trunk.tar.gz
+cp -a ${installation_folder}svn/mapbender ${installation_folder}
 cp ${installation_folder}mapbender.conf ${installation_folder}mapbender/conf/
 cp ${installation_folder}geoportal.conf ${installation_folder}mapbender/conf/
 cp ${installation_folder}extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
@@ -1603,67 +1634,32 @@ sed -i 's/\/\/metadataUrlPlaceholder/$metadataUrl="http:\/\/www.geoportal.rlp.de
 sed -i 's/http:\/\/ws.geonames.org\/searchJSON?lang=de&/http:\/\/www.geoportal.rlp.de\/mapbender\/geoportal\/gaz_geom_mobile.php/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 sed -i 's/options.isGeonames = true;/options.isGeonames = false;/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
 sed -i 's/options.helpText = "";/options.helpText = "Orts- und Straßennamen sind bei der Adresssuche mit einem Komma voneinander zu trennen!<br><br>Auch Textfragmente der gesuchten Adresse reichen hierbei aus.<br><br>\&nbsp\&nbsp\&nbsp\&nbsp Beispiel:<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"Am Zehnthof 10 , St. Goar\\" oder<br>\&nbsp\&nbsp\&nbsp\&nbsp\&nbsp\\"zehnt 10 , goar\\"<br><br>Der passende Treffer muss in der erscheinenden Auswahlliste per Mausklick ausgewählt werden!";/' ${installation_folder}mapbender/http/plugins/mod_jsonAutocompleteGazetteer.php
+sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+
 echo "Mapbender Update Done"
-
-echo "Updating Mapbender Database"
-
-sed -i "s/:group_id/$mapbender_subadmin_group_id/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
-sed -i "s/:db_owner/$mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql
-
-while true; do
-    read -p "Do you use an external Database Server. Be sure to specify mapbender_database_host and superuser if yes. y/n?" yn
-    case $yn in
-        [Yy]* ) external_db_update; break;;
-        [Nn]* ) sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}GeoPortal.rlp/scripts/update_2.7.4_to_2.8_pgsql_UTF-8.sql;break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
 
 #update django
 echo "Updating Geoportal Project"
 cd ${installation_folder}GeoPortal.rlp
+cp -a ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}settings.py_$(date +"%m_%d_%Y")
 
-# save settings
-old_hostname=`grep -m 1 HOSTNAME  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
-old_hostip=`grep -m 1 HOSTIP  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
-old_ssl_conf=`grep -m 1 HTTP_OR_SSL  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
-old_search_proto=`grep -m 1 SEARCH_API_PROTOCOL  Geoportal/settings.py | cut -d "\"" -f2 | cut -d "\"" -f1`
-old_database_name=`grep -wm 1 NAME  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
-old_database_user=`grep -wm 1 USER  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
-old_database_password=`grep -wm 1 PASSWORD  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
-old_database_host=`grep -wm 1 HOST  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
-old_database_port=`grep -wm 1 PORT  Geoportal/settings.py | cut -d "'" -f4 | cut -d "'" -f3`
-
-mv ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}GeoPortal.rlp/Geoportal/settings.py_$(date +"%m_%d_%Y")
 git reset --hard
 git pull
 
-if [ ! -f ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ]; then
-  wget -P ${installation_folder}GeoPortal.rlp/Geoportal/ https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/Geoportal/settings.py
-fi
+cp -a ${installation_folder}settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 
-# refill with old values
-sed -i s/"HOSTIP = \"127.0.0.1\""/"HOSTIP = \"$old_hostip\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"HOSTNAME = \"localhost\""/"HOSTNAME = \"$old_hostname\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"SEARCH_API_PROTOCOL = \"http\""/"SEARCH_API_PROTOCOL = \"$old_search_proto\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$old_database_name',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$old_database_user',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$old_database_password',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"        'HOST':'127.0.0.1',"/"        'HOST':'$old_database_host',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-sed -i s/"        'PORT':''"/"        'PORT':'$old_database_port'"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 
-if [ $old_ssl_conf == "https://" ];then
-	sed -i s/"HTTP_OR_SSL = \"http:\/\/\""/"HTTP_OR_SSL = \"https:\/\/\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-fi
-
+# copy some scripts that are needed for django mapbender integration
 cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}mapbender/http/local
 cp -a ${installation_folder}GeoPortal.rlp/scripts/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php
 cp -a ${installation_folder}GeoPortal.rlp/scripts/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
-
-# change ip address in various locations
-# mapbender
-sed -i "s/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/mapbender\/frames\/login.php\");/g" ${installation_folder}mapbender/conf/mapbender.conf
-sed -i "s/define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/#define(\"LOGIN\", \"http:\/\/\".\$_SERVER\['HTTP_HOST'\].\"\/portal\/anmelden.html\");/g" ${installation_folder}mapbender/conf/mapbender.conf
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/plugins/mb_downloadFeedClient.php ${installation_folder}mapbender/http/plugins/mb_downloadFeedClient.php
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/move.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/select.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/style.css ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
+cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
 
 # create and activate virtualenv
 virtualenv -ppython3 ${installation_folder}env
@@ -1742,6 +1738,9 @@ cp /etc/postgresql/9.6/main/pg_hba.conf_backup /etc/postgresql/9.6/main/pg_hba.c
 service postgresql restart
 cp /etc/subversion/servers_backup_geoportal /etc/subversion/servers
 
+# drop MySQL
+mysql -uroot -p$mysqlpw -e "DROP DATABASE Geoportal;"
+
 }
 
 backup () {
@@ -1753,16 +1752,35 @@ if [ -d ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y") ]; the
 fi
 
 echo "Creating backup in ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")"
-mkdir -pv ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")
+mkdir -pv ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/
+mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/conf
+mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/http/extensions/mobilemap2/scripts/
+mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/tools/wms_extent/
+mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/Geoportal/
+
 
 # Django Backup
-cp -a ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")
-cp -a ${installation_folder}mapbender/conf/mapbender.conf ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/Geoportal/
+# Mapbender config files
+cp -av ${installation_folder}mapbender/conf/* ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/conf/
+cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/http/extensions/mobilemap2/scripts/
+cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/tools/wms_extent/
+cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/tools/wms_extent/
 
-su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql"
-cp -a /tmp/geoportal_mapbender_backup.psql ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")
-mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql
+while true; do
+    read -p "Do you want to dump the databases y/n?" yn
+    case $yn in
+        [Yy]* )
+        su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql";
+        cp -a /tmp/geoportal_mapbender_backup.psql ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y");
+        mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
+        break;;
+        [Nn]* ) exit;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
+echo "Backup Done!."
 }
 
 check_mode() {
