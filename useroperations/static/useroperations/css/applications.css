@@ -1,0 +1,46 @@
+.tile-content-abstract-text{
+    max-height: 200px;
+    overflow: auto;
+}
+
+.sub-tile-container{
+    margin: 0 0 0.25em 0;
+}
+
+.applications a{
+    text-decoration: none;
+    width: 100%;
+    color: var(--secondary-font);
+}
+
+.applications .data-info-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.metadata-link{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.metadata-link:hover{
+    border: 1px solid white;
+}
+
+.metadata-link:hover{
+    /*
+    Little trick: since we invert the colors here to make black icons white,
+    we need to make all other colors inverted before, to display the correct ones
+    */
+    -webkit-filter: invert(1.0);
+    filter: invert(1.0);
+    color: black;
+    background-color: var(--primary-invert);
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.organization-title{
+    margin: 0 0 0 1em
+}

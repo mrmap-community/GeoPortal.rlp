@@ -115,6 +115,9 @@ def get_landing_page(lang):
     # get number of organizations
     ret_dict["num_orgs"] = len(get_all_organizations())
 
+    # get number of applications
+    ret_dict["num_apps"] = len(get_all_applications())
+
     # get number of topics
     ret_dict["num_topics"] = len(get_all_inspire_topics(lang).get("tags", []))
 
@@ -140,6 +143,17 @@ def get_all_organizations():
     searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
 
     return searcher.get_all_organizations()
+
+
+def get_all_applications():
+    """ Returns a list of all available applications
+
+    Returns:
+         A list of all applications
+    """
+    searcher = Searcher(keywords="", resource_set=["application"], host=HOSTNAME)
+    return searcher.get_search_results_primary()["application"]["application"]["application"]["srv"]
+
 
 def get_all_inspire_topics(language):
     """ Returns a list of all inspire topics available

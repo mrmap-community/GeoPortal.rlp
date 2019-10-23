@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static i18n humanize %}
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'useroperations/js/filter.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/applications.css' %}" media="all" />
+{% endblock %}
+
+{% block body %}
+<div class="landing-page-headline">
+    <h2>{% trans 'Applications' %}</h2>
+</div>
+<div class="tile-filter-options">
+    <div class="tile-filter-input-wrapper">
+        <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
+        <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+    </div>
+</div>
+<div class="tile-wrapper applications">
+    {% for result in apps %}
+        <div class="tile">
+            <a target="_blank" href="{{ result.accessURL }}">
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}">
+                <div class="tile-title">
+                    {{ result.title }}
+                </div>
+                <div class="tile-header-img">
+                        {% if result.previewURL != '' %}
+                        <img class="tile-img" src="{{ result.previewURL }}">
+                        {% else  %}
+                        <img class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}">
+                        {% endif %}
+                </div>
+                </div>
+            </a>
+            <div class="tile-content">
+                <div class="tile-content-abstract">
+                    <div class="sub-tile-container">
+                    </div>
+                    <div class="sub-tile-container">
+                        <div class="data-info-container" title="{% trans 'Times used' %}">
+                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                            <div>{{ result.loadCount|intcomma }}</div>
+                        </div>
+                    </div>
+                    <div class="sub-tile-container">
+                        <div class="data-info-container" title="{% trans 'Published on' %}">
+                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                            <div>{{ result.date }}</div>
+                        </div>
+                    </div>
+                    <div class="sub-tile-container">
+                        <a href="{{ result.mdLink }}#tabs-3" target="_blank">
+                        <div class="data-info-container metadata-link" title="{% trans 'Published by' %}">
+                            <img alt="{% trans 'An organization logo' %}" class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                            <div class="organization-title">{{ result.respOrg }}</div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="sub-tile-container">
+                        <a href="{{ result.mdLink }}" target="_blank">
+                        <div class="data-info-container metadata-link" title="{% trans 'Metadata' %}">
+                            <img alt="{% trans 'A metadata symbol' %}" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
+                            <div>{% trans 'Metadata' %}</div>
+                        </div>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="tile-content-abstract-text">
+                        {{ result.abstract }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
