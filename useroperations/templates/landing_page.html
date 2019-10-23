@@ -37,6 +37,13 @@
         </div>
         <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
     </a>
+    <a class="quickstart" href="{% url 'useroperations:apps' %}" title="{% trans 'Show all applications' %}">
+        <div class="quickstart-header">
+            <img alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}" src="{% static 'searchCatalogue/images/icons/icn_application.png' %}">
+            <span>{% trans 'Applications' %}</span>
+        </div>
+        <span class="quickstart-body">{{ results.num_apps|intcomma }}</span>
+    </a>
     <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
         <div class="quickstart-header">
             <img alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" src="{% static 'searchCatalogue/images/icons/icn_filter.png' %}">

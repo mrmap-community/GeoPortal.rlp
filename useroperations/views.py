@@ -104,6 +104,24 @@ def index_view(request, wiki_keyword=""):
     else:
         return render(request, template, geoportal_context.get_context())
 
+@check_browser
+def applications_view(request: HttpRequest):
+    """ Renders the view for showing all available applications
+
+    Args:
+        request: The incoming request
+    Returns:
+         A rendered view
+    """
+    geoportal_context = GeoportalContext(request)
+
+    apps = useroperations_helper.get_all_applications()
+    params = {
+        "apps": apps,
+    }
+    template = "applications.html"
+    geoportal_context.add_context(params)
+    return render(request, template, geoportal_context.get_context())
 
 @check_browser
 def organizations_view(request: HttpRequest):

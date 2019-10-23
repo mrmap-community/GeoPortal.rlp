@@ -11,7 +11,14 @@ $(document).ready(function(){
             var obj = $(elem);
             var conTitle = obj.find(".tile-header").attr("data-name").toUpperCase();
             var conDescr = obj.find(".tile-content-abstract-text").text().trim().toUpperCase();
-            if(conTitle.includes(val) || conDescr.includes(val)){
+            // check if there is a responsible organization as well
+            var respOrg = obj.find(".organization-title");
+            if (respOrg !== null){
+                respOrg = respOrg.text().trim().toUpperCase()
+            }else{
+                respOrg = "";
+            }
+            if(conTitle.includes(val) || conDescr.includes(val) || respOrg.includes(val)){
                 obj.show();
             }else{
                 obj.hide();
