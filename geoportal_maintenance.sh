@@ -1597,16 +1597,24 @@ echo "Checking differences in config files"
 check_django_settings
 
 #update mapbender
+echo "Backing up Mapbender Configs"
+cp -av ${installation_folder}mapbender/conf/mapbender.conf ${installation_folder}mapbender.conf_$(date +"%m_%d_%Y") 
+cp -av ${installation_folder}mapbender/conf/geoportal.conf ${installation_folder}geoportal.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installation_folder}extents_geoportal_rlp.map_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}config.js_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y")
+
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
 su -c 'svn -q update'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
-cp ${installation_folder}mapbender.conf ${installation_folder}mapbender/conf/
-cp ${installation_folder}geoportal.conf ${installation_folder}mapbender/conf/
-cp ${installation_folder}extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
-cp ${installation_folder}extent_service_geoportal_rlp.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
-cp ${installation_folder}config.js ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
-cp ${installation_folder}atomFeedClient.conf ${installation_folder}mapbender/conf/atomFeedClient.conf
+cp -av ${installation_folder}mapbender.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/
+cp -av ${installation_folder}geoportal.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/
+cp -av ${installation_folder}extents_geoportal_rlp.map_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extents.map
+cp -av ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
+cp -av ${installation_folder}config.js_$(date +"%m_%d_%Y") ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
+cp -av ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/atomFeedClient.conf
 cd ${installation_folder}mapbender/tools
 sh ./i18n_update_mo.sh
 cd ${installation_folder}mapbender
