@@ -1783,7 +1783,7 @@ while true; do
         cp -a /tmp/geoportal_mapbender_backup.psql ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y");
         mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
         break;;
-        [Nn]* ) exit;break;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
