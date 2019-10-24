@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static i18n humanize %}
 
+{% block title %}
+- {% trans 'Applications' %}
+{% endblock %}
+
 {% block head %}
     <script type="text/javascript" src="{% static 'useroperations/js/filter.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
@@ -22,6 +26,9 @@
         <div class="tile">
             <a target="_blank" href="{{ result.accessURL }}">
             <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}">
+                {% if result.internal %}
+                <img class="powered-by" src="{% static 'useroperations/images/favicon.png' %}" title="{% trans 'Powered by GeoPortal.RLP' %}">
+                {% endif %}
                 <div class="tile-title">
                     {{ result.title }}
                 </div>
