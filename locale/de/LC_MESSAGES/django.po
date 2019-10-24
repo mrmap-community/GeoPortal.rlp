@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 08:33+0000\n"
+"POT-Creation-Date: 2019-10-24 11:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: Geoportal/geoportalObjects.py:66
+#: Geoportal/geoportalObjects.py:65
 msgid "Modern"
 msgstr ""
 
-#: Geoportal/geoportalObjects.py:67
+#: Geoportal/geoportalObjects.py:66
 msgid "Klassik"
 msgstr ""
 
-#: Geoportal/geoportalObjects.py:68
+#: Geoportal/geoportalObjects.py:67
 msgid "Mobil"
 msgstr ""
 
@@ -1204,6 +1204,10 @@ msgstr ""
 msgid "Powered by GeoPortal.RLP"
 msgstr ""
 
+#: useroperations/templates/applications.html:39
+msgid "No preview available"
+msgstr "Keine Beschreibung verfügbar"
+
 #: useroperations/templates/applications.html:49
 msgid "Times used"
 msgstr "Anzahl Klicks"
@@ -1283,7 +1287,7 @@ msgstr ""
 "entgegengesetzte Richtungen zeigen"
 
 #: useroperations/templates/geoportal.html:8
-msgid "Switch mapviewer"
+msgid "Switch between mapviewers"
 msgstr "Kartenviewer wechseln"
 
 #: useroperations/templates/geoportal.html:18

@@ -36,7 +36,7 @@
                         {% if result.previewURL != '' and result.previewURL is not None %}
                         <img class="tile-img" src="{{ result.previewURL }}">
                         {% else  %}
-                        <img class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}">
+                        <img class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}" title="{% trans 'No preview available' %}">
                         {% endif %}
                 </div>
                 </div>
