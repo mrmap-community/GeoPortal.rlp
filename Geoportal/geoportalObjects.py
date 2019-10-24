@@ -7,6 +7,7 @@ Created on: 11.03.19
 
 """
 from django.http.response import JsonResponse
+from django.utils.translation import ugettext_lazy as _
 
 from Geoportal import settings
 from Geoportal.settings import DEFAULT_GUI, RSS_FILE, HOSTNAME, HTTP_OR_SSL, IFRAME_HEIGHT, IFRAME_WIDTH
@@ -60,6 +61,11 @@ class GeoportalContext:
             'userid': session_data.get("userid", ""),
             'gui': session_data.get("gui", None),
             'guis': session_data.get("guis", ""),
+            'mapviewers': {
+                _("Modern"): "Geoportal-RLP_2019",
+                _("Klassik"): "Geoportal-RLP",
+                _("Mobil"): HTTP_OR_SSL + HOSTNAME + "/mapbender/extensions/mobilemap2/index.html?wmc_id=current",
+            },
             'dsgvo': session_data.get("dsgvo", "no"),
             'preferred_gui': session_data.get("preferred_gui", DEFAULT_GUI),
             'lang': request.LANGUAGE_CODE,

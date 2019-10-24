@@ -361,14 +361,14 @@ ul {
     z-index: 2;
 }
 
-.map-viewer-toggler img, .sidebar-toggler img, .mobile-map-toggler img, .map-applications-toggler img{
+.map-viewer-toggler img, .sidebar-toggler img, .map-viewer-selector img, .map-applications-toggler img{
     background-color: var(--primary);
     padding: 0.1em;
     border-radius: 100%;
     width: 3em;
 }
 
-.mobile-map-toggler{
+.map-viewer-selector{
     margin: 5px 0 0 0;
 }
 
@@ -385,10 +385,10 @@ ul {
     flex-direction: column;
     align-items: flex-end;
 }
-.map-applications-list{
+.map-applications-list, .map-viewer-list{
     display: none;
 }
-.map-applications-list-entry{
+.map-applications-list-entry, .map-viewer-list-entry{
     color: white;
     font-weight: bold;
     padding: 10px;
@@ -396,7 +396,7 @@ ul {
     background-color: var(--primary-light);
     border-radius: 10px;
 }
-.map-applications-list-entry:hover{
+.map-applications-list-entry:hover, .map-viewer-list-entry:hover {
     background-color: var(--primary-light-hover);
     cursor: pointer;
 }
@@ -474,7 +474,7 @@ ul {
 }
 
 
-.sidebar-toggler:hover, .map-viewer-toggler:hover, .map-applications-toggler:hover, .mobile-map-toggler:hover{
+.sidebar-toggler:hover, .map-viewer-toggler:hover, .map-applications-toggler:hover, .map-viewer-selector:hover{
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
     cursor: pointer;
@@ -744,7 +744,7 @@ ul {
         margin-right: unset;
     }
 
-    .sidebar-toggler img, .map-viewer-toggler img, .mobile-map-toggler img{
+    .sidebar-toggler img, .map-viewer-toggler img, .map-viewer-selector img{
         width: 3.5em;
     }
 

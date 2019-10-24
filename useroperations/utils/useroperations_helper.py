@@ -152,7 +152,7 @@ def get_all_applications():
          A list of all applications
     """
     searcher = Searcher(keywords="", resource_set=["application"], host=HOSTNAME, max_results=50)
-    return searcher.get_search_results_primary()["application"]["application"]["application"]["srv"]
+    return searcher.get_search_results_primary().get("application", {}).get("application", {}).get("application", {}).get("srv", [])
 
 
 def get_all_inspire_topics(language):
