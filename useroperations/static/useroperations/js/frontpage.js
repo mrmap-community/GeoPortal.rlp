@@ -98,15 +98,15 @@ function toggleMapviewer(){
     // start loading the iframe content
     var iframe = $("#mapviewer");
     var src = iframe.attr("src");
-    var dataParams = iframe.attr("data-params");
+    var dataParams = iframe.attr("data-resource");
 
     // change mb_user_gui Parameter if default gui  differs
     var url = new URL(dataParams)
     var params = new URLSearchParams(url.search);
     if(preferred_gui == "Geoportal-RLP-Classic" || preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
-        params.set('mb_user_myGui',"Geoportal-RLP")
+        params.set('gui_id',"Geoportal-RLP")
     }else{
-        params.set('mb_user_myGui', preferred_gui)
+        params.set('gui_id', preferred_gui)
     }
     url.search = params.toString();
     dataParams = url.toString();
@@ -167,8 +167,10 @@ $(document).on("click", ".mobile-button", function(){
     openInNewTab("/mapbender/extensions/mobilemap2/index.html?wmc_id=" + id);
 });
 
-$(document).on("click", ".mobile-map-toggler", function(){
-    toggleMapViewers();
+$(document).on("click", ".map-viewer-selector", function(){
+    var viewerList = $(".map-viewer-list");
+    viewerList.slideToggle("medium");
+    //toggleMapViewers();
 });
 
 $(document).on("click", ".map-applications-toggler", function(){
@@ -177,13 +179,41 @@ $(document).on("click", ".map-applications-toggler", function(){
     applicationsList.slideToggle("medium");
 });
 
+$(document).on("click", ".map-viewer-list-entry", function(){
+    var elem = $(this);
+    // move viewport for user
+    window.scrollTo({
+        top:150,
+        left:0,
+        behavior:'smooth'
+    });
+    gui_id = elem.attr("data-resource");
+    var iFrame = $("#mapviewer");
+    if(gui_id.includes("http")){
+        // simply paste in the new url
+        iFrame.attr("src", gui_id);
+    }else{
+        if(!iFrame.attr("src").includes("gui_id")){
+            // there is a url in the src which can not be changed directly. We need to go back to the fallback uri!
+            iFrame.attr("src", iFrame.attr("data-resource"));
+        }
+        // this is just another gui id, we need to put it inside the matching parameter
+        var srcUrl = iFrame.attr("src");
+        var url = new URL(srcUrl);
+        var searchParams = new URLSearchParams(url.search);
+        searchParams.set("gui_id", gui_id);
+        url.search = searchParams.toString();
+        var src = url.toString();
+        iFrame.attr("src", src);
+    }
+
+    // close menu
+    $(".map-viewer-selector").click();
+});
+
 $(document).on("click", ".map-applications-list-entry", function(){
     var elem = $(this);
     var iframe = $("#mapviewer");
-    // switch back to default map viewer if mobile is active
-    if(iframe.hasClass("mobile-viewer")){
-        toggleMapViewers();
-    }
 
     // move viewport for user
     window.scrollTo({
@@ -193,21 +223,16 @@ $(document).on("click", ".map-applications-list-entry", function(){
     });
 
     iframeSrc = iframe.attr("src").toString();
-    iframeDataParams = iframe.attr("data-params").toString();
+    iframeDataParams = iframe.attr("data-resource").toString();
 
-    // locate gui id in attribute strings
-    var iframeSrcArr = iframeSrc.split("&");
-    for(var i in iframeSrcArr){
-        if(iframeSrcArr[i].includes("myGui")){
-            guiId = iframeSrcArr[i].split("=")[1];
-            break;
-        }
-    }
-    // replace gui id with new id
-    iframeSrc = iframeSrc.replace(guiId, elem.attr("data-id"));
-    iframeDataParams = iframeDataParams.replace(guiId, elem.attr("data-id"));
-    iframe.attr("src", iframeSrc);
-    iframe.attr("data-params", iframeDataParams);
+    var srcUrl = new URL(iframeDataParams);
+    var params = new URLSearchParams(srcUrl.search);
+    params.set('gui_id',elem.attr("data-id"))
+
+    srcUrl.search = params.toString();
+    src = srcUrl.toString();
+
+    iframe.attr("src", src);
 
     // close list menu
     $(".map-applications-toggler").click();
@@ -306,9 +331,9 @@ $(document).on("click", "#geoportal-search-button", function(){
         return;
     }
     href = elem.attr("data-id");
-    if($("#mapviewer").hasClass("mobile-viewer")){
-        toggleMapViewers();
-    }
+    //if($("#mapviewer").hasClass("mobile-viewer")){
+    //    toggleMapViewers();
+    //}
     startAjaxMapviewerCall(href);
 
  });

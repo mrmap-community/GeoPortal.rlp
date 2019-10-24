@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-23 12:07+0000\n"
+"POT-Creation-Date: 2019-10-24 08:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Geoportal/geoportalObjects.py:66
+msgid "Modern"
+msgstr ""
+
+#: Geoportal/geoportalObjects.py:67
+msgid "Klassik"
+msgstr ""
+
+#: Geoportal/geoportalObjects.py:68
+msgid "Mobil"
+msgstr ""
 
 #: Geoportal/settings.py:172 Geoportal/settings.py:191
 msgid "German"
@@ -56,7 +68,7 @@ msgid "Resource types"
 msgstr "Ressourcentyp"
 
 #: searchCatalogue/templates/facets.html:41
-#: useroperations/templates/applications.html:16
+#: useroperations/templates/applications.html:20
 #: useroperations/templates/inspire_topics.html:15
 #: useroperations/templates/publishing_organizations.html:16
 msgid "Filter by"
@@ -136,7 +148,7 @@ msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
 #: searchCatalogue/templates/index.html:47
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:88
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:90
 msgid "Search"
 msgstr "Suche"
 
@@ -191,7 +203,8 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:6
 #: searchCatalogue/templates/other/application/application_category.html:7
-#: searchCatalogue/views.py:277 useroperations/templates/applications.html:12
+#: searchCatalogue/views.py:280 useroperations/templates/applications.html:5
+#: useroperations/templates/applications.html:16
 #: useroperations/templates/landing_page.html:42
 #: useroperations/templates/landing_page.html:43
 msgid "Applications"
@@ -278,8 +291,8 @@ msgstr "Ein stylisierter Globus"
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/dataset/dataset_category.html:7
-#: searchCatalogue/views.py:268 searchCatalogue/views.py:274
-#: searchCatalogue/views.py:365 useroperations/templates/landing_page.html:26
+#: searchCatalogue/views.py:271 searchCatalogue/views.py:277
+#: searchCatalogue/views.py:368 useroperations/templates/landing_page.html:26
 #: useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr "Datensätze"
@@ -290,7 +303,7 @@ msgstr "Drei Punkte in einer Reihe"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:7
-#: searchCatalogue/views.py:278
+#: searchCatalogue/views.py:281
 msgid "Miscellaneous Datasets"
 msgstr "Sonstige Datensätze"
 
@@ -303,7 +316,7 @@ msgid "Competent authority"
 msgstr "Zuständige Stelle:"
 
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:56
+#: useroperations/templates/applications.html:64
 msgid "An organization logo"
 msgstr "Ein Organisationslogo"
 
@@ -326,7 +339,7 @@ msgstr "Ein Kalendarsymbol"
 
 #: searchCatalogue/templates/other/series/series_category.html:6
 #: searchCatalogue/templates/other/series/series_category.html:7
-#: searchCatalogue/views.py:269 searchCatalogue/views.py:275
+#: searchCatalogue/views.py:272 searchCatalogue/views.py:278
 msgid "Series"
 msgstr "Serien"
 
@@ -338,7 +351,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
-#: searchCatalogue/views.py:270 searchCatalogue/views.py:276
+#: searchCatalogue/views.py:273 searchCatalogue/views.py:279
 msgid "Services"
 msgstr "Dienste"
 
@@ -582,8 +595,8 @@ msgstr "Zusammenstellungen"
 
 #: searchCatalogue/templates/search_result_actions.html:78
 #: searchCatalogue/templates/search_result_list_entry.html:4
-#: useroperations/templates/applications.html:63
-#: useroperations/templates/applications.html:65
+#: useroperations/templates/applications.html:72
+#: useroperations/templates/applications.html:74
 msgid "Metadata"
 msgstr "Metadaten"
 
@@ -722,27 +735,27 @@ msgstr "Räumliche Einschränkung:"
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
 
-#: searchCatalogue/views.py:366 useroperations/templates/landing_page.html:19
+#: searchCatalogue/views.py:369 useroperations/templates/landing_page.html:19
 msgid "Web Map Services"
 msgstr "Darstellungsdienste"
 
-#: searchCatalogue/views.py:367
+#: searchCatalogue/views.py:370
 msgid "Search-, Download-,Gathering-modules"
 msgstr "Such-, Download-, Erfassungsmodule"
 
-#: searchCatalogue/views.py:368
+#: searchCatalogue/views.py:371
 msgid "Map Combinations"
 msgstr "Karten"
 
-#: searchCatalogue/views.py:604
+#: searchCatalogue/views.py:607
 msgid "Send permission request"
 msgstr "Berechtigungsanfrage senden"
 
-#: searchCatalogue/views.py:605
+#: searchCatalogue/views.py:608
 msgid "[Geoportal.RLP] Permission request for "
 msgstr "[Geoportal.RLP] Berechtigungsanfrage für "
 
-#: searchCatalogue/views.py:606
+#: searchCatalogue/views.py:609
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
@@ -750,7 +763,7 @@ msgstr ""
 "Bitte geben Sie mir die Berechtigung die folgende Ressource zu verwenden \n"
 "'"
 
-#: searchCatalogue/views.py:607
+#: searchCatalogue/views.py:610
 msgid ""
 "'\n"
 " It has the ID "
@@ -758,7 +771,7 @@ msgstr ""
 "' \n"
 "Die Ressource verwendet die ID "
 
-#: searchCatalogue/views.py:608
+#: searchCatalogue/views.py:611
 msgid ""
 ".\n"
 "\n"
@@ -1187,19 +1200,23 @@ msgid "Activation failed. Please contact an administrator!"
 msgstr ""
 "Aktivierung fehlgeschlagen. Bitte kontaktieren Sie einen Administrator!"
 
-#: useroperations/templates/applications.html:42
+#: useroperations/templates/applications.html:30
+msgid "Powered by GeoPortal.RLP"
+msgstr ""
+
+#: useroperations/templates/applications.html:49
 msgid "Times used"
 msgstr "Anzahl Klicks"
 
-#: useroperations/templates/applications.html:48
+#: useroperations/templates/applications.html:55
 msgid "Published on"
 msgstr "Veröffentlicht am"
 
-#: useroperations/templates/applications.html:55
+#: useroperations/templates/applications.html:63
 msgid "Published by"
 msgstr "Veröffentlicht von"
 
-#: useroperations/templates/applications.html:64
+#: useroperations/templates/applications.html:73
 msgid "A metadata symbol"
 msgstr "Ein Metadatensymbol"
 
@@ -1266,10 +1283,10 @@ msgstr ""
 "entgegengesetzte Richtungen zeigen"
 
 #: useroperations/templates/geoportal.html:8
-msgid "Switch between default and mobile map viewer"
-msgstr "Wechseln zwischen mobilem und Standard-Kartenviewer"
+msgid "Switch mapviewer"
+msgstr "Kartenviewer wechseln"
 
-#: useroperations/templates/geoportal.html:13
+#: useroperations/templates/geoportal.html:18
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
 

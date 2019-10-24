@@ -540,14 +540,14 @@ function enableSearchInputField(){
 function changeMapviewerIframeSrc(srcSuffix){
     // replace the src from "Geoportal-RLP" on
     var mapviewer = $("#mapviewer");
-    var src = mapviewer.attr("data-params");
+    var src = mapviewer.attr("data-resource");
     if(src != null){
-        var srcArr = src.split("mb_user_myGui");
-        var newSrc = srcArr[0] + "mb_user_myGui=" + srcSuffix;
+        var srcArr = src.split("gui_id");
+        var newSrc = srcArr[0] + "gui_id=" + srcSuffix;
         if(mapviewer.hasClass("mobile-viewer")){
             toggleMapViewers();
         }
-        mapviewer.attr("data-params", newSrc);
+        mapviewer.attr("data-resource", newSrc);
         mapviewer.attr("src", newSrc);
     }
 }
@@ -605,7 +605,7 @@ function startAjaxMapviewerCall(value, mobile){
                 });
                 $(".map-viewer-toggler").click();
                 if(mobile){
-                    $(".mobile-map-toggler").click();
+                    $(".map-viewer-selector").click();
                 }
             }else if(data["url"] != ""){
             // external mapviewer call
