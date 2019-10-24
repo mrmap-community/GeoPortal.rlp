@@ -140,7 +140,7 @@ def get_all_organizations():
     Returns:
          A list of all organizations which publish data
     """
-    searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
+    searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME, max_results=1000)
 
     return searcher.get_all_organizations()
 
