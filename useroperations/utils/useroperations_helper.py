@@ -151,7 +151,7 @@ def get_all_applications():
     Returns:
          A list of all applications
     """
-    searcher = Searcher(keywords="", resource_set=["application"], host=HOSTNAME, max_results=1000)
+    searcher = Searcher(keywords="", resource_set=["application"], host=HOSTNAME, max_results=50)
     return searcher.get_search_results_primary()["application"]["application"]["application"]["srv"]
 
 
