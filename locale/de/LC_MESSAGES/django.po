@@ -1206,7 +1206,7 @@ msgstr ""
 
 #: useroperations/templates/applications.html:39
 msgid "No preview available"
-msgstr "Keine Beschreibung verfügbar"
+msgstr "Keine Vorschau verfügbar"
 
 #: useroperations/templates/applications.html:49
 msgid "Times used"
