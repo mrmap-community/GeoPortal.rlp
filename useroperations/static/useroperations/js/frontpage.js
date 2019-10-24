@@ -181,29 +181,35 @@ $(document).on("click", ".map-applications-toggler", function(){
 
 $(document).on("click", ".map-viewer-list-entry", function(){
     var elem = $(this);
+    var iFrame = $("#mapviewer");
+
     // move viewport for user
     window.scrollTo({
         top:150,
         left:0,
         behavior:'smooth'
     });
+
     gui_id = elem.attr("data-resource");
-    var iFrame = $("#mapviewer");
     if(gui_id.includes("http")){
         // simply paste in the new url
         iFrame.attr("src", gui_id);
     }else{
+        var srcUrl = null;
         if(!iFrame.attr("src").includes("gui_id")){
             // there is a url in the src which can not be changed directly. We need to go back to the fallback uri!
-            iFrame.attr("src", iFrame.attr("data-resource"));
+            srcUrl = iFrame.attr("data-resource");
+        }else{
+            // this is just another gui id, we need to put it inside the matching parameter
+            srcUrl = iFrame.attr("src");
         }
-        // this is just another gui id, we need to put it inside the matching parameter
-        var srcUrl = iFrame.attr("src");
         var url = new URL(srcUrl);
         var searchParams = new URLSearchParams(url.search);
         searchParams.set("gui_id", gui_id);
+
         url.search = searchParams.toString();
-        var src = url.toString();
+        src = url.toString();
+
         iFrame.attr("src", src);
     }
 
