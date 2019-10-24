@@ -7,6 +7,10 @@
     margin: 0 0 0.25em 0;
 }
 
+.sub-tile-img, .icon-organization, .icon-metadata{
+    opacity: 0.6;
+}
+
 .powered-by{
     position: absolute;
     top: -0.75em;
