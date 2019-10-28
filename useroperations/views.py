@@ -716,11 +716,17 @@ def map_viewer_view(request):
     template = "geoportal_external.html"
     gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
+    wmc_id = request_get_params.get("WMC", None) or request_get_params.get("wmc", None)
+    wms_id = request_get_params.get("WMS", None) or request_get_params.get("wms", None)
     # check if the request comes from a mobile device
-    is_mobile = geoportal_context.get_context().get("is_mobile")
+    is_mobile = request.user_agent.is_mobile
     if is_mobile:
         # if so, just call the mobile map viewer in a new window
-        mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?wmc_id={}".format(HTTP_OR_SSL, HOSTNAME, request_get_params.get("WMC",""))
+        mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
+        if wmc_id is not None:
+            mobile_viewer_url += "&wmc_id={}".format(wmc_id)
+        if wms_id is not None:
+            mobile_viewer_url += "&wms_id={}".format(wms_id)
         return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
 
     # if the call targets a DE catalogue result, we need to adjust a little thing here to restore the previously splitted url
@@ -737,8 +743,8 @@ def map_viewer_view(request):
         "LAYER[zoom]": request_get_params.get("LAYER[zoom]", None),
         "LAYER[visible]": request_get_params.get("LAYER[visible]", 1),
         "LAYER[querylayer]": request_get_params.get("LAYER[querylayer]", 1),
-        "WMS": urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe=""),
-        "WMC": request_get_params.get("WMC", "") or request_get_params.get("wmc", ""),
+        "WMS": wms_id,
+        "WMC": wmc_id,
         "GEORSS": urllib.parse.urlencode(request_get_params.get("GEORSS", "")),
         "KML": urllib.parse.urlencode(request_get_params.get("KML", "")),
         "FEATURETYPE": request_get_params.get("FEATURETYPE[id]", ""),
@@ -746,8 +752,9 @@ def map_viewer_view(request):
         "GEOJSON": request_get_params.get("GEOJSON", None),
         "GEOJSONZOOM": request_get_params.get("GEOJSONZOOM", None),
         "GEOJSONZOOMOFFSET": request_get_params.get("GEOJSONZOOMOFFSET", None),
+        "gui_id": request_get_params.get("gui_id", gui_id),
     }
-    mapviewer_params = gui_id
+    mapviewer_params = ""
     for param_key, param_val in mapviewer_params_dict.items():
         if param_val is not None:
             if isinstance(param_val, int):
@@ -759,7 +766,7 @@ def map_viewer_view(request):
         # an internal call from our geoportal should lead to the map viewer page without problems
         params = {
             "mapviewer_params": mapviewer_params,
-            "mapviewer_src":  HTTP_OR_SSL + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&mb_user_myGui=" + mapviewer_params,
+            "mapviewer_src":  HTTP_OR_SSL + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&" + mapviewer_params,
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
