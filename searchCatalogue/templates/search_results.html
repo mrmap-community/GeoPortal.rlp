@@ -47,10 +47,11 @@
                     {% elif is_info_search %}
                         {% include 'info/info_results.html' %}
                     {% else %}
-                        {% include 'primary/dataset/dataset_category.html' %}
                         {% include 'primary/wms/wms_category.html' %}
+                        {% include 'primary/dataset/dataset_category.html' %}
                         {% include 'primary/wmc/wmc_category.html' %}
                         {% include 'primary/wfs/wfs_category.html' %}
+                        {% include 'primary/application/application_category.html' %}
                     {% endif %}
                 </div>
             </div>

@@ -369,6 +369,7 @@ def get_data_primary(request: HttpRequest):
         "wms": _("Web Map Services"),
         "wfs": _("Search-, Download-,Gathering-modules"),
         "wmc": _("Map Combinations"),
+        "application": _("Applications"),
     }
     lang_code = request.LANGUAGE_CODE
 

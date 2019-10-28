@@ -22,6 +22,11 @@
                     {% trans 'Show' %}
                 </a>
             {% endif %}
+        {% elif type == 'application' %}
+            <a class='button view-button' target="_blank" href="{{ result.accessURL }}">
+                <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                {% trans 'Show' %}
+            </a>
 
         {% else %}
         <!-- WMS and DATASET -->

@@ -46,7 +46,8 @@ var Search = function() {
         wms: true,
         wfs: true,
         wmc: true,
-        dataset: true
+        dataset: true,
+        application: true,
     };
     this.resources_de = {
         dataset: true,
