@@ -66,7 +66,12 @@ class AutoCompleter:
             "maxResults": self.max_results,
         }
         response = requests.get(url, params, verify=INTERNAL_SSL)
-        results = response.json()
+        results = {
+            "results": 0,
+            "resultList": []
+        }
+        if len(response.content) > 0:
+            results = response.json()
         return results
 
 

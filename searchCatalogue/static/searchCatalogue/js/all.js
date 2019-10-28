@@ -744,6 +744,14 @@ $(document).ready(function() {
         // get terms from search input field
         var searchField = $(".simple-search-field");
         var terms = searchField.val();
+
+        // Make sure terms are set before search starts!
+        // Racing condition might occur, when page is not completely loaded and the value of searchbarBackup
+        // has not been pasted in the searchbar, yet. Check this in here!
+        var searchbarBackup = search.getParam("searchbarBackup");
+        if(searchbarBackup !== null && terms != searchbarBackup){
+            terms = searchbarBackup
+        }
         search.setParam("terms", terms);
 
         // disable input field during search
