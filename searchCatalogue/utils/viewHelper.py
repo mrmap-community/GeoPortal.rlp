@@ -522,6 +522,10 @@ def gen_extent_graphic_url(search_results):
                 srv["bbox"] = srv.get("bbox", EXTENT_SERVICE_BBOX)[0]
                 srv["extent_url"] = __gen_single_extent_graphic_url(srv)
                 layers = None
+            elif resource == "application":
+                srv["bbox"] = srv.get("bbox", EXTENT_SERVICE_BBOX)[0]
+                srv["extent_url"] = __gen_single_extent_graphic_url(srv)
+                layers = None
             else:  # == wfs
                 srv["extent_url"] = __gen_single_extent_graphic_url(srv)
                 layers = srv.get("ftype", None)
