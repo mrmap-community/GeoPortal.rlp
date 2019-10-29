@@ -707,9 +707,6 @@ def map_viewer_view(request):
     is_external_search = "external" in request.META.get("HTTP_REFERER", "")
     request_get_params_dict = request.GET.dict()
 
-    # get default gui
-    #user = MbUser.objects.get(mb_user_id=context_data['userid'])
-
     # is regular call means the request comes directly from the navigation menu in the page, without selecting a search result
     is_regular_call = len(request_get_params_dict) == 0 or request_get_params_dict.get("searchResultParam", None) is None
     request_get_params = dict(urllib.parse.parse_qsl(request_get_params_dict.get("searchResultParam")))
@@ -717,10 +714,15 @@ def map_viewer_view(request):
     gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
     wmc_id = request_get_params.get("WMC", "") or request_get_params.get("wmc", "")
-    wms_id = urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe="")
+    if len(request_get_params) > 1:
+        wms_id = urllib.parse.quote(request_get_params_dict.get("searchResultParam", "").replace("WMS=", ""), safe="")
+    else:
+        wms_id = urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe="")
+
     # check if the request comes from a mobile device
     is_mobile = request.user_agent.is_mobile
     if is_mobile:
+
         # if so, just call the mobile map viewer in a new window
         mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
         if wmc_id != "":
