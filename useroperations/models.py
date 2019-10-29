@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 
+from Geoportal.settings import DEFAULT_GUI
+
+
 class Navigation(models.Model):
     name = models.CharField(max_length=100, unique=True)
     url = models.CharField(max_length=200, blank=True)
@@ -61,7 +64,7 @@ class MbUser(models.Model):
     timestamp_delete = models.BigIntegerField(blank=True, null=True)
     timestamp_dsgvo_accepted = models.BigIntegerField(blank=True, null=True)
     create_digest = models.BooleanField(blank=True, null=True)
-    fkey_preferred_gui_id = models.CharField(max_length=100, blank=True, null=True, default="Geoportal-RLP")
+    fkey_preferred_gui_id = models.CharField(max_length=100, blank=True, null=True, default=DEFAULT_GUI)
 
     class Meta:
         managed = False
