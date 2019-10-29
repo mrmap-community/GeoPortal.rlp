@@ -716,16 +716,16 @@ def map_viewer_view(request):
     template = "geoportal_external.html"
     gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
-    wmc_id = request_get_params.get("WMC", None) or request_get_params.get("wmc", None)
-    wms_id = request_get_params.get("WMS", None) or request_get_params.get("wms", None)
+    wmc_id = request_get_params.get("WMC", "") or request_get_params.get("wmc", "")
+    wms_id = urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe="")
     # check if the request comes from a mobile device
     is_mobile = request.user_agent.is_mobile
     if is_mobile:
         # if so, just call the mobile map viewer in a new window
         mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
-        if wmc_id is not None:
+        if wmc_id != "":
             mobile_viewer_url += "&wmc_id={}".format(wmc_id)
-        if wms_id is not None:
+        if wms_id != "":
             mobile_viewer_url += "&wms_id={}".format(wms_id)
         return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
 
