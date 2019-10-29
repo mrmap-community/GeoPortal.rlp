@@ -60,6 +60,7 @@ OPEN_DATA_URL = "https://okfn.org/opendata/"
 ROOT_EMAIL_ADDRESS = "root@debian"
 
 # Gui settings
+MODERN_GUI = "Geoportal-RLP_2019"
 DEFAULT_GUI = "Geoportal-RLP"
 
 # Social networking and news feeds
