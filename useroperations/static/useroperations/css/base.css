@@ -695,7 +695,7 @@ ul {
 }
 
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 700px){
 
     #logo_gdi{
         display: none;
@@ -733,7 +733,7 @@ ul {
 
     #sidebar{
         font-size: 1.25em;
-        width: 60vw;
+        width: 65vw;
     }
     .sidebar-list-element{
         font-size: 0.9em;

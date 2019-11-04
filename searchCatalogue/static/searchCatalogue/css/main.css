@@ -1350,7 +1350,7 @@ dl dd {
   margin: 0 10px 0 0 !important; }
 
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 700px){
     #search-results{
         font-size: 1.0em;
     }
