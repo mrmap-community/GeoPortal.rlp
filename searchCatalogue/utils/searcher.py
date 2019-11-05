@@ -463,7 +463,7 @@ class Searcher:
         # therefore we need to iterate by hand
         pdf_files = []
         for item in response:
-            if keyword in item.get("name", "") and item.get("mime", "") == "application/pdf":
+            if keyword.upper() in item.get("name", "").upper() and item.get("mime", "") == "application/pdf":
                 pdf_files.append(item)
         if results.get(keyword, None) is not None:
             results[keyword] += pdf_files
