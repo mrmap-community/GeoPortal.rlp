@@ -1,13 +1,12 @@
 import threading
 import random
 import string
-import ssl
-
-from urllib import request
 
 import bcrypt
+import requests
 from lxml import html
 from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL
+from Geoportal.utils import utils
 from searchCatalogue.utils.searcher import Searcher
 from useroperations.models import MbUser
 
@@ -15,7 +14,6 @@ from useroperations.models import MbUser
 def random_string(stringLength=15):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
-
 
 
 def __set_tag(dom, tag, attribute, prefix):
@@ -42,10 +40,12 @@ def __set_tag(dom, tag, attribute, prefix):
             elem.set(attribute, prefix + attrib)
 
 def set_links_in_dom(dom):
-    """ Since the wiki (where the DOM comes from) is currently(!!!) not on the same machine as the Geoportal, we need to change all links to the machine where the wiki lives
+    """ Since the wiki (where the DOM comes from) is currently(!!!) not on the same machine as the Geoportal,
+    we need to change all links to the machine where the wiki lives
 
-    :param dom:
-    :return:
+    Args:
+        dom:
+    Returns:
     """
     prefix = HTTP_OR_SSL + HOSTNAME
 
@@ -53,19 +53,8 @@ def set_links_in_dom(dom):
     thread_list = []
     thread_list.append(threading.Thread(target=__set_tag, args=(dom, "a", "href", prefix)))
     thread_list.append(threading.Thread(target=__set_tag, args=(dom, "img", "src", prefix)))
-    __execute_threads(thread_list)
+    utils.execute_threads(thread_list)
 
-
-def __execute_threads(thread_list):
-    """ Executes a given list of threads
-
-    :param thread_list:
-    :return:
-    """
-    for thread in thread_list:
-        thread.start()
-    for thread in thread_list:
-        thread.join()
 
 def get_wiki_body_content(wiki_keyword, lang, category=None):
     """ Returns the HTML body content of the corresponding mediawiki page
@@ -79,9 +68,12 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
     """
     # get mediawiki html
     url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
-    html_raw = request.urlopen(url, context=ssl._create_unverified_context())
-    html_raw = html_raw.read()
-    html_con = html.fromstring(html_raw)
+    html_raw = requests.get(url)
+    if html_raw.status_code != 200:
+        raise FileNotFoundError
+
+    html_con = html.fromstring(html_raw.content)
+
     # get body html div - due to translation module on mediawiki, we need to fetch the parser output
     try:
         body_con = html_con.cssselect(".mw-parser-output")
@@ -91,8 +83,10 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
         return "Error: Check if mediawiki translation package is installed!"
     except TypeError:
         return "Error: mw-parser-output ist not unique"
+
     # set correct src/link for all <img> and <a> tags
     set_links_in_dom(body_con)
+
     # render back to html
     return html.tostring(doc=body_con, method='html', encoding='unicode')
 

@@ -21,7 +21,7 @@ import threading
 from copy import copy
 
 from Geoportal.utils import utils
-from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL
+from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL, INTERNAL_PAGES_CATEGORY
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
@@ -393,7 +393,7 @@ class Searcher:
         }
         resp = self.get_info_result_category(tmp)
         for category in resp:
-            if "Intern" in category.get("title", ""):
+            if INTERNAL_PAGES_CATEGORY in category.get("title", ""):
                 return True
         return False
 
