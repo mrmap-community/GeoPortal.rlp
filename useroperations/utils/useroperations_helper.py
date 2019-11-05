@@ -68,7 +68,7 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
     """
     # get mediawiki html
     url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
-    html_raw = requests.get(url)
+    html_raw = requests.get(url, verify=False)
     if html_raw.status_code != 200:
         raise FileNotFoundError
 
