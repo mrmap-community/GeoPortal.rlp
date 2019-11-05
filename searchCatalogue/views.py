@@ -579,9 +579,7 @@ def get_data_info(request: HttpRequest):
         "sources": viewHelper.get_source_catalogues(False),
     }
     # since we need to return plain text to the ajax handler, we need to use render_to_string
-    #start_time = time.time()
     view_content = render_to_string(template_name, params)
-    #print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
     return GeoportalJsonResponse(html=view_content, params={"directly_open": True}).get_response()
 

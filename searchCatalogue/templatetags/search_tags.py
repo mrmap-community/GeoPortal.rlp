@@ -50,7 +50,7 @@ def remove_translation_suffix(value, arg):
     """
     if arg in value:
         return value.replace("/" + arg, "")
-    return ""
+    return value
 
 
 register.filter("drop_translation", remove_translation_suffix)

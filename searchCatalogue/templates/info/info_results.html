@@ -25,11 +25,11 @@
                 <a href="/mediawiki/index.php/{{ result.title }}" target="_blank">
                 {% endif %}
                 <div class="">
-                    <div class="result--item info-result-header {% if result.is_intern %}info-search-result{% endif %}" data-target="{{ result.title|drop_translation:lang }}" title="{% trans 'Open article' %}">
-                        <span class="info-result-title">{{ result.title|drop_translation:lang }}</span>
+                    <div class="result--item info-result-header {% if result.is_intern %}info-search-result{% endif %}" data-target="{{ result.title|drop_translation:lang }}" title="{% trans 'Open page' %}">
                         {% if not result.is_intern %}
                             <img alt="{% trans 'An arrow pointing out of a box' %}" class="external-link-img" src="{% static 'searchCatalogue/images/icons/icn_open_external.png' %}" title="{% trans 'Link opens in a new tab' %}">
                         {% endif %}
+                        <span class="info-result-title">{{ result.title|drop_translation:lang }}</span>
                     </div>
                 </div>
                 {% if not result.is_intern %}
