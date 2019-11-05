@@ -82,7 +82,7 @@ def index_view(request, wiki_keyword=""):
         # display the wiki article in the template
         try:
             output = useroperations_helper.get_wiki_body_content(wiki_keyword, lang)
-        except error.HTTPError:
+        except (error.HTTPError, FileNotFoundError) as e:
             template = "404.html"
             output = ""
     else:
