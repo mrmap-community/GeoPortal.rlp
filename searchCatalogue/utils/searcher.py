@@ -417,10 +417,16 @@ class Searcher:
                 params_cp["srwhat"] = what
                 # create thread
                 thread_list.append(threading.Thread(target=self.__get_single_info_result, args=(params_cp, results)))
+            thread_list.append(threading.Thread(target=self.get_info_pdf_files, args=(keyword, results)))
         utils.execute_threads(thread_list)
         return results
 
     def get_info_all_pages(self):
+        """ Returns all mediawiki pages directly
+
+        Returns:
+             A dict containing all pages
+        """
         params = {
             "action": "query",
             "list": "allpages",
@@ -433,3 +439,33 @@ class Searcher:
         response = response.json()
         results = response
         return results
+
+    def get_info_pdf_files(self, keyword: str, results: dict):
+        """ Searches for all given
+
+        Args:
+            keyword (str): The keyword, we are looking for
+        Returns:
+             A dict, containing the results
+        """
+        params = {
+            "action": "query",
+            "list": "allimages",
+            "format": "json",
+            "aifrom": "*",
+            "aiprop": "canonicaltitle|mime|url",
+            "ailimit": 500,
+        }
+        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
+        response = response.json().get("query", {}).get("allimages", [])
+
+        # the mediawiki API does not provide a way to fetch directly files with a certain mimeType or even with a title match
+        # therefore we need to iterate by hand
+        pdf_files = []
+        for item in response:
+            if keyword in item.get("name", "") and item.get("mime", "") == "application/pdf":
+                pdf_files.append(item)
+        if results.get(keyword, None) is not None:
+            results[keyword] += pdf_files
+        else:
+            results[keyword] = pdf_files

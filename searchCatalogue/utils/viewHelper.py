@@ -854,6 +854,11 @@ def prepare_info_search_results(search_results, list_all: bool, lang: str):
         for search_result_key, search_result_val in search_results.items():
             ret_list[search_result_key] = []
             for result in search_result_val:
+                if result.get("query", None) is None:
+                    result["title"] = result["canonicaltitle"]
+                    del result["canonicaltitle"]
+                    ret_list[search_result_key].append(result)
+                    continue
                 res = result["query"].get("search", [])
                 if len(res) > 0:
                     for hit in res:
