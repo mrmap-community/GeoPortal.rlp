@@ -1651,12 +1651,13 @@ echo "Mapbender Update Done"
 echo "Updating Geoportal Project"
 cd ${installation_folder}GeoPortal.rlp
 cp -a ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}settings.py_$(date +"%m_%d_%Y")
+cp -a ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}useroperations_conf.py_$(date +"%m_%d_%Y")
 
 git reset --hard
 git pull
 
 cp -a ${installation_folder}settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-
+cp -a ${installation_folder}useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
 
 # copy some scripts that are needed for django mapbender integration
 cp -a ${installation_folder}GeoPortal.rlp/scripts/guiapi.php ${installation_folder}mapbender/http/local
@@ -1765,10 +1766,11 @@ mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbe
 mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/http/extensions/mobilemap2/scripts/
 mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/tools/wms_extent/
 mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/Geoportal/
-
+mkdir -p ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/useroperations/
 
 # Django Backup
 cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/Geoportal/
+cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/GeoPortal.rlp/useroperations/conf.py
 # Mapbender config files
 cp -av ${installation_folder}mapbender/conf/* ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/conf/
 cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/http/extensions/mobilemap2/scripts/
