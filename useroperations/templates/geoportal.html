@@ -28,9 +28,9 @@
         </div>
 
 		{% if mapviewer_params is None %}
-			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ lang }}&gui_id={{ DEFAULT_GUI }}&LAYER[visible]=1&LAYER[querylayer]=1" name="geop_map" width="{{ IFRAME_WIDTH }}px" height="{{ IFRAME_HEIGHT }}px"></iframe>
+			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&gui_id={{ DEFAULT_GUI }}&LAYER[visible]=1&LAYER[querylayer]=1" name="geop_map" width="{{ IFRAME_WIDTH }}px" height="{{ IFRAME_HEIGHT }}px"></iframe>
 		{% else %}
-			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ lang }}&gui_id={{ mapviewer_params }}" name="geop_map" width="{{ IFRAME_WIDTH }}x" height="{{ IFRAME_HEIGHT }}px"></iframe>
+			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&gui_id={{ mapviewer_params }}" name="geop_map" width="{{ IFRAME_WIDTH }}x" height="{{ IFRAME_HEIGHT }}px"></iframe>
 		{% endif %}
 	</div>
 {% endblock %}

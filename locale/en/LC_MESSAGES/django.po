@@ -316,10 +316,8 @@ msgstr ""
 # Navigation items
 #: searchCatalogue/templates/other/search_result.html:20
 #: useroperations/templates/applications.html:64
-#, fuzzy
-#| msgid "Informationen"
 msgid "An organization logo"
-msgstr "Information"
+msgstr ""
 
 #: searchCatalogue/templates/other/search_result.html:24
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
@@ -1053,8 +1051,6 @@ msgstr ""
 
 # Navigation items
 #: useroperations/forms.py:17 useroperations/forms.py:36
-#, fuzzy
-#| msgid "Informationen"
 msgid "Password confirmation."
 msgstr "Information"
 
@@ -1281,10 +1277,8 @@ msgstr ""
 
 # Navigation items
 #: useroperations/templates/inspire_topics.html:45
-#, fuzzy
-#| msgid "Informationen"
 msgid "More information"
-msgstr "Information"
+msgstr "Mehr Information"
 
 #: useroperations/templates/inspire_topics.html:46
 msgid "An information icon, shaped like the letter i"
@@ -1292,8 +1286,6 @@ msgstr ""
 
 # Navigation items
 #: useroperations/templates/inspire_topics.html:47
-#, fuzzy
-#| msgid "Informationen"
 msgid "Information"
 msgstr "Information"
 
@@ -1336,10 +1328,8 @@ msgstr ""
 
 # Navigation items
 #: useroperations/templates/landing_page.html:42
-#, fuzzy
-#| msgid "Informationen"
 msgid "An application icon"
-msgstr "Information"
+msgstr ""
 
 #: useroperations/templates/landing_page.html:47
 msgid "Show all topics"
@@ -1633,17 +1623,21 @@ msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 
 # Navigation items
-#~ msgid "Karten"
-#~ msgstr "Maps"
+msgid "Karten"
+msgstr "Maps"
 
 # Navigation items
-#~ msgid "Hilfe"
-#~ msgstr "Help"
+msgid "Hilfe"
+msgstr "Help"
 
 # Navigation items
-#~ msgid "Meldungen"
-#~ msgstr "News"
+msgid "Meldungen"
+msgstr "News"
 
 # Navigation items
-#~ msgid "Das Geoportal RLP"
-#~ msgstr "Geoportal RLP"
+msgid "Informationen"
+msgstr "Information"
+
+# Navigation items
+msgid "Das Geoportal RLP"
+msgstr "Geoportal RLP"

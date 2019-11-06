@@ -5,7 +5,7 @@ import string
 import bcrypt
 import requests
 from lxml import html
-from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL
+from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, MULTILINGUAL
 from Geoportal.utils import utils
 from searchCatalogue.utils.searcher import Searcher
 from useroperations.models import MbUser
@@ -19,11 +19,13 @@ def random_string(stringLength=15):
 def __set_tag(dom, tag, attribute, prefix):
     """ Checks the DOM for a special tag and changes the attribute according to the provided value
 
-    :param dom:
-    :param tag:
-    :param attribute:
-    :param value:
-    :return:
+    Args:
+        dom: The document object model
+        tag: The tag which we are looking for (e.g. <a>)
+        attribute: The attribute that has to be changed
+        prefix: The 'https://xyz' prefix of a route
+    Returns:
+        Nothing, dom is mutable
     """
     protocol = "http"
     searcher = Searcher()
@@ -38,6 +40,7 @@ def __set_tag(dom, tag, attribute, prefix):
                 attrib = "/article/" + title
         if protocol not in attrib:
             elem.set(attribute, prefix + attrib)
+
 
 def set_links_in_dom(dom):
     """ Since the wiki (where the DOM comes from) is currently(!!!) not on the same machine as the Geoportal,
@@ -67,7 +70,10 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
         str: The html content of the wiki article
     """
     # get mediawiki html
-    url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
+    if MULTILINGUAL:
+        url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
+    else:
+        url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "#bodyContent"
     html_raw = requests.get(url, verify=INTERNAL_SSL)
     if html_raw.status_code != 200:
         raise FileNotFoundError
@@ -91,11 +97,13 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
     return html.tostring(doc=body_con, method='html', encoding='unicode')
 
 
-def get_landing_page(lang):
+def get_landing_page(lang: str):
     """ Returns the landing page content (favourite wmcs)
 
-    :param lang:
-    :return:
+    Args:
+        lang (str): The language for which the data shall be fetched
+    Returns:
+        A dict containing an overview of how many organizations, topics, wmcs, services and so on are available
     """
     ret_dict = {}
     # get favourite wmcs

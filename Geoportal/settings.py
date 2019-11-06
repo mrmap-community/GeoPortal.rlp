@@ -167,12 +167,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-#LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'de'
 LANGUAGES = [
     ('de', _('German')),
     ('en', _('English')),
 ]
+LANGUAGE_CODE = 'de'  # Default language
+MULTILINGUAL = True  # whether to use multiple languages or not
+
 LOCALE_PATHS = [
    os.path.join(BASE_DIR, 'searchCatalogue/locale'),
    os.path.join(BASE_DIR, 'useroperations/locale'),
@@ -180,17 +181,13 @@ LOCALE_PATHS = [
 
 TIME_ZONE = 'UTC'
 
+# These internationalization setting has to be always True
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
 
-# Provide a lists of languages which your site supports.
-LANGUAGES = (
-    ('en', _('English')),
-    ('de', _('German')),
-)
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),

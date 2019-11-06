@@ -6,7 +6,6 @@ Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 
 """
-import json
 import logging
 import smtplib
 import time
@@ -15,7 +14,6 @@ from django.core.mail import send_mail
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
-from django.utils import translation
 from django.utils.translation import gettext as _
 from django_extensions import settings
 
@@ -23,7 +21,7 @@ from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL, SESSION_NAME
 from Geoportal.utils.php_session_data import get_mb_user_session_data
-from Geoportal.utils.utils import write_gml_to_session, print_debug
+from Geoportal.utils.utils import print_debug
 from searchCatalogue.utils import viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher

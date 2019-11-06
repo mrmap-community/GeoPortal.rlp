@@ -888,7 +888,7 @@ msgstr ""
 
 #: templates/base.html:132
 msgid "News"
-msgstr ""
+msgstr "Meldungen"
 
 #: templates/base.html:141 useroperations/templates/landing_page.html:19
 msgid "A lying map"
@@ -1693,15 +1693,3 @@ msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
-
-#~ msgid "Old password"
-#~ msgstr "Altes Passwort"
-
-# msgid "Activation Mail"
-# msgstr "Aktivierungsmail"
-# msgid "Hello "
-# msgstr "Hallo"
-# msgid "Lost Password"
-# msgstr "Passwort vergessen"
-#~ msgid "This is your new password, please change it immediately!"
-#~ msgstr "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich"
