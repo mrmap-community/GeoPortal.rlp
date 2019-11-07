@@ -33,10 +33,12 @@
 
 <div class="header">
     <div class="upper-header">
+        {% if MULTILINGUAL %}
         <div class="language-selector-wrapper">
             <img alt="{% trans 'The german flag, indicating the german language' %}" class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
             <img alt="{% trans 'The United Kingdoms`s flag, indicating the english language' %}" class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
         </div>
+        {% endif %}
     </div>
     <div class="left-header">
         <a href="/"><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>

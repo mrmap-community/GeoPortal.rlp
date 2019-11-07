@@ -6,9 +6,9 @@
 
 	<div class="mapbender">
 		{% if mapviewer_params is None %}
-			<iframe id="mapviewer-external" frameborder="no" src="about:blank" data-params="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ lang }}&mb_user_myGui={{ DEFAULT_GUI }}&LAYER[visible]=1&LAYER[querylayer]=1" name="geop_map"></iframe>
+			<iframe id="mapviewer-external" frameborder="no" src="about:blank" data-params="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&mb_user_myGui={{ DEFAULT_GUI }}&LAYER[visible]=1&LAYER[querylayer]=1" name="geop_map"></iframe>
 		{% else %}
-			<iframe id="mapviewer-external" frameborder="no" src="{{ mapviewer_src }}" data-params="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ lang }}&mb_user_myGui={{ mapviewer_params }}" name="geop_map"></iframe>
+			<iframe id="mapviewer-external" frameborder="no" src="{{ mapviewer_src }}" data-params="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&mb_user_myGui={{ mapviewer_params }}" name="geop_map"></iframe>
 		{% endif %}
 	</div>
 

@@ -13,12 +13,12 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import ROOT_EMAIL_ADDRESS, DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, SESSION_NAME, PROJECT_DIR
+from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, \
+    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.utils import useroperations_helper
@@ -54,21 +54,29 @@ def index_view(request, wiki_keyword=""):
     """
 
     request.session["current_page"] = "index"
-    lang = request.LANGUAGE_CODE
+    if MULTILINGUAL:
+        lang = request.LANGUAGE_CODE
+    else:
+        lang = LANGUAGE_CODE
     get_params = request.GET.dict()
     dsgvo_list = ["Datenschutz", "Kontakt", "Impressum", "Rechtshinweis", "Transparenzgesetz"]
 
     output = ""
     results = []
 
+    # In a first run, we check if the mapbender login has worked, which is indicated by a 'status' GET parameter.
+    # Since this is not nice to have in your address bar, we exchange the GET parameter with a pretty message for the user
+    # and reload the same route simply again to get rid of the GET parameter.
     if request.method == 'GET' and 'status' in request.GET:
         if request.GET['status'] == "fail":
             messages.error(request, _("Login failed"))
             return redirect('useroperations:login')
         elif request.GET['status'] == "success":
             messages.success(request, _("Successfully logged in"))
+            return redirect('useroperations:index')
         elif request.GET['status'] == "notactive":
             messages.error(request, _("Account not active"))
+            return redirect('useroperations:index')
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
@@ -78,16 +86,16 @@ def index_view(request, wiki_keyword=""):
     if wiki_keyword == "viewer":
         template = "geoportal.html"
     elif wiki_keyword != "":
-        template = "wiki.html"
         # display the wiki article in the template
+        template = "wiki.html"
         try:
             output = useroperations_helper.get_wiki_body_content(wiki_keyword, lang)
         except (error.HTTPError, FileNotFoundError) as e:
             template = "404.html"
             output = ""
     else:
-        template = "landing_page.html"
         # display the favourite WMCs in the template
+        template = "landing_page.html"
         results = useroperations_helper.get_landing_page(lang)
 
     context = {
@@ -103,6 +111,7 @@ def index_view(request, wiki_keyword=""):
         return GeoportalJsonResponse(html=output).get_response()
     else:
         return render(request, template, geoportal_context.get_context())
+
 
 @check_browser
 def applications_view(request: HttpRequest):
@@ -122,6 +131,7 @@ def applications_view(request: HttpRequest):
     template = "applications.html"
     geoportal_context.add_context(params)
     return render(request, template, geoportal_context.get_context())
+
 
 @check_browser
 def organizations_view(request: HttpRequest):
@@ -514,7 +524,6 @@ def change_profile_view(request):
                 user.create_digest = form.cleaned_data['create_digest']
                 user.fkey_preferred_gui_id = form.cleaned_data['preferred_gui']
 
-
                 if form.cleaned_data['dsgvo'] == True:
                     user.timestamp_dsgvo_accepted = time.time()
                     # set session variable dsgvo via session wrapper php script
@@ -523,7 +532,6 @@ def change_profile_view(request):
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME) +'&operation=set&key=dsgvo&value=false', verify=INTERNAL_SSL)
                     user.timestamp_dsgvo_accepted = None
 
-                    
                 if form.cleaned_data['preferred_gui'] == 'Geoportal-RLP_2019':
                     # set session variable preferred_gui via session wrapper php script
                     response = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_sessionWrapper.php?sessionId='+request.COOKIES.get(SESSION_NAME)+'&operation=set&key=preferred_gui&value=Geoportal-RLP_2019', verify=INTERNAL_SSL)
@@ -738,7 +746,6 @@ def map_viewer_view(request):
             if request_get_params_key == "WMS":
                 continue
             request_get_params["WMS"] += "&" + request_get_params_key + "=" + request_get_params_val
-
 
     mapviewer_params_dict = {
         "LAYER[id]": request_get_params.get("LAYER[id]", None),
@@ -955,6 +962,7 @@ def open_linked_data(request: HttpRequest):
 
     geoportal_context = GeoportalContext(request=request)
     return render(request=request, context=geoportal_context.get_context(), template_name=template)
+
 
 def incompatible_browser(request: HttpRequest):
     """ Renders a template about how the user's browser is a filthy peasants tool.
