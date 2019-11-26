@@ -12,7 +12,7 @@ import requests
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
@@ -978,3 +978,17 @@ def incompatible_browser(request: HttpRequest):
 
     }
     return render(request, template_name=template, context=params)
+
+
+def handle500(request: HttpRequest, template_name="500.html"):
+    """ Handles a 404 page not found error using a custom template
+
+    Args:
+        request:
+        exception:
+        template_name:
+    Returns:
+    """
+    response = render_to_response(template_name, GeoportalContext(request).get_context())
+    response.status_code = 500
+    return response

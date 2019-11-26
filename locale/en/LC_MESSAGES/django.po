@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 11:44+0000\n"
+"POT-Creation-Date: 2019-11-07 06:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: Geoportal/geoportalObjects.py:65
+#: Geoportal/geoportalObjects.py:66
 msgid "Modern"
 msgstr ""
 
-#: Geoportal/geoportalObjects.py:66
+#: Geoportal/geoportalObjects.py:67
 msgid "Klassik"
 msgstr ""
 
-#: Geoportal/geoportalObjects.py:67
+#: Geoportal/geoportalObjects.py:68
 msgid "Mobil"
 msgstr ""
 
-#: Geoportal/settings.py:172 Geoportal/settings.py:191
+#: Geoportal/settings.py:171
 msgid "German"
 msgstr ""
 
-#: Geoportal/settings.py:173 Geoportal/settings.py:190
+#: Geoportal/settings.py:172
 msgid "English"
 msgstr ""
 
@@ -54,8 +54,8 @@ msgstr ""
 msgid "Inspire Download"
 msgstr ""
 
-#: resourceManager/views.py:138 useroperations/views.py:305
-#: useroperations/views.py:395 useroperations/views.py:627
+#: resourceManager/views.py:138 useroperations/views.py:317
+#: useroperations/views.py:407 useroperations/views.py:637
 msgid "Hello "
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Is filtered"
 msgstr ""
 
-#: searchCatalogue/templates/facets.html:43 templates/base.html:48
+#: searchCatalogue/templates/facets.html:43 templates/base.html:50
 msgid "A magnifying glass"
 msgstr ""
 
@@ -128,6 +128,7 @@ msgstr ""
 
 #: searchCatalogue/templates/hits_and_sort_option.html:49
 #: searchCatalogue/templates/hits_and_sort_option.html:51
+#: searchCatalogue/templates/primary/application/application_search_result.html:39
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:39
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:28
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:36
@@ -148,27 +149,27 @@ msgid "Insert search term here"
 msgstr ""
 
 #: searchCatalogue/templates/index.html:47
-#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:90
+#: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:88
 msgid "Search"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:52 templates/base.html:54
+#: searchCatalogue/templates/index.html:52 templates/base.html:56
 msgid "Spatial Filter"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:53 templates/base.html:55
+#: searchCatalogue/templates/index.html:53 templates/base.html:57
 msgid "Use spatial filter"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:60 templates/base.html:37
+#: searchCatalogue/templates/index.html:61 templates/base.html:38
 msgid "The german flag, indicating the german language"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:61 templates/base.html:38
+#: searchCatalogue/templates/index.html:62 templates/base.html:39
 msgid "The United Kingdoms`s flag, indicating the english language"
 msgstr ""
 
-#: searchCatalogue/templates/index.html:88
+#: searchCatalogue/templates/index.html:90
 msgid "Extended Search"
 msgstr ""
 
@@ -181,14 +182,14 @@ msgid "All articles"
 msgstr ""
 
 #: searchCatalogue/templates/info/info_results.html:28
-msgid "Open article"
+msgid "Open page"
 msgstr ""
 
-#: searchCatalogue/templates/info/info_results.html:31
+#: searchCatalogue/templates/info/info_results.html:30
 msgid "An arrow pointing out of a box"
 msgstr ""
 
-#: searchCatalogue/templates/info/info_results.html:31
+#: searchCatalogue/templates/info/info_results.html:30
 msgid "Link opens in a new tab"
 msgstr ""
 
@@ -202,7 +203,8 @@ msgstr ""
 
 #: searchCatalogue/templates/other/application/application_category.html:6
 #: searchCatalogue/templates/other/application/application_category.html:7
-#: searchCatalogue/views.py:280 useroperations/templates/applications.html:5
+#: searchCatalogue/views.py:278 searchCatalogue/views.py:370
+#: useroperations/templates/applications.html:5
 #: useroperations/templates/applications.html:16
 #: useroperations/templates/landing_page.html:42
 #: useroperations/templates/landing_page.html:43
@@ -214,6 +216,7 @@ msgstr ""
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:32
 #: searchCatalogue/templates/other/series/series_category.html:32
 #: searchCatalogue/templates/other/service/service_category.html:32
+#: searchCatalogue/templates/primary/application/application_category.html:39
 #: searchCatalogue/templates/primary/dataset/dataset_category.html:39
 #: searchCatalogue/templates/primary/wfs/wfs_category.html:40
 #: searchCatalogue/templates/primary/wmc/wmc_category.html:38
@@ -221,13 +224,15 @@ msgid "No results found, please use another search term..."
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:5
+#: searchCatalogue/templates/primary/application/application_search_result.html:17
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:17
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:18
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:17
 #: searchCatalogue/templates/search_result_actions.html:9
 #: searchCatalogue/templates/search_result_actions.html:21
-#: searchCatalogue/templates/search_result_actions.html:43
+#: searchCatalogue/templates/search_result_actions.html:27
 #: searchCatalogue/templates/search_result_actions.html:48
+#: searchCatalogue/templates/search_result_actions.html:53
 #: useroperations/templates/landing_page.html:74
 msgid "An eye icon"
 msgstr ""
@@ -235,18 +240,19 @@ msgstr ""
 #: searchCatalogue/templates/other/coupled_resources.html:6
 #: searchCatalogue/templates/search_result_actions.html:10
 #: searchCatalogue/templates/search_result_actions.html:22
-#: searchCatalogue/templates/search_result_actions.html:44
+#: searchCatalogue/templates/search_result_actions.html:28
 #: searchCatalogue/templates/search_result_actions.html:49
+#: searchCatalogue/templates/search_result_actions.html:54
 msgid "Show"
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:11
 #: searchCatalogue/templates/other/coupled_resources.html:48
 #: searchCatalogue/templates/search_result_actions.html:15
-#: searchCatalogue/templates/search_result_actions.html:30
-#: searchCatalogue/templates/search_result_actions.html:38
-#: searchCatalogue/templates/search_result_actions.html:90
-#: searchCatalogue/templates/search_result_actions.html:122
+#: searchCatalogue/templates/search_result_actions.html:35
+#: searchCatalogue/templates/search_result_actions.html:43
+#: searchCatalogue/templates/search_result_actions.html:95
+#: searchCatalogue/templates/search_result_actions.html:127
 msgid "A download icon"
 msgstr ""
 
@@ -254,20 +260,20 @@ msgstr ""
 #: searchCatalogue/templates/other/coupled_resources.html:37
 #: searchCatalogue/templates/other/coupled_resources.html:44
 #: searchCatalogue/templates/search_result_actions.html:16
-#: searchCatalogue/templates/search_result_actions.html:31
-#: searchCatalogue/templates/search_result_actions.html:39
-#: searchCatalogue/templates/search_result_actions.html:104
-#: searchCatalogue/templates/search_result_actions.html:122
+#: searchCatalogue/templates/search_result_actions.html:36
+#: searchCatalogue/templates/search_result_actions.html:44
+#: searchCatalogue/templates/search_result_actions.html:109
+#: searchCatalogue/templates/search_result_actions.html:127
 msgid "Download"
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:43
-#: searchCatalogue/templates/search_result_actions.html:86
+#: searchCatalogue/templates/search_result_actions.html:91
 msgid "Original atom feed"
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
-#: searchCatalogue/templates/search_result_actions.html:87
+#: searchCatalogue/templates/search_result_actions.html:92
 #: useroperations/templates/inspire_topics.html:36
 msgid "A document icon"
 msgstr ""
@@ -282,6 +288,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/series/series_category.html:6
+#: searchCatalogue/templates/primary/application/application_category.html:7
 #: searchCatalogue/templates/primary/dataset/dataset_category.html:7
 #: useroperations/templates/landing_page.html:26
 msgid "A stylized globe"
@@ -289,8 +296,8 @@ msgstr ""
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/dataset/dataset_category.html:7
-#: searchCatalogue/views.py:271 searchCatalogue/views.py:277
-#: searchCatalogue/views.py:368 useroperations/templates/landing_page.html:26
+#: searchCatalogue/views.py:269 searchCatalogue/views.py:275
+#: searchCatalogue/views.py:366 useroperations/templates/landing_page.html:26
 #: useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr ""
@@ -301,11 +308,12 @@ msgstr ""
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:7
-#: searchCatalogue/views.py:281
+#: searchCatalogue/views.py:279
 msgid "Miscellaneous Datasets"
 msgstr ""
 
 #: searchCatalogue/templates/other/search_result.html:19
+#: searchCatalogue/templates/primary/application/application_search_result.html:24
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:24
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:17
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:25
@@ -320,6 +328,7 @@ msgid "An organization logo"
 msgstr ""
 
 #: searchCatalogue/templates/other/search_result.html:24
+#: searchCatalogue/templates/primary/application/application_search_result.html:28
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:21
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:29
@@ -328,6 +337,8 @@ msgid "Date of metadata"
 msgstr ""
 
 #: searchCatalogue/templates/other/search_result.html:25
+#: searchCatalogue/templates/primary/application/application_search_result.html:29
+#: searchCatalogue/templates/primary/application/application_search_result.html:33
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:29
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:33
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:22
@@ -338,7 +349,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/series/series_category.html:6
 #: searchCatalogue/templates/other/series/series_category.html:7
-#: searchCatalogue/views.py:272 searchCatalogue/views.py:278
+#: searchCatalogue/views.py:270 searchCatalogue/views.py:276
 msgid "Series"
 msgstr ""
 
@@ -348,7 +359,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
-#: searchCatalogue/views.py:273 searchCatalogue/views.py:279
+#: searchCatalogue/views.py:271 searchCatalogue/views.py:277
 msgid "Services"
 msgstr ""
 
@@ -379,20 +390,23 @@ msgid "Cancel"
 msgstr ""
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:887 useroperations/views.py:898
+#: useroperations/views.py:905 useroperations/views.py:916
 msgid "Send"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:3
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:3
 msgid "Open metadata for"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:16
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:16
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:17
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:16
 msgid "Total view count"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:25
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:25
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:18
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:26
@@ -401,14 +415,17 @@ msgstr ""
 msgid "An organization icon"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:32
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:32
 msgid "Time of metadata"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:34
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:34
 msgid "to"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:43
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
@@ -417,6 +434,7 @@ msgid ""
 "A fingerprint icon, which indicates that this service usage will be logged"
 msgstr ""
 
+#: searchCatalogue/templates/primary/application/application_search_result.html:43
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
@@ -584,47 +602,47 @@ msgstr ""
 msgid "GeoRSS Newsfeeds"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:60
+#: searchCatalogue/templates/search_result_actions.html:65
 msgid "Compilations"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:78
+#: searchCatalogue/templates/search_result_actions.html:83
 #: searchCatalogue/templates/search_result_list_entry.html:4
 #: useroperations/templates/applications.html:72
 #: useroperations/templates/applications.html:74
 msgid "Metadata"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:89
+#: searchCatalogue/templates/search_result_actions.html:94
 msgid "Open in atom feed viewer"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:116
+#: searchCatalogue/templates/search_result_actions.html:121
 msgid "Download services"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:120
+#: searchCatalogue/templates/search_result_actions.html:125
 #: useroperations/templates/inspire_topics.html:41
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:132
+#: searchCatalogue/templates/search_result_actions.html:137
 msgid "Layers"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:156
+#: searchCatalogue/templates/search_result_actions.html:161
 msgid "A key above an envelope"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:156
+#: searchCatalogue/templates/search_result_actions.html:161
 msgid "Ask data provider for permission"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:159
+#: searchCatalogue/templates/search_result_actions.html:164
 msgid "A black closed padlock"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:159
+#: searchCatalogue/templates/search_result_actions.html:164
 msgid "Only for registered users"
 msgstr ""
 
@@ -730,39 +748,39 @@ msgstr ""
 msgid "Hits per Page:"
 msgstr ""
 
-#: searchCatalogue/views.py:369 useroperations/templates/landing_page.html:19
+#: searchCatalogue/views.py:367 useroperations/templates/landing_page.html:19
 msgid "Web Map Services"
 msgstr ""
 
-#: searchCatalogue/views.py:370
+#: searchCatalogue/views.py:368
 msgid "Search-, Download-,Gathering-modules"
 msgstr ""
 
-#: searchCatalogue/views.py:371
+#: searchCatalogue/views.py:369
 msgid "Map Combinations"
 msgstr ""
 
-#: searchCatalogue/views.py:607
+#: searchCatalogue/views.py:604
 msgid "Send permission request"
 msgstr ""
 
-#: searchCatalogue/views.py:608
+#: searchCatalogue/views.py:605
 msgid "[Geoportal.RLP] Permission request for "
 msgstr ""
 
-#: searchCatalogue/views.py:609
+#: searchCatalogue/views.py:606
 msgid ""
 "Please give me permission to view the resource \n"
 "'"
 msgstr ""
 
-#: searchCatalogue/views.py:610
+#: searchCatalogue/views.py:607
 msgid ""
 "'\n"
 " It has the ID "
 msgstr ""
 
-#: searchCatalogue/views.py:611
+#: searchCatalogue/views.py:608
 msgid ""
 ".\n"
 "\n"
@@ -784,151 +802,176 @@ msgid ""
 "administrator."
 msgstr ""
 
-#: templates/base.html:42 useroperations/templates/landing_page.html:95
+#: templates/500.html:12
+msgid "Maintenance ongoing"
+msgstr ""
+
+#: templates/500.html:14 templates/unsupported_browser.html:13
+msgid "Dear Visitor,"
+msgstr ""
+
+#: templates/500.html:15
+msgid "we are currently working on the Geoportal."
+msgstr ""
+
+#: templates/500.html:16
+msgid "The service will be back as fast as possible."
+msgstr ""
+
+#: templates/500.html:18
+msgid "Helpdesk contact:"
+msgstr ""
+
+#: templates/500.html:20 templates/unsupported_browser.html:20
+msgid "Thank you for your understanding!"
+msgstr ""
+
+#: templates/500.html:25 templates/base.html:238
+#: templates/unsupported_browser.html:25
+msgid "The logo of Geoportal Rhineland-Palatinate"
+msgstr ""
+
+#: templates/base.html:44 useroperations/templates/landing_page.html:95
 msgid "Logo of the spatial data infrastructure organization"
 msgstr ""
 
-#: templates/base.html:46
+#: templates/base.html:48
 msgid "Search term"
 msgstr ""
 
-#: templates/base.html:71
+#: templates/base.html:73
 msgid "A lying map icon"
 msgstr ""
 
-#: templates/base.html:71
+#: templates/base.html:73
 msgid "Open and close map viewer"
 msgstr ""
 
-#: templates/base.html:77
+#: templates/base.html:79
 msgid "Three horizontal lines, one below the other"
 msgstr ""
 
-#: templates/base.html:77
+#: templates/base.html:79
 msgid "Open and close menu"
 msgstr ""
 
-#: templates/base.html:81
+#: templates/base.html:83
 msgid "Menu"
 msgstr ""
 
-#: templates/base.html:87
+#: templates/base.html:89
 msgid "A stylized house"
 msgstr ""
 
-#: templates/base.html:90
+#: templates/base.html:92
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:98
+#: templates/base.html:100
 msgid "A filled stylized person shape in a circle"
 msgstr ""
 
-#: templates/base.html:100
+#: templates/base.html:102
 msgid "An empty stylized person shape in a circle"
 msgstr ""
 
-#: templates/base.html:107
+#: templates/base.html:109
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:113
+#: templates/base.html:115
 msgid "Hello"
 msgstr ""
 
-#: templates/base.html:114
+#: templates/base.html:116
 msgid "Change Profile"
 msgstr ""
 
-#: templates/base.html:115 useroperations/templates/show_abo.html:5
+#: templates/base.html:117 useroperations/templates/show_abo.html:5
 msgid "Show subscription"
 msgstr ""
 
-#: templates/base.html:116
+#: templates/base.html:118
 msgid "Logout"
 msgstr ""
 
-#: templates/base.html:118
+#: templates/base.html:120
 msgid "Not signed in"
 msgstr ""
 
-#: templates/base.html:119 useroperations/views.py:191
-#: useroperations/views.py:197
+#: templates/base.html:121 useroperations/views.py:203
+#: useroperations/views.py:209
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:120 useroperations/views.py:221
-#: useroperations/views.py:233 useroperations/views.py:276
-#: useroperations/views.py:336
+#: templates/base.html:122 useroperations/views.py:233
+#: useroperations/views.py:245 useroperations/views.py:288
+#: useroperations/views.py:348
 msgid "Registration"
 msgstr ""
 
-#: templates/base.html:121
+#: templates/base.html:123
 msgid "Reset Password"
 msgstr ""
 
-#: templates/base.html:130
+#: templates/base.html:132
 msgid "A newspaper"
 msgstr ""
 
-#: templates/base.html:132
+#: templates/base.html:134
 msgid "News"
 msgstr ""
 
-#: templates/base.html:141 useroperations/templates/landing_page.html:19
+#: templates/base.html:143 useroperations/templates/landing_page.html:19
 msgid "A lying map"
 msgstr ""
 
-#: templates/base.html:144
+#: templates/base.html:146
 msgid "Mapviewer"
 msgstr ""
 
-#: templates/base.html:153
+#: templates/base.html:155
 msgid "A navigation menu icon"
 msgstr ""
 
-#: templates/base.html:210
+#: templates/base.html:212
 msgid "State coat of arms of Rhineland-Palatinate"
 msgstr ""
 
-#: templates/base.html:215
+#: templates/base.html:217
 msgid "Contact"
 msgstr ""
 
-#: templates/base.html:216
+#: templates/base.html:218
 msgid "Legal Disclosure"
 msgstr ""
 
-#: templates/base.html:217
+#: templates/base.html:219
 msgid "Privacy"
 msgstr ""
 
-#: templates/base.html:218
+#: templates/base.html:220
 msgid "Legal Notice"
 msgstr ""
 
-#: templates/base.html:219
+#: templates/base.html:221
 msgid "Transparency law"
 msgstr ""
 
-#: templates/base.html:225
+#: templates/base.html:227
 msgid "Signal waves emerging from a single point"
 msgstr ""
 
-#: templates/base.html:225 templates/base.html:226
+#: templates/base.html:227 templates/base.html:228
 msgid "RSS Newsfeed"
 msgstr ""
 
-#: templates/base.html:229
+#: templates/base.html:231
 msgid "A white stylized bird in front of a blue background"
 msgstr ""
 
-#: templates/base.html:229 templates/base.html:230
+#: templates/base.html:231 templates/base.html:232
 msgid "Twitter"
-msgstr ""
-
-#: templates/base.html:236 templates/unsupported_browser.html:25
-msgid "The logo of Geoportal Rhineland-Palatinate"
 msgstr ""
 
 #: templates/cookie_banner.html:7
@@ -964,10 +1007,6 @@ msgstr ""
 msgid "Unsupported browser detected"
 msgstr ""
 
-#: templates/unsupported_browser.html:13
-msgid "Dear Visitor,"
-msgstr ""
-
 #: templates/unsupported_browser.html:14
 msgid ""
 "you are using a not supported browser. For the best user experience and for "
@@ -984,10 +1023,6 @@ msgstr ""
 
 #: templates/unsupported_browser.html:17
 msgid "Compatibility"
-msgstr ""
-
-#: templates/unsupported_browser.html:20
-msgid "Thank you for your understanding!"
 msgstr ""
 
 #: useroperations/forms.py:8
@@ -1403,202 +1438,202 @@ msgstr ""
 msgid "Published wmcs"
 msgstr ""
 
-#: useroperations/views.py:66
+#: useroperations/views.py:72
 msgid "Login failed"
 msgstr ""
 
-#: useroperations/views.py:69
+#: useroperations/views.py:75
 msgid "Successfully logged in"
 msgstr ""
 
-#: useroperations/views.py:71
+#: useroperations/views.py:78
 msgid "Account not active"
 msgstr ""
 
-#: useroperations/views.py:190
+#: useroperations/views.py:202
 msgid "Forgot Password?"
 msgstr ""
 
-#: useroperations/views.py:229
+#: useroperations/views.py:241
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:243
+#: useroperations/views.py:255
 msgid "Log out to register a new user"
 msgstr ""
 
-#: useroperations/views.py:251
+#: useroperations/views.py:263
 msgid "The Username"
 msgstr ""
 
-#: useroperations/views.py:251
+#: useroperations/views.py:263
 msgid "is already taken"
 msgstr ""
 
-#: useroperations/views.py:255
+#: useroperations/views.py:267
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
 "characters, allowed special chars are: @#$%&+=!"
 msgstr ""
 
-#: useroperations/views.py:282 useroperations/views.py:501
+#: useroperations/views.py:294 useroperations/views.py:513
 msgid "Passwords do not match"
 msgstr ""
 
-#: useroperations/views.py:304
+#: useroperations/views.py:316
 msgid "Activation Mail"
 msgstr ""
 
-#: useroperations/views.py:307
+#: useroperations/views.py:319
 msgid ""
 "This is your activation link. It will be valid until the end of the day, "
 "please click it!"
 msgstr ""
 
-#: useroperations/views.py:328
+#: useroperations/views.py:340
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
 msgstr ""
 
-#: useroperations/views.py:342 useroperations/views.py:883
+#: useroperations/views.py:354 useroperations/views.py:901
 msgid "Captcha was wrong! Please try again"
 msgstr ""
 
-#: useroperations/views.py:366
+#: useroperations/views.py:378
 msgid "Submit"
 msgstr ""
 
-#: useroperations/views.py:382
+#: useroperations/views.py:394
 msgid "No Account with this Username or Email found"
 msgstr ""
 
-#: useroperations/views.py:394
+#: useroperations/views.py:406
 msgid "Lost Password"
 msgstr ""
 
-#: useroperations/views.py:397
+#: useroperations/views.py:409
 msgid ""
 "This is your new password, please change it immediately!\n"
 " Password: "
 msgstr ""
 
-#: useroperations/views.py:404
+#: useroperations/views.py:416
 msgid "Password reset was successful, check your mails."
 msgstr ""
 
-#: useroperations/views.py:444
+#: useroperations/views.py:456
 msgid "The user could not be found. Please contact an administrator!"
 msgstr ""
 
-#: useroperations/views.py:468
+#: useroperations/views.py:480
 msgid ""
 "Please accept the General Data Protection Regulation or delete your account!"
 msgstr ""
 
-#: useroperations/views.py:479
+#: useroperations/views.py:491
 msgid "Your old Password was wrong"
 msgstr ""
 
-#: useroperations/views.py:494
+#: useroperations/views.py:506
 msgid "Your current password was wrong"
 msgstr ""
 
-#: useroperations/views.py:505
+#: useroperations/views.py:517
 msgid ""
 "For changing your password, you have to enter your current password as well."
 msgstr ""
 
-#: useroperations/views.py:534
+#: useroperations/views.py:544
 msgid "Successfully changed data"
 msgstr ""
 
-#: useroperations/views.py:543
+#: useroperations/views.py:553
 msgid "Save"
 msgstr ""
 
-#: useroperations/views.py:544
+#: useroperations/views.py:554
 msgid "Delete Profile"
 msgstr ""
 
-#: useroperations/views.py:551
+#: useroperations/views.py:561
 msgid "Change data"
 msgstr ""
 
-#: useroperations/views.py:583
+#: useroperations/views.py:593
 msgid "Delete Profile!"
 msgstr ""
 
-#: useroperations/views.py:587
+#: useroperations/views.py:597
 msgid "Delete Profile?"
 msgstr ""
 
-#: useroperations/views.py:600 useroperations/views.py:676
+#: useroperations/views.py:610 useroperations/views.py:686
 msgid "You are not logged in"
 msgstr ""
 
-#: useroperations/views.py:610
+#: useroperations/views.py:620
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:613
+#: useroperations/views.py:623
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:616
+#: useroperations/views.py:626
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
 msgstr ""
 
-#: useroperations/views.py:626
+#: useroperations/views.py:636
 msgid "Reactivation Mail"
 msgstr ""
 
-#: useroperations/views.py:629
+#: useroperations/views.py:639
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
 msgstr ""
 
-#: useroperations/views.py:637
+#: useroperations/views.py:647
 msgid "Successfully deleted the user:"
 msgstr ""
 
-#: useroperations/views.py:639
+#: useroperations/views.py:649
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
 msgstr ""
 
-#: useroperations/views.py:644
+#: useroperations/views.py:654
 msgid "Password invalid. Profile not deleted."
 msgstr ""
 
-#: useroperations/views.py:673
+#: useroperations/views.py:683
 msgid "Successfully logged out"
 msgstr ""
 
-#: useroperations/views.py:809
+#: useroperations/views.py:827
 msgid "Account already active"
 msgstr ""
 
-#: useroperations/views.py:814
+#: useroperations/views.py:832
 msgid "Invalid data"
 msgstr ""
 
-#: useroperations/views.py:826
+#: useroperations/views.py:844
 msgid "Account activation"
 msgstr ""
 
-#: useroperations/views.py:854
+#: useroperations/views.py:872
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1606,19 +1641,19 @@ msgid ""
 "Further information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:861
+#: useroperations/views.py:879
 msgid "Feedback sent. Thank you!"
 msgstr ""
 
-#: useroperations/views.py:870
+#: useroperations/views.py:888
 msgid "Geoportal Feedback"
 msgstr ""
 
-#: useroperations/views.py:871
+#: useroperations/views.py:889
 msgid "Feedback from "
 msgstr ""
 
-#: useroperations/views.py:880
+#: useroperations/views.py:898
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 

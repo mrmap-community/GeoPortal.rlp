@@ -29,3 +29,5 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
+
+handler500 = "useroperations.views.handle500"
