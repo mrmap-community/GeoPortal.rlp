@@ -4,6 +4,7 @@ import re
 import smtplib
 import time
 import urllib.parse
+from collections import OrderedDict
 from pprint import pprint
 from urllib import error
 
@@ -150,8 +151,14 @@ def organizations_view(request: HttpRequest):
 
     template = "publishing_organizations.html"
     geoportal_context = GeoportalContext(request)
+    order_by_options = OrderedDict()
+    order_by_options["rank"] = _("Relevance")
+    order_by_options["title"] = _("Alphabetically")
+
     context = {
-        "organizations": useroperations_helper.get_all_organizations()
+        "organizations": useroperations_helper.get_all_organizations(),
+        "order_by_options": order_by_options,
+        "default_order": order_by_options.get("rank"),
     }
     geoportal_context.add_context(context)
     return render(request, template, geoportal_context.get_context())
