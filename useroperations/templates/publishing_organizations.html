@@ -24,15 +24,16 @@
     </div>
     <div class="options-right">
         <div class="tile-list-wrapper">
+            <img class="tile-list-toggler-img" src="{% static 'useroperations/images/icn_list.png' %}">
             <label class="switch">
-              <input type="checkbox">
+              <input {%if LISTED_VIEW_AS_DEFAULT %} checked="checked" {% endif %} type="checkbox">
               <span class="slider round"></span>
             </label>
         </div>
         <div class="tile-order-wrapper select-wrapper">
             <select class="tile-filter-order" title="{% trans 'Order by' %}">
                 {% for val, title in order_by_options.items %}
-                    <option class="tile-filter-order-option" value="{{ val }}" {% if title == default_order %} selected="selected" {% endif %}>{{ title }}</option>
+                    <option class="tile-filter-order-option" value="{{ val }}" {% if val == ORDER_BY_DEFAULT %} selected="selected" {% endif %}>{{ title }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -74,9 +75,9 @@
                         </div>
                     </div>
                     <hr>
-                    <span class="tile-content-abstract-text">
+                    <div class="tile-content-abstract-text">
                         {{ result.description|safe }}
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>

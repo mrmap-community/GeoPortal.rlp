@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-07 06:21+0000\n"
+"POT-Creation-Date: 2019-12-16 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,8 +54,8 @@ msgstr ""
 msgid "Inspire Download"
 msgstr ""
 
-#: resourceManager/views.py:138 useroperations/views.py:317
-#: useroperations/views.py:407 useroperations/views.py:637
+#: resourceManager/views.py:138 useroperations/views.py:334
+#: useroperations/views.py:424 useroperations/views.py:654
 msgid "Hello "
 msgstr ""
 
@@ -68,9 +68,9 @@ msgid "Resource types"
 msgstr ""
 
 #: searchCatalogue/templates/facets.html:41
-#: useroperations/templates/applications.html:20
-#: useroperations/templates/inspire_topics.html:15
-#: useroperations/templates/publishing_organizations.html:16
+#: useroperations/templates/applications.html:25
+#: useroperations/templates/inspire_topics.html:20
+#: useroperations/templates/publishing_organizations.html:21
 msgid "Filter by"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 #: searchCatalogue/templates/other/application/application_category.html:7
 #: searchCatalogue/views.py:278 searchCatalogue/views.py:370
 #: useroperations/templates/applications.html:5
-#: useroperations/templates/applications.html:16
+#: useroperations/templates/applications.html:18
 #: useroperations/templates/landing_page.html:42
 #: useroperations/templates/landing_page.html:43
 msgid "Applications"
@@ -274,7 +274,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
 #: searchCatalogue/templates/search_result_actions.html:92
-#: useroperations/templates/inspire_topics.html:36
+#: useroperations/templates/inspire_topics.html:57
 msgid "A document icon"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 
 # Navigation items
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:64
+#: useroperations/templates/applications.html:86
 msgid "An organization logo"
 msgstr ""
 
@@ -390,7 +390,7 @@ msgid "Cancel"
 msgstr ""
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:905 useroperations/views.py:916
+#: useroperations/views.py:922 useroperations/views.py:933
 msgid "Send"
 msgstr ""
 
@@ -476,7 +476,8 @@ msgstr ""
 msgid "Demand"
 msgstr ""
 
-#: searchCatalogue/templates/search_forms.html:15
+#: searchCatalogue/templates/search_forms.html:15 useroperations/views.py:130
+#: useroperations/views.py:162 useroperations/views.py:190
 msgid "Alphabetically"
 msgstr ""
 
@@ -497,7 +498,7 @@ msgid "When?"
 msgstr ""
 
 #: searchCatalogue/templates/search_forms.html:28
-#: useroperations/templates/inspire_topics.html:11
+#: useroperations/templates/inspire_topics.html:13
 msgid "Topics"
 msgstr ""
 
@@ -608,8 +609,8 @@ msgstr ""
 
 #: searchCatalogue/templates/search_result_actions.html:83
 #: searchCatalogue/templates/search_result_list_entry.html:4
-#: useroperations/templates/applications.html:72
-#: useroperations/templates/applications.html:74
+#: useroperations/templates/applications.html:94
+#: useroperations/templates/applications.html:96
 msgid "Metadata"
 msgstr ""
 
@@ -622,7 +623,7 @@ msgid "Download services"
 msgstr ""
 
 #: searchCatalogue/templates/search_result_actions.html:125
-#: useroperations/templates/inspire_topics.html:41
+#: useroperations/templates/inspire_topics.html:62
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr ""
 
@@ -899,14 +900,14 @@ msgstr ""
 msgid "Not signed in"
 msgstr ""
 
-#: templates/base.html:121 useroperations/views.py:203
-#: useroperations/views.py:209
+#: templates/base.html:121 useroperations/views.py:220
+#: useroperations/views.py:226
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:122 useroperations/views.py:233
-#: useroperations/views.py:245 useroperations/views.py:288
-#: useroperations/views.py:348
+#: templates/base.html:122 useroperations/views.py:250
+#: useroperations/views.py:262 useroperations/views.py:305
+#: useroperations/views.py:365
 msgid "Registration"
 msgstr ""
 
@@ -1201,27 +1202,42 @@ msgstr ""
 msgid "Activation failed. Please contact an administrator!"
 msgstr ""
 
+#: useroperations/templates/applications.html:26
+#: useroperations/templates/inspire_topics.html:21
+msgid "A magnifying glass icon"
+msgstr ""
+
 #: useroperations/templates/applications.html:30
+msgid "Switch between list or tile view"
+msgstr ""
+
+#: useroperations/templates/applications.html:38
+#: useroperations/templates/inspire_topics.html:32
+#: useroperations/templates/publishing_organizations.html:33
+msgid "Order by"
+msgstr ""
+
+#: useroperations/templates/applications.html:52
 msgid "Powered by GeoPortal.RLP"
 msgstr ""
 
-#: useroperations/templates/applications.html:39
+#: useroperations/templates/applications.html:61
 msgid "No preview available"
 msgstr ""
 
-#: useroperations/templates/applications.html:49
+#: useroperations/templates/applications.html:71
 msgid "Times used"
 msgstr ""
 
-#: useroperations/templates/applications.html:55
+#: useroperations/templates/applications.html:77
 msgid "Published on"
 msgstr ""
 
-#: useroperations/templates/applications.html:63
+#: useroperations/templates/applications.html:85
 msgid "Published by"
 msgstr ""
 
-#: useroperations/templates/applications.html:73
+#: useroperations/templates/applications.html:95
 msgid "A metadata symbol"
 msgstr ""
 
@@ -1290,37 +1306,33 @@ msgstr ""
 msgid "Select other map application"
 msgstr ""
 
-#: useroperations/templates/inspire_topics.html:16
-msgid "A magnifying glass icon"
-msgstr ""
-
-#: useroperations/templates/inspire_topics.html:26
+#: useroperations/templates/inspire_topics.html:47
 msgid "An INSPIRE topic symbol"
 msgstr ""
 
-#: useroperations/templates/inspire_topics.html:28
+#: useroperations/templates/inspire_topics.html:49
 msgid "Placeholder INSPIRE topic symbol, since no topic symbol is available"
 msgstr ""
 
-#: useroperations/templates/inspire_topics.html:35
+#: useroperations/templates/inspire_topics.html:56
 msgid "Number of data"
 msgstr ""
 
-#: useroperations/templates/inspire_topics.html:40
+#: useroperations/templates/inspire_topics.html:61
 msgid "INSPIRE Topic"
 msgstr ""
 
 # Navigation items
-#: useroperations/templates/inspire_topics.html:45
+#: useroperations/templates/inspire_topics.html:66
 msgid "More information"
 msgstr "Mehr Information"
 
-#: useroperations/templates/inspire_topics.html:46
+#: useroperations/templates/inspire_topics.html:67
 msgid "An information icon, shaped like the letter i"
 msgstr ""
 
 # Navigation items
-#: useroperations/templates/inspire_topics.html:47
+#: useroperations/templates/inspire_topics.html:68
 msgid "Information"
 msgstr "Information"
 
@@ -1418,222 +1430,227 @@ msgstr ""
 msgid "LinkedOpenData"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:12
+#: useroperations/templates/publishing_organizations.html:14
 msgid "Publishing Organizations"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:36
+#: useroperations/templates/publishing_organizations.html:57
 msgid "Published datasets"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:40
+#: useroperations/templates/publishing_organizations.html:61
 msgid "Published layers"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:46
+#: useroperations/templates/publishing_organizations.html:67
 msgid "Published featuretypes"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:50
+#: useroperations/templates/publishing_organizations.html:71
 msgid "Published wmcs"
 msgstr ""
 
-#: useroperations/views.py:72
+#: useroperations/views.py:73
 msgid "Login failed"
 msgstr ""
 
-#: useroperations/views.py:75
+#: useroperations/views.py:76
 msgid "Successfully logged in"
 msgstr ""
 
-#: useroperations/views.py:78
+#: useroperations/views.py:79
 msgid "Account not active"
 msgstr ""
 
-#: useroperations/views.py:202
+#: useroperations/views.py:129 useroperations/views.py:161
+#: useroperations/views.py:189
+msgid "Relevance"
+msgstr ""
+
+#: useroperations/views.py:219
 msgid "Forgot Password?"
 msgstr ""
 
-#: useroperations/views.py:241
+#: useroperations/views.py:258
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:255
+#: useroperations/views.py:272
 msgid "Log out to register a new user"
 msgstr ""
 
-#: useroperations/views.py:263
+#: useroperations/views.py:280
 msgid "The Username"
 msgstr ""
 
-#: useroperations/views.py:263
+#: useroperations/views.py:280
 msgid "is already taken"
 msgstr ""
 
-#: useroperations/views.py:267
+#: useroperations/views.py:284
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
 "characters, allowed special chars are: @#$%&+=!"
 msgstr ""
 
-#: useroperations/views.py:294 useroperations/views.py:513
+#: useroperations/views.py:311 useroperations/views.py:530
 msgid "Passwords do not match"
 msgstr ""
 
-#: useroperations/views.py:316
+#: useroperations/views.py:333
 msgid "Activation Mail"
 msgstr ""
 
-#: useroperations/views.py:319
+#: useroperations/views.py:336
 msgid ""
 "This is your activation link. It will be valid until the end of the day, "
 "please click it!"
 msgstr ""
 
-#: useroperations/views.py:340
+#: useroperations/views.py:357
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
 msgstr ""
 
-#: useroperations/views.py:354 useroperations/views.py:901
+#: useroperations/views.py:371 useroperations/views.py:918
 msgid "Captcha was wrong! Please try again"
 msgstr ""
 
-#: useroperations/views.py:378
+#: useroperations/views.py:395
 msgid "Submit"
 msgstr ""
 
-#: useroperations/views.py:394
+#: useroperations/views.py:411
 msgid "No Account with this Username or Email found"
 msgstr ""
 
-#: useroperations/views.py:406
+#: useroperations/views.py:423
 msgid "Lost Password"
 msgstr ""
 
-#: useroperations/views.py:409
+#: useroperations/views.py:426
 msgid ""
 "This is your new password, please change it immediately!\n"
 " Password: "
 msgstr ""
 
-#: useroperations/views.py:416
+#: useroperations/views.py:433
 msgid "Password reset was successful, check your mails."
 msgstr ""
 
-#: useroperations/views.py:456
+#: useroperations/views.py:473
 msgid "The user could not be found. Please contact an administrator!"
 msgstr ""
 
-#: useroperations/views.py:480
+#: useroperations/views.py:497
 msgid ""
 "Please accept the General Data Protection Regulation or delete your account!"
 msgstr ""
 
-#: useroperations/views.py:491
+#: useroperations/views.py:508
 msgid "Your old Password was wrong"
 msgstr ""
 
-#: useroperations/views.py:506
+#: useroperations/views.py:523
 msgid "Your current password was wrong"
 msgstr ""
 
-#: useroperations/views.py:517
+#: useroperations/views.py:534
 msgid ""
 "For changing your password, you have to enter your current password as well."
 msgstr ""
 
-#: useroperations/views.py:544
+#: useroperations/views.py:561
 msgid "Successfully changed data"
 msgstr ""
 
-#: useroperations/views.py:553
+#: useroperations/views.py:570
 msgid "Save"
 msgstr ""
 
-#: useroperations/views.py:554
+#: useroperations/views.py:571
 msgid "Delete Profile"
 msgstr ""
 
-#: useroperations/views.py:561
+#: useroperations/views.py:578
 msgid "Change data"
 msgstr ""
 
-#: useroperations/views.py:593
+#: useroperations/views.py:610
 msgid "Delete Profile!"
 msgstr ""
 
-#: useroperations/views.py:597
+#: useroperations/views.py:614
 msgid "Delete Profile?"
 msgstr ""
 
-#: useroperations/views.py:610 useroperations/views.py:686
+#: useroperations/views.py:627 useroperations/views.py:703
 msgid "You are not logged in"
 msgstr ""
 
-#: useroperations/views.py:620
+#: useroperations/views.py:637
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:623
+#: useroperations/views.py:640
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
 msgstr ""
 
-#: useroperations/views.py:626
+#: useroperations/views.py:643
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
 msgstr ""
 
-#: useroperations/views.py:636
+#: useroperations/views.py:653
 msgid "Reactivation Mail"
 msgstr ""
 
-#: useroperations/views.py:639
+#: useroperations/views.py:656
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
 msgstr ""
 
-#: useroperations/views.py:647
+#: useroperations/views.py:664
 msgid "Successfully deleted the user:"
 msgstr ""
 
-#: useroperations/views.py:649
+#: useroperations/views.py:666
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
 msgstr ""
 
-#: useroperations/views.py:654
+#: useroperations/views.py:671
 msgid "Password invalid. Profile not deleted."
 msgstr ""
 
-#: useroperations/views.py:683
+#: useroperations/views.py:700
 msgid "Successfully logged out"
 msgstr ""
 
-#: useroperations/views.py:827
+#: useroperations/views.py:844
 msgid "Account already active"
 msgstr ""
 
-#: useroperations/views.py:832
+#: useroperations/views.py:849
 msgid "Invalid data"
 msgstr ""
 
-#: useroperations/views.py:844
+#: useroperations/views.py:861
 msgid "Account activation"
 msgstr ""
 
-#: useroperations/views.py:872
+#: useroperations/views.py:889
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1641,38 +1658,38 @@ msgid ""
 "Further information can be found in our "
 msgstr ""
 
-#: useroperations/views.py:879
+#: useroperations/views.py:896
 msgid "Feedback sent. Thank you!"
 msgstr ""
 
-#: useroperations/views.py:888
+#: useroperations/views.py:905
 msgid "Geoportal Feedback"
 msgstr ""
 
-#: useroperations/views.py:889
+#: useroperations/views.py:906
 msgid "Feedback from "
 msgstr ""
 
-#: useroperations/views.py:898
+#: useroperations/views.py:915
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 
 # Navigation items
-msgid "Karten"
-msgstr "Maps"
+#~ msgid "Karten"
+#~ msgstr "Maps"
 
 # Navigation items
-msgid "Hilfe"
-msgstr "Help"
+#~ msgid "Hilfe"
+#~ msgstr "Help"
 
 # Navigation items
-msgid "Meldungen"
-msgstr "News"
+#~ msgid "Meldungen"
+#~ msgstr "News"
 
 # Navigation items
-msgid "Informationen"
-msgstr "Information"
+#~ msgid "Informationen"
+#~ msgstr "Information"
 
 # Navigation items
-msgid "Das Geoportal RLP"
-msgstr "Geoportal RLP"
+#~ msgid "Das Geoportal RLP"
+#~ msgstr "Geoportal RLP"

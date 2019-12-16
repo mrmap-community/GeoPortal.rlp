@@ -9,23 +9,45 @@
     <script type="text/javascript" src="{% static 'useroperations/js/filter.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
     <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/applications.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/tiles.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'searchCatalogue/css/main.css' %}">
 {% endblock %}
 
 {% block body %}
 <div class="landing-page-headline">
     <h2>{% trans 'Applications' %}</h2>
 </div>
-<div class="options-middle">
-    <div class="tile-filter-input-wrapper">
-        <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
-        <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+<div class="tile-options-wrapper">
+    <div class="options-left">
+    </div>
+    <div class="options-middle">
+        <div class="tile-filter-input-wrapper">
+            <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
+            <img alt="{% trans 'A magnifying glass icon' %}" id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+        </div>
+    </div>
+    <div class="options-right">
+        <div class="tile-list-wrapper" title="{% trans 'Switch between list or tile view' %}">
+            <img class="tile-list-toggler-img" src="{% static 'useroperations/images/icn_list.png' %}">
+            <label class="switch">
+              <input {%if LISTED_VIEW_AS_DEFAULT %} checked="checked" {% endif %} type="checkbox">
+              <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="tile-order-wrapper select-wrapper">
+            <select class="tile-filter-order" title="{% trans 'Order by' %}">
+                {% for val, title in order_by_options.items %}
+                    <option class="tile-filter-order-option" value="{{ val }}" {% if val == ORDER_BY_DEFAULT %} selected="selected" {% endif %}>{{ title }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
 </div>
 <div class="tile-wrapper applications">
     {% for result in apps %}
         <div class="tile">
             <a target="_blank" href="{{ result.accessURL }}">
-            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}">
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}" data-num-resources="{{ result.loadCount }}">
                 {% if result.internal %}
                 <img class="powered-by" src="{% static 'useroperations/images/favicon.png' %}" title="{% trans 'Powered by GeoPortal.RLP' %}">
                 {% endif %}

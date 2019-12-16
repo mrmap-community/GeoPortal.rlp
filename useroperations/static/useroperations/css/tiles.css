@@ -66,7 +66,6 @@
     box-shadow: 0 0 10px var(--primary);
 }
 
-
 .switch{
     position: relative;
     display: inline-block;
@@ -133,9 +132,6 @@ input:checked + .slider:before {
 }
 .organizations .tile-img, .topics .tile-img{
     width: 7em;
-    /*
-    height: 50px;
-    */
     object-fit: contain;
 }
 
@@ -155,6 +151,73 @@ input:checked + .slider:before {
     background-color: var(--primary);
     color: white;
     cursor: pointer;
+}
+
+/*
+    TILES AS LIST
+*/
+
+.tile-list-wrapper{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.tile-list-toggler-img{
+    padding: 0.5em;
+    width: 3em;
+}
+
+.tile-list-wrapper .tile{
+    position: relative;
+    display: flex;
+    color: var(--primary);
+    font-weight: bold;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    width: 100%;
+}
+.tile-list-wrapper .tile-header{
+    flex-direction: unset;
+    justify-content: space-evenly;
+    height: unset;
+}
+
+.tile-list-wrapper .tile-content{
+    display: none;
+}
+
+
+.tile-list-wrapper .tile-img{
+    font-size: 0.75em;
+}
+
+.applications.tile-list-wrapper .tile-img{
+    font-size: 1.25em;
+}
+
+
+.tile-list-wrapper .tile-content-abstract-text{
+    overflow-y: auto;
+    height: 10em;
+    display: flex;
+    align-items: center;
+}
+
+.tile-list-wrapper .tile-title, .tile-list-wrapper .tile-content-abstract{
+    width: 33%;
+}
+
+.tile-list-wrapper .tile-content-abstract{
+    font-size: 0.75em;
+    font-weight: initial;
+}
+
+.tile-list-wrapper .powered-by{
+    width: 7.5%;
 }
 
 
