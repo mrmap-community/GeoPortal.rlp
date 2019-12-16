@@ -2,7 +2,9 @@
 {% load static i18n humanize %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/favourite_wmcs.css' %}" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/tiles.css' %}" media="all" />
+<link rel="stylesheet" href="{% static 'searchCatalogue/css/main.css' %}">
 <script type="text/javascript" src="{% static 'useroperations/js/filter.js' %}"></script>
 <script type="text/javascript" src="{% static 'useroperations/js/organizations.js' %}"></script>
 {% endblock %}
@@ -11,16 +13,36 @@
 <div class="landing-page-headline">
     <h2>{% trans 'Publishing Organizations' %}</h2>
 </div>
-<div class="tile-filter-options">
-    <div class="tile-filter-input-wrapper">
-        <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
-        <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+<div class="tile-options-wrapper">
+    <div class="options-left">
+    </div>
+    <div class="options-middle">
+        <div class="tile-filter-input-wrapper">
+            <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
+            <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+        </div>
+    </div>
+    <div class="options-right">
+        <div class="tile-list-wrapper">
+            <img class="tile-list-toggler-img" src="{% static 'useroperations/images/icn_list.png' %}">
+            <label class="switch">
+              <input {%if LISTED_VIEW_AS_DEFAULT %} checked="checked" {% endif %} type="checkbox">
+              <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="tile-order-wrapper select-wrapper">
+            <select class="tile-filter-order" title="{% trans 'Order by' %}">
+                {% for val, title in order_by_options.items %}
+                    <option class="tile-filter-order-option" value="{{ val }}" {% if val == ORDER_BY_DEFAULT %} selected="selected" {% endif %}>{{ title }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
 </div>
 <div class="tile-wrapper organizations">
     {% for result in organizations %}
         <div class="tile">
-            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.name }}">
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.name }}" data-num-resources="{{ result.all_resources }}">
                 <div class="tile-title">{{ result.name }}</div>
                 <div class="tile-header-img">
                     {% if result.image_display_url != '' %}
@@ -53,9 +75,9 @@
                         </div>
                     </div>
                     <hr>
-                    <span class="tile-content-abstract-text">
+                    <div class="tile-content-abstract-text">
                         {{ result.description|safe }}
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>

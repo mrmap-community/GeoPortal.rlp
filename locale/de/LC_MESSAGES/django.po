@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-07 06:21+0000\n"
+"POT-Creation-Date: 2019-12-16 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,8 +54,8 @@ msgstr "Kein Speicherplat übrig. Bitte versuchen Sie es später wieder!"
 msgid "Inspire Download"
 msgstr ""
 
-#: resourceManager/views.py:138 useroperations/views.py:317
-#: useroperations/views.py:407 useroperations/views.py:637
+#: resourceManager/views.py:138 useroperations/views.py:334
+#: useroperations/views.py:424 useroperations/views.py:654
 msgid "Hello "
 msgstr "Hallo "
 
@@ -68,9 +68,9 @@ msgid "Resource types"
 msgstr "Ressourcentyp"
 
 #: searchCatalogue/templates/facets.html:41
-#: useroperations/templates/applications.html:20
-#: useroperations/templates/inspire_topics.html:15
-#: useroperations/templates/publishing_organizations.html:16
+#: useroperations/templates/applications.html:25
+#: useroperations/templates/inspire_topics.html:20
+#: useroperations/templates/publishing_organizations.html:21
 msgid "Filter by"
 msgstr "Filtern nach"
 
@@ -206,7 +206,7 @@ msgstr "Schlagwortsuche"
 #: searchCatalogue/templates/other/application/application_category.html:7
 #: searchCatalogue/views.py:278 searchCatalogue/views.py:370
 #: useroperations/templates/applications.html:5
-#: useroperations/templates/applications.html:16
+#: useroperations/templates/applications.html:18
 #: useroperations/templates/landing_page.html:42
 #: useroperations/templates/landing_page.html:43
 msgid "Applications"
@@ -276,7 +276,7 @@ msgstr "Originaler Atom Feed"
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
 #: searchCatalogue/templates/search_result_actions.html:92
-#: useroperations/templates/inspire_topics.html:36
+#: useroperations/templates/inspire_topics.html:57
 msgid "A document icon"
 msgstr "Ein Dokumentensymbol"
 
@@ -324,7 +324,7 @@ msgid "Competent authority"
 msgstr "Zuständige Stelle:"
 
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:64
+#: useroperations/templates/applications.html:86
 msgid "An organization logo"
 msgstr "Ein Organisationslogo"
 
@@ -393,7 +393,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: searchCatalogue/templates/permission_email_form.html:35
-#: useroperations/views.py:905 useroperations/views.py:916
+#: useroperations/views.py:922 useroperations/views.py:933
 msgid "Send"
 msgstr "Senden"
 
@@ -481,9 +481,10 @@ msgstr "Unterebenen"
 msgid "Demand"
 msgstr "Nachfrage"
 
-#: searchCatalogue/templates/search_forms.html:15
+#: searchCatalogue/templates/search_forms.html:15 useroperations/views.py:130
+#: useroperations/views.py:162 useroperations/views.py:190
 msgid "Alphabetically"
-msgstr "alphabetisch"
+msgstr "Alphabetisch"
 
 #: searchCatalogue/templates/search_forms.html:19
 msgid "Identification number"
@@ -502,7 +503,7 @@ msgid "When?"
 msgstr "Wann?"
 
 #: searchCatalogue/templates/search_forms.html:28
-#: useroperations/templates/inspire_topics.html:11
+#: useroperations/templates/inspire_topics.html:13
 msgid "Topics"
 msgstr "Themen"
 
@@ -613,8 +614,8 @@ msgstr "Zusammenstellungen"
 
 #: searchCatalogue/templates/search_result_actions.html:83
 #: searchCatalogue/templates/search_result_list_entry.html:4
-#: useroperations/templates/applications.html:72
-#: useroperations/templates/applications.html:74
+#: useroperations/templates/applications.html:94
+#: useroperations/templates/applications.html:96
 msgid "Metadata"
 msgstr "Metadaten"
 
@@ -627,7 +628,7 @@ msgid "Download services"
 msgstr "Downloaddienste"
 
 #: searchCatalogue/templates/search_result_actions.html:125
-#: useroperations/templates/inspire_topics.html:41
+#: useroperations/templates/inspire_topics.html:62
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr "Das INSPIRE Symbol in der Form einer Ananas"
 
@@ -803,7 +804,7 @@ msgstr ""
 
 #: templates/404.html:11
 msgid "A warning triangle with an exclamation mark inside"
-msgstr ""
+msgstr "Ein Warndreieck mit Ausrufezeichen"
 
 #: templates/404.html:12
 msgid "Something went wrong..."
@@ -914,14 +915,14 @@ msgstr "Abmelden"
 msgid "Not signed in"
 msgstr "Nicht angemeldet"
 
-#: templates/base.html:121 useroperations/views.py:203
-#: useroperations/views.py:209
+#: templates/base.html:121 useroperations/views.py:220
+#: useroperations/views.py:226
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/base.html:122 useroperations/views.py:233
-#: useroperations/views.py:245 useroperations/views.py:288
-#: useroperations/views.py:348
+#: templates/base.html:122 useroperations/views.py:250
+#: useroperations/views.py:262 useroperations/views.py:305
+#: useroperations/views.py:365
 msgid "Registration"
 msgstr "Registrierung"
 
@@ -931,7 +932,7 @@ msgstr "Passwort zurücksetzen"
 
 #: templates/base.html:132
 msgid "A newspaper"
-msgstr ""
+msgstr "Eine Zeitung"
 
 #: templates/base.html:134
 msgid "News"
@@ -1235,27 +1236,42 @@ msgid "Activation failed. Please contact an administrator!"
 msgstr ""
 "Aktivierung fehlgeschlagen. Bitte kontaktieren Sie einen Administrator!"
 
+#: useroperations/templates/applications.html:26
+#: useroperations/templates/inspire_topics.html:21
+msgid "A magnifying glass icon"
+msgstr "Ein Lupensymbol"
+
 #: useroperations/templates/applications.html:30
+msgid "Switch between list or tile view"
+msgstr "Zwischen Listen- und Kachelansicht wechseln"
+
+#: useroperations/templates/applications.html:38
+#: useroperations/templates/inspire_topics.html:32
+#: useroperations/templates/publishing_organizations.html:33
+msgid "Order by"
+msgstr "Sortieren nach"
+
+#: useroperations/templates/applications.html:52
 msgid "Powered by GeoPortal.RLP"
 msgstr ""
 
-#: useroperations/templates/applications.html:39
+#: useroperations/templates/applications.html:61
 msgid "No preview available"
 msgstr "Keine Vorschau verfügbar"
 
-#: useroperations/templates/applications.html:49
+#: useroperations/templates/applications.html:71
 msgid "Times used"
 msgstr "Anzahl Klicks"
 
-#: useroperations/templates/applications.html:55
+#: useroperations/templates/applications.html:77
 msgid "Published on"
 msgstr "Veröffentlicht am"
 
-#: useroperations/templates/applications.html:63
+#: useroperations/templates/applications.html:85
 msgid "Published by"
 msgstr "Veröffentlicht von"
 
-#: useroperations/templates/applications.html:73
+#: useroperations/templates/applications.html:95
 msgid "A metadata symbol"
 msgstr "Ein Metadatensymbol"
 
@@ -1329,36 +1345,32 @@ msgstr "Kartenviewer wechseln"
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
 
-#: useroperations/templates/inspire_topics.html:16
-msgid "A magnifying glass icon"
-msgstr "Ein Lupensymbol"
-
-#: useroperations/templates/inspire_topics.html:26
+#: useroperations/templates/inspire_topics.html:47
 msgid "An INSPIRE topic symbol"
 msgstr "Ein INSPIRE Themen Symbol"
 
-#: useroperations/templates/inspire_topics.html:28
+#: useroperations/templates/inspire_topics.html:49
 msgid "Placeholder INSPIRE topic symbol, since no topic symbol is available"
 msgstr ""
 "Platzhaltersymbol für INSPIRE Themen, da kein richtiges Bild verfügbar ist"
 
-#: useroperations/templates/inspire_topics.html:35
+#: useroperations/templates/inspire_topics.html:56
 msgid "Number of data"
 msgstr "Datenanzahl"
 
-#: useroperations/templates/inspire_topics.html:40
+#: useroperations/templates/inspire_topics.html:61
 msgid "INSPIRE Topic"
 msgstr "INSPIRE Thema"
 
-#: useroperations/templates/inspire_topics.html:45
+#: useroperations/templates/inspire_topics.html:66
 msgid "More information"
 msgstr "Layer trägt Informationen"
 
-#: useroperations/templates/inspire_topics.html:46
+#: useroperations/templates/inspire_topics.html:67
 msgid "An information icon, shaped like the letter i"
 msgstr "Ein Informationssymbol in Form des Buchstabens i"
 
-#: useroperations/templates/inspire_topics.html:47
+#: useroperations/templates/inspire_topics.html:68
 msgid "Information"
 msgstr "Informationen"
 
@@ -1457,43 +1469,48 @@ msgstr ""
 msgid "LinkedOpenData"
 msgstr ""
 
-#: useroperations/templates/publishing_organizations.html:12
+#: useroperations/templates/publishing_organizations.html:14
 msgid "Publishing Organizations"
 msgstr "Veröffentlichende Organisationen"
 
-#: useroperations/templates/publishing_organizations.html:36
+#: useroperations/templates/publishing_organizations.html:57
 msgid "Published datasets"
 msgstr "Veröffentlichte Datensätze"
 
-#: useroperations/templates/publishing_organizations.html:40
+#: useroperations/templates/publishing_organizations.html:61
 msgid "Published layers"
 msgstr "Veröffentlichte Kartenebenen"
 
-#: useroperations/templates/publishing_organizations.html:46
+#: useroperations/templates/publishing_organizations.html:67
 msgid "Published featuretypes"
 msgstr "Veröffentlichte Objektarten"
 
-#: useroperations/templates/publishing_organizations.html:50
+#: useroperations/templates/publishing_organizations.html:71
 msgid "Published wmcs"
 msgstr "Veröffentlichte Karten"
 
-#: useroperations/views.py:72
+#: useroperations/views.py:73
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: useroperations/views.py:75
+#: useroperations/views.py:76
 msgid "Successfully logged in"
 msgstr "Anmeldung erfolgreich"
 
-#: useroperations/views.py:78
+#: useroperations/views.py:79
 msgid "Account not active"
 msgstr "Nicht aktiv"
 
-#: useroperations/views.py:202
+#: useroperations/views.py:129 useroperations/views.py:161
+#: useroperations/views.py:189
+msgid "Relevance"
+msgstr "Relevanz"
+
+#: useroperations/views.py:219
 msgid "Forgot Password?"
 msgstr "Passwort vergessen?"
 
-#: useroperations/views.py:241
+#: useroperations/views.py:258
 msgid ""
 "Personal data will not be transmitted to other parties or services. Further "
 "information can be found in our "
@@ -1503,19 +1520,19 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#: useroperations/views.py:255
+#: useroperations/views.py:272
 msgid "Log out to register a new user"
 msgstr "Ausloggen um neuen Benutzer zu registrieren"
 
-#: useroperations/views.py:263
+#: useroperations/views.py:280
 msgid "The Username"
 msgstr "Der Benutzername"
 
-#: useroperations/views.py:263
+#: useroperations/views.py:280
 msgid "is already taken"
 msgstr "wurde bereits verwendet"
 
-#: useroperations/views.py:267
+#: useroperations/views.py:284
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
@@ -1525,15 +1542,15 @@ msgstr ""
 "einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, außerdem müssen Sie "
 "mindestens 9 Zeichen verwenden"
 
-#: useroperations/views.py:294 useroperations/views.py:513
+#: useroperations/views.py:311 useroperations/views.py:530
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: useroperations/views.py:316
+#: useroperations/views.py:333
 msgid "Activation Mail"
 msgstr "Aktivierungsmail"
 
-#: useroperations/views.py:319
+#: useroperations/views.py:336
 msgid ""
 "This is your activation link. It will be valid until the end of the day, "
 "please click it!"
@@ -1541,7 +1558,7 @@ msgstr ""
 "Dies ist ihr Aktivierungslink. Er wird für die nächsten 24 Stunden gültig "
 "sein. Bitte klicken um Aktivierung abzuschließen!"
 
-#: useroperations/views.py:340
+#: useroperations/views.py:357
 msgid ""
 "Account creation was successful. You have to activate your account via email "
 "before you can login!"
@@ -1549,23 +1566,23 @@ msgstr ""
 "Konto wurde erfolgreich angelegt. Sie müssen Ihren Account über den Link in "
 "der von uns gesendeten E-Mail aktivieren bevor Sie sich einloggen können!"
 
-#: useroperations/views.py:354 useroperations/views.py:901
+#: useroperations/views.py:371 useroperations/views.py:918
 msgid "Captcha was wrong! Please try again"
 msgstr "Captcha war falsch! Bitte erneut versuchen"
 
-#: useroperations/views.py:378
+#: useroperations/views.py:395
 msgid "Submit"
 msgstr "Bestätigen"
 
-#: useroperations/views.py:394
+#: useroperations/views.py:411
 msgid "No Account with this Username or Email found"
 msgstr "Kein Konto mit diesem Benutzernamen oder dieser Email Adresse gefunden"
 
-#: useroperations/views.py:406
+#: useroperations/views.py:423
 msgid "Lost Password"
 msgstr "Passwort vergessen"
 
-#: useroperations/views.py:409
+#: useroperations/views.py:426
 msgid ""
 "This is your new password, please change it immediately!\n"
 " Password: "
@@ -1573,65 +1590,65 @@ msgstr ""
 "Dies ist ihr neues Passwort, bitte ändern Sie es unverzüglich!\n"
 " Passwort: "
 
-#: useroperations/views.py:416
+#: useroperations/views.py:433
 msgid "Password reset was successful, check your mails."
 msgstr "Passwort erfolgreich zurückgesetzt, bitte prüfen Sie ihre Emails"
 
-#: useroperations/views.py:456
+#: useroperations/views.py:473
 msgid "The user could not be found. Please contact an administrator!"
 msgstr ""
 "Aktivierung fehlgeschlagen. Bitte kontaktieren Sie einen Administrator!"
 
-#: useroperations/views.py:480
+#: useroperations/views.py:497
 msgid ""
 "Please accept the General Data Protection Regulation or delete your account!"
 msgstr ""
 "Bitte akzeptieren Sie die Datenschutzerklärung oder löschen Sie Ihr Konto!"
 
-#: useroperations/views.py:491
+#: useroperations/views.py:508
 msgid "Your old Password was wrong"
 msgstr "Ihr altes Passwort war falsch"
 
-#: useroperations/views.py:506
+#: useroperations/views.py:523
 msgid "Your current password was wrong"
 msgstr "Ihr aktuelles Passwort war falsch"
 
-#: useroperations/views.py:517
+#: useroperations/views.py:534
 msgid ""
 "For changing your password, you have to enter your current password as well."
 msgstr ""
 "Um Ihr Passwort zu ändern, müssen Sie Ihr aktuelles Passwort ebenfalls "
 "angeben."
 
-#: useroperations/views.py:544
+#: useroperations/views.py:561
 msgid "Successfully changed data"
 msgstr "Daten erfolgreich geändert"
 
-#: useroperations/views.py:553
+#: useroperations/views.py:570
 msgid "Save"
 msgstr "Speichern"
 
-#: useroperations/views.py:554
+#: useroperations/views.py:571
 msgid "Delete Profile"
 msgstr "Profil entfernen"
 
-#: useroperations/views.py:561
+#: useroperations/views.py:578
 msgid "Change data"
 msgstr "Daten ändern"
 
-#: useroperations/views.py:593
+#: useroperations/views.py:610
 msgid "Delete Profile!"
 msgstr "Profil entfernen!"
 
-#: useroperations/views.py:597
+#: useroperations/views.py:614
 msgid "Delete Profile?"
 msgstr "Profil entfernen?"
 
-#: useroperations/views.py:610 useroperations/views.py:686
+#: useroperations/views.py:627 useroperations/views.py:703
 msgid "You are not logged in"
 msgstr "Sie sind nicht angemeldet"
 
-#: useroperations/views.py:620
+#: useroperations/views.py:637
 msgid ""
 "You are owner of registrated services - please delete them or give the "
 "ownership to another user."
@@ -1639,7 +1656,7 @@ msgstr ""
 "Sie sind Besitzer von registrierten Diensten - Dienste löschen oder einem "
 "anderen Eigentümer übergeben"
 
-#: useroperations/views.py:623
+#: useroperations/views.py:640
 msgid ""
 "You are owner of guis/applications - please delete them or give the "
 "ownership to another user."
@@ -1647,7 +1664,7 @@ msgstr ""
 "Sie sind Besitzer von Anwendungen - Anwendungen löschen doer einem anderen "
 "Besitzer übergeben"
 
-#: useroperations/views.py:626
+#: useroperations/views.py:643
 msgid ""
 "There are logged service accesses for this user profile. Please connect the "
 "service administrators for the billing first."
@@ -1655,11 +1672,11 @@ msgstr ""
 "Für dieses Profile existieren gebührenpflichtige Dienste - Bitte "
 "kontaktieren Sie einen Administrator"
 
-#: useroperations/views.py:636
+#: useroperations/views.py:653
 msgid "Reactivation Mail"
 msgstr "Reaktivierungsmail"
 
-#: useroperations/views.py:639
+#: useroperations/views.py:656
 msgid ""
 "In case the deletion of your account was a mistake, you can reactivate it by "
 "clicking this link!"
@@ -1667,11 +1684,11 @@ msgstr ""
 "Falls Sie ihr Konto versehentlich gelöscht haben, können Sie es unter dem "
 "folgenden Link reaktivieren!"
 
-#: useroperations/views.py:647
+#: useroperations/views.py:664
 msgid "Successfully deleted the user:"
 msgstr "Konto erfolgreich gelöscht für:"
 
-#: useroperations/views.py:649
+#: useroperations/views.py:666
 msgid ""
 ". In case this was an accident, we sent you a link where you can reactivate "
 "your account for 24 hours!"
@@ -1679,27 +1696,27 @@ msgstr ""
 ". Für den Fall der versehentlichen Löschung haben wir Ihnen eine Email zur "
 "Reaktivierung geschickt. Diese ist 24 Stunden gültig."
 
-#: useroperations/views.py:654
+#: useroperations/views.py:671
 msgid "Password invalid. Profile not deleted."
 msgstr "Passwort falsch. Profil wurde nicht gelöscht."
 
-#: useroperations/views.py:683
+#: useroperations/views.py:700
 msgid "Successfully logged out"
 msgstr "Abmeldung erfolgreich"
 
-#: useroperations/views.py:827
+#: useroperations/views.py:844
 msgid "Account already active"
 msgstr "Konto bereits aktiviert"
 
-#: useroperations/views.py:832
+#: useroperations/views.py:849
 msgid "Invalid data"
 msgstr "Invalide Daten"
 
-#: useroperations/views.py:844
+#: useroperations/views.py:861
 msgid "Account activation"
 msgstr "Kontoaktivierung"
 
-#: useroperations/views.py:872
+#: useroperations/views.py:889
 msgid ""
 "Personal data will not be transmitted to other parties or services. The "
 "data, you provided during the feedback process, will only be used to stay in "
@@ -1711,19 +1728,19 @@ msgstr ""
 "Kontaktaufnahme bzgl. Ihres Feedbacks. \n"
 "Weitere Informationen entnehmen Sie bitte unserer"
 
-#: useroperations/views.py:879
+#: useroperations/views.py:896
 msgid "Feedback sent. Thank you!"
 msgstr "Feedback gesendet. Vielen Dank!"
 
-#: useroperations/views.py:888
+#: useroperations/views.py:905
 msgid "Geoportal Feedback"
 msgstr ""
 
-#: useroperations/views.py:889
+#: useroperations/views.py:906
 msgid "Feedback from "
 msgstr "Feedback Formular"
 
-#: useroperations/views.py:898
+#: useroperations/views.py:915
 msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "

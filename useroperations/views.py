@@ -4,6 +4,7 @@ import re
 import smtplib
 import time
 import urllib.parse
+from collections import OrderedDict
 from pprint import pprint
 from urllib import error
 
@@ -21,6 +22,7 @@ from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTER
     SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
+from useroperations.settings import LISTED_VIEW_AS_DEFAULT, ORDER_BY_DEFAULT
 from useroperations.utils import useroperations_helper
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
 from .models import MbUser, MbGroup, MbUserMbGroup, MbRole, GuiMbUser, MbProxyLog, Wfs, Wms
@@ -124,9 +126,16 @@ def applications_view(request: HttpRequest):
     """
     geoportal_context = GeoportalContext(request)
 
+    order_by_options = OrderedDict()
+    order_by_options["rank"] = _("Relevance")
+    order_by_options["title"] = _("Alphabetically")
+
     apps = useroperations_helper.get_all_applications()
     params = {
         "apps": apps,
+        "order_by_options": order_by_options,
+        "ORDER_BY_DEFAULT": ORDER_BY_DEFAULT,
+        "LISTED_VIEW_AS_DEFAULT": LISTED_VIEW_AS_DEFAULT,
     }
     template = "applications.html"
     geoportal_context.add_context(params)
@@ -150,8 +159,15 @@ def organizations_view(request: HttpRequest):
 
     template = "publishing_organizations.html"
     geoportal_context = GeoportalContext(request)
+    order_by_options = OrderedDict()
+    order_by_options["rank"] = _("Relevance")
+    order_by_options["title"] = _("Alphabetically")
+
     context = {
-        "organizations": useroperations_helper.get_all_organizations()
+        "organizations": useroperations_helper.get_all_organizations(),
+        "order_by_options": order_by_options,
+        "ORDER_BY_DEFAULT": ORDER_BY_DEFAULT,
+        "LISTED_VIEW_AS_DEFAULT": LISTED_VIEW_AS_DEFAULT,
     }
     geoportal_context.add_context(context)
     return render(request, template, geoportal_context.get_context())
@@ -172,10 +188,17 @@ def categories_view(request: HttpRequest):
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True:
         return redirect('useroperations:change_profile')
 
+    order_by_options = OrderedDict()
+    order_by_options["rank"] = _("Relevance")
+    order_by_options["title"] = _("Alphabetically")
+
     template = "inspire_topics.html"
     context = {
         "topics": useroperations_helper.get_all_inspire_topics(request.LANGUAGE_CODE),
         "inspire_doc_uri": URL_INSPIRE_DOC,
+        "order_by_options": order_by_options,
+        "ORDER_BY_DEFAULT": ORDER_BY_DEFAULT,
+        "LISTED_VIEW_AS_DEFAULT": LISTED_VIEW_AS_DEFAULT,
     }
     geoportal_context.add_context(context)
     return render(request, template, geoportal_context.get_context())
