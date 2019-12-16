@@ -7,7 +7,7 @@ Created on: 16.12.19
 """
 
 # Refers to the listable view of applications/organizations/categories
-LISTED_VIEW_AS_DEFAULT = True
+LISTED_VIEW_AS_DEFAULT = False
 
 # Refers to the default order of applications/organizations/categories
 ORDER_BY_DEFAULT = "rank"  # rank | title
