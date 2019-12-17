@@ -17,7 +17,8 @@ function orderTiles(orderBy){
             b = $(b);
             titleA = a.find(".tile-header").attr("data-name");
             titleB = b.find(".tile-header").attr("data-name");
-            return titleA > titleB;
+            var retVal = titleA > titleB ? 1 : -1;
+            return retVal;
         })
     }
     return tiles;
