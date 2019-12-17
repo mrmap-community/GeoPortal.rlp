@@ -638,20 +638,16 @@ function checkForExternalMapviewerCall(){
 
 
 $(document).ready(function() {
-
     /**
      * Observe for changes in body content and resize sidebar if needed
      *
      */
-    var target = document.querySelector('.body-content');
+    var target = document.querySelector('#body-content');
     if(target !== null){
-        var observer = window.MutationObserver;
-        observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-            resizeSidebar();
-          });
-        });
         var config = {attributes: true, subtree: true, childList: true, characterData: true};
+        var observer = new MutationObserver(function(mutations) {
+          setTimeout(resizeSidebar, 250);
+        });
         observer.observe(target, config);
     }
 
