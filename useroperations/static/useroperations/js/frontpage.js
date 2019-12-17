@@ -50,9 +50,11 @@ function startSearch(){
 function resizeSidebar(){
     var sidebar = $(".sidebar-wrapper");
     var content = $(".body-content .wrapper");
-    var body = $(".body-content");
+    var body = $("#body-content");
+
     var contentLength = content.outerHeight();
     var sidebarLength = sidebar.outerHeight();
+
     if(sidebar.outerHeight() != body.outerHeight()){
         sidebar.outerHeight(body.outerHeight());
     }
