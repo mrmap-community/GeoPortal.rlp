@@ -79,6 +79,10 @@ def index_view(request, wiki_keyword=""):
         elif request.GET['status'] == "notactive":
             messages.error(request, _("Account not active"))
             return redirect('useroperations:index')
+        elif request.GET['status'] == "fail3":
+            messages.error(request, _("Password failed too many times! Account is deactivated! Activation mail was sent to you!"))
+            return redirect('useroperations:index')
+
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
