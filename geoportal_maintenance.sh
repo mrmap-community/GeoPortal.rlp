@@ -1553,9 +1553,10 @@ update(){
      while IFS="" read -r p || [ -n "$p" ]
        do
           h=`printf '%s\n' "$p" | cut -d = -f 1`
+          h_full=`printf '%s\n' "$p"`
           if ! grep -Fq "$h" ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
           then
-              missing_items+=("$h")
+              missing_items+=("$h_full")
            fi
 
      done < /tmp/settings.py
