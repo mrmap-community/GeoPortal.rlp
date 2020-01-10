@@ -1731,6 +1731,14 @@ if [ -e "/etc/phppgadmin/config.inc.php_geoportal_backup" ]; then
         cp  /etc/phppgadmin/config.inc.php_geoportal_backup /etc/phppgadmin/config.inc.php
 fi
 
+if [ -e "/etc/apache2/sites-enabled/geoportal-apache.conf" ]; then
+        echo "Restoring Apache Site Conf"
+        a2dissite geoportal-apache
+        a2ensite 000-default
+        service apache2 restart
+
+fi
+
 rm *.tar.gz*
 rm *.sql
 rm -R ${installation_folder}cronjobs
@@ -1776,7 +1784,7 @@ cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${in
 cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/mapbender/tools/wms_extent/
 
 while true; do
-    read -p "Do you want to dump the databases (mysqlpw neeeded)y/n?" yn
+    read -p "Do you want to dump the databases (mysqlpw neeeded, postgres needs to be local with no pw from root)y/n?" yn
     case $yn in
         [Yy]* )
         su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql";
