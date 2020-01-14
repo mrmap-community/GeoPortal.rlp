@@ -133,8 +133,8 @@ if [ $create_folders = 'true' ]; then
     ############################################################
     # create folder structure
     ############################################################
-    mkdir -pv $installation_folder | tee -a $installation_log
     touch $installation_log | tee -a $installation_log
+    mkdir -pv $installation_folder | tee -a $installation_log
     mkdir -pv ${installation_folder}svn/ | tee -a $installation_log
     mkdir -pv ${installation_folder}access/ | tee -a $installation_log
 
