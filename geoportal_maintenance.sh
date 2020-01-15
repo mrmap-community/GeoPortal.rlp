@@ -109,6 +109,10 @@ red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
 
+determineEmailSettings(){
+  sed -i s/"EMAIL_HOST_USER = 'geoportal@server.domain.tld'"/"EMAIL_HOST_USER = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+}
+
 install_full(){
 
 ##################### Geoportal-RLP
@@ -1402,7 +1406,7 @@ sed -i "s#PROJECT_DIR = \"/data/\"#PROJECT_DIR = \"${installation_folder}\"#g" $
 sed -i s/"        'USER':'mapbenderdbuser',"/"        'USER':'$mapbender_database_user',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'PASSWORD':'mapbenderdbpassword',"/"        'PASSWORD':'$mapbender_database_password',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$mapbender_database_name',"/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-
+determineEmailSettings
 
 # enable php_serialize
 if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
@@ -1831,15 +1835,16 @@ This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
     	--ip=ipaddress             		| Default \"127.0.0.1\"
-        --hostname=hostname              		| Default \"127.0.0.1\"
+      --hostname=hostname              		| Default \"127.0.0.1\"
     	--proxy=Proxy IP:Port  	 			| Default \"None\" ; Syntax --proxy=1.2.3.4:5555
-        --proxyuser=username                            | Default \"\" ; Password will be prompted
-        --mapbenderdbname=mapbender						| Default \"mapbender\"
+      --proxyuser=username                            | Default \"\" ; Password will be prompted
+      --mapbenderdbname=mapbender						| Default \"mapbender\"
     	--mapbenderdbuser=User for Database access	| Default \"mapbenderdbuser\"
     	--mapbenderdbpw=Password for database access    | Default \"mapbenderdbpassword\"
     	--phppgadmin_user=User for PGAdmin web access	| Default \"postgresadmin\"
     	--phppgadmin_pw=Password for PGAdmin web access | Default \"postgresadmin_password\"
-	--install_dir=Directory for installation	| Default \"/data/\"
+	    --install_dir=Directory for installation	| Default \"/data/\"
+      --webadmin_email=Default email address for send mail      | Default \"test@test.de\"
     	--mysqlpw=database password for MySQL		| Default \"root\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
 
@@ -1861,6 +1866,7 @@ while getopts h-: arg; do
 	   phppgadmin_user=?*		)  phppgadmin_user=$LONG_OPTARG;;
 	   phppgadmin_pw=?*		)  phppgadmin_password=$LONG_OPTARG;;
 	   install_dir=?*		)  installation_folder=$LONG_OPTARG;;
+     webadmin_email=?*          )   webadmin_email=$LONG_OPTARG;;
 	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
