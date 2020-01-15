@@ -64,6 +64,7 @@ You can choose from the following options:
         --webadmin_email=email address for send mail        | Default "test@test.de"
     	--mysqlpw=database password for MySQL		     	| Default "root"
     	--mode=what you want to do				            | Default "none" [install,update,delete,backup]
+        --email_hosting_server=your mailing server          | Default "mail.domain.tld"
 
 
 
@@ -84,12 +85,13 @@ Description:
 	--phppgadmin_pw         -> Password for phppgadmin_user.
 	--mysqlpw               -> Passwort for the MySql root user.
     --webadmin_email        -> The email address e.g. registration mails are send from
+    --email_hosting_server  -> The mailing server geoportal mails will be send from
 
 Examples:  
 
 Install:  
 ```shell
-geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/ --webadmin_email=geoportal@yourdomain.tld
+geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/ --webadmin_email=geoportal@yourdomain.tld --email_hosting_server=mail.yourdomain.tld
 ```
 
 Update:

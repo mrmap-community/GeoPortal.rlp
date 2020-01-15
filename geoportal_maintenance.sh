@@ -33,6 +33,7 @@ http_proxy_pass=""
 
 # misc
 webadmin_email="test@test.de"
+email_hosting_server="mail.domain.tld"
 use_ssl="false"
 not_proxy_hosts="localhost,127.0.0.1"
 installation_folder="/data/"
@@ -110,6 +111,7 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 
 determineEmailSettings(){
+  sed -i s/"EMAIL_HOST = 'server.domain.tld'"/"EMAIL_HOST = \"$email_hosting_server\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
   sed -i s/"EMAIL_HOST_USER = 'geoportal@server.domain.tld'"/"EMAIL_HOST_USER = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 }
 
@@ -1844,10 +1846,11 @@ You can choose from the following options:
     	--phppgadmin_user=User for PGAdmin web access	| Default \"postgresadmin\"
     	--phppgadmin_pw=Password for PGAdmin web access | Default \"postgresadmin_password\"
 	    --install_dir=Directory for installation	| Default \"/data/\"
-      --webadmin_email=Default email address for send mail      | Default \"test@test.de\"
+      --webadmin_email=email address for send mail      | Default \"test@test.de\"
     	--mysqlpw=database password for MySQL		| Default \"root\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
-
+      --email_hosting_server=your mailing server        | Default \"mail.domain.tld\"
+      
 "
 
 }
@@ -1867,6 +1870,7 @@ while getopts h-: arg; do
 	   phppgadmin_pw=?*		)  phppgadmin_password=$LONG_OPTARG;;
 	   install_dir=?*		)  installation_folder=$LONG_OPTARG;;
      webadmin_email=?*          )   webadmin_email=$LONG_OPTARG;;
+     email_hosting_server=?*    )   email_hosting_server=$LONG_OPTARG;
 	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
