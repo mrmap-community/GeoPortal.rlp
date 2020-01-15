@@ -61,6 +61,7 @@ You can choose from the following options:
     	--phppgadmin_user=User for PGAdmin web access		| Default "postgresadmin"
     	--phppgadmin_pw=Password for PGAdmin web access   	| Default "postgresadmin_password"
 	    --install_dir=Directory for installation		    | Default "/data/"
+        --webadmin_email=email address for send mail        | Default "test@test.de"
     	--mysqlpw=database password for MySQL		     	| Default "root"
     	--mode=what you want to do				            | Default "none" [install,update,delete,backup]
 
@@ -82,12 +83,13 @@ Description:
 	--phppgadmin_user       -> User for the PHPPgAdmin Webinterface.
 	--phppgadmin_pw         -> Password for phppgadmin_user.
 	--mysqlpw               -> Passwort for the MySql root user.
+    --webadmin_email        -> The email address e.g. registration mails are send from
 
 Examples:  
 
 Install:  
 ```shell
-geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/
+geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/ --webadmin_email=geoportal@yourdomain.tld
 ```
 
 Update:
