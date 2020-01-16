@@ -37,7 +37,7 @@ Fast install on local system (only for testing, default passwords!):
 ```shell
 wget --no-check-certificate https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
 chmod +x geoportal_maintenance.sh
-./geoportal_maintenance.sh --mode=install --ipaddress=127.0.0.1 [options]
+./geoportal_maintenance.sh --mode=install --ip=127.0.0.1 [options]
 ```
 
 
