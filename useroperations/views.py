@@ -19,7 +19,7 @@ from django.utils.translation import gettext as _
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, \
-    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE
+    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from useroperations.settings import LISTED_VIEW_AS_DEFAULT, ORDER_BY_DEFAULT
@@ -343,8 +343,8 @@ def register_view(request):
                 ", \n \n" +
                 _("This is your activation link. It will be valid until the end of the day, please click it!")
               	+ "\n Link: "  + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
-                'kontakt@geoportal.de',
-                [user.mb_user_email],  # später email variable eintragen
+                DEFAULT_FROM_EMAIL,
+                [user.mb_user_email],
                 fail_silently=False,
             )
 

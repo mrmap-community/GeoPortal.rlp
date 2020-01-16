@@ -57,7 +57,13 @@ EU_SRC_IMG = "eu_results.png"
 OPEN_DATA_URL = "https://okfn.org/opendata/"
 
 # Mailing settings
-ROOT_EMAIL_ADDRESS = "root@debian"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'server.domain.tld'
+EMAIL_HOST_USER = 'geoportal@server.domain.tld'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_PORT = 25
+ROOT_EMAIL_ADDRESS = "geoportal-root@server.domain.tld"
 
 # Gui settings
 MODERN_GUI = "Geoportal-RLP_2019"
