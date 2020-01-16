@@ -1552,15 +1552,38 @@ update(){
 
   custom_update(){
 
-    while true; do
-        read -p "Do you want to use a custom update script? Should lie under ${installation_folder}custom_update.sh y/n?" yn
-        case $yn in
-            [Yy]* ) source ${installation_folder}custom_update.sh;break;;
-            [Nn]* ) exit;break;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-  }
+    if [ -e ${installation_folder}"custom_files.txt" ];then
+        if [ "$1" == "save" ];then
+          input="${installation_folder}/custom_files.txt"
+          while IFS= read -r line
+          do
+            directory=`echo $line | cut -d / -f 3-`
+            filename=`echo $line | cut -d / -f 3- | rev | cut -d / -f -1 | rev`
+            directory=${directory%$filename}
+
+            mkdir -p /tmp/custom_files/$directory
+            cp -a $line /tmp/custom_files/
+          done < "$input"
+        fi
+
+        if [ "$1" == "restore" ];then
+            cp -a /tmp/custom_files/* ${installation_folder}
+        fi
+      fi
+
+
+    if [ "$1" == "script" ];then
+
+      while true; do
+          read -p "Do you want to use a custom update script? Should lie under ${installation_folder}custom_update.sh y/n?" yn
+          case $yn in
+              [Yy]* ) source ${installation_folder}custom_update.sh;break;;
+              [Nn]* ) exit;break;;
+              * ) echo "Please answer yes or no.";;
+          esac
+      done
+    fi
+}
 
   check_django_settings(){
      missing_items=()
@@ -1606,7 +1629,8 @@ while true; do
     esac
 done
 
-custom_update
+custom_update "save"
+
 echo "Checking differences in config files"
 check_django_settings
 
@@ -1688,6 +1712,9 @@ cp -a ${installation_folder}GeoPortal.rlp/scripts/delete_inactive_users.sql ${in
 #cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/select.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
 #cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/style.css ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
 #cp -a ${installation_folder}GeoPortal.rlp/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
+
+# restore custom Files
+custom_update "restore"
 
 # create and activate virtualenv
 virtualenv -ppython3 ${installation_folder}env
@@ -1863,7 +1890,7 @@ You can choose from the following options:
     	--mysqlpw=database password for MySQL		| Default \"root\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
       --email_hosting_server=your mailing server        | Default \"mail.domain.tld\"
-      
+
 "
 
 }
