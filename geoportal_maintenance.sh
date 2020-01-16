@@ -1550,6 +1550,18 @@ echo -e "\n Details can be found in $installation_log \n" | tee -a $installation
 
 update(){
 
+  custom_update(){
+
+    while true; do
+        read -p "Do you want to use a custom update script? Should lie under ${installation_folder}custom_update.sh y/n?" yn
+        case $yn in
+            [Yy]* ) source ${installation_folder}custom_update.sh;break;;
+            [Nn]* ) exit;break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+  }
+
   check_django_settings(){
      missing_items=()
 
@@ -1594,6 +1606,7 @@ while true; do
     esac
 done
 
+custom_update
 echo "Checking differences in config files"
 check_django_settings
 
