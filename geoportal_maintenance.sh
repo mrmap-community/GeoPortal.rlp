@@ -1870,7 +1870,7 @@ while getopts h-: arg; do
 	   phppgadmin_pw=?*		)  phppgadmin_password=$LONG_OPTARG;;
 	   install_dir=?*		)  installation_folder=$LONG_OPTARG;;
      webadmin_email=?*          )   webadmin_email=$LONG_OPTARG;;
-     email_hosting_server=?*    )   email_hosting_server=$LONG_OPTARG;
+     email_hosting_server=?*    )   email_hosting_server=$LONG_OPTARG;;
 	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
 	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
