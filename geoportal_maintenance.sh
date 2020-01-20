@@ -916,20 +916,19 @@ fi
           ServerName $hostname
           ServerAdmin $webadmin_email
           ReWriteEngine On
-          RewriteRule ^/registry/wfs/([\d]+)\/?$ ${REQUEST_SCHEME}://127.0.0.1/http_auth/http/index.php?wfs_id=\$1 [P,L,QSA,NE]
-          RewriteRule ^/layer/(.*) ${REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=layer&languageCode=de&id=\$1
-          RewriteRule ^/wms/(.*) ${REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=wms&languageCode=de&id=\$1
-          RewriteRule ^/wmc/(.*) ${REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=wmc&languageCode=de&id=\$1
-          RewriteRule ^/dataset/(.*) ${REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_dataISOMetadata.php?outputFormat=iso19139&id=\$1
+          RewriteRule ^/registry/wfs/([\d]+)\/?$ %{REQUEST_SCHEME}://127.0.0.1/http_auth/http/index.php?wfs_id=\$1 [P,L,QSA,NE]
+          RewriteRule ^/layer/(.*) %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=layer&languageCode=de&id=\$1
+          RewriteRule ^/wms/(.*) %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=wms&languageCode=de&id=\$1
+          RewriteRule ^/wmc/(.*) %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_showMetadata.php?resource=wmc&languageCode=de&id=\$1
+          RewriteRule ^/dataset/(.*) %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/php/mod_dataISOMetadata.php?outputFormat=iso19139&id=\$1
 
           # for mobilemap2 api
           RewriteCond %{QUERY_STRING} ^(.*)wmcid(.*)$
-          RewriteRule /mapbender/extensions/mobilemap/map.php ${REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1wmc_id%2
+          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1wmc_id%2
           RewriteCond %{QUERY_STRING} ^(.*)layerid(.*)$
-          RewriteRule /mapbender/extensions/mobilemap/map.php ${REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1layerid%2
+          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1layerid%2
           # for digitizing module
-          RewriteRule ^/icons/maki/([^/]+)/([^/]+)/([^[/]+).png$ ${REQUEST_SCHEME}://127.0.0.1/mapbender/php/mod_getSymbolFromRepository.php?marker-color=\$1&marker-size=\$2&marker-symbol=\$3 [P,L,QSA,NE]
-
+          RewriteRule ^/icons/maki/([^/]+)/([^/]+)/([^[/]+).png$ %{REQUEST_SCHEME}://127.0.0.1/mapbender/php/mod_getSymbolFromRepository.php?marker-color=\$1&marker-size=\$2&marker-symbol=\$3 [P,L,QSA,NE]
 
   	      Alias /static/ ${installation_folder}GeoPortal.rlp/static/
 
@@ -937,7 +936,6 @@ fi
   		  Options -Indexes -FollowSymlinks
 	      Require all granted
   	      </Directory>
-
 
           DocumentRoot ${installation_folder}/mapbender/http
           Alias /local ${installation_folder}/mapbender/http/local
@@ -947,13 +945,11 @@ fi
   		  Require ip 127.0.0.1
   	      </Directory>
 
-
-
           ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
           <Directory "/usr/lib/cgi-bin">
                   AllowOverride None
                   Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-                  #SetEnv http_proxy http://[IP}:{PORT}
+                  #SetEnv http_proxy http://IP:PORT
                   Order allow,deny
                   Allow from all
           </Directory>
@@ -999,7 +995,6 @@ fi
             </Files>
           </Directory>
 
-
           #Part for proxy function
           ProxyPreserveHost On
           #ReWriteEngine On
@@ -1017,7 +1012,7 @@ fi
                   Options +FollowSymLinks
                   ReWriteEngine On
                   RewriteBase /owsproxy
-                  RewriteRule  ^([\w\d]+)\/([\w\d]+)\/?$ ${REQUEST_SCHEME}://127.0.0.1/owsproxy/http/index.php?sid=\$1\&wms=\$2\& [P,L,QSA,NE]
+                  RewriteRule  ^([\w\d]+)\/([\w\d]+)\/?$ %{REQUEST_SCHEME}://127.0.0.1/owsproxy/http/index.php?sid=\$1\&wms=\$2\& [P,L,QSA,NE]
                   Options +Indexes
                   Allow from all
           </Directory>
@@ -1042,7 +1037,7 @@ fi
                   Options +FollowSymLinks +Indexes
                   ReWriteEngine On
                   RewriteBase /http_auth
-                  RewriteRule  ^([\w\d]+)\/?$ ${REQUEST_SCHEME}://127.0.0.1/http_auth/http/index.php?layer_id=\$1 [P,L,QSA,NE]
+                  RewriteRule  ^([\w\d]+)\/?$ %{REQUEST_SCHEME}://127.0.0.1/http_auth/http/index.php?layer_id=\$1 [P,L,QSA,NE]
                   Order allow,deny
                   Allow from all
           </Directory>
@@ -1055,7 +1050,6 @@ fi
           Options +ExecCGI
           Require all granted
           </Directory>
-
 
   </VirtualHost>
 EOF
