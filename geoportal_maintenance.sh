@@ -139,8 +139,8 @@ if [ $create_folders = 'true' ]; then
     ############################################################
     # create folder structure
     ############################################################
-    touch $installation_log | tee -a $installation_log
-    mkdir -pv $installation_folder | tee -a $installation_log
+    mkdir -pv $installation_folder
+    touch $installation_log
     mkdir -pv ${installation_folder}svn/ | tee -a $installation_log
     mkdir -pv ${installation_folder}access/ | tee -a $installation_log
 
@@ -216,7 +216,7 @@ if [ "$http_proxy" != "" ];then
     fi
 
 apt-get update | tee -a $installation_log
-apt-get install subversion | tee -a $installation_log
+apt-get install -y subversion | tee -a $installation_log
 
     if [ "$custom_proxy" == true ];then
       if [ "$svn_proxy" != "" ];then
