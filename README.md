@@ -97,6 +97,12 @@ geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbender
 Update:
 ```shell
 geoportal_maintenance.sh --mode=update
+
+You can create a file called custom_files.txt in the $installation_directory.  
+Files mentioned in this file are saved before update and restored afterwards.  
+You need to specify the full path, one file each line!  
+
+
 ```
 
 Delete:  
