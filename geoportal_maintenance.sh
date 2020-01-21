@@ -924,9 +924,9 @@ fi
 
           # for mobilemap2 api
           RewriteCond %{QUERY_STRING} ^(.*)wmcid(.*)$
-          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1wmc_id%2
+          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/extensions/mobilemap2/index.html?%1wmc_id%2
           RewriteCond %{QUERY_STRING} ^(.*)layerid(.*)$
-          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{HTTP_HOST}/mapbender/extensions/mobilemap2/index.html?%1layerid%2
+          RewriteRule /mapbender/extensions/mobilemap/map.php %{REQUEST_SCHEME}://%{SERVER_NAME}/mapbender/extensions/mobilemap2/index.html?%1layerid%2
           # for digitizing module
           RewriteRule ^/icons/maki/([^/]+)/([^/]+)/([^[/]+).png$ %{REQUEST_SCHEME}://127.0.0.1/mapbender/php/mod_getSymbolFromRepository.php?marker-color=\$1&marker-size=\$2&marker-symbol=\$3 [P,L,QSA,NE]
 
