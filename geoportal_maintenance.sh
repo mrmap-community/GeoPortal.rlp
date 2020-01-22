@@ -1798,7 +1798,7 @@ service postgresql restart
 cp /etc/subversion/servers_backup_geoportal /etc/subversion/servers
 
 # drop MySQL
-mysql -uroot -p$mysqlpw -e "DROP DATABASE Geoportal;"
+mysql -uroot -p$mysql_root_pw -e "DROP DATABASE Geoportal;"
 
 }
 
@@ -1833,7 +1833,7 @@ while true; do
         [Yy]* )
         su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql";
         cp -a /tmp/geoportal_mapbender_backup.psql ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y");
-        mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
+        mysqldump -uroot -p$mysql_root_pw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
