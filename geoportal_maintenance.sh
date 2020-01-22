@@ -1463,15 +1463,15 @@ mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysql_root_pw') WHERE
 mysql -uroot -e "update mysql.user set plugin='' where user='root';"
 mysql -uroot -e "flush privileges;"
 
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='';"
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
-mysql -uroot -p$mysqlpw -e "DROP DATABASE IF EXISTS test;"
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
-mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
-mysql -uroot -p$mysqlpw -e "create database Geoportal;"
-mysql -uroot -p$mysqlpw -e "CREATE USER '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_user_pw';"
-mysql -uroot -p$mysqlpw -e "create database Geoportal;"
-mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='';"
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+mysql -uroot -p$mysql_root_pw -e "DROP DATABASE IF EXISTS test;"
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+mysql -uroot -p$mysql_root_pw -e "FLUSH PRIVILEGES;"
+mysql -uroot -p$mysql_root_pw -e "create database Geoportal;"
+mysql -uroot -p$mysql_root_pw -e "CREATE USER '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_user_pw';"
+mysql -uroot -p$mysql_root_pw -e "create database Geoportal;"
+mysql -uroot -p$mysql_root_pw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
 echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
 
