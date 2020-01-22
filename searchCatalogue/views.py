@@ -165,7 +165,6 @@ def resolve_coupled_resources(request: HttpRequest):
     return GeoportalJsonResponse(html=html, data=params).get_response()
 
 
-
 @check_browser
 def get_data(request: HttpRequest):
     """ Redistributor for general get_data requests.
