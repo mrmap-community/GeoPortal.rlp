@@ -39,7 +39,6 @@ email_hosting_server="mail.domain.tld"
 use_ssl="false"
 not_proxy_hosts="localhost,127.0.0.1"
 installation_folder="/data/"
-installation_log=${installation_folder}"geoportal_install_$(date +"%m_%d_%Y").log"
 
 # mapbender specific stuff
 mapbender_guest_user_id="2"
@@ -135,7 +134,6 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 
 # create directories
 if [ $create_folders = 'true' ]; then
-
     echo -e "\n Creating directories for Mapbender! \n"
     # initial installation of geoportal.rlp on debian 9
     ############################################################
@@ -1849,7 +1847,8 @@ check_mode() {
 
 if [ $mode = "install" ]; then
   echo -n " "
-  date | tee -a /tmp/geoportal_install_$(date +"%m_%d_%Y").log
+  # log has to be defined here as it depends on installation_folder
+  installation_log=${installation_folder}"geoportal_install_$(date +"%m_%d_%Y").log"
   echo -e "\n Performing complete installation \n"
 	install_full
 elif [ $mode = "update" ];then
