@@ -749,15 +749,20 @@ def map_viewer_view(request):
     gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
     wmc_id = request_get_params.get("WMC", "") or request_get_params.get("wmc", "")
-    if len(request_get_params) > 1:
-        wms_id = urllib.parse.quote(request_get_params_dict.get("searchResultParam", "").replace("WMS=", ""), safe="")
-    else:
-        wms_id = urllib.parse.quote(request_get_params.get("WMS", "") or request_get_params.get("wms", ""), safe="")
+    wms_id = request_get_params.get("WMS", "") or request_get_params.get("wms", "")
+
+    # resolve wms_id to LAYER[id] if the given parameter is not an uri but rather an integer
+    try:
+        wms_id = int(wms_id)
+        request_get_params["LAYER[id]"] = wms_id
+        wms_id = ""
+    except ValueError:
+        # If this failed, the wms_id is not an integer, so we assume it must be some kind of link
+        pass
 
     # check if the request comes from a mobile device
     is_mobile = request.user_agent.is_mobile
     if is_mobile:
-
         # if so, just call the mobile map viewer in a new window
         mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
         if wmc_id != "":
@@ -766,17 +771,9 @@ def map_viewer_view(request):
             mobile_viewer_url += "&wms_id={}".format(wms_id)
         return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
 
-    # if the call targets a DE catalogue result, we need to adjust a little thing here to restore the previously splitted url
-    if request_get_params.get("WMS", None) is not None:
-        # yes, this happens when we have a DE catalogue call! Now merge the stuff back into "WMS" again!
-        for request_get_params_key, request_get_params_val in request_get_params.items():
-            if request_get_params_key == "WMS":
-                continue
-            request_get_params["WMS"] += "&" + request_get_params_key + "=" + request_get_params_val
-
     mapviewer_params_dict = {
-        "LAYER[id]": request_get_params.get("LAYER[id]", None),
-        "LAYER[zoom]": request_get_params.get("LAYER[zoom]", None),
+        "LAYER[id]": request_get_params.get("LAYER[id]", ""),
+        "LAYER[zoom]": request_get_params.get("LAYER[zoom]", ""),
         "LAYER[visible]": request_get_params.get("LAYER[visible]", 1),
         "LAYER[querylayer]": request_get_params.get("LAYER[querylayer]", 1),
         "WMS": wms_id,
@@ -784,21 +781,15 @@ def map_viewer_view(request):
         "GEORSS": urllib.parse.urlencode(request_get_params.get("GEORSS", "")),
         "KML": urllib.parse.urlencode(request_get_params.get("KML", "")),
         "FEATURETYPE": request_get_params.get("FEATURETYPE[id]", ""),
-        "ZOOM": request_get_params.get("ZOOM", None),
-        "GEOJSON": request_get_params.get("GEOJSON", None),
-        "GEOJSONZOOM": request_get_params.get("GEOJSONZOOM", None),
-        "GEOJSONZOOMOFFSET": request_get_params.get("GEOJSONZOOMOFFSET", None),
+        "ZOOM": request_get_params.get("ZOOM", ""),
+        "GEOJSON": request_get_params.get("GEOJSON", ""),
+        "GEOJSONZOOM": request_get_params.get("GEOJSONZOOM", ""),
+        "GEOJSONZOOMOFFSET": request_get_params.get("GEOJSONZOOMOFFSET", ""),
         "gui_id": request_get_params.get("gui_id", gui_id),
         "DATASETID": request_get_params.get("DATASETID", ""),
     }
 
-    mapviewer_params = ""
-    for param_key, param_val in mapviewer_params_dict.items():
-        if param_val is not None:
-            if isinstance(param_val, int):
-                mapviewer_params += "&" + param_key + "=" + str(param_val)
-            elif len(param_val) > 0:
-                mapviewer_params += "&" + param_key + "=" + param_val
+    mapviewer_params = "&" + urllib.parse.urlencode(mapviewer_params_dict)
 
     if is_regular_call:
         # an internal call from our geoportal should lead to the map viewer page without problems
