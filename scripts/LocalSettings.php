@@ -56,7 +56,7 @@ $wgEmailAuthentication = true;
 $wgDBtype = "mysql";
 $wgDBserver = "localhost";
 $wgDBname = "Geoportal";
-$wgDBuser = "root";
+$wgDBuser = "geowiki";
 $wgDBpassword = "root";
 
 # MySQL specific settings

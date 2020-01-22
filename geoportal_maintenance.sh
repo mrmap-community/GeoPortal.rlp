@@ -12,7 +12,6 @@
 # Variables
 ipaddress="127.0.0.1"
 hostname="127.0.0.1"
-mysqlpw="root"
 mode="none"
 
 # mapbender/phppgadmin database config
@@ -23,6 +22,9 @@ mapbender_database_user="mapbenderdbuser"
 mapbender_database_password="mapbenderdbpassword"
 phppgadmin_user="postgresadmin"
 phppgadmin_password="postgresadmin_password"
+mysql_user="geowiki"
+mysql_user_pw="geoportal"
+mysql_root_pw="root"
 
 #proxy config
 http_proxy=""
@@ -1459,7 +1461,7 @@ echo -e "\n ${green}Successfully installed Mediawiki${reset} ! \n" | tee -a $ins
 #mysql_secure_installation
 
 echo -e "\n Configuring Mysql! \n" | tee -a $installation_log
-mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysqlpw') WHERE User='root';"
+mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysql_root_pw') WHERE User='root';"
 mysql -uroot -e "update mysql.user set plugin='' where user='root';"
 mysql -uroot -e "flush privileges;"
 
@@ -1468,7 +1470,8 @@ mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='root' AND Host NO
 mysql -uroot -p$mysqlpw -e "DROP DATABASE IF EXISTS test;"
 mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
 mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
-
+mysql -uroot -p$mysqlpw -e "create database Geoportal;"
+mysql -uroot -p$mysqlpw -e "CREATE USER '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_user_pw';"
 mysql -uroot -p$mysqlpw -e "create database Geoportal;"
 mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
@@ -1509,7 +1512,8 @@ sed -i s/"\$wgDefaultSkin = \"vector\";/\$wgDefaultSkin = \"timeless\";"/g /etc/
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBuser = \"geowiki\";"/"\$wgDBuser = \"$mysql_user\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysql_user_pw\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
@@ -1881,7 +1885,9 @@ You can choose from the following options:
     	--phppgadmin_pw=Password for PGAdmin web access | Default \"postgresadmin_password\"
 	    --install_dir=Directory for installation	| Default \"/data/\"
       --webadmin_email=email address for send mail      | Default \"test@test.de\"
-    	--mysqlpw=database password for MySQL		| Default \"root\"
+    	--mysql_root_pw=database password for MySQL root user		| Default \"root\"
+      --mysql_user=database user for MySQL		| Default \"geowiki\"
+      --mysql_user_pw=database password for MySQL		| Default \"geoportal\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
       --email_hosting_server=your mailing server        | Default \"mail.domain.tld\"
 
@@ -1907,7 +1913,9 @@ while getopts h-: arg; do
      email_hosting_server=?*    )   email_hosting_server=$LONG_OPTARG;;
 	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
-	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
+	   mysql_root_pw=?*			)  mysql_root_pw=$LONG_OPTARG;;
+     mysql_user=?*			)  mysql_user=$LONG_OPTARG;;
+     mysql_user_pw=?*			)  mysql_user_pw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
            '' 				)  break ;; # "--" terminates argument processing
            * 				)  echo "Illegal option --$OPTARG" >&2; usage; exit 2 ;;
