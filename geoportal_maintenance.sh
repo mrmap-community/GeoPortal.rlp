@@ -1468,8 +1468,9 @@ mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='root' AND Host NO
 mysql -uroot -p$mysqlpw -e "DROP DATABASE IF EXISTS test;"
 mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
 mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
-
 mysql -uroot -p$mysqlpw -e "create database Geoportal;"
+mysql -uroot -p$mysqlpw -e "CREATE USER 'wikiuser'@'localhost' IDENTIFIED BY '$mapbender_database_password';"
+mysql -uroot -p$mysqlpw -e "GRANT ALL PRIVILEGES ON Geoportal.* TO 'wikiuser'@'localhost' WITH GRANT OPTION;"
 mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
 echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
@@ -1509,7 +1510,7 @@ sed -i s/"\$wgDefaultSkin = \"vector\";/\$wgDefaultSkin = \"timeless\";"/g /etc/
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysqlpw\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mapbender_database_password\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
