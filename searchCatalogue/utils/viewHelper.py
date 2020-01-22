@@ -985,9 +985,11 @@ def resolve_coupled_resources(md_link: str):
         for resource in resources:
             _type = resource.get("serviceType", "")
             uri = resource.get("accessUrl", None)
+            dataset_id = resource.get("datasetId", "")
             uri_atom = resource.get("accessClient", None)
             data = {
                     "uri": uri,
+                    "datasetId": urllib.parse.quote_plus(dataset_id),
                     "atom_uri": uri_atom,
                     "showMapUrl": urllib.parse.quote_plus(uri),
                     "title": resource.get("serviceTitle", None),

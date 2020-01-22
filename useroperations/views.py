@@ -744,7 +744,7 @@ def map_viewer_view(request):
 
     # is regular call means the request comes directly from the navigation menu in the page, without selecting a search result
     is_regular_call = len(request_get_params_dict) == 0 or request_get_params_dict.get("searchResultParam", None) is None
-    request_get_params = dict(urllib.parse.parse_qsl(request_get_params_dict.get("searchResultParam")))
+    request_get_params = dict(urllib.parse.parse_qsl(request_get_params_dict.get("searchResultParam"), keep_blank_values=True))
     template = "geoportal_external.html"
     gui_id = context_data.get("preferred_gui", DEFAULT_GUI)  # get selected gui from params, use default gui otherwise!
 
@@ -789,7 +789,9 @@ def map_viewer_view(request):
         "GEOJSONZOOM": request_get_params.get("GEOJSONZOOM", None),
         "GEOJSONZOOMOFFSET": request_get_params.get("GEOJSONZOOMOFFSET", None),
         "gui_id": request_get_params.get("gui_id", gui_id),
+        "DATASETID": request_get_params.get("DATASETID", ""),
     }
+
     mapviewer_params = ""
     for param_key, param_val in mapviewer_params_dict.items():
         if param_val is not None:
@@ -806,9 +808,11 @@ def map_viewer_view(request):
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
+
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
         return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTNAME, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
         return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
