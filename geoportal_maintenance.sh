@@ -1470,7 +1470,7 @@ mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='te
 mysql -uroot -p$mysql_root_pw -e "FLUSH PRIVILEGES;"
 mysql -uroot -p$mysql_root_pw -e "create database Geoportal;"
 mysql -uroot -p$mysql_root_pw -e "CREATE USER '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_user_pw';"
-mysql -uroot -p$mysql_root_pw -e "create database Geoportal;"
+mysql -uroot -p$mysql_root_pw -e "GRANT ALL PRIVILEGES ON Geoportal.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;"
 mysql -uroot -p$mysql_root_pw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
 echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
