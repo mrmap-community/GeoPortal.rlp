@@ -59,7 +59,7 @@
         {% else %}
         <div id="{{ layer.id }}" class="resource-element-actions" data-resource="other-catalogue">
             <a href="{{ layer_data.uri }}" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
-            <a href="WMS={{ layer_data.showMapUrl }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
+            <a href="WMS={{ layer_data.showMapUrl }}&DATASETID={{ layer_data.datasetId }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
         </div>
         {% endif %}
     </div>
