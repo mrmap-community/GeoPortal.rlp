@@ -12,7 +12,6 @@
 # Variables
 ipaddress="127.0.0.1"
 hostname="127.0.0.1"
-mysqlpw="root"
 mode="none"
 
 # mapbender/phppgadmin database config
@@ -23,6 +22,9 @@ mapbender_database_user="mapbenderdbuser"
 mapbender_database_password="mapbenderdbpassword"
 phppgadmin_user="postgresadmin"
 phppgadmin_password="postgresadmin_password"
+mysql_user="geowiki"
+mysql_user_pw="geoportal"
+mysql_root_pw="root"
 
 #proxy config
 http_proxy=""
@@ -37,7 +39,6 @@ email_hosting_server="mail.domain.tld"
 use_ssl="false"
 not_proxy_hosts="localhost,127.0.0.1"
 installation_folder="/data/"
-installation_log=${installation_folder}"geoportal_install_$(date +"%m_%d_%Y").log"
 
 # mapbender specific stuff
 mapbender_guest_user_id="2"
@@ -133,7 +134,6 @@ wms_6_register_cmd="/usr/bin/php -f ${installation_folder}mapbender/tools/regist
 
 # create directories
 if [ $create_folders = 'true' ]; then
-
     echo -e "\n Creating directories for Mapbender! \n"
     # initial installation of geoportal.rlp on debian 9
     ############################################################
@@ -1459,19 +1459,19 @@ echo -e "\n ${green}Successfully installed Mediawiki${reset} ! \n" | tee -a $ins
 #mysql_secure_installation
 
 echo -e "\n Configuring Mysql! \n" | tee -a $installation_log
-mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysqlpw') WHERE User='root';"
+mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysql_root_pw') WHERE User='root';"
 mysql -uroot -e "update mysql.user set plugin='' where user='root';"
 mysql -uroot -e "flush privileges;"
 
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='';"
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
-mysql -uroot -p$mysqlpw -e "DROP DATABASE IF EXISTS test;"
-mysql -uroot -p$mysqlpw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
-mysql -uroot -p$mysqlpw -e "FLUSH PRIVILEGES;"
-mysql -uroot -p$mysqlpw -e "create database Geoportal;"
-mysql -uroot -p$mysqlpw -e "CREATE USER 'wikiuser'@'localhost' IDENTIFIED BY '$mapbender_database_password';"
-mysql -uroot -p$mysqlpw -e "GRANT ALL PRIVILEGES ON Geoportal.* TO 'wikiuser'@'localhost' WITH GRANT OPTION;"
-mysql -uroot -p$mysqlpw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='';"
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+mysql -uroot -p$mysql_root_pw -e "DROP DATABASE IF EXISTS test;"
+mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+mysql -uroot -p$mysql_root_pw -e "FLUSH PRIVILEGES;"
+mysql -uroot -p$mysql_root_pw -e "create database Geoportal;"
+mysql -uroot -p$mysql_root_pw -e "CREATE USER '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_user_pw';"
+mysql -uroot -p$mysql_root_pw -e "GRANT ALL PRIVILEGES ON Geoportal.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;"
+mysql -uroot -p$mysql_root_pw Geoportal < ${installation_folder}GeoPortal.rlp/scripts/geoportal.sql
 
 echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
 
@@ -1510,7 +1510,8 @@ sed -i s/"\$wgDefaultSkin = \"vector\";/\$wgDefaultSkin = \"timeless\";"/g /etc/
 sed -i s/"\$wgServer = \"http:\/\/192.168.56.222\";"/"\$wgServer = \"http:\/\/$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyContact = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mapbender_database_password\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBuser = \"geowiki\";"/"\$wgDBuser = \"$mysql_user\";"/g /etc/mediawiki/LocalSettings.php
+sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysql_user_pw\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
 	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
@@ -1797,7 +1798,7 @@ service postgresql restart
 cp /etc/subversion/servers_backup_geoportal /etc/subversion/servers
 
 # drop MySQL
-mysql -uroot -p$mysqlpw -e "DROP DATABASE Geoportal;"
+mysql -uroot -p$mysql_root_pw -e "DROP DATABASE Geoportal;"
 
 }
 
@@ -1832,7 +1833,7 @@ while true; do
         [Yy]* )
         su - postgres -c "pg_dump mapbender > /tmp/geoportal_mapbender_backup.psql";
         cp -a /tmp/geoportal_mapbender_backup.psql ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y");
-        mysqldump -uroot -p$mysqlpw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
+        mysqldump -uroot -p$mysql_root_pw Geoportal > ${installation_folder}backup/geoportal_backup_$(date +"%m_%d_%Y")/geoportal_mediawiki_backup.mysql;
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
@@ -1846,7 +1847,8 @@ check_mode() {
 
 if [ $mode = "install" ]; then
   echo -n " "
-  date | tee -a /tmp/geoportal_install_$(date +"%m_%d_%Y").log
+  # log has to be defined here as it depends on installation_folder
+  installation_log=${installation_folder}"geoportal_install_$(date +"%m_%d_%Y").log"
   echo -e "\n Performing complete installation \n"
 	install_full
 elif [ $mode = "update" ];then
@@ -1882,7 +1884,9 @@ You can choose from the following options:
     	--phppgadmin_pw=Password for PGAdmin web access | Default \"postgresadmin_password\"
 	    --install_dir=Directory for installation	| Default \"/data/\"
       --webadmin_email=email address for send mail      | Default \"test@test.de\"
-    	--mysqlpw=database password for MySQL		| Default \"root\"
+    	--mysql_root_pw=database password for MySQL root user		| Default \"root\"
+      --mysql_user=database user for MySQL		| Default \"geowiki\"
+      --mysql_user_pw=database password for MySQL		| Default \"geoportal\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
       --email_hosting_server=your mailing server        | Default \"mail.domain.tld\"
 
@@ -1908,7 +1912,9 @@ while getopts h-: arg; do
      email_hosting_server=?*    )   email_hosting_server=$LONG_OPTARG;;
 	   ip=?*			)  ipaddress=$LONG_OPTARG;;
      	   hostname=?*			)  hostname=$LONG_OPTARG;;
-	   mysqlpw=?*			)  mysqlpw=$LONG_OPTARG;;
+	   mysql_root_pw=?*			)  mysql_root_pw=$LONG_OPTARG;;
+     mysql_user=?*			)  mysql_user=$LONG_OPTARG;;
+     mysql_user_pw=?*			)  mysql_user_pw=$LONG_OPTARG;;
 	   mode=?*			)  mode=$LONG_OPTARG;;
            '' 				)  break ;; # "--" terminates argument processing
            * 				)  echo "Illegal option --$OPTARG" >&2; usage; exit 2 ;;
