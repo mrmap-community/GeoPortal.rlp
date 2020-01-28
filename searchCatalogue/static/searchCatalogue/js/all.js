@@ -426,6 +426,7 @@ var Autocomplete = function(search) {
  * @param conf
  * @constructor
  */
+/*
 function Map($searchBbox, conf) {
     var _map = null;
     var _$searchBbox = null;
@@ -454,7 +455,7 @@ function Map($searchBbox, conf) {
     };
     this.init(conf);
 }
-
+*/
 
 /**
  * Group 1 = coming from download, shut down view
