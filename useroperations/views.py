@@ -87,7 +87,6 @@ def index_view(request, wiki_keyword=""):
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
-    pprint(context_data)
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True and wiki_keyword not in dsgvo_list:
         return redirect('useroperations:change_profile')
 
