@@ -3,13 +3,15 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from captcha.fields import CaptchaField
 from django.utils.safestring import mark_safe
+from Geoportal.settings import USE_RECAPTCHA
 
 class FeedbackForm(forms.Form):
     first_name = forms.CharField(max_length=200, label=_("First name"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter your first name.")}))
     family_name = forms.CharField(max_length=200, label=_("Family name"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter your last name.")}))
     email = forms.EmailField(label=_("E-Mail address"),  widget=forms.EmailInput(attrs={'title':_("Please enter your email.")}))
     message = forms.CharField(label=_("Your Message"), widget=forms.Textarea(attrs={"maxlength": 3000, 'title':_("Please enter your message.")}))
-    captcha = CaptchaField(label=_("I'm not a robot"))
+    if USE_RECAPTCHA == 0:
+        captcha = CaptchaField(label=_("I'm not a robot"))
 
 class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=100, label=_("Username"), widget=forms.TextInput(attrs={'title':_("Please enter your username.")}))
@@ -23,7 +25,8 @@ class RegistrationForm(forms.Form):
     newsletter = forms.BooleanField(initial=True, label=_("I want to sign up for the newsletter"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Sign up for the newsletter.")}))
     survey = forms.BooleanField(initial=True, label=_("I want to participate in surveys"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Participate in surveys.")}))
     dsgvo = forms.BooleanField(initial=False, label=_("I understand and accept that my data will be automatically processed and securely stored, as it is stated in the general data protection regulation (GDPR)."), required=True, widget=forms.CheckboxInput(attrs={'title':_("Accept privacy policy.")}))
-    captcha = CaptchaField(label=_("I'm not a robot"))
+    if USE_RECAPTCHA == 0:
+        captcha = CaptchaField(label=_("I'm not a robot"))
 
 class LoginForm(forms.Form):
     name = forms.CharField(max_length=100, label=_("Username"), widget=forms.TextInput(attrs={'title':_("Please enter your username.")}))

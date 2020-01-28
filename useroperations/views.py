@@ -19,9 +19,10 @@ from django.utils.translation import gettext as _
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, \
-    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL
+    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
+from searchCatalogue.settings import PROXIES
 from useroperations.settings import LISTED_VIEW_AS_DEFAULT, ORDER_BY_DEFAULT
 from useroperations.utils import useroperations_helper
 from .forms import RegistrationForm, LoginForm, PasswordResetForm, ChangeProfileForm, DeleteProfileForm, FeedbackForm
@@ -86,6 +87,7 @@ def index_view(request, wiki_keyword=""):
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
+    pprint(context_data)
     if context_data['dsgvo'] == 'no' and context_data['loggedin'] == True and wiki_keyword not in dsgvo_list:
         return redirect('useroperations:change_profile')
 
@@ -271,6 +273,9 @@ def register_view(request):
         "btn_label1": btn_label,
         "small_labels": small_labels,
         "disclaimer": disclaimer,
+        "use_recaptcha": USE_RECAPTCHA,
+        "recaptcha_public_key": GOOGLE_RECAPTCHA_PUBLIC_KEY,
+        "register": 1,
     }
 
     geoportal_context.add_context(context)
@@ -283,6 +288,20 @@ def register_view(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
+
+            if USE_RECAPTCHA == 1:
+                recaptcha_response = request.POST.get('g-recaptcha-response')
+                data = {
+                    'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
+                    'response': recaptcha_response
+                }
+                r = requests.post('https://www.google.com/recaptcha/api/siteverify', proxies=PROXIES, data=data)
+                result = r.json()
+
+                if not result['success']:
+                    messages.error(request, _("Invalid reCAPTCHA. Please try again."))
+                    return redirect('useroperations:register')
+
 
             if MbUser.objects.filter(mb_user_name=form.cleaned_data['name']).exists():
                 messages.error(request, _("The Username") + " {str_name} ".format(str_name=form.cleaned_data['name']) + _("is already taken"))
@@ -314,6 +333,8 @@ def register_view(request):
                     "btn_label1": btn_label,
                     "small_labels": small_labels,
                     "disclaimer": disclaimer,
+                    "use_recaptcha": USE_RECAPTCHA,
+                    "register": 1,
                 }
                 geoportal_context.add_context(context)
                 messages.error(request, _("Passwords do not match"))
@@ -896,6 +917,21 @@ def feedback_view(request: HttpRequest):
         # form is returning
         form = FeedbackForm(request.POST)
         if form.is_valid():
+
+            if USE_RECAPTCHA == 1:
+                recaptcha_response = request.POST.get('g-recaptcha-response')
+                data = {
+                    'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
+                    'response': recaptcha_response
+                }
+                r = requests.post('https://www.google.com/recaptcha/api/siteverify', proxies=PROXIES, data=data)
+                result = r.json()
+
+                if not result['success']:
+                    messages.error(request, _("Invalid reCAPTCHA. Please try again."))
+                    return redirect('useroperations:feedback')
+
+
             messages.success(request, _("Feedback sent. Thank you!"))
             msg = {
                 "sender": form.cleaned_data["first_name"] + " " + form.cleaned_data["family_name"],
@@ -935,6 +971,8 @@ def feedback_view(request: HttpRequest):
             "form": feedback_form,
             "btn_send": _("Send"),
             "disclaimer": disclaimer,
+            "use_recaptcha": USE_RECAPTCHA,
+            "recaptcha_public_key" : GOOGLE_RECAPTCHA_PUBLIC_KEY,
         }
         geoportal_context = GeoportalContext(request=request)
         geoportal_context.add_context(params)

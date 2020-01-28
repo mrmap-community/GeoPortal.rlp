@@ -70,6 +70,10 @@ footer{
     justify-content: space-evenly;
 }
 
+.g-recaptcha{
+margin-left: 212px;
+}
+
 #logo_geoportal{
     max-height: 50px;
 }

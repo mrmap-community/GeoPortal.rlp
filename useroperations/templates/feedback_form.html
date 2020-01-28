@@ -23,6 +23,9 @@
                 </tr>
             {% endfor %}
         </table>
+        {% if use_recaptcha == 1 %}
+         <div class="g-recaptcha" data-sitekey="{{ recaptcha_public_key }}"></div>
+        {% endif %}
         <div class="foot-note">
             {% trans 'Remaining characters: ' %}
             <span id="character-counter"></span>
