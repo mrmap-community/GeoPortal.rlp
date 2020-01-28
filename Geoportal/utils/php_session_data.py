@@ -21,7 +21,7 @@ from useroperations.models import MbUser
 ### IMPORTANT NOTE ####
 # LATER VERSIONS OF php-memcached will use "memc.sess.key.XYZ" as session storage string,
 # If users dont see their login status anymore in the frontend after php upgrade, 
-# this will probably be the reason why, has to be changed in line 28.
+# this will probably be the reason why, has to be changed in line 28 AND 42.
 def get_mapbender_session_by_memcache(session_id):
     client = base.Client(('localhost', 11211))
 
