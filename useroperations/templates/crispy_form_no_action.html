@@ -39,6 +39,9 @@
             </tr>
             {% endfor %}
         </table>
+        {% if use_recaptcha == 1 and register == 1 %}
+         <div class="g-recaptcha" data-sitekey="{{ recaptcha_public_key }}"></div>
+        {% endif %}
         <div class="foot-note">
             {% trans '* The field is required.' %}
         </div>
