@@ -296,9 +296,6 @@ Search.prototype = {
     }
 };
 
-'use strict';
-/* globals jQuery, Search, BASEDIR, setTimeout, L, document, window, $ */
-
 /**
  * init
  */
@@ -402,14 +399,20 @@ var Autocomplete = function(search) {
     this.onSelect = function(e) {
         var el = $(e.target);
 
+        // resolve into possible suggestion element where only name was clicked
+        var el = el.closest(".suggestion");
+
         // if click is outside of the .middle-header element (where the search field and suggestion list lives), we close the list
         if(el.is(".middle-header, .middle-header *")){
-            // if click doesn't target a suggestion element, we do nothing
-            if(!el.hasClass("suggestion")){
-                return;
-            }
+
             if(el.hasClass("location")){
                 // for location suggestions
+                var bbox = el.attr("data-location");
+
+                // create parameter string, which defines a zoom to the given bbox
+                var param = "ZOOM=" + bbox + ",EPSG%3A4326"
+                startAjaxMapviewerCall(param);
+                self.hide();
 
             }else{
                 // for regular data search suggestions
@@ -628,7 +631,12 @@ function startAjaxMapviewerCall(value, mobile){
                     left:0,
                     behavior:'smooth'
                 });
-                $(".map-viewer-toggler").click();
+
+                // Open the map overlay only if it wasn't opened yet!
+                var mapOverlay = $(".map-viewer-overlay");
+                if(mapOverlay.hasClass("closed")){
+                    $(".map-viewer-toggler").click();
+                }
                 if(mobile){
                     $(".map-viewer-selector").click();
                 }
@@ -1026,12 +1034,13 @@ $(document).ready(function() {
         var bboxParams = elem.attr("data-params");
         var termsParams = elem.attr("data-source");
         var locationParam = elem.attr("data-target");
+
         // remove locationParam from searchfield input!
         var searchField = $("#geoportal-search-field");
         var checkbox = $("#spatial-checkbox");
         checkbox.prop("checked", false);
         searchField.val(searchField.val().replace(locationParam, "").trim());
-        //search.setParam("terms", termsParams);
+
         search.setParam("searchBbox", bboxParams);
         search.setParam("searchTypeBbox", "intersects");
         prepareAndSearch();

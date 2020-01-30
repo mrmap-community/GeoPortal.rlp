@@ -118,7 +118,7 @@ def auto_completion(request: HttpRequest):
     Returns:
         JsonResponse: Contains auto-completion suggestions
     """
-    max_results = 4
+    max_results = 5
 
     if request.method == "GET":
         content = request.GET.dict()
