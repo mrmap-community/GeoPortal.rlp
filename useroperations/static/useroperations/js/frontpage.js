@@ -481,8 +481,12 @@ $(window).on("load", function(param){
     if (window.sessionStorage.getItem("isSpatialCheckboxChecked") == 'true'){
         checkbox.prop("checked", true);
     }
-    searchbar.val(window.sessionStorage.getItem("searchbarBackup"));
-    window.sessionStorage.removeItem("searchbarBackup");
+
+    var searchbarBackup = window.sessionStorage.getItem("searchbarBackup");
+    if (searchbarBackup !== null){
+        searchbar.val(searchbarBackup);
+        window.sessionStorage.removeItem("searchbarBackup");
+    }
     window.sessionStorage.removeItem("isSpatialCheckboxChecked");
 
     var current_page_area = $(".current-page").parents(".sidebar-area-content");

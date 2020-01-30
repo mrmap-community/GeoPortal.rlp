@@ -408,11 +408,17 @@ var Autocomplete = function(search) {
             if(!el.hasClass("suggestion")){
                 return;
             }
-            var keyword = el.text().trim();
-            if (keyword) {
-                _input.val(keyword);
-                self.hide();
-                $("#geoportal-search-button").click();
+            if(el.hasClass("location")){
+                // for location suggestions
+
+            }else{
+                // for regular data search suggestions
+                var keyword = el.text().trim();
+                if (keyword) {
+                    _input.val(keyword);
+                    self.hide();
+                    $("#geoportal-search-button").click();
+                }
             }
         }else{
             self.hide();
@@ -685,14 +691,6 @@ $(document).ready(function() {
         }
         return null;
     };
-    /*
-    var fixDateFormats = function(items) {
-        items.regTimeBegin = [fixDateFormat(items.regTimeBegin[0])];
-        items.regTimeEnd = [fixDateFormat(items.regTimeEnd[0])];
-        items.timeBegin = [fixDateFormat(items.timeBegin[0])];
-        items.timeEnd = [fixDateFormat(items.timeEnd[0])];
-    };
-    */
 
      // set the focus on the search bar
      if(window.location.pathname == "/"){
