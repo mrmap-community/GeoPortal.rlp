@@ -324,7 +324,7 @@ class Searcher:
             params = {
                 "outputFormat": self.output_format,
                 "resultTarget": "web",
-                "searchEPSG": 4326,
+                "searchEPSG": 25832,
                 "maxResults": max_results,
                 "maxRows": max_results,
                 "searchText": search_text,
