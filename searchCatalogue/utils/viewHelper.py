@@ -980,7 +980,7 @@ def resolve_coupled_resources(md_link: str):
         "download_links": [],
     }
     searcher = Searcher(host=HOSTNAME)
-    resources = searcher.get_coupled_resource(md_link).get("result", {}).get("service", [])
+    resources = searcher.search_coupled_resource(md_link).get("result", {}).get("service", [])
     if resources is not None:
         for resource in resources:
             _type = resource.get("serviceType", "")

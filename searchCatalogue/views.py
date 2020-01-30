@@ -71,7 +71,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
-    facets = searcher.get_categories_list(lang=request.LANGUAGE_CODE)
+    facets = searcher.search_categories_list(lang=request.LANGUAGE_CODE)
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
     # renaming facet variables for dynamical reasons!
@@ -224,7 +224,7 @@ def get_spatial_results(request: HttpRequest):
     search_text = post_params.get("terms").split(",")
 
     searcher = Searcher()
-    spatial_data = searcher.get_spatial_data(search_text)
+    spatial_data = searcher.search_locations(search_text)
     spatial_data = viewHelper.prepare_spatial_data(spatial_data)
 
     view_content = render_to_string(template, spatial_data)
@@ -292,7 +292,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
 			            host=host,
                         )
     start_time = time.time()
-    search_results = searcher.get_search_results_de()
+    search_results = searcher.search_external_catalogue_data()
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
@@ -429,7 +429,7 @@ def get_data_primary(request: HttpRequest):
                         catalogue_id=catalogue_id,
                         host=host
                         )
-    search_results = searcher.get_search_results_primary(user_id=session_data.get("userid", ""))
+    search_results = searcher.search_primary_catalogue_data(user_id=session_data.get("userid", ""))
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
