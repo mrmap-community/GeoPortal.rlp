@@ -10,10 +10,10 @@ import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from Geoportal.settings import INTERNAL_SSL
+from searchCatalogue.utils.searcher import Searcher
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
 
 
@@ -40,7 +40,7 @@ class AutoCompleter:
         Returns:
             AutoCompleter: Returns the object itself
         """
-        search_text = search_text
+        self.search_text = search_text
         return self
 
     def set_max_results(self, max_results):
@@ -51,10 +51,10 @@ class AutoCompleter:
         Returns:
             AutoCompleter: Returns the object itself
         """
-        max_results = max_results
+        self.max_results = max_results
         return self
 
-    def get_auto_completion_suggestions(self):
+    def get_data_search_suggestions(self):
         """ Returns all suggestions for the search texts
 
         Returns:
@@ -74,4 +74,12 @@ class AutoCompleter:
             results = response.json()
         return results
 
+    def get_location_suggestions(self):
+        """ Returns location suggestions that match the search texts
 
+        Returns:
+             dict: Contains suggestions
+        """
+        searcher = Searcher()
+        locations = searcher.search_locations([self.search_text], max_results=self.max_results)
+        return locations

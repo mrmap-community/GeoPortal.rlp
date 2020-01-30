@@ -150,10 +150,12 @@ Search.prototype = {
                 'terms':  self.getParam('terms'),
                 'type': 'autocomplete'
             },
-            type: 'post',
+            type: 'get',
             dataType: 'json',
             success: function(data) {
-                self.parseAutocompleteResult(data);
+                var autocompleteList = $(".-js-simple-search-autocomplete");
+                autocompleteList.html(data["html"]);
+                autocompleteList.show();
             }
         });
     },
@@ -328,7 +330,8 @@ var Autocomplete = function(search) {
         DOWN_ARROW: 40,
         LEFT_ARROW: 37,
         RIGHT_ARROW: 39,
-        ENTER: 13
+        ENTER: 13,
+        ESC: 27
     };
 
     this.init = function(search) {
@@ -336,14 +339,15 @@ var Autocomplete = function(search) {
         _search = search;
         _input = jQuery('.-js-simple-search-field');
         _div = jQuery('.-js-simple-search-autocomplete');
-        _div.on('click', self.onSelect);
+        $("html").on('click', self.onSelect);
         _input.on('keyup', function(e) {
             self.keyUp(e.keyCode);
         });
     };
 
     this.hide = function() {
-        _div.removeClass('active');
+        _div.empty();
+        _div.hide();
         _pos = 0;
     };
 
@@ -378,6 +382,9 @@ var Autocomplete = function(search) {
                 }
             }
         }
+        else if (keyCode === KEYBOARD.ESC){
+            self.hide();
+        }
         else  if (keyCode !== KEYBOARD.LEFT_ARROW && keyCode !== KEYBOARD.RIGHT_ARROW) {
             var term = _input.val().trim();
             _search.setParam('terms', term);
@@ -393,17 +400,27 @@ var Autocomplete = function(search) {
     };
 
     this.onSelect = function(e) {
-        var el = jQuery(e.target);
-        var keyword = el.data('keyword') ? el.data('keyword') : el.parent().data('keyword');
-        if (keyword) {
-            _input.val(keyword);
+        var el = $(e.target);
+
+        // if click is outside of the .middle-header element (where the search field and suggestion list lives), we close the list
+        if(el.is(".middle-header, .middle-header *")){
+            // if click doesn't target a suggestion element, we do nothing
+            if(!el.hasClass("suggestion")){
+                return;
+            }
+            var keyword = el.text().trim();
+            if (keyword) {
+                _input.val(keyword);
+                self.hide();
+                $("#geoportal-search-button").click();
+            }
+        }else{
             self.hide();
-            $("#geoportal-search-button").click();
         }
     };
 
     this.nav = function(p) {
-        var alldivs = _div.find('div');
+        var alldivs = _div.find('.suggestion');
         if (alldivs.length) {
             _pos = _pos + p;
             if (_pos < 1) {
@@ -411,8 +428,8 @@ var Autocomplete = function(search) {
             } else if (_pos > alldivs.length) {
                 _pos = alldivs.length;
             }
-            var el = _div.find('div:nth-child(' + _pos + ')');
-            _div.find('div').removeClass('active');
+            var el = $(alldivs[_pos]);
+            _div.find('.suggestion.active').removeClass('active');
             el.addClass('active');
         }
     };

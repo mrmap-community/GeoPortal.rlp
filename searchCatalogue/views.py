@@ -118,30 +118,47 @@ def auto_completion(request: HttpRequest):
     Returns:
         JsonResponse: Contains auto-completion suggestions
     """
-    max_results = 7
+    max_results = 4
 
-    if request.method == 'POST' and request.POST.dict()["type"] == "autocomplete":
-        search_text = request.POST.dict()["terms"]
-        # clean for UMLAUTE!
-        search_text = search_text.replace("ö", "oe")
-        search_text = search_text.replace("Ö", "Oe")
-        search_text = search_text.replace("ä", "ae")
-        search_text = search_text.replace("Ä", "Ae")
-        search_text = search_text.replace("ü", "ue")
-        search_text = search_text.replace("U", "Ue")
-        search_text = search_text.replace("ß", "ss")
-
-        auto_completer = AutoCompleter(search_text, max_results)
-        results = auto_completer.get_auto_completion_suggestions()
-    elif request.method == 'GET':
-        # This is for debugging
-        search_text = "Koblenz"
-        auto_completer = AutoCompleter(search_text, max_results)
-        results = auto_completer.get_auto_completion_suggestions()
+    if request.method == "GET":
+        content = request.GET.dict()
+    elif request.method == "POST":
+        content = request.POST.dict()
     else:
-        results = None
+        # nothing else is supported
+        return GeoportalJsonResponse().get_response()
 
-    return GeoportalJsonResponse(results=results["results"], resultList=results["resultList"]).get_response()
+    search_text = content["terms"]
+
+    # clean for UMLAUTE!
+    search_text = search_text.replace("ö", "oe")
+    search_text = search_text.replace("Ö", "Oe")
+    search_text = search_text.replace("ä", "ae")
+    search_text = search_text.replace("Ä", "Ae")
+    search_text = search_text.replace("ü", "ue")
+    search_text = search_text.replace("U", "Ue")
+    search_text = search_text.replace("ß", "ss")
+
+    auto_completer = AutoCompleter(search_text, max_results)
+
+    # Fetch data
+    data_search_suggestions = auto_completer.get_data_search_suggestions()
+    location_search_suggestions = auto_completer.get_location_suggestions()
+
+    # Prepare data for rendering
+    tmp = []
+    for loc in location_search_suggestions:
+        tmp += loc.get("geonames", [])
+    location_search_suggestions = tmp
+    data_search_suggestions = data_search_suggestions.get("resultList", [])
+
+    params = {
+        "data_suggestions": data_search_suggestions,
+        "location_suggestions": location_search_suggestions,
+    }
+    html = render_to_string("autocompleter/suggestions.html", context=params, request=request)
+
+    return GeoportalJsonResponse(html=html).get_response()
 
 
 def resolve_coupled_resources(request: HttpRequest):

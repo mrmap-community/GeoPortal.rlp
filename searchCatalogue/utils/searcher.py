@@ -309,23 +309,24 @@ class Searcher:
 
         return results
 
-    def search_locations(self, search_texts):
+    def search_locations(self, search_texts: list, max_results=15):
         """ Performs a spatial filtered search
 
         Args:
-            search_texts: All search words in a list
+            search_texts (list): All search words in a list
+            max_results (int): Defines a number of maximum returned elements, default is 15
         Returns:
             Returns the spatial search results from the database
         """
         ret_val = []
-        url = URL_SPATIAL_BASE + URL_SPATIAL_SEARCH_SUFFIX
+        url = URL_BASE_GEOPORTAL + URL_LOCATION_SEARCH_SUFFIX
         for search_text in search_texts:
             params = {
                 "outputFormat": self.output_format,
                 "resultTarget": "web",
                 "searchEPSG": 4326,
-                "maxResults": 15,
-                "maxRows": 15,
+                "maxResults": max_results,
+                "maxRows": max_results,
                 "searchText": search_text,
                 "hostName": HOSTNAME,
                 "protocol": SEARCH_API_PROTOCOL,
@@ -336,7 +337,6 @@ class Searcher:
             result = response.json()
             result["keyword"] = search_text
             ret_val.append(result)
-
 
         return ret_val
 

@@ -26,7 +26,7 @@ CHANGE PLACEHOLDER COLORS
   color: var(--secondary-placeholder);
 }
 
-*{font-family:Arial,Helvetica,"Sans Serif" !important;}
+*{font-family:arial,helvetica,candara;}
 
 html{
     height: 100%;
@@ -276,7 +276,6 @@ margin-left: 212px;
 }
 
 .simple-search-autocomplete {
-
     box-shadow: 0px 5px 5px 0px var(--primary);
     border-left: 1px solid #d5d5d5;
     border-right: 1px solid #d5d5d5;
@@ -286,7 +285,6 @@ margin-left: 212px;
     position: absolute;
     top: 40px;
     display: none;
-    cursor: pointer;
     z-index: 3;
   }
 
@@ -296,8 +294,17 @@ margin-left: 212px;
     padding: 10px;
     display: block; }
 
-.simple-search-autocomplete div:hover, .simple-search-autocomplete div.active {
-  /*background-color: #f2f2f2; */
+.simple-search-autocomplete .headline{
+    font-weight: bold;
+}
+
+.simple-search-autocomplete .suggestion{
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.simple-search-autocomplete .suggestion:hover, .simple-search-autocomplete .suggestion.active{
   background-color: var(--primary);
   color: white;
   }
