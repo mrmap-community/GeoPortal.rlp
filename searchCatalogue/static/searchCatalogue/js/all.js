@@ -410,7 +410,7 @@ var Autocomplete = function(search) {
                 var bbox = el.attr("data-location");
 
                 // create parameter string, which defines a zoom to the given bbox
-                var param = "ZOOM=" + bbox + ",EPSG%3A4326"
+                var param = "ZOOM=" + bbox + ",EPSG%3A25832"
                 startAjaxMapviewerCall(param);
                 self.hide();
 
