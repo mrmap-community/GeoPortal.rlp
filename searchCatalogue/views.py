@@ -71,7 +71,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     template_name = "index.html"
     get_params = request.GET.dict()
     searcher = Searcher()
-    facets = searcher.get_categories_list(lang=request.LANGUAGE_CODE)
+    facets = searcher.search_categories_list(lang=request.LANGUAGE_CODE)
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
     # renaming facet variables for dynamical reasons!
@@ -118,30 +118,55 @@ def auto_completion(request: HttpRequest):
     Returns:
         JsonResponse: Contains auto-completion suggestions
     """
-    max_results = 7
+    max_results = 5
 
-    if request.method == 'POST' and request.POST.dict()["type"] == "autocomplete":
-        search_text = request.POST.dict()["terms"]
-        # clean for UMLAUTE!
-        search_text = search_text.replace("ö", "oe")
-        search_text = search_text.replace("Ö", "Oe")
-        search_text = search_text.replace("ä", "ae")
-        search_text = search_text.replace("Ä", "Ae")
-        search_text = search_text.replace("ü", "ue")
-        search_text = search_text.replace("U", "Ue")
-        search_text = search_text.replace("ß", "ss")
-
-        auto_completer = AutoCompleter(search_text, max_results)
-        results = auto_completer.get_auto_completion_suggestions()
-    elif request.method == 'GET':
-        # This is for debugging
-        search_text = "Koblenz"
-        auto_completer = AutoCompleter(search_text, max_results)
-        results = auto_completer.get_auto_completion_suggestions()
+    if request.method == "GET":
+        content = request.GET.dict()
+    elif request.method == "POST":
+        content = request.POST.dict()
     else:
-        results = None
+        # nothing else is supported
+        return GeoportalJsonResponse().get_response()
 
-    return GeoportalJsonResponse(results=results["results"], resultList=results["resultList"]).get_response()
+    search_text = content["terms"]
+
+    # clean for UMLAUTE!
+    search_text = search_text.replace("ö", "oe")
+    search_text = search_text.replace("Ö", "Oe")
+    search_text = search_text.replace("ä", "ae")
+    search_text = search_text.replace("Ä", "Ae")
+    search_text = search_text.replace("ü", "ue")
+    search_text = search_text.replace("U", "Ue")
+    search_text = search_text.replace("ß", "ss")
+
+    auto_completer = AutoCompleter(search_text, max_results)
+
+    # Fetch data
+    data_search_suggestions = auto_completer.get_data_search_suggestions()
+    location_search_suggestions = auto_completer.get_location_suggestions()
+
+    # Prepare data for rendering
+    tmp = []
+    for loc in location_search_suggestions:
+        tmp += loc.get("geonames", [])
+    location_search_suggestions = tmp
+    data_search_suggestions = data_search_suggestions.get("resultList", [])
+
+    # Strange behaviour can be occured on the API when fetching 'Kob' and 'Kobl'. One time a list is returned,
+    # another time a dict. Since we need a list here, we need to fix this for now by ourselves.
+    tmp = []
+    if isinstance(data_search_suggestions, dict):
+        for k, v in data_search_suggestions.items():
+            tmp.append(v)
+        data_search_suggestions = tmp
+
+    params = {
+        "data_suggestions": data_search_suggestions,
+        "location_suggestions": location_search_suggestions,
+    }
+    html = render_to_string("autocompleter/suggestions.html", context=params, request=request)
+
+    return GeoportalJsonResponse(html=html).get_response()
 
 
 def resolve_coupled_resources(request: HttpRequest):
@@ -224,7 +249,7 @@ def get_spatial_results(request: HttpRequest):
     search_text = post_params.get("terms").split(",")
 
     searcher = Searcher()
-    spatial_data = searcher.get_spatial_data(search_text)
+    spatial_data = searcher.search_locations(search_text)
     spatial_data = viewHelper.prepare_spatial_data(spatial_data)
 
     view_content = render_to_string(template, spatial_data)
@@ -292,7 +317,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
 			            host=host,
                         )
     start_time = time.time()
-    search_results = searcher.get_search_results_de()
+    search_results = searcher.search_external_catalogue_data()
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
@@ -429,7 +454,7 @@ def get_data_primary(request: HttpRequest):
                         catalogue_id=catalogue_id,
                         host=host
                         )
-    search_results = searcher.get_search_results_primary(user_id=session_data.get("userid", ""))
+    search_results = searcher.search_primary_catalogue_data(user_id=session_data.get("userid", ""))
     print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
 
     # prepare search filters

@@ -25,8 +25,8 @@ URL_RESOLVE_COUPLED_RESOURCES = "php/mod_getCoupledResourcesForDataset.php"
 
 URL_GLM_MOD = "php/mod_sessionWrapper.php"
 
-URL_SPATIAL_BASE = "http://geoportal.rlp.de/mapbender/"
-URL_SPATIAL_SEARCH_SUFFIX = "geoportal/gaz_geom_mobile.php"
+URL_BASE_GEOPORTAL = "http://geoportal.rlp.de/mapbender/"
+URL_LOCATION_SEARCH_SUFFIX = "geoportal/gaz_geom_mobile.php"
 
 URL_INSPIRE_DOC = "https://inspire.ec.europa.eu/Themes/"
 

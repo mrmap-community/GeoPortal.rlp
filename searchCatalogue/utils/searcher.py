@@ -8,22 +8,22 @@ Created on: 22.01.19
 """
 import hashlib
 import random
+import threading
+import requests
+
+from copy import copy
 from collections import OrderedDict
 from json import JSONDecodeError
 
-import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
-import threading
-
-from copy import copy
-
 from Geoportal.utils import utils
-from Geoportal.settings import PRIMARY_CATALOGUE, HOSTNAME, INTERNAL_SSL, SEARCH_API_PROTOCOL, INTERNAL_PAGES_CATEGORY
+from Geoportal.settings import PRIMARY_CATALOGUE, INTERNAL_SSL, SEARCH_API_PROTOCOL, INTERNAL_PAGES_CATEGORY
+
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Searcher:
@@ -87,7 +87,7 @@ class Searcher:
         md_5.update(microseconds)
         self.search_id = md_5.hexdigest()
 
-    def __prepare_selected_facets(self):
+    def _prepare_selected_facets(self):
         """ Find the ids of the selected facets in all facets
 
         Returns:
@@ -105,8 +105,7 @@ class Searcher:
                 elif facet.get("parent_category") == "Organizations":
                     self.org_ids.append(facet.get("id"))
 
-
-    def __get_resource_results(self, url, params: dict, resource, result: dict):
+    def _get_resource_results(self, url, params: dict, resource, result: dict):
         """ Use a GET request to retrieve the search results for a specific data resource
 
         Args:
@@ -120,7 +119,7 @@ class Searcher:
         response = requests.get(url, params, verify=INTERNAL_SSL)
         result[resource] = response.json()
 
-    def get_categories_list(self, lang):
+    def search_categories_list(self, lang):
         """ Get a list of all categories/facets from the database using a GET request
 
         Returns:
@@ -143,7 +142,7 @@ class Searcher:
         categories = response["categories"]["searchMD"]["category"]
         return categories
 
-    def get_all_organizations(self):
+    def search_all_organizations(self):
         """ Get a list of all organizations that published data
 
         Returns:
@@ -157,7 +156,7 @@ class Searcher:
             return response
         return {}
 
-    def get_all_topics(self, language):
+    def search_all_topics(self, language):
         """ Get a list of all topics that can be found in the database
 
         Returns:
@@ -180,7 +179,7 @@ class Searcher:
             return response
         return {}
 
-    def get_coupled_resource(self, md_link):
+    def search_coupled_resource(self, md_link):
         """ Resolve coupled dataset/series resources for secondary catalogues
 
         Args:
@@ -202,7 +201,7 @@ class Searcher:
             return response
         return {}
 
-    def get_search_results_primary(self, user_id=None):
+    def search_primary_catalogue_data(self, user_id=None):
         """ Performs the search
 
         Search parameters will be used from the Searcher object itself.
@@ -211,7 +210,7 @@ class Searcher:
             dict: Contains the search results
         """
         url = URL_BASE + URL_SEARCH_PRIMARY_SUFFIX
-        self.__prepare_selected_facets()
+        self._prepare_selected_facets()
         params = {
             "searchText": self.keywords,
             "outputFormat": self.output_format,
@@ -250,13 +249,13 @@ class Searcher:
             else:
                 params["searchPages"] = 1
             params["searchResources"] = resource
-            thread = threading.Thread(target=self.__get_resource_results, args=(url, copy(params), resource, result))
+            thread = threading.Thread(target=self._get_resource_results, args=(url, copy(params), resource, result))
             thread_list.append(thread)
             #self.__get_resource_results(url, params, resource, result)
         utils.execute_threads(thread_list)
         return result
 
-    def __get_resource_results_de(self, resource, params: dict, results: dict, url):
+    def _get_external_resource_results(self, resource, params: dict, results: dict, url):
         """ Executes API calls for the german catalogue for each resource in an own thread
 
         Args:
@@ -275,7 +274,7 @@ class Searcher:
         except JSONDecodeError:
             return
 
-    def get_search_results_de(self):
+    def search_external_catalogue_data(self):
         """ Main function for calling the german catalogue
 
         Returns:
@@ -305,28 +304,29 @@ class Searcher:
             else:
                 params["searchPages"] = 1
             params["searchResources"] = resource
-            thread_list.append(threading.Thread(target=self.__get_resource_results_de, args=(resource, copy(params), results, url)))
+            thread_list.append(threading.Thread(target=self._get_external_resource_results, args=(resource, copy(params), results, url)))
         utils.execute_threads(thread_list)
 
         return results
 
-    def get_spatial_data(self, search_texts):
+    def search_locations(self, search_texts: list, max_results=15):
         """ Performs a spatial filtered search
 
         Args:
-            search_texts: All search words in a list
+            search_texts (list): All search words in a list
+            max_results (int): Defines a number of maximum returned elements, default is 15
         Returns:
             Returns the spatial search results from the database
         """
         ret_val = []
-        url = URL_SPATIAL_BASE + URL_SPATIAL_SEARCH_SUFFIX
+        url = URL_BASE_GEOPORTAL + URL_LOCATION_SEARCH_SUFFIX
         for search_text in search_texts:
             params = {
                 "outputFormat": self.output_format,
                 "resultTarget": "web",
                 "searchEPSG": 4326,
-                "maxResults": 15,
-                "maxRows": 15,
+                "maxResults": max_results,
+                "maxRows": max_results,
                 "searchText": search_text,
                 "hostName": HOSTNAME,
                 "protocol": SEARCH_API_PROTOCOL,
@@ -338,10 +338,9 @@ class Searcher:
             result["keyword"] = search_text
             ret_val.append(result)
 
-
         return ret_val
 
-    def __get_single_info_result(self, params: dict, results: dict):
+    def _get_single_info_result(self, params: dict, results: dict):
         """ Runs a single thread GET request
 
         Args:
@@ -416,7 +415,7 @@ class Searcher:
                 params_cp = copy(params)
                 params_cp["srwhat"] = what
                 # create thread
-                thread_list.append(threading.Thread(target=self.__get_single_info_result, args=(params_cp, results)))
+                thread_list.append(threading.Thread(target=self._get_single_info_result, args=(params_cp, results)))
             thread_list.append(threading.Thread(target=self.get_info_pdf_files, args=(keyword, results)))
         utils.execute_threads(thread_list)
         return results

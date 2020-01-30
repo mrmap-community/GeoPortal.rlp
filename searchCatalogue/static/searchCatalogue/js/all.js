@@ -150,10 +150,12 @@ Search.prototype = {
                 'terms':  self.getParam('terms'),
                 'type': 'autocomplete'
             },
-            type: 'post',
+            type: 'get',
             dataType: 'json',
             success: function(data) {
-                self.parseAutocompleteResult(data);
+                var autocompleteList = $(".-js-simple-search-autocomplete");
+                autocompleteList.html(data["html"]);
+                autocompleteList.show();
             }
         });
     },
@@ -294,9 +296,6 @@ Search.prototype = {
     }
 };
 
-'use strict';
-/* globals jQuery, Search, BASEDIR, setTimeout, L, document, window, $ */
-
 /**
  * init
  */
@@ -328,7 +327,8 @@ var Autocomplete = function(search) {
         DOWN_ARROW: 40,
         LEFT_ARROW: 37,
         RIGHT_ARROW: 39,
-        ENTER: 13
+        ENTER: 13,
+        ESC: 27
     };
 
     this.init = function(search) {
@@ -336,14 +336,15 @@ var Autocomplete = function(search) {
         _search = search;
         _input = jQuery('.-js-simple-search-field');
         _div = jQuery('.-js-simple-search-autocomplete');
-        _div.on('click', self.onSelect);
+        $("html").on('click', self.onSelect);
         _input.on('keyup', function(e) {
             self.keyUp(e.keyCode);
         });
     };
 
     this.hide = function() {
-        _div.removeClass('active');
+        _div.empty();
+        _div.hide();
         _pos = 0;
     };
 
@@ -378,6 +379,9 @@ var Autocomplete = function(search) {
                 }
             }
         }
+        else if (keyCode === KEYBOARD.ESC){
+            self.hide();
+        }
         else  if (keyCode !== KEYBOARD.LEFT_ARROW && keyCode !== KEYBOARD.RIGHT_ARROW) {
             var term = _input.val().trim();
             _search.setParam('terms', term);
@@ -393,17 +397,39 @@ var Autocomplete = function(search) {
     };
 
     this.onSelect = function(e) {
-        var el = jQuery(e.target);
-        var keyword = el.data('keyword') ? el.data('keyword') : el.parent().data('keyword');
-        if (keyword) {
-            _input.val(keyword);
+        var el = $(e.target);
+
+        // resolve into possible suggestion element where only name was clicked
+        var el = el.closest(".suggestion");
+
+        // if click is outside of the .middle-header element (where the search field and suggestion list lives), we close the list
+        if(el.is(".middle-header, .middle-header *")){
+
+            if(el.hasClass("location")){
+                // for location suggestions
+                var bbox = el.attr("data-location");
+
+                // create parameter string, which defines a zoom to the given bbox
+                var param = "ZOOM=" + bbox + ",EPSG%3A4326"
+                startAjaxMapviewerCall(param);
+                self.hide();
+
+            }else{
+                // for regular data search suggestions
+                var keyword = el.text().trim();
+                if (keyword) {
+                    _input.val(keyword);
+                    self.hide();
+                    $("#geoportal-search-button").click();
+                }
+            }
+        }else{
             self.hide();
-            $("#geoportal-search-button").click();
         }
     };
 
     this.nav = function(p) {
-        var alldivs = _div.find('div');
+        var alldivs = _div.find('.suggestion');
         if (alldivs.length) {
             _pos = _pos + p;
             if (_pos < 1) {
@@ -411,8 +437,8 @@ var Autocomplete = function(search) {
             } else if (_pos > alldivs.length) {
                 _pos = alldivs.length;
             }
-            var el = _div.find('div:nth-child(' + _pos + ')');
-            _div.find('div').removeClass('active');
+            var el = $(alldivs[_pos]);
+            _div.find('.suggestion.active').removeClass('active');
             el.addClass('active');
         }
     };
@@ -605,7 +631,12 @@ function startAjaxMapviewerCall(value, mobile){
                     left:0,
                     behavior:'smooth'
                 });
-                $(".map-viewer-toggler").click();
+
+                // Open the map overlay only if it wasn't opened yet!
+                var mapOverlay = $(".map-viewer-overlay");
+                if(mapOverlay.hasClass("closed")){
+                    $(".map-viewer-toggler").click();
+                }
                 if(mobile){
                     $(".map-viewer-selector").click();
                 }
@@ -668,14 +699,6 @@ $(document).ready(function() {
         }
         return null;
     };
-    /*
-    var fixDateFormats = function(items) {
-        items.regTimeBegin = [fixDateFormat(items.regTimeBegin[0])];
-        items.regTimeEnd = [fixDateFormat(items.regTimeEnd[0])];
-        items.timeBegin = [fixDateFormat(items.timeBegin[0])];
-        items.timeEnd = [fixDateFormat(items.timeEnd[0])];
-    };
-    */
 
      // set the focus on the search bar
      if(window.location.pathname == "/"){
@@ -1011,12 +1034,13 @@ $(document).ready(function() {
         var bboxParams = elem.attr("data-params");
         var termsParams = elem.attr("data-source");
         var locationParam = elem.attr("data-target");
+
         // remove locationParam from searchfield input!
         var searchField = $("#geoportal-search-field");
         var checkbox = $("#spatial-checkbox");
         checkbox.prop("checked", false);
         searchField.val(searchField.val().replace(locationParam, "").trim());
-        //search.setParam("terms", termsParams);
+
         search.setParam("searchBbox", bboxParams);
         search.setParam("searchTypeBbox", "intersects");
         prepareAndSearch();
@@ -1708,6 +1732,10 @@ $(document).ready(function() {
         var thisBody = elem.parents(".search-cat").find(".search--body");
         thisBody.toggle("slow");
         thisBody.toggleClass("hide");
+
+        // open automatically subelements
+        var subelements = thisBody.find(".sublayer-more");
+        subelements.click();
     });
 
     $(document).on('change', '#geoportal-maxResults', function() {

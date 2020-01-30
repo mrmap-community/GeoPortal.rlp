@@ -107,7 +107,7 @@ def get_landing_page(lang: str):
     ret_dict = {}
     # get favourite wmcs
     searcher = Searcher(keywords="", result_target="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME, max_results=10)
-    search_results = searcher.get_search_results_primary()
+    search_results = searcher.search_primary_catalogue_data()
     ret_dict["wmc"] = search_results.get("wmc", {}).get("wmc", {}).get("srv", [])
 
     # get number of wmc's
@@ -129,7 +129,7 @@ def get_landing_page(lang: str):
     }
     for key, val in tmp.items():
         searcher = Searcher(keywords="", result_target="", resource_set=[key], host=HOSTNAME)
-        search_results = searcher.get_search_results_primary()
+        search_results = searcher.search_primary_catalogue_data()
         ret_dict[val] = search_results.get(key, {}).get(key, {}).get("md", {}).get("nresults")
 
     return ret_dict
@@ -143,7 +143,7 @@ def get_all_organizations():
     """
     searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
 
-    return searcher.get_all_organizations()
+    return searcher.search_all_organizations()
 
 
 def get_all_applications():
@@ -153,7 +153,7 @@ def get_all_applications():
          A list of all applications
     """
     searcher = Searcher(keywords="", resource_set=["application"], host=HOSTNAME, max_results=50)
-    return searcher.get_search_results_primary().get("application", {}).get("application", {}).get("application", {}).get("srv", [])
+    return searcher.search_primary_catalogue_data().get("application", {}).get("application", {}).get("application", {}).get("srv", [])
 
 
 def get_all_inspire_topics(language):
@@ -164,7 +164,7 @@ def get_all_inspire_topics(language):
     """
     searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
 
-    return searcher.get_all_topics(language)
+    return searcher.search_all_topics(language)
 
 
 def bcrypt_password(pw: str, user: MbUser):
