@@ -1732,6 +1732,10 @@ $(document).ready(function() {
         var thisBody = elem.parents(".search-cat").find(".search--body");
         thisBody.toggle("slow");
         thisBody.toggleClass("hide");
+
+        // open automatically subelements
+        var subelements = thisBody.find(".sublayer-more");
+        subelements.click();
     });
 
     $(document).on('change', '#geoportal-maxResults', function() {
