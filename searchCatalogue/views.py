@@ -152,6 +152,14 @@ def auto_completion(request: HttpRequest):
     location_search_suggestions = tmp
     data_search_suggestions = data_search_suggestions.get("resultList", [])
 
+    # Strange behaviour can be occured on the API when fetching 'Kob' and 'Kobl'. One time a list is returned,
+    # another time a dict. Since we need a list here, we need to fix this for now by ourselves.
+    tmp = []
+    if isinstance(data_search_suggestions, dict):
+        for k, v in data_search_suggestions.items():
+            tmp.append(v)
+        data_search_suggestions = tmp
+
     params = {
         "data_suggestions": data_search_suggestions,
         "location_suggestions": location_search_suggestions,
