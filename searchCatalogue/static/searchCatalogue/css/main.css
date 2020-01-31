@@ -657,9 +657,9 @@ dl dd {
 }
 
 .tab-icn{
-  margin: 0 0.5em 0 0.5em;
-  width: 1.0em;
-  max-height: 1.0em;
+    margin: 0 1.5em 0 0.5em;
+    font-size: 1.25em;
+    color: white;
 }
 
 .select-wrapper{
