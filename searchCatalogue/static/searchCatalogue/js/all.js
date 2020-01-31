@@ -99,9 +99,6 @@ function openInNewTab(url){
 
 Search.prototype = {
     '__proto__': Storage.prototype,
-    setBasedir: function(basedir) {
-        //this.searchUrl = basedir + 'server.php'; //WTF?
-    },
 
     getAjaxDeferred: function() {
         var def = $.Deferred();
@@ -199,9 +196,18 @@ Search.prototype = {
             },
             timeout: 10000,
             error: function(jqXHR, textStatus, errorThrown){
+                // set old checkbox checked, so the user will not be confused if the failed catalogues checkbox is checked
+                // but the results from the last working search are displayed
+                var lastCatalgoueIdentifier = window.sessionStorage.getItem("lastCatalogueIdentifier")
+                window.sessionStorage.removeItem("lastCatalogueIdentifier")
+                var lastCatalogueCheckbox = $(".radio-button-catalogue[value='" + lastCatalgoueIdentifier + "']")
+                lastCatalogueCheckbox.click();
+
                 if(textStatus === "timeout"){
+                    // inform user about timeout problem
                     alert("The catalogue provider didn't respond. Please try again later.");
                 }else{
+
                 }
             },
         })
@@ -308,7 +314,6 @@ var maps = []; //used for "raemliche Eingrenzung"
  * @type {Search}
  */
 var search = new Search();
-search.setBasedir(BASEDIR);
 
 /**
  * Autocomplete feature for searchfield
@@ -1389,9 +1394,15 @@ $(document).ready(function() {
      */
      $(document).on("click", ".radio-button-catalogue", function(){
         var elem = $(this);
+
+        // save the catalogue radio button id, to restore it in case of a failed new search
+        window.sessionStorage.setItem("lastCatalogueIdentifier", search.getParam("source"))
+
         search.setParam("source", elem.val());
+
         // make sure to drop the spatial search if it is still enabled
         disableSpatialCheckbox();
+
         // run search as always
         prepareAndSearch();
 
