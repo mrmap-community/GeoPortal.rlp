@@ -36,8 +36,19 @@ https://www.geoportal.rlp.de/
 Fast install on local system (only for testing, default passwords!):
 ```shell
 wget --no-check-certificate https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
-chmod +x geoportal_maintenance.sh
-./geoportal_maintenance.sh --mode=install --ip=127.0.0.1 [options]
+wget --no-check-certificate https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/options.txt
+
+FILL THE OPTIONS FILE!
+
+Default path is options.txt in same directory as geoportal_maintenance.sh,
+other location can be specified with --options_file=/full/path/options.txt
+Place it somewhere where it wont be replaced by updates.
+
+CHANGE RIGHTS OF OPTIONS FILE TO 600 and have it owned by root!
+chmod 600 options.txt
+chown root options.txt
+
+bash geoportal_maintenance.sh --mode=install [--options_file=/full/path/options.txt]
 ```
 
 
@@ -52,51 +63,20 @@ Requirements:
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-        --ip=ipaddress             			                | Default "127.0.0.1"
-        --hostname=hostname              			        | Default "127.0.0.1"
-        --proxy=Proxy IP     	 			                | Default "None" ; Syntax --proxy=1.2.3.4:5555
-        --proxyuser=username                      	        | Default "" ; Password will be prompted
-        --mapbenderdbuser=User for Database access	        | Default "mapbenderdbuser"
-    	--mapbenderdbpw=Password for database access    	| Default "mapbenderdbpassword"
-    	--phppgadmin_user=User for PGAdmin web access		| Default "postgresadmin"
-    	--phppgadmin_pw=Password for PGAdmin web access   	| Default "postgresadmin_password"
-	    --install_dir=Directory for installation		    | Default "/data/"
-        --webadmin_email=email address for send mail        | Default "test@test.de"
-    	--mysqlpw=database password for MySQL		     	| Default "root"
-    	--mode=what you want to do				            | Default "none" [install,update,delete,backup]
-        --email_hosting_server=your mailing server          | Default "mail.domain.tld"
+        --options_file=File with install options 		| Default "options.txt"
+        --mode=what you want to do			            | Default "none" [install,update,delete,backup]
 
-
-
-Description:  
-
-	mandatory:  
-	--ip                    -> The address of your external interface.
-	--hostname              -> FQDN of your Server www.example.rlp.de
-	--mode                  -> What you want to do. Choices are install | update | delete | backup.
-
-	optional:  
-	--proxy                 -> IP Address:Port of your local proxy server. Will be inserted in: apt.conf, mapbender.conf, subversion.conf
-                            Special case: --proxyip=custom lets you choose a different proxy for each service above
-	--proxyuser             -> Username for proxy auth, Password will be prompted
-	--mapbenderdbuser       -> User for accessing the mapbender database. Will be created on install.
-	--mapbenderdbpw         -> Password for mapbenderdbuser.
-	--phppgadmin_user       -> User for the PHPPgAdmin Webinterface.
-	--phppgadmin_pw         -> Password for phppgadmin_user.
-	--mysqlpw               -> Passwort for the MySql root user.
-    --webadmin_email        -> The email address e.g. registration mails are send from
-    --email_hosting_server  -> The mailing server geoportal mails will be send from
 
 Examples:  
 
 Install:  
 ```shell
-geoportal_maintenance.sh --ip=192.168.0.2 --proxy=192.168.0.254:3128 --mapbenderdbuser=MyPostgresDBUser --mapbenderdbpw=MyPostgresDBPassword --phppgadmin_user=MyPHPPgAdminUser ---phppgadmin_pw=MyPHPPgAdminPassword --mysqlpw=MyMySQLRootPW --mode=install --install_dir=/opt/ --webadmin_email=geoportal@yourdomain.tld --email_hosting_server=mail.yourdomain.tld
+geoportal_maintenance.sh --mode=install --options_file=/data/options.txt
 ```
 
 Update:
 ```shell
-geoportal_maintenance.sh --mode=update
+geoportal_maintenance.sh --mode=update --options_file=/data/options.txt
 
 You can create a file called custom_files.txt in the $installation_directory.  
 Files mentioned in this document are saved before update and restored afterwards.  
@@ -117,12 +97,12 @@ geoportal_maintenance.sh --mode=delete
 
 Backup:  
 ```shell
-geoportal_maintenance.sh --mode=backup
+geoportal_maintenance.sh --mode=backup --options_file=/data/options.txt
 ```
 
 default credentials:  
 mysql        -> root:root  
-wiki         -> root:rootroot  
+wiki         -> geowiki:geoportal;root:root  
 postgres     -> postgres:  
 phppgadmin   -> postgresadmin:postgresadmin_password  
 django-admin -> root:root  
