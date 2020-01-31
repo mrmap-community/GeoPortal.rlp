@@ -1192,7 +1192,7 @@ update(){
             directory=${directory%$filename}
 
             mkdir -p /tmp/custom_files/$directory
-            cp -a $line /tmp/custom_files/
+            cp -a $line /tmp/custom_files/$directory
           done < "$input"
         fi
 
@@ -1275,7 +1275,7 @@ cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_f
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
-su -c 'svn -q update'
+su -c 'svn update'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
 
 echo "Restoring Mapbender Configs"
