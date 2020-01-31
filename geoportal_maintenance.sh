@@ -10,7 +10,7 @@
 
 
 # Variables
-options_file="/data/options_file"
+options_file="options.txt"
 installation_folder="/data/"
 ipaddress="127.0.0.1"
 hostname="127.0.0.1"
@@ -1515,7 +1515,7 @@ echo "
 This script is for installing and maintaining your geoportal solution
 You can choose from the following options:
 
-      --options_file=File with install options 		| Default \"/data/options_file\"
+      --options_file=File with install options 		| Default \"options.txt\"
     	--mode=what you want to do			| Default \"none\" [install,update,delete,backup]
 
 "
