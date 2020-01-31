@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# where to install geoportal
+installation_folder="/data/"
+
+# ipaddress for INTERNAL communication, dont use your public ip for this
+ipaddress="127.0.0.1"
+
+# hostname for external links etc.
+hostname="127.0.0.1"
+
+# mapbender/phppgadmin/mysql database config
+#mb
+mapbender_database_name="mapbender"
+mapbender_database_host="127.0.0.1"
+mapbender_database_port="5432"
+mapbender_database_user="mapbenderdbuser"
+mapbender_database_password="mapbenderdbpassword"
+
+#phppgadmin
+phppgadmin_user="postgresadmin"
+phppgadmin_password="postgresadmin_password"
+
+#mysql
+mysql_user="geowiki"
+mysql_user_pw="geoportal"
+mysql_root_pw="root"
+
+#proxy config, will be set for apt,subversion,mapbender
+http_proxy="myproxy:8080"
+
+# admin email address, apache2 conf
+webadmin_email="test@test.de"
+
+# email settings, for django config
+email_hosting_server="mail.domain.tld"
+
+# mapbender specific Account IDs
+mapbender_guest_user_id="2"
+mapbender_guest_group_id="22"
+mapbender_subadmin_group_id="21"
+mapbender_subadmin_default_user_id="3"
+mapbender_subadmin_default_group_id="23"
+
+# coords
+minx="289000"
+miny="5423000"
+maxx="465000"
+maxy="5647000"
+epsg="EPSG:25832"
+bbox_current_epsg_csv="$minx,$miny,$maxx,$maxy"
+bbox_current_epsg_space="$minx $miny $maxx $maxy"
+
+# define name of the default gui -
+# don't use spaces, cause the gui names are used for filenames!!!! - TBD not already operabel!
+#default_gui_name="Geoportal-Default-GUI"
+#extended_search_default_gui_name="Geoportal-Extended-Search-GUI"
+default_gui_name="Geoportal-RLP"
+extended_search_default_gui_name="Geoportal-RLP_erwSuche2"
+
+# atomFeedClient.conf / config.js - mm2_config.js
+center_x_i="385000"
+center_y_i="5543000"
+# config.js - mm2_config.js
+bbox_wgs84="6.05 48.9 8.6 50.96"
+initial_scale_i="1500000"
+map_extent_csv=$bbox_wgs84
+
+
