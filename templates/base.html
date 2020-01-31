@@ -68,13 +68,13 @@
 <body>
     <nav>
     <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
-        <img alt="{% trans 'A lying map icon' %}" src="{% static 'useroperations/images/icn_map_viewer_toggler_transp.png' %}" title="{% trans 'Open and close map viewer' %}">
+        <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}"></i>
     </div>
     <div class="map-viewer-overlay closed">
         {% include 'geoportal.html' %}
     </div>
     <div class="sidebar-toggler">
-        <img alt="{% trans 'Three horizontal lines, one below the other' %}" src="{% static 'useroperations/images/icn_toggler_transp.png' %}" title="{% trans 'Open and close menu' %}">
+        <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i>
     </div>
     <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
         <div class="sidebar-title">
@@ -84,7 +84,7 @@
             <a href="{% url 'useroperations:index' %}">
                 <div class="sidebar-area-title">
                     <div class="sidebar-area-title-icon">
-                        <img alt="{% trans 'A stylized house' %}" width="40px" src="{% static 'useroperations/images/icn_home.png' %}">
+                        <i class="fas fa-home" alt="{% trans 'A stylized house' %}"></i>
                     </div>
                     <div class="sidebar-area-title-text">
                         {% trans 'Home' %}
@@ -95,9 +95,9 @@
             <div class="sidebar-area-title" onclick="toggleSubMenu(this)">
                 <div class="sidebar-area-title-icon">
                     {% if loggedin %}
-                        <img alt="{% trans 'A filled stylized person shape in a circle' %}" width="40px" src="{% static 'useroperations/images/icn_user_logged_in.png' %}">
+                        <i class="fas fa-user-circle" alt="{% trans 'A filled stylized person shape in a circle' %}"></i>
                     {% else %}
-                        <img alt="{% trans 'An empty stylized person shape in a circle' %}" width="40px" src="{% static 'useroperations/images/icn_user.png' %}">
+                        <i class="far fa-user-circle" alt="{% trans 'An empty stylized person shape in a circle' %}"></i>
                     {% endif %}
                 </div>
                 <div class="sidebar-area-title-text">
@@ -118,7 +118,6 @@
                 <div>{% trans 'Not signed in' %}</div>
                     <a href="{% url 'useroperations:login' %}"><div class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</div></a>
                     <a href="{% url 'useroperations:register' %}"><div class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</div></a>
-                    <!--<a href="{% url 'useroperations:pw_reset' %}"><div class="sidebar-list-element">{% trans 'Reset Password' %}</div></a> ToDo: Move to login form -->
                 {% endif %}
             </div>
         </div>
@@ -127,7 +126,7 @@
 	        <div class="sidebar-area" id="news">
                 <div class="sidebar-area-title">
                     <div class="sidebar-area-title-icon">
-                        <img alt="{% trans 'A newspaper' %}" width="40px" src="{% static 'useroperations/images/icn_news.png' %}">
+                        <i class="far fa-newspaper" alt="{% trans 'A newspaper' %}" ></i>
                     </div>
                     <div class="sidebar-area-title-text">{% trans 'News' %}
                     </div>
@@ -138,7 +137,7 @@
         <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
-                    <img alt="{% trans 'A lying map' %}" width="40px" src="{% static 'useroperations/images/icn_map_viewer.png' %}">
+                    <i class="far fa-map" alt="{% trans 'A lying map' %}"></i>
                 </div>
                 <div class="sidebar-area-title-text">
                     {% trans 'Mapviewer' %}

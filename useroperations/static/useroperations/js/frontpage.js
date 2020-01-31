@@ -170,6 +170,15 @@ $(document).on("click", ".mobile-button", function(){
 });
 
 $(document).on("click", ".map-viewer-selector", function(){
+    var elem = $(this);
+    elem.toggleClass("open")
+
+    // close other menu
+    var mapViewerSelector = $(".map-applications-toggler");
+    if(mapViewerSelector.hasClass("open") && elem.hasClass("open")){
+        mapViewerSelector.click();
+    }
+
     var viewerList = $(".map-viewer-list");
     viewerList.slideToggle("medium");
     //toggleMapViewers();
@@ -177,6 +186,14 @@ $(document).on("click", ".map-viewer-selector", function(){
 
 $(document).on("click", ".map-applications-toggler", function(){
     var elem = $(this);
+    elem.toggleClass("open")
+
+    // close other menu
+    var mapViewerSelector = $(".map-viewer-selector");
+    if(mapViewerSelector.hasClass("open") && elem.hasClass("open")){
+        mapViewerSelector.click();
+    }
+
     var applicationsList = $(".map-applications-list");
     applicationsList.slideToggle("medium");
 });

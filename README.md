@@ -242,3 +242,7 @@ All other images that have the prefix `icn_` are used as icons and can be change
 ## License
 
 Licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
+
+### Attributions
+#### Fontawesome
+We use the fantastic [free Fontawesome](https://fontawesome.com/start) icons for our open source project. 

@@ -370,17 +370,45 @@ ul {
     top: 150px;
     right: 0px;
     z-index: 2;
+
+    background-color: var(--primary);
+    font-size: 2.0em;
+    color: white;
+    padding: .5em;
+    border-radius: 0 0 0 0.75em;
 }
 
-.map-viewer-toggler img, .sidebar-toggler img, .map-viewer-selector img, .map-applications-toggler img{
+.map-viewer-toggler img, .sidebar-toggler img{
     background-color: var(--primary);
     padding: 0.1em;
     border-radius: 100%;
     width: 3em;
 }
 
-.map-viewer-selector{
-    margin: 5px 0 0 0;
+.map-viewer-selector, .map-applications-toggler{
+    margin: 0.75em 0 0 0;
+    background-color: var(--primary);
+    font-size: 1.50em;
+    color: white;
+    padding: .5em;
+    border-radius: 0.75em 0 0 0.75em;
+    transition: all 0.25s ease-in-out;
+    width: 2.5em;
+    transform: translateX(1.75em);
+}
+
+.map-viewer-selector:hover, .map-applications-toggler:hover{
+    cursor: pointer;
+	-webkit-filter: drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-moz-filter:    drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-ms-filter:     drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	-o-filter:      drop-shadow(0 5px 2px rgba(0,0,0,.5));
+	filter:         drop-shadow(0 5px 2px rgba(0,0,0,.5));
+}
+
+.map-viewer-selector.open, .map-applications-toggler.open{
+    transform: translateX(0.0em);
+    background: var(--primary-light);
 }
 
 .map-applications-toggler{
@@ -402,10 +430,10 @@ ul {
 .map-applications-list-entry, .map-viewer-list-entry{
     color: white;
     font-weight: bold;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 0.5em;
+    margin-top: 0.25em;
     background-color: var(--primary-light);
-    border-radius: 10px;
+    border-radius: 0.75em 0 0 0.75em;
 }
 .map-applications-list-entry:hover, .map-viewer-list-entry:hover {
     background-color: var(--primary-light-hover);
@@ -456,9 +484,9 @@ ul {
     margin: auto;
 }
 
-.quickstart-header img{
+.quickstart-header i{
     margin: 0 20px 0 0;
-    width: 1.25em;
+    font-size: 1.5em;
 }
 
 .landing-page-headline{
@@ -482,10 +510,15 @@ ul {
     top: 150px;
     left: 0px;
     z-index: 2;
+    background-color: var(--primary);
+    font-size: 2.0em;
+    color: white;
+    padding: .5em;
+    border-radius: 0 0 0.75em 0;
 }
 
 
-.sidebar-toggler:hover, .map-viewer-toggler:hover, .map-applications-toggler:hover, .map-viewer-selector:hover{
+.sidebar-toggler:hover, .map-viewer-toggler:hover{
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
     cursor: pointer;
@@ -518,7 +551,6 @@ ul {
     text-align: center;
     width: 100%;
     margin-top: 0px;
-    padding: 20px 0 0 0;
     color: white;
 }
 .sidebar-content a{
@@ -531,7 +563,7 @@ ul {
     text-align: center;
     font-weight: bold;
     color: white;
-    padding: 10px;
+    padding: 1em;
     font-size: 20px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -601,6 +633,11 @@ ul {
 .sidebar-list-element:hover{
     text-decoration: none;
     background-color: var(--primary-light-hover);
+    color: white;
+}
+
+.sidebar-area-title-icon{
+    font-size: 2.0em;
     color: white;
 }
 
@@ -759,9 +796,9 @@ ul {
         width: 3.5em;
     }
 
-
-    .sidebar-area-title-icon img{
-        width: 2em;
+    .sidebar-area-title-icon{
+        font-size: 1.5em;
+        color: white;
     }
 
     .sidebar-title{

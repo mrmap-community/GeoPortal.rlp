@@ -5,7 +5,8 @@
         <div class="map-sidebar">
             <div class="map-sidebar-actions">
                 <div class="map-viewer-selector">
-		        	<img alt="{% trans 'A mapviewer switcher icon, shaped as two arrows pointing in opposite directions' %}" src="{% static 'useroperations/images/icn_switch_transp.png' %}" title="{% trans 'Switch between mapviewers' %}">
+					<i class="fas fa-exchange-alt" alt="{% trans 'A mapviewer switcher icon, shaped as two arrows pointing in opposite directions' %}" title="{% trans 'Switch between mapviewers' %}"></i>
+		        	<!--<img alt="{% trans 'A mapviewer switcher icon, shaped as two arrows pointing in opposite directions' %}" src="{% static 'useroperations/images/icn_switch_transp.png' %}" title="{% trans 'Switch between mapviewers' %}">-->
 		        </div>
                 <div class="map-viewer-list">
 				{% for mapviewer_name, mapviewer_val in mapviewers.items %}
@@ -15,7 +16,7 @@
 				{% if guis|length > 1 %}
 		        	<div class="map-application-selector">
 		        		<div class="map-applications-toggler">
-		        			<img alt="An arrow pointing from one map to another above" src="{% static 'useroperations/images/icn_map_application_toggler_transp.png' %}" title="{% trans 'Select other map application' %}">
+							<i class="far fa-folder-open" alt="An arrow pointing from one map to another above" title="{% trans 'Select other map application' %}"></i>
 		        		</div>
 		        	</div>
 				{% endif %}
