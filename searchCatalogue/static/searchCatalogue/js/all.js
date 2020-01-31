@@ -398,6 +398,7 @@ var Autocomplete = function(search) {
 
     this.onSelect = function(e) {
         var el = $(e.target);
+        var srs = 25832;
 
         // resolve into possible suggestion element where only name was clicked
         var el = el.closest(".suggestion");
@@ -410,7 +411,7 @@ var Autocomplete = function(search) {
                 var bbox = el.attr("data-location");
 
                 // create parameter string, which defines a zoom to the given bbox
-                var param = "ZOOM=" + bbox + ",EPSG%3A25832"
+                var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
                 startAjaxMapviewerCall(param);
                 self.hide();
 

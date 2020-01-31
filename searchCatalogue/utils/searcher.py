@@ -42,7 +42,7 @@ class Searcher:
                  catalogue_id=PRIMARY_CATALOGUE,
                  only_open_data='false',
                  host=None,
-                 result_target="webclient",):
+                 result_target="webclient"):
         """ Constructor
 
         Args:
@@ -309,12 +309,13 @@ class Searcher:
 
         return results
 
-    def search_locations(self, search_texts: list, max_results=15):
+    def search_locations(self, search_texts: list, max_results: int=15, srs: int=4326):
         """ Performs a spatial filtered search
 
         Args:
             search_texts (list): All search words in a list
             max_results (int): Defines a number of maximum returned elements, default is 15
+            srs (int): Defines the spatial reference system code, default is 4326
         Returns:
             Returns the spatial search results from the database
         """
@@ -324,7 +325,7 @@ class Searcher:
             params = {
                 "outputFormat": self.output_format,
                 "resultTarget": "web",
-                "searchEPSG": 25832,
+                "searchEPSG": srs,
                 "maxResults": max_results,
                 "maxRows": max_results,
                 "searchText": search_text,

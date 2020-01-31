@@ -81,5 +81,5 @@ class AutoCompleter:
              dict: Contains suggestions
         """
         searcher = Searcher()
-        locations = searcher.search_locations([self.search_text], max_results=self.max_results)
+        locations = searcher.search_locations([self.search_text], max_results=self.max_results, srs=25832)
         return locations
