@@ -36,12 +36,12 @@
 }
 
 #tile-filter-input-icon{
-    width: 2em;
+    font-size: 1.5em;
     opacity: 0.2;
     -webkit-filter: grayscale(1.0);
     filter: grayscale(1.0);
     position: relative;
-    right: 2.5em;
+    right: 1.5em;
 }
 #tile-filter-input-icon:hover{
     pointer-events: none;
