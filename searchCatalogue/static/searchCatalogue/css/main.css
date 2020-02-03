@@ -798,6 +798,14 @@ dl dd {
   display: none;
   padding: 0; }
 
+.icn-organization, .icn-date, .icn-licence{
+    font-size: 1.5em;
+    padding: 0.5em;
+}
+.icn-licence.error{
+    color: var(--error-red);
+}
+
 @media only screen and (max-width: 480px) {
   .search--sort--box {
     width: 25px;

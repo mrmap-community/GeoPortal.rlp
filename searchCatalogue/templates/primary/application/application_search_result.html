@@ -22,15 +22,15 @@
         </div>
         <div class="flex-row metadata-links">
             <a class="metadata-link-element" href="{{ result.mdLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
-                <img alt="{% trans 'An organization icon' %}" class="icon-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                <img alt="{% trans 'An organization icon' %}" class="icn-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
                 {{ result.respOrg }}
             </span></a>
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
-                <img alt="{% trans 'A calendar icon' %}" class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <img alt="{% trans 'A calendar icon' %}" class="icn-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
                 {{ result.date }}
             </span></a>
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Time of metadata' %}">
-                <img alt="{% trans 'A calendar icon' %}" class="icon-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <img alt="{% trans 'A calendar icon' %}" class="icn-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
                 {{ result.timeBegin }} {% trans 'to' %} {{ result.timeEnd }}
             </span></a>
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %} {{ result.symbolLink }} {% endif %}"></a>

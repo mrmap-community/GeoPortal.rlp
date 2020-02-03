@@ -141,8 +141,7 @@
 }
 
 .view-count{
-    padding: 10px 0;
-    font-size: 0.8em;
+    font-size: 1.0em;
 }
 .view-count img{
     opacity: 0.5;
@@ -177,7 +176,7 @@
     }
 
     .view-count{
-        padding: 1em;
+
     }
 
     .view-count img{
