@@ -395,7 +395,7 @@ ul {
     border-radius: 0.75em 0 0 0.75em;
     transition: all 0.25s ease-in-out;
     width: 2.5em;
-    transform: translateX(1.75em);
+    transform: translateX(0.8em);
 }
 
 .map-viewer-selector:hover, .map-applications-toggler:hover{

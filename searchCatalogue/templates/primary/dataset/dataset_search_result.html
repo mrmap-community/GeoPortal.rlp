@@ -14,7 +14,7 @@
             <article class="search-result-detail">{{ result.abstract }}</article>
         </div>
         <div title="{% trans 'Total view count' %}" class="view-count">
-            <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+            <i class="fas fa-eye"></i>
             <span>{{ result.loadCount|intcomma }}</span>
         </div>
         <hr>
@@ -22,25 +22,37 @@
         </div>
         <div class="flex-row metadata-links">
             <a class="metadata-link-element" href="{{ result.mdLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
-                <img alt="{% trans 'An organization icon' %}" class="icn-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                <i class="fas fa-city icn-organization" title="{% trans 'Organizations' %}" ></i>
                 {{ result.respOrg }}
             </span></a>
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
-                <img alt="{% trans 'A calendar icon' %}" class="icn-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <i class="fas fa-calendar-alt icn-date"></i>
                 {{ result.date }}
             </span></a>
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Time of metadata' %}">
-                <img alt="{% trans 'A calendar icon' %}" class="icn-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <i class="fas fa-calendar-alt icn-date"></i>
                 {{ result.timeBegin }} {% trans 'to' %} {{ result.timeEnd }}
             </span></a>
-            <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-4" target="_blank"><img class="img-symbollink" title="{% if result.symbolLink is None %}Keine Lizenzinfos verfügbar{% else %}Es gelten die Nutzungsrechte des Dienstbereitsteller{% endif %}" style="max-width:100px;" src="{% if result.symbolLink is None %} {% static 'searchCatalogue/images/no_licence.jpg' %} {% else %} {{ result.symbolLink }} {% endif %}"></a>
+
+            <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-4" target="_blank" title="{% if result.symbolLink is None %}{% trans 'No licence information found' %}{% else %}{% trans 'The data providers terms of licence applies to this data.' %}{% endif %}">
+                {% if result.symbolLink is None %}
+                    <i class="fas fa-exclamation-triangle icn-licence error"></i>
+                {% endif %}
+                <i class="fas fa-balance-scale icn-licence"></i>
+                <span>{% trans 'Licence' %}</span>
+            </a>
+
             {% if result.isopen is not None %}
                 <a class="metadata-link-element"  href="{{ OPEN_DATA_URL }}" target="_blank">
                     <img alt="{% trans 'An open data icon' %}" class="img-open"  src="{% static 'searchCatalogue/images/open-data.jpg' %}" title="Open Data">
                 </a>
             {% endif %}
+
             {% if result.logged is True or result.logged == "1" %}
-                <img alt="{% trans 'A fingerprint icon, which indicates that this service usage will be logged' %}" class="metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+            <div class="metadata-link-element" title="{% trans 'Access will be logged' %}">
+                <i class="fas fa-fingerprint icn-logging"></i>
+                <span>{% trans 'Logging' %}</span>
+            </div>
             {% endif %}
         </div>
 

@@ -221,17 +221,11 @@ dl dd {
 
 .button {
   font-weight: bold;
-  height: 40px;
   border: 1px solid var(--secondary);
   cursor: pointer;
-  padding: 10px;
-  /*
-  background-color: #f2f2f2;
-  */
+  padding: 0.5em;
   border-color: #6f6f6f;
-  line-height: 40px;
   text-decoration: none;
-  margin: 5px 10px 0 0;
     }
 
 .button:hover {
@@ -798,12 +792,29 @@ dl dd {
   display: none;
   padding: 0; }
 
-.icn-organization, .icn-date, .icn-licence{
+.icn-organization,
+.icn-date,
+.icn-licence,
+.icn-download,
+.icn-file,
+.icn-show,
+.icn-logging,
+.icn-price,
+.icn-network-restricted{
     font-size: 1.5em;
-    padding: 0.5em;
+    padding: 0 0.5em 0 0;
 }
+.icn-single{
+    padding: unset;
+}
+
 .icn-licence.error{
     color: var(--error-red);
+}
+
+.icn-price,
+.icn-network-restricted{
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -1113,6 +1124,10 @@ dl dd {
 .img-symbollink, .img-open{
     border: 1px solid rgba(0, 0, 0, 0.0);
     max-height: 3em;
+}
+
+.img-open:hover{
+    filter: unset;
 }
 
 

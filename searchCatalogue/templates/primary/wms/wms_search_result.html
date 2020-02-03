@@ -42,7 +42,10 @@
                 </a>
             {% endif %}
             {% if result.logged is True or result.logged == "1" %}
-                <i class="fas fa-fingerprint metadata-link-element resource-element-info-logging" title="{% trans 'Access will be logged' %}"></i>
+            <div class="metadata-link-element" title="{% trans 'Access will be logged' %}">
+                <i class="fas fa-fingerprint icn-logging"></i>
+                <span>{% trans 'Logging' %}</span>
+            </div>
             {% endif %}
         </div>
 

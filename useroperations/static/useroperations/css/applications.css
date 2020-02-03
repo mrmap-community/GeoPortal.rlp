@@ -9,6 +9,7 @@
 
 .sub-tile-img, .icn-organization, .icn-metadata{
     opacity: 0.6;
+    font-size: 2em;
 }
 
 .powered-by{

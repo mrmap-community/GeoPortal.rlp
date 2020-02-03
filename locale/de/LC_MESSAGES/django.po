@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 08:35+0000\n"
+"POT-Creation-Date: 2020-02-03 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,11 +126,11 @@ msgstr "Nur freie Daten"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:49
 #: searchCatalogue/templates/hits_and_sort_option.html:51
-#: searchCatalogue/templates/primary/application/application_search_result.html:39
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:39
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:28
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:36
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:43
+#: searchCatalogue/templates/primary/application/application_search_result.html:47
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:47
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:36
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:44
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:41
 msgid "An open data icon"
 msgstr "Nur freie Daten"
 
@@ -225,14 +225,6 @@ msgstr ""
 "Keine Ergebnisse gefunden, bitte versuchen Sie einen anderen Suchbegriff..."
 
 #: searchCatalogue/templates/other/coupled_resources.html:5
-#: searchCatalogue/templates/primary/application/application_search_result.html:17
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:17
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:18
-#: searchCatalogue/templates/search_result_actions.html:9
-#: searchCatalogue/templates/search_result_actions.html:21
-#: searchCatalogue/templates/search_result_actions.html:27
-#: searchCatalogue/templates/search_result_actions.html:48
-#: searchCatalogue/templates/search_result_actions.html:53
 msgid "An eye icon"
 msgstr "Ein Augensymbol"
 
@@ -247,11 +239,7 @@ msgstr "Anzeigen"
 
 #: searchCatalogue/templates/other/coupled_resources.html:11
 #: searchCatalogue/templates/other/coupled_resources.html:48
-#: searchCatalogue/templates/search_result_actions.html:15
-#: searchCatalogue/templates/search_result_actions.html:35
-#: searchCatalogue/templates/search_result_actions.html:43
-#: searchCatalogue/templates/search_result_actions.html:95
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "A download icon"
 msgstr "Ein Downloadsymbol"
 
@@ -261,8 +249,7 @@ msgstr "Ein Downloadsymbol"
 #: searchCatalogue/templates/search_result_actions.html:16
 #: searchCatalogue/templates/search_result_actions.html:36
 #: searchCatalogue/templates/search_result_actions.html:44
-#: searchCatalogue/templates/search_result_actions.html:109
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "Download"
 msgstr ""
 
@@ -272,7 +259,6 @@ msgid "Original atom feed"
 msgstr "Originaler Atom Feed"
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
-#: searchCatalogue/templates/search_result_actions.html:92
 #: useroperations/templates/inspire_topics.html:58
 msgid "A document icon"
 msgstr "Ein Dokumentensymbol"
@@ -305,12 +291,11 @@ msgstr "Sonstige Datensätze"
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:24
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:17
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:25
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:24
 msgid "Competent authority"
 msgstr "Zuständige Stelle"
 
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:86
 msgid "An organization logo"
 msgstr "Ein Organisationslogo"
 
@@ -319,17 +304,11 @@ msgstr "Ein Organisationslogo"
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:21
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:29
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:30
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:28
 msgid "Date of metadata"
 msgstr "Datum der Metadaten"
 
 #: searchCatalogue/templates/other/search_result.html:25
-#: searchCatalogue/templates/primary/application/application_search_result.html:29
-#: searchCatalogue/templates/primary/application/application_search_result.html:33
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:29
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:33
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:22
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:30
 msgid "A calendar icon"
 msgstr "Ein Kalendarsymbol"
 
@@ -392,9 +371,12 @@ msgstr "Anzahl Aufrufe"
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:25
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:18
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:26
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: useroperations/templates/applications.html:86
 #: useroperations/templates/landing_page.html:35
-msgid "An organization icon"
-msgstr "Ein Organisationssymbol"
+#: useroperations/templates/landing_page.html:36
+msgid "Organizations"
+msgstr "Organisationen"
 
 #: searchCatalogue/templates/primary/application/application_search_result.html:32
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:32
@@ -406,25 +388,48 @@ msgstr "Zeitliche Ausdehnung:"
 msgid "to"
 msgstr "bis"
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-msgid ""
-"A fingerprint icon, which indicates that this service usage will be logged"
-msgstr ""
-"Ein Fingerabdrucksymbol. Die Nutzung dieses Dienstes wird protokolliert"
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+msgid "No licence information found"
+msgstr "Keine Lizenzinfos vorhanden"
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:47
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+msgid "The data providers terms of licence applies to this data."
+msgstr "Es gelten die Nutzungsbedingungen des Diensteanbieters."
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:42
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:42
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:31
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:39
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:37
+msgid "Licence"
+msgstr ""
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:51
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:52
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:40
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:49
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:45
 #: searchCatalogue/templates/search_result_list_entry.html:16
 msgid "Access will be logged"
 msgstr "Der Zugriff wird protokolliert"
 
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:47
+#: searchCatalogue/templates/primary/application/application_search_result.html:53
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:54
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:42
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:51
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:47
+msgid "Logging"
+msgstr "Protokollierung"
+
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:58
 msgid "More"
 msgstr "Weitere"
 
@@ -456,21 +461,7 @@ msgstr "Für großes Bild anklicken"
 msgid "Bounding box around area of interest on a map"
 msgstr "Umrissgrenzen um das Gebiet auf der Karte"
 
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:26
-#: useroperations/templates/landing_page.html:35
-#: useroperations/templates/landing_page.html:36
-msgid "Organizations"
-msgstr "Organisationen"
-
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:36
-msgid "No licence information found"
-msgstr "Keine Lizenzinfos vorhanden"
-
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:38
-msgid "The data providers terms of licence applies to this data."
-msgstr "Es gelten die Nutzungsbedingungen des Diensteanbieters."
-
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:63
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:64
 msgid "Sublayers"
 msgstr "Unterebenen"
 
@@ -620,32 +611,28 @@ msgstr "Metadaten"
 msgid "Open in atom feed viewer"
 msgstr "Öffne im Atom Feed Viewer"
 
-#: searchCatalogue/templates/search_result_actions.html:121
+#: searchCatalogue/templates/search_result_actions.html:109
 msgid "Download services"
 msgstr "Downloaddienste"
 
-#: searchCatalogue/templates/search_result_actions.html:125
+#: searchCatalogue/templates/search_result_actions.html:113
 #: useroperations/templates/inspire_topics.html:63
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr "Das INSPIRE Symbol in der Form einer Ananas"
 
-#: searchCatalogue/templates/search_result_actions.html:137
-msgid "Layers"
-msgstr "Ebenen"
-
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "A key above an envelope"
 msgstr "Ein Schlüssel über einem Briefumschlag"
 
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "Ask data provider for permission"
 msgstr "Datenanbieter um Berechtigung bitten"
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "A black closed padlock"
 msgstr "Ein schwarzes, geschlossenes Vorhängeschloss"
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "Only for registered users"
 msgstr "Nur für registrierte Nutzer"
 
@@ -669,17 +656,22 @@ msgstr "Durchschnittliche Verfügbarkeit"
 msgid "Last monitoring state"
 msgstr "Letzter Monitoring Status"
 
-#: searchCatalogue/templates/search_result_list_entry.html:46
+#: searchCatalogue/templates/search_result_list_entry.html:45
+#: searchCatalogue/templates/search_result_list_entry.html:61
+#: searchCatalogue/templates/search_result_list_entry.html:93
+msgid "Capabilities"
+msgstr ""
+
 #: searchCatalogue/templates/search_result_list_entry.html:50
-#: searchCatalogue/templates/search_result_list_entry.html:53
-#: searchCatalogue/templates/search_result_list_entry.html:56
-#: searchCatalogue/templates/search_result_list_entry.html:62
+#: searchCatalogue/templates/search_result_list_entry.html:66
+#: searchCatalogue/templates/search_result_list_entry.html:77
+#: searchCatalogue/templates/search_result_list_entry.html:83
+#: searchCatalogue/templates/search_result_list_entry.html:98
 msgid "Add to mapviewer"
 msgstr "Kartenviewer hinzufügen"
 
-#: searchCatalogue/templates/search_result_list_entry.html:47
-#: searchCatalogue/templates/search_result_list_entry.html:51
-#: searchCatalogue/templates/search_result_list_entry.html:54
+#: searchCatalogue/templates/search_result_list_entry.html:55
+#: searchCatalogue/templates/search_result_list_entry.html:71
 msgid "Add to mapviewer with zoom"
 msgstr "Kartenviewer hinzufügen mit Zoom"
 
@@ -1252,10 +1244,6 @@ msgstr "Veröffentlicht am"
 msgid "Published by"
 msgstr "Veröffentlicht von"
 
-#: useroperations/templates/applications.html:95
-msgid "A metadata symbol"
-msgstr "Ein Metadatensymbol"
-
 #: useroperations/templates/crispy_form_no_action.html:11
 msgid "Why should I create an account?"
 msgstr "Wozu brauche ich ein Benutzerkonto?"
@@ -1380,6 +1368,10 @@ msgstr "Suche nach allen Datensätzen"
 #: useroperations/templates/landing_page.html:33
 msgid "Show all organizations"
 msgstr "Suche nach allen Organisationen starten"
+
+#: useroperations/templates/landing_page.html:35
+msgid "An organization icon"
+msgstr "Ein Organisationssymbol"
 
 #: useroperations/templates/landing_page.html:40
 msgid "Show all applications"
@@ -1729,6 +1721,17 @@ msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
+
+#~ msgid ""
+#~ "A fingerprint icon, which indicates that this service usage will be logged"
+#~ msgstr ""
+#~ "Ein Fingerabdrucksymbol. Die Nutzung dieses Dienstes wird protokolliert"
+
+#~ msgid "Layers"
+#~ msgstr "Ebenen"
+
+#~ msgid "A metadata symbol"
+#~ msgstr "Ein Metadatensymbol"
 
 #~ msgid "A magnifying glass"
 #~ msgstr "Eine Lupe"

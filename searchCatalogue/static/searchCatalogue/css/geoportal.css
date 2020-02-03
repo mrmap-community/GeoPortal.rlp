@@ -156,13 +156,20 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .resource-element-action{
-    padding:5px 5px 5px 5px;
+    padding: .5em;
     border-style: solid;
     border-color: var(--primary);
     border-width:1px;
-    border-radius: 0%;
-    margin-left: 5px;
-    }
+    margin-left: .25em;
+    color: var(--primary);
+    align-items: center;
+    display: flex;
+    font-size: 1.25em;
+}
+.icn-add-map{
+    font-size: 1.5em;
+}
+
 
 .resource-element-action img{
     display: block;
@@ -171,7 +178,8 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 
 .resource-element-action:hover{
     background: var(--primary);
-    }
+    color: white;
+}
 
 .resource-element-data{
     display: flex;
@@ -206,7 +214,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     background: var(--primary);
 }
 
-.resource-element-info-logging, .resource-element-info-price, .resource-element-info-queryable, .resource-element-info-network{
+.resource-element-info-queryable{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,20 +238,32 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     margin-left: 5px;
 }
 
-.resource-element-info-status:hover, .resource-element-info-availability:hover, .resource-element-info-logging:hover, .resource-element-info-price:hover, .resource-element-info-queryable:hover, .resource-element-info-network:hover{
-    color: #fff;
+.resource-element-info .icn-status:hover,
+.resource-element-info .icn-availability:hover,
+.resource-element-info .icn-price:hover,
+.resource-element-info .icn-queryable:hover,
+.resource-element-info .icn-network-restricted:hover
+{
+    color: white;
     background: var(--primary);
 }
 
-.resource-element-info-status{
+.resource-element-info .icn-status,
+.resource-element-info .icn-price,
+.resource-element-info .icn-logging,
+.resource-element-info .icn-queryable,
+.resource-element-info .icn-availability,
+.resource-element-info .icn-network-restricted
+{
     display:flex;
     align-items: center;
     justify-content: center;
     border-color: var(--primary);
     border-width: 1px;
     border-style: solid;
-    padding: 5px 5px 5px 5px;
-    margin-left: 5px;
+    padding: 0.5em;
+    margin-left: 0.25em;
+    color: var(--primary)
 }
 
 .resource-element-info-status img{
@@ -285,6 +305,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     border:1px solid var(--primary);
     padding: 5px 10px 5px 10px;
     margin: 0 5px 0 0;
+    color: var(--primary);
 }
 
 .feed-download-button:hover, .atom-feed-button:hover{
@@ -336,21 +357,16 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     display: flex;
 }
 
+
 .metadata-link-element:hover{
     /*
     Little trick: since we invert the colors here to make black icons white,
     we need to make all other colors inverted before, to display the correct ones
     */
-    -webkit-filter: invert(1.0);
-    filter: invert(1.0);
-    color: black;
-    background-color: var(--primary-invert);
+    color: white;
+    background-color: var(--primary);
     cursor: pointer;
     border: 1px solid black;
-
-}
-
-.metadata-links img{
 }
 
 .metadata-button{
@@ -543,7 +559,6 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .view-button, .download-button{
-    max-width: 175px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

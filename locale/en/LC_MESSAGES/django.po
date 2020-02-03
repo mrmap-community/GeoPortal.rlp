@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 08:35+0000\n"
+"POT-Creation-Date: 2020-02-03 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,11 +126,11 @@ msgstr ""
 
 #: searchCatalogue/templates/hits_and_sort_option.html:49
 #: searchCatalogue/templates/hits_and_sort_option.html:51
-#: searchCatalogue/templates/primary/application/application_search_result.html:39
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:39
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:28
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:36
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:43
+#: searchCatalogue/templates/primary/application/application_search_result.html:47
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:47
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:36
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:44
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:41
 msgid "An open data icon"
 msgstr ""
 
@@ -223,14 +223,6 @@ msgid "No results found, please use another search term..."
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:5
-#: searchCatalogue/templates/primary/application/application_search_result.html:17
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:17
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:18
-#: searchCatalogue/templates/search_result_actions.html:9
-#: searchCatalogue/templates/search_result_actions.html:21
-#: searchCatalogue/templates/search_result_actions.html:27
-#: searchCatalogue/templates/search_result_actions.html:48
-#: searchCatalogue/templates/search_result_actions.html:53
 msgid "An eye icon"
 msgstr ""
 
@@ -245,11 +237,7 @@ msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:11
 #: searchCatalogue/templates/other/coupled_resources.html:48
-#: searchCatalogue/templates/search_result_actions.html:15
-#: searchCatalogue/templates/search_result_actions.html:35
-#: searchCatalogue/templates/search_result_actions.html:43
-#: searchCatalogue/templates/search_result_actions.html:95
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "A download icon"
 msgstr ""
 
@@ -259,8 +247,7 @@ msgstr ""
 #: searchCatalogue/templates/search_result_actions.html:16
 #: searchCatalogue/templates/search_result_actions.html:36
 #: searchCatalogue/templates/search_result_actions.html:44
-#: searchCatalogue/templates/search_result_actions.html:109
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "Download"
 msgstr ""
 
@@ -270,7 +257,6 @@ msgid "Original atom feed"
 msgstr ""
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
-#: searchCatalogue/templates/search_result_actions.html:92
 #: useroperations/templates/inspire_topics.html:58
 msgid "A document icon"
 msgstr ""
@@ -303,13 +289,12 @@ msgstr ""
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:24
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:17
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:25
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:24
 msgid "Competent authority"
 msgstr ""
 
 # Navigation items
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:86
 msgid "An organization logo"
 msgstr ""
 
@@ -318,17 +303,11 @@ msgstr ""
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:28
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:21
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:29
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:30
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:28
 msgid "Date of metadata"
 msgstr ""
 
 #: searchCatalogue/templates/other/search_result.html:25
-#: searchCatalogue/templates/primary/application/application_search_result.html:29
-#: searchCatalogue/templates/primary/application/application_search_result.html:33
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:29
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:33
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:22
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:30
 msgid "A calendar icon"
 msgstr ""
 
@@ -391,8 +370,11 @@ msgstr ""
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:25
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:18
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:26
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: useroperations/templates/applications.html:86
 #: useroperations/templates/landing_page.html:35
-msgid "An organization icon"
+#: useroperations/templates/landing_page.html:36
+msgid "Organizations"
 msgstr ""
 
 #: searchCatalogue/templates/primary/application/application_search_result.html:32
@@ -405,24 +387,51 @@ msgstr ""
 msgid "to"
 msgstr ""
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-msgid ""
-"A fingerprint icon, which indicates that this service usage will be logged"
+# Navigation items
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+#, fuzzy
+#| msgid "More information"
+msgid "No licence information found"
+msgstr "Mehr Information"
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+msgid "The data providers terms of licence applies to this data."
 msgstr ""
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:47
+#: searchCatalogue/templates/primary/application/application_search_result.html:42
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:42
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:31
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:39
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:37
+msgid "Licence"
+msgstr ""
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:51
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:52
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:40
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:49
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:45
 #: searchCatalogue/templates/search_result_list_entry.html:16
 msgid "Access will be logged"
 msgstr ""
 
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:47
+#: searchCatalogue/templates/primary/application/application_search_result.html:53
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:54
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:42
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:51
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:47
+msgid "Logging"
+msgstr ""
+
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:58
 msgid "More"
 msgstr ""
 
@@ -454,24 +463,7 @@ msgstr ""
 msgid "Bounding box around area of interest on a map"
 msgstr ""
 
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:26
-#: useroperations/templates/landing_page.html:35
-#: useroperations/templates/landing_page.html:36
-msgid "Organizations"
-msgstr ""
-
-# Navigation items
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:36
-#, fuzzy
-#| msgid "More information"
-msgid "No licence information found"
-msgstr "Mehr Information"
-
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:38
-msgid "The data providers terms of licence applies to this data."
-msgstr ""
-
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:63
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:64
 msgid "Sublayers"
 msgstr ""
 
@@ -621,32 +613,28 @@ msgstr ""
 msgid "Open in atom feed viewer"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:121
+#: searchCatalogue/templates/search_result_actions.html:109
 msgid "Download services"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:125
+#: searchCatalogue/templates/search_result_actions.html:113
 #: useroperations/templates/inspire_topics.html:63
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:137
-msgid "Layers"
-msgstr ""
-
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "A key above an envelope"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "Ask data provider for permission"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "A black closed padlock"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "Only for registered users"
 msgstr ""
 
@@ -670,17 +658,22 @@ msgstr ""
 msgid "Last monitoring state"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_list_entry.html:46
+#: searchCatalogue/templates/search_result_list_entry.html:45
+#: searchCatalogue/templates/search_result_list_entry.html:61
+#: searchCatalogue/templates/search_result_list_entry.html:93
+msgid "Capabilities"
+msgstr ""
+
 #: searchCatalogue/templates/search_result_list_entry.html:50
-#: searchCatalogue/templates/search_result_list_entry.html:53
-#: searchCatalogue/templates/search_result_list_entry.html:56
-#: searchCatalogue/templates/search_result_list_entry.html:62
+#: searchCatalogue/templates/search_result_list_entry.html:66
+#: searchCatalogue/templates/search_result_list_entry.html:77
+#: searchCatalogue/templates/search_result_list_entry.html:83
+#: searchCatalogue/templates/search_result_list_entry.html:98
 msgid "Add to mapviewer"
 msgstr ""
 
-#: searchCatalogue/templates/search_result_list_entry.html:47
-#: searchCatalogue/templates/search_result_list_entry.html:51
-#: searchCatalogue/templates/search_result_list_entry.html:54
+#: searchCatalogue/templates/search_result_list_entry.html:55
+#: searchCatalogue/templates/search_result_list_entry.html:71
 msgid "Add to mapviewer with zoom"
 msgstr ""
 
@@ -1224,10 +1217,6 @@ msgstr ""
 msgid "Published by"
 msgstr ""
 
-#: useroperations/templates/applications.html:95
-msgid "A metadata symbol"
-msgstr ""
-
 #: useroperations/templates/crispy_form_no_action.html:11
 msgid "Why should I create an account?"
 msgstr ""
@@ -1347,6 +1336,10 @@ msgstr ""
 
 #: useroperations/templates/landing_page.html:33
 msgid "Show all organizations"
+msgstr ""
+
+#: useroperations/templates/landing_page.html:35
+msgid "An organization icon"
 msgstr ""
 
 #: useroperations/templates/landing_page.html:40
