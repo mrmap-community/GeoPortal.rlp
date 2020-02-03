@@ -301,7 +301,7 @@ if [ $checkout_mapbender_svn = 'true' ]; then
       svn cleanup
     fi
     cd ${installation_folder}svn/
-    echo -e "\n Downloading Mapbender Sources from SVN! \n" | tee -a $installation_log
+    echo -e "\n Downloading Mapbender Sources from Git! \n" | tee -a $installation_log
     git clone --progress https://git.osgeo.org/gitea/hollsandre/Mapbender2.8 mapbender | tee -a $installation_log
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Source!${reset} \n"  | tee -a $installation_log
@@ -501,7 +501,7 @@ if [ $install_mapbender_database = 'true' ]; then
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'" | tee -a $installation_log
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'" | tee -a $installation_log
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT  INSERT, UPDATE, DELETE ON DATABASE $mapbender_database_name TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapbender TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mapbender TO $mapbender_database_user'" | tee -a $installation_log
@@ -1275,7 +1275,8 @@ cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_f
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
-su -c 'svn update'
+su -c 'git reset --hard'
+su -c 'git pull'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
 
 echo "Restoring Mapbender Configs"
@@ -1287,8 +1288,6 @@ cp -av ${installation_folder}config.js_$(date +"%m_%d_%Y") ${installation_folder
 cp -av ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/atomFeedClient.conf
 cd ${installation_folder}mapbender/tools
 sh ./i18n_update_mo.sh
-cd ${installation_folder}mapbender
-rm -rf $(find . -type d -name .svn)
 cd ${installation_folder}
 chown -R www-data ${installation_folder}mapbender/http/tmp/
 chown -R www-data ${installation_folder}mapbender/log/
