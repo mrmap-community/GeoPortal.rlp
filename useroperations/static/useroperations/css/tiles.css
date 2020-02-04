@@ -142,10 +142,10 @@ input:checked + .slider:before {
 .organizations .data-info-container, .topics .data-info-container{
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 5px;
+    padding: 0.5em;
     color: var(--secondary-font);
     flex-grow: 1;
+    width: 50%;
 }
 .organizations .data-info-container:hover, .topics .data-info-container:hover{
     background-color: var(--primary);

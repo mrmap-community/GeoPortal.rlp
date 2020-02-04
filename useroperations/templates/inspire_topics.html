@@ -55,17 +55,17 @@
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Number of data' %}">
-                            <img alt="{% trans 'A document icon' %}" class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}">
+                            <img alt="{% trans 'A document icon' %}" class="icn-sub-tile" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}">
                             <span>{{ result.weight|intcomma }}</span>
                         </div>
                         <a href="https://inspire.ec.europa.eu/">
                             <div class="data-info-container" title="{% trans 'INSPIRE Topic' %}">
-                                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="sub-tile-img only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
+                                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="icn-sub-tile only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
                             </div>
                         </a>
                         <a href="{{ inspire_doc_uri }}{{ result.inspireThemeId }}" target="_blank">
                             <div class="data-info-container" title="{% trans 'More information' %}">
-                                <img alt="{% trans 'An information icon, shaped like the letter i' %}" class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
+                                <img alt="{% trans 'An information icon, shaped like the letter i' %}" class="icn-sub-tile" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
                                 <span>{% trans 'Information' %}</span>
                             </div>                            
                         </a>

@@ -7,7 +7,7 @@
     margin: 0 0 0.25em 0;
 }
 
-.sub-tile-img, .icn-organization, .icn-metadata{
+.icn-sub-tile, .icn-organization, .icn-metadata{
     opacity: 0.6;
     font-size: 2em;
 }
