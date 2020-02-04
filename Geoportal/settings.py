@@ -112,7 +112,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Geoportal.urls'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "Geoportal"),  # for fontawesome, which is not app related but has to be accessible from everywhere!
+    os.path.join(BASE_DIR, "Geoportal/static"),  # for generic static files, which are used in all apps
 ]
 
 TEMPLATES = [
