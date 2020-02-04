@@ -31,7 +31,15 @@
             {% endif %}
             {% if layer_info.status is not None %}
                 <a class="icn-status" title="{% trans 'Last monitoring state' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
-                    <img src="{% static 'searchCatalogue/images/icons/' %}{% if layer_info.status == '-1' %}icn_monitoring_bad.png{% elif layer_info.status == '0' %}icn_monitoring_warn.png{% else %}icn_monitoring_okay.png{% endif %}">
+                    {% if layer_info.status == '-1' %}
+                        <i class="fas fa-times-circle error"></i>
+                    {% elif layer_info.status == '0' %}
+                        <i class="fas fa-exclamation-circle warn"></i>
+                    {% elif layer_info.status == '1' %}
+                        <i class="fas fa-check-circle success"></i>
+                    {% else %}
+
+                    {% endif %}
                 </a>
             {% endif %}
             {% if layer_info.iso3166 is not None %}

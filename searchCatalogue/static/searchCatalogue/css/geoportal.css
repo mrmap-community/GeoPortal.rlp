@@ -263,12 +263,12 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     border-style: solid;
     padding: 0.5em;
     margin-left: 0.25em;
-    color: var(--primary)
+    color: var(--primary);
+    text-decoration: none;
 }
 
-.resource-element-info-status img{
-    display: block;
-    margin: 0 auto;
+.resource-element-info .icn-status i{
+    font-size: 1.75em;
 }
 
 
