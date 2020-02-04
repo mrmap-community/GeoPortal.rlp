@@ -72,8 +72,6 @@
                             <i class="fas fa-eye icn-show"></i>
                             <div>{{ result.loadCount|intcomma }}</div>
                         </div>
-                    </div>
-                    <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Published on' %}">
                             <i class="fas fa-calendar-alt icn-date"></i>
                             <div>{{ result.date }}</div>
@@ -82,7 +80,7 @@
                     <hr>
                     <div class="sub-tile-container">
                         <a href="{{ result.mdLink }}#tabs-3" target="_blank">
-                        <div class="data-info-container metadata-link" title="{% trans 'Published by' %}">
+                        <div class="metadata-link data-info-container" title="{% trans 'Published by' %}">
                             <i class="fas fa-city icn-organization" title="{% trans 'Organizations' %}" ></i>
                             <div class="organization-title">{{ result.respOrg }}</div>
                         </div>
@@ -91,7 +89,7 @@
                     <hr>
                     <div class="sub-tile-container">
                         <a href="{{ result.mdLink }}" target="_blank">
-                        <div class="data-info-container metadata-link" title="{% trans 'Metadata' %}">
+                        <div class="metadata-link data-info-container" title="{% trans 'Metadata' %}">
                             <i class="fas fa-file-alt icn-metadata"></i>
                             <div>{% trans 'Metadata' %}</div>
                         </div>

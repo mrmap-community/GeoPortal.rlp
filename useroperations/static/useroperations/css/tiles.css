@@ -145,8 +145,12 @@ input:checked + .slider:before {
     padding: 0.5em;
     color: var(--secondary-font);
     flex-grow: 1;
+}
+
+.organizations .data-info-container{
     width: 50%;
 }
+
 .organizations .data-info-container:hover, .topics .data-info-container:hover{
     background-color: var(--primary);
     color: white;

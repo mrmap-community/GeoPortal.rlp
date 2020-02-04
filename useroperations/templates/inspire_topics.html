@@ -55,19 +55,19 @@
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Number of data' %}">
-                            <img alt="{% trans 'A document icon' %}" class="icn-sub-tile" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}">
+                            <i class="fas fa-file-alt icn-file icn-sub-tile"></i>
                             <span>{{ result.weight|intcomma }}</span>
                         </div>
+                        <a href="{{ inspire_doc_uri }}{{ result.inspireThemeId }}" target="_blank">
+                            <div class="data-info-container" title="{% trans 'More information' %}">
+                                <i class="fas fa-info-circle icn-sub-tile"></i>
+                                <span>{% trans 'Information' %}</span>
+                            </div>
+                        </a>
                         <a href="https://inspire.ec.europa.eu/">
                             <div class="data-info-container" title="{% trans 'INSPIRE Topic' %}">
                                 <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="icn-sub-tile only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
                             </div>
-                        </a>
-                        <a href="{{ inspire_doc_uri }}{{ result.inspireThemeId }}" target="_blank">
-                            <div class="data-info-container" title="{% trans 'More information' %}">
-                                <img alt="{% trans 'An information icon, shaped like the letter i' %}" class="icn-sub-tile" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
-                                <span>{% trans 'Information' %}</span>
-                            </div>                            
                         </a>
                     </div>
                     <hr>

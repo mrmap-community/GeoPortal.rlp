@@ -31,22 +31,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.5em;
 }
 
-.metadata-link{
-    padding: 10px;
+.applications .data-info-container:hover{
+    cursor: default;
 }
 
 .metadata-link:hover{
-    /*
-    Little trick: since we invert the colors here to make black icons white,
-    we need to make all other colors inverted before, to display the correct ones
-    */
-    -webkit-filter: invert(1.0);
-    filter: invert(1.0);
-    color: black;
-    background-color: var(--primary-invert);
-    cursor: pointer;
+    color: white;
+    background-color: var(--primary);
+    cursor: pointer !important;
 }
 
 .organization-title{
