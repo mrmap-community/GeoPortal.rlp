@@ -49,7 +49,7 @@
             <a target="_blank" href="{{ result.accessURL }}">
             <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}" data-num-resources="{{ result.loadCount }}">
                 {% if result.internal %}
-                <img class="powered-by" src="{% static 'useroperations/images/favicon.png' %}" title="{% trans 'Powered by GeoPortal.RLP' %}">
+                <img class="powered-by" src="{% static 'useroperations/images/powered-by-geoportal.png' %}" title="{% trans 'Powered by GeoPortal.RLP' %}"/>
                 {% endif %}
                 <div class="tile-title">
                     {{ result.title }}
