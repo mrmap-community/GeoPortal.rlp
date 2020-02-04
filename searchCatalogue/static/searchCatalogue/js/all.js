@@ -1246,6 +1246,7 @@ $(document).ready(function() {
      */
      $(document).on("click", ".spatial-result-title", function(){
         var elem = $(this);
+        elem.toggleClass("active");
         elem.next(".spatial-search-result-wrapper").slideToggle("slow");
      });
 

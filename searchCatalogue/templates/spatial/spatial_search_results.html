@@ -8,7 +8,6 @@
             </div>
         {% elif spatial_search_results|length > 0 %}
         <div class="spatial-result-header">
-            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_spatial_search_results.png' %}">
             {% trans 'Spatial search - select a usable combination' %}
         </div>
             <div class="spatial-results-list">
@@ -16,7 +15,7 @@
                     {% for location in spatial_search_results %}
                         {% for subject in looking_for %}
                             <div class="spatial-result-title">
-                                <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_spatial_search_results.png' %}">
+                                <i class="far fa-compass tab-icn"></i>
                                 "{{ subject }}" in {{ location.keyword }}...
                             </div>
                             {% if location.geonames|length > 0 %}
@@ -25,7 +24,7 @@
                                     {% if geoname.title|contains:location.keyword %}
                                     <li class="spatial-search-list-element">
                                         <div class="spatial-search-result" data-target="{{ location.keyword }}" data-source="{{ subject }}" data-params="{{ geoname.minx }},{{ geoname.miny }},{{ geoname.maxx }},{{ geoname.maxy }}">
-                                            <img class="tab-icn" src="{% static 'searchCatalogue/images/icons/icn_spatial_search_results_hover.png' %}">
+                                            <i class="far fa-compass tab-icn"></i>
                                             {{subject}} in {{ geoname.title }}
                                         </div>
                                     </li>
