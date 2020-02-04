@@ -70,9 +70,6 @@ footer{
     justify-content: space-evenly;
 }
 
-.g-recaptcha{
-margin-left: 212px;
-}
 
 #logo_geoportal{
     max-height: 50px;
@@ -116,28 +113,6 @@ margin-left: 212px;
     max-width: 400px;
 }
 
-.message-container{
-    display: flex;
-    justify-content: center;
-}
-
-.alert-error{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: var(--primary);
-    color: white;
-    font-weight: bold;
-    padding: 20px;
-    border-radius: 20px;
-    width: 50%;
-    min-width: 150px;
-}
-.alert-error:hover{
-    cursor: default;
-    background-color: red;
-}
-
 .image-text-container{
     display: flex;
     align-items: center;
@@ -156,13 +131,6 @@ margin-left: 212px;
     background-image: linear-gradient(to bottom left, white, var(--secondary));
     border-bottom: 5px solid var(--primary);
     /*background-color: var(--secondary);*/
-}
-
-.logo-geoportal-wrapper{
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0.25;
 }
 
 /* FOR MOBILE USERS */
