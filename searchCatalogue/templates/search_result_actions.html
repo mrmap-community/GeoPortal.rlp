@@ -143,13 +143,16 @@
         {% endif %}
     </div>
 {% else %}
-    <div class="not-allowed-wrapper">
-            {% if loggedin %}
-            <img alt="{% trans 'A key above an envelope' %}"  class="ask-permission-img" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" src="{% static 'searchCatalogue/images/icons/icn_permission_email.png' %}" title="{% trans 'Ask data provider for permission' %}">
-            {% else %}
-            <a href="/login">
-                <img alt="{% trans 'A black closed padlock' %}" class="not-allowed-img" src="{% static 'searchCatalogue/images/icons/icn_permission_restricted.png' %}" title="{% trans 'Only for registered users' %}">
+    <div class="flex-row not-allowed-wrapper">
+            <a href="/login" class="metadata-link-element button" title="{% trans 'Only for registered users' %}">
+                <i class="fas fa-eye-slash icn-show"></i>
+                <span>{% trans 'Locked' %}</span>
             </a>
+            {% if loggedin %}
+            <div id="ask-permission" class="metadata-link-element" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" title="{% trans 'Ask data provider for permission' %}">
+                <i class="fas fa-envelope-open-text icn-ask-permission"></i>
+                <span>{% trans 'Request permission' %}</span>
+            </div>
             {% endif %}
     </div>
 {% endif %}

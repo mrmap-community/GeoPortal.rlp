@@ -1188,7 +1188,7 @@ $(document).ready(function() {
         openInNewTab(url);
     });
 
-    $(document).on("click", ".ask-permission-img", function(){
+    $(document).on("click", "#ask-permission", function(){
         var elem = $(this);
         var params = {
             "dataProvider": elem.attr("data-params"),

@@ -351,8 +351,8 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     justify-content: space-evenly;
     align-items: center;
     display: flex;
+    text-decoration: none;
 }
-
 
 .metadata-link-element:hover{
     /*
@@ -371,15 +371,14 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     justify-content: space-between;
 }
 
-
-.metadata-links a{
-    text-decoration: none;
-}
-
 .metadata-button img{
     max-width: 20px;
     max-height: 20px;
     margin: 0 10px 0 0;
+}
+
+.not-allowed-wrapper{
+    color: var(--primary);
 }
 
 .search-result-detail{
