@@ -164,9 +164,10 @@ input:checked + .slider:before {
     flex-direction: row;
 }
 
-.tile-list-toggler-img{
+.icn-toggle-list{
     padding: 0.5em;
-    width: 3em;
+    font-size: 2em;
+    color: var(--primary);
 }
 
 .tile-list-wrapper .tile{
