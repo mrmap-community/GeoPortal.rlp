@@ -1407,7 +1407,7 @@ msgstr "Anzahl Aufrufe diese Woche"
 
 #: useroperations/templates/landing_page.html:77
 msgid "Open in mobile viewer"
-msgstr "Kartenviewer öffnen/schließen"
+msgstr "Im mobilen Kartenviewer öffnen"
 
 #: useroperations/templates/landing_page.html:78
 msgid "A stylized mobile phone"

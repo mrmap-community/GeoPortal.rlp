@@ -17,12 +17,12 @@
         </div>
         <div class="flex-row metadata-links">
             <a class="metadata-link-element" href="{{ result.htmlLink }}#tabs-3" target="_blank"><span class="metadata-button" title="{% trans 'Competent authority' %}">
-                <img alt="{% trans 'An organization logo' %}" class="icn-organization" src="{% static 'searchCatalogue/images/icons/icn_organization.png' %}">
+                <i class="fas fa-city icn-organization" title="{% trans 'Organizations' %}" ></i>
                 {{ result.respOrg }}
             </span></a>
             {% if result.date|length > 0 %}
             <a class="metadata-link-element"  href="{{ result.mdLink }}#tabs-2" target="_blank"><span class="metadata-button" title="{% trans 'Date of metadata' %}">
-                <img alt="{% trans 'A calendar icon' %}" class="icn-date" src="{% static 'searchCatalogue/images/icons/icn_calendar.png' %}">
+                <i class="fas fa-calendar-alt icn-date"></i>
                 {{ result.date }}
             </span></a>
             {% endif %}

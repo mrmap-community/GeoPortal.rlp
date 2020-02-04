@@ -137,17 +137,13 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 .button-clickable{background:var(--primary);color:#fff !important; padding: 5px 5px 5px 5px}
 .button-clickable:hover{background:var(--primary-hover);}
 .active-button{
-    -ms-filter: invert(1.0);
-    -webkit-filter: invert(1.0);
-    filter: invert(1.0);
-    background:var(--primary-invert);
-    color: black;
+    background: var(--primary);
+    color: white !important;
 }
 .active-button:hover{
-    background:var(--primary-hover);
-    color:#fff !important;
+    background: var(--primary-hover) !important;
 }
-.resource-list{padding:10px; border-width:1px; border-style: solid; border-color: var(--primary);}
+.resource-list{border-width:1px; border-style: solid; border-color: var(--primary);}
 .resource-view-title{padding:5px; background:var(--primary); color:#fff !important; width:100%; display: inline-block}
 .resource-view-title:hover{background:var(--primary-hover)}
 
@@ -349,7 +345,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .metadata-link-element{
-    margin: 0 1em 0 0;
+    margin: 0.5em;
     border: 1px solid black;
     padding: .5em;
     justify-content: space-evenly;
@@ -445,19 +441,20 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
   justify-content: center;
   */
   width: auto;
-  max-width: 300px;
+  max-width: 10em;
   text-align: center;
-  color: #333;
-  border: 1px solid #6f6f6f;
+  color: black;
+  border: 1px solid black;
   border-radius: 0px;
-  padding: 5px;
+  padding: 0.5em;
   cursor: pointer;
-  margin: 10px 0;
+  margin: 0.5em 0;
   }
 
 .sublayer-more:hover{
-  background: var(--secondary-hover);
-  color: var(--secondary);}
+  background: var(--primary);
+  color: white;
+  }
 
 .gray-out-overlay{
   pointer-events:none;
@@ -563,17 +560,12 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     align-items: center;
     justify-content: space-evenly;
     border: 1px solid black;
-}
-
-.view-button img, .download-button img{
-    margin: 0 10px 0 0;
+    margin: 0 .5em 0 0;
 }
 
 .view-button:hover, .download-button:hover{
-    filter: invert(1.0);
-    -webkit-filter: invert(1.0);
-    background: var(--primary-invert);
-    color: black;
+    background: var(--primary);
+    color: white;
 }
 
 .not-allowed-img, .ask-permission-img{
