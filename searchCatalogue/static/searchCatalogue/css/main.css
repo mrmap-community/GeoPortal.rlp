@@ -791,28 +791,6 @@ dl dd {
   display: none;
   padding: 0; }
 
-.icn-organization,
-.icn-date,
-.icn-licence,
-.icn-download,
-.icn-file,
-.icn-show,
-.icn-ask-permission,
-.icn-logging,
-.icn-locked,
-.icn-price,
-.icn-network-restricted{
-    font-size: 1.5em;
-    padding: 0 0.5em 0 0;
-}
-.icn-single{
-    padding: unset;
-}
-
-.icn-licence.error{
-    color: var(--error-red);
-}
-
 
 @media only screen and (max-width: 480px) {
   .search--sort--box {

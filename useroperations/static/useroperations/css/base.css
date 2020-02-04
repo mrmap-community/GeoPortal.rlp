@@ -118,7 +118,6 @@ footer{
     align-items: center;
 }
 
-
 .show{
     display: block;
 }
@@ -303,6 +302,31 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.icn-organization,
+.icn-date,
+.icn-licence,
+.icn-download,
+.icn-file,
+.icn-show,
+.icn-rss,
+.icn-twitter,
+.icn-ask-permission,
+.icn-logging,
+.icn-locked,
+.icn-price,
+.icn-network-restricted{
+    font-size: 1.5em;
+    padding: 0 0.5em 0 0;
+}
+
+.icn-single{
+    padding: unset;
+}
+
+.icn-licence.error{
+    color: var(--error-red);
 }
 
 .mapbender{
@@ -639,7 +663,7 @@ ul {
     color: var(--secondary-placeholder);
 }
 .footer-col a:hover{
-    color: var(--primary-hover);
+    color: var(--primary);
 }
 
 .search-form-text-input{
