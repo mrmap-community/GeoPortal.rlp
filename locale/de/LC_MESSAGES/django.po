@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 13:24+0000\n"
+"POT-Creation-Date: 2020-02-03 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,13 +59,11 @@ msgstr ""
 msgid "Hello "
 msgstr "Hallo "
 
-#: searchCatalogue/templates/autocompleter/suggestions.html:
-#| msgid "Search term"
+#: searchCatalogue/templates/autocompleter/suggestions.html:4
 msgid "Search for:"
 msgstr "Suche nach:"
 
 #: searchCatalogue/templates/autocompleter/suggestions.html:16
-#| msgid "Applications"
 msgid "Locations:"
 msgstr "Orte:"
 
@@ -85,18 +83,8 @@ msgid "Filter by"
 msgstr "Filtern nach"
 
 #: searchCatalogue/templates/facets.html:42
-#: searchCatalogue/templates/search_results.html:11
-#: useroperations/templates/landing_page.html:49
-msgid "A filter icon"
-msgstr "Ein Filtersymbol"
-
-#: searchCatalogue/templates/facets.html:42
 msgid "Is filtered"
 msgstr "Filter gesetzt"
-
-#: searchCatalogue/templates/facets.html:43 templates/base.html:51
-msgid "A magnifying glass"
-msgstr "Eine Lupe"
 
 #: searchCatalogue/templates/facets.html:43
 msgid "Open filter"
@@ -138,11 +126,11 @@ msgstr "Nur freie Daten"
 
 #: searchCatalogue/templates/hits_and_sort_option.html:49
 #: searchCatalogue/templates/hits_and_sort_option.html:51
-#: searchCatalogue/templates/primary/application/application_search_result.html:39
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:39
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:28
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:36
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:35
+#: searchCatalogue/templates/primary/application/application_search_result.html:47
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:47
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:36
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:44
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:41
 msgid "An open data icon"
 msgstr "Nur freie Daten"
 
@@ -154,33 +142,33 @@ msgstr "Aktiv"
 msgid "Not active"
 msgstr "Nicht aktiv"
 
-#: searchCatalogue/templates/index.html:46
+#: searchCatalogue/templates/index.html:43
 msgid "Insert search term here"
 msgstr "Bitte Suchbegriff eingeben"
 
-#: searchCatalogue/templates/index.html:47
+#: searchCatalogue/templates/index.html:44
 #: searchCatalogue/templates/search_forms.html:904 searchCatalogue/views.py:88
 msgid "Search"
 msgstr "Suche"
 
-#: searchCatalogue/templates/index.html:52 templates/base.html:57
+#: searchCatalogue/templates/index.html:49 templates/base.html:54
 msgid "Spatial Filter"
 msgstr "Räumlicher Filter"
 
-#: searchCatalogue/templates/index.html:53 templates/base.html:58
+#: searchCatalogue/templates/index.html:50 templates/base.html:55
 msgid "Use spatial filter"
 msgstr "Räumlichen Filter benutzen"
 
-#: searchCatalogue/templates/index.html:61 templates/base.html:39
+#: searchCatalogue/templates/index.html:58 templates/base.html:36
 msgid "The german flag, indicating the german language"
 msgstr "Die deutsche Flagge, stellt die deutsche Sprache dar"
 
-#: searchCatalogue/templates/index.html:62 templates/base.html:40
+#: searchCatalogue/templates/index.html:59 templates/base.html:37
 msgid "The United Kingdoms`s flag, indicating the english language"
 msgstr ""
 "Die Flagge des vereinigten Königreiches, stellt die englische Sprache dar"
 
-#: searchCatalogue/templates/index.html:90
+#: searchCatalogue/templates/index.html:87
 msgid "Extended Search"
 msgstr "Erweiterte Suche"
 
@@ -214,6 +202,7 @@ msgstr "Schlagwortsuche"
 
 #: searchCatalogue/templates/other/application/application_category.html:6
 #: searchCatalogue/templates/other/application/application_category.html:7
+#: searchCatalogue/templates/primary/application/application_category.html:7
 #: searchCatalogue/views.py:302 searchCatalogue/views.py:394
 #: useroperations/templates/applications.html:5
 #: useroperations/templates/applications.html:18
@@ -236,16 +225,6 @@ msgstr ""
 "Keine Ergebnisse gefunden, bitte versuchen Sie einen anderen Suchbegriff..."
 
 #: searchCatalogue/templates/other/coupled_resources.html:5
-#: searchCatalogue/templates/primary/application/application_search_result.html:17
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:17
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:18
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:17
-#: searchCatalogue/templates/search_result_actions.html:9
-#: searchCatalogue/templates/search_result_actions.html:21
-#: searchCatalogue/templates/search_result_actions.html:27
-#: searchCatalogue/templates/search_result_actions.html:48
-#: searchCatalogue/templates/search_result_actions.html:53
-#: useroperations/templates/landing_page.html:74
 msgid "An eye icon"
 msgstr "Ein Augensymbol"
 
@@ -260,11 +239,7 @@ msgstr "Anzeigen"
 
 #: searchCatalogue/templates/other/coupled_resources.html:11
 #: searchCatalogue/templates/other/coupled_resources.html:48
-#: searchCatalogue/templates/search_result_actions.html:15
-#: searchCatalogue/templates/search_result_actions.html:35
-#: searchCatalogue/templates/search_result_actions.html:43
-#: searchCatalogue/templates/search_result_actions.html:95
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "A download icon"
 msgstr "Ein Downloadsymbol"
 
@@ -274,8 +249,7 @@ msgstr "Ein Downloadsymbol"
 #: searchCatalogue/templates/search_result_actions.html:16
 #: searchCatalogue/templates/search_result_actions.html:36
 #: searchCatalogue/templates/search_result_actions.html:44
-#: searchCatalogue/templates/search_result_actions.html:109
-#: searchCatalogue/templates/search_result_actions.html:127
+#: searchCatalogue/templates/search_result_actions.html:115
 msgid "Download"
 msgstr ""
 
@@ -285,7 +259,6 @@ msgid "Original atom feed"
 msgstr "Originaler Atom Feed"
 
 #: searchCatalogue/templates/other/coupled_resources.html:44
-#: searchCatalogue/templates/search_result_actions.html:92
 #: useroperations/templates/inspire_topics.html:58
 msgid "A document icon"
 msgstr "Ein Dokumentensymbol"
@@ -299,24 +272,13 @@ msgid "Open atom client"
 msgstr "Öffne Atom Client"
 
 #: searchCatalogue/templates/other/dataset/dataset_category.html:6
-#: searchCatalogue/templates/other/series/series_category.html:6
-#: searchCatalogue/templates/primary/application/application_category.html:7
-#: searchCatalogue/templates/primary/dataset/dataset_category.html:7
-#: useroperations/templates/landing_page.html:26
-msgid "A stylized globe"
-msgstr "Ein stylisierter Globus"
-
-#: searchCatalogue/templates/other/dataset/dataset_category.html:6
 #: searchCatalogue/templates/other/dataset/dataset_category.html:7
+#: searchCatalogue/templates/primary/dataset/dataset_category.html:7
 #: searchCatalogue/views.py:293 searchCatalogue/views.py:299
 #: searchCatalogue/views.py:390 useroperations/templates/landing_page.html:26
 #: useroperations/templates/landing_page.html:27
 msgid "Datasets"
 msgstr "Datensätze"
-
-#: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
-msgid "Three dots in a row"
-msgstr "Drei Punkte in einer Reihe"
 
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:6
 #: searchCatalogue/templates/other/nonGeographicDataset/nonGeographicDataset_category.html:7
@@ -331,10 +293,9 @@ msgstr "Sonstige Datensätze"
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:25
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:24
 msgid "Competent authority"
-msgstr "Zuständige Stelle:"
+msgstr "Zuständige Stelle"
 
 #: searchCatalogue/templates/other/search_result.html:20
-#: useroperations/templates/applications.html:86
 msgid "An organization logo"
 msgstr "Ein Organisationslogo"
 
@@ -345,16 +306,9 @@ msgstr "Ein Organisationslogo"
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:29
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:28
 msgid "Date of metadata"
-msgstr "Datum der Metadaten:"
+msgstr "Datum der Metadaten"
 
 #: searchCatalogue/templates/other/search_result.html:25
-#: searchCatalogue/templates/primary/application/application_search_result.html:29
-#: searchCatalogue/templates/primary/application/application_search_result.html:33
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:29
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:33
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:22
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:30
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:29
 msgid "A calendar icon"
 msgstr "Ein Kalendarsymbol"
 
@@ -363,12 +317,6 @@ msgstr "Ein Kalendarsymbol"
 #: searchCatalogue/views.py:294 searchCatalogue/views.py:300
 msgid "Series"
 msgstr "Serien"
-
-#: searchCatalogue/templates/other/service/service_category.html:6
-msgid "A service icon, shaped as two arrows pointing in opposite directions"
-msgstr ""
-"Ein Dienstesymbol in der Form zweier Pfeile, die in entgegengesetzte "
-"Richtungen zeigen"
 
 #: searchCatalogue/templates/other/service/service_category.html:6
 #: searchCatalogue/templates/other/service/service_category.html:7
@@ -424,9 +372,11 @@ msgstr "Anzahl Aufrufe"
 #: searchCatalogue/templates/primary/wfs/wfs_search_result.html:18
 #: searchCatalogue/templates/primary/wmc/wmc_search_result.html:26
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:25
+#: useroperations/templates/applications.html:86
 #: useroperations/templates/landing_page.html:35
-msgid "An organization icon"
-msgstr "Ein Organisationssymbol"
+#: useroperations/templates/landing_page.html:36
+msgid "Organizations"
+msgstr "Organisationen"
 
 #: searchCatalogue/templates/primary/application/application_search_result.html:32
 #: searchCatalogue/templates/primary/dataset/dataset_search_result.html:32
@@ -438,37 +388,65 @@ msgstr "Zeitliche Ausdehnung:"
 msgid "to"
 msgstr "bis"
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:39
-msgid ""
-"A fingerprint icon, which indicates that this service usage will be logged"
-msgstr ""
-"Ein Fingerabdrucksymbol. Die Nutzung dieses Dienstes wird protokolliert"
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+msgid "No licence information found"
+msgstr "Keine Lizenzinfos vorhanden"
 
-#: searchCatalogue/templates/primary/application/application_search_result.html:43
-#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:43
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:32
-#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:40
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:39
+#: searchCatalogue/templates/primary/application/application_search_result.html:37
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:37
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:26
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:34
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:32
+msgid "The data providers terms of licence applies to this data."
+msgstr "Es gelten die Nutzungsbedingungen des Diensteanbieters."
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:42
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:42
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:31
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:39
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:37
+msgid "Licence"
+msgstr ""
+
+#: searchCatalogue/templates/primary/application/application_search_result.html:51
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:52
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:40
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:49
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:45
 #: searchCatalogue/templates/search_result_list_entry.html:16
 msgid "Access will be logged"
 msgstr "Der Zugriff wird protokolliert"
 
-#: searchCatalogue/templates/primary/wfs/wfs_category.html:6
-msgid "A web feature service icon, shaped as a magnifying glass over a map"
-msgstr ""
-"Ein Web Feature Service Symbol, in der Form einer Lupe über einer Karte"
+#: searchCatalogue/templates/primary/application/application_search_result.html:53
+#: searchCatalogue/templates/primary/dataset/dataset_search_result.html:54
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:42
+#: searchCatalogue/templates/primary/wmc/wmc_search_result.html:51
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:47
+msgid "Logging"
+msgstr "Protokollierung"
 
-#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:47
+#: searchCatalogue/templates/primary/wfs/wfs_search_result.html:58
 msgid "More"
 msgstr "Weitere"
 
+#: searchCatalogue/templates/primary/wmc/wmc_category.html:6
+#: useroperations/templates/landing_page.html:12
+msgid "Web Map Context"
+msgstr ""
+
 #: searchCatalogue/templates/primary/wms/wms_category.html:7
-msgid "A web map service icon, shaped as a lying map"
-msgstr "Ein Web Map Service Symbol, in der Form einer liegenden Karte"
+#: templates/base.html:140 useroperations/templates/landing_page.html:19
+msgid "A lying map"
+msgstr "Eine liegende Karte"
+
+#: searchCatalogue/templates/primary/wms/wms_category.html:7
+#: searchCatalogue/views.py:391 useroperations/templates/landing_page.html:19
+msgid "Web Map Services"
+msgstr "Darstellungsdienste"
 
 #: searchCatalogue/templates/primary/wms/wms_search_result.html:11
 msgid "Smaller version of map preview"
@@ -483,7 +461,7 @@ msgstr "Für großes Bild anklicken"
 msgid "Bounding box around area of interest on a map"
 msgstr "Umrissgrenzen um das Gebiet auf der Karte"
 
-#: searchCatalogue/templates/primary/wms/wms_search_result.html:55
+#: searchCatalogue/templates/primary/wms/wms_search_result.html:64
 msgid "Sublayers"
 msgstr "Unterebenen"
 
@@ -633,32 +611,28 @@ msgstr "Metadaten"
 msgid "Open in atom feed viewer"
 msgstr "Öffne im Atom Feed Viewer"
 
-#: searchCatalogue/templates/search_result_actions.html:121
+#: searchCatalogue/templates/search_result_actions.html:109
 msgid "Download services"
 msgstr "Downloaddienste"
 
-#: searchCatalogue/templates/search_result_actions.html:125
+#: searchCatalogue/templates/search_result_actions.html:113
 #: useroperations/templates/inspire_topics.html:63
 msgid "The INSPIRE icon, shaped like a pineapple"
 msgstr "Das INSPIRE Symbol in der Form einer Ananas"
 
-#: searchCatalogue/templates/search_result_actions.html:137
-msgid "Layers"
-msgstr "Ebenen"
-
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "A key above an envelope"
 msgstr "Ein Schlüssel über einem Briefumschlag"
 
-#: searchCatalogue/templates/search_result_actions.html:161
+#: searchCatalogue/templates/search_result_actions.html:148
 msgid "Ask data provider for permission"
 msgstr "Datenanbieter um Berechtigung bitten"
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "A black closed padlock"
 msgstr "Ein schwarzes, geschlossenes Vorhängeschloss"
 
-#: searchCatalogue/templates/search_result_actions.html:164
+#: searchCatalogue/templates/search_result_actions.html:151
 msgid "Only for registered users"
 msgstr "Nur für registrierte Nutzer"
 
@@ -682,27 +656,33 @@ msgstr "Durchschnittliche Verfügbarkeit"
 msgid "Last monitoring state"
 msgstr "Letzter Monitoring Status"
 
-#: searchCatalogue/templates/search_result_list_entry.html:46
+#: searchCatalogue/templates/search_result_list_entry.html:45
+#: searchCatalogue/templates/search_result_list_entry.html:61
+#: searchCatalogue/templates/search_result_list_entry.html:93
+msgid "Capabilities"
+msgstr ""
+
 #: searchCatalogue/templates/search_result_list_entry.html:50
-#: searchCatalogue/templates/search_result_list_entry.html:53
-#: searchCatalogue/templates/search_result_list_entry.html:56
-#: searchCatalogue/templates/search_result_list_entry.html:62
+#: searchCatalogue/templates/search_result_list_entry.html:66
+#: searchCatalogue/templates/search_result_list_entry.html:77
+#: searchCatalogue/templates/search_result_list_entry.html:83
+#: searchCatalogue/templates/search_result_list_entry.html:98
 msgid "Add to mapviewer"
 msgstr "Kartenviewer hinzufügen"
 
-#: searchCatalogue/templates/search_result_list_entry.html:47
-#: searchCatalogue/templates/search_result_list_entry.html:51
-#: searchCatalogue/templates/search_result_list_entry.html:54
+#: searchCatalogue/templates/search_result_list_entry.html:55
+#: searchCatalogue/templates/search_result_list_entry.html:71
 msgid "Add to mapviewer with zoom"
 msgstr "Kartenviewer hinzufügen mit Zoom"
+
+#: searchCatalogue/templates/search_results.html:11
+#: useroperations/templates/landing_page.html:49
+msgid "A filter icon"
+msgstr "Ein Filtersymbol"
 
 #: searchCatalogue/templates/search_results.html:12
 msgid "Filter"
 msgstr "Filter"
-
-#: searchCatalogue/templates/search_results.html:25
-msgid "A magnifying class"
-msgstr "Ein Ver"
 
 #: searchCatalogue/templates/search_results.html:26
 msgid "Results"
@@ -763,10 +743,6 @@ msgstr "Räumliche Einschränkung:"
 #: searchCatalogue/utils/viewHelper.py:284
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
-
-#: searchCatalogue/views.py:391 useroperations/templates/landing_page.html:19
-msgid "Web Map Services"
-msgstr "Darstellungsdienste"
 
 #: searchCatalogue/views.py:392
 msgid "Search-, Download-,Gathering-modules"
@@ -852,151 +828,143 @@ msgstr "Kontakt zum Helpdesk:"
 msgid "Thank you for your understanding!"
 msgstr "Vielen Dank für Ihr Verständnis!"
 
-#: templates/500.html:25 templates/base.html:239
+#: templates/500.html:25 templates/base.html:235
 #: templates/unsupported_browser.html:25
 msgid "The logo of Geoportal Rhineland-Palatinate"
 msgstr "Das Logo des Geoportals Rheinland-Pfalz"
 
-#: templates/base.html:45 useroperations/templates/landing_page.html:95
+#: templates/base.html:42 useroperations/templates/landing_page.html:95
 msgid "Logo of the spatial data infrastructure organization"
 msgstr "Logo der Geodateninfrastruktur"
 
-#: templates/base.html:49
+#: templates/base.html:46
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: templates/base.html:74
+#: templates/base.html:71
 msgid "A lying map icon"
 msgstr "Eine liegende Karte"
 
-#: templates/base.html:74
+#: templates/base.html:71
 msgid "Open and close map viewer"
 msgstr "Kartenviewer öffnen/schließen"
 
-#: templates/base.html:80
+#: templates/base.html:77
 msgid "Three horizontal lines, one below the other"
 msgstr "Drei horizontale Linien untereinander"
 
-#: templates/base.html:80
+#: templates/base.html:77
 msgid "Open and close menu"
 msgstr "Menü ein-/ausklappen"
 
-#: templates/base.html:84
+#: templates/base.html:81
 msgid "Menu"
 msgstr "Menü"
 
-#: templates/base.html:90
+#: templates/base.html:87
 msgid "A stylized house"
 msgstr "Ein stilisiertes Haus"
 
-#: templates/base.html:93
+#: templates/base.html:90
 msgid "Home"
 msgstr "Home"
 
-#: templates/base.html:101
+#: templates/base.html:98
 msgid "A filled stylized person shape in a circle"
 msgstr "Eine farblich ausgefüllte stilisierte Person in einem Kreis"
 
-#: templates/base.html:103
+#: templates/base.html:100
 msgid "An empty stylized person shape in a circle"
 msgstr "Eine nicht ausgefüllte stilisierte Person in einem Kreis"
 
-#: templates/base.html:110
+#: templates/base.html:107
 msgid "My Profile"
 msgstr "Mein Profil"
 
-#: templates/base.html:116
+#: templates/base.html:113
 msgid "Hello"
 msgstr "Hallo"
 
-#: templates/base.html:117
+#: templates/base.html:114
 msgid "Change Profile"
 msgstr "Profil bearbeiten"
 
-#: templates/base.html:118 useroperations/templates/show_abo.html:5
+#: templates/base.html:115 useroperations/templates/show_abo.html:5
 msgid "Show subscription"
 msgstr "Abos anzeigen"
 
-#: templates/base.html:119
+#: templates/base.html:116
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/base.html:121
+#: templates/base.html:118
 msgid "Not signed in"
 msgstr "Nicht angemeldet"
 
-#: templates/base.html:122 useroperations/views.py:229
+#: templates/base.html:119 useroperations/views.py:229
 #: useroperations/views.py:235
 msgid "Login"
 msgstr "Anmelden"
 
-#: templates/base.html:123 useroperations/views.py:259
+#: templates/base.html:120 useroperations/views.py:259
 #: useroperations/views.py:271 useroperations/views.py:331
 #: useroperations/views.py:393
 msgid "Registration"
 msgstr "Registrierung"
 
-#: templates/base.html:124
-msgid "Reset Password"
-msgstr "Passwort zurücksetzen"
-
-#: templates/base.html:133
+#: templates/base.html:129
 msgid "A newspaper"
 msgstr "Eine Zeitung"
 
-#: templates/base.html:135
+#: templates/base.html:131
 msgid "News"
 msgstr "Meldungen"
 
-#: templates/base.html:144 useroperations/templates/landing_page.html:19
-msgid "A lying map"
-msgstr "Eine liegende Karte"
-
-#: templates/base.html:147
+#: templates/base.html:143
 msgid "Mapviewer"
 msgstr "Kartenviewer"
 
-#: templates/base.html:156
+#: templates/base.html:152
 msgid "A navigation menu icon"
 msgstr "Ein Navigationsmenüsymbol"
 
-#: templates/base.html:213
+#: templates/base.html:209
 msgid "State coat of arms of Rhineland-Palatinate"
 msgstr "Wappen von Rheinland-Pfalz"
 
-#: templates/base.html:218
+#: templates/base.html:214
 msgid "Contact"
 msgstr "Kontakt"
 
-#: templates/base.html:219
+#: templates/base.html:215
 msgid "Legal Disclosure"
 msgstr "Impressum"
 
-#: templates/base.html:220
+#: templates/base.html:216
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: templates/base.html:221
+#: templates/base.html:217
 msgid "Legal Notice"
 msgstr "Rechtshinweis"
 
-#: templates/base.html:222
+#: templates/base.html:218
 msgid "Transparency law"
 msgstr "Transparenzgesetz"
 
-#: templates/base.html:228
+#: templates/base.html:224
 msgid "Signal waves emerging from a single point"
 msgstr "Signalwellen strahlen aus einem einzelnen Punkt"
 
-#: templates/base.html:228 templates/base.html:229
+#: templates/base.html:224 templates/base.html:225
 msgid "RSS Newsfeed"
 msgstr ""
 
-#: templates/base.html:232
+#: templates/base.html:228
 msgid "A white stylized bird in front of a blue background"
 msgstr "Ein weißer stilisierter Vogel vor blauem Hintergrund"
 
-#: templates/base.html:232 templates/base.html:233
+#: templates/base.html:228 templates/base.html:229
 msgid "Twitter"
 msgstr ""
 
@@ -1246,11 +1214,6 @@ msgid "Activation failed. Please contact an administrator!"
 msgstr ""
 "Aktivierung fehlgeschlagen. Bitte kontaktieren Sie einen Administrator!"
 
-#: useroperations/templates/applications.html:26
-#: useroperations/templates/inspire_topics.html:21
-msgid "A magnifying glass icon"
-msgstr "Ein Lupensymbol"
-
 #: useroperations/templates/applications.html:30
 msgid "Switch between list or tile view"
 msgstr "Zwischen Listen- und Kachelansicht wechseln"
@@ -1280,10 +1243,6 @@ msgstr "Veröffentlicht am"
 #: useroperations/templates/applications.html:85
 msgid "Published by"
 msgstr "Veröffentlicht von"
-
-#: useroperations/templates/applications.html:95
-msgid "A metadata symbol"
-msgstr "Ein Metadatensymbol"
 
 #: useroperations/templates/crispy_form_no_action.html:11
 msgid "Why should I create an account?"
@@ -1340,6 +1299,7 @@ msgid "Remaining characters: "
 msgstr "Verbleibende Zeichen: "
 
 #: useroperations/templates/geoportal.html:8
+#: useroperations/templates/geoportal.html:9
 msgid ""
 "A mapviewer switcher icon, shaped as two arrows pointing in opposite "
 "directions"
@@ -1348,10 +1308,11 @@ msgstr ""
 "entgegengesetzte Richtungen zeigen"
 
 #: useroperations/templates/geoportal.html:8
+#: useroperations/templates/geoportal.html:9
 msgid "Switch between mapviewers"
 msgstr "Kartenviewer wechseln"
 
-#: useroperations/templates/geoportal.html:18
+#: useroperations/templates/geoportal.html:19
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
 
@@ -1392,10 +1353,6 @@ msgstr "Suche nach allen Karten starten"
 msgid "A lying map in the background. A large plus in the foreground."
 msgstr "Eine liegende Karte im Hintergrund. Ein großes Plus im Vordergrund."
 
-#: useroperations/templates/landing_page.html:12
-msgid "Web Map Context"
-msgstr ""
-
 #: useroperations/templates/landing_page.html:17
 msgid "Search for all map layers"
 msgstr "Suche nach allen Kartenebenen"
@@ -1413,9 +1370,8 @@ msgid "Show all organizations"
 msgstr "Suche nach allen Organisationen starten"
 
 #: useroperations/templates/landing_page.html:35
-#: useroperations/templates/landing_page.html:36
-msgid "Organizations"
-msgstr "Organisationen"
+msgid "An organization icon"
+msgstr "Ein Organisationssymbol"
 
 #: useroperations/templates/landing_page.html:40
 msgid "Show all applications"
@@ -1451,7 +1407,7 @@ msgstr "Anzahl Aufrufe diese Woche"
 
 #: useroperations/templates/landing_page.html:77
 msgid "Open in mobile viewer"
-msgstr "Kartenviewer öffnen/schließen"
+msgstr "Im mobilen Kartenviewer öffnen"
 
 #: useroperations/templates/landing_page.html:78
 msgid "A stylized mobile phone"
@@ -1553,10 +1509,6 @@ msgid "is already taken"
 msgstr "wurde bereits verwendet"
 
 #: useroperations/views.py:310
-#| msgid ""
-#| "Password does not meet specified criteria, you need at least one "
-#| "uppercase letter, one lowercase letter, one number, you should have at "
-#| "least 9 characters, allowed special chars are: @#$%&+=!"
 msgid ""
 "Password does not meet specified criteria, you need at least one uppercase "
 "letter, one lowercase letter, one number, you should have at least 9 "
@@ -1769,3 +1721,44 @@ msgid "An error occured during sending. Please inform an administrator."
 msgstr ""
 "Die angefragte Seite scheint nicht zu existieren. Bitte informieren Sie "
 "einen Administrator."
+
+#~ msgid ""
+#~ "A fingerprint icon, which indicates that this service usage will be logged"
+#~ msgstr ""
+#~ "Ein Fingerabdrucksymbol. Die Nutzung dieses Dienstes wird protokolliert"
+
+#~ msgid "Layers"
+#~ msgstr "Ebenen"
+
+#~ msgid "A metadata symbol"
+#~ msgstr "Ein Metadatensymbol"
+
+#~ msgid "A magnifying glass"
+#~ msgstr "Eine Lupe"
+
+#~ msgid "A stylized globe"
+#~ msgstr "Ein stylisierter Globus"
+
+#~ msgid "Three dots in a row"
+#~ msgstr "Drei Punkte in einer Reihe"
+
+#~ msgid "A service icon, shaped as two arrows pointing in opposite directions"
+#~ msgstr ""
+#~ "Ein Dienstesymbol in der Form zweier Pfeile, die in entgegengesetzte "
+#~ "Richtungen zeigen"
+
+#~ msgid "A web feature service icon, shaped as a magnifying glass over a map"
+#~ msgstr ""
+#~ "Ein Web Feature Service Symbol, in der Form einer Lupe über einer Karte"
+
+#~ msgid "A web map service icon, shaped as a lying map"
+#~ msgstr "Ein Web Map Service Symbol, in der Form einer liegenden Karte"
+
+#~ msgid "A magnifying class"
+#~ msgstr "Ein Ver"
+
+#~ msgid "Reset Password"
+#~ msgstr "Passwort zurücksetzen"
+
+#~ msgid "A magnifying glass icon"
+#~ msgstr "Ein Lupensymbol"

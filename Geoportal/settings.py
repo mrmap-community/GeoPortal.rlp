@@ -111,6 +111,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Geoportal.urls'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "Geoportal/static"),  # for generic static files, which are used in all apps
+]
 
 TEMPLATES = [
     {

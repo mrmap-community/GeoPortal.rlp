@@ -15,5 +15,6 @@ DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
     --secondary-light: #EFEFEF;
 
     --success-green: #1d873c;
-    --error-red: #D70000;
+    --error-red: #871d28;
+    --warning: #87711d;
 }

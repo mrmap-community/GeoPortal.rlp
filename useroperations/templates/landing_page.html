@@ -9,21 +9,21 @@
 <div class="quickstart-container">
     <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">
-            <img alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" src="{% static 'searchCatalogue/images/icons/icn_wmc.png' %}">
+            <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" ></i>
             <span>{% trans 'Map collections' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
     </a>
     <a class="quickstart search" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
-            <img alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" src="{% static 'searchCatalogue/images/icons/icn_wms_primary.png' %}">
+            <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" ></i>
             <span>{% trans 'Map layers' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
     </a>
     <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
-            <img alt="{% trans 'A stylized globe' %}" title="{% trans 'Datasets' %}" src="{% static 'searchCatalogue/images/icons/icn_dataset_primary.png' %}">
+            <i class="fas fa-globe" title="{% trans 'Datasets' %}"></i>
             <span>{% trans 'Datasets' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
@@ -32,21 +32,21 @@
 <div class="quickstart-container">
     <a class="quickstart" href="{% url 'useroperations:organizations' %}" title="{% trans 'Show all organizations' %}">
         <div class="quickstart-header">
-            <img alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" src="{% static 'searchCatalogue/images/icons/icn_organization_primary.png' %}">
+            <i class="fas fa-city" alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" ></i>
             <span>{% trans 'Organizations' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:apps' %}" title="{% trans 'Show all applications' %}">
         <div class="quickstart-header">
-            <img alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}" src="{% static 'searchCatalogue/images/icons/icn_application.png' %}">
+            <i class="fas fa-cogs" alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}"></i>
             <span>{% trans 'Applications' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_apps|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
         <div class="quickstart-header">
-            <img alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" src="{% static 'searchCatalogue/images/icons/icn_filter.png' %}">
+            <i class="fas fa-filter" alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" ></i>
             <span>{% trans 'Categories and topics' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
@@ -71,11 +71,11 @@
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div title="{% trans 'Total views this week' %}" class="view-count">
-                            <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                            <i class="fas fa-eye"></i>
                             <span>{{ result.loadCount|intcomma }}</span>
                         </div>
                         <div title="{% trans 'Open in mobile viewer' %}" class="mobile-button">
-                            <img alt="{% trans 'A stylized mobile phone' %}" title="{% trans 'Open directly in the mobile map viewer' %}" src="{% static 'useroperations/images/icn_mobile.png' %}">
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
                     </div>
                     <hr>

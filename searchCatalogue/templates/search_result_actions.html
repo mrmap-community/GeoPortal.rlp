@@ -6,25 +6,25 @@
             {% if type == 'service_DE' %}
                 {% if layer.showMapUrl %}
                     <a class='button view-button' id="view_{{ layer.id }}">
-                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <i class="fas fa-eye icn-show"></i>
                         {% trans 'Show' %}
                     </a>
                 {% endif %}
                 {% if layer.downloadFeedClientUrl %}
                     <a class='button download-button' target="_blank" href="{{ layer.downloadFeedClientUrl }}">
-                        <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                        <i class="fas fa-download icn-download"></i>
                         {% trans 'Download' %}
                     </a>
                 {% endif %}
             {% else %}
                 <a class='button view-button' id="view_{{ layer.id }}">
-                    <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                    <i class="fas fa-eye icn-show"></i>
                     {% trans 'Show' %}
                 </a>
             {% endif %}
         {% elif type == 'application' %}
             <a class='button view-button' target="_blank" href="{{ result.accessURL }}">
-                <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                <i class="fas fa-eye icn-show"></i>
                 {% trans 'Show' %}
             </a>
 
@@ -32,7 +32,7 @@
         <!-- WMS and DATASET -->
             {% if feeds is not None and feeds|length > 0 %}
                 <a class="button download-button" id="download_{{ result.id }}">
-                    <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                    <i class="fas fa-download icn-download"></i>
                     {% trans 'Download' %} ({{ feeds|length }})
                 </a>
             {% endif %}
@@ -40,17 +40,17 @@
                 {% if type == 'wms' %}
                     {% if layer.download_url is not None and layer.download_url|length > 0%}
                         <a class="button download-button" id="download_{{ layer.id }}">
-                            <img alt="{% trans 'A download icon' %}" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}">
+                            <i class="fas fa-download icn-download"></i>
                             {% trans 'Download' %}
                         </a>
                     {% endif %}
                     <a class='button view-button' id="view_{{ layer.id }}">
-                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <i class="fas fa-eye icn-show"></i>
                         {% trans 'Show' %}
                     </a>
                 {% elif type == 'dataset' %}
                     <a class='button view-button' id="view_{{ result.id }}">
-                        <img alt="{% trans 'An eye icon' %}" src="{% static 'searchCatalogue/images/icons/icn_show.png' %}">
+                        <i class="fas fa-eye icn-show"></i>
                         {% trans 'Show' %} ({{ layers|length }})
                     </a>
                 {% endif %}
@@ -89,27 +89,15 @@
                                 <div class="resource-element-info"></div>
                                 <div class="feed-download-wrapper">
                                     <a class="feed-download-button" href="{{ feed.accessUrl }}" target="_blank" title="{% trans 'Original atom feed' %}">
-                                        <img alt="{% trans 'A document icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}"/>
+                                        <i class="fas fa-file-alt icn-file icn-single"></i>
                                     </a>
                                     <a class="atom-feed-button" href="{{ feed.accessClient }}" target="_blank" title="{% trans 'Open in atom feed viewer' %}">
-                                        <img alt="{% trans 'A download icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}"/>
+                                        <i class="fas fa-download icn-download icn-single"></i>
                                     </a>
                                 </div>
                             </div>
                         </li>
 
-                    <!--
-                    <li class="resource-element">
-                        <a href="{{ feed.download_url }}" target="_blank" >
-                            <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
-                                <div class="resource-element-info">
-                                    <strong>{{ feed.serviceUuid }}</strong>
-                                    <img src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
-                                </div>
-                                <img class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
-                            </div></a>
-                    </li>
-                    -->
                     {% endfor %}
                 </ul>
             </div>
@@ -124,7 +112,7 @@
                             <div id="download_button_{{ layer.id }}" class="feed-download">
                                 <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}" title="Inspire"/>
                                 <strong>{{ layer.name }}</strong>
-                                <img alt="{% trans 'A download icon' %}" class="feed-download-img" src="{% static 'searchCatalogue/images/icons/icn_download.png' %}" title="{% trans 'Download' %}"/>
+                                <i class="fas fa-download icn-download" title="{% trans 'Download' %}"></i>
                             </div></a>
                     </li>
                 </ul>
@@ -134,7 +122,6 @@
             {% if layers is not None and layers|length > 0 %}
                 <div class="resource-list view_{% if type == 'wms' %}{{ layer.id }}{% elif type == 'dataset' %}{{ result.id }}{% endif %}" style="display:none;">
                 <ul style="overflow: hidden;">
-                    <!-- <li class="resource-category-header">{% trans 'Layers' %}</li> -->
                     {% if type == 'dataset' %}
                         {% for layer in layers %}
                             {% with layer.srv.layer.0 as layer_data %}
@@ -156,13 +143,16 @@
         {% endif %}
     </div>
 {% else %}
-    <div class="not-allowed-wrapper">
-            {% if loggedin %}
-            <img alt="{% trans 'A key above an envelope' %}"  class="ask-permission-img" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" src="{% static 'searchCatalogue/images/icons/icn_permission_email.png' %}" title="{% trans 'Ask data provider for permission' %}">
-            {% else %}
-            <a href="/login">
-                <img alt="{% trans 'A black closed padlock' %}" class="not-allowed-img" src="{% static 'searchCatalogue/images/icons/icn_permission_restricted.png' %}" title="{% trans 'Only for registered users' %}">
+    <div class="flex-row not-allowed-wrapper">
+            <a href="/login" class="metadata-link-element button" title="{% trans 'Only for registered users' %}">
+                <i class="fas fa-eye-slash icn-show"></i>
+                <span>{% trans 'Locked' %}</span>
             </a>
+            {% if loggedin %}
+            <div id="ask-permission" class="metadata-link-element" data-params="{{ layer.permission }}" data-name="{{ layer.title }}" data-id="{{ layer.id }}" title="{% trans 'Ask data provider for permission' %}">
+                <i class="fas fa-envelope-open-text icn-ask-permission"></i>
+                <span>{% trans 'Request permission' %}</span>
+            </div>
             {% endif %}
     </div>
 {% endif %}

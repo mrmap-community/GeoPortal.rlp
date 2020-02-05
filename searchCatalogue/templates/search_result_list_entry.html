@@ -13,25 +13,34 @@
         {% endif %}
         <div class="resource-element-info">
             {% if layer_info.logged is True or layer_info.logged == "1" %}
-                <img class="resource-element-info-logging" title="{% trans 'Access will be logged' %}" src="{% static 'searchCatalogue/images/icons/icn_isLogging.png' %}">
+                <i class="fas fa-fingerprint icn-logging" title="{% trans 'Access will be logged' %}" ></i>
             {% endif %}
             {% if layer_info.nwaccess is True %}
-                <img class="resource-element-info-network" title="{% trans 'Access is network dependent' %}" src="{% static 'searchCatalogue/images/icons/icn_isNetworkRestricted.png' %}">
+                <i class="fas fa-network-wired icn-network-restricted" title="{% trans 'Access is network dependent' %}" ></i>
             {% endif %}
             {% if layer_info.price is not None %}
-                <img class="resource-element-info-price" title="{% trans 'Chargeable' %}" src="{% static 'searchCatalogue/images/icons/icn_price.png' %}">
+                <i class="fas fa-euro-sign icn-price" title="{% trans 'Chargeable' %}"></i>
             {% endif %}
             {% if layer_data.queryable == 1 %}
-                <img class="resource-element-info-queryable" title="{% trans 'Layer has information' %}" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
+                <i class="fas fa-question-circle icn-queryable" title="{% trans 'Layer has information' %}"></i>
             {% endif %}
             {% if layer_info.avail is not None %}
-                <a class="resource-element-info-availability" title="{% trans 'Avg. availability' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
-                    {{ layer_info.avail }} %
+                <a class="icn-availability" title="{% trans 'Avg. availability' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
+                    <i class="fas fa-signal"></i>
+                    <span>{{ layer_info.avail }}%</span>
                 </a>
             {% endif %}
             {% if layer_info.status is not None %}
-                <a class="resource-element-info-status" title="{% trans 'Last monitoring state' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
-                    <img src="{% static 'searchCatalogue/images/icons/' %}{% if layer_info.status == '-1' %}icn_monitoring_bad.png{% elif layer_info.status == '0' %}icn_monitoring_warn.png{% else %}icn_monitoring_okay.png{% endif %}">
+                <a class="icn-status" title="{% trans 'Last monitoring state' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
+                    {% if layer_info.status == '-1' %}
+                        <i class="fas fa-times-circle error"></i>
+                    {% elif layer_info.status == '0' %}
+                        <i class="fas fa-exclamation-circle warn"></i>
+                    {% elif layer_info.status == '1' %}
+                        <i class="fas fa-check-circle success"></i>
+                    {% else %}
+
+                    {% endif %}
                 </a>
             {% endif %}
             {% if layer_info.iso3166 is not None %}
@@ -42,24 +51,63 @@
         {% if type != 'service_DE' %}
         <div id="{{layer.srv.id}}" class="resource-element-actions" data-id="{% if type == 'wfs' or type == 'wms' %}{{ result.id }}{% else %}{{ layer.srv.id }}{% endif %}" data-resource="{{ type }}">
             {% if type == 'wms' %}
-                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
-                <a href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
-                <a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>
+                <a class="resource-element-action" href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank" title="{% trans 'Capabilities' %}">
+                    <div id="capabilities-button-div" >
+                        <i class="fas fa-file-alt icn-file icn-single"></i>
+                    </div>
+                </a>
+                <a class="resource-element-action icn-add-map" href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank" title="{% trans 'Add to mapviewer' %}">
+                    <div id="add-map-button-div">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </a>
+                <a class="resource-element-action icn-add-map" href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank" title="{% trans 'Add to mapviewer with zoom' %}" >
+                    <div id="add-map-and-zoom-button-div" >
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
             {% elif type == 'dataset' %}
-                <a href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
-                <a href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
-                <a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>
+                <a class="resource-element-action" href="{{ wms_action_url }}layer_id={{ layer_data.id }}&INSPIRE=1&REQUEST=GetCapabilities&VERSION=1.1.1&SERVICE=WMS" target="_blank" title="{% trans 'Capabilities' %}">
+                    <div id="capabilities-button-div" >
+                        <i class="fas fa-file-alt icn-file icn-single"></i>
+                    </div>
+                </a>
+                <a class="resource-element-action icn-add-map" href="LAYER[id]={{ layer_data.id }}" id="add-map-button" target="_blank" title="{% trans 'Add to mapviewer' %}">
+                    <div id="add-map-button-div" >
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </a>
+                <a class="resource-element-action icn-add-map" href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank" title="{% trans 'Add to mapviewer with zoom' %}">
+                    <div id="add-map-and-zoom-button-div" >
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
             {% elif type == 'wmc' %}
-                <a href="WMC={{ layer_data.id }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
-                <!--<a href="LAYER[zoom]=1&LAYER[id]={{ layer_data.id }}" id="add-map-and-zoom-button" target="_blank"><div id="add-map-and-zoom-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer with zoom' %}" src="{% static 'searchCatalogue/images/icons/icn_zoommap_2018.png'%}"></div></a>-->
+                <a class="resource-element-action icn-add-map" href="WMC={{ layer_data.id }}" id="add-map-button" target="_blank" title="{% trans 'Add to mapviewer' %}">
+                    <div id="add-map-button-div" >
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </a>
             {% else %}
-                <a href="FEATURETYPE[id]={{ layer_data.id }}" id="add-map-button" ><div class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_suche.png'%}"></div></a>
+                <a class="resource-element-action icn-add-map" href="FEATURETYPE[id]={{ layer_data.id }}" id="add-map-button" title="{% trans 'Add to mapviewer' %}">
+                    <div >
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </a>
             {% endif %}
         </div>
         {% else %}
         <div id="{{ layer.id }}" class="resource-element-actions" data-resource="other-catalogue">
-            <a href="{{ layer_data.uri }}" target="_blank"><div id="capabilities-button-div" class="resource-element-action"><img title="Capabilities" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png'%}"></div></a>
-            <a href="WMS={{ layer_data.showMapUrl }}&DATASETID={{ layer_data.datasetId }}" id="add-map-button" target="_blank"><div id="add-map-button-div" class="resource-element-action"><img title="{% trans 'Add to mapviewer' %}" src="{% static 'searchCatalogue/images/icons/icn_map_2018.png'%}"></div></a>
+            <a href="{{ layer_data.uri }}" target="_blank">
+                <div id="capabilities-button-div" class="resource-element-action" title="{% trans 'Capabilities' %}">
+                    <i class="fas fa-file-alt icn-file icn-single"></i>
+                </div>
+            </a>
+            <a href="WMS={{ layer_data.showMapUrl }}&DATASETID={{ layer_data.datasetId }}" id="add-map-button" target="_blank">
+                <div id="add-map-button-div" class="resource-element-action icn-add-map" title="{% trans 'Add to mapviewer' %}">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </a>
         </div>
         {% endif %}
     </div>

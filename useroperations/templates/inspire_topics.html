@@ -18,12 +18,12 @@
     <div class="options-middle">
         <div class="tile-filter-input-wrapper">
             <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
-            <img alt="{% trans 'A magnifying glass icon' %}" id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+            <i id="tile-filter-input-icon" class="fas fa-search"></i>
         </div>
     </div>
     <div class="options-right">
-        <div class="tile-list-wrapper">
-            <img class="tile-list-toggler-img" src="{% static 'useroperations/images/icn_list.png' %}">
+        <div class="tile-list-wrapper" title="{% trans 'Switch between list or tile view' %}">
+            <i class="fas fa-th-list icn-toggle-list"></i>
             <label class="switch">
               <input  {%if LISTED_VIEW_AS_DEFAULT %} checked="checked" {% endif %} type="checkbox">
               <span class="slider round"></span>
@@ -55,19 +55,19 @@
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Number of data' %}">
-                            <img alt="{% trans 'A document icon' %}" class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_capabilities.png' %}">
+                            <i class="fas fa-file-alt icn-file icn-sub-tile"></i>
                             <span>{{ result.weight|intcomma }}</span>
                         </div>
-                        <a href="https://inspire.ec.europa.eu/">
-                            <div class="data-info-container" title="{% trans 'INSPIRE Topic' %}">
-                                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="sub-tile-img only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
-                            </div>
-                        </a>
                         <a href="{{ inspire_doc_uri }}{{ result.inspireThemeId }}" target="_blank">
                             <div class="data-info-container" title="{% trans 'More information' %}">
-                                <img alt="{% trans 'An information icon, shaped like the letter i' %}" class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_queryable.png' %}">
+                                <i class="fas fa-info-circle icn-sub-tile"></i>
                                 <span>{% trans 'Information' %}</span>
-                            </div>                            
+                            </div>
+                        </a>
+                        <a href="https://inspire.ec.europa.eu/">
+                            <div class="data-info-container" title="{% trans 'INSPIRE Topic' %}">
+                                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="icn-sub-tile only" src="{% static 'searchCatalogue/images/icons/icn_inspire_2018.png' %}">
+                            </div>
                         </a>
                     </div>
                     <hr>

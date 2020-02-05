@@ -1052,120 +1052,6 @@ $(document).ready(function() {
         prepareAndSearch();
       });
 
-
-    $(document).on("mouseover", ".resource-element-info-logging", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_isLogging_hover.png");
-    });
-    $(document).on("mouseout", ".resource-element-info-logging", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_isLogging.png");
-    });
-
-    $(document).on("mouseover", ".resource-element-info-network", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_isNetworkRestricted_hover.png");
-    });
-    $(document).on("mouseout", ".resource-element-info-network", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_isNetworkRestricted.png");
-    });
-
-    $(document).on("mouseover", ".resource-element-info-price", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_price_hover.png");
-    });
-    $(document).on("mouseout", ".resource-element-info-price", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_price.png");
-    });
-
-    $(document).on("mouseover", ".resource-element-info-queryable", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_queryable_hover.png");
-    });
-    $(document).on("mouseout", ".resource-element-info-queryable", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_queryable.png");
-    });
-
-    $(document).on("mouseover", ".not-allowed-img", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_permission_restricted_hover.png");
-    });
-    $(document).on("mouseout", ".not-allowed-img", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_permission_restricted.png");
-    });
-
-    $(document).on("mouseover", ".ask-permission-img", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_permission_email_hover.png");
-    });
-    $(document).on("mouseout", ".ask-permission-img", function(){
-        var elem = $(this);
-        elem.attr("src", "/static/searchCatalogue/images/icons/icn_permission_email.png");
-    });
-
-
-    $(document).on("mouseover", "#add-map-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_map_2018_hover.png");
-    });
-    $(document).on("mouseout", "#add-map-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_map_2018.png");
-    });
-
-    $(document).on("mouseover", "#add-map-and-zoom-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_zoommap_2018_hover.png");
-    });
-    $(document).on("mouseout", "#add-map-and-zoom-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_zoommap_2018.png");
-    });
-
-    $(document).on("mouseover", "#capabilities-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_hover.png");
-    });
-
-    $(document).on("mouseout", "#capabilities-button-div", function(){
-        var elem = $(this);
-        var elem_img = elem.find("img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
-    });
-
-    $(document).on("mouseover", ".feed-download-button", function(){
-        var elem = $(this);
-        var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities_hover.png");
-    });
-
-    $(document).on("mouseout", ".feed-download-button", function(){
-        var elem = $(this);
-        var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_capabilities.png");
-    });
-
-    $(document).on("mouseover", ".atom-feed-button", function(){
-        var elem = $(this);
-        var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download_hover.png");
-    });
-
-    $(document).on("mouseout", ".atom-feed-button", function(){
-        var elem = $(this);
-        var elem_img = elem.find(".feed-download-img");
-        elem_img.attr("src", "/static/searchCatalogue/images/icons/icn_download.png");
-    });
-
     $(document).on("click", ".thumbnail-extent", function(){
         var elem = $(this);
         var url = elem.attr("src");
@@ -1188,7 +1074,7 @@ $(document).ready(function() {
         openInNewTab(url);
     });
 
-    $(document).on("click", ".ask-permission-img", function(){
+    $(document).on("click", "#ask-permission", function(){
         var elem = $(this);
         var params = {
             "dataProvider": elem.attr("data-params"),
@@ -1246,6 +1132,7 @@ $(document).ready(function() {
      */
      $(document).on("click", ".spatial-result-title", function(){
         var elem = $(this);
+        elem.toggleClass("active");
         elem.next(".spatial-search-result-wrapper").slideToggle("slow");
      });
 

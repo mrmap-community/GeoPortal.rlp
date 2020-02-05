@@ -19,12 +19,12 @@
     <div class="options-middle">
         <div class="tile-filter-input-wrapper">
             <input class="tile-filter-input" type="text" title="{% trans 'Filter by' %}" placeholder="{% trans 'Filter by' %}">
-            <img id="tile-filter-input-icon" src="{% static 'searchCatalogue/images/icons/icn_search.png' %}">
+            <i id="tile-filter-input-icon" class="fas fa-search"></i>
         </div>
     </div>
     <div class="options-right">
-        <div class="tile-list-wrapper">
-            <img class="tile-list-toggler-img" src="{% static 'useroperations/images/icn_list.png' %}">
+        <div class="tile-list-wrapper" title="{% trans 'Switch between list or tile view' %}">
+            <i class="fas fa-th-list icn-toggle-list"></i>
             <label class="switch">
               <input {%if LISTED_VIEW_AS_DEFAULT %} checked="checked" {% endif %} type="checkbox">
               <span class="slider round"></span>
@@ -56,21 +56,21 @@
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Published datasets' %}" data-resource="dataset">
-                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_dataset.png' %}">
+                            <i class="fas fa-globe icn-sub-tile"></i>
                             <span>{{ result.datasets|intcomma }}</span>
                         </div>
                         <div class="data-info-container" title="{% trans 'Published layers' %}" data-resource="wms">
-                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_wms.png' %}">
+                            <i class="fas fa-layer-group icn-sub-tile"></i>
                             <span>{{ result.layers|intcomma }}</span>
                         </div>
                     </div>
                     <div class="sub-tile-container">
                         <div class="data-info-container" title="{% trans 'Published featuretypes' %}" data-resource="wfs">
-                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_wfs.png' %}">
+                            <i class="fas fa-info-circle icn-sub-tile"></i>
                             <span>{{ result.featuretypes|intcomma }}</span>
                         </div>
                         <div class="data-info-container" title="{% trans 'Published wmcs' %}" data-resource="wmc">
-                            <img class="sub-tile-img" src="{% static 'searchCatalogue/images/icons/icn_wmc.png' %}">
+                            <i class="fas fa-map icn-sub-tile"></i>
                             <span>{{ result.wmcs|intcomma }}</span>
                         </div>
                     </div>
