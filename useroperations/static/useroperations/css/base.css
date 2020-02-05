@@ -389,9 +389,7 @@ ul {
     color: white;
     padding: .5em;
     border-radius: 0.75em 0 0 0.75em;
-    transition: all 0.25s ease-in-out;
     width: 2.5em;
-    transform: translateX(0.8em);
 }
 
 .map-viewer-selector:hover, .map-applications-toggler:hover{
@@ -403,18 +401,19 @@ ul {
 	filter:         drop-shadow(0 5px 2px rgba(0,0,0,.5));
 }
 
-.map-viewer-selector.open, .map-applications-toggler.open{
-    transform: translateX(0.0em);
-    background: var(--primary-light);
+.map-sidebar{
+    position: absolute;
+    top: 50px;
+    right: -2em;
+    transition: all 0.25s ease-in-out;
+}
+
+.map-sidebar.open{
+    transform: translateX(-2.0em);
 }
 
 .map-applications-toggler{
     margin: 5px 0 0 0;
-}
-.map-sidebar{
-    position: absolute;
-    top: 50px;
-    right: 0px;
 }
 .map-sidebar-actions{
     display: flex;

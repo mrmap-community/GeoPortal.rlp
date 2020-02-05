@@ -4,8 +4,8 @@
 	<div class="mapbender">
         <div class="map-sidebar">
             <div class="map-sidebar-actions">
-                <div class="map-viewer-selector">
-					<i class="fas fa-exchange-alt" alt="{% trans 'A mapviewer switcher icon, shaped as two arrows pointing in opposite directions' %}" title="{% trans 'Switch between mapviewers' %}"></i>
+                <div class="map-viewer-selector" title="{% trans 'Switch between mapviewers' %}">
+					<i class="fas fa-exchange-alt"></i>
 		        </div>
                 <div class="map-viewer-list">
 				{% for mapviewer_name, mapviewer_val in mapviewers.items %}
@@ -13,9 +13,9 @@
 				{% endfor %}
                 </div>
 				{% if guis|length > 1 %}
-		        	<div class="map-application-selector">
+		        	<div class="map-application-selector" title="{% trans 'Select other map application' %}">
 		        		<div class="map-applications-toggler">
-							<i class="far fa-folder-open" alt="An arrow pointing from one map to another above" title="{% trans 'Select other map application' %}"></i>
+							<i class="far fa-folder-open"></i>
 		        		</div>
 		        	</div>
 				{% endif %}
