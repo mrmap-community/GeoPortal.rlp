@@ -171,31 +171,44 @@ $(document).on("click", ".mobile-button", function(){
 
 $(document).on("click", ".map-viewer-selector", function(){
     var elem = $(this);
-    elem.toggleClass("open")
-
-    // close other menu
     var mapViewerSelector = $(".map-applications-toggler");
+
+    elem.toggleClass("open")
+    // close other menu
     if(mapViewerSelector.hasClass("open") && elem.hasClass("open")){
         mapViewerSelector.click();
     }
 
     var viewerList = $(".map-viewer-list");
     viewerList.slideToggle("medium");
-    //toggleMapViewers();
+
+    var sideBar = elem.closest(".map-sidebar");
+    if((mapViewerSelector.hasClass("open") || elem.hasClass("open")) && !sideBar.hasClass("open")){
+        sideBar.addClass("open");
+    }else if(!mapViewerSelector.hasClass("open") && !elem.hasClass("open") && sideBar.hasClass("open")){
+        sideBar.removeClass("open");
+    }
 });
 
 $(document).on("click", ".map-applications-toggler", function(){
     var elem = $(this);
-    elem.toggleClass("open")
-
-    // close other menu
     var mapViewerSelector = $(".map-viewer-selector");
+
+    elem.toggleClass("open")
+    // close other menu
     if(mapViewerSelector.hasClass("open") && elem.hasClass("open")){
         mapViewerSelector.click();
     }
 
     var applicationsList = $(".map-applications-list");
     applicationsList.slideToggle("medium");
+
+    var sideBar = elem.closest(".map-sidebar");
+    if((mapViewerSelector.hasClass("open") || elem.hasClass("open")) && !sideBar.hasClass("open")){
+        sideBar.addClass("open");
+    }else if(!mapViewerSelector.hasClass("open") && !elem.hasClass("open") && sideBar.hasClass("open")){
+        sideBar.removeClass("open");
+    }
 });
 
 $(document).on("click", ".map-viewer-list-entry", function(){
