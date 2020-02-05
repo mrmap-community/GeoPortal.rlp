@@ -26,7 +26,8 @@
             {% endif %}
             {% if layer_info.avail is not None %}
                 <a class="icn-availability" title="{% trans 'Avg. availability' %}" href="{{ layer_data.mdLink }}#tabs-5" target="_blank">
-                    {{ layer_info.avail }} %
+                    <i class="fas fa-signal"></i>
+                    <span>{{ layer_info.avail }}%</span>
                 </a>
             {% endif %}
             {% if layer_info.status is not None %}

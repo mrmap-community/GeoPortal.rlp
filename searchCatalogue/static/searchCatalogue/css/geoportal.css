@@ -275,11 +275,16 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     color: var(--error-red);
 }
 
-.resource-element-info:hover .icn-status .success,
-.resource-element-info:hover .icn-status .warn,
-.resource-element-info:hover .icn-status .error
+.icn-status:hover .success,
+.icn-status:hover .warn,
+.icn-status:hover .error
 {
     color: white;
+}
+
+.resource-element-info .icn-availability i{
+    font-size: 1.25em;
+    padding: 0 0.5em 0 0;
 }
 
 .resource-element-info .icn-status i{
