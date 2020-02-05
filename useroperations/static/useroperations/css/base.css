@@ -329,6 +329,10 @@ ul {
     color: var(--error-red);
 }
 
+.metadata-link-element:hover .icn-licence.error{
+    color: white;
+}
+
 .mapbender{
     opacity: 1;
     display: flex;

@@ -355,11 +355,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .metadata-link-element:hover{
-    /*
-    Little trick: since we invert the colors here to make black icons white,
-    we need to make all other colors inverted before, to display the correct ones
-    */
-    color: white;
+    color: white !important;
     background-color: var(--primary);
     cursor: pointer;
     border: 1px solid black;
