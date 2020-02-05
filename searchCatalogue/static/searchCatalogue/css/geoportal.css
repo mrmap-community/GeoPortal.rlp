@@ -263,6 +263,25 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     text-decoration: none;
 }
 
+.icn-status .success{
+    color: var(--success-green);
+}
+
+.icn-status .warn{
+    color: var(--warning);
+}
+
+.icn-status .error{
+    color: var(--error-red);
+}
+
+.resource-element-info:hover .icn-status .success,
+.resource-element-info:hover .icn-status .warn,
+.resource-element-info:hover .icn-status .error
+{
+    color: white;
+}
+
 .resource-element-info .icn-status i{
     font-size: 1.75em;
 }
