@@ -116,10 +116,11 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     padding: 10px;
     color: var(--primary);
     border-radius: 100%;
-    width: 3em;
-    height: 3em;
+    width: 1em;
+    height: 1em;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 0 0 0 1em;
 }
 .filter-remover:hover{
