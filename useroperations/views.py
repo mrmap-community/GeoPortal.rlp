@@ -876,6 +876,7 @@ def activation_view(request, activation_key=""):
     else:
         user = MbUser.objects.get(activation_key=activation_key, is_active=False)
         user.is_active = True
+        user.mb_user_login_count = 0
         activated = True
         user.save()
         template = 'activation.html'
