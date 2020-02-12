@@ -530,7 +530,10 @@ EOF
 fi
 
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql | tee -a $installation_log
-
+  
+  sed -i "s/mapbenderdbuser/$mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/change_owner.psql
+  sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}GeoPortal.rlp/scripts/change_owner.psql | tee -a $installation_log
+  
   echo -e "\n ${green}Successfully installed Mapbender Database!${reset} \n" | tee -a $installation_log
 
   if [ $checkout_mapbender_conf = 'true' ]; then
