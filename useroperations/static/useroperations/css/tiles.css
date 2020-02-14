@@ -221,11 +221,19 @@ input:checked + .slider:before {
     font-weight: initial;
 }
 
-.tile-list-wrapper .powered-by{
-
+.tile-corner-icn{
+    position: absolute;
+    top: -0.75em;
+    max-width: 5.5rem;
+    border-radius: 100%;
+    padding: 1em;
+    right: -0.75em;
 }
 
-
+.inspire-icn{
+    width: 2.5em;
+    opacity: 0.75
+}
 
 
 @media screen and (max-width: 700px){

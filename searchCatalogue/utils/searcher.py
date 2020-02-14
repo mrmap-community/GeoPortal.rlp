@@ -156,15 +156,20 @@ class Searcher:
             return response
         return {}
 
-    def search_all_topics(self, language):
+    def search_topics(self, language: str, topic_type: str):
         """ Get a list of all topics that can be found in the database
+
+        Args:
+            language (str): Defines the language of the responded items (de|en)
+            topic_type (str): Defines the type of topic, which will be used
 
         Returns:
              dict: Contains a json list of all topics
         """
         uri = URL_BASE + URL_GET_TOPICS
+
         params = {
-            "type": "inspireCategories",
+            "type": topic_type,
             "scale": "absolute",
             "maxObjects": 35,
             "maxFontSize": 30,
@@ -173,11 +178,20 @@ class Searcher:
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
+        ret_resp = {}
+
         response = requests.get(uri, params, verify=INTERNAL_SSL)
         if response.status_code == 200:
-            response = response.json().get("tagCloud")
-            return response
-        return {}
+            ret_resp = response.json().get("tagCloud")
+            tags = ret_resp.get("tags")
+            # collect the svg as inline svg - skip the inspire icons, which are not svg!
+            if len(tags) > 0 and tags[0].get("inspireThemeId", None) is None:
+                for tag in tags:
+                    uri = tag.get("symbolUrl", "")
+                    tag_resp = requests.get(uri)
+                    tag["svg_inline"] = tag_resp.content.decode("UTF-8")
+
+        return ret_resp
 
     def search_coupled_resource(self, md_link):
         """ Resolve coupled dataset/series resources for secondary catalogues

@@ -12,15 +12,6 @@
     font-size: 2em;
 }
 
-.powered-by{
-    position: absolute;
-    top: -0.75em;
-    max-width: 5.5rem;
-    border-radius: 100%;
-    padding: 1em;
-    right: -0.75em;
-}
-
 .applications a{
     text-decoration: none;
     width: 100%;

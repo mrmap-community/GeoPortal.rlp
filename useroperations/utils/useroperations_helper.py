@@ -9,6 +9,7 @@ from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, MULT
 from Geoportal.utils import utils
 from searchCatalogue.utils.searcher import Searcher
 from useroperations.models import MbUser
+from useroperations.settings import INSPIRE_CATEGORIES, ISO_CATEGORIES
 
 
 def random_string(stringLength=15):
@@ -120,7 +121,9 @@ def get_landing_page(lang: str):
     ret_dict["num_apps"] = len(get_all_applications())
 
     # get number of topics
-    ret_dict["num_topics"] = len(get_all_inspire_topics(lang).get("tags", []))
+    len_inspire = len(get_topics(lang, INSPIRE_CATEGORIES).get("tags", []))
+    len_iso = len(get_topics(lang, ISO_CATEGORIES).get("tags", []))
+    ret_dict["num_topics"] = len_inspire + len_iso
 
     # get number of datasets and layers
     tmp = {
@@ -156,15 +159,21 @@ def get_all_applications():
     return searcher.search_primary_catalogue_data().get("application", {}).get("application", {}).get("application", {}).get("srv", [])
 
 
-def get_all_inspire_topics(language):
+def get_topics(language, topic_type: str):
     """ Returns a list of all inspire topics available
 
     Returns:
          A list of all organizations which publish data
     """
-    searcher = Searcher(keywords="", resource_set=["wmc"], page=1, order_by="rank", host=HOSTNAME)
+    searcher = Searcher(
+        keywords="",
+        resource_set=["wmc"],
+        page=1,
+        order_by="rank",
+        host=HOSTNAME
+    )
 
-    return searcher.search_all_topics(language)
+    return searcher.search_topics(language, topic_type)
 
 
 def bcrypt_password(pw: str, user: MbUser):
