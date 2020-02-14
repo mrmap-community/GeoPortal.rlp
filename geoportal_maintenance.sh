@@ -1275,6 +1275,12 @@ cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installati
 cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}config.js_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/ckan.conf ${installation_folder}ckan.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/mobilemap2.conf ${installation_folder}mobilemap2.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/linkedDataProxy.json ${installation_folder}linkedDataProxy.json_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}twitter.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}bkgGeocoding.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}excludeproxyurls.conf_$(date +"%m_%d_%Y")
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
