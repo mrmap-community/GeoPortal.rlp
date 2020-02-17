@@ -231,8 +231,7 @@ input:checked + .slider:before {
 }
 
 .inspire-icn{
-    width: 2.5em;
-    opacity: 0.75
+    width: 2em;
 }
 
 
