@@ -685,7 +685,7 @@ def delete_profile_view(request):
                                     _("In case the deletion of your account was a mistake, you can reactivate it by clicking this link!")
                                     + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
                                     EMAIL_HOST_USER,
-                                    [user.mb_user_email],  # später email variable eintragen
+                                    [user.mb_user_email],
                                     fail_silently=False,
                                 )
 
@@ -947,7 +947,7 @@ def feedback_view(request: HttpRequest):
                     + ", \n \n" +
                     form.cleaned_data["message"],
                     form.cleaned_data["email"],
-                    ['kontakt@geoportal.rlp.de'],  # später email variable eintragen
+                    [EMAIL_HOST_USER],
                     fail_silently=False,
                 )
             except smtplib.SMTPException:
