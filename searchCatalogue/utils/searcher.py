@@ -183,13 +183,6 @@ class Searcher:
         response = requests.get(uri, params, verify=INTERNAL_SSL)
         if response.status_code == 200:
             ret_resp = response.json().get("tagCloud")
-            tags = ret_resp.get("tags")
-            # collect the svg as inline svg - skip the inspire icons, which are not svg!
-            if len(tags) > 0 and tags[0].get("inspireThemeId", None) is None:
-                for tag in tags:
-                    uri = tag.get("symbolUrl", "")
-                    tag_resp = requests.get(uri)
-                    tag["svg_inline"] = tag_resp.content.decode("UTF-8")
 
         return ret_resp
 

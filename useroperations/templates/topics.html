@@ -51,12 +51,11 @@
                 <div class="tile-title">{{ result.title }}</div>
                 <div class="tile-header-img">
                     {% if result.symbolUrl != '' %}
-                        {% if result.svg_inline is not None %}
-                            <div class="tile-img">
-                                {{ result.svg_inline|safe }}
+                        {% if result.inlineSvg is not None %}
+                            <div class="tile-img {% if not result.keepColor %}fill-color{% endif %}">
+                                {{ result.inlineSvg|safe }}
                             </div>
-                        {% else%}
-                            <img alt="{% trans 'An INSPIRE topic symbol' %}" class="tile-img" src="{{ result.symbolUrl }}">
+
                         {% endif %}
                     {% else  %}
                         <img alt="{% trans 'Placeholder topic symbol, since no topic symbol is available' %}" class="tile-img" src="{% static 'searchCatalogue/images/no_image.png' %}">
