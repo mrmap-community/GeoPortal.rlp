@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from useroperations.models import Wfs, Wms, InspireDownloads
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
-from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, HOSTIP
+from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, HOSTIP, EMAIL_HOST_USER
 from django.utils.translation import gettext as _
 from email.utils import parseaddr
 import json
@@ -138,8 +138,8 @@ def download(request):
         _("Hello ") + body['user_name'] +
         ", \n \n" +
         message,
-        'kontakt@geoportal.rlp.de',
-        [body['user_email']],  # später email variable eintragen
+        EMAIL_HOST_USER,
+        [body['user_email']],
         fail_silently=False,
     )
 
