@@ -19,7 +19,8 @@ from django.utils.translation import gettext as _
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, \
-    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY
+    SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, \
+    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, EMAIL_HOST_USER
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from searchCatalogue.settings import PROXIES
@@ -452,7 +453,7 @@ def pw_reset_view(request):
                         _("Hello ") + user.mb_user_name +
                         ", \n\n" +
                         _("This is your new password, please change it immediately!\n Password: ") + newpassword ,
-                        'kontakt@geoportal.de',
+                        EMAIL_HOST_USER,
                         [user.mb_user_email],
                         fail_silently=False,
                 )
@@ -683,7 +684,7 @@ def delete_profile_view(request):
                                     ", \n \n" +
                                     _("In case the deletion of your account was a mistake, you can reactivate it by clicking this link!")
                                     + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
-                                    'kontakt@geoportal.de',
+                                    EMAIL_HOST_USER,
                                     [user.mb_user_email],  # später email variable eintragen
                                     fail_silently=False,
                                 )
