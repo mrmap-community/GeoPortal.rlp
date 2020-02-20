@@ -1,5 +1,5 @@
-Django
-2.1.3
+#Django 2.1.3
+
 BSD
 Copyright (c) Django Software Foundation and individual contributors.
 All rights reserved.
@@ -33,10 +33,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </details>
 
 
-Pillow
-5.3.0
+# Pillow 5.3.0
 Standard PIL License
-The Python Imaging Library (PIL) is
+
+
+<details>
+  <summary>Click for more information</summary>
+  The Python Imaging Library (PIL) is
 
     Copyright © 1997-2011 by Secret Labs AB
     Copyright © 1995-2011 by Fredrik Lundh
@@ -52,14 +55,17 @@ By obtaining, using, and/or copying this software and/or its associated document
 Permission to use, copy, modify, and distribute this software and its associated documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appears in all copies, and that both that copyright notice and this permission notice appear in supporting documentation, and that the name of Secret Labs AB or the author not be used in advertising or publicity pertaining to distribution of the software without specific, written prior permission.
 
 SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL SECRET LABS AB OR THE AUTHOR BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+</details>
 
+# PyYAML 5.3
 
-PyYAML
-5.3
 MIT
 Copyright (c) 2017-2019 Ingy döt Net
 Copyright (c) 2006-2016 Kirill Simonov
 
+
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software without restriction, including without limitation the rights to
@@ -77,12 +83,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+</details>
 
 
-Werkzeug
-0.14.1
+# Werkzeug 0.14.1
 BSD
 Copyright © 2007 by the Pallets team.
+
+<details>
+  <summary>Click for more information</summary>
 
 Some rights reserved.
 
@@ -113,15 +122,17 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE AND DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGE.
+</details>
 
 
-bcrypt
-3.1.6
+#bcrypt 3.1.6
 Apache License, Version 2.0
                               Apache License
                         Version 2.0, January 2004
                      http://www.apache.org/licenses/
 
+<details>
+  <summary>Click for more information</summary>
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
@@ -319,18 +330,21 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+</details>
 
 
-captcha
-0.3
+# captcha 0.3
+
 BSD
 UNKNOWN
 
-certifi
-2018.11.29
+# certifi 2018.11.29
 MPL-2.0
 This packge contains a modified version of ca-bundle.crt:
 
+
+<details>
+  <summary>Click for more information</summary>
 ca-bundle.crt -- Bundle of CA Root Certificates
 
 Certificate data from Mozilla as of: Thu Nov  3 19:04:19 2011#
@@ -380,24 +394,25 @@ documentation is licensed as follows:
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
     DEALINGS IN THE SOFTWARE.
+</details>
 
 
 
-chardet
-3.0.4
+# chardet 3.0.4
 LGPL
 UNKNOWN
 
-cssselect
-1.0.3
+# cssselect 1.0.3
 BSD
 UNKNOWN
 
-django-crispy-forms
-1.7.2
+# django-crispy-forms 1.7.2
 MIT
 Copyright (c) 2009-2015 Miguel Araujo and contributors.
 
+
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
@@ -418,12 +433,14 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+</details>
 
-django-extensions
-2.1.4
+# django-extensions 2.1.4
 MIT License
 Copyright (c) 2007 Michael Trier
 
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -441,18 +458,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+</details>
 
 
-django-ranged-response
-0.2.0
+# django-ranged-response 0.2.0
 MIT
 UNKNOWN
 
-django-simple-captcha
-0.5.9
+# django-simple-captcha 0.5.9
 MIT
 Copyright (c) 2008 - 2014 Marco Bonetti
 
+
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
@@ -471,17 +490,19 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</details>
 
 
-django-user-agents
-0.4.0
+# django-user-agents 0.4.0
 MIT
 UNKNOWN
 
-idna
-2.8
+# idna 2.8
 BSD-like
 License
+
+<details>
+  <summary>Click for more information</summary>
 -------
 
 Copyright (c) 2013-2018, Kim Davies. All rights reserved.
@@ -561,23 +582,24 @@ is subject to the Unicode, Inc. License Agreement:
    shall not be used in advertising or otherwise to promote the sale,
    use or other dealings in these Data Files or Software without prior
    written authorization of the copyright holder.
+</details>
 
 
-lxml
-4.3.0
+# lxml 4.3.0
 BSD
 UNKNOWN
 
-mwclient
-0.9.3
+# mwclient 0.9.3
 MIT
 UNKNOWN
 
-oauthlib
-3.1.0
+# oauthlib 3.1.0
 BSD
 Copyright (c) 2019 The OAuthlib Community
 All rights reserved.
+
+<details>
+  <summary>Click for more information</summary>
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -603,17 +625,19 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</details>
 
 
-phpserialize
-1.3
+# phpserialize 1.3
 UNKNOWN
 UNKNOWN
 
-psycopg2
-2.7.6.1
+# psycopg2 2.7.6.1
 LGPL with exceptions or ZPL
 psycopg2 and the LGPL
+
+<details>
+  <summary>Click for more information</summary>
 ---------------------
 
 psycopg2 is free software: you can redistribute it and/or modify it
@@ -662,12 +686,15 @@ the pattern ``psycopg/adapter*.{h,c}`` and ``psycopg/microprotocol*.{h,c}``:
     be misrepresented as being the original software.
  
  3. This notice may not be removed or altered from any source distribution.
+</details>
 
 
-psycopg2-binary
-2.7.6.1
+# psycopg2-binary 2.7.6.1
 LGPL with exceptions or ZPL
 psycopg2 and the LGPL
+
+<details>
+  <summary>Click for more information</summary>
 ---------------------
 
 psycopg2 is free software: you can redistribute it and/or modify it
@@ -716,16 +743,18 @@ the pattern ``psycopg/adapter*.{h,c}`` and ``psycopg/microprotocol*.{h,c}``:
     be misrepresented as being the original software.
  
  3. This notice may not be removed or altered from any source distribution.
+</details>
 
 
-pycparser
-2.19
+# pycparser 2.19
 BSD
 pycparser -- A C parser in Python
 
 Copyright (c) 2008-2017, Eli Bendersky
 All rights reserved.
 
+<details>
+  <summary>Click for more information</summary>
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
@@ -748,18 +777,15 @@ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</details>
 
 
-pymemcache
-2.0.0
-Apache License 2.0
-UNKNOWN
-
-pytz
-2018.7
+# pytz 2018.7
 MIT
 Copyright (c) 2003-2018 Stuart Bishop <stuart@stuartbishop.net>
 
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
@@ -777,13 +803,15 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+</details>
 
 
-requests
-2.21.0
+# requests 2.21.0
 Apache 2.0
 Copyright 2018 Kenneth Reitz
 
+<details>
+  <summary>Click for more information</summary>
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -795,15 +823,17 @@ Copyright 2018 Kenneth Reitz
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+</details>
 
 
-requests-oauthlib
-1.3.0
+# requests-oauthlib 1.3.0
 ISC
 ISC License
 
 Copyright (c) 2014 Kenneth Reitz.
 
+<details>
+  <summary>Click for more information</summary>
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
@@ -815,25 +845,25 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+</details>
 
 
-six
-1.11.0
+# six 1.11.0
 MIT
 UNKNOWN
 
-ua-parser
-0.9.0
+# ua-parser 0.9.0
 Apache 2.0
 UNKNOWN
 
-urllib3
-1.24.1
+# urllib3 1.24.1
 MIT
 This is the MIT license: http://www.opensource.org/licenses/mit-license.php
 
 Copyright 2008-2016 Andrey Petrov and contributors (see CONTRIBUTORS.txt)
 
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining a copy of this
 software and associated documentation files (the "Software"), to deal in the Software
 without restriction, including without limitation the rights to use, copy, modify, merge,
@@ -849,13 +879,15 @@ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
 FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+</details>
 
 
-user-agents
-2.1
+# user-agents 2.1
 MIT
 Copyright (c) 2013 Selwin Ong
 
+<details>
+  <summary>Click for more information</summary>
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
@@ -874,5 +906,6 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</details>
 
 
