@@ -11,3 +11,6 @@ LISTED_VIEW_AS_DEFAULT = False
 
 # Refers to the default order of applications/organizations/categories
 ORDER_BY_DEFAULT = "rank"  # rank | title
+
+INSPIRE_CATEGORIES = "inspireCategories"
+ISO_CATEGORIES = "topicCategories"
