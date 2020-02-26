@@ -168,7 +168,6 @@ define("PW", "mapbenderdbpassword");
 ```shell
 
 HOSTNAME = "192.168.56.111"
-HOSTIP = "192.168.56.111"
 HTTP_OR_SSL = "http://"
 
 # Database

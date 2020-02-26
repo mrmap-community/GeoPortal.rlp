@@ -5,7 +5,7 @@ import string
 import bcrypt
 import requests
 from lxml import html
-from Geoportal.settings import HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, MULTILINGUAL
+from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, INTERNAL_SSL, MULTILINGUAL
 from Geoportal.utils import utils
 from searchCatalogue.utils.searcher import Searcher
 from useroperations.models import MbUser
@@ -71,9 +71,9 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
     """
     # get mediawiki html
     if MULTILINGUAL:
-        url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
+        url = HTTP_OR_SSL + '127.0.0.1' + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
     else:
-        url = HTTP_OR_SSL + HOSTIP + "/mediawiki/index.php/" + wiki_keyword + "#bodyContent"
+        url = HTTP_OR_SSL + '127.0.0.1' + "/mediawiki/index.php/" + wiki_keyword + "#bodyContent"
     html_raw = requests.get(url, verify=INTERNAL_SSL)
     if html_raw.status_code != 200:
         raise FileNotFoundError

@@ -60,7 +60,7 @@ class AutoCompleter:
         Returns:
              dict: Contains suggestions
         """
-        url = URL_BASE + URL_AUTO_COMPLETE_SUFFIX
+        url = URL_BASE_LOCALHOST + URL_AUTO_COMPLETE_SUFFIX
         params = {
             "searchText": self.search_text,
             "maxResults": self.max_results,
