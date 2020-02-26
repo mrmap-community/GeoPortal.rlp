@@ -327,7 +327,7 @@ class Searcher:
             Returns the spatial search results from the database
         """
         ret_val = []
-        url = URL_BASE_LOCALHOST + URL_LOCATION_SEARCH_SUFFIX
+        url = URL_BASE_GEOPORTAL + URL_LOCATION_SEARCH_SUFFIX
         for search_text in search_texts:
             params = {
                 "outputFormat": self.output_format,
