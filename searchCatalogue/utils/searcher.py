@@ -125,7 +125,7 @@ class Searcher:
         Returns:
             Returns the categories which have been found during the search
         """
-        url = URL_BASE + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
         params = {
             "outputFormat": self.output_format,
             "resultTarget": self.result_target,
@@ -149,7 +149,7 @@ class Searcher:
              dict: Contains a json list of all organizations
         """
         # get overview of all organizations
-        uri = URL_BASE + URL_GET_ORGANIZATIONS
+        uri = URL_BASE_LOCALHOST + URL_GET_ORGANIZATIONS
         response = requests.get(uri, {}, verify=INTERNAL_SSL)
         if response.status_code == 200:
             response = response.json().get("organizations")
@@ -166,7 +166,7 @@ class Searcher:
         Returns:
              dict: Contains a json list of all topics
         """
-        uri = URL_BASE + URL_GET_TOPICS
+        uri = URL_BASE_LOCALHOST + URL_GET_TOPICS
 
         params = {
             "type": topic_type,
@@ -194,7 +194,7 @@ class Searcher:
         Returns:
             response(dict): The response body as json
         """
-        uri = URL_BASE + URL_RESOLVE_COUPLED_RESOURCES
+        uri = URL_BASE_LOCALHOST + URL_RESOLVE_COUPLED_RESOURCES
         params = {
             "getRecordByIdUrl": md_link,
             "hostName": self.host,
@@ -216,7 +216,7 @@ class Searcher:
         Returns:
             dict: Contains the search results
         """
-        url = URL_BASE + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
         self._prepare_selected_facets()
         params = {
             "searchText": self.keywords,
@@ -287,7 +287,7 @@ class Searcher:
         Returns:
             dict: Contains all search results
         """
-        url = URL_BASE + URL_SEARCH_DE_SUFFIX
+        url = URL_BASE_LOCALHOST + URL_SEARCH_DE_SUFFIX
         params = {
             "catalogueId": self.catalogue_id,
             "searchText": self.keywords,

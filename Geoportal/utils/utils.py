@@ -13,7 +13,7 @@ import requests
 from collections import OrderedDict
 from copy import copy
 from Geoportal.settings import DEBUG, INTERNAL_SSL
-from searchCatalogue.utils.url_conf import URL_BASE, URL_GLM_MOD, URL_BASE_LOCALHOST
+from searchCatalogue.utils.url_conf import URL_SESSION_WRAPPER, URL_BASE_LOCALHOST
 from useroperations.models import Navigation
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -70,7 +70,7 @@ def write_gml_to_session(session_id: str, lat_lon: dict):
         "value": post_content
     }
 
-    uri = URL_BASE_LOCALHOST + URL_GLM_MOD + "?sessionId=" + session_id + "&operation=set&key=GML&" + urllib.parse.urlencode(data)
+    uri = URL_BASE_LOCALHOST + URL_SESSION_WRAPPER + "?sessionId=" + session_id + "&operation=set&key=GML&" + urllib.parse.urlencode(data)
 
     response = requests.post(url=uri, data=post_content, verify=INTERNAL_SSL)
     i = 0

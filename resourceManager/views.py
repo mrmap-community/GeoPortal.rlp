@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from useroperations.models import Wfs, Wms, InspireDownloads
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
-from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, HOSTIP, EMAIL_HOST_USER
+from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, EMAIL_HOST_USER
 from django.utils.translation import gettext as _
 from email.utils import parseaddr
 import json
@@ -19,7 +19,7 @@ import os
 def download(request):
 
 
-    if request.META['HTTP_HOST'] not in ["127.0.0.1","localhost",HOSTNAME,HOSTIP]:
+    if request.META['HTTP_HOST'] not in ["127.0.0.1","localhost",HOSTNAME]:
         return HttpResponse('Only internal requests!')
 
     #body = (json.loads(request.body.decode('utf-8')))

@@ -269,7 +269,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     """
     post_params = request.POST.dict()
     template_name = app_name + "search_results.html"
-    host = request.META.get("HTTP_HOST")
+    host = HOSTNAME
 
     # extract parameters
     start_time = time.time()
@@ -384,7 +384,7 @@ def get_data_primary(request: HttpRequest):
         JsonResponse: Contains data for the ajax call
     """
     post_params = request.POST.dict()
-    host = request.META.get("HTTP_HOST")
+    host = HOSTNAME
     template_name = app_name + "search_results.html"
     resources = {
         "dataset": _("Datasets"),

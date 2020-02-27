@@ -18,7 +18,7 @@ from django.utils.translation import gettext as _
 
 from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HOSTIP, HTTP_OR_SSL, INTERNAL_SSL, \
+from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HTTP_OR_SSL, INTERNAL_SSL, \
     SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, \
     USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, EMAIL_HOST_USER
 from Geoportal.utils import utils, php_session_data, mbConfReader
@@ -822,7 +822,7 @@ def map_viewer_view(request):
         # an internal call from our geoportal should lead to the map viewer page without problems
         params = {
             "mapviewer_params": mapviewer_params,
-            "mapviewer_src":  HTTP_OR_SSL + HOSTIP + "/mapbender/frames/index.php?lang=" + lang + "&" + mapviewer_params,
+            "mapviewer_src":  HTTP_OR_SSL + HOSTNAME + "/mapbender/frames/index.php?lang=" + lang + "&" + mapviewer_params,
         }
         geoportal_context.add_context(context=params)
         return render(request, template, geoportal_context.get_context())
