@@ -530,10 +530,10 @@ EOF
 fi
 
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/pgsql/pgsql_serial_set_sequences_2.7.sql | tee -a $installation_log
-  
+
   sed -i "s/mapbenderdbuser/$mapbender_database_user/g" ${installation_folder}GeoPortal.rlp/scripts/change_owner.psql
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}GeoPortal.rlp/scripts/change_owner.psql | tee -a $installation_log
-  
+
   echo -e "\n ${green}Successfully installed Mapbender Database!${reset} \n" | tee -a $installation_log
 
   if [ $checkout_mapbender_conf = 'true' ]; then
@@ -1294,6 +1294,14 @@ cp -av ${installation_folder}extents_geoportal_rlp.map_$(date +"%m_%d_%Y") ${ins
 cp -av ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
 cp -av ${installation_folder}config.js_$(date +"%m_%d_%Y") ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
 cp -av ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/atomFeedClient.conf
+cp -av ${installation_folder}ckan.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/ckan.conf
+cp -av ${installation_folder}mobilemap2.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap2.conf
+cp -av ${installation_folder}linkedDataProxy.json_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/linkedDataProxy.json
+cp -av ${installation_folder}twitter.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/twitter.conf
+cp -av ${installation_folder}bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
+cp -av ${installation_folder}excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
+
+
 cd ${installation_folder}mapbender/tools
 sh ./i18n_update_mo.sh
 cd ${installation_folder}
