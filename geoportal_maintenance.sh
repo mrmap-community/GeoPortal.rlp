@@ -946,6 +946,11 @@ EOF
   cronjob6="57 23 * * * $croncmd6"
   ( crontab -l | grep -v -F "$croncmd6" ; echo "$cronjob6" ) | crontab -
   ############################################################
+  # 7. materialize application search view
+  croncmd7="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_application_view.sql\""
+  cronjob7="0,30 * * * * $croncmd7"
+  ( crontab -l | grep -v -F "$croncmd7" ; echo "$cronjob7" ) | crontab -
+  ############################################################
   # 8. materialize wms search view
   croncmd8="su - postgres -c \"PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f ${installation_folder}mapbender/resources/db/materialize_wms_view.sql\""
   cronjob8="0,30 * * * * $croncmd8"
@@ -983,6 +988,7 @@ fi
 # initially monitor registrated services and add them to catalogue (materialize search tables)
 ############################################################
 eval $croncmd11
+eval $croncmd7
 eval $croncmd8
 eval $croncmd9
 eval $croncmd10
