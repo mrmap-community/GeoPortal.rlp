@@ -758,7 +758,6 @@ $(document).ready(function() {
         var terms     = [];
         var $farea    = $current.find('.-js-result .-js-filterarea');
         var allFacets = [];
-        var isSpatialCheckboxSelected = $("#spatial-checkbox").is(":checked");
 
         // close search area so that loading bar will drop into viewport of user
         if($(".area-elements").is(":visible")){
@@ -783,9 +782,6 @@ $(document).ready(function() {
 
         // disable input field during search
         disableSearchInputField();
-
-        // set spatial checkbox info
-        search.setParam("spatialSearch", isSpatialCheckboxSelected);
 
         // collect all already selected facets
         var facets = $(".-js-facet-item");
@@ -827,6 +823,11 @@ $(document).ready(function() {
                 toEncode[item.name] = [item.value];
             }
         });
+
+        // Collect spatial search checkbox value
+        var spatialSearch = $("#spatial-checkbox").is(":checked");
+        search.setParam("spatialSearch", spatialSearch);
+
         //fixDateFormats(toEncode);
         toggleCataloguesResources();
         var rs = [];
@@ -841,9 +842,6 @@ $(document).ready(function() {
         $.each(toEncode, function(key, values) {
             extended += '&' + key + '=' + values.join(',');
         });
-        //if (search.getParam('maxResults')) {
-        //    extended += '&maxResults=' + search.getParam('maxResults');;
-        //}
 
         extended = encodeURIComponent(extended);
         search.setParam('extended', extended);
@@ -851,12 +849,6 @@ $(document).ready(function() {
             $farea.find('.-js-keyword').each(function() {
                 keywords.push($(this).text().trim());
             });
-            /*
-            $farea.find('.-js-term').each(function() {
-                var term = $(this).text();
-                terms.push(prepareTerm(term.trim()));
-            });
-            */
         }
         search.setParam('resources', JSON.stringify(reslist));
         var input = jQuery('.-js-simple-search-field');
@@ -874,13 +866,17 @@ $(document).ready(function() {
 
     /**
      * Start search if search button was clicked
+     * Collect all needed information from the search elements
      * This function is needed for the external search page!
      */
     jQuery(document).on("click", '.-js-search-start', function() {
         var elem = $(this);
+
+        // Collect query input
         var inputTerms = $(".-js-simple-search-field").val().trim();
         search.setParam("terms", inputTerms);
-        // collapse extended search if open
+
+        // Collapse extended search if open
         var extendedSearchHeader = $(".-js-extended-search-header");
         if(extendedSearchHeader.hasClass("active")){
             extendedSearchHeader.click();
@@ -1044,8 +1040,10 @@ $(document).ready(function() {
         // remove locationParam from searchfield input!
         var searchField = $("#geoportal-search-field");
         var checkbox = $("#spatial-checkbox");
-        checkbox.prop("checked", false);
-        searchField.val(searchField.val().replace(locationParam, "").trim());
+        if(checkbox.is(":checked")){
+            checkbox.click();
+        }
+        searchField.val(termsParams);
 
         search.setParam("searchBbox", bboxParams);
         search.setParam("searchTypeBbox", "intersects");

@@ -22,7 +22,7 @@ from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL, SESSION_NAME
 from Geoportal.utils.php_session_data import get_mb_user_session_data
 from Geoportal.utils.utils import print_debug
-from searchCatalogue.utils import viewHelper
+from searchCatalogue.utils import viewHelper, spatial_filter_helper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
 from searchCatalogue.utils.searcher import Searcher
@@ -246,13 +246,15 @@ def get_spatial_results(request: HttpRequest):
     """
     template = app_name + "spatial/spatial_search_results.html"
     post_params = request.POST.dict()
-    search_text = post_params.get("terms").split(",")
+    search_text = post_params.get("terms")
 
-    searcher = Searcher()
-    spatial_data = searcher.search_locations(search_text)
-    spatial_data = viewHelper.prepare_spatial_data(spatial_data)
+    # Check if a shortcut based filter input has to be processed
+    if spatial_filter_helper.uses_shortcut(search_text):
+        results = spatial_filter_helper.process_shortcut_filter(search_text)
+    else:
+        results = spatial_filter_helper.process_regular_filter(search_text)
 
-    view_content = render_to_string(template, spatial_data)
+    view_content = render_to_string(template, results)
 
     return GeoportalJsonResponse(html=view_content).get_response()
 

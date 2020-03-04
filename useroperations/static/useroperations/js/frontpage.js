@@ -31,8 +31,10 @@ function startSearch(){
     // which lives in all.js
     var script = $("#all-script");
     $(script).ready(function(){
+        // Collect query parameters
         var inputTerms = $(".-js-simple-search-field").val().trim();
         search.setParam("terms", inputTerms);
+
         // collapse extended search if open
         var extendedSearchHeader = $(".-js-extended-search-header");
         if(extendedSearchHeader.hasClass("active")){
