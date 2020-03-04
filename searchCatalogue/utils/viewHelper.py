@@ -241,32 +241,6 @@ def set_children_data_wfs(search_results):
 
     return search_results
 
-def prepare_spatial_data(spatial_data):
-    """ Organizes keywords in spatial_data
-
-    The results of the spatial data search does not differentiate between a search word that encodes a location,
-    like a city name, and a "thing" the user is looking for, like "environment".
-    This function analyzes the output of the spatial search and transforms it into a dict
-    where the location ('in') and the "thing" ('looking_for') can be differentiated.
-
-    Args:
-        spatial_data: The results of the search results from the spatial search
-    Returns:
-        dict: Contains the same data but sorted by "is it a location or a thing we are looking for in the location?"
-    """
-    looking_for = []
-    _in = []
-    for data in spatial_data:
-        looking_for.append(data.get("keyword"))
-        if data.get("totalResultsCount", 0) == 0:
-            continue
-        _in.append(data)
-
-    result = {
-        "looking_for": looking_for,
-        "in": _in,
-    }
-    return result
 
 def translate_filter_titles(filters):
     """ Translates filter titles according to the selected language
