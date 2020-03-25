@@ -35,8 +35,8 @@ https://www.geoportal.rlp.de/
 
 Fast install on local system (only for testing, default passwords!):
 ```shell
-wget --no-check-certificate https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
-wget --no-check-certificate https://git.osgeo.org/gitea/armin11/GeoPortal.rlp/raw/branch/master/options.txt
+wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
+wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/options.txt
 
 FILL THE OPTIONS FILE!
 
