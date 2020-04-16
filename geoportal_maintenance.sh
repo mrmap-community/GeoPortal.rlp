@@ -907,6 +907,13 @@ if [ $configure_cronjobs = 'true' ]; then
 curl http://localhost/mapbender/php/mod_exportISOMetadata.php?Type=ALL > /tmp/metadataGeneration.log
 EOF
   chmod u+x ${installation_folder}cronjobs/generateMetadata.sh
+
+  # create script to qualify metadata via localhost
+  cat << EOF > ${installation_folder}cronjobs/qualifyMetadata.sh
+  #!/bin/bash
+  php /data/mapbender/tools/mod_qualifyPersistedMetadataXml.php > /tmp/metadata_qualify.log
+EOF
+  chmod u+x ${installation_folder}cronjobs/qualifyMetadata.sh
   ############################################################
   # install cronjobs for root account
   ############################################################
@@ -937,7 +944,7 @@ EOF
   ( crontab -l | grep -v -F "$croncmd4" ; echo "$cronjob4" ) | crontab -
   ############################################################
   # 5. generate metadata xml files
-  croncmd5="sh ${installation_folder}cronjobs/generateMetadata.sh"
+  croncmd5="sh ${installation_folder}cronjobs/generateMetadata.sh && sh ${installation_folder}cronjobs/qualifyMetadata.sh"
   cronjob5="45 23 * * * $croncmd5"
   ( crontab -l | grep -v -F "$croncmd5" ; echo "$cronjob5" ) | crontab -
   ############################################################
