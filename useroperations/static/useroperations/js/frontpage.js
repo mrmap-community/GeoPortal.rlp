@@ -384,7 +384,7 @@ $(document).on("click", ".message-toggler", function(){
     elem.parent().toggle();
 });
 
-/*
+
 // Password message popup
 $(document).on('focus blur', "#id_password", function(){
     // use nice transition css hack from
@@ -392,46 +392,21 @@ $(document).on('focus blur', "#id_password", function(){
     $("#password_message").toggleClass("in");
     setTimeout(resizeSidebar, 1000);
 });
-*/
-
-/*
-DEPRECATED - REMOVE WHEN SURE THAT EVERYTHING IS SAFE
-
 
 // Client side password validation
 $(document).on('keyup', "#id_password", function(){
 
   var PasswordInput = document.getElementById("id_password");
-  var letter = document.getElementById("letter");
-  var capital = document.getElementById("capital");
-  var number = document.getElementById("number");
+  var special = document.getElementById("special");
   var length = document.getElementById("length");
 
-  // Validate lowercase letters
-  if(PasswordInput.value.match(/[a-z]/g)) {
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
+  // Validate special chars
+  if(PasswordInput.value.match(/[@#$%&+=!:-_]/g)) {
+    special.classList.remove("invalid");
+    special.classList.add("valid");
   } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
-
-  // Validate capital letters
-  if(PasswordInput.value.match(/[A-Z]/g)) {
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-
-  // Validate numbers
-  if(PasswordInput.value.match(/[0-9]/g)) {
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
+    special.classList.remove("valid");
+    special.classList.add("invalid");
   }
 
   // Validate length
@@ -445,8 +420,6 @@ $(document).on('keyup', "#id_password", function(){
 
 });
 
-*/
-
 
 $(document).on('click', "#change-form-button", function(){
 
@@ -454,7 +427,7 @@ $(document).on('click', "#change-form-button", function(){
   var PasswordInput = document.getElementById("id_password");
   var PasswordInputConfirm = document.getElementById("id_passwordconfirm");
 
-  /*
+
   if(PasswordInput.value != PasswordInputConfirm.value) {
     if(userLang == "de") {
       alert("Passwörter stimmen nicht überein");
@@ -464,7 +437,7 @@ $(document).on('click', "#change-form-button", function(){
     event.preventDefault();
 
   }
-  */
+
 
 });
 
