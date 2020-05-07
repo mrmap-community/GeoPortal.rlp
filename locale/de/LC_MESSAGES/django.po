@@ -1040,13 +1040,13 @@ msgstr "Benutzername"
 msgid "Please enter your username."
 msgstr "Bitte geben Sie Ihren Benutzernamen ein."
 
-#: useroperations/forms.py:18 useroperations/forms.py:38
-#, fuzzy
-#| msgid "Please enter your password with at least 9 characters."
+
 msgid ""
 "Please enter your password with at least 9 characters. Allowed special chars "
 "are: @#$%&+=!:-_"
-msgstr "Bitte geben Sie Ihr Passwort mit mindestens 9 Zeichen ein"
+msgstr ""
+"Bitte geben Sie Ihr Passwort mit mindestens 9 Zeichen ein."
+"Erlaubte Sonderzeichen @#$%&+=!:-_"
 
 #: useroperations/forms.py:18
 msgid "Please use at least 9 characters."
@@ -1224,7 +1224,7 @@ msgstr "Passwort muss folgendes beinhalten:"
 #: useroperations/templates/crispy_form_no_action.html:22
 #, python-format
 msgid "A special character, these are allowed: @#$%%&+=!:-_"
-msgstr ""
+msgstr "Ein Sonderzeichen, erlaubt sind: @#$%%&+=!:-_"
 
 #: useroperations/templates/crispy_form_no_action.html:23
 msgid "Minimum 9 characters"
@@ -1400,7 +1400,7 @@ msgstr "Anmeldung erfolgreich"
 
 #: useroperations/views.py:82
 msgid "Account not active, please check your emails to reactivate!"
-msgstr Konto nicht aktiv, bitte prüfen Sie Ihre Emails!"
+msgstr "Konto nicht aktiv, bitte prüfen Sie Ihre Emails!"
 
 #: useroperations/views.py:86
 msgid ""
