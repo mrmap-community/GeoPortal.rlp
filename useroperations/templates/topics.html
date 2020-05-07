@@ -41,12 +41,15 @@
 <div class="tile-wrapper topics">
     {% for result in topics %}
         <div class="tile">
-            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}" data-num-resources="{{ result.weight }}">
-                {% if result.inspireThemeId is not None %}
-                <a href="https://inspire.ec.europa.eu/" title="{% trans 'An INSPIRE category' %}">
-                    <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="tile-corner-icn inspire-icn" src="{% static 'searchCatalogue/images/inspire_pineapple.png' %}">
-                </a>
-                {% endif %}
+            <div class="tile-header" data-id="{{ result.id }}" data-name="{{ result.title }}"
+            data-num-resources="{{ result.weight }}"
+            data-search-category="{% if result.inspireThemeId is not None %}INSPIRE{% else %}ISO 19115{% endif %}">
+            {% if result.inspireThemeId is not None %}
+            <a href="https://inspire.ec.europa.eu/" title="{% trans 'An INSPIRE category' %}">
+                <img alt="{% trans 'The INSPIRE icon, shaped like a pineapple' %}" class="tile-corner-icn inspire-icn"
+                    src="{% static 'searchCatalogue/images/inspire_pineapple.png' %}">
+            </a>
+            {% endif %}
 
                 <div class="tile-title">{{ result.title }}</div>
                 <div class="tile-header-img">
