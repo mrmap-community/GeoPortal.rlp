@@ -353,7 +353,8 @@ $(document).on("click", "#geoportal-search-button", function(){
      var filterName = elem.attr("data-name");
      var filterId = elem.attr("data-id");
      var searchButton = $("#geoportal-search-button");
-     search.setParam("facet", ["INSPIRE", filterName, filterId].join(","));
+     const searchCategory = elem.attr("data-search-category");
+     search.setParam("facet", [searchCategory, filterName, filterId].join(","));
      searchButton.click();
  });
 
