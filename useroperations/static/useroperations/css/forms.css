@@ -131,7 +131,7 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 
 .sliding.in{
-    height: 200px;
+    height: 120px;
 }
 
 .valid {

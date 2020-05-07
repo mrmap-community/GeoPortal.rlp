@@ -83,7 +83,7 @@ if(is_array($isAuthenticated) != false) {
 
 } else if (strpos($isAuthenticated,'Password failed third time for') !== false){
 
-	$URLAdd="?status=fail3";
+	$URLAdd="?status=fail3&name=".$name;
 	if($_SERVER["HTTPS"] != "on") {
 		header ("Location: http://".$_SERVER['HTTP_HOST'].$URLAdd);
 	} else {

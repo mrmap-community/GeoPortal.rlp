@@ -79,10 +79,27 @@ def index_view(request, wiki_keyword=""):
             messages.success(request, _("Successfully logged in"))
             return redirect('useroperations:index')
         elif request.GET['status'] == "notactive":
-            messages.error(request, _("Account not active"))
+            messages.error(request, _("Account not active, please check your emails to reactivate!"))
             return redirect('useroperations:index')
         elif request.GET['status'] == "fail3":
+            user = MbUser.objects.get(mb_user_name=request.GET['name'])
             messages.error(request, _("Password failed too many times! Account is deactivated! Activation mail was sent to you!"))
+            try:
+
+                send_mail(
+                    _("Activation Mail"),
+                    _("Hello ") + request.GET['name'] +
+                    ", \n \n" +
+                    _("Your account has been deactivated because of too many failed password inputs! You can reactivate with the following link.")
+                    + "\n Link: " + HTTP_OR_SSL + HOSTNAME + "/activate/" + user.activation_key,
+                    DEFAULT_FROM_EMAIL,
+                    [user.mb_user_email],
+                    fail_silently=False,
+                )
+            except smtplib.SMTPException:
+                logger.error("Could not send activation mail!")
+                messages.error(request, _("An error occured during sending. Please inform an administrator."))
+
             return redirect('useroperations:index')
 
 
@@ -894,8 +911,6 @@ def activation_view(request, activation_key=""):
         "navigation": utils.get_navigation_items(),
     }
     geoportal_context.add_context(context=context)
-
-    pprint(geoportal_context)
 
     return render(request, template, context=geoportal_context.get_context())
 

@@ -19,9 +19,7 @@
         {% csrf_token %}
             <div class="sliding" id="password_message">
                 <h3>{% trans 'Password must contain the following:' %}</h3>
-                <p id="letter" class="invalid"><b>{% trans 'A lowercase letter' %}</b> </p>
-                <p id="capital" class="invalid"><b>{% trans 'A uppercase letter' %}</b> </p>
-                <p id="number" class="invalid"><b>{% trans 'A number' %}</b></p>
+                <p id="special" class="invalid"><b>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</b></p>
                 <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
             </div>
             <table>
