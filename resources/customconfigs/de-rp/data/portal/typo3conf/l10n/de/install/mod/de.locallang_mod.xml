@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">Installations-Tool</label>
+			<label index="mlang_labels_tabdescr">Bietet einen Verweis auf das Installations-Tool. Zu beachten ist, dass das Installations-Tool (in typo3/install/) aktiviert sein muss.&lt;br /&gt;&lt;em&gt;Zugriff nur für Administratoren!&lt;/em&gt;</label>
+			<label index="mlang_tabs_tab">Installation</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel" type="integer">91233822</label>
+			<label index="mlang_labels_tabdescr" type="integer">184150281</label>
+			<label index="mlang_tabs_tab" type="integer">55149455</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">Install Tool</label>
+			<label index="mlang_labels_tabdescr">Provides a simple link to the Install Tool. Notice the Install Tool (in typo3/install/) must be enabled.&lt;br /&gt;&lt;em&gt;Access for 'admin' users only!&lt;/em&gt;</label>
+			<label index="mlang_tabs_tab">Install</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="import">Importieren aus .t3d</label>
+			<label index="export">Exportieren in .t3d</label>
+			<label index="title">Import / Export</label>
+			<label index="moduleFunction.tx_impexp_modfunc1">Voreinstellungen für Export</label>
+			<label index="tableselec_configuration">Konfiguration</label>
+			<label index="exportdata_savedFile">DATEI GESPEICHERT</label>
+			<label index="exportdata_savedInSBytes">Gespeichert in &quot;%s&quot; (%s Bytes)</label>
+			<label index="exportdata_problemsSavingFile">Fehler beim Speichern</label>
+			<label index="exportdata_badPathS">Fehlerhafter Pfad: &quot;%s&quot;</label>
+			<label index="exportdata_filePreset">Datei &amp; Voreinstellungen</label>
+			<label index="exportdata_advancedOptions">Erweiterte Einstellungen</label>
+			<label index="exportdata_messages">Meldungen</label>
+			<label index="execlistqu_structureToBeExported">Zu exportierende Struktur:</label>
+			<label index="execlistqu_maxNumberLimit">Höchstwert erreicht!</label>
+			<label index="makeconfig_anSqlQueryReturned">Eine SQL-Abfrage erbrachte genau den voreingestellten Höchstwert (LIMIT %s) - das könnte bedeuten, dass nicht alle Datensätze vollständig selektiert wurden! Vergewissern Sie sich, dass das absichtlich geschah.</label>
+			<label index="makeconfig_exportPagetreeConfiguration">Exporteinstellungen für Seitenbaum</label>
+			<label index="makeconfig_pageId">Seiten ID:</label>
+			<label index="makeconfig_tree">Baum:</label>
+			<label index="makeconfig_noTreeExportedOnly">Kein Baum exportiert - nur Tabellen auf dieser Seite.</label>
+			<label index="makeconfig_tablesOnThisPage">Tabellen auf dieser Seite</label>
+			<label index="makeconfig_expandedTree">Erweiterter Baum</label>
+			<label index="makeconfig_onlyThisPage">Nur diese Seite</label>
+			<label index="makeconfig_1Level">1 Ebene</label>
+			<label index="makeconfig_2Levels">2 Ebenen</label>
+			<label index="makeconfig_3Levels">3 Ebenen</label>
+			<label index="makeconfig_4Levels">4 Ebenen</label>
+			<label index="makeconfig_infinite">Unendlich</label>
+			<label index="makeconfig_levels">Ebenen:</label>
+			<label index="makeconfig_includeTables">Einzuschliessende Tabellen:</label>
+			<label index="makeconfig_maxNumberOfRecords">Höchstwert für Datensätze:</label>
+			<label index="makeconfig_exportSingleRecord">Einzelnen Datensatz exportieren:</label>
+			<label index="makeconfig_record">Datensatz:</label>
+			<label index="makeconfig_exportTablesFromPages">Tabellen von Seiten exportieren:</label>
+			<label index="makeconfig_tablePids">Tabellen/PIDs:</label>
+			<label index="makeconfig_relationsAndExclusions">Relationen und Ausschlüsse:</label>
+			<label index="makeconfig_includeRelationsToTables">Relationen zu Tabellen einschliessen:</label>
+			<label index="makeconfig_useStaticRelationsFor">Statische Relationen von Tabellen verwenden:</label>
+			<label index="makeconfig_showStaticRelations">Statische Relationen anzeigen:</label>
+			<label index="makeconfig_excludeElements">Elemente ausschliessen:</label>
+			<label index="makeconfig_clearAllExclusions">Alle Ausschlüsse zurücksetzen:</label>
+			<label index="makeconfig_noExcludedElementsYet">Bis jetzt noch keine Ausschlüsse. Markieren Sie auszuschliessende in der folgenden Übersicht.</label>
+			<label index="makeadvanc_update">Update</label>
+			<label index="makeadvanc_softReferences">Soft References:</label>
+			<label index="makeadvanc_excludeHtmlCssFile">HTML/CSS Dateien ausschliessen:</label>
+			<label index="makeadvanc_extensionDependencies">Abhängigkeiten von Erweiterungen</label>
+			<label index="makeadvanc_selectExtensionsThatThe">Erweiterungen auswählen, von denen der exportierte Inhalt abhängig ist:</label>
+			<label index="makesavefo_update">Update</label>
+			<label index="makesavefo_presets">Voreinstellungen:</label>
+			<label index="makesavefo_selectPreset">Voreinstellung laden:</label>
+			<label index="makesavefo_load">Laden</label>
+			<label index="makesavefo_save">Speichern</label>
+			<label index="makesavefo_areYouSure">Sind Sie sicher?</label>
+			<label index="makesavefo_delete">Löschen</label>
+			<label index="makesavefo_merge">Zusammenführen</label>
+			<label index="makesavefo_titleOfNewPreset">Name der neuen Voreinstellung:</label>
+			<label index="makesavefo_public">Öffentlich:</label>
+			<label index="makesavefo_outputOptions">Ausgabe Optionen:</label>
+			<label index="makesavefo_metaData">Meta-Daten:</label>
+			<label index="makesavefo_title">Titel:</label>
+			<label index="makesavefo_description">Beschreibung:</label>
+			<label index="makesavefo_notes">Anmerkungen:</label>
+			<label index="makesavefo_thumbnail">Vorschaubild:</label>
+			<label index="makesavefo_uploadThumbnail">Vorschaubild hochladen:</label>
+			<label index="makesavefo_t3dFileCompressed">T3D Datei / komprimiert</label>
+			<label index="makesavefo_t3dFile">T3D Datei</label>
+			<label index="makesavefo_xml">XML</label>
+			<label index="makesavefo_fileFormat">Dateiformat:</label>
+			<label index="makesavefo_maxSizeOfFiles">Größenbeschränkung (kB) für Dateien:</label>
+			<label index="makesavefo_filenameSavedInS">Dateiname (gespeichert in &quot;%s&quot;):</label>
+			<label index="makesavefo_downloadExport">Exportdatei downloaden</label>
+			<label index="importdata_saveToFilename">Speichern als</label>
+			<label index="importdata_selectFileToImport">Importdatei auswählen:</label>
+			<label index="importdata_file">Datei:</label>
+			<label index="importdata_fromPathS">(Aus Pfad: %s)</label>
+			<label index="importdata_noteNoDecompressorAvailable">ACHTUNG: Kein Entpackprogramm für komprimierte Dateien vorhanden!</label>
+			<label index="importdata_importOptions">Import Einstellungen:</label>
+			<label index="importdata_update">Update:</label>
+			<label index="importdata_updateRecords">Datensätze aktualisieren</label>
+			<label index="importdata_thisOptionRequiresThat">Diese Option verlangt, dass die zu importierende Struktur bereits auf dem Server existiert und nur Inhalts-Update stattfinden soll!</label>
+			<label index="importdata_ignorePidDifferencesGlobally">PID Unterschiede generell ignorieren:</label>
+			<label index="importdata_ifYouSetThis">Mit dieser Option wird die Position geupdateter Inhalte nicht mit der Struktur aus der Importdatei überschrieben.</label>
+			<label index="importdata_force_all_UIDS">ALLE UID Werte erzwingen</label>
+			<label index="importdata_force_all_UIDS_descr">Mit dieser Option werden alle ursprünglichen UID Werte der importierten Datensätze beim Import erzwungen. VERWENDEN SIE DIESE OPTION MIT VORSICHT! (Nur für Admins)</label>
+			<label index="importdata_options">Optionen:</label>
+			<label index="importdata_doNotShowDifferences">Unterschiede in Datensätzen nicht anzeigen</label>
+			<label index="importdata_greenValuesAreFrom">Grüne Werte stammen aus der Importdatei, rote Werte aus dem aktuellen Datensatz und schwarze Werte sind in beiden gleich.</label>
+			<label index="importdata_allowToWriteBanned">Verbotene Dateierweiterungen dennoch erlauben (z.B. PHP-Skripte)</label>
+			<label index="importdata_action">Aktion:</label>
+			<label index="importdata_preview">Vorschau</label>
+			<label index="importdata_update_299e">Update</label>
+			<label index="importdata_import">Import</label>
+			<label index="importdata_areYouSure">Sind Sie sicher?</label>
+			<label index="importdata_newImport">Neuer Import</label>
+			<label index="importdata_enableLogging">Logging einschalten:</label>
+			<label index="importdata_writeIndividualDbActions">Alle während des Importvorgangs auftretende Datenbankaktionen aufzeichnen</label>
+			<label index="importdata_thisIsDisabledBy">Diese Option ist standardmäßig deaktiviert, weil unter Umständen hunderte Einträge erzeugt werden.</label>
+			<label index="importdata_uploadFileFromLocal">Importdatei übertragen:</label>
+			<label index="importdata_browse">Durchsuchen:</label>
+			<label index="importdata_uploadStatus">Upload Status:</label>
+			<label index="importdata_success">Erfolg:</label>
+			<label index="importdata_failureNoFileUploaded">Fehler: Es wurde keine Datei übertragen! (Datei zu groß?) Weitere Angaben in System Logfile.</label>
+			<label index="importdata_upload">Upload</label>
+			<label index="importdata_metaData">Meta-Daten:</label>
+			<label index="importdata_title">Titel:</label>
+			<label index="importdata_description">Beschreibung:</label>
+			<label index="importdata_notes">Anmerkungen:</label>
+			<label index="importdata_packager">Packprogramm:</label>
+			<label index="importdata_email">Email:</label>
+			<label index="importdata_icon">Icon:</label>
+			<label index="importdata_metaData_1387">Meta-Daten</label>
+			<label index="importdata_messages">Meldungen</label>
+			<label index="importdata_structureHasBeenImported">Folgende Struktur wurde importiert:</label>
+			<label index="filterpage_structureToBeImported">Zu importierende Struktur:</label>
+			<label index="ALL_tables">ALLE Tabellen</label>
+			<label index="impexpcore_displaycon_controls">Steuerung:</label>
+			<label index="impexpcore_displaycon_title">Titel:</label>
+			<label index="impexpcore_displaycon_size">Größe:</label>
+			<label index="impexpcore_displaycon_message">Meldungen:</label>
+			<label index="impexpcore_displaycon_updateMode">Update Mode:</label>
+			<label index="impexpcore_displaycon_currentPath">Derzeitiger Pfad:</label>
+			<label index="impexpcore_displaycon_result">Ergebnis:</label>
+			<label index="impexpcore_displaycon_insidePagetree">Innerhalb des Seitenbaumes:</label>
+			<label index="impexpcore_singlereco_outsidePagetree">Ausserhalb des Seitenbaumes:</label>
+			<label index="impexpcore_singlereco_softReferencesFiles">Soft References - Dateien:</label>
+			<label index="impexpcore_singlereco_update">Update</label>
+			<label index="impexpcore_singlereco_insert">Einfügen</label>
+			<label index="impexpcore_singlereco_importAsNew">Import als neu</label>
+			<label index="impexpcore_singlereco_ignorePid">PID ignorieren</label>
+			<label index="impexpcore_singlereco_respectPid">PID beachten</label>
+			<label index="impexpcore_singlereco_forceUidSAdmin">UID [%s] erzwingen (Admin)</label>
+			<label index="impexpcore_singlereco_exclude">Ausschliessen</label>
+			<label index="impexpcore_singlereco_title">Titel:</label>
+			<label index="impexpcore_singlereco_descr">Beschreibung:</label>
+			<label index="impexpcore_singlereco_filename">Dateiname:</label>
+			<label index="impexpcore_singlereco_value">Wert:</label>
+			<label index="impexpcore_softrefsel_record">Datensatz:</label>
+			<label index="impexpcore_softrefsel_editable">Editierbar</label>
+			<label index="impexpcore_softrefsel_exclude">Ausschliessen</label>
+			<label index="impexpcore_printerror_description">Beschreibung:</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="import" type="integer">176109005</label>
+			<label index="export" type="integer">243149277</label>
+			<label index="title" type="integer">159173914</label>
+			<label index="moduleFunction.tx_impexp_modfunc1" type="integer">34124876</label>
+			<label index="tableselec_configuration" type="integer">39122498</label>
+			<label index="makeadvanc_update" type="double">6894342</label>
+			<label index="makesavefo_update" type="double">6894342</label>
+			<label index="makesavefo_presets" type="integer">55506821</label>
+			<label index="makesavefo_selectPreset" type="integer">195196243</label>
+			<label index="makesavefo_load" type="integer">253352946</label>
+			<label index="makesavefo_save" type="integer">211601612</label>
+			<label index="makesavefo_areYouSure" type="integer">120169752</label>
+			<label index="makesavefo_delete" type="integer">254438473</label>
+			<label index="makesavefo_merge" type="integer">109831299</label>
+			<label index="makesavefo_titleOfNewPreset" type="integer">153609668</label>
+			<label index="makesavefo_public" type="integer">130440982</label>
+			<label index="makesavefo_metaData" type="integer">155433787</label>
+			<label index="makesavefo_title" type="integer">85903807</label>
+			<label index="makesavefo_description" type="integer">218120871</label>
+			<label index="makesavefo_notes" type="integer">44047703</label>
+			<label index="makesavefo_thumbnail" type="integer">74729175</label>
+			<label index="makesavefo_uploadThumbnail" type="integer">214848229</label>
+			<label index="makesavefo_xml" type="integer">55581616</label>
+			<label index="makesavefo_fileFormat" type="integer">152564791</label>
+			<label index="importdata_file" type="integer">182590850</label>
+			<label index="importdata_importOptions" type="integer">202945720</label>
+			<label index="importdata_update" type="integer">60645742</label>
+			<label index="importdata_ignorePidDifferencesGlobally" type="integer">105855116</label>
+			<label index="importdata_options" type="integer">247251860</label>
+			<label index="importdata_preview" type="integer">52420219</label>
+			<label index="importdata_update_299e" type="double">6894342</label>
+			<label index="importdata_import" type="integer">120417658</label>
+			<label index="importdata_areYouSure" type="integer">120169752</label>
+			<label index="importdata_newImport" type="integer">27979046</label>
+			<label index="importdata_browse" type="integer">20214859</label>
+			<label index="importdata_success" type="integer">77331493</label>
+			<label index="importdata_upload" type="integer">152310342</label>
+			<label index="importdata_metaData" type="integer">155433787</label>
+			<label index="importdata_title" type="integer">85903807</label>
+			<label index="importdata_description" type="integer">218120871</label>
+			<label index="importdata_notes" type="integer">44047703</label>
+			<label index="importdata_email" type="integer">111272549</label>
+			<label index="importdata_icon" type="integer">57819822</label>
+			<label index="importdata_metaData_1387" type="integer">167148460</label>
+			<label index="importdata_messages" type="integer">69068502</label>
+			<label index="ALL_tables" type="integer">84436380</label>
+			<label index="impexpcore_displaycon_title" type="integer">85903807</label>
+			<label index="impexpcore_displaycon_size" type="integer">183911828</label>
+			<label index="impexpcore_displaycon_message" type="integer">155215423</label>
+			<label index="impexpcore_displaycon_result" type="integer">95077261</label>
+			<label index="impexpcore_singlereco_update" type="double">6894342</label>
+			<label index="impexpcore_singlereco_insert" type="integer">172329952</label>
+			<label index="impexpcore_singlereco_ignorePid" type="integer">132277591</label>
+			<label index="impexpcore_singlereco_respectPid" type="integer">234394398</label>
+			<label index="impexpcore_singlereco_title" type="integer">85903807</label>
+			<label index="impexpcore_singlereco_descr" type="integer">203173356</label>
+			<label index="impexpcore_singlereco_filename" type="integer">105459047</label>
+			<label index="impexpcore_singlereco_value" type="integer">181254146</label>
+			<label index="impexpcore_softrefsel_record" type="integer">204948081</label>
+			<label index="impexpcore_softrefsel_editable" type="integer">46177913</label>
+			<label index="impexpcore_printerror_description" type="integer">218120871</label>
+			<label index="exportdata_savedFile" type="integer">115450939</label>
+			<label index="exportdata_savedInSBytes" type="integer">24048618</label>
+			<label index="exportdata_problemsSavingFile" type="integer">217500640</label>
+			<label index="exportdata_badPathS" type="integer">254355411</label>
+			<label index="exportdata_filePreset" type="integer">131837887</label>
+			<label index="exportdata_advancedOptions" type="integer">165660117</label>
+			<label index="exportdata_messages" type="integer">69068502</label>
+			<label index="execlistqu_structureToBeExported" type="integer">198018009</label>
+			<label index="makeconfig_exportPagetreeConfiguration" type="integer">37597973</label>
+			<label index="makeconfig_pageId" type="integer">36562266</label>
+			<label index="makeconfig_tree" type="integer">56313694</label>
+			<label index="makeconfig_noTreeExportedOnly" type="integer">132745840</label>
+			<label index="makeconfig_tablesOnThisPage" type="integer">85076309</label>
+			<label index="makeconfig_expandedTree" type="integer">168668529</label>
+			<label index="makeconfig_onlyThisPage" type="integer">203612347</label>
+			<label index="makeconfig_1Level" type="integer">200641290</label>
+			<label index="makeconfig_2Levels" type="integer">228799796</label>
+			<label index="makeconfig_3Levels" type="integer">195275893</label>
+			<label index="makeconfig_4Levels" type="integer">97262614</label>
+			<label index="makeconfig_infinite" type="integer">185655876</label>
+			<label index="makeconfig_levels" type="integer">252893175</label>
+			<label index="makeconfig_includeTables" type="integer">186581448</label>
+			<label index="makeconfig_exportSingleRecord" type="integer">36722263</label>
+			<label index="makeconfig_record" type="integer">204948081</label>
+			<label index="makeconfig_exportTablesFromPages" type="integer">50982422</label>
+			<label index="makeconfig_tablePids" type="integer">132705207</label>
+			<label index="makeconfig_relationsAndExclusions" type="integer">197994151</label>
+			<label index="makeconfig_includeRelationsToTables" type="integer">36619195</label>
+			<label index="makeconfig_useStaticRelationsFor" type="integer">171228730</label>
+			<label index="makeconfig_showStaticRelations" type="integer">223212142</label>
+			<label index="makeconfig_excludeElements" type="integer">118220352</label>
+			<label index="makeconfig_clearAllExclusions" type="integer">261736872</label>
+			<label index="makeadvanc_extensionDependencies" type="integer">55829513</label>
+			<label index="makeadvanc_selectExtensionsThatThe" type="integer">235658373</label>
+			<label index="makesavefo_outputOptions" type="double">2864698</label>
+			<label index="makesavefo_t3dFileCompressed" type="integer">237497820</label>
+			<label index="makesavefo_t3dFile" type="integer">66222176</label>
+			<label index="makesavefo_maxSizeOfFiles" type="integer">70540311</label>
+			<label index="makesavefo_filenameSavedInS" type="integer">122482427</label>
+			<label index="importdata_fromPathS" type="integer">188699176</label>
+			<label index="importdata_noteNoDecompressorAvailable" type="double">14210277</label>
+			<label index="execlistqu_maxNumberLimit" type="integer">193350209</label>
+			<label index="makeconfig_anSqlQueryReturned" type="integer">97272129</label>
+			<label index="makeconfig_maxNumberOfRecords" type="integer">29568678</label>
+			<label index="makeconfig_noExcludedElementsYet" type="integer">235641648</label>
+			<label index="makeadvanc_excludeHtmlCssFile" type="integer">145541760</label>
+			<label index="makesavefo_downloadExport" type="integer">48733077</label>
+			<label index="importdata_saveToFilename" type="integer">91594981</label>
+			<label index="importdata_selectFileToImport" type="integer">59789389</label>
+			<label index="importdata_updateRecords" type="integer">114968258</label>
+			<label index="importdata_doNotShowDifferences" type="integer">81542334</label>
+			<label index="importdata_greenValuesAreFrom" type="integer">131674592</label>
+			<label index="importdata_action" type="integer">140023463</label>
+			<label index="importdata_enableLogging" type="integer">133157843</label>
+			<label index="importdata_failureNoFileUploaded" type="integer">22276285</label>
+			<label index="importdata_packager" type="integer">190005166</label>
+			<label index="importdata_structureHasBeenImported" type="integer">247317839</label>
+			<label index="filterpage_structureToBeImported" type="integer">44467435</label>
+			<label index="impexpcore_displaycon_controls" type="integer">44875680</label>
+			<label index="impexpcore_displaycon_updateMode" type="integer">186500994</label>
+			<label index="impexpcore_displaycon_currentPath" type="integer">122128109</label>
+			<label index="impexpcore_displaycon_insidePagetree" type="integer">128562357</label>
+			<label index="impexpcore_singlereco_outsidePagetree" type="integer">180151794</label>
+			<label index="impexpcore_singlereco_importAsNew" type="integer">55394824</label>
+			<label index="impexpcore_singlereco_forceUidSAdmin" type="integer">73775815</label>
+			<label index="impexpcore_singlereco_exclude" type="integer">138670721</label>
+			<label index="impexpcore_softrefsel_exclude" type="integer">138670721</label>
+			<label index="importdata_thisOptionRequiresThat" type="integer">151315909</label>
+			<label index="importdata_ifYouSetThis" type="integer">54401865</label>
+			<label index="importdata_allowToWriteBanned" type="integer">152460404</label>
+			<label index="importdata_writeIndividualDbActions" type="integer">53866295</label>
+			<label index="importdata_thisIsDisabledBy" type="integer">77040448</label>
+			<label index="importdata_uploadFileFromLocal" type="integer">124159338</label>
+			<label index="importdata_uploadStatus" type="integer">193138604</label>
+			<label index="makeadvanc_softReferences" type="integer">160412732</label>
+			<label index="impexpcore_singlereco_softReferencesFiles" type="integer">216890027</label>
+			<label index="importdata_force_all_UIDS" type="integer">57047475</label>
+			<label index="importdata_force_all_UIDS_descr" type="integer">81651299</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="import">Import from .t3d</label>
+			<label index="export">Export to .t3d</label>
+			<label index="title">Import / Export</label>
+			<label index="moduleFunction.tx_impexp_modfunc1">Export Presets</label>
+			<label index="tableselec_configuration">Configuration</label>
+			<label index="makeadvanc_update">Update</label>
+			<label index="makesavefo_update">Update</label>
+			<label index="makesavefo_presets">Presets:</label>
+			<label index="makesavefo_selectPreset">Select preset:</label>
+			<label index="makesavefo_load">Load</label>
+			<label index="makesavefo_save">Save</label>
+			<label index="makesavefo_areYouSure">Are you sure?</label>
+			<label index="makesavefo_delete">Delete</label>
+			<label index="makesavefo_merge">Merge</label>
+			<label index="makesavefo_titleOfNewPreset">Title of new preset:</label>
+			<label index="makesavefo_public">Public:</label>
+			<label index="makesavefo_metaData">Meta data:</label>
+			<label index="makesavefo_title">Title:</label>
+			<label index="makesavefo_description">Description:</label>
+			<label index="makesavefo_notes">Notes:</label>
+			<label index="makesavefo_thumbnail">Thumbnail:</label>
+			<label index="makesavefo_uploadThumbnail">Upload thumbnail:</label>
+			<label index="makesavefo_xml">XML</label>
+			<label index="makesavefo_fileFormat">File format:</label>
+			<label index="importdata_file">File:</label>
+			<label index="importdata_importOptions">Import Options:</label>
+			<label index="importdata_update">Update:</label>
+			<label index="importdata_ignorePidDifferencesGlobally">Ignore PID differences globally</label>
+			<label index="importdata_options">Options:</label>
+			<label index="importdata_preview">Preview</label>
+			<label index="importdata_update_299e">Update</label>
+			<label index="importdata_import">Import</label>
+			<label index="importdata_areYouSure">Are you sure?</label>
+			<label index="importdata_newImport">New import</label>
+			<label index="importdata_browse">Browse:</label>
+			<label index="importdata_success">Success:</label>
+			<label index="importdata_upload">Upload</label>
+			<label index="importdata_metaData">Meta data:</label>
+			<label index="importdata_title">Title:</label>
+			<label index="importdata_description">Description:</label>
+			<label index="importdata_notes">Notes:</label>
+			<label index="importdata_email">Email:</label>
+			<label index="importdata_icon">Icon:</label>
+			<label index="importdata_metaData_1387">Meta data</label>
+			<label index="importdata_messages">Messages</label>
+			<label index="ALL_tables">ALL tables</label>
+			<label index="impexpcore_displaycon_title">Title:</label>
+			<label index="impexpcore_displaycon_size">Size:</label>
+			<label index="impexpcore_displaycon_message">Message:</label>
+			<label index="impexpcore_displaycon_result">Result:</label>
+			<label index="impexpcore_singlereco_update">Update</label>
+			<label index="impexpcore_singlereco_insert">Insert</label>
+			<label index="impexpcore_singlereco_ignorePid">Ignore PID</label>
+			<label index="impexpcore_singlereco_respectPid">Respect PID</label>
+			<label index="impexpcore_singlereco_title">Title:</label>
+			<label index="impexpcore_singlereco_descr">Descr:</label>
+			<label index="impexpcore_singlereco_filename">Filename:</label>
+			<label index="impexpcore_singlereco_value">Value:</label>
+			<label index="impexpcore_softrefsel_record">Record:</label>
+			<label index="impexpcore_softrefsel_editable">Editable</label>
+			<label index="impexpcore_printerror_description">Description:</label>
+			<label index="exportdata_savedFile">SAVED FILE</label>
+			<label index="exportdata_savedInSBytes">Saved in &quot;%s&quot;, bytes %s</label>
+			<label index="exportdata_problemsSavingFile">Problems saving file</label>
+			<label index="exportdata_badPathS">Bad path: &quot;%s&quot;</label>
+			<label index="exportdata_filePreset">File &amp; Preset</label>
+			<label index="exportdata_advancedOptions">Advanced Options</label>
+			<label index="exportdata_messages">Messages</label>
+			<label index="execlistqu_structureToBeExported">Structure to be exported:</label>
+			<label index="makeconfig_exportPagetreeConfiguration">Export pagetree configuration:</label>
+			<label index="makeconfig_pageId">Page ID:</label>
+			<label index="makeconfig_tree">Tree:</label>
+			<label index="makeconfig_noTreeExportedOnly">No tree exported - only tables on the page.</label>
+			<label index="makeconfig_tablesOnThisPage">Tables on this page</label>
+			<label index="makeconfig_expandedTree">Expanded tree</label>
+			<label index="makeconfig_onlyThisPage">Only this page</label>
+			<label index="makeconfig_1Level">1 level</label>
+			<label index="makeconfig_2Levels">2 levels</label>
+			<label index="makeconfig_3Levels">3 levels</label>
+			<label index="makeconfig_4Levels">4 levels</label>
+			<label index="makeconfig_infinite">Infinite</label>
+			<label index="makeconfig_levels">Levels:</label>
+			<label index="makeconfig_includeTables">Include tables:</label>
+			<label index="makeconfig_exportSingleRecord">Export single record:</label>
+			<label index="makeconfig_record">Record:</label>
+			<label index="makeconfig_exportTablesFromPages">Export tables from pages:</label>
+			<label index="makeconfig_tablePids">Table/Pids:</label>
+			<label index="makeconfig_relationsAndExclusions">Relations and Exclusions:</label>
+			<label index="makeconfig_includeRelationsToTables">Include relations to tables:</label>
+			<label index="makeconfig_useStaticRelationsFor">Use static relations for tables:</label>
+			<label index="makeconfig_showStaticRelations">Show static relations:</label>
+			<label index="makeconfig_excludeElements">Exclude elements:</label>
+			<label index="makeconfig_clearAllExclusions">Clear all exclusions:</label>
+			<label index="makeadvanc_extensionDependencies">Extension dependencies:</label>
+			<label index="makeadvanc_selectExtensionsThatThe">Select extensions that the exported content depends on:</label>
+			<label index="makesavefo_outputOptions">Output options:</label>
+			<label index="makesavefo_t3dFileCompressed">T3D file / compressed</label>
+			<label index="makesavefo_t3dFile">T3D file</label>
+			<label index="makesavefo_maxSizeOfFiles">Max size of files to include (kb):</label>
+			<label index="makesavefo_filenameSavedInS">Filename (saved in &quot;%s&quot;):</label>
+			<label index="importdata_fromPathS">(From path: %s)</label>
+			<label index="importdata_noteNoDecompressorAvailable">NOTE: No decompressor available for compressed files!</label>
+			<label index="execlistqu_maxNumberLimit">Max number limit!</label>
+			<label index="makeconfig_anSqlQueryReturned">An SQL query returned exactly the amount of records specified by the limit value (%s) - that could indicate an incomplete selection of records! Make sure this is on purpose.</label>
+			<label index="makeconfig_maxNumberOfRecords">Max number of records:</label>
+			<label index="makeconfig_noExcludedElementsYet">No excluded elements yet. Exclude by setting checkboxes below in the element display.</label>
+			<label index="makeadvanc_excludeHtmlCssFile">Exclude HTML/CSS file resources:</label>
+			<label index="makesavefo_downloadExport">Download export</label>
+			<label index="importdata_saveToFilename">Save to filename</label>
+			<label index="importdata_selectFileToImport">Select file to import:</label>
+			<label index="importdata_updateRecords">Update records</label>
+			<label index="importdata_doNotShowDifferences">Do not show differences in records</label>
+			<label index="importdata_greenValuesAreFrom">Green values are from the import file, red values from the current database record and black values are similar in both versions.</label>
+			<label index="importdata_action">Action:</label>
+			<label index="importdata_enableLogging">Enable logging:</label>
+			<label index="importdata_failureNoFileUploaded">Failure: No file uploaded - was it too big? Check system log.</label>
+			<label index="importdata_packager">Packager:</label>
+			<label index="importdata_structureHasBeenImported">Structure has been imported, here is the result:</label>
+			<label index="filterpage_structureToBeImported">Structure to be imported:</label>
+			<label index="impexpcore_displaycon_controls">Controls:</label>
+			<label index="impexpcore_displaycon_updateMode">Update Mode:</label>
+			<label index="impexpcore_displaycon_currentPath">Current Path:</label>
+			<label index="impexpcore_displaycon_insidePagetree">Inside pagetree:</label>
+			<label index="impexpcore_singlereco_outsidePagetree">Outside pagetree:</label>
+			<label index="impexpcore_singlereco_importAsNew">Import as new</label>
+			<label index="impexpcore_singlereco_forceUidSAdmin">Force UID [%s] (Admin)</label>
+			<label index="impexpcore_singlereco_exclude">Exclude</label>
+			<label index="impexpcore_softrefsel_exclude">Exclude</label>
+			<label index="importdata_thisOptionRequiresThat">This option requires that the structure you import already exists on this server and only needs to be updated with new content!</label>
+			<label index="importdata_ifYouSetThis">If you set this option, the position of updated elements will not be updated to match the structure of the input file.</label>
+			<label index="importdata_allowToWriteBanned">Allow to write banned file extensions (eg. PHP scripts), if any</label>
+			<label index="importdata_writeIndividualDbActions">Write individual DB actions during import to the log</label>
+			<label index="importdata_thisIsDisabledBy">This is disabled by default since there may be hundred of entries generated.</label>
+			<label index="importdata_uploadFileFromLocal">Upload file from local computer:</label>
+			<label index="importdata_uploadStatus">Upload status:</label>
+			<label index="makeadvanc_softReferences">Soft References:</label>
+			<label index="impexpcore_singlereco_softReferencesFiles">Soft References Files:</label>
+			<label index="importdata_force_all_UIDS">Force ALL UIDs values</label>
+			<label index="importdata_force_all_UIDS_descr">With this option the original UID value of all imported records are forced to be the same. BE VERY CAREFUL WITH THIS! (Admin Only).</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

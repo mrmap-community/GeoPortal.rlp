@@ -1,0 +1,71 @@
+2006-06-01 Ingo Renner <typo3@ingo-renner.com>
+	* FIX fixed bug #3144: Kickstater don't WRITE anything and the icons are missing (typo3 4RC3) - many thanks to Michael Stucki for the patch!
+
+2006-05-05 Ingo Renner <typo3@ingo-renner.com>
+	* CHG changed require to require_once as requested in feature request #3395
+	* FIX fixed bug #3384: wrong Code in xxx_pi1_wizicon.php
+	* FIX fxed typo (bug #3377)
+	* CHG changed warning message before actually writing the extension (#1255)
+	* CHG changed year in copyright notices for all files
+
+2006-03-06  Kasper Skaarhoej
+	* Kickstarter now produces llXML files (locallang-XML) instead of locallang*.php files.
+	
+2006-02-22  Kasper Skaarhoej
+	* Complies with new EM (function that writes extension to file system has changed in 4.0 EM)
+	* Fixed problem with path to images now that symlinks has been removed.
+
+2006-01-27  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Fixed bug #140: Selecting floating point input type doesn;t set the DB tables correctly
+
+2005-11-15  Ingo Renner  <typo3@ingo-renner.com>
+
+	* added recent translations from TER
+	
+2005-11-12  Ingo Renner  <typo3@ingo-renner.com>
+
+	* Merged Version from TYPO3 v3.8.0 with CVS
+	
+2005-09-15  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Fixed one more pair of quotes for SQL default values
+
+2005-05-13  Michael Stucki  <michael@typo3.org>
+
+	* Changed quotes for SQL default values
+
+2005-04-29  Kasper Skårhøj  <kasper@typo3.com>
+
+	* Added "var $pi_checkCHash = TRUE;" in plugins when based on USER objects. See changelog of core for more explanation of this very important parameter for cached plugins.
+
+2005-04-11  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Kickstarter now automatically creates README.txt and ChangeLog files
+
+2005-04-10  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Made overwrite checkboxes finally work properly
+
+2005-04-06  Kasper Skårhøj  <kasper@typo3.com>
+
+	* Removed all "unsigned" keywords from produced SQL (non-DBAL compliant)
+
+2004-11-23  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Finetuning new modularity of the Kickstarter.
+
+2004-11-18  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Making the Kickstarter modular.
+		- Outsourced all add_cat_*() and renderExtPart_*() functions into separate section classes.
+		- Created ext_localconf.php where all the sections are registered.
+
+2004-08-22  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Fine-tuning the way of interaction between EM and Kickstarter.
+		-> Added option "Edit in Kickstarter" to the upper right menu in the single extension view of the EM
+
+2004-08-20  Ingmar Schlecht  <ingmar@typo3.org>
+
+	* Initial import to CVS.

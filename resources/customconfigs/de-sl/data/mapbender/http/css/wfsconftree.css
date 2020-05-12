@@ -1,0 +1,148 @@
+/*
+li{ border: 1px solid black; }
+ul{ border: 1px dotted blue; }
+a{ border: 1px dotted red; }
+*/
+
+
+/* The Whole feed Tree */
+
+#body ul.conftree {
+	overflow: auto;
+	width: 10em;
+/*	background-image: url("http://localhost:8888/vertical_dots.png");*/
+	background-repeat: repeat-y	;
+	background-position: 20px;
+	
+}
+#body ul.conftree, ul.conftree ul {
+	list-style-type: none !important;
+	margin-left: 0;
+	padding: 0 !important;
+    margin-top: 0;
+}
+
+#body ul.conftree a{
+	font-size: x-small;
+}
+
+
+#body ul.conftree  li{
+	padding-bottom: 0;
+}
+
+#body ul.conftree button {
+	padding: 0;
+	margin-left: 0;
+	background-color: transparent;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	border: none;
+}
+
+#body ul.conftree a:link, ul.conftree a:visited, ul.conftree a:hover, ul.conftree a:active {
+	background-color: transparent;
+	text-decoration: none;
+	color: black;
+}
+
+
+/* a Root Node  */
+
+#body ul.conftree  li.wfsconf.open{
+	padding-left: 0;
+}
+
+#body ul.conftree li.wfsconf ul li{
+	margin-left:  0.2em;
+}
+
+#body ul.conftree li.wfsconf > button.add{
+	background-image:  url("../img/add.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+#body ul.conftree li.open.wfsconf > button.toggle{
+	background-image: url("../img/geowfsconf_logo_folder.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+#body ul.conftree li.closed.wfsconf > button.toggle{
+	background-image: url("../img/geowfsconf_logo_folder.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+#body ul.conftree li.wfsconf.open, ul.conftree li.wfsconf.closed {
+	background-image: none;
+}
+
+
+/*  a Feed Node */
+
+#body ul.conftree li.open > button.toggle{
+	background-image: url("../img/tree_new/expanded_folder.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+#body ul.conftree li.closed >  button.toggle{
+	background-image: url("../img/tree_new/closed_folder.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+#body ul.conftree li button.remove{
+	background-image: url("../img/button_digitize/geomRemove.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	color: transparent;
+	width: 2em;
+}
+
+#body ul.conftree li img.meta{
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	color: transparent;
+}
+
+
+#body ul.conftree li.open, ul.conftree li.closed {
+	padding-bottom: 0.5em;
+}
+
+#body ul.conftree li.closed >ul{
+	display: none;
+}
+
+
+
+#body ul.conftree li.wfsconf  li input{
+	vertical-align: middle;
+	margin: 0;
+}
+
+
+/* a FeedItem Node */
+
+#body ul.conftree  ul ul {
+	padding: 0;
+	margin-left: 0.5em;
+	border-left: thin dotted grey;
+}
+
+#body ul.conftree  ul ul li {
+	padding: 0;
+	border: 1px solid transparent;
+}
+#body ul.conftree  ul ul li:hover {
+	border: 1px dotted gray;
+}
+
+#body ul.conftree ul ul li img {
+	vertical-align: bottom;
+	height: 20px;
+	
+}

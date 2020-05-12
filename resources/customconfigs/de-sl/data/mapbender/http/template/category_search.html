@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Darstellung der Kategorie-Suche</title>
+		<script type="text/javascript">
+/**
+                                            $(document).ready(function(){
+							var searchFilter ="'.urlencode($matches[1][0]).'";
+							var searchstring = "../php/mod_create_category.php?searchResources=wms&orderby=title&searchText=" + searchFilter;
+							$.get(searchstring, function(data){
+								$("#catList'.$article->id.'").html(data);
+							});
+						})
+*/
+                                          $(document).ready(function(){
+                                              var sFilter ="'.urlencode($matches[1][0]).'";
+                                              var elmStr = "#catList'.$article->id.'";
+                                              loadCreateCategories(sFilter, elmStr)
+                                          });
+		</script>
+	</head>
+	<body>
+		<div id="catList"></div>
+	</body>
+</html>

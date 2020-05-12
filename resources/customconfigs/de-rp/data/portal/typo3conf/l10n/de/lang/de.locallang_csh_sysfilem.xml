@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Dateifreigaben beschreiben relative oder absolute Pfade auf dem Server.</label>
+			<label index=".details">In dem Sie eine Dateifreigabe erstellen und diese Freigabe einer Backend Benutzergruppe zuweisen, gewähren Sie diesen Benutzern den Zugriff auf die freigegebenen Dateien (über das Datei&gt;Dateifreigabe Menü).
+Dateifreigaben können unter Umständen auch Pfade beschreiben, zu denen der Benutzer direkten Zugriff per FTP hat. Stellen Sie in diesem Fall sicher, dass der Webserver (bzw. der Systembenutzer, unter dessen Kennung der PHP Prozess läuft) zumindest Leserechte auf diese Dateien hat - andernfalls erscheinen solche Dateien nicht im TYPO3 Dateibrowser!
+Absolute Pfade für Dateifreigaben sind nur innerhalb des durch die Systemvariable $TYPO3_CONF_VARS[BE][lockRootPath] festgelegten Pfades möglich.</label>
+			<label index="title.description">Geben Sie einen Namen für die Dateifreigabe an. Dieser Name erscheint, wenn Sie Benutzern oder Gruppen diese Dateifreigabe zuweisen.</label>
+			<label index="path.description">Geben Sie den relativen oder absoluten Pfad zur Dateifreigabe an, abhängig davon, welche Option Sie bei BASE gewählt haben.</label>
+			<label index="path.details">Wenn Sie bei BASE die Option &quot;relativ&quot; gewählt haben, beziehen sich Dateifreigaben auf Unterordner von &quot;fileadmin/&quot;. Beispiel: um Ihren Benutzern den Ordner &quot;fileadmin/user_uploads/&quot; zur Verfügung zu stellen, können Sie zunächst die BASE Option &quot;relativ&quot; wählen und dann als Pfad &quot;user_uploads/&quot; eingeben.
+Wenn Sie bei BASE die Option &quot;absolut&quot; gewählt haben, beziehen sich Dateifreigaben auf den absoluten Pfad auf dem Server, also z.B. &quot;/home/ftp_upload&quot; oder &quot;C:/home/ftp_upload&quot;. 
+Sie müssen ebenfalls darauf achten, dass der erste Teil des angegebenen Pfades auch in der Systemvariablen $TYPO3_CONF_VARS[BE][lockRootPath] eingetragen ist.</label>
+			<label index="path.image_descr">Dies ist eine Dateifreigabe relativ zum Ordner &quot;fileadmin/&quot;. Der freigegebene Ordner ist also &quot;fileadmin/user_upload&quot;, weil &quot;user_upload&quot; als Wert in diesem Feld eingegeben wurde.
+Dies ist die Ordnerstruktur von &quot;fileadmin/&quot;. Sie finden den Ordner &quot;user_upload&quot; am Ende der Liste.</label>
+			<label index="hidden.description">Verwenden Sie diese Option, um die Dateifreigabe zeitweilig aufzuheben.</label>
+			<label index="hidden.details">Allen Backend Benutzern - 'Admin' Benutzer eingeschlossen - wird der Zugriff auf diese Dateifreigabe entzogen.</label>
+			<label index="base.description">Legt fest, ob das PATH Feld als absoluter oder relativer Pfad (bezogen auf den fileadmin/ Ordner) interpretiert werden soll.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">90189964</label>
+			<label index=".details" type="integer">72796230</label>
+			<label index="title.description" type="integer">240983894</label>
+			<label index="path.description" type="integer">40932089</label>
+			<label index="path.details" type="integer">83621925</label>
+			<label index="path.image_descr" type="integer">198168257</label>
+			<label index="hidden.description" type="integer">191012042</label>
+			<label index="hidden.details" type="integer">244149635</label>
+			<label index="base.description" type="integer">89456305</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Filemounts describe a filepath on the server, relative or absolute.</label>
+			<label index=".details">By creating a file mount record and placing a reference to it in a Backend usergroup you can allow a user access to the file mount in the File&gt;List module.
+Filemounts may also configure access to a path on the server to which the user has FTP-access. Just remember to set file-permissions on the server correctly so the webserver user (which PHP is running as) has at least read access to the FTP-dir.
+You can only mount absolute paths if they are within the base path set in $TYPO3_CONF_VARS[BE][lockRootPath]</label>
+			<label index="title.description">Enter a title for the filemount. The title will appear as the name of the file mount when it is applied to users and groups.</label>
+			<label index="path.description">Enter the path of the filemount, relative or absolute depending on the settings of BASE.</label>
+			<label index="path.details">If BASE is set to relative, the path mounted is found in the subfolder &quot;fileadmin/&quot; of the website. Then you should enter the subfolder in &quot;fileadmin/&quot; as path. For instance if you want to mount access to &quot;fileadmin/user_uploads/all/&quot; then enter the value &quot;user_uploads/all&quot; as the value of PATH.
+If BASE is absolute you should enter the absolute path on the server, eg. &quot;/home/ftp_upload&quot; or &quot;C:/home/ftp_upload&quot;. Further you must make sure the configuration variable $TYPO3_CONF_VARS[BE][lockRootPath] contains the first part of the path you want to mount.
+
+&lt;strong&gt;Notice:&lt;/strong&gt; In any case, make sure the webserver user which PHP is running as has &lt;em&gt;at least&lt;/em&gt; read-access to the path. If not, the mount will simply not appear without any warnings.
+If you have problems - especially with absolute mounts - try to mount something &quot;simple&quot; like a relative path in fileadmin. If that is working well, try the absolute path.
+
+Your PHP-configuration may also impose other restrictions on you if safe_mode or open_basedir is enabled. Then use relative paths.</label>
+			<label index="path.image_descr">This is a filemount relative to &quot;fileadmin/&quot;. The mounted folder is &quot;fileadmin/user_upload/&quot; since &quot;user_upload&quot; is the value of the &quot;Path&quot; field.
+The directory structure of &quot;fileadmin/&quot; where you can see the &quot;user_upload&quot; folder in the bottom of the list.</label>
+			<label index="hidden.description">Use this option to temporarily disable the filemount.</label>
+			<label index="hidden.details">All backend users using the mount will not have access anymore. This includes 'Admin'-users.</label>
+			<label index="base.description">Determines whether the value of the PATH field is to be recognized as an absolute path on the server or a path relative to the fileadmin/ subfolder to the website.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

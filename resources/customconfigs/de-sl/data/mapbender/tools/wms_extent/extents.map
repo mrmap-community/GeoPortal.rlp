@@ -1,0 +1,208 @@
+MAP
+	NAME "extents"
+	STATUS ON
+	SIZE 600 600
+	MAXSIZE 5000
+	UNITS METERS
+	EXTENT 2475000 5425000 2724000 5658000
+	SYMBOLSET  "symbolset_mapbender.sym"
+
+	PROJECTION
+		"init=epsg:4326"
+	END
+
+	WEB
+		IMAGEPATH "/tmp/"
+		METADATA
+			WMS_TITLE "Layer Extent"
+			WMS_ABSTRACT "Geoportal Saarland, Layer Extent"
+			WMS_ONLINERESOURCE "http://localhost/cgi-bin/mapserv?map=/data/mapbender/tools/extents.map"
+			WMS_FEATURE_INFO_MIME_TYPE    "text/html"
+			WMS_SRS "epsg:4326 epsg:31467 epsg:31466"
+			wms_extent "2475000 5425000 272400 5658000"
+			"ows_keywordlist" "Geoportal SL, Service Layer, WMS, WFS"
+			"ows_fees" "none"
+			"ows_accessconstraints" "none"
+			"ows_addresstype" "postal"
+			"ows_address" "Von der Heydt 22"
+			"ows_city" "Saarbruecken"
+			"ows_stateorprovince" "Saarland"
+			"ows_postcode" "66115"
+			"ows_country" "Germany"
+			"ows_enable_request" "*"
+		END
+		VALIDATION
+			'minx' '^[0-9]*\.?[0-9]*$'
+			'miny' '^[0-9]*\.?[0-9]*$'
+			'maxx'  '^[0-9]*\.?[0-9]*$'
+			'maxy' '^[0-9]*\.?[0-9]*$'
+			'metadata_uuid' '^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{12}\}?$'
+		END
+	END
+
+	SYMBOL
+		NAME 'my_hatch'
+		TYPE hatch
+	END
+
+	OUTPUTFORMAT
+		NAME 'png'
+		DRIVER 'AGG/PNG'
+		MIMETYPE 'image/png'
+		EXTENSION PNG
+		IMAGEMODE PC256
+		TRANSPARENT ON
+	END
+
+LEGEND
+  STATUS ON
+  KEYSIZE 10 8
+  KEYSPACING 10 10
+  IMAGECOLOR 255 255 255
+  LABEL
+    COLOR 128 128 128
+    TYPE TRUETYPE
+    FONT "arial"
+    SIZE 8
+  END
+END
+
+#-------- use this to have a global map background
+#-------- please set the right IMAGEPATH in the WEB-Section above
+
+LAYER
+	NAME "background"
+	STATUS ON
+	TYPE LINE
+	CONNECTIONTYPE postgis
+	CONNECTION   "dbname=geoportal_gaz_utf8 user=postgres port=5432 host=127.0.0.1"
+	DATA "the_geom from (select gid , the_geom from gis.landes) as foo using unique gid using SRID=31466"
+	METADATA
+		WMS_TITLE "Saarland"
+		WMS_SRS "epsg:31466"
+		WMS_ABSTRACT "Bounding Box Rectangles of Geo Resources registered with the Geoportal Saarland"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://www.mapbender.org/"
+		wms_keywordlist "Geoportal, SL, Saarland, Umgebungsrechteck, Kartensuche, Dienst, OGC WMS, Open Source Geospatial Foundation, OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://wiki.osgeo.org/"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+	MINSCALE 0
+	MAXSCALE 0
+	PROJECTION
+		"init=epsg:31466"
+	END
+	CLASS
+		NAME "Rheinland_Pfalz"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR -1 -1 -1
+		END
+	END
+END
+
+#---------------------------------------------------
+LAYER
+	NAME "extent"
+	STATUS ON
+	TYPE POLYGON
+	CONNECTIONTYPE postgis
+	CONNECTION   "dbname=geoportal_utf8 user=postgres port=5432 host=127.0.0.1"
+	#DATA "the_geom from (select GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326) as the_geom,area2d(transform(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326),31466)) as area, 1 as oid ) as foo USING UNIQUE oid USING SRID=4326"
+	DATA "the_geom from (select GeomFromText('POLYGON((6.35461 49.1083,6.35461 49.6434,7.41299 49.6434,7.41299 49.1083, 6.35461 49.1083))',4326) as the_geom,area2d(transform(GeomFromText('POLYGON((6.35461 49.1083,6.35461 49.6434,7.41299 49.6434,7.41299 49.1083, 6.35461 49.1083))',4326),31466)) as area, 1 as oid) as foo USING UNIQUE oid USING SRID=4326"
+	METADATA
+		WMS_TITLE "SL Geo-Services"
+		WMS_SRS "epsg:4326"
+		WMS_ABSTRACT "Bounding Box Rectangles of OWS Services registered with the Geoportal Saarland"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://geoportal.saarland.de"
+		wms_keywordlist "Geoportal, SL, Saarland, Umgebungsrechteck, Kartensuche, Dienst, OGC WMS, Open Source Geospatial Foundation. OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://geoportal.saarland.de"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+
+	PROJECTION
+		"init=epsg:4326"
+	END
+	CLASS
+		EXPRESSION ([area] > 300000)
+		NAME "bbox2"
+		STYLE
+			OUTLINECOLOR 135 30 50
+			WIDTH 2
+		END
+	END
+END
+
+#-------------------------------------
+LAYER
+	NAME "ows_layer_target"
+	STATUS OFF
+	TYPE POINT
+	LABELMAXSCALE 5000000000
+	LABELMINSCALE 0
+	CONNECTIONTYPE postgis
+	CONNECTION   "dbname=geoportal_utf8 user=postgres port=5432 host=127.0.0.1"
+	DATA "the_geom from (select centroid(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326)) as the_geom,area2d(transform(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326),31466)) as area, 1 as oid ) as foo USING UNIQUE oid USING SRID=4326"
+	LABELCACHE ON
+	METADATA
+		WMS_TITLE "RLP Geo-Services Annotations"
+		WMS_SRS "epsg:4326"
+		WMS_ABSTRACT "Bounding Box Rectangles of OWS Services registered with thte Geoportal Rhineland Palatinate"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://www.mapbender.org/"
+		wms_keywordlist "Geoportal, RLP, Rheinland Pfalz, Umgebungsrechteck, Kartensuche, Dienst,OGC WMS, Open Source Geospatial Foundation. OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://wiki.osgeo.org/"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+
+	PROJECTION
+		"init=epsg:4326"
+	END
+
+	CLASS
+		EXPRESSION ([area] <= 300000)
+		NAME "bbox"
+		STYLE
+			SYMBOL 'target'
+		END
+	END
+END
+
+#-------------------------------------
+LAYER
+        NAME "metadata_polygon"
+        STATUS ON
+        TYPE POLYGON
+        CONNECTIONTYPE postgis
+        CONNECTION   "dbname=geoportal_utf8 user=postgres port=5432 host=localhost"
+        DATA "geom FROM (SELECT (st_dumprings((ST_Dump(bounding_geom)).geom)).path[1],(st_dumprings((ST_Dump(bounding_geom)).geom)).geom
+FROM mb_metadata WHERE uuid = \'%metadata_uuid%\') AS rings USING UNIQUE path USING SRID=4326"
+        METADATA
+                WMS_TITLE "Metadata polygon"
+                WMS_SRS "EPSG:4326"
+                WMS_ABSTRACT "Polygon of a special metadataset from the mapbender registry"
+                include "include_metadata_layer.map"
+        END
+
+        PROJECTION
+                "init=epsg:4326"
+        END
+
+        CLASS
+                NAME "Metadata polygon"
+                STYLE
+                        OUTLINECOLOR 246 234 41
+                        WIDTH 2
+                END
+        END
+END
+
+#-------------------------------------
+END

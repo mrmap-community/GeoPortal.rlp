@@ -1,0 +1,114 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "L",
+    "units" : "mm",
+    "format" : "a4",
+    "controls" : [
+ 
+        {
+            "id" : "comment1",
+            "label" : "Notiz",
+            "type" : "textarea",
+            "size" : 5,
+            "pageElementsLink" : {
+                "kommentar1" : "value"
+            }
+        },
+            
+        {
+            "id" : "scale",
+            "label" : "Maßstab",
+            "type" : "text",
+            "pageElementsLink" : {
+                "scale" : "value"
+            }
+        },
+	{
+    		"id" : "coordinates",
+    		"type" : "hidden"
+    	}
+    ],
+    "pages" : [
+        {
+            "tpl" : "Laermkartierung_A4.pdf",
+            "useTplPage" : 1,
+            "elements" : {
+                "karte" : {
+                    "type" : "map",
+                    "res_dpi" : 72,
+                    "x_ul" : 10,
+                    "y_ul" : 10,
+                    "width" : 215,
+                    "height" : 180,
+                    "coords" : 0,
+                    "coords_font_family" : "Arial",
+                    "coords_font_size" : 8
+                },
+                
+                "minikarte" : {
+                    "type" : "overview",
+                    "res_dpi" : 72,
+                    "x_ul" : 262.5,
+                    "y_ul" : 80.0,
+                    "width" : 30,
+                    "height" : 25
+                },
+            
+                "scale" : {
+                    "type" : "text",
+                    "x_ul" : 255.0,
+                    "y_ul" : 149.7,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "scale"
+                },
+                "date" : {
+                    "type" : "text",
+                    "x_ul" : 255.0,
+                    "y_ul" : 187.0,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "date"
+                },
+              
+                "nordpfeil" : {
+                    "type" : "image",
+                    "x_ul" : 215,
+                    "y_ul" : 180,
+                    "width" : 25,
+                    "height" : 25,
+                    "angle" : 0,
+                    "filename" : "./img/northarrow.png"
+                },
+
+                "kommentar1" : {
+                    "type" : "para",
+                    "x_ul" : 250,
+                    "y_ul" : 160,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "width" : 60,
+                    "height" : 20,
+                    "align" : "L",
+                    "border" : 0,
+                    "fill" : 1,
+                    "border_width" : 0.3
+                },
+				
+			    "legende" : {
+                    "type" : "legend",
+                    "x_ul" : 225,
+                    "y_ul" : 75,
+                    "width" : 25,
+                    "height" : 60,
+                    "font_family" : "Arial",
+                    "font_size" : 10.5,
+                    "scale" : 0.9
+                }
+
+				
+            }
+        }
+        
+    ]
+}

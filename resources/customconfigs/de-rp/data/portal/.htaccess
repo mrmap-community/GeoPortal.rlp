@@ -1,0 +1,40 @@
+### Begin: Rewrite stuff ###
+
+RewriteEngine On
+RewriteBase /portal
+RewriteRule ^typo3$ - [L]
+RewriteRule ^typo3/.*$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php
+
+### End: Rewrite stuff ###
+AddType text/vtt .vtt
+### Begin: PHP optimisation ###
+
+# All features below are left to the default if you don't change this.
+# Simply remove the comment marks if you want to use some/all of these
+# settings
+
+# The PHP developers recommend disabling this feature. Do that.
+# It's deprecated and is likely to be unsupported in future versions of PHP.
+#php_flag allow_call_time_pass_reference off
+
+# TYPO3 works fine with register_globals turned off.
+# This is highly recommended!
+#php_flag register_globals off
+
+# PHP may not declare the argv & argc variables (that would contain the GET
+# information).
+# TYPO3 doesn't need this, so just turn it off.
+#php_flag register_argc_argv off
+
+# Magic quotes for runtime-generated data (data from SQL, exec(), etc.)
+#php_flag magic_quotes_gpc off
+
+# Order in which PHP registers GET, POST, Cookie and Built-in variables
+#php_value variables_order GPCS
+
+### End: PHP optimisation ###
+

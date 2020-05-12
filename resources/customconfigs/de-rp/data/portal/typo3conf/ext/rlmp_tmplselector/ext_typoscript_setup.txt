@@ -1,0 +1,27 @@
+plugin.tx_rlmptmplselector_pi1 {
+
+		# Template type. Default is "main". Allowed values: "main", "sub"
+	templateType = main
+
+		# Paths to search for templates in HTML file mode (vs. TS mode)		
+	templatePathMain = fileadmin/template/main/
+	templatePathSub = fileadmin/template/sub/
+
+      # Refers to the default template file name to use
+      # if no value is set for the current page
+   defaultTemplateFileNameMain =
+   defaultTemplateFileNameSub =
+
+      # Refers to the default template object to use
+      # if no value is set for the current page
+   defaultTemplateObjectMain = 10
+   defaultTemplateObjectSub = 10
+
+		# Contains TEMPLATE objects for TS mode (vs. external HTML file mode)   
+   templateObjects.main =
+   templateObjects.sub =
+
+		# Use the template selected earlier in the rootline of no template was selected	
+	inheritMainTemplates = 0
+	inheritSubTemplates = 0
+}

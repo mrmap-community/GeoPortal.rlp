@@ -1,0 +1,49 @@
+<!-- ###TEMPLATE_LATEST### begin This is the template for the latest news, typically displayed on a frontpage -->
+<div class="news-latest-container">
+	<!-- ###CONTENT### begin This is the part of the template substituted with the list of news: -->
+	<!-- ###NEWS### begin Template for a single item -->
+	<div class="news-latest-item">
+		<p class="news-latest-date">###NEWS_DATE###</p>
+		<h3><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h3>
+		###NEWS_SUBHEADER###
+	</div>
+	<!-- ###NEWS### end-->
+	<!-- ###CONTENT### end -->
+</div>
+<!-- ###TEMPLATE_LATEST### end -->
+
+
+
+<!-- ###TEMPLATE_LIST### begin This is the template for the list of news in the archive or news page or search -->
+<div class="news-list-container">
+	<!-- ###CONTENT### begin This is the part of the template substituted with the list of news: -->
+	<!-- ###NEWS### begin Template for a single item -->
+	<div class="news-list-item">
+		<p class="news-list-date">###NEWS_DATE###</p>
+		<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
+		<div class="news-list-image"><!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###--></div>
+		<div class="news-list-text">
+			###NEWS_SUBHEADER###
+			<p class="news-list-morelink"><img src="fileadmin/design/icn_arrow_right.png" alt="" /><!--###LINK_ITEM###-->Lesen Sie weiter<!--###LINK_ITEM###--></p>
+		</div>
+		<hr />
+	</div>
+	<!-- ###NEWS### end-->
+	<!-- ###CONTENT### end -->
+</div>
+<!-- ###TEMPLATE_LIST### end -->
+
+
+
+<!-- ###TEMPLATE_SINGLE### begin This subpart is used to display single news items -->
+<div class="news-single-item">
+<p class="news-single-date">###NEWS_DATE###</p>
+<h2>###NEWS_TITLE###</h2>
+###NEWS_SUBHEADER###
+<div class="news-single-image">###NEWS_IMAGE###</div>
+###NEWS_CONTENT###
+###FILE_LINK###
+###NEWS_LINKS###
+<p class="news-list-morelink"><img src="fileadmin/design/icn_arrow_right.png" alt="" /><a href="aktuelles/meldungen.html">Zurück</a></p>
+</div>
+<!-- ###TEMPLATE_SINGLE### end -->

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Template für die erweiterte Suche</title>
+		<base href="http://93.89.10.171/mapbender/template/">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link type="text/css" rel="stylesheet" href="css/jquery-ui-1.8.13.custom.css" >
+		<link type="text/css" rel="stylesheet" href="css/template_erw_suche.css">
+		<link type="text/css" rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" language="JavaScript" src="lib/jquery/jquery-1.5.1.min.js" ></script>
+		<script type="text/javascript" language="JavaScript" src="lib/jquery/jquery-ui-1.8.13.custom.min.js"></script>
+		<script type="text/javascript" language="JavaScript" src="lib/jquery/jquery.paginate.js"></script>
+		<script type="text/javascript" language="JavaScript" src="scripts/common.js" ></script>
+		<script type="text/javascript" language="JavaScript" src="scripts/initial.js"></script>
+		<script type="text/javascript" language="JavaScript" src="scripts/parser.js"></script>
+		<script type="text/javascript" language="JavaScript" src="scripts/md5.js"></script>
+		
+	</head>
+	<body>
+		<div style="display:table; width:100%">
+			<div style="display:table-row;">
+				<div style="display:table-cell;">
+					<div class="search-filter">
+						<div id="headerAll"></div>
+						<div id="headerDienst" class="displayService" style="display:none;"></div>
+					</div>
+					<div id="tabs">
+						<ul class="search-cat">
+							<li><a href="#tabs-1" onclick="clearHeader()">Übersicht</a></li>
+							<li><a href="#tabs-2" onclick="showHeader()">Interaktive Daten</a><img id="statusService" src="../img/loader_lightblue.gif" height="15 px" align="center"></li>
+							<li><a href="#tabs-3" onclick="clearHeader()">Metadaten</a><img src="../img/loader_lightblue.gif" height="15 px" align="center"></li>
+						</ul>
+						<div id="tabs-1" class="search-container">
+							<h2>
+								<a onclick="showTab('#tabs-2',1)" title="Alle Ergebnisse aus dem Container interaktive Daten anzeigen" >Interaktive Daten</a>
+							</h2>
+							<div id="search-container-dienste">
+								<img src="../img/loader_lightblue.gif" height="15 px" align="center">
+							</div>
+							<h2>
+								<a onclick="showTab('#tabs-3',2)"  title="Alle Ergebnisse aus dem Container Metadaten anzeigen">Metadaten</a>
+							</h2>
+							<div id="search-container-meta">
+								<img src="../img/loader_lightblue.gif" height="15 px" align="center">
+							</div>
+						</div>
+						<div id="tabs-2">
+						</div>
+						<div id="tabs-3">
+						</div>
+					</div>
+				</div>
+				<div style="display:table-cell;width:150px;padding-left:5px">
+					<div id="saveSearch">
+						<h3 class="header-right">Aktuelle Suche speichern?</h3>
+					</div>
+					<div id="searchCategories" class="displayService" style="display:none;">
+						<h3 id="headerCategory" class="header-right">Kategorien</h3>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+<!-- Neue Version des Body, der im Saarland aktiv ist
+<div class="tx-q4usearch-pi2">
+        <div style="display:table; width:100%">
+                <div style="display:table-row;">
+                        <div style="display:table-cell;">
+                                <div class="search-filter">
+
+                                        <div id="headerAll"></div>
+                                        <div id="headerDienst" class="displayService" style="display:none;"></div>
+                                </div>
+                                <div id="tabs">
+                                        <ul class="search-cat">
+                                                <li><a href="#tabs-1" onclick="clearHeader()"><?php echo JText::_('TPL_Q4U_MB_OVERVIEW'); ?></a></li>
+                                                <li><a href="#tabs-2" onclick="showHeader()"><?php echo JText::_('TPL_Q4U_MB_INTERACTIVE_DATA'); ?></a><img class="loader" id="statusServiceTab" src="/mapbender/template/fileadmin/design/l$
+                                                <li><a href="#tabs-3" onclick="clearHeader()"><?php echo JText::_('TPL_Q4U_MB_METADATA'); ?></a><img class="loader" id="statusMetaTab" src="/mapbender/template/fileadmin/design/loader_ligh$
+                                        </ul>
+                                        <div id="tabs-1" class="search-container">
+                                                        <a onclick="showTab('#tabs-2',1)" title="Alle Ergebnisse aus dem Container interaktive Daten anzeigen" ><h2><?php echo JText::_('TPL_Q4U_MB_INTERACTIVE_DATA'); ?></h2></a>
+                                                <div id="search-container-dienste">
+                                                        <img class="loader" id="statusServiceBod" src="/mapbender/template/fileadmin/design/loader_lightblue.gif" height="15 px" align="center">
+                                                </div>
+                                             //   <br /></br /><hr>
+                                                        <a onclick="showTab('#tabs-3',2)"  title="Alle Ergebnisse aus dem Container Metadaten anzeigen"><h2><?php echo JText::_('TPL_Q4U_MB_METADATA'); ?></h2></a>
+
+                                                <div id="search-container-meta">
+                                                        <img class="loader" id="statusMetaBod" src="/mapbender/template/fileadmin/design/loader_lightblue.gif" height="15 px" align="center">
+                                                </div>
+                                        </div>
+                                        <div id="tabs-2">
+                                        </div>
+                                        <div id="tabs-3">
+                                        </div>
+                                </div>
+                        </div>
+                        <div style="display:table-cell;width:150px;padding-left:5px;">
+                                <div id="saveSearch">
+                                        <h3 class="header-right"><?php echo JText::_('TPL_Q4U_MB_SAVE_SEARCH'); ?></h3>
+                                        <div id="search_notlogged">
+                                            <span>Diese Funktionalität steht nur  angemeldeten Benutzern zur Verfügung.</span>
+                                        </div>
+                                        <div id="search_logged" style="display:none;">
+                                                <form method="post" id="searchsave" action="">
+                                                        <fieldset>
+                                                                <label for="searchsavename">Name:</label>
+                                                                <input type="text" value="" id="searchsavename" name="name" class="text">
+                                                                <br class="clr" />
+                                                                <label for="searchsavesearchtext">Adressen, Karten, Daten, ...:</label>
+                                                                <input type="text" value="" id="searchsavesearchtext" name="searchtext2" class="text">
+                                                                <br class="clr" />
+                                                        </fieldset>
+                                                        <fieldset class="control">
+                                                                <input type="hidden" value="save" name="act">
+                                                                <input type="hidden" value="" name="searchid">
+                                                                <input type="hidden" value="" name="selectsearch">
+                                                                <input type="hidden" value="" name="cat">
+                                                                <input type="hidden" value="" name="uid">
+                                                                <input type="submit" value="Speichern">
+                                                        </fieldset>
+                                                </form>
+                                                <br class="clr" />
+                                                <div class="search-saved">
+                                                        <h3 class="header-right">Gespeicherte Suchen verwalten</h3>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div id="searchCategories" class="displayService" style="display:none;">
+                                        <h3 id="headerCategory" class="header-right"><?php echo JText::_('TPL_Q4U_MB_CATEGORIES'); ?></h3>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+
+-->

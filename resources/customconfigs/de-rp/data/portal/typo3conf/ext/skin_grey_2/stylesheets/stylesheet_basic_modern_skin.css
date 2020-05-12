@@ -1,0 +1,169 @@
+/* t3skin uses currently default stylesheet for Typo3 */
+@import url(../../../../typo3/stylesheet.css);
+/*
+@import url(../stylesheets_modern_skin/listexpander.css);
+*/
+
+
+/* Typo 4.2 */
+/* csh */
+div#typo3-docheader { z-index:2 !important; }
+.docheader-csh { 
+	position:absolute; 
+	top:32px;
+	right:5px;
+	z-index:4 !important;
+}
+div#typo3-docheader .typo3-csh-link .typo3-csh-icon { 
+	float:right; 
+	margin: 2px 2px 0 2px; 
+}
+div#typo3-docheader .typo3-csh-link .typo3-csh-inline {
+	width:200px;
+	border:1px solid black !important;
+	text-align:left !important;
+	position:absolute;
+	top:15px;
+	right:5px;
+	background-color:white;
+	padding:5px !important;
+	white-space:normal;
+	z-index: 100; 
+}
+body#typo3-pagetree div#typo3-docheader .typo3-csh-link .typo3-csh-icon  { float:none; }
+body#typo3-pagetree div#typo3-docheader .typo3-csh-link .typo3-csh-inline { top:27px; }
+
+body#ext-cms-layout-db-layout-php .docheader-funcmenu select { 
+	margin-left:0px !important; 
+	margin-right:0px !important;
+}
+body#ext-cms-layout-db-layout-php .docheader-funcmenu select option { margin: 0; }
+div#typo3-docheader .buttonsleft {
+	position:relative;
+	z-index:1 !important;
+}
+div#typo3-docheader img, div#typo3-docheader input { 
+	margin: 2px 3px 0; 
+	vertical-align: top; 
+}
+div#typo3-docheader div#typo3-docheader-row1 select { margin: 1px 0 0; }
+body#ext-cms-layout-db-layout-php .buttonsrightbottom { 
+	height:22px;             
+	float:right;
+	text-align:right !important;
+	width:130px;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom .buttongroup { 
+	white-space:nowrap  !important; 
+	display:inline;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom .buttongroup a { 
+	text-align:right !important;
+	display:inline !important;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom a img {
+	background:transparent url(../backgrounds/docheader_icon_bg.png) bottom left no-repeat;
+	line-height:26px;
+	border:0 solid transparent;
+	z-index:1;
+	margin:0;
+	padding:6px 12px 6px 10px;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom a:hover img {
+	background:#f8f8f8 url(../backgrounds/docheader_icon_bg_o.png) bottom left no-repeat;
+	border:0 solid #a0a0a0;
+	z-index:1000;
+}
+body#typo3-pagetree .buttonsright {
+	width:140px !important;
+	float:right; 
+	height:30px; 
+	text-align:right;
+}
+.docheader-row2-left select { margin-top:3px !important; }
+body#ext-cms-layout-db-layout-php .columns_alt #select_menus { 
+	position:absolute;
+	top:-40px;
+	right:150px;	
+	height:21px;
+}
+body#ext-cms-layout-db-layout-php .qe_alt #select_menus_qe { 
+	position:absolute;
+	top:0px;
+	right:2px;	
+	height:21px;
+}
+#div-editNav table { border-collapse:collapse; }
+.docheader-row2-right {
+	position:absolute; 
+	top:36px;
+	right:18px;
+	text-align:right;
+	padding-top: 3px;
+}
+/*
+body#ext-cms-layout-db-layout-php .qe_no .docheader-row2-right span.pageinformation { 	
+	display:block;
+	margin-top:1px;
+}
+body#ext-cms-layout-db-layout-php .qe_alt .docheader-row2-right span.pageinformation { 	
+	display:block;
+	margin-top:-12px;
+}
+body#ext-cms-layout-db-layout-php .columns_alt .docheader-row2-right span.pageinformation { 	
+	display:block;
+	margin-top:-12px;
+}
+*/
+.buttonsleft { 
+	float:left; 
+	height:20px; 
+}
+.buttonsright { 
+	float:right; 
+	height: 20px;
+}
+.buttongroup { white-space:nowrap  !important; } 
+.buttonsright { text-align:right !important; }
+.buttonsleft .buttongroup, .buttonsleft .buttongroup *, .buttonsright .buttongroup, .buttonsright .buttongroup * { display: inline !important; } 
+.typo3-csh-inline .header, .typo3-csh-inline .paragraph { text-align:left !important; }
+.typo3-csh-link:link .typo3-csh-inline,
+.typo3-csh-link:visited .typo3-csh-inline { display:none !important; }
+.typo3-csh-link:hover .typo3-csh-inline { display:block !important; }
+div#typo3-docbody { z-index: 1 !important; }
+
+/* list module fixes 
+table.typo3-dblist .typo3-ctrl-versioning-link { padding: 0% 3px; height; line-height:16px;}
+table.typo3-dblist tr td .typo3-DBctrl .typo3-ctrl-versioning {	margin-top: 3px; }
+*/
+table.typo3-dblist tr td div.typo3-DBctrl { 
+	width: 380px; 
+	height:18px !important; 
+	white-space:nowrap  !important;
+}
+table.typo3-dblist tr td div.typo3-DBctrl * { 
+	display: inline !important; 
+	float:none !important; 
+}
+
+table.typo3-dblist tr td div.typo3-clipCtrl { width: 120px; }
+table.typo3-dblist div.typo3-DBctrl img.spacerimage { margin-right:12px !important; }
+
+#typo3-backend-php { overflow:hidden; }
+/*
+.checkbox { 
+	font-size:11px; 
+	padding:0;
+}
+*/
+/* open docs */
+#tx-opendocs-menu { background: transparent url(../backgrounds/topicons_bg.png) top left repeat-x !important; }
+#tx-opendocs-menu a.toolbar-item img { margin-top:6px !important; }
+#tx-opendocs-menu a.toolbar-item input { margin-top:8px !important; }
+#tx-opendocs-menu a.toolbar-item { background:none !important; }
+
+#tx-opendocs-menu a.toolbar-item-active,
+#tx-opendocs-menu a.toolbar-item:active, 
+#tx-opendocs-menu a.toolbar-item:focus {
+	background: white url() !important; /*../backgrounds/toolbar_item_active_bg.png*/
+}

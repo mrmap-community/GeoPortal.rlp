@@ -1,0 +1,92 @@
+plugin.pmkslimbox {
+
+	# cat=pmkslimbox/enable/e1; type=boolean; label= SlimBox mode (tt_content): If set, click-enlarged groups of images will be navigable. (Next/Previous buttons ar shown)
+	imgtext.navigable = 1
+
+	# cat=pmkslimbox/enable/e2; type=boolean; label= SlimBox mode (tt_news): If set, click-enlarged groups of images in tt_news will be navigable. (Next/Previous buttons ar shown)
+	tt_news.navigable = 1
+
+	# cat=pmkslimbox/enable/e3; type=boolean; label= Caption Animation: Set it to false to disable the caption animation.
+	animateCaption = 1
+
+	# cat=pmkslimbox/enable/e4; type=boolean; label= Display Print Button: If set, a Print button is displayed in the caption box.
+	enablePrintButton = 0
+
+	# cat=pmkslimbox/enable/e5; type=boolean; label= Display Save Button: If set, a Save button is displayed in the caption box.
+	enableSaveButton = 0
+
+	# cat=pmkslimbox/enable/e6; type=boolean; label= Show Counter: Set it to false to disable "Page 1 of 3" text..
+	showCounter = 1
+
+	# cat=pmkslimbox/enable/e7; type=boolean; label= Enable Splitting in tt_news: If true, then a small userfunction is included for tt_news. This enables splitting of the caption value by setting the register value "IMAGE_NUM_CURRENT" to the current item number. NOTE. If you are using "dam_ttnews" this option should be turned off!
+	tt_news.enableSplit = 1
+
+	# cat=pmkslimbox/enable/e8; type=boolean; label= Enable SlimBox in displaySingle : If set, LightBox effect will be available in tt_news SingleView when you click on an image.
+	tt_news.displaySingle.slimBoxEnable = 1
+
+	# cat=pmkslimbox/enable/e9; type=boolean; label= Enable SlimBox in displayLatest : If set, LightBox effect will be available in tt_news LatestView when you click on an image.
+	tt_news.displayLatest.slimBoxEnable = 0
+
+	# cat=pmkslimbox/enable/ea; type=boolean; label= Enable SlimBox in displayList : If set, LightBox effect will be available in tt_news ListView when you click on an image.
+	tt_news.displayList.slimBoxEnable = 0
+
+	# cat=pmkslimbox/enable/eb; type=boolean; label= Enable singleView in SlimBox : If set, tt_news SingleView will be shown inside a LightBox.
+	tt_news.displayList.slimBoxSingleView = 0
+
+	# cat=pmkslimbox/enable/ec; type=boolean; label= Enable loop : if true, allows to navigate between the first and last images of a Slimbox gallery, when there is more than one image to display.
+	loop = 1
+	
+	# cat=pmkslimbox/dims/d1; type=int+; label= Starting Width: The initial width of the box, in pixels.
+	initialWidth = 250
+
+	# cat=pmkslimbox/dims/d2; type=int+; label= Starting Height: The initial height of the box, in pixels.
+	initialHeight = 250
+
+	# cat=pmkslimbox/dims/d3; type=int+; label= SlimBox Max Image Width: Defines the maxwidth of the image shown in the Lightbox.
+	slimBoxMaxW = 800
+
+	# cat=pmkslimbox/dims/d4; type=int+; label= SlimBox Max Image Height: Defines the maxheight of the image shown in the Lightbox.
+	slimBoxMaxH = 600
+
+	# cat=pmkslimbox/dims/d5; type=int+; label= Iframe Default Width: The default width of the iframe, in pixels.
+	defaultIframeWidth = 500
+
+	# cat=pmkslimbox/dims/d6; type=int+; label= Iframe Default Height: The default height of the iframe, in pixels.
+	defaultIframeHeight = 300
+
+	# cat=pmkslimbox/dims/d7; type=int+; label= SlimBox tt_news Iframe width : Used to set the width of the LightBox if displaying tt_news SingleView in SlimBox is enabled.
+	tt_news.displayList.slimBoxWidth = 600
+
+	# cat=pmkslimbox/dims/d8; type=int+; label= SlimBox tt_news Iframe height : Used to set the height of the LightBox if displaying tt_news SingleView in SlimBox is enabled.
+	tt_news.displayList.slimBoxHeight = 500
+
+	# cat=pmkslimbox/file/f1; type=file[css]; label= CSS File: CSS file for Slimbox. See EXT:pmkslimbox/res/styles/slimbox_ex.css for an example.
+	slimboxCSS = EXT:pmkslimbox/res/styles/slimboxplus.css
+
+	# cat=pmkslimbox/file/f2; type=file[js]; label= Mootools Javascript Library: You only need to change this if you are using Mootools, and need some functions not in the included in the one used as default. (A full version of Mootools v1.2.1 is lotated at EXT:pmkslimbox/res/scripts/mootools-1.2.1_uncompressed.js)
+	mootoolsJS = EXT:pmkslimbox/res/scripts/mootools-1.2.1.js
+	
+	# cat=pmkslimbox/file/f3; type=file[js]; label= Slimbox Javascript Library: You will only need to change this, if you want to use a different version of the slimbox script.
+	slimboxJS = EXT:pmkslimbox/res/scripts/slimboxplus.js
+	
+	# cat=pmkslimbox//o1; type=int+; label= Resizing Duration: The duration of the resize animation for width and height, in milliseconds.
+	resizeDuration = 400
+
+	# cat=pmkslimbox//o2; type=options[linear,Quad.easeIn,Quad.easeOut,Quad.easeInOut,Cubic.easeIn,Cubic.easeOut,Cubic.easeInOut,Quart.easeIn,Quart.easeOut,Quart.easeInOut,Quint.easeIn,Quint.easeOut,Quint.easeInOut,Sine.easeIn,Sine.easeOut,Sine.easeInOut,Expo.easeIn,Expo.easeOut,Expo.easeInOut,Circ.easeIn,Circ.easeOut,Circ.easeInOut,Elastic.easeIn,Elastic.easeOut,Elastic.easeInOut,Back.easeIn,Back.easeOut,Back.easeInOut,Bounce.easeIn,Bounce.easeOut,Bounce.easeInOut]; label= SlimBox Transition: The transition you want to use for the resize animation. You can choose amongst lots of cool transitions that are part of the optional "Transitions" module of mootools, like "Fx.Transitions.Elastic.Out". Many transitions require a longer execution time to look good, so you should adjust the resizeDuration option above as well.
+	resizeTransition = Sine.easeInOut
+
+	# cat=pmkslimbox//o3; type=options[0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]; label= Background Opacity Level:
+	opacity = 0.8
+
+	# cat=pmkslimbox//o4; type=int+; label= Background Opacity Duration: The duration of the opacity fading animation for the background, in milliseconds.
+	opacityDuration = 500
+		
+	# cat=pmkslimbox//o5; type=options[auto,yes,no]; label= Iframe scrolling parameter: (When HTML page is displayed inside Lightbox frame).
+	iframeScrolling = auto
+
+	# cat=pmkslimbox//o6; type=options[titleText,altText,imagecaption]; label= tt_content Caption Field: tt_content field to use as caption inside the Lightbox.
+	imgtext.captionField = titleText
+
+	# cat=pmkslimbox//o7; type=options[imagetitletext,imagealttext,imagecaption]; label= tt_news Caption Field: tt_news field to use as caption inside the Lightbox.
+	tt_news.captionField = imagetitletext
+}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Import/Export</label>
+			<label index=".description">Import/Export Modul für TYPO3-Daten. Kann einzelne Datensätze, Tabelleninhalte, einzelne Seiten oder ganze Zweige des Seitenbaums exportieren. Berücksichtigt eingebundene Medien wie z.B. Bilder und behält Beziehungen zwischen Datensätzen bei. Eportiert nur ein ein TYPO3-spezifisches Format, entwäder ein binäres Format (.T3D) oder XML. Das Format ist zum Datenaustausch zwischen TYPO3-Systemen gedacht.</label>
+			<label index=".image_descr">Beispiel der Vorschau-Anzeige während der Export-Konfiguratoin einer Seite. Man beachte, wie die Datensätze auf der Seite einbezogen werden und wie die Referenz innerhalb des Datensatzes gefunden un ebenfalls einbezogen wird.</label>
+			<label index="export.alttitle">Datensätze aus TYPO3 exportieren</label>
+			<label index="export.description">Um TYPO3 T3D/XML-Dateien zu exportieren, klicken Sie auf ein Datensatz-Symbol im Seitenbaum (incl. der Root-Seite!), wählen Sie &quot;Mehr Optionen&quot; (erfordert die Installation Extension &quot;extra_page_cm_options&quot;) und dann &quot;Nach .t3d exportieren&quot;. Das Export-Interface wird aufgerufen, wo Sie die Optionen für Ihren Export einstellen können.</label>
+			<label index="export.details">Es gibt eine ganze Reihe Methoden, mit denen man Daten aus TYPO3 exportieren kann:
+- Export einer einzelnen Seite oder eines Zweiges des Seitenbaums (mit dem Kontext-Menu des Seiten-Symbols)
+- Export eines einzelnen Datensatzes von einer Seite (mit dem Kontext-Menü des Datensatz-Symbols)
+- Export aller Datensätze einer bestimmten Tabelle einer bestimmten Seite (mit dem Web&gt;List Modul)
+- Export einer frei wählbaren Auswahl von Datensätzen aus der Zwischenablage (mit dem Web&gt;List Modul)
+
+Das Export-Format beachtet alle TYPO3-Methoden für Beziehungen zwischen den Datensätzen in der Export-Datei. Aber Sie müssen einstellen, wie diese Beziehungen beibehalten werden, zumindest bis zu einem gewissen Grad. Manchmal werden Sie wollen, dass Datensätze, auf die verwiesen wird, in den Export eingeschlossen werden, in anderen Fällen wollen Sie möglicherweise das originale Mapping beibehalten. Das hängt vom Ziel Ihres Exports ab.
+
+Unabhängig von den Export-Einstellungen werden alle ausgewählten Datensätze und ihre internen Beziehungen in der Vorschau-Anzeige am Fuß der Export-Modul-Seite wiedergegeben.
+
+&lt;b&gt;Fehlermeldungen:&lt;/b&gt; Kontrollieren Sie vor dem Export im &quot;Message-Tab&quot; ob sich dort eventuell Fehlermeldungen befinden!</label>
+			<label index="export.image_descr">Um eine Seite oder einen Datensatz zu exportieren klicken Sie einfach auf das Symbol und wählen Sie &quot;Export&quot; aus dem Kontext-Menu.
+Mit dem Web&gt;List Modul können Sie auch alle Datensätze einer Tabelle exportieren, indem Sie zuerst auf den Tabellentitel klicken, um nur diese Tabelle zu sehen. Neben dem CSV-Export finden Sie den Button für einen T3D-Export der Tabelle. Sie können auch den Inhalt der Zwischenablage exportieren in dem sie einfach &quot;Export&quot; im Menu wählen.</label>
+			<label index="pageTreeCfg.alttitle">Konfiguration des Seitenbaum-Exports</label>
+			<label index="pageTreeCfg.description">Hier können Sie einstellen, wie eine Seite oder ein Zweig des Seitenbaums exportiert werden sollen. Mit der Auswahlbox legen Sie fest, wieviele Unterseiten-Ebenen in den Export eingeschlossen werden sollen.</label>
+			<label index="pageTreeDisplay.alttitle">Seitenbaum</label>
+			<label index="pageTreeDisplay.description">Augehend von den ausgewählten Ebenen für den Seitenbaum zeigt dies die Struktur die zum Export ansteht. Falls Seiten ausdrücklich durch die &quot;Ausschließen-Option&quot; ausgeschlossen wurden, werden sie nicht angezeigt.</label>
+			<label index="pageTreeMode.alttitle">Ebenen</label>
+			<label index="pageTreeMode.description">Hier wählen Sie die Ebenentiefe für diesen Export aus, bezogen auf den aktuellen Ausgangspunkt.</label>
+			<label index="pageTreeMode.details">Wenn Sie &quot;Erweiterter Baum&quot; auswählen, wird der Export auf Basis der aktuell erweiterten Ebenen erfolgen. Eine weitere Spezial-Option ist &quot;Tabellen auf dieser Seite&quot;, die nicht den Seiten-Datensatz selbst, sondern nur die Tabellen der Seite exportiert, natürlich abhängig von der Tabellen-Konfiguration.</label>
+			<label index="pageTreeRecordLimit.alttitle">Einzuschließende Tabellen</label>
+			<label index="pageTreeRecordLimit.description">Beim Export einer Seite werden standardmäßig alle Datensätze der Seite eingeschlossen. Mit diesem Selektor können Sie die einzuschließenden Tabellen auswählen, falls sie einzelne Datensätze nicht einschließen wollen.</label>
+			<label index="pageTreeRecordLimit.details">In der Box &quot;Höchstwert für Datensätze&quot; können Sie ein Limit setzen, wie viele Datensätze maximal aus einer einzelnen Tabelle ausgewählt werden. Dies ist eine &quot;Notbremse&quot;, falls sich ungewöhnlich viele Datensätze in der Tabelle befinden.</label>
+			<label index="singleRecord.alttitle">Einzelnen Datensatz exportieren</label>
+			<label index="singleRecord.description">Dieser Überblick zeigt, welche unabhängigen Datensätze unabhängig von einander für den Export ausgewählt wurden.</label>
+			<label index="singleRecord.image_descr">Um mehrere Datensätze wie diesen zu exportieren, bitte die Zwischenablage, wie weiter unten gezeigt, benutzen.</label>
+			<label index="tableList.alttitle">Tabellenexport</label>
+			<label index="tableList.description">Expoprt aller Datensätze einer Seite aus einer bestimmten Tabelle. Wird vom &quot;Web&gt;List&quot; Modul konfiguriert; dort wählen Sie &quot;Nur Tabellen Ansicht&quot; und klicken oben auf einen Button.</label>
+			<label index="tableList.details">Tipp: Sie können mehrere Tabellen-Listen auswählen, indem sie jede Auswahl als Preset speichern und dann die Auswahlen laden / zusammenführen.</label>
+			<label index="tableList.image_descr">Hier werden zwei Tabellen von verschiedenen Seiten ausgewählt. Dies geschieht, indem man zunächst die erste Tabelle auswählt und als Preset speichert, dann die nächste auswählt und sie mit dem gespeicherten Preset zusammenführt. Hier sehen Sie, wie man das Web&gt;List Modul benutzt, um alle Datensätze einer Tabelle aus einer Seite zu exportieren.</label>
+			<label index="tableListMaxNumber.alttitle">Maximale Export-Anzahl</label>
+			<label index="tableListMaxNumber.description">&quot;Notbremse&quot;, die sicherstellt, dass das Interface nicht von einer großen Anzahl Datensätze blockiert wird. Standard ist 100, aber Sie können den Wert natürlich beliebig ändern.</label>
+			<label index="inclRelations.alttitle">Verknüpfungen einbeziehen</label>
+			<label index="inclRelations.description">Konfigurieren Sie die Tabellen, aus denen Sie Datensätze, die als Beziehungen in der Haupt-Export-Konfiguration gefunden werden, einbeziehen wollen.</label>
+			<label index="inclRelations.details">Hintergrund: Wenn Sie einen Datensatz in TYPO3 exportieren kann er Beziehungen zu anderen Datensätzen des Systems enthalten. Sie müssen dem Export-Interface sagen, was mit diesen Beziehungen geschehen soll. Grundsätzlich gibt es drei Szenarios:
+- Wenn Beziehungen zwischen Datensätzen gefunden werden, die alle in der Export-Konfiguration enthalten sind, gibt eskein Problem: Die Beziehungen werden beim Importieren automatisch auf die neuen IDs dieser Datensätze umgestellt.
+- Wenn die Datensätze, auf die Beziehungen verweisen, nicht enthalten sind, geht die Beziehung verloren (angezeigt durch eine Fehlermeldung im Preview), außer
+a) Sie wählen eine Tabelle in der Auswahl-Box. In diesem Fall werden alle Bezeihungen zu dieser Tabelle einbezogen oder
+b) Sie bestimmen die Tabelle als &quot;Statische Tabelle&quot; (in diesem Fall wird die Beziehung unverändert importiert - was natürlich zu Fehlern führt, wenn kein Datensatz mit der entsprechenden UID im System gefunden wird)
+
+&lt;b&gt;Soft References (&quot;Weiche Beziehungen&quot;):&lt;/b&gt; Man spricht von &quot;Soft References&quot; wenn ein Datensatz Zeiger auf externe Dateien oder Datensätze enthält, aber in Feldern, für die keine formale Beziehung konfiguriert ist, z.B. wenn ein Content-Element ein  &quot;&amp;lt;link 123&amp;gt;&quot; Tag enthält, das für einen Link zur Seite 123 steht. Das wird formal nicht als Beziehung aufgenommen, wird aber als &quot;Soft Reference&quot; gefunden. Das gleiche gilt für &amp;lt;img&amp;gt;-Tags mit Bildern aus z.B. &quot;fileadmin/&quot;.
+Standardmäßig verhalten sich Soft-References die auf Datensätze oder Dateien verweisen wie normale Beziehungen; entweder die verknüpften Objekte sind enthalten oder es wird eine Fehlermeldung angezeigt. Allerdings kann man auch die Behandlung von Soft-References auch abschalten oder die Werte als &quot;veränderbar&quot; beim Import definieren. Das geschieht mit einer Auswahl-Box in der Export-Vorschau.</label>
+			<label index="inclRelations.image_descr">Dieses Beispiel zeigt drei Beispiele für Beziehungen: a) ein Bild, das mit einem Content-Element verknüpft ist, b) eine Beziehung zu einer Front-End-Benutzergruppe UID und c) eine Soft-Reference, die im Bodytext-Feld eines Datensatzes gefunden wurde, in diesem Fall ein Link-Tag, das auf die Seite mit der UID 1 verweist.
+Beachten Sie im vorangegangenen Bild, wie die Beziehung zu der Front-End Benutzergruppe verloren ging. Das wurde in diesem Screenshot korrigiert, indem in der Liste der einzubindenen Tabellen die fe_group Tabelle ausgewählt wurde. Das Ergebnis ist, dass die Front-End Benutzergruppe als ein Datensatz außerhalb des exportierten Seitenbaums einbezogen wurde. Falls Sie die Beziehung behalten, aber nicht  die Benutzergruppe einschließen wollen, müssen Sie &quot;fe_groups&quot; stattdessen als statische Tabelle definieren (siehe unten).
+Dieses Beispiel zeigt einen TypoScript Template-Datensatz, bei dem mehrere Soft-References gefunden wurden. Die erste ist eine E-Mail Adresse. Hier ist sie als editierbar ausgewählt. Das bedeutet, dass der Benutzer beim Importieren die Möglichkeit hat, diesen Wert zu ändern, bevor der eigentliche Import ausgeführt wird. Das ist sehr sinnvoll, wenn exportierte Dateien als Templates benutzt werden. Ein anderes Beispiel bindet ein PHP-Script ein, das wir nicht in den Export einbeziehen möchten - darum haben wir die Exclude-Option für diese Soft-Reference ausgewählt.</label>
+			<label index="staticRelations.alttitle">Statische Tabellen festlegen</label>
+			<label index="staticRelations.description">Legen Sie fest, für welche Tabellen (zusätzlich zu den statischen TYPO3 Tabellen) die Beziehungen nicht verändert werden dürfen. Diese Einstellungen haben Vorrang vor den unter &quot;Verknüpfungen einbeziehen&quot; getroffenen Einstellungen.</label>
+			<label index="excludedElements.alttitle">Ausgeschlossene Elemente</label>
+			<label index="htmlCssResources.alttitle">Resourcen aus HTML und CSS Dateien ausschließen</label>
+			<label index="extensionDependencies.alttitle">Abhängigkeiten von Erweiterungen</label>
+			<label index="presets.alttitle">Voreinstellungen</label>
+			<label index="metadata.alttitle">Meta-Daten</label>
+			<label index="fileFormat.alttitle">Dateiformat</label>
+			<label index="import.alttitle">TYPO3 Datensätze importieren</label>
+			<label index="importFile.alttitle">Importdatei auswählen</label>
+			<label index="update.alttitle">Datensätze aktualisieren</label>
+			<label index="options.alttitle">Optionen</label>
+			<label index="options.description">Legt verschiedene Optionen für den Importvorgang fest.</label>
+			<label index="action.alttitle">Aktion</label>
+			<label index="enableLogging.alttitle">Logging aktivieren</label>
+			<label index="upload.alttitle">Importdatei übertragen</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle" type="integer">260906242</label>
+			<label index=".image_descr" type="integer">70436675</label>
+			<label index="export.alttitle" type="double">9010103</label>
+			<label index="export.description" type="integer">150520112</label>
+			<label index="export.details" type="integer">113510702</label>
+			<label index="export.image_descr" type="integer">74768430</label>
+			<label index="pageTreeCfg.alttitle" type="integer">236227215</label>
+			<label index="pageTreeCfg.description" type="integer">147952098</label>
+			<label index="pageTreeDisplay.alttitle" type="double">9880458</label>
+			<label index="pageTreeMode.alttitle" type="integer">152759754</label>
+			<label index="pageTreeRecordLimit.alttitle" type="integer">169123110</label>
+			<label index="singleRecord.alttitle" type="integer">128794302</label>
+			<label index="tableList.alttitle" type="integer">146883216</label>
+			<label index="tableListMaxNumber.alttitle" type="integer">225797227</label>
+			<label index="inclRelations.alttitle" type="integer">164484847</label>
+			<label index="pageTreeDisplay.description" type="integer">59122430</label>
+			<label index="pageTreeMode.description" type="integer">261676486</label>
+			<label index="pageTreeMode.details" type="integer">231396751</label>
+			<label index="pageTreeRecordLimit.description" type="integer">131668315</label>
+			<label index="pageTreeRecordLimit.details" type="integer">221257491</label>
+			<label index="singleRecord.description" type="integer">132615781</label>
+			<label index="singleRecord.image_descr" type="integer">225220803</label>
+			<label index="staticRelations.alttitle" type="double">1210228</label>
+			<label index="excludedElements.alttitle" type="integer">227920200</label>
+			<label index="htmlCssResources.alttitle" type="integer">178718927</label>
+			<label index="extensionDependencies.alttitle" type="integer">230544289</label>
+			<label index="presets.alttitle" type="integer">204662048</label>
+			<label index="metadata.alttitle" type="integer">266477806</label>
+			<label index="fileFormat.alttitle" type="integer">54960098</label>
+			<label index="import.alttitle" type="integer">32716924</label>
+			<label index="importFile.alttitle" type="integer">36260242</label>
+			<label index="update.alttitle" type="integer">56150550</label>
+			<label index="options.alttitle" type="integer">55046973</label>
+			<label index="options.description" type="integer">57482610</label>
+			<label index="action.alttitle" type="integer">185830356</label>
+			<label index="upload.alttitle" type="integer">182180379</label>
+			<label index="tableList.description" type="integer">61027651</label>
+			<label index="tableList.details" type="integer">207214955</label>
+			<label index="tableList.image_descr" type="integer">72114061</label>
+			<label index="tableListMaxNumber.description" type="integer">261288618</label>
+			<label index="inclRelations.description" type="integer">75889546</label>
+			<label index="inclRelations.details" type="integer">21617906</label>
+			<label index=".description" type="integer">68307774</label>
+			<label index="inclRelations.image_descr" type="integer">68907185</label>
+			<label index="enableLogging.alttitle" type="integer">110785878</label>
+			<label index="staticRelations.description" type="integer">220143778</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Import/Export</label>
+			<label index=".image_descr">Example of the preview display during export configuration of a page. Notice how records on the page are include plus how references inside the record is found and included as well (bottom of screen).</label>
+			<label index="export.alttitle">Exporting records from TYPO3</label>
+			<label index="export.description">To export TYPO3 T3D/XML files you click any record icon or page in the page tree (including the root page!), select &quot;More options&quot; (requires the extensions &quot;extra_page_cm_options&quot; to be installed) and then &quot;Export to .t3d&quot;. This will bring up the export interface where you can configure options for your export session.</label>
+			<label index="export.details">There are a number of methods by which you can export data from TYPO3:
+- Export a single page or branch of the page tree (use page icon context menu)
+- Export a single record from any page (use record icon context menu)
+- Export all records from a specific table on a specific page (using the Web&gt;List module)
+- Export an arbitrary selection of records from the clipboard (using the Web&gt;List module)
+
+The export format observes all TYPO3s methods for relations between the records in the export file. But you will have to configure how these relations are maintained, at least to some degree. Sometimes you would want to include records referred to, at other times you surely want to keep the original mapping. That depends on your objectives with the export.
+
+Regardless of your configuration for export you will always see a complete reflection of all chosen records and their internal relations in the preview display found in the bottom of the export module page.
+
+&lt;b&gt;Error messages:&lt;/b&gt; Remember to consult the Message-tab before exporting if there are any error messages there!</label>
+			<label index="export.image_descr">To export a page or record, simply click the icon and select &quot;Export&quot; from the context menu.
+With the Web&gt;List module you can also export all records from a table by first clicking the table title to see only this table, then next to the CSV export you will find the export button for a T3D export of the table.
+You can export the contents of the clipboard as well by simply selecting &quot;Export&quot; in the menu.</label>
+			<label index="pageTreeCfg.alttitle">Configuration of page tree export</label>
+			<label index="pageTreeCfg.description">Here you configure how a page or a branch of the page tree should be exported. Using the selector box you can set the number of levels of subpages to include in the export.
+By default all records belonging to a page is included when a page is exported.</label>
+			<label index="pageTreeDisplay.alttitle">Page Tree</label>
+			<label index="pageTreeMode.alttitle">Levels</label>
+			<label index="pageTreeRecordLimit.alttitle">Include tables</label>
+			<label index="singleRecord.alttitle">Export single record</label>
+			<label index="tableList.alttitle">Table export</label>
+			<label index="tableListMaxNumber.alttitle">Max number to export</label>
+			<label index="inclRelations.alttitle">Include relations</label>
+			<label index="pageTreeDisplay.description">Based on the levels selected for page tree export this will show the structure that is about to be exported. If any pages are specifically excluded by the exclude option they are not shown either.</label>
+			<label index="pageTreeMode.description">Here you select how deeply in the page tree from the current starting point to go for this export.</label>
+			<label index="pageTreeMode.details">If you select &quot;Expanded tree&quot; it will base the export on the currently expanded levels of the page tree. Another special option is &quot;Tables on this page&quot; which will not include the page record itself but only include records from tables on the page, depending on the table configuration of course.</label>
+			<label index="pageTreeRecordLimit.description">When you export a page all records on the page is included by default. By this selector you can pick which tables to include exclusively if there are certain records you are not interested in seeing included.</label>
+			<label index="pageTreeRecordLimit.details">In the box &quot;Max number of records&quot; you can set a limit to how many records are selected from a single table. This is a runaway brake in case you have an unusual large amount of records from a table.</label>
+			<label index="singleRecord.description">This overview tells you which independent records has been independently selected for export.</label>
+			<label index="singleRecord.image_descr">The way to export multiple records like this is using the clipboard like shown below.</label>
+			<label index="staticRelations.alttitle">Set static tables</label>
+			<label index="excludedElements.alttitle">Excluded elements</label>
+			<label index="htmlCssResources.alttitle">Exclude resources from HTML and CSS files</label>
+			<label index="extensionDependencies.alttitle">Extension Dependencies</label>
+			<label index="presets.alttitle">Configuration presets</label>
+			<label index="metadata.alttitle">Meta data setting</label>
+			<label index="fileFormat.alttitle">File format options</label>
+			<label index="import.alttitle">Importing TYPO3 records</label>
+			<label index="importFile.alttitle">Select file to import</label>
+			<label index="update.alttitle">Update instead of Insert</label>
+			<label index="options.alttitle">Import options</label>
+			<label index="options.description">Various options for import.</label>
+			<label index="action.alttitle">Import Action</label>
+			<label index="upload.alttitle">Upload import file</label>
+			<label index="tableList.description">Export of all records on a page from a specific table. This is configured from the Web&gt;List module where you will have to select table-only view and click a button in the top of the page.</label>
+			<label index="tableList.details">Tip: You can select multiple table lists by simply saving each selecting as a preset and finally load/merge the selections together.</label>
+			<label index="tableList.image_descr">Here two tables from different pages are selected. This is done by first selecting the one, saving it as a preset, then select the other and merge with the saved preset.
+Here you see how to use the Web&gt;List module to export all records from a table on a page.</label>
+			<label index="tableListMaxNumber.description">Run-away brake that will make sure a large amount of records does not halt the interface. Default is 100, but you can change it to anything you like of course.</label>
+			<label index="inclRelations.description">Configure the tables from which you want to include records that are found as relations in the main export configuration.</label>
+			<label index="inclRelations.details">Background: When you export a record in TYPO3 it might contain relations to other records in the system. You have to tell the export interface what to do with these relations. Basically there are three scenarios:
+- If relations are found between records that are all in the export configuration, there is no problem: The relations are automatically mapped to the new id's of those records when imported.
+- If the records related to are not included the relation will be lost (indicated with an error message in the preview) unless you a) either select that table in this selector box in which case all relations to that table will be included or b) if you set the table as a static table (in which case the relation is untouched and imported as-is - but which will of course break if no record with that UID is found in the import system).
+
+&lt;b&gt;Soft References:&lt;/b&gt; Soft references are when a record contains pointers to external files or records but in fields where there are no formal relation configured. Examples of this is when a content element contains a &quot;&amp;lt;link 123&amp;gt;&quot; tag that represents a link to the page 123. This is not picked up formally as a reference, but is found anyhow as a &quot;soft reference&quot;. The same goes for &amp;lt;img&amp;gt; tags with images from eg. &quot;fileadmin/&quot;.
+By default soft references pointing to records or files will act as normal references; either including the referenced item or showing an error. However you can also choose to exclude the handling of individual soft references or maybe set the value as &quot;editable&quot; upon import. This is done with a selector box in the export preview.</label>
+			<label index=".description">Native Import/Export module for TYPO3 data. Can export single records, content of tables, single pages or whole branches of the page tree. Includes attached media like image and preserves relations between records. Exports only to TYPO3 specific format, either a binary format (.T3D) or XML. The format is meant for exchange between TYPO3 systems.</label>
+			<label index="inclRelations.image_descr">This example shows tree examples of references; a) an image attached to a content element, b) a relation to a frontend usergroup UID, and c) a soft reference found in the bodytext field of a record, here it is the link-tag pointing to the page with UID 1. 
+Notice in the previous image how the relation to the frontend user group was lost. This has been corrected in this screenshot where the fe_group table has been selected in the list of table for which to include relations. The result is that the frontend usergroup is included as a record outside the exported pagetree. If you wanted to keep the relation but not include the usergroup you have to set &quot;fe_groups&quot; as a static table instead. See below.
+This example shows a TypoScript Template Record where multiple soft references has been found. The first one is an email address. Here it is configured to be editable. This means that upon import the user will have a chance to edit the value before the import is actually done. This is very useful when exported files are used as templates. Another example includes a PHP script which we don't want to include in the export and therefore we have selected the exclude option for the soft reference.</label>
+			<label index="enableLogging.alttitle">Enable System Logging</label>
+			<label index="staticRelations.description">Select which tables in addition to the static TYPO3 tables to keep relations untouched for. Takes precedence over &quot;Include relations&quot; configured tables.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

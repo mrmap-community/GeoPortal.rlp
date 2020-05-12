@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Natural Language Parser - Help</title>
+	<style type="text/css">
+	* {
+		font-family: arial, sans-serif;
+		font-size: 8pt;
+	}
+
+	table {
+		width: 100%;
+		border-spacing: 0px;
+		border: 1px solid #CACACA;
+		border-bottom: 0;
+		border-collapse: collapse;
+		}
+
+	table thead td {
+		font-weight: bold;
+		font-size: 11pt;
+	}
+
+	table thead {
+		background-color: #F9F9F9;
+		font-weight: bold;
+	}
+
+	table th {
+		background-color: #F9F9F9;
+		font-weight: bold;
+		padding: 9px;
+		border-bottom: 1px solid #CACACA;
+	}
+
+	table td {
+		padding: 6px;
+		border-bottom: 1px solid #CACACA;
+	}
+
+	table td+td,
+	table th+th {
+		border-left: 1px solid #CACACA;
+	}
+	</style>
+</head>
+<body onclick="window.close();">
+	<table>
+	<thead>
+		<tr>
+			<td>Input</td>
+
+			<td>Definition</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>Today</strong></td>
+			<td>Today (<strong>tod</strong> also works)</td>
+
+		</tr>
+		<tr>
+			<td><strong>Tomorrow</strong></td>
+			<td>Tomorrow (<strong>tom</strong> also works)</td>
+		</tr>
+		<tr>
+
+			<td><strong>Yesterday</strong></td>
+			<td>Yesterday (<strong>yes</strong> also works)</td>
+		</tr>
+		<tr>
+			<td><strong>11 Oct</strong></td>
+			<td>The Next October 11th</td>
+
+		</tr>
+		<tr>
+			<td><strong>Oct 11</strong></td>
+			<td>The Next October 11th</td>
+		</tr>
+		<tr>
+			<td><strong>11th of Oct</strong></td>
+
+			<td>The Next October 11th</td>
+		</tr>
+		<tr>
+			<td><strong>10/11/2006</strong></td>
+			<td>October 11, 2006</td>
+		</tr>
+		<tr>
+
+			<td><strong>10/11</strong></td>
+			<td>October 11, 2006</td>
+		</tr>
+		<tr>
+			<td><strong>2006-10-11</strong></td>
+			<td>October 11, 2006</td>
+		</tr>
+
+		<tr>
+			<td><strong>10-11</strong></td>
+			<td>October 11, 2006</td>
+		</tr>
+		<tr>
+			<td><strong>11</strong></td>
+			<td>11th day of the current month</td>
+
+		</tr>
+		<tr>
+			<td><strong>Next Friday</strong></td>
+			<td>The next Friday to occur (<strong>next f</strong>, <strong>next fri</strong> also works)</td>
+		</tr>
+
+		<tr>
+			<td><strong>Last Monday</strong></td>
+			<td>The previous Monday to occur (<strong>last m</strong>, <strong>last mon</strong> also works)</td>
+		</tr>
+	</tbody>
+
+	</table>
+	<p>Powered by <a href="javascript:void(0);" onclick="window.open('http://datetime.toolbocks.com', 'datetime_toolbocks', 'width=570,height=600,scrollbars=yes,resizable=yes,location=yes');">Datetime Toolbocks</a></p>
+</body>
+</html>

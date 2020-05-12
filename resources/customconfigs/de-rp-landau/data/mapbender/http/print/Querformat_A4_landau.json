@@ -1,0 +1,178 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "L",
+    "units" : "mm",
+    "format" : "a4",
+    "controls" : [
+	{
+            "id" : "title",
+            "label" : "Titel",
+            "type" : "text",
+            "size" : 12,
+	    "maxCharacter" : 32,
+            "pageElementsLink" : {
+                "titel" : "value"
+            }
+        },
+        
+        {
+            "id" : "dpi",
+            "label" : "Auflösung",
+            "type" : "select",
+            "size" : 23,
+            "pageElementsLink" : {
+                "karte" : "res_dpi"
+            },
+            "options" : [
+                {
+                    "value" : "72",
+                    "label" : "72 dpi"
+                },
+                {
+                    "value" : "144",
+                    "label" : "144 dpi"
+                }
+            ]
+	},
+        {
+            "id" : "comment1",
+            "label" : "Notiz",
+	    "type" : "textarea",
+             "maxCharacter" : 100,
+	     "size" : 8,
+            "pageElementsLink" : {
+                "kommentar1" : "value"
+            }
+        },
+        
+        {
+            "id" : "angle",
+            "label" : "Drehwinkel",
+            "type" : "text",
+            "pageElementsLink" : {
+                "nordpfeil" : "angle",
+                "karte" : "angle",
+                "minikarte" : "angle"
+            }
+        },
+     
+        {
+            "id" : "scale",
+            "label" : "Maßstab",
+            "type" : "text",
+            "pageElementsLink" : {
+                "scale" : "value"
+            }
+        },
+	{
+    		"id" : "coordinates",
+    		"type" : "hidden"
+    	}
+    ],
+    "pages" : [
+        {
+            "tpl" : "Querformat_A4_landau.pdf",
+            "useTplPage" : 1,
+            "elements" : {
+                "karte" : {
+                    "type" : "map",
+                    "res_dpi" : 72,
+                    "x_ul" : 20.8,
+                    "y_ul" : 25.9,
+                    "width" : 256.4,
+                    "height" : 164.2,
+                    "coords" : 0,
+                    "coords_font_family" : "Arial",
+                    "coords_font_size" : 7
+                },
+                
+           	"frameelement1" : {
+                    "type" : "image",
+                    "x_ul" : 205.8,
+                    "y_ul" : 164.2,
+                    "width" : 71.7,
+                    "height" : 26.6,
+                    "angle" : 0,
+                    "filename" : "./img/Beschriftung_Landau_A4_H.png"
+                },
+
+           	"frameelement2" : {
+                    "type" : "image",
+                    "x_ul" : 205.8,
+                    "y_ul" : 25.3,
+                    "width" : 71.7,
+                    "height" : 10,
+                    "angle" : 0,
+                    "filename" : "./img/Titel_Hintergrund_Landau_A4_H.png"
+                },
+           	
+                "scale" : {
+                    "type" : "text",
+                    "x_ul" : 235,
+                    "y_ul" : 177.2,
+                    "font_family" : "Arial",
+                    "font_size" : 6,
+                    "value" : "scale"
+                },
+                "date" : {
+                    "type" : "text",
+                    "x_ul" : 235,
+                    "y_ul" : 180.2,
+                    "font_family" : "Arial",
+                    "font_size" : 6,
+                    "value" : "date"
+                },
+              
+                "nordpfeil" : {
+                    "type" : "image",
+                    "x_ul" : 265,
+                    "y_ul" : 47,
+                    "width" : 6,
+                    "height" : 19,
+                    "filename" : "./img/northarrow_simple.png"
+                },
+		"titel" : {
+                    "type" : "text",
+                    "x_ul" : 207.8,
+                    "y_ul" : 31.5,
+                    "font_family" : "Arial",
+                    "font_size" : 12,
+		    "font_color" : "255,255,255"
+                },
+		"messung" : {
+                 "type" : "measure",
+                 "do_fill" : 0,
+                 "fill_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "do_stroke" : 1,
+                 "stroke_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "line_style" : {
+                     "width" : 2.0
+                     }
+                    },
+
+                "kommentar1" : {
+                    "type" : "para",
+                    "x_ul" : 224,
+                    "y_ul" : 181.2,
+                    "font_family" : "Arial",
+                    "font_size" : 6,
+                    "width" : 60,
+                    "height" : 2,
+                    "align" : "L",
+                    "border" : 0,
+                    "fill" : 0,
+                    "border_width" : 0.3
+                }
+            }
+        }
+        
+    ]
+}

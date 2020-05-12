@@ -1,0 +1,12 @@
+plugin.tx_q4ucontentparser_pi1 {
+	parse {
+		1.link=.*\.pdf
+		1.before=<img width="10" height="9" src="fileadmin/design/images/link_pdf.gif" alt="PDF-Datei" title="Bei Klick öffnet sich die PDF Datei." />
+		2.link=http://.*
+		2.before=<img width="14" height="9" src="fileadmin/design/images/link_ext.gif" alt="externer Link" title="Bei Klick öffnet sich die Seite in einem neuen Fenster." />
+		3.link=mailto:.*
+		3.before=<img width="14" height="9" src="fileadmin/design/images/link_mailto.gif" alt="E-Mail" title="Bei Klick öffnet sich Ihr E-Mail-Programm." />
+		4.link=.*(zip)
+		4.before=<img width="11" height="9" src="fileadmin/design/images/link_file.gif" alt="Datei" title="Bei Klick können Sie die Datei speichern." />
+	}
+}

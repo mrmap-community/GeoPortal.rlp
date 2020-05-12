@@ -1,0 +1,43 @@
+/* onclick mode backgrouds */
+body#typo3-alt-topmenu-dummy-php-iconmenu,
+body#typo3-alt-toplogo-php,
+body.topmenu_high { background: #cecece url(../backgrounds/docheader_bg.gif) bottom left repeat-x !important; }
+body#typo3-alt-topmenu-dummy-php-iconmenu div#header, 
+body#typo3-alt-topmenu-dummy-php-iconmenu #nav,
+body#typo3-alt-topmenu-dummy-php-iconmenu .c-menu { 
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+body#typo3-alt-topmenu-dummy-php-iconmenu div.header_mode_0,
+body#typo3-alt-topmenu-dummy-php-iconmenu div.header_mode_2 {
+	position:relative;
+	top:-20px;
+	left:0;
+}
+#div-editNav td, table.typo3-dyntabmenu-tabs td { white-space:nowrap; }
+/* hover mode backgrouds */
+body#typo3-alt-toplogo-php .backendlogo { display:none !important; }
+body.topmenu_high table#typo3-topMenu,
+body.topmenu_high #nav li ul { background-image: none !important; }
+.both-wrapper {
+	border:1px solid #c0c0c0;
+	background-color:#F0F0EE;
+}
+
+.curItem .both-wrapper { border:1px solid #2270c3 !important; }
+.secondary a:link .txt-wrapper, .secondary a:visited .txt-wrapper, .secondary a:hover .txt-wrapper,
+.secondary a:link, .secondary a:visited, .secondary a:hover, .secondary a:active, .secondary a:focus { color:#2270c3 !important }
+.both-wrapper {
+	border:1px solid #c0c0c0;
+	background-color:#F0F0EE;
+}
+/* hover mode colors */
+span.img-wrapper { border:1px solid #F0F0EE; }
+a:hover span.img-wrapper { border:1px solid #2270c3 !important; }
+ul.primary_mode_1 div.tab, ul.primary_mode_1 div.tabact { padding:1px 5px !important; }
+div.tab_mode_0,
+ul.primary_mode_2 div.tab, ul.primary_mode_2 div.tabact { padding:2px 5px !important; }
+ul.primary_mode_0 ul.sedondary_mode_0 { margin-top:2px !important; }
+ul.primary_mode_1 ul.sedondary_mode_1 { margin-top:-3px !important; }
+ul.primary_mode_2 ul.sedondary_mode_2 { margin-top:6px !important; }
+body#typo3-alt-topmenu-dummy-php-iconmenu #nav a:hover { text-decoration: none !important; }

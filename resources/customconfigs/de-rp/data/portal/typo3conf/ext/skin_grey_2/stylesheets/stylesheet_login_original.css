@@ -1,0 +1,154 @@
+/* Login Screen
+
+	 * Warning:
+	 * DO NOT prevent the copyright notice from being shown!
+	 * According to the GPL license an interactive application must show such a notice on start-up ('If the program is interactive, make it output a short notice... ' - see GPL.txt)
+	 * Therefore preventing this notice from being properly shown is a violation of the license, regardless of whether you remove it or use the stylesheet to obstruct the display.
+
+	 Color set: #8A4308 / #4d1300
+
+*/
+BODY#typo3-index-php,BODY#typo3-index-php P, BODY#typo3-index-php DIV {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	color: black;
+}
+BODY#typo3-index-php a img { border-width:0 }
+BODY#typo3-index-php a:link, BODY#typo3-index-php a:visited { 
+	color:black;
+	text-decoration:none;
+}
+BODY#typo3-index-php { 
+	background-color: white; 
+	margin: 0px 0px 0px 0px; 
+}
+DIV#loginNews { 
+	width: 70%; 
+	margin-top: 30px; 
+}
+DIV#loginNews H2 { 
+	background-color: #E26816; 
+	color: white; 
+	font-size: 12px; 
+}
+DIV#loginNews TABLE TR TD { 
+	padding-right: 10px; 
+	padding-left: 10px; 
+}
+DIV#loginNews TABLE TR TD.c-header { 
+	font-weight: bold; 
+	background-color: #FFD8A9;  
+}
+DIV#loginNews TABLE TR.c-spacer { 
+	height: 10px; 
+}
+
+/*
+DL#loginNews DT { font-weight:bold;font-size:14px; }
+DL#loginNews DT SPAN{ font-weight:normal;font-size:10px;padding-left:16px;margin-bottom:4px;}
+DL#loginNews DD {border-left:2px solid #F69220; padding-left:10px;font-size:12px;margin-bottom:12px;}
+*/
+
+BODY#typo3-index-php TABLE#wrapper { 
+	width: 100%; 
+	margin-top: 60px;  /*25px - 100px*/
+	background-image: url(../backgrounds/login_back.gif); 
+}
+BODY#typo3-index-php TABLE#loginwrapper { 
+	width: 500px; 
+	height:300px; /* 250px */
+	border: #ABABAB solid 1px; 
+	background-color: #DBE9F7; 
+	text-align: left; 
+	background-image: url(../backgrounds/login_table_bg.gif); 
+}
+h2#loginNewsTitle, dl#loginNews { width: 500px; }
+BODY#typo3-index-php DIV#copyrightnotice { 
+	width: 500px; 
+	text-align: left; 
+	margin-top: 10px; 
+	font-weight: normal; 
+	color: #ABABAB; 
+}
+BODY#typo3-index-php DIV#copyrightnotice IMG { 
+	margin-right:5px; 
+	margin-bottom:5px; 
+}
+BODY#typo3-index-php DIV#loginimage {
+	text-align: right; 
+	padding-right: 0px; 
+	margin-bottom: 5px; 
+}
+BODY#typo3-index-php DIV#loginimage img { display:none; }
+TABLE#logintable {
+	position:static !important; 
+	background-color: #FEFEFE; 
+	border: #ABABAB solid 1px; 
+	width: 300px; 
+	height: 150px; 
+	margin: 100px 5px 5px 185px; /* 25px 5px 5px 185px, 145px 5px 5px 185px*/
+}
+TABLE#logintable TR TD { 
+	padding: 4px 5px 5px 5px; 
+}
+TABLE#logintable H2 { 
+	border: #E6E6E6 solid 1px; 
+	background-color: #FFFFFF;
+	background-image: url(../backgrounds/menu_bg.gif); 
+	font-size: 10px; 
+	color: black; 
+	text-align: left; 
+	text-transform:uppercase;
+	padding:5px;
+}
+TABLE#logintable P { 
+	font-size: 10px; 
+	font-weight: semibold; 
+	color: #ABABAB;
+	margin-top:0;
+	margin-bottom:0;
+}
+TABLE#logintable P.c-info { 
+	font-size: 10px; 
+	font-weight: normal; 
+	color: #ABABAB; 
+}
+TABLE#logintable P.c-wrong { 
+	font-size: 9px; 
+	font-weight:normal; 
+	width: 275px; 
+	border: #DEEAF5 solid 1px; 
+	margin: 0px 0px 0px 0px; 
+	padding: 5px 5px 5px 5px; 
+}
+TABLE#logintable INPUT.c-username, 
+TABLE#logintable INPUT.c-password, 
+TABLE#logintable SELECT.c-interfaceselector { width: 150px; }
+TABLE#logintable INPUT { 
+	border: #E6E6E6 solid 1px; 
+	background-color: white; 
+}
+TABLE#logintable INPUT.c-submit { 
+	background-color: transparent;
+	width: 80px; 
+	height: 20px; 
+	padding: 0px 0px 0px 10px; 
+	border: 0px; 
+	background-image: url(../backgrounds/login_submit_bg.gif); 
+}
+
+
+/* new in Typo3 4.2 */
+/**
+backend-style.css
+*/
+/* ----- logged in user ----- */
+
+#username {
+	padding-top: 2px;
+}
+
+#username img {
+	padding-right: 4px;
+	vertical-align: bottom;
+}

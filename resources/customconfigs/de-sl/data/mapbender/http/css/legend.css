@@ -1,0 +1,63 @@
+body{
+	background-color: #ffffff;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.header{
+	font-family: Verdana
+	font-weight: bold;
+	font-size: 12px;	
+}
+.switch{
+	font-family: Verdana
+	font-size: 10px;
+	font-weight: bold;
+}
+.titles{
+	font-family: Verdana
+	font-weight: bold;
+	font-size: 11px;
+}
+
+a:link{
+	text-decoration : none;
+	font-family : Verdana
+	font-size : 12px;
+
+	/* aukommentiert wegen Kollision mit Joomla
+color: #ffffff;
+	background-color:#ffffff;
+*/
+}
+	a:visited{
+		text-decoration : none;
+		font-family : Verdana
+		font-size : 12px;
+
+	/* auskommentiert wegen Kollision mit Joomla
+	color: #ffffff;
+        background-color:#ffffff;
+*/
+	}
+	a:hover{
+		font-family : Verdana
+		text-decoration : none;
+        /* auskommentiert wegen Kollision mit Joomla
+        color: #ffffff;
+		background-color : #ffffff;
+*/
+	}
+	a:active{
+		font-family : Verdana
+		color: #ffffff;
+
+		text-decoration : none;
+        background-color:#ffffff;
+	}
+.legendlink{
+	text-decoration : none;
+	color:#ffffff;
+        border: 0;
+        border-width:0px;
+	background-color: #ffffff;
+}

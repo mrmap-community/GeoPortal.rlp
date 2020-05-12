@@ -1,0 +1,70 @@
+.menu-hilight {
+	background-image: url(../backgrounds/toolbar_item_active_bg_long.png);
+	padding-left: 0; 
+	padding-right: 0;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+}
+.menu-normal {
+	padding-left: 1px; 
+	padding-right: 1px;
+}
+#tm_topapps_menu {
+	margin-top: 1px !important;
+	height:20px; 
+	background-position: 0 2px;
+	display: block;
+	padding-top: 2px;
+	padding-bottom: 9px;
+	display: block;
+	text-align: left;
+	background-repeat: no-repeat;
+}
+#tm_topapps_menu .menuItems {
+	height: 20px;
+	cursor: pointer;
+	padding-top:2px;
+	font-size: 12px;
+	z-index:2; 
+}
+.menuItems a:hover { color: #000 !important; }
+.menulayer {
+	position: absolute;
+	top:24px !important;
+	z-index:0;
+	border: 1px solid;
+	border-color: transparent #abb2bc #abb2bc #abb2bc;
+	background-color: #f9f9f9;
+}
+.menulayerspec {
+	padding-left: 5px;
+	min-width: 250px;
+	_width: 250px; /* dont know why, but it helps to get IE working :) */
+}
+.menulayer DIV.menuLayerItem {
+	cursor: pointer;
+	width:auto;
+	height: 16px;
+	white-space: nowrap;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-size: 11px;
+	display:block;
+}
+.menulayer DIV.menuLayerItem:hover {
+	/*background-color: #d0e7b1; */
+	color: #BD7A1D !important;
+}
+.menulayerItemIcon	{
+	vertical-align: middle;
+	padding-right: 3px;
+}
+.menulayerItemIconSubItem {
+	position: absolute;
+	right: 5px;
+}
+.menulayer DIV.menuLayerItem_divider {
+	background-image : url("../icons/gfx/x_dividerbg.png");
+	width: 100%;
+	height: 7px;
+}

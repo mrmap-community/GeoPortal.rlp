@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_q4usearch_pi1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="topicCategories">Themenbereiche</label>
+			<label index="keywords">Stichwörter</label>
+			<label index="situation">Kartenkombinationen</label>
+			<label index="furtherWmcResults">alle Treffer</label>
+		</languageKey>
+		<languageKey index="en" type="array">
+			<label index="topicCategories">Themes</label>
+			<label index="keywords">Keywords</label>
+			<label index="situation">Predefined maps</label>
+			<label index="furtherWmcResults">all results</label>
+		</languageKey>
+	</data>
+</T3locallang>

@@ -1,0 +1,357 @@
+<?php
+# $Id: mapbender.conf-dist 6540 2010-07-03 16:47:38Z christoph $
+# http://www.mapbender.org/index.php/Mapbender.conf
+# Copyright (C) 2002 CCGIS 
+# --------------------------------------------
+# type of mapbender database
+# --------------------------------------------
+
+define("SYS_DBTYPE", "pgsql");
+
+# --------------------------------------------
+
+# database information
+
+# --------------------------------------------
+
+define("DBSERVER", "****");
+
+define("PORT", "5433");
+
+define("DB", "geoportal");
+
+define("OWNER", "****");
+
+define("PW", "****");
+
+# --------------------------------------------
+
+# prepared statements (PHP > 5.1.x, PostgreSQL > 7.4)
+
+# --------------------------------------------
+
+define("PREPAREDSTATEMENTS",true);
+
+# --------------------------------------------
+
+# encoding - default characterset UTF-8 / ISO-8859-1
+
+# --------------------------------------------
+
+define("CHARSET","UTF-8");
+
+# --------------------------------------------
+
+# error_reporting
+
+# --------------------------------------------
+
+//ini_set('error_reporting', 'E_ALL & ~ E_NOTICE');
+
+# --------------------------------------------
+
+# directory for temporary files
+
+# --------------------------------------------
+
+define("TMPDIR", "../tmp");
+
+# --------------------------------------------
+
+# URL to login
+
+# --------------------------------------------
+
+#define("LOGIN", "http://".$_SERVER['HTTP_HOST']."/mapbender/frames/login.php");
+
+define("LOGIN", "http://".$_SERVER['HTTP_HOST']."/portal/anmelden.html");
+
+define("MAXLOGIN", 3);
+
+$login = LOGIN;
+
+# --------------------------------------------
+
+# mapbender web path
+
+# --------------------------------------------
+
+define("MAPBENDER_PATH", "http://".$_SERVER['HTTP_HOST']."/mapbender");
+
+# --------------------------------------------
+
+# URL to owsproxy
+
+# (no terminating slash)
+
+# --------------------------------------------
+
+define("OWSPROXY", "http://".$_SERVER['HTTP_HOST']."/owsproxy");
+
+# --------------------------------------------
+
+# Definitions for HTTP Authentication
+
+# --------------------------------------------
+
+define('REALM', 'mapbender_registry');
+
+define('NONCEKEY', 'geoportal');
+
+$nonceLife = 300; 
+
+define('HTTP_AUTH_PROXY',"https://".$_SERVER['HTTP_HOST']."/http_auth"); //Problem - behind a rewrite rule - define it hardcoded?
+
+# --------------------------------------------
+
+# type of server-connection
+
+# curl, socket, http
+
+# --------------------------------------------
+
+define("CONNECTION", "curl");
+
+#define("CONNECTION", "http");
+
+#define("CONNECTION", "socket");
+
+define("CONNECTION_PROXY", "****"); // ip
+
+define("CONNECTION_PORT", "****"); // port
+
+#define("CONNECTION_PROXY", ""); // ip
+
+#define("CONNECTION_PORT", ""); // port
+
+define("CONNECTION_USER", ""); // user
+
+define("CONNECTION_PASSWORD", ""); // password
+
+define("CONNECTION_USERAGENT", "GeoPortal Rheinland-Pfalz");
+
+# --------------------------------------------
+
+# HOSTs not for Proxy (curl)
+
+# --------------------------------------------
+
+define("NOT_PROXY_HOSTS", "localhost,127.0.0.1,****");
+
+# --------------------------------------------
+
+# security: path to modules
+
+# --------------------------------------------
+
+define("CHECK", false);
+
+# --------------------------------------------
+
+# enable/disable portal
+
+# --------------------------------------------
+
+define("PORTAL", false);
+
+# --------------------------------------------
+
+# enable/disable ows metadata overwrite
+
+# If set to false, the edited metadata of the ows will not
+
+# automatically exchanged with the metadata from the server,
+
+# when updating the service. It has to be done with help of
+
+# the metadata editor afterwards
+
+# --------------------------------------------
+
+define("MD_OVERWRITE", false);
+
+# --------------------------------------------
+
+# mail settings for internal mapbender mails 
+
+# smtp mailing
+
+# for further settings check 'class_administration.php'
+
+# please check phpmailer for more information
+
+# --------------------------------------------
+
+define("USE_PHP_MAILING", "true");
+
+define("MAILHOST", "localhost");
+
+define("MAILUSERNAME", "");
+
+define("MAILPASSWORD", "");
+
+define("MAILADMIN", "kontakt@geoportal.rlp.de");
+
+define("MAILADMINNAME", "Geoportal-RLP");
+
+$mailHost = MAILHOST;
+
+$mailUsername =  MAILUSERNAME;
+
+$mailPassword =  MAILPASSWORD;
+
+# --------------------------------------------
+
+# wms monitoring
+
+# --------------------------------------------
+
+define("AUTO_UPDATE", "0");
+
+define("TIME_LIMIT", "10");
+
+define("PHP_PATH", "/usr/bin/");
+
+# --------------------------------------------
+
+# Mapbender error logging
+
+# --------------------------------------------
+
+define("LOG_LEVEL", "error"); //"off","error","warning","notice" or "all"
+
+define("LOG_JS", "off"); // "on", "alert", "console" or "off"
+
+# --------------------------------------------
+
+# Internationalization
+
+# --------------------------------------------
+
+define("USE_I18N", true);  // requires gettext for PHP. 
+
+                            // If "false", LANGUAGE is set to english
+
+define("LANGUAGE", "de");   // only available if USE_I18N is "true". 
+
+                            // "en", "de", "bg", "gr", "nl", "hu", "it", "es","fr","pt" 
+
+# --------------------------------------------
+
+# RSS
+
+# --------------------------------------------
+
+define("GEO_RSS_FILE", "../geoportal/news/georss.xml");
+
+#---------------------------------------------
+
+# ANONYMOUS 
+
+#---------------------------------------------
+
+define("ANONYMOUS_USER", 2);
+
+define("ANONYMOUS_GROUP", 37);
+
+define("REGISTRATING_GROUP",36);
+
+#---------------------------------------------
+
+# PREVIEW
+
+#---------------------------------------------
+
+define("PREVIEW_DIR", "../geoportal/preview");
+
+#---------------------------------------------
+
+# METADATA
+
+# This path is defined to allow a saving of iso19139 xml files which are generated by mapbender and metador
+
+# The folder should be owned by the webserver user to allow writing of files which are generated from a php 
+
+# script. The content of the folder may be harvested 
+
+#---------------------------------------------
+
+define("METADATA_DIR", "../../metadata");
+
+# --------------------------------------------
+
+# UPLOAD
+
+# --------------------------------------------
+
+define("UPLOAD_DIR", "../tmp");
+
+define("UPLOAD_WHITELIST_FILE_TYPES", "xml");
+
+define("UPLOAD_BLACKLIST_FILE_TYPES", "");
+
+define("UPLOAD_MAX_SIZE_KB", 2048);
+
+# --------------------------------------------
+
+# use jQuery from Google CDN
+
+# --------------------------------------------
+
+define("LOAD_JQUERY_FROM_GOOGLE", false);
+
+#---------------------------------------------
+
+# HOSTNAME WHITELIST
+
+# The whitelist is used for some modules who generate urls from a given hostName GET parameter. In such a case it is usefull to give a whitelist for security reasons! If no hostName is given, the parameter $_SERVER['HTTP_HOST'] is used for the urls!
+
+#---------------------------------------------
+
+define("HOSTNAME_WHITELIST", "www.geoportal.rlp.de,www.geoportal.rlp,geoportal.rlp,****");
+
+# --------------------------------------------
+
+# Calculate bboxes for all supported SRS (Postgis needed)
+
+# This module will compute bboxes for all srs which will be found in the service capabilities and which are defined
+
+# in the array below. Normaly mapbender only uses bbox's which are given thru the service caps. In many use cases it is
+
+# needfull to have more than one bbox given (e.g. metadata). The array is defined to supress the calculation of to many 
+
+# srs like e.g. geoserver offers. The array should include all the srs which are used in the mapbender installation and 
+
+# which are usefull for the special community for which the installation was done (local-sdi, INSPIRE, ...) 
+
+# --------------------------------------------
+
+define("SRS_ARRAY", "4326,31466,31467,31468,25832,4258,4839");
+
+# --------------------------------------------
+
+# define a public user
+
+# --------------------------------------------
+
+define("PUBLIC_USER", "2");
+
+# --------------------------------------------
+
+# define a wrapper for index.php to use get api when integrated in external applications like cms
+
+# --------------------------------------------
+
+define("WRAPPER_PATH","/portal/karten.html");
+
+###HACK for GLOBALS
+
+$DBSERVER=DBSERVER;
+
+  $DB=DB;
+
+  $OWNER=OWNER;
+
+  $PW=PW;
+
+?>

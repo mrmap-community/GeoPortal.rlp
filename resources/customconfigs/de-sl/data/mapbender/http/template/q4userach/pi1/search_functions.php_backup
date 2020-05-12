@@ -1,0 +1,1396 @@
+<?php
+// ä
+$indicator="<img src=\"fileadmin/design/images/indicator.gif\" />";
+$BundesLaender=array("DE-BW","DE-BY","DE-BE","DE-BR","DE-HB","DE-HH","DE-HE","DE-MV","DE-NI","DE-NW","DE-RP","DE-SL","DE-SN","DE-ST","DE-SH","DE-TH");
+
+function textcut2($text,$size=200) {
+  $shorttext=str_replace("<br", " <br", $text);
+  $shorttext=substr(strip_tags($shorttext,"<br>"),0,$size);
+
+	if(strlen($text) >= $size) {
+		$shorttext=substr($shorttext,0,strrpos($shorttext," "))."&hellip;";
+	}
+	return($shorttext);
+}
+
+function PageCounter($count, $items_page, $url, $typ) {
+	$output="<div class=\"search-pagecounter-container\">\n";
+	$output.="Seiten: \n";
+	for($i=1,$j=0;$i<$count+1;$i+=$items_page,$j++) {
+		if($j==$_REQUEST["page"]) {
+			$output.="<a class=\"search-pagecounter-item active\" href=\"".$url."&amp;cat=".$typ."&amp;page=$j\">".($j+1)."</a>";
+		} else {
+			$output.="<a class=\"search-pagecounter-item\" href=\"".$url."&amp;cat=".$typ."&amp;page=$j\">".($j+1)."</a>";
+		}
+	}
+	$output.="</div>\n";
+	return($output);
+}
+
+function SearchChange() {
+	$db=new DB_MYSQL;
+	$sql="SELECT * FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["editid"];
+	$db->query($sql);
+	if($db->num_rows()) {
+		$db->next_record();
+		if($_REQUEST["searchtext"]!=$db->f("searchtext")) {
+			$sql="UPDATE search SET name='".$_REQUEST["name"]."', searchtext='".$_REQUEST["searchtext"]."', datetime=".time()." WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["editid"];
+			$db->query($sql);
+			if($_REQUEST["editid"]!=$_REQUEST["searchid"]) {
+				return(false);
+			} else {
+				$_REQUEST["uid"]=CreateUUID();
+				return(true);
+			}
+		} else {
+			$sql="UPDATE search SET name='".$_REQUEST["name"]."', datetime=".time()." WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["editid"];
+			$db->query($sql);
+			return(false);
+		}
+	}
+}
+
+function SearchSave() {
+	$db=new DB_MYSQL;
+	$sql="SELECT * FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND searchtext='".$_REQUEST["searchtext2"]."' AND name='".$_REQUEST["name"]."'";
+	$db->query($sql);
+	if($db->num_rows()) {
+		return($_REQUEST["searchid"]);
+	} else {
+		$sql="INSERT INTO search (SELECT 0, '".$_REQUEST["name"]."', uid, '".$_REQUEST["searchtext2"]."', ".time().", 0 FROM search WHERE id=".$_REQUEST["searchid"].")";
+		$db->query($sql);
+		return($db->insert_id());
+	}
+}
+
+function SearchDelete() {
+	$db=new DB_MYSQL;
+	$sql="DELETE FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["deleteid"];
+	$db->query($sql);
+	if($_REQUEST["searchid"]==$_REQUEST["deleteid"]) {
+		$sql="SELECT * FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND lastsearch=1 ORDER BY datetime desc";
+		$db->query($sql);
+		if($db->num_rows()) {
+			$db->next_record();
+			return($db->f("id"));
+		}
+	} else {
+		return($_REQUEST["searchid"]);
+	}
+}
+
+function SearchURL($searchid=0, $cat=false) {
+	$page=parse_url($_SERVER["REQUEST_URI"]);
+	$url=$page['path'];
+
+	if($searchid==0) {
+		if($_REQUEST["selectsearch"]=="1") $url.="?searchid=".$_REQUEST["searchid"]."&amp;selectsearch=1";
+		if($_REQUEST["selectsearch"]=="0") $url.="?searchid=".$_REQUEST["searchid"]."&amp;selectsearch=0";
+	} else {
+		$url.="?searchid=".$searchid."&amp;selectsearch=1&amp;act=search";
+	}
+
+	if($url==$page["path"]) $url.="?";
+
+	$url.="&amp;uid=".$_REQUEST["uid"];
+	if($cat) $url.="&amp;cat=".$_REQUEST["cat"];
+
+	return $url;
+}
+
+function SearchText() {
+	$db=new DB_MYSQL;
+
+	if($_REQUEST["searchid"]!="") {
+#		$sql="SELECT * FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["searchid"];
+		$sql="SELECT * FROM search WHERE uid='".UserID()."' AND id=".$_REQUEST["searchid"];
+		$db->query($sql);
+		if($db->num_rows()) {
+			$db->next_record();
+			$searchtext=$db->f("searchtext");
+		}
+	} elseif($_REQUEST["searchtext"]!="") {
+		$searchtext=$_REQUEST["searchtext"];
+	}
+	return($searchtext);
+}
+
+function CreateUUID() {
+ // The field names refer to RFC 4122 section 4.1.2
+ return sprintf('%04x%04x-%04x-%03x4-%04x-%04x%04x%04x',
+     mt_rand(0, 65535), mt_rand(0, 65535), // 32 bits for "time_low"
+     mt_rand(0, 65535), // 16 bits for "time_mid"
+     mt_rand(0, 4095),  // 12 bits before the 0100 of (version) 4 for "time_hi_and_version"
+     bindec(substr_replace(sprintf('%016b', mt_rand(0, 65535)), '01', 6, 2)),
+         // 8 bits, the last two of which (positions 6 and 7) are 01, for "clk_seq_hi_res"
+         // (hence, the 2nd hex digit after the 3rd hyphen can only be 1, 5, 9 or d)
+         // 8 bits for "clk_seq_low"
+     mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535) // 48 bits for "node"
+ );
+}
+
+function WriteLastSearch() {
+	$db=new DB_MYSQL;
+
+	if($_REQUEST["selectsearch"]==1) {
+		#$sql="SELECT * FROM search WHERE uid='".$_SESSION["mb_user_id"]."' AND id=".$_REQUEST["searchid"];
+		$sql="SELECT * FROM search WHERE uid='".UserID()."' AND id=".$_REQUEST["searchid"];
+		$db->query($sql);
+		if($db->num_rows()) {
+			$db->next_record();
+			if($db->f("lastsearch")==1) return($_REQUEST["searchid"]);
+		}
+
+		$sql="INSERT INTO search (uid, searchtext, datetime, name, lastsearch)
+		           VALUES ('".UserID()."', '".$_REQUEST["searchtext"]."', ".time().", 'letzte Suche', 1)";
+		$db->query($sql);
+		return($_REQUEST["searchid"]);
+	} else {
+		$sql="INSERT INTO search (uid, searchtext, datetime, name, lastsearch)
+		           VALUES ('".UserID()."', '".$_REQUEST["searchtext"]."', ".time().", 'letzte Suche', 1)";
+		$db->query($sql);
+		return($db->insert_id());
+	}
+}
+
+function Wiki($file, $max=0) {
+	global $output, $out, $name, $data, $counter, $startpage, $count;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$xml_begin=$xml_end=$xml_content=$xml_data=false;
+	$xml_max=$max;
+	$counter=0;
+
+	$out[$name].="<div id=\"search-container-".$name."\">\n";
+	if(file_exists($file)) {
+		$xmlFile = file($file);
+
+		$parser=xml_parser_create();
+
+		xml_set_element_handler($parser, "startWiki", "endWiki");
+		xml_set_character_data_handler($parser, "cdataWiki");
+
+		foreach($xmlFile as $elem) {
+			xml_parse($parser, $elem);
+			if($max!=0 && $counter>=$max) break;
+		}
+
+		if($counter==0 && $xml_end) {
+			$out[$name].="<p>".$L["kein Ergbnis"]."</p>";
+			$ready=1; // Suche abgeschlossen
+		} elseif( (!$xml_end && !$startpage) || (!$xml_end && $startpage && $counter<$max) ) {
+			$ready=0; // Suche noch nicht abgeschlossen
+		} else {
+			$ready=1; // Suche abgeschlossen
+		}
+		xml_parser_free($parser);
+	} else {
+		$ready=0; // Suche noch nicht abgeschlossen Datei nicht gefunden
+	}
+	$out[$name].="</div>\n";
+
+	return $ready;
+}
+
+function Meta($file, $max=0) {
+	global $output, $out, $name, $data, $counter, $counter2, $startpage, $count;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+	global $filename;
+
+	$xml_max=$max;
+	$counter=$meta_count=0;
+
+	$out[$name].="<div id=\"search-container-".$name."\">\n";
+
+	$allready=0;
+	if(file_exists($file) && filesize($file)>0) {
+		$allready=1;
+		$indexfile = file($file);
+		foreach($indexfile as $key => $xml_cat) {
+			if(trim($xml_cat)=="") continue;
+			$parts=split("\.",$file);
+			$filename=$parts[0].($key+1).".".$parts[1];
+			$counter2=0;
+			$xml_begin=$xml_end=$xml_content=$xml_data=false;
+			$data=array();
+			$out["temp"]="";
+
+			if(file_exists($filename)) {
+				$xmlFile = file($filename);
+				$parser = xml_parser_create();
+
+				xml_set_element_handler($parser, "startMeta", "endMeta");
+				xml_set_character_data_handler($parser, "cdataMeta");
+
+				foreach($xmlFile as $elem) {
+					xml_parse($parser, $elem);
+					if($max!=0 && $counter>=$max) break;
+				}
+
+				if( (!$xml_end && !$startpage) || (!$xml_end && $startpage && $counter<$max) ) {
+					$allready=0; // Suche noch nicht abgeschlossen
+				}
+
+				xml_parser_free($parser);
+			} else {
+				if( !$startpage || ($startpage && $counter<$max) ) {
+					$allready=0; // Suche noch nicht abgeschlossen
+				}
+			}
+			if(!$startpage) {
+				$out[$name].="<div class=\"search-cat meta-search-container".$meta_count."\">\n";
+				$out[$name].="<div class=\"search-header\" onclick=\"openclose('".$meta_count++."');\"><h2>".$xml_cat."</h2><p>".$counter2." ".$L["Trefferkurz"]."</p></div>";
+			}
+			$out[$name].=$out["temp"];
+			if(!$startpage) {
+				$out[$name].="</div>\n";
+			}
+
+		}
+
+		if($counter==0 && $allready==1) {
+			$out[$name].="<p>".$L["kein Ergbnis"]."</p>";
+		}
+	}
+	$out[$name].="</div>\n";
+
+	return $allready;
+}
+
+function Dienste($file, $max=0) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $ebene, $DoPrint, $ebeneoffen;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+	global $FeaturetypeID,$OpenedLists;
+	global $Wappen;
+	
+	$Wappen=array(
+		"DE-RP",
+		"DE-BE",
+		"DE-BR",
+		"DE-BW",
+		"DE-BY",
+		"DE-HB",
+		"DE-HE",
+		"DE-HH",
+		"DE-MV",
+		"DE-NI",
+		"DE-NW",
+		"DE-SH",
+		"DE-SL",
+		"DE-SN",
+		"DE-ST",
+		"DE-TH",
+	);
+	
+
+	$xml_begin=$xml_end=$xml_content=$xml_data=false;
+	$xml_max=$max;
+	$counter=0;
+	$ebeneoffen=$ebene=0;
+	$DoPrint=false;
+
+	$FeaturetypeID=array();
+	$OpenedLists=0;
+	$countMembers=0;
+
+	$out[$name].="<div id=\"search-container-".$name."\">\n";
+	$out[$name].="<form action=\"karten.html\" method=\"get\" name=\"formmaps\">\n";
+	$out[$name].="<fieldset class=\"hidden\">
+		<input name=\"zoomToLayer\" type=\"hidden\" value=\"0\" />
+		</fieldset>";
+
+	if(file_exists($file)) {
+		$content=file_get_contents($file);
+		if(strpos($content,"<ready>true</ready>")!==false) {
+			$countMembers=substr_count($content,"<member");
+			if(!$startpage) {
+				if(strpos($content,"<overlimit>true</overlimit>")!==false) {
+					$out[$name].='<p class="search-hits-info" style="float:none">Es wurden mehr als '.$countMembers.' Treffer gefunden.</p><div class="clearer"></div>';
+				}
+			}
+
+
+//			if(strpos($content,"<overlimit>true</overlimit>")!==false) {
+//				$out[$name].="<p>".$L["OverLimit"]."</p>";
+//			}
+
+			$xmlFile = file($file);
+			$parser = xml_parser_create();
+
+			xml_set_element_handler($parser, "startDienste", "endDienste");
+			xml_set_character_data_handler($parser, "cdataDienste");
+
+			foreach($xmlFile as $elem) {
+				xml_parse($parser, $elem);
+				if($max!=0 && $counter>=$max) break;
+			}
+
+			while($OpenedLists>0) {
+				$out[$name].="</ul>";
+				$OpenedLists--;
+			}
+
+			if($counter==0 && $xml_end) {
+				$out[$name].="<p>".$L["kein Ergbnis"]."</p>";
+				$ready=1; // Suche abgeschlossen
+			} elseif( (!$xml_end && !$startpage) || (!$xml_end && $startpage && $counter<$max) ) {
+				$ready=0; // Suche noch nicht abgeschlossen
+			} else {
+				$ready=1; // Suche abgeschlossen
+			}
+			xml_parser_free($parser);
+		} else {
+			$ready=0; // Suche noch nicht abgeschlossen Ready fehlt
+		}
+	} else {
+		$ready=0; // Suche noch nicht abgeschlossen Datei nicht gefunden
+	}
+	if($counter!=0) {
+		if($startpage) {
+			$out[$name].='<p class="search-hits-info">';
+			if(strpos($content,"<overlimit>true</overlimit>")!==false) {
+				$out[$name].='Es wurden mehr als '.$countMembers.' Treffer gefunden.<br/>';
+			}
+			$out[$name].='<a href="#" onclick="location.href=location.pathname+\'?searchid='.$_REQUEST["searchid"].'&amp;selectsearch=1&amp;uid='.$_REQUEST["uid"].'&amp;cat=dienste\';return false">Die ersten '.$countMembers.' Treffer anzeigen.</a></p>';
+		}
+
+		$out[$name].="<fieldset class=\"search-dienste\"><input type=\"submit\" value=\"".$L["In Karte aufnehmen"]."\" /></fieldset><div class='clearer'></div>\n";
+
+	}
+
+	$out[$name].="</form>\n";
+	$out[$name].="</div>\n";
+
+	return $ready;
+}
+
+function Adressen($file, $max=0) {
+	global $output, $out, $name, $data, $counter, $startpage, $count;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$xml_begin=$xml_end=$xml_content=$xml_data=false;
+	$xml_max=$max;
+	$counter=0;
+
+	$out[$name].="<div id=\"search-container-".$name."\">\n";
+	if(file_exists($file)) {
+		$xmlFile = file($file);
+
+		$parser=xml_parser_create();
+
+		xml_set_element_handler($parser, "startAdressen", "endAdressen");
+		xml_set_character_data_handler($parser, "cdataAdressen");
+
+		foreach($xmlFile as $elem) {
+			xml_parse($parser, $elem);
+			if($max!=0 && $counter>=$max) break;
+		}
+
+		if($counter==0 && $xml_end) {
+			$out[$name].="<p>".$L["kein Ergbnis"]."</p>";
+			$ready=1; // Suche abgeschlossen
+		} elseif( (!$xml_end && !$startpage) || (!$xml_end && $startpage && $counter<$max) ) {
+			$ready=0; // Suche noch nicht abgeschlossen
+		} else {
+			$ready=1; // Suche abgeschlossen
+		}
+		xml_parser_free($parser);
+	} else {
+		$ready=0; // Suche noch nicht abgeschlossen Datei nicht gefunden
+	}
+	$out[$name].="</div>\n";
+
+	return $ready;
+}
+
+function Info($file, $max=0) {
+	global $output, $out, $name, $data, $counter, $startpage, $count;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L;
+
+	$xml_begin=$xml_end=$xml_content=$xml_data=false;
+	$counter=0;
+
+	$out[$name].="<div id=\"search-container-".$name."\">\n";
+	if(file_exists($file)) {
+		$xmlFile = file($file);
+		$parser = xml_parser_create();
+		xml_set_element_handler($parser, "startInfo", "endInfo");
+		xml_set_character_data_handler($parser, "cdataInfo");
+
+		foreach($xmlFile as $elem) {
+			xml_parse($parser, $elem);
+			if($max!=0 && $counter>=$max) break;
+		}
+
+		if($counter==0 && $xml_end) {
+			$out[$name].="<p>".$L["kein Ergbnis"]."</p>";
+			$ready=1; // Suche abgeschlossen
+		} elseif( (!$xml_end && !$startpage) || (!$xml_end && $startpage && $counter<$max) ) {
+			$ready=0; // Suche noch nicht abgeschlossen
+		} else {
+			$ready=1; // Suche abgeschlossen
+		}
+		xml_parser_free($parser);
+	} else {
+		$ready=0; // Suche noch nicht abgeschlossen Datei nicht gefunden
+	}
+	$out[$name].="</div>\n";
+	return $ready;
+}
+
+function startWiki($parser, $element_name, $element_attribute) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "result":
+			$xml_begin=true;
+			break;
+		case "member":
+			$data=array();
+			$xml_content=true;
+			break;
+		case "ready":
+			$xml_content=true;
+			$xml_data=true;
+			$xml_typ=$element_name;
+			break;
+		case "title":
+		case "abstract":
+		case "url":
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+	}
+}
+
+function endWiki($parser, $element_name) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "ready":
+			$xml_content=false;
+			$xml_data=false;
+			if($data["ready"]=="true") $xml_end=true;
+			break;
+		case "result":
+			$xml_begin=false;
+			break;
+		case "member":
+			$xml_content=false;
+			if($startpage) {
+				if($counter<$xml_max) {
+					$out[$name].="<div class=\"search-item\">\n";
+					$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+        	$out[$name].="<div class=\"search-title all\"><a href=\"".$data["url"]." \" target=\"_blank\">".$data["title"]."</a></div>\n";
+					$out[$name].="</div>\n";
+				}
+			} else {
+				$out[$name].="<div class=\"search-item\">\n";
+				$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+      	$out[$name].="<div class=\"search-title\"><a href=\"".$data["url"]." \" target=\"_blank\">".$data["title"]."</a></div>\n";
+      	$out[$name].="<div class=\"search-text\" style=\"height:1%;padding:0 0 0 8px;_padding:0 0 0 5px\">".textcut2($data["abstract"],200)."</div>\n";
+				$out[$name].="</div>\n";
+			}
+			$xml_content=false;
+			break;
+		case "title":
+		case "abstract":
+		case "url":
+			$xml_data=false;
+			break;
+	}
+}
+
+function cdataWiki($parser, $element_inhalt) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+
+	if($xml_begin && $xml_data) {
+		$data[$xml_typ].=$element_inhalt;
+	}
+}
+
+function startMeta($parser, $element_name, $element_attribute) {
+	global $output, $out, $name, $data, $counter, $counter2, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "result":
+			$xml_begin=true;
+			break;
+		case "member":
+			$data=array();
+			$xml_content=true;
+			break;
+		case "categorie":
+			if($data["categorie"]!="") $data["categorie"].=", ";
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+		case "keyword":
+			if($data["keyword"]!="") $data["keyword"].=", ";
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+		case "ready":
+			$xml_content=true;
+			$xml_data=true;
+			$xml_typ=$element_name;
+			break;
+		case "title":
+		case "id":
+		case "abstract":
+		case "date":
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+	}
+}
+
+function endMeta($parser, $element_name) {
+	global $output, $out, $name, $data, $counter, $counter2, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+	global $filename;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "ready":
+			$xml_content=false;
+			$xml_data=false;
+			if($data["ready"]=="true") $xml_end=true;
+			break;
+		case "result":
+			$xml_begin=false;
+			break;
+		case "member":
+			$xml_content=false;
+
+			$values="XMLID=".$data["id"]."ÿXMLFILE=".$filename."ÿXMLCAT=".$xml_cat;
+			$code=CodeParameter($values);
+
+			if($startpage) {
+				if($counter<$xml_max) {
+					$out["temp"].="<div class=\"search-item\">\n";
+					$out["temp"].="<div class=\"search-nr\">".++$counter."</div>\n";
+					$out["temp"].="<div class=\"search-title\"><a target=\"_blank\" href=\"fileadmin/scripts/metadata.php?meta=".$code."\" onclick=\"openwindow(this.href); return false\">".urldecode($data["title"])."</a></div>\n";
+					$out["temp"].="</div>\n";
+				}
+			} else {
+				$out["temp"].="<div class=\"search-item\">\n";
+				$out["temp"].="<div class=\"search-nr\">".++$counter."</div>\n";
+				$out["temp"].="<div class=\"search-title\"><a target=\"_blank\" href=\"fileadmin/scripts/metadata.php?meta=".$code."\" onclick=\"openwindow(this.href); return false\">".urldecode($data["title"])."</a></div>\n";
+       	$out["temp"].="<div class=\"search-metacat\">".urldecode($data["date"])."</div>\n";
+#       	$out["temp"].="<div class=\"search-metacat\">".urldecode($data["categorie"])."</div>\n";
+       	$out["temp"].="<div class=\"search-metacat\">".textcut(trim(urldecode($data["keyword"])))."</div>\n";
+       	$out["temp"].="<div class=\"search-text\">".nl2br(textcut(trim(urldecode($data["abstract"]))))."</div>\n";
+				$out["temp"].="</div>\n";
+			}
+			$counter2++;
+			$xml_content=false;
+			break;
+		case "id":
+		case "title":
+		case "abstract":
+		case "date":
+		case "categorie":
+		case "keyword":
+			$xml_data=false;
+			break;
+	}
+}
+
+function cdataMeta($parser, $element_inhalt) {
+	global $output, $out, $name, $data, $counter, $counter2, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+
+	if($xml_begin && $xml_data) {
+		$data[$xml_typ].=$element_inhalt;
+	}
+}
+
+function startAdressen($parser, $element_name, $element_attribute) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "result":
+			$xml_begin=true;
+			break;
+		case "member":
+			$data=array();
+			$xml_cat=$element_attribute["ID"];
+			$xml_content=true;
+			break;
+		case "ready":
+			$xml_content=true;
+			$xml_data=true;
+			$xml_typ=$element_name;
+			break;
+		case "title":
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+	}
+}
+
+function endAdressen($parser, $element_name) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "ready":
+			$xml_content=false;
+			$xml_data=false;
+			if($data["ready"]=="true") $xml_end=true;
+			break;
+		case "result":
+			$xml_begin=false;
+			break;
+		case "member":
+			$xml_content=false;
+			if($startpage) {
+				if($counter<$xml_max) {
+					$out[$name].="<div class=\"search-item\">\n";
+					$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+        	$out[$name].="<div class=\"search-title all\"><a href=\"karten.html?geomuid=".$_REQUEST["uid"]."&geomid=".$xml_cat." \">".$data["title"]."</a></div>\n";
+					$out[$name].="</div>\n";
+				}
+			} else {
+				$out[$name].="<div class=\"search-item\">\n";
+				$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+      	$out[$name].="<div class=\"search-title all\"><a href=\"karten.html?geomuid=".$_REQUEST["uid"]."&geomid=".$xml_cat." \">".$data["title"]."</a></div>\n";
+				$out[$name].="</div>\n";
+			}
+			$xml_content=false;
+			break;
+		case "title":
+			$xml_data=false;
+			break;
+	}
+}
+
+function cdataAdressen($parser, $element_inhalt) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+
+	if($xml_begin && $xml_data) {
+		$data[$xml_typ].=$element_inhalt;
+	}
+}
+
+function startDienste($parser, $element_name, $element_attribute) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page, $ebene, $DoPrint, $ebeneoffen;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+	global $FeaturetypeID,$OpenedLists;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "result":
+			$xml_begin=true;
+			break;
+		case "category":
+			if($element_attribute["NAME"]=="") $xml_cat=$L["keineKategorie"];
+			else $xml_cat=$element_attribute["NAME"];
+			if(!$startpage) {
+				$out[$name].="<div class=\"search-cat closed\">\n";
+				$out[$name].="<div class=\"search-header\" onclick=\"openclose2(this);\"><h2>".$xml_cat."</h2><p>".$element_attribute["COUNT"]." ".$L["Trefferkurz"]."</p></div>";
+			}
+			$FeaturetypeID=array();
+
+			break;
+		case "member":
+// Neu: FeatureTypes schachteln
+// Start
+			if($DoPrint) {
+				if($FeaturetypeID[$ebene]!=$data["featuretype_id"]) {
+					if($FeaturetypeID[$ebene]!="") { // zumachen
+						if(!$startpage) {
+							$out[$name].="</li>";
+							$out[$name].="</ul>";
+							$OpenedLists--;
+						}
+					}
+					if($data["featuretype_id"]!="") { // aufmachen
+						if(!$startpage) {
+							if($OpenedLists==0) {
+								$out[$name].="<ul class=\"search-tree\" style=\"display: block\">";
+							} else {
+								$out[$name].="<ul style=\"display: block\">";
+							}
+							$out[$name].="<li class=\"search-item\">";
+							$OpenedLists++;
+						}
+						printDienste("start",true);
+					}
+					$FeaturetypeID[$ebene]=$data["featuretype_id"];
+				}
+			}
+// Ende
+
+			if($DoPrint) {
+				if(!$startpage) {
+					if($ebene>$ebeneoffen) {
+						if($OpenedLists==0) {
+							$out[$name].="<ul class=\"search-tree\">";
+						} elseif($FeaturetypeID[$ebene]!="") {
+							$out[$name].="<ul style=\"display: block\">";
+						} else {
+							$out[$name].="<ul style=\"display: none\">";
+						}
+						$ebeneoffen++;
+						$OpenedLists++;
+					}
+					$out[$name].="<li class=\"search-item\">";
+				}
+
+				printDienste("start");
+			}
+			
+			$data=array();
+			$ebene++;
+
+			$DoPrint=true;
+			$xml_content=true;
+			break;
+		case "ready":
+			$xml_content=true;
+			$xml_data=true;
+			$xml_typ=$element_name;
+			break;
+		case "overLimit":
+			$xml_data=true;
+			$xml_typ=$element_name;
+			break;
+		case "id":
+		case "title":
+		case "abstract":
+		case "accessconstraints":
+		case "type":
+		case "date":
+		case "department":
+		case "queryable":
+		case "termsofuse":
+		case "permission":
+		case "epsg":
+		case "federalstate":
+		case "last_monitoring":
+		case "availability":
+		case "relevance":
+		case "layername":
+		case "layer_pos":
+		case "featuretype_id":
+		case "featuretype_title":
+		case "featuretype_abstract":
+		case "geomtype":
+		case "wfs_id":
+		case "wfs_conf_id":
+		case "wfs_conf_title":
+		case "wfs_conf_abstract":
+		case "wfs_conf_modul":
+		case "wms_id":
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+	}
+}
+
+function endDienste($parser, $element_name) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page, $ebene, $DoPrint, $ebeneoffen;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+	global $check_array;
+	global $FeaturetypeID,$OpenedLists;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "ready":
+			$xml_content=false;
+			$xml_data=false;
+			if($data["ready"]=="true") $xml_end=true;
+			break;
+		case "result":
+			$xml_begin=false;
+			break;
+		case "category":
+			if(!$startpage) {
+				while($OpenedLists>0) {
+					$out[$name].="</ul>\n";
+					$OpenedLists--;
+				}
+				$out[$name].="</div>\n";
+			}
+			$ebene=0;
+			$ebeneoffen=0;
+			$OpenedLists=0;
+			$FeaturetypeID=array();
+			break;
+		case "member":
+
+			if(!$startpage) {
+				if($ebene<=$ebeneoffen) {
+					if($FeaturetypeID[$ebeneoffen]!="") {
+						if(!$startpage) {
+							$out[$name].="</li>";
+							$out[$name].="</ul>";
+							$OpenedLists--;
+							$FeaturetypeID[$ebeneoffen]="";
+						}
+					}
+					$out[$name].="</ul>";
+					$ebeneoffen--;
+					$OpenedLists--;
+				}
+			}
+
+// Neu: FeatureTypes schachteln
+// Start
+			if($DoPrint) {
+			
+				if($FeaturetypeID[$ebene]!=$data["featuretype_id"]) {
+					if($FeaturetypeID[$ebene]!="") { // zumachen
+						if(!$startpage) {
+							$out[$name].="</li>";
+							$out[$name].="</ul>";
+							$OpenedLists--;
+						}
+					}
+					if($data["featuretype_id"]!="") { // aufmachen
+						if(!$startpage) {
+							if($OpenedLists==0) {
+								$out[$name].="<ul class=\"search-tree\" style=\"display: block\">";
+							} else {
+								$out[$name].="<ul style=\"display: block\">";
+							}
+							$out[$name].="<li class=\"search-item\">";
+							$OpenedLists++;
+						}
+						printDienste("ende",true);
+					}
+					$FeaturetypeID[$ebene]=$data["featuretype_id"];
+				}
+			}
+// Ende
+
+			if($DoPrint) {
+				if(!$startpage) {
+					if($ebene>$ebeneoffen) {
+						if($OpenedLists==0) {
+							$out[$name].="<ul class=\"search-tree\">";
+						} elseif($FeaturetypeID[$ebene]!="") {
+							$out[$name].="<ul style=\"display: block\">";
+						} else {
+							$out[$name].="<ul style=\"display: none\">";
+						}
+						$ebeneoffen++;
+						$OpenedLists++;
+					}
+					$out[$name].="<li class=\"search-item\">";
+				}
+				printDienste("ende");
+			}
+
+			$out[$name].="</li>";
+			
+			$DoPrint=false;
+			$ebene--;
+			$xml_content=false;
+			break;
+		case "overLimit":
+		case "id":
+		case "title":
+		case "abstract":
+		case "accessconstraints":
+		case "type":
+		case "date":
+		case "department":
+		case "queryable":
+		case "termsofuse":
+		case "permission":
+		case "epsg":
+		case "federalstate":
+		case "last_monitoring":
+		case "availability":
+		case "relevance":
+		case "layername":
+		case "layer_pos":
+		case "featuretype_id":
+		case "featuretype_title":
+		case "featuretype_abstract":
+		case "geomtype":
+		case "wfs_id":
+		case "wfs_conf_id":
+		case "wfs_conf_title":
+		case "wfs_conf_abstract":
+		case "wfs_conf_modul":
+		case "wms_id":
+			$xml_data=false;
+			break;
+	}
+}
+
+function cdataDienste($parser, $element_inhalt) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page, $ebene, $DoPrint;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L, $xml_cat, $xml_max;
+
+	if($xml_begin && $xml_data) {
+		$data[$xml_typ].=$element_inhalt;
+	}
+}
+
+function printDienste($multi,$printFeatureType=false) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page, $ebene, $DoPrint;
+	global $L, $xml_cat, $xml_max;
+//	global $FeaturetypeID;
+	
+	if($data["type"]=="wfs") {
+		$parameter_name="portal_services_wfs";
+		$id_field="wfs_conf_id";
+		$Type="wfs";
+	} else {
+		$parameter_name="portal_services";
+		$id_field="id";
+		$Type="wms";
+	}
+	  
+	if($DoPrint) {
+		if($startpage) {
+			if(!$printFeatureType) {
+				if($counter<$xml_max) {
+					$out[$name].="<div class=\"search-item\">\n";
+					$out[$name].="<div class=\"search-titleicons\"><div class=\"search-checkbox\">";
+	
+					if($printFeatureType) {
+						$out[$name].="<img src=\"fileadmin/design/images/icons/clear.png\" />\n";
+					} else {
+						if($data["permission"]!="true") {
+							if($_SESSION["mb_user_id"]==2) {
+								$out[$name].="<img src=\"fileadmin/design/images/icons/encrypted.png\" alt=\"".$L["Schloss"]."\" title=\"".$L["DiensteBerechtigung"]."\" />\n";
+							} else {
+								$values="ID=".$data["id"]."ÿTITLE=".$data["title"]."ÿAC=".$data["accessconstraints"]."ÿTO=".$data["permission"];
+								$code=CodeParameter($values);
+					
+								$out[$name].="<a href=\"fileadmin/scripts/register_service.php?service=".$code."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\"><img src=\"fileadmin/design/images/icons/encrypted_mail.png\" alt=\"".$L["Schloss"]."\" title=\"".$L["DiensteBerechtigung"]."\" /></a>\n";
+							}
+						} else {
+							if($data["termsofuse"]!="") {
+								$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+								$code=CodeParameter($values);
+								$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" onclick=\"return tou(this,".$data[$Type."_id"].",'".$Type."','".$code."');\"/>\n";
+							} elseif($data["accessconstraints"]!="" && strtolower($data["accessconstraints"])!="none") {
+								$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+								$code=CodeParameter($values);
+								$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" onclick=\"return tou(this,".$data[$Type."_id"].",'".$Type."','".$code."');\"/>\n";
+							} else {
+								$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" />\n";
+							}
+						}
+					}
+					$out[$name].="</div>";
+	
+	
+					$ext=".gif";
+	
+					if($data["type"]=="wms") $out[$name].="<img style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/wms".$ext."\" width=\"16\" height=\"16\" alt=\"WMS\" title=\"".$L["WMSKartenwerk"]."\" />";
+					if($data["type"]=="wfs" && $printFeatureType) $out[$name].="<img style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/wfs".$ext."\" width=\"16\" height=\"16\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+					if($data["type"]=="wfs" && !$printFeatureType && $data["wfs_conf_modul"]=="0") $out[$name].="<img style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/icons/abfragemodul.png\" width=\"22\" height=\"22\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+					if($data["type"]=="wfs" && !$printFeatureType && $data["wfs_conf_modul"]!="0") $out[$name].="<img style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/icons/suchmodul.png\" width=\"22\" height=\"22\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+					if($data["type"]=="layer") $out[$name].="<img style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/".$data["type"].$ext."\" width=\"16\" height=\"16\" alt=\"Layer\" />";
+					
+					if($data["type"]=="wfs" && $printFeatureType) {
+						$Title=$data["featuretype_title"]." (".$xml_cat.")";
+					} elseif($data["type"]=="wfs" && !$printFeatureType) {
+						$Title=$data["wfs_conf_title"]." (".$xml_cat.")";
+					} else {
+						$Title=$data["title"]." (".$xml_cat.")";
+					}
+					if($data["type"]=="wfs") {
+						if($printFeatureType) {
+							$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_featuretypeMetadata.php?wfs_conf_id=".$data["wfs_conf_id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\">".$data["featuretype_title"]." (".$xml_cat.")</a></div>\n";
+						} else {
+							$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_featuretypeMetadata.php?wfs_conf_id=".$data["wfs_conf_id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\">".$data["wfs_conf_title"]." (".$xml_cat.")</a></div>\n";
+						}
+					} else {
+						$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_layerMetadata.php?id=".$data["id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\"  >".$data["title"]." (".$xml_cat.")</a></div>\n";
+					}
+	
+	
+					if($data["type"]!="layer" || ($data["type"]=="layer" && $data["layername"]!="") )
+						printIconBlock($printFeatureType);
+	
+					$out[$name].="</div>\n";
+					++$counter;
+				}
+			}
+		} else {
+			$out[$name].="<div>";
+	//		$out[$name].="--".$multi."--".$printFeatureType."--".$ebene."--".print_r($FeaturetypeID,true);
+
+			$out[$name].="<div class=\"search-titleicons\"><div class=\"search-checkbox\">";
+
+			if($printFeatureType) {
+				$out[$name].="<img src=\"fileadmin/design/images/icons/clear.png\" />\n";
+			} else {
+				if($data["permission"]!="true") {
+					if($_SESSION["mb_user_id"]==2) {
+						$out[$name].="<img src=\"fileadmin/design/images/icons/encrypted.png\" alt=\"".$L["Schloss"]."\" title=\"".$L["DiensteBerechtigung"]."\" />\n";
+					} else {
+						$values="ID=".$data["id"]."ÿTITLE=".$data["title"]."ÿAC=".$data["accessconstraints"]."ÿTO=".$data["permission"];
+						$code=CodeParameter($values);
+			
+						$out[$name].="<a href=\"fileadmin/scripts/register_service.php?service=".$code."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\"><img src=\"fileadmin/design/images/icons/encrypted_mail.png\" alt=\"".$L["Schloss"]."\" title=\"".$L["DiensteBerechtigung"]."\" /></a>\n";
+					}
+				} else {
+					if($data["termsofuse"]!="") {
+						$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+						$code=CodeParameter($values);
+						$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" onclick=\"return tou(this,".$data[$Type."_id"].",'".$Type."','".$code."');\"/>\n";
+					} elseif($data["accessconstraints"]!="" && strtolower($data["accessconstraints"])!="none") {
+						$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+						$code=CodeParameter($values);
+						$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" onclick=\"return tou(this,".$data[$Type."_id"].",'".$Type."','".$code."');\"/>\n";
+					} else {
+						$out[$name].="<input name=\"".$parameter_name."[]\" value=\"".$data[$id_field]."\" id=\"c".$counter."\" type=\"checkbox\" />\n";
+					}
+				}
+			}
+
+			$out[$name].="</div>";
+
+			if($multi=="start") {
+				$ext="_plus.gif";
+			} else {
+				$ext=".gif";
+			}
+
+			if($data["type"]=="wms")   				$out[$name].="<img onclick=\"openclose3(this);\" style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/wms".$ext."\" width=\"16\" height=\"16\" alt=\"WMS\" title=\"".$L["WMSKartenwerk"]."\" />";
+			if($data["type"]=="wfs" &&  $printFeatureType) $out[$name].="<img onclick=\"openclose3(this);\" style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/wfs2.gif\" width=\"16\" height=\"16\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+			if($data["type"]=="wfs" && !$printFeatureType && $data["wfs_conf_modul"]=="0") $out[$name].="<img onclick=\"openclose3(this);\" style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/icons/abfragemodul.png\" width=\"22\" height=\"22\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+			if($data["type"]=="wfs" && !$printFeatureType && $data["wfs_conf_modul"]!="0") $out[$name].="<img onclick=\"openclose3(this);\" style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/icons/suchmodul.png\" width=\"22\" height=\"22\" alt=\"WFS\" title=\"".$L["WFSKartenwerk"]."\" />";
+			if($data["type"]=="layer") 				$out[$name].="<img onclick=\"openclose3(this);\" style=\"font-size:1em;float:left;margin:2px 2px 0 0\" src=\"fileadmin/design/images/".$data["type"].$ext."\" width=\"16\" height=\"16\" alt=\"Layer\" />";
+		
+			
+
+			if($data["type"]=="wfs") {
+				if($printFeatureType) {
+					$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_featuretypeMetadata.php?wfs_conf_id=".$data["wfs_conf_id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\">".$data["featuretype_title"]."</a></div>\n";
+				} else {
+					$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_featuretypeMetadata.php?wfs_conf_id=".$data["wfs_conf_id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\">".$data["wfs_conf_title"]."</a></div>\n";
+				}
+			} else {
+			#	$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_layerMetadata.php?id=".$data["id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\" ><font  onmouseover=\"document.getElementById('versteckbild').style.visibility='visible';\" onmouseout=\"document.getElementById('versteckbild').style.visibility='hidden'\">".$data["title"]."</font></a><img id=\"versteckbild\" src=\"\" alt=\"Bild fehlt\" style=\"visibility:hidden;\"></div>\n";
+		$out[$name].="</div><div class=\"search-title\"><a href=\"/mapbender/x_geoportal/mod_layerMetadata.php?id=".$data["id"]."\" target=\"_blank\" onclick=\"openwindow(this.href); return false\" >".$data["title"]."</a></div>\n";
+		
+		}
+
+			if($data["type"]!="layer" || ($data["type"]=="layer" && $data["layername"]!="") )
+				printIconBlock($printFeatureType);
+
+			$out[$name].="<div class=\"search-info-dep\">".$data["department"]."</div>\n";
+			$out[$name].="<div class=\"search-info\">".$data["date"]."</div>\n";
+			
+			if($data["type"]=="wfs" && $printFeatureType) {
+				$Field="featuretype_abstract";
+			} elseif($data["type"]=="wfs" && !$printFeatureType) {
+				$Field="wfs_conf_abstract";
+			} else {
+				$Field="abstract";
+			}
+
+			$out[$name].="<div class=\"search-text\" style=\"height:1%;padding:0 0 0 8px;_padding:0 0 0 5px\">".textcut2($data[$Field],200)."</div>\n";
+
+			$out[$name].="</div>\n";
+
+			++$counter;
+		}
+	}
+}
+
+function printIconBlock($printFeatureType) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page, $ebene, $DoPrint;
+	global $L, $xml_cat, $xml_max;
+	global $Wappen;
+
+	if($data["type"]=="wfs") {
+		$parameter_name="portal_services_wfs";
+		$id_field="wfs_conf_id";
+		$Type="wfs";
+	} else {
+		$parameter_name="portal_services";
+		$id_field="id";
+		$Type="wms";
+	}
+  
+	$out[$name].="<div class='clearer'></div><div class=\"search-icons\">";
+	if($data["type"]!="wfs") {
+	$out[$name].="<img src=\"/mapbender/x_geoportal/layer_preview/".$data["id"]."_layer_map_preview.png\"  width=\"100\" height=\"100\"  title=\"Vorschau\" alt=\"Kein Vorschaubild\">";
+	//$out[$name].="<img style=\"border-color:#dfdfdf; border-width:2px;border-style:solid; padding:4px\" src=\"/mapbender/x_geoportal/layer_preview/".$data["id"]."_layer_map_preview.png\"  width=\"100\" height=\"100\"  title=\"Vorschau\" alt=\"Vorschau nicht verf&uuml;gbar\">";
+	}
+	if($data["federalstate"]!="" && in_array($data["federalstate"],$Wappen)) {
+		$out[$name].="<img src=\"fileadmin/design/images/wappen_".$data["federalstate"].".png\" title=\"".$L[$data["federalstate"]]."\" />";
+	} else {
+		$out[$name].="<img src=\"fileadmin/design/images/icn_wappen_grau.png\" title=\"Länderkennung fehlt\" />";
+	}
+	#$out[$name].="<img src=\"/mapbender/x_geoportal/layer_preview/".$data["id"]."_layer_map_preview.png\"  width=\"120\" height=\"120\" title=\"Vorschau\" alt=\"Vorschau nicht verf&uuml;gbar\">";
+	if($data["termsofuse"]!="") {
+		$values="id=".$data["termsofuse"]."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+		$code=CodeParameter($values);
+
+		if(strstr($_SERVER["HTTP_HOST"],"q4u.de")===false)
+			$image=file_get_contents("http://".$_SERVER["HTTP_HOST"]."/mapbender/php/mod_termsofuse_service.php?id=".$data["termsofuse"]."&type=symbollink");
+		$out[$name].="<a href=\"javascript:opentou('".$code."');\"><img src=\"".$image."\" title=\"".$L["TermsOfUse"]."\" /></a>";
+	} else {
+		if($data["accessconstraints"]=="" || strtolower($data["accessconstraints"])=="none") {
+			$out[$name].="<img src=\"fileadmin/design/images/icons/ok.png\" title=\"".$L["TermsOfUseOK"]."\" />";
+		} else {
+			$values="id=".$data["termsofuse"]."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+			$code=CodeParameter($values);
+
+			$out[$name].="<a href=\"javascript:opentou('".$code."');\"><img src=\"fileadmin/design/images/icons/warn.png\" title=\"".$L["TermsOfUse"]."\" /></a>";
+//			$out[$name].="<img src=\"fileadmin/design/images/icons/warn.png\" title=\"".$L["TermsOfUse"]."\" />";
+		}
+	}
+
+
+	switch($data["last_monitoring"]) {
+		case "1":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/go.png\" title=\"".$L["Monitoring1"]."\" />";
+			break;
+		case "0":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/wait.png\" title=\"".$L["Monitoring0"]."\" />";
+			break;
+		case "-1":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/stop.png\" title=\"".$L["Monitoring-1"]."\" />";
+			break;
+		case "-2":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/refresh.png\" title=\"".$L["Monitoring-2"]."\" />";
+			break;
+		case "-3":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/warning.png\" title=\"".$L["Monitoring-3"]."\" />";
+			break;
+		default:
+			$out[$name].="<img src=\"fileadmin/design/images/icons/ampel_grau.png\" title=\"Monitoring nicht aktiv\" />";
+			break;
+	}
+
+	if($data["availability"]=="") {
+		$out[$name].="<img src=\"fileadmin/design/images/icons/prozent_grau.png\" title=\"Monitoring nicht aktiv\" />";
+	} else {
+		$out[$name].=$data["availability"]."%";
+	}
+
+
+	switch($data["geomtype"]) {
+		case "PointPropertyType":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/pkt.png\" title=\"Punktgeometrie\" />";
+			break;
+		case "GeometryPropertyType":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/geo_unbekannt.png\" title=\"Geometrietyp unbekannt\" />";
+			break;
+		case "PolygonPropertyType":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/poly.png\" title=\"Flächengeometrie\" />";
+			break;
+		case "LinePropertyType":
+			$out[$name].="<img src=\"fileadmin/design/images/icons/line.png\" title=\"Liniengeometrie\" />";
+			break;
+		default:
+			if($data["type"]=="wfs") {
+				$out[$name].="<img src=\"fileadmin/design/images/icons/geo_unbekannt.png\" title=\"Geometrietyp unbekannt\" />";
+			} else {
+				if($data["queryable"]=="true") {
+					$out[$name].="<img src=\"fileadmin/design/images/icons/info.png\" title=\"".$L["Queryable"]."\" />";
+				} else {
+					$out[$name].="<img src=\"fileadmin/design/images/icons/info_grau.png\" title=\"".$L["NotQueryable"]."\" />";
+				}
+			}
+			break;
+	}
+
+
+	if($data["epsg"]=="false") {  // KlÃ¤ren, was hier drin steht!
+		$out[$name].="<img src=\"fileadmin/design/images/icons/epsg.png\" title=\"".$L["NotEPSG"]."\" />";
+	} else {
+		$out[$name].="<img src=\"fileadmin/design/images/icons/epsg_grau.png\" title=\"".$L["EPSG"]."\" />";
+	}
+
+	$out[$name].="</div>";
+	#$out[$name].="<div>";
+	#$out[$name].="<a href=\"/mapbender/x_geoportal/layer_preview/19535_layer_map_preview.png\">link auf bild</a>";
+	#$out[$name].="<img src=\"/mapbender/x_geoportal/layer_preview/".$data["id"]."_layer_map_preview.png\"  width=\"70\" height=\"70\" title=\"Vorschau\" alt=\"Vorschau nicht verf&uuml;gbar\">";
+	#$out[$name].="</div>";
+	$out[$name].="<div class=\"search-mapicons\">";
+	if(!$printFeatureType) {
+		if($data["type"]!="wfs") {
+			if($data["permission"]=="true") {
+				if($data["termsofuse"]!="") {
+					$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type."ÿurl=karten.html?zoomToLayer=1&".$parameter_name."[]=".$data[$id_field];
+					$code=CodeParameter($values);
+					$out[$name].="<a onclick=\"return tou2(document.getElementById('c".$counter."'),".$data[$Type."_id"].",'".$Type."','".$code."');\" href=\"karten.html?zoomToLayer=1&".$parameter_name."[]=".$data[$id_field]."\"><img src=\"fileadmin/design/images/icons/zoommap.png\" title=\"Auf Ebenenausdehnung zoomen\" /></a>";
+				} elseif($data["accessconstraints"]!="" && strtolower($data["accessconstraints"])!="none") {
+					$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type."ÿurl=karten.html?zoomToLayer=1&".$parameter_name."[]=".$data[$id_field];
+					$code=CodeParameter($values);
+					$out[$name].="<a onclick=\"return tou2(document.getElementById('c".$counter."'),".$data[$Type."_id"].",'".$Type."','".$code."');\" href=\"karten.html?zoomToLayer=1&".$parameter_name."[]=".$data[$id_field]."\"><img src=\"fileadmin/design/images/icons/zoommap.png\" title=\"Auf Ebenenausdehnung zoomen\" /></a>";
+				} else {
+					$out[$name].="<a href=\"karten.html?zoomToLayer=1&".$parameter_name."[]=".$data[$id_field]."\"><img src=\"fileadmin/design/images/icons/zoommap.png\" title=\"Auf Ebenenausdehnung zoomen\" /></a>";
+				}
+			}
+		}
+	
+	
+		if($data["wfs_conf_modul"]=="0"){
+			$image="download";
+		}elseif($data["wfs_conf_modul"]=="1"){
+			$image="suche";
+		} else {
+			$image="map";
+		}
+		if($data["permission"]=="true") {
+			if($data["termsofuse"]!="") {
+				$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+				$code=CodeParameter($values);
+				$out[$name].="<input type=\"image\" onclick=\"return tou3(document.getElementById('c".$counter."'),".$data[$Type."_id"].",'".$Type."','".$code."');\" src=\"fileadmin/design/images/icons/".$image.".png\" title=\"".$L["In Karte aufnehmen"]."\" />";
+			} elseif($data["accessconstraints"]!="" && $data["accessconstraints"]!="none") {
+				$values="id=".$data["termsofuse"]."ÿel=c".$counter."ÿac=".$data["accessconstraints"]."ÿwms_id=".$data[$Type."_id"]."ÿtype=".$Type;
+				$code=CodeParameter($values);
+				$out[$name].="<input type=\"image\" onclick=\"return tou3(document.getElementById('c".$counter."'),".$data[$Type."_id"].",'".$Type."','".$code."');\" src=\"fileadmin/design/images/icons/".$image.".png\" title=\"".$L["In Karte aufnehmen"]."\" />";
+			} else {
+				$out[$name].="<input type=\"image\" onclick=\"document.getElementById('c".$counter."').checked=true;\" src=\"fileadmin/design/images/icons/".$image.".png\" title=\"".$L["In Karte aufnehmen"]."\" />";
+			}
+		}
+	}
+
+	$out[$name].="</div><div class='clearer'></div>";
+}
+
+function startInfo($parser, $element_name, $element_attribute) {
+	global $output, $data;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "searchresult":
+			$xml_begin=true;
+			break;
+		case "content":
+			$xml_content=true;
+			break;
+		case "count":
+			if($xml_begin) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+		case "typ":
+		case "uid":
+		case "title":
+		case "link":
+		case "breadcrumb":
+		case "shorttext":
+		case "datetime":
+		case "rating":
+			if($xml_content) {
+				$xml_typ=$element_name;
+				$xml_data=true;
+			}
+			break;
+	}
+}
+
+function endInfo($parser, $element_name) {
+	global $output, $out, $name, $data, $counter, $startpage, $count, $page, $items_page;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ, $L;
+
+	$element_name = strtolower($element_name);
+
+	switch($element_name) {
+		case "searchresult":
+			$xml_begin=false;
+			$xml_end=true;
+			break;
+		case "content":
+			if($startpage) {
+				$out[$name].="<div class=\"search-item\">\n";
+				$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+				$out[$name].="<div class=\"search-title all\"><a href=\"".$data["link"]." \">".$data["title"]."</a></div>\n";
+				$out[$name].="</div>\n";
+			} else {
+				if($counter>=($page*$items_page) && $counter<(($page+1)*$items_page)) {
+					$out[$name].="<div class=\"search-item\">\n";
+					$out[$name].="<div class=\"search-nr\">".++$counter."</div>\n";
+	        $out[$name].="<div class=\"search-title\"><a href=\"".$data["link"]." \">".$data["title"]."</a></div>\n";
+					$out[$name].="<div class=\"search-rating\" title=\"".$data["rating"]."%\"><div style=\"width:".($data["rating"]/20.83)."em\"></div></div>\n";
+					$out[$name].="<div class=\"search-breadcrumb\">".$data["breadcrumb"]."</div>\n";
+					$out[$name].="<div class=\"search-text\">".$data["shorttext"]."</div>\n";
+					$out[$name].="</div>\n";
+				} else {
+					++$counter;
+				}
+			}
+			$xml_content=false;
+			break;
+		case "count":
+		if(!$startpage) {
+			$count=$data["count"];
+		}
+			$xml_data=false;
+			break;
+		case "typ":
+		case "uid":
+		case "title":
+		case "link":
+		case "breadcrumb":
+		case "shorttext":
+		case "datetime":
+		case "rating":
+			$xml_data=false;
+			break;
+	}
+}
+
+function cdataInfo($parser, $element_inhalt) {
+	global $output, $data;
+	global $xml_begin, $xml_end, $xml_content, $xml_data, $xml_typ;
+
+	if($xml_begin && $xml_data) {
+		$data[$xml_typ]=urldecode($element_inhalt);
+	}
+}
+
+?>

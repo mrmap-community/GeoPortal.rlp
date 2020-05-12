@@ -1,0 +1,33 @@
+/* onclick mode backgrouds */
+body#typo3-alt-topmenu-dummy-php-iconmenu { background-image:url(../backgrounds/topmenubackground.gif); }
+#div-editNav td, table.typo3-dyntabmenu-tabs td { white-space:nowrap; }
+/* hover mode backgrouds */
+body.topmenu_high,
+body.topmenu_high table#typo3-topMenu { background-image:url(../backgrounds/topmenubackground_high.gif) !important; }
+body.topmenu_high #nav li ul {
+	background-image:url(../backgrounds/topmenubackground_high.gif) !important;
+	background-position:0 100%;
+}
+.both-wrapper {
+	border:1px solid #cecece;
+	background-color:#F0F0EE;
+}
+
+.curItem .both-wrapper { border:1px solid #FFB936 !important; }
+.secondary a:active, .secondary a:focus { color:#FFB936 !important }
+.both-wrapper {
+	border:1px solid #cecece;
+	background-color:#F0F0EE;
+}
+
+#nav .tabact a, #nav .tabactEl .tabTable .middle a:link, .tabactEl .tabTable .middle a:visited { color:#BD7A1D !important }
+/* hover mode colors */
+span.img-wrapper { border:1px solid #F0F0EE; }
+a:hover span.img-wrapper { border:1px solid #FFB936 !important; }
+
+#nav .middle { white-space: nowrap; }
+#nav .middle a { 
+	display:block; 
+	white-space: nowrap;
+	border-width:0 !important;
+}

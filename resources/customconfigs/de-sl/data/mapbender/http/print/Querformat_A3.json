@@ -1,0 +1,179 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "L",
+    "units" : "mm",
+    "format" : "a3",
+    "controls" : [
+	{
+            "id" : "title",
+            "label" : "Titel",
+            "type" : "text",
+            "size" : 18,
+            "pageElementsLink" : {
+                "titel" : "value"
+            }
+        },
+        
+        {
+            "id" : "dpi",
+            "label" : "DPI",
+            "type" : "select",
+            "size" : 20,
+            "pageElementsLink" : {
+                "karte" : "res_dpi"
+            },
+            "options" : [
+                {
+                    "value" : "72",
+                    "label" : "72 dpi"
+                },
+                {
+                    "value" : "144",
+                    "label" : "144 dpi"
+                }
+            ]
+	},
+        {
+            "id" : "comment1",
+            "label" : "Notiz",
+            "type" : "textarea",
+            "size" : 5,
+            "pageElementsLink" : {
+                "kommentar1" : "value"
+            }
+        },
+        
+        {
+            "id" : "angle",
+            "label" : "Drehwinkel",
+            "type" : "text",
+            "pageElementsLink" : {
+                "nordpfeil" : "angle",
+                "karte" : "angle",
+                "minikarte" : "angle"
+            }
+        },
+     
+        {
+            "id" : "scale",
+            "label" : "Maßstab",
+            "type" : "text",
+            "pageElementsLink" : {
+                "scale" : "value"
+            }
+        },
+	{
+    		"id" : "coordinates",
+    		"type" : "hidden"
+    	}
+    ],
+    "pages" : [
+        {
+            "tpl" : "Querformat_A3.pdf",
+            "useTplPage" : 1,
+            "elements" : {
+                "karte" : {
+                    "type" : "map",
+                    "res_dpi" : 72,
+                    "x_ul" : 16.5,
+                    "y_ul" : 29.5,
+                    "width" : 308,
+                    "height" : 250,
+                    "coords" : 1,
+                    "coords_font_family" : "Arial",
+                    "coords_font_size" : 11
+                },
+                
+                "minikarte" : {
+                    "type" : "overview",
+                    "res_dpi" : 72,
+                    "x_ul" : 16.2,
+                    "y_ul" : 29.2,
+                    "width" : 50,
+                    "height" : 50
+                },
+            
+                "scale" : {
+                    "type" : "text",
+                    "x_ul" : 370.0,
+                    "y_ul" : 67.5,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "scale"
+                },
+                "date" : {
+                    "type" : "text",
+                    "x_ul" : 370.0,
+                    "y_ul" : 53.5,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "date"
+                },
+              
+                "nordpfeil" : {
+                    "type" : "image",
+                    "x_ul" : 370,
+                    "y_ul" : 100,
+                    "width" : 35,
+                    "height" : 35,
+                    "angle" : 0,
+                    "filename" : "./img/northarrow.png"
+                },
+		"titel" : {
+                    "type" : "text",
+                    "x_ul" : 160,
+                    "y_ul" : 18,
+                    "font_family" : "Arial",
+                    "font_size" : 18
+                },
+                "messung" : {
+                 "type" : "measure",
+                 "do_fill" : 0,
+                 "fill_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "do_stroke" : 1,
+                 "stroke_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "line_style" : {
+                     "width" : 2.0
+                     }
+                    },
+                "kommentar1" : {
+                    "type" : "para",
+                    "x_ul" : 338.2,
+                    "y_ul" : 140.0,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "width" : 70,
+                    "height" : 5,
+                    "align" : "L",
+                    "border" : 1,
+                    "fill" : 1,
+                    "border_width" : 0.3
+                }
+            }
+        },
+        	{
+            "tpl" : "Querformat_A3.pdf",
+            "useTplPage" : 2,
+            "elements" : {
+                "legende" : {
+                    "type" : "legend",
+                    "x_ul" : 10,
+                    "y_ul" : 42,
+                    "width" : 90,
+                    "height" : 180,
+                    "font_family" : "Arial",
+                    "font_size" : 13,
+                    "scale" : 0.75
+                }
+			}
+        }
+    ]
+}

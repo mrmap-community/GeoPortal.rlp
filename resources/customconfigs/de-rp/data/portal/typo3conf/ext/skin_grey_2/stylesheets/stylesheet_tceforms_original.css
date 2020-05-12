@@ -1,0 +1,231 @@
+/*********************************************
+ * TCEforms:
+ *********************************************/
+ 
+/* special setting for the frontend mode 'Forms on page' */
+TABLE.formsOnPage { 
+	background-color:white;
+	border:1px solid black;
+}
+.editButtonsForFormsOnPage * { border-width: 0 !important }
+
+
+/* Default. Always used on main-palettes in the bottom of the forms */
+TABLE.typo3-TCEforms .class-main1 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main2 { background-color: #E6E6E6; }
+TABLE.typo3-TCEforms .class-main3 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main4 { color: #000000; }
+TABLE.typo3-TCEforms .class-main5 { color: #333333; }
+TABLE.typo3-TCEforms .formField { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+TABLE.typo3-TCEforms .wrapperTable1 {
+	margin-top:5px
+}
+.formsOnPage { border: 1px solid black !important;}
+
+/* Typically hidden, type and other primary 'meta' fields */
+TABLE.typo3-TCEforms .class-main11 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main12 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	background-image: url(../backgrounds/h3_bg_original.gif); 
+	background-repeat : repeat-x; 
+	margin-top: 4px;
+}
+TABLE.typo3-TCEforms .class-main13 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main14 { color: #000000; }
+TABLE.typo3-TCEforms .class-main15 { color: #333333; }
+TABLE.typo3-TCEforms .formField1 { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable1 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For headers */
+TABLE.typo3-TCEforms .class-main21 { background-color: #F2F2F2; }
+
+TABLE.typo3-TCEforms .class-main22 { 
+	background-color: #E6E6E6; 
+	height: 24px; padding-top: 2px; 
+	background-image: url(../backgrounds/h3_bg_original.gif); 
+	background-repeat : 
+	repeat-x;
+}
+TABLE.typo3-TCEforms .class-main23 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main24 { color: #000000; }
+TABLE.typo3-TCEforms .class-main25 { color: #333333; }
+TABLE.typo3-TCEforms .formField2 {  
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable2 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For main content */
+TABLE.typo3-TCEforms .class-main31 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main32 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px; 
+	background-image: url(../backgrounds/h3_bg_original.gif);
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main33 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main34 { color: #000000; }
+TABLE.typo3-TCEforms .class-main35 { color: #333333; }
+TABLE.typo3-TCEforms .formField3 {
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable3 { 
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px;
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For extra content, like images, files etc. */
+TABLE.typo3-TCEforms .class-main41 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main42 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px;
+	background-image: url(../backgrounds/h3_bg_original.gif); 
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main43 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main44 { color: #000000; }
+TABLE.typo3-TCEforms .class-main45 { color: #333333; }
+TABLE.typo3-TCEforms .formField4 { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable4 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For special content */
+TABLE.typo3-TCEforms .class-main51 {
+	background-color: #F2F2F2; 
+	margin: 4px; 
+}
+TABLE.typo3-TCEforms .class-main52 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px; 
+	background-image: url(../backgrounds/h2_bg_original.gif); 
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main53 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main54 { color: #000000; }
+TABLE.typo3-TCEforms .class-main55 { color: #111111; }
+TABLE.typo3-TCEforms .formField5 { 
+	margin-right: 2px;
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable5 { 
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+TABLE.typo3-TCEforms .typo3-TCEforms-selectIcons,
+TABLE.typo3-TCEforms .class-main13,
+TABLE.typo3-TCEforms .class-main23,
+TABLE.typo3-TCEforms .class-main33,
+TABLE.typo3-TCEforms .class-main43,
+TABLE.typo3-TCEforms .class-main53 { padding: 3px 0; }
+
+/* TCEforms */
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-recHeader { 
+	font-weight:
+	bold; color: #333366; 
+}
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-newToken { 
+	font-weight: bold; 
+	color: #990000; 
+}
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-helpText { color: #666666; }
+TABLE.typo3-TCEforms OPTGROUP.c-divider,
+TABLE.typo3-TCEforms OPTION.c-divider { 
+	font-style: italic; 
+	color: #666; 
+	background-color: #eee; 
+	text-transform: uppercase; 
+	margin-top: 10px; 
+	/*padding: 0px;*/ 
+	border-top: 1px solid #666; 
+	}
+TABLE.typo3-TCEforms OPTGROUP OPTION { 
+	font-style: normal; 
+	color: black; 
+	background-color: white; 
+	text-transform: none; 
+	border-bottom: none; 
+	padding: 0px;
+	/*padding: 0px;*/ 
+	text-indent: 0px;
+}
+.typo3-TCEforms option { white-space:nowrap; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-selectedItem { background-color: #c5c1b5; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-invalidItem { background-color: #ff6600; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD {
+	border-bottom: 1px #999999 dashed; 
+	padding: 1px 3px 1px 3px; 
+}
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD.c-labelCell { padding-right: 30px; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD.c-labelCell P.c-descr {
+	margin-left: 30px; 
+	font-style: italic;
+}
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-header TD { 
+	font-weight: bold; 
+	padding-top: 10px; 
+	border-bottom: none; 
+}
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox { 
+	margin-top: 4px; 
+	margin-bottom: 10px; 
+}
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-singlebox { 
+	margin-top: 4px; 
+	margin-bottom: 10px; 
+}
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-originalLanguageValue { background-color: #bbccbb; }
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-diffBox { 
+	background-color: white; 
+	border: 1px solid black; 
+}
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-diffBox-header { 
+	background-color: red; 
+	font-weight: bold; 
+}
+table.typo3-TCEforms div.typo3-dyntabmenu-tabs { margin-top: 10px; }
+
+/* TCEforms Inline-Relational-Record-Editing */
+.typo3-TCEforms DIV.inlineDiv,
+.typo3-TCEforms DIV.inlineDivMSIE { display: inline-block; }
+
+/*********************************************
+ * END TCEforms:
+ *********************************************/

@@ -1,0 +1,28 @@
+@import url(../../../../typo3/sysext/t3skin/stylesheets/typo3-index-php.css);
+body#typo3-index-php DIV#loginimage { 
+	width:500px;
+	height:100px;
+}
+
+BODY#typo3-index-php,BODY#typo3-index-php P, BODY#typo3-index-php DIV {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	color: black;
+}
+BODY#typo3-index-php a img { border-width:0 }
+BODY#typo3-index-php a:link, 
+BODY#typo3-index-php a:visited { 
+	color:black;
+	text-decoration:none;
+}
+
+BODY#typo3-index-php TABLE#loginwrapper,
+BODY#typo3-index-php TABLE#logintable {
+	background-image:none !important;
+	border-width:0 !important;
+	background-color:transparent !important;
+}
+BODY#typo3-index-php TABLE#logintable td H2 { 
+	display:block !important; 
+	color: black !important;
+}

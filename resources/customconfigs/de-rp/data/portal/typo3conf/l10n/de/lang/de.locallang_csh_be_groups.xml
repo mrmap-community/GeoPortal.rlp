@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Dies sind die Backend Benutzergruppen. Sie bestimmen Zugriffsrechte und weitere Einstellungen für zugeordnete Backend Benutzer.</label>
+			<label index=".details">Backend Benutzergruppen legen die Grund-Zugriffsrechte und Einstellungen für zugeordnete Benutzer fest. Viele Benutzer können Mitglied in ein und der selben Gruppe sein und haben dann alle die gleichen Rechte. Einzelnen Benutzern können auch weitere Rechte eingeräumt werden.
+Eine Gruppe darf andere Gruppen als Unter-Gruppe besitzen, dann werden die Rechte der Untergruppe den Rechten der Obergruppe hinzugefügt. Eine Gruppe &quot;Chef-Redakteure&quot; könnte zum Beispiel eine Untergruppe &quot;Redakteure&quot; haben. Dann wäre ein Mitglied der Gruppe &quot;Chef-Redakteure&quot; automatisch mit allen Rechten eines Redakteurs ausgestattet.
+Ein Backend-Benutzer kann Mitglied in mehr als einer Gruppe sein. Dann werden die Rechte aller Gruppen-Mitgliedschaften für diesen Benutzer einfach vereinigt, einschließlich eventueller Untergruppen. Je mehr Gruppen der Benutzer angehört, desto mehr Rechte erhält er.</label>
+			<label index=".image_descr">Backend Benutzergruppen finden sich in der Wurzel des Seitenbaums, und können nur von &quot;admin&quot; Benutzern bearbeitet werden. Die Gruppen mit roten Symbolen in dieser Abbildung sind diejenigen, die ihre Rechte an die Benutzer weitergeben. Blaue Symbole sind einfache Gruppen, die die Rechte nicht weitergeben (für jede Gruppe konfigurierbar).
+In den Rechten wird festgelegt, auf welche Module, Tabellen, Datenbankfelder usw. von den Gruppen-Mitgliedern zugegriffen werden darf.</label>
+			<label index="title.description">Name der Backend Benutzergruppe. Er sollte beschreibend sein und kann jederzeit geändert werden.</label>
+			<label index="title.details">Intern werden die Benutzer über das Feld &quot;uid&quot; der Benutzergruppe zugeordnet. Deshalb ist es jederzeit möglich, den Gruppenamen zu ändern, ohne die Zuordnung zu Benutzern zu verändern. Die &quot;uid&quot; der Gruppe ändert sich dagegen niemals. Überall, wo die Gruppe angezeigt wird, z.B. bei der Zuordnung von Benutzern zu Gruppen, sehen Sie den Gruppennamen statt der &quot;uid&quot;.</label>
+			<label index="title.image_descr">Der Gruppenname wird z.B. in Datensatzlisten angezeigt.</label>
+			<label index="db_mountpoints.description">Ausgangspunkte im Seitenbaum für Gruppenmitglieder.</label>
+			<label index="db_mountpoints.details">Für jeden Backend Benutzer müssen ein oder mehrere Einstiegspunkte in die Seiten-Hierarchie festgelegt werden. Die Benutzer können dann diese Seite(n) und alle Kind-Seiten bearbeiten. Fügen Sie hier eine oder mehrere solcher Startseiten für die Gruppenmitglieder ein. Diese werden den Benutzern dann jeweils als Wurzel-Seiten eines Teilbaums präsentiert. Das wird &quot;Datenbank Mount&quot; oder kurz &quot;DB Mount&quot; genannt.
+DB Mounts &lt;i&gt;können&lt;/i&gt; an die Mitglieder der Gruppe vererbt werden. Das hängt davon ab, ob beim Benutzer das Ererben der Mounts von der Gruppe aktiviert wurde.
+Es wird jedoch dringend empfohlen, Benutzergruppen zur Verwaltung der Mounts zu benutzen, anstatt die Mounts für jeden einzelnen Benutzer gesondert einzustellen. Das gilt besonders, wenn mehrere Benutzer gemeinschaftlich an den gleichen Teilbäumen arbeiten.</label>
+			<label index="db_mountpoints.image_descr">Hier wurde eine Seite als &quot;DB Mount&quot; hinzugefügt ...
+... und im Seitenbaum der Gruppenmitglieder erscheint diese Seite als Wurzel des Seitenbaums.</label>
+			<label index="file_mountpoints.description">Ausgangspunkte im Verzeichnisbaum für Gruppenmitglieder.</label>
+			<label index="file_mountpoints.details">Der Verzeichnisbaum wird von allen Datei-Untermodulen benutzt um auf Verzeichnisse und Dateien des Webservers zuzugreifen. Wenn Sie Benutzern den Zugriff auf das Server Dateisystem mittels Typo3 gestatten wollen, müssen Sie mindestens einen &quot;Datei Mount&quot; für diese Benutzer festlegen (außerdem benötigen diese Benutzer Zugang zum Modul Datei &gt; Dateiliste).
+Wie bei &quot;DB Mounts&quot; auch, können die &quot;File Mounts&quot; von Gruppenmitgliedern ererbt werden, wenn das für den Benutzer aktiviert wurde.
+Oft reicht es, einen oder mehrere Pfade im &quot;fileadmin/&quot; Verzeichnis, relativ zur TYPO3 Installation, freizugeben. Sie können aber auch einen absoluten Pfad zu einem Verzeichnis irgendwo auf dem Server (außerhalb des WEB-Bereichs!) freigeben.
+Dazu muß $TYPO3_CONF_VARS[BE][lockRootPath] (im Install-Werkzeug) definiert sein. Der eigntliche Pfad, den Sie mounten, wird durch die zugehörige &quot;Dateifreigabe&quot; näher beschrieben, auf die Sie hier verweisen. Der Datei Mount ist also eine indirekte Festlegung, der Mount verweist nur auf einen anderen Datensatz und erst in dem verwiesenen Datensatz &quot;Dateifreigabe&quot; stehen die Details. Vergleichen Sie die Abbildungen unten.
+&quot;Admin&quot; Benutzer haben immer das Verzeichnis &quot;fileadmin/&quot; automatisch gemountet.</label>
+			<label index="file_mountpoints.image_descr">Die Datei Mounts sind Verweise auf Datensätze der &quot;Dateifreigaben&quot; Tabelle.
+Im &quot;Dateifreigabe&quot; Datensatz legen Sie fest, ob der Pfad absolut sein soll (er muß dann im $TYPO3_CONF_VARS[BE][lockRootPath] Verzeichnis sein), oder ob er relativ zu &quot;fileadmin/&quot; sein soll. Im Bild zeigt die Dateifreigabe auf &quot;fileadmin/user_upload/&quot;.
+Dies ist der Verzeichnisbaum eines &quot;Admin&quot; Benutzers. Beachten Sie den Ordner &quot;user_upload/&quot;, der in der Dateifreigabe konfiguriert ist und auf den der Datei Mount verweist.
+Dies Bild zeigt den gemounteten Order aus Sicht eines Gruppenmitglieds. Die zum Mount verfügbaren Dateifreigaben werden in der Wurzel des Seitenbaums von &quot;Admin&quot; Benutzern eingerichtet.</label>
+			<label index="pagetypes_select.description">Erlaubte Seiten-Typen für Gruppenmitglieder.</label>
+			<label index="pagetypes_select.details">Diese Option schränkt die verfügbare Auswahl beim Festlegen des Typs einer Seite ein.
+Die Auswahl des Typs einer Seite (doktype) beeinflußt
+a) ein spezielles Symbol für Seiten dieses Typs
+b) erlaubte Tabellen auf der Seite (siehe die globale Variable $PAGES_TYPES)
+c) ob die Seite eine normale, sichtbare Webseite ist oder vom Typ &quot;System Order&quot;, der als Behälter für verschiedene Datensätze dient, aber niemals als Webseite angezeigt wird.</label>
+			<label index="pagetypes_select.image_descr">Die Liste der typisch in einem CMS Kontext verfügbaren Seiten Typen. Die hier festgelegte Auswahl schränkt alle Gruppenmitglieder entsprechend ein.</label>
+			<label index="tables_modify.description">Tabellen, die von Gruppenmitgliedern modifiziert werden dürfen.</label>
+			<label index="tables_modify.details">Bitte erinnern Sie sich, daß, bis auf Medien-Dateien, alle Seiten und Seiteninhalte in entsprechenden Tabellen einer Datenbank abgelegt werden. Deshalb ist einer der wichtigsten Aspekte der Zugriffsrechte die Festlegung, welche der Datenbank-Tabellen von Gruppenmitgliedern verändert werden dürfen.
+Die beiden wichtigsten Tabellen sind &quot;Seiten&quot; (pages) und &quot;Seiteninhalt&quot; (tt_content). Ohne Änderungsrechte an diesen beiden Tabellen kann ein Benutzer keine sichtbaren Inhalte pflegen.
+Tabellen mit Recht zur Änderung sind automatisch auch sichtbar und müssen nicht nochmals in der &quot;Tabellen (Anzeige)&quot; Box gewählt werden.
+Wie bei anderen Rechten auch, werden die Rechte hier vereinigt mit den Änderungs-Rechten anderer Benutzergruppen, denen ein Benutzer angehört.</label>
+			<label index="tables_modify.image_descr">Hier sehen Sie den Dialog &quot;Neuer Datensatz&quot; für einen Benutzer, der nur &quot;Seiten&quot; und &quot;Seiteninhalte&quot; ändern darf.
+Für diese Gruppe ist nur die Änderung der Tabellen &quot;Seiten&quot; und &quot;Seiteninhalte&quot; erlaubt. Aber Änderungs-Rechte an weiteren Tabellen aus anderen Gruppen-Zugehörigkeiten eines benutzers werden respektiert, auch wenn das natürlich hier nicht sichtbar ist.
+Dies ist der volle Umfang von Seiteninhalten (ein Beispiel), die von einem &quot;Admin&quot; Benutzer einer Seite hinzugefügt werden können, weil Administratoren keinen Beschränkungen unterliegen.</label>
+			<label index="tables_select.description">Tabellen, die von Gruppenmitgliedern eingesehen werden dürfen.</label>
+			<label index="tables_select.details">Dieses Feld bestimmt, welche Tabellen - neben denen, die auch verändert werden dürfen - von Gruppenmitgliedern gelistet bzw. gesehen werden dürfen. Benutzer können diese Tabellen nicht verändern, nur deren Datensätze listen und die Inhalte einsehen.
+Diese Liste ist nicht sonderlich wichtig. Es kommt selten vor, daß Benutzer Tabellen-Inhalte sehen dürfen, ohne sie zumindest auch ändern zu dürfen.
+
+Eine Ausnahme bildet das TemplaVoila (TV) Modul. Die Tabellen &quot;TemplaVoila Template Objekt&quot; und &quot;TemplaVoila Datenstruktur&quot; werden normalerweise nur von Administratoren verändert. Damit aber normale Redakteure beim Erzeugen von Seiten Datenstrukturen und Templates auswählen können, muß ihnen hier das Recht zur Ansicht eingeräumt werden.</label>
+			<label index="non_exclude_fields.description">Viele Tabellen-Felder sind per Vorgabe nicht verfügbar. Diese Felder können hier für Gruppenmitglieder ausdrücklich verfügbar gemacht werden.</label>
+			<label index="non_exclude_fields.details">&quot;Ausdrücklich erlaubte Felder&quot; erlaubt eine feinfühlige Steuerung der Zugriffsrechte auf (-re- TO BE CONTINUED)</label>
+			<label index="hidden.description">Deaktiviert eine Benutzergruppe.</label>
+			<label index="groupMods.description">Legen Sie fest, welche Backend Module den Gruppenmitgliedern zugewiesen werden sollen.</label>
+			<label index="TSconfig.syntax">Eingabe als normales TypoScript, aber ohne Bedingungen und Konstanten.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="hidden.description" type="integer">190841262</label>
+			<label index=".description" type="integer">24692837</label>
+			<label index="title.image_descr" type="integer">254619996</label>
+			<label index="file_mountpoints.description" type="integer">172594607</label>
+			<label index=".details" type="integer">152748622</label>
+			<label index=".image_descr" type="double">13061130</label>
+			<label index="title.description" type="integer">122308063</label>
+			<label index="title.details" type="integer">131557834</label>
+			<label index="db_mountpoints.description" type="integer">79572288</label>
+			<label index="db_mountpoints.details" type="integer">43503742</label>
+			<label index="db_mountpoints.image_descr" type="integer">217823442</label>
+			<label index="file_mountpoints.details" type="integer">65754039</label>
+			<label index="file_mountpoints.image_descr" type="integer">176310322</label>
+			<label index="pagetypes_select.description" type="integer">44094257</label>
+			<label index="pagetypes_select.details" type="integer">266555079</label>
+			<label index="pagetypes_select.image_descr" type="integer">59933954</label>
+			<label index="tables_modify.description" type="integer">138526409</label>
+			<label index="tables_modify.details" type="integer">89351209</label>
+			<label index="tables_modify.image_descr" type="integer">125152696</label>
+			<label index="tables_select.description" type="integer">79180839</label>
+			<label index="tables_select.details" type="integer">95679269</label>
+			<label index="non_exclude_fields.description" type="integer">17658287</label>
+			<label index="non_exclude_fields.details" type="integer">206989457</label>
+			<label index="groupMods.description" type="integer">249603367</label>
+			<label index="TSconfig.syntax" type="integer">185290164</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="hidden.description">Disables a user group.</label>
+			<label index=".description">This is the Backend administration user groups available for the Backend users. These determine the access credentials for the Backend users.</label>
+			<label index="title.image_descr">The usergroup title is shown in the record lists.</label>
+			<label index="file_mountpoints.description">Define startpoints for the file folder tree.</label>
+			<label index=".details">Groups contain the main permission settings you can set for a backend user. Many users can be members of the same group and thus share permissions.
+When a user is a member of many groups (including sub-groups) then the permission settings are added together so that the more groups a user is a member of, the more access is granted to him.</label>
+			<label index=".image_descr">Backend Usergroups are found in the root of the page tree where only &quot;admin&quot; users can edit them. The usergroups with red icons in this image are the ones with Access Lists enabled. The blue are just plain usergroups.
+This usergroup has Access Lists enabled. In the Access Lists you specify which modules, tables, database fields etc. the group members can access in TYPO3.</label>
+			<label index="title.description">Name of the Backend usergroup. The name should be descriptive and can always be changed later.</label>
+			<label index="title.details">Backend Usergroups are identified by their &quot;uid&quot; field value (integer) and therefore the title can always be changed. The &quot;uid&quot; can never be changed for a user group.</label>
+			<label index="db_mountpoints.description">Define page tree root points for the group members.</label>
+			<label index="db_mountpoints.details">The page tree in TYPO3 must have some points-of-entry defined. Here you should insert one or more references to a page which will represent a new root page for the page tree. This is called a &quot;Database mount&quot; or &quot;DB mount&quot;.
+DB mounts &lt;i&gt;may&lt;/i&gt; be inherited by the users which are members of this group. This depends on whether the user is configured to include the mounts set in the member groups.
+However it's recommended to use backend user groups like this to configure mounts. Especially if they need to be shared among many users.</label>
+			<label index="db_mountpoints.image_descr">Here a page is added as a &quot;DB mount&quot;...
+... and in the page tree of member users this will become the starting point for the page tree.</label>
+			<label index="file_mountpoints.details">The file folder tree is used by all File-submodules to navigate the file folders on the webserver. If you want users to access the servers file system through TYPO3 they need at least one File Mount (and access to eg. File &gt; Filelist module).
+You can mount a path in &quot;fileadmin/&quot; relative to the TYPO3 installation or you can mount an absolute path somewhere else on the server (outside webroot!). The last requires that $TYPO3_CONF_VARS[BE][lockRootPath] is defined. The path you mount is defined by the Filemount record you refer to by this field. So a File Mount just points to another record inside of which the details are configured. See screen shots below.
+&quot;admin&quot; users always have the &quot;fileadmin/&quot; folder mounted by default.
+Notice; as with 'DB mounts' the file folder mounts may be inherited by the users which are members of this group.</label>
+			<label index="file_mountpoints.image_descr">The File Mounts are references to records from the &quot;Filemounts&quot; table.
+In the Filemount record you define whether the path should be absolute (must be within $TYPO3_CONF_VARS[BE][lockRootPath]) or relative to &quot;fileadmin/&quot;. In this case the Filemount points to &quot;fileadmin/user_upload/&quot;
+This is the page tree of the &quot;admin&quot; user. Notice the folder &quot;user_upload&quot; which is the folder referred to by the File Mount record.
+This shows the mounted folder as seen by a user who was member of the group.
+Filemount records are also created in the page tree root.</label>
+			<label index="pagetypes_select.description">Select which 'Types' of Pages the members may set.</label>
+			<label index="pagetypes_select.details">This option limits the number of valid choices for the user when he is about to select a page type.
+Choice of Page types (doktype) for a page is associated with a) a special icon for the page, b) permitted tables on the page (see $PAGES_TYPES global variable) and c) if the page is a web page or &quot;system folder&quot; type.</label>
+			<label index="pagetypes_select.image_descr">The list of typical page types available in a CMS context. Selecting Page types for a usergroup defines which of these options can be selected by member users.</label>
+			<label index="tables_modify.description">Select which tables the members may modify.</label>
+			<label index="tables_modify.details">An important part of setting permissions is to define which database tables a user is allowed to modify.
+Tables allowed for modification is automatically also allowed for selection and thus you don't need to set tables entered here in the &quot;Tables (listing)&quot; box.
+
+&lt;strong&gt;Notice&lt;/strong&gt; that this list adds to the fields selected in other member groups of a user.</label>
+			<label index="tables_modify.image_descr">The screen shot above shows how the &quot;Create new record&quot; dialog looks for a user limited to editing only &quot;Page&quot; and &quot;Pagecontent&quot; elements.
+The two tables are simply added to the list of &quot;Tables (modify)&quot; in the group Access Lists.
+This is (an example of) the full amount of elements that can be created on the page by the &quot;admin&quot; user for whom there are no restrictions.</label>
+			<label index="tables_select.description">Select which tables the members may see in record lists ('modify' tables does not need to be re-entered here!).</label>
+			<label index="tables_select.details">This determines which tables - in addition to those selected in the &quot;Tables (modify)&quot; box - may be viewed and listed for the member users. He is not able to &lt;em&gt;edit&lt;/em&gt; the table - only select the records and view the content.
+This list is not very important. It's a pretty rare situation that a user may select tables but not modify them.</label>
+			<label index="non_exclude_fields.description">Certain table fields are not available by default. Those fields can be explicitly enabled for the group members here.</label>
+			<label index="non_exclude_fields.details">&quot;Allowed excludefields&quot; allows you to detail the permissions granted to tables. By default all these fields are not available to users but must be specifically enabled by being selected here.
+One application of this is that pages are usually hidden by default and that the hidden field is not available for a user unless he has been granted access by this list of &quot;Allowed excludefields&quot;. So the user may create a new page, but cannot un-hide the page - unless of course he has been assigned the &quot;Page: Hide page&quot; exclude field through one of his member groups.
+Of course it does not make any sense to add fields from tables which are not included in the list of tables allowed to be modified.</label>
+			<label index="groupMods.description">Select available backend modules for the group members.</label>
+			<label index="TSconfig.syntax">TypoScript syntax without conditions and constants.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

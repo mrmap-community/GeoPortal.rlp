@@ -1,0 +1,13 @@
+Old images are copyright of Kasper Skårhøj.
+
+New icons based on:
+
+1) Icons from the KDE skin, "Slick 1.5".This is the copyright notice from the "Slick 1.5" KDE skin:<slick readme.txt>Slick 1.5 (C) 2003 - Robert Cosgrove <rob@digital-confusion.net>
+
+2) Icons for Opera 8.x IEXP6.
+
+3) Modified icons by me
+
+4) Icons from t3skin
+
+5) Icons from modern_skin

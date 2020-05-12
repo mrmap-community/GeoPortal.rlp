@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="bold">Fett</label>
+			<label index="italic">Kursiv</label>
+			<label index="underline">Unterstrichen</label>
+			<label index="strikethrough">Durchgestrichen</label>
+			<label index="subscript">Tiefgestellt</label>
+			<label index="superscript">Hochgestellt</label>
+			<label index="justifyleft">Links</label>
+			<label index="justifycenter">Zentrieren</label>
+			<label index="justifyright">Rechts</label>
+			<label index="justifyfull">Blocksatz</label>
+			<label index="insertorderedlist">Nummerierung</label>
+			<label index="insertunorderedlist">Punktliste</label>
+			<label index="outdent">Einzug verkleinern</label>
+			<label index="indent">Einzug vergrößern</label>
+			<label index="forecolor">Zeichenfarbe</label>
+			<label index="hilitecolor">Hintergrundfarbe</label>
+			<label index="inserthorizontalrule">Horizontale Linie</label>
+			<label index="createlink">Link einfügen</label>
+			<label index="insertimage">Bild einfügen / verändern</label>
+			<label index="inserttable">Tabelle einfügen</label>
+			<label index="htmlmode">Zur HTML-Ansicht wechseln</label>
+			<label index="popupeditor">Editor-Fenster vergrößern</label>
+			<label index="about">Über diesen Editor</label>
+			<label index="showhelp">Hilfe</label>
+			<label index="textindicator">Momentaner Style</label>
+			<label index="undo">Macht die letzte Aktion rückgängig</label>
+			<label index="redo">Wiederholt die letzte Aktion</label>
+			<label index="cut">Auswahl ausschneiden</label>
+			<label index="copy">Auswahl kopieren</label>
+			<label index="paste">Aus der Zwischenablage einfügen</label>
+			<label index="lefttoright">Schreibrichtung von links nach rechts</label>
+			<label index="righttoleft">Schreibrichtung von rechts nach links</label>
+			<label index="removeformat">Formatierung entfernen</label>
+			<label index="print">Das Dokument drucken</label>
+			<label index="killword">MSOffice &lt;o:&gt; entfernen</label>
+			<label index="fontname">Zeichensatz</label>
+			<label index="fontsize">Zeichengröße</label>
+			<label index="formatblock">Absatzart</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="bold" type="integer">18137861</label>
+			<label index="italic" type="integer">30962801</label>
+			<label index="underline" type="integer">139620890</label>
+			<label index="strikethrough" type="integer">153527579</label>
+			<label index="subscript" type="integer">153638286</label>
+			<label index="superscript" type="integer">103903129</label>
+			<label index="justifyleft" type="integer">103035233</label>
+			<label index="justifycenter" type="integer">155705392</label>
+			<label index="justifyright" type="integer">75036879</label>
+			<label index="justifyfull" type="integer">6823521</label>
+			<label index="insertorderedlist" type="integer">127299663</label>
+			<label index="insertunorderedlist" type="integer">77997053</label>
+			<label index="outdent" type="integer">245172929</label>
+			<label index="indent" type="integer">67026639</label>
+			<label index="forecolor" type="integer">35667911</label>
+			<label index="hilitecolor" type="integer">123630626</label>
+			<label index="inserthorizontalrule" type="integer">219272101</label>
+			<label index="createlink" type="integer">147436421</label>
+			<label index="insertimage" type="integer">146708638</label>
+			<label index="inserttable" type="integer">111652295</label>
+			<label index="htmlmode" type="integer">150105834</label>
+			<label index="popupeditor" type="integer">108884081</label>
+			<label index="about" type="integer">93541894</label>
+			<label index="showhelp" type="integer">224256507</label>
+			<label index="textindicator" type="integer">123554729</label>
+			<label index="undo" type="integer">255659</label>
+			<label index="redo" type="integer">251355262</label>
+			<label index="cut" type="integer">205223202</label>
+			<label index="copy" type="integer">248051882</label>
+			<label index="paste" type="integer">226578047</label>
+			<label index="lefttoright" type="integer">1013968</label>
+			<label index="righttoleft" type="integer">206570525</label>
+			<label index="removeformat" type="integer">187827535</label>
+			<label index="print" type="integer">177493560</label>
+			<label index="killword" type="integer">228066956</label>
+			<label index="fontname" type="integer">26539321</label>
+			<label index="fontsize" type="integer">206127878</label>
+			<label index="formatblock" type="integer">4875199</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

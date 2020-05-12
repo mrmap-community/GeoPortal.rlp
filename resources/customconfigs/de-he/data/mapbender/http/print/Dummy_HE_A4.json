@@ -1,0 +1,79 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "P",
+    "units" : "mm",
+    "format" : "a4",
+    "controls" : [
+	
+     
+        {
+            "id" : "scale",
+            "label" : "Maßstab",
+            "type" : "hidden",
+            "pageElementsLink" : {
+                "scale" : "value"
+            }
+        }
+	
+    ],
+    "pages" : [
+        {
+            "tpl" : "Dummy_HE_A4.pdf",
+            "useTplPage" : 1,
+            "elements" : {
+                "karte" : {
+                    "type" : "map",
+                    "res_dpi" : 105,
+                    "x_ul" : 18.5,
+                    "y_ul" : 22.8,
+                    "width" : 179.7,
+                    "height" : 180.93,
+                    "coords" : 1,
+                    "coords_font_family" : "Arial",
+                    "coords_font_size" : 8
+                },
+                
+               
+                "date" : {
+                    "type" : "text",
+                    "x_ul" : 36.6,
+                    "y_ul" : 267.8,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "date"
+                },
+              
+                "nordpfeil" : {
+                    "type" : "image",
+                    "x_ul" : 194,
+                    "y_ul" : 269,
+                    "width" : 5,
+                    "height" : 5,
+                    "angle" : 0,
+                    "filename" : "./img/northarrowdummy.png"
+               		
+                },
+	
+		"messung" : {
+                 "type" : "measure",
+                 "do_fill" : 0,
+                 "fill_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "do_stroke" : 1,
+                 "stroke_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "line_style" : {
+                     "width" : 1.5
+                     }
+                    }
+            }
+        }
+        
+    ]
+}

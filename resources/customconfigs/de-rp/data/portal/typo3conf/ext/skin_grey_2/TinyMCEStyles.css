@@ -1,0 +1,338 @@
+/* This file contains the CSS data for the editor UI of TinyMCE instances for skin_grey_2 */
+
+.firstCell, 
+.lastCell,
+body#typo3-browse-links-php br,
+.spacerTd,
+body#typo3-browse-links-php #typo3-linkPages br,
+body#typo3-browse-links-php #typo3-linkFiles br { display:block; }
+
+body#ext-tinyrte-rte-select-image-php,
+body#typo3-browse-links-php,
+body#typo3-show-item-php { background-color:#f0f0ee !important; }
+
+table.typo3-imageMenu, 
+table.typo3-imageMenu td {
+	border-collapse:collapse !important;
+	width:auto !important;
+}
+
+body#ext-tinyrte-rte-select-image-php table.typo3-imageMenu,
+body#typo3-browse-links-php table#typo3-tabmenu {
+	margin:0 !important;; 
+	width:auto !important;; 
+	border-width:0 !important;
+	position:relative;
+	top:1px;
+	left:0;
+	z-index:2;
+}
+
+body#ext-tinyrte-rte-select-image-php table.tabTable, 
+body#typo3-browse-links-php #typo3-tabmenu table.tabTable,
+body#typo3-alt-doc-php table.tabTable {
+	width:auto !important; 
+	margin-right:2px;
+}
+
+legend,
+.title {	
+	margin-top:2px;
+	font-size: 9px;
+	font-color: #FFB936;
+	padding-top: 4px;
+	padding-right:5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB;
+	border-top: 0px solid #8BDE00;
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : repeat-x; 
+	text-align: left;
+	color: #000000; 
+	text-transform:uppercase;
+	}
+	
+body#ext-tinyrte-rte-select-image-php table.bgColor5 strong,
+#typo3-browse-links-php h3,
+#typo3-show-item-php h2 { background-image: url(backgrounds/h3_bg.gif) !important; }
+
+div#wrapCurUrlAndTree,	
+body#ext-tinyrte-rte-select-image-php .folderTree,
+body#typo3-browse-links-php #typo3-EBfiles,
+body#typo3-browse-links-php #typo3-EBrecords,
+body#typo3-show-item-php .typo3-smallDoc {
+	border-style:solid !important;
+	border-color: #919b9c !important;
+	background-color:white;
+	margin-top:0;
+}
+
+body#typo3-show-item-php .typo3-smallDoc {
+	padding:10px 10px 5px 5px;
+	border-width:1px;
+}
+
+div#wrapCurUrlAndTree,
+body#ext-tinyrte-rte-select-image-php .folderTree {
+	border-width:1px 1px 1px 1px !important;
+	z-index:0;
+	position:relative;
+	top:0;
+	left:0;
+	z-index:0;
+	background-color:white;	
+}
+
+div#wrapCurUrlAndTree {	width:97%; }
+
+#typo3-curUrl {
+	margin-top:5px;
+	margin-bottom:5px;
+	margin-left:5px;
+	margin-right:10px;
+}
+
+body#typo3-browse-links-php #typo3-EBfiles,
+body#typo3-browse-links-php #typo3-EBrecords { border-width:1px 1px 1px 1px !important; }
+
+body#typo3-browse-links-php #typo3-EBfiles,
+body#typo3-browse-links-php #typo3-EBrecords,
+body#ext-tinyrte-rte-select-image-php .folderTree { width:99% }
+
+body#ext-tinyrte-rte-select-image-php table.bgColor5 {
+	margin-top:15px;
+	margin-bottom:2px;
+	background-color:white !important
+}
+
+body#typo3-browse-links-php #typo3-linkPages #typo3-tree,
+body#typo3-browse-links-php #typo3-linkFiles #typo3-tree,
+body#ext-tinyrte-rte-select-image-php .folderTree .headerCell table,
+body#typo3-browse-links-php #typo3-linkPages h3, 
+body#typo3-browse-links-php #typo3-linkFiles h3 { margin-left:5px !important; }
+
+body#typo3-browse-links-php #typo3-linkPages h3, 
+body#typo3-browse-links-php #typo3-linkFiles h3 { margin-bottom:5px; }
+
+body#typo3-browse-links-php #typo3-EBfiles .c-wCell,
+body#typo3-browse-links-php #typo3-EBrecords .c-wCell,
+body#ext-tinyrte-rte-select-image-php .headercell,
+body#ext-tinyrte-rte-select-image-php .files,
+body#typo3-browse-links-php #typo3-linkPages td.c-wCell, 
+body#typo3-browse-links-php #typo3-linkFiles td.c-wCell { width:50%; }
+
+body#typo3-browse-links-php #typo3-linkPages td.c-wCell, 
+body#typo3-browse-links-php #typo3-linkFiles td.c-wCell,
+body#ext-tinyrte-rte-select-image-php .folderTree td.headerCell,
+body#ext-tinyrte-rte-select-image-php .folderTree td.files { padding:0 10px 5px 0 !important }
+
+body#typo3-browse-links-php #typo3-linkPages td.c-wCell table, 
+body#typo3-browse-links-php #typo3-linkFiles td.c-wCell table,
+body#ext-tinyrte-rte-select-image-php td.headerCell table,
+body#ext-tinyrte-rte-select-image-php td.files table { width:99% }
+
+body#typo3-browse-links-php #typo3-EBfiles td.c-wCell,
+body#typo3-browse-links-php #typo3-EBrecords td.c-wCell {	
+	padding-left:5px !important;
+	padding-right:10px !important;
+	text-align:left !important;
+}
+
+body#typo3-browse-links-php #typo3-EBfiles td.c-wCell table#typo3-tree,
+body#typo3-browse-links-php #typo3-EBrecords td.c-wCell table#typo3-tree {
+	width:99%;
+	margin-left:0 !important
+}
+body#typo3-browse-links-php #typo3-EBfiles td.c-wCell table#typo3-tree td,
+body#typo3-browse-links-php #typo3-EBrecords td.c-wCell table#typo3-tree td {
+	padding:0;
+}
+
+#typo3-EBfiles h3.bgColor5,
+#typo3-EBrecords h3.bgColor5 { margin-top:10px !important; }
+
+body#typo3-browse-links-php .c-wCell h3.bgColor5 { margin-left:0 !important; }
+
+body#typo3-browse-links-php #typo3-linkPages, 
+body#typo3-browse-links-php #typo3-linkFiles {	
+	position:relative;
+	top:-3px;
+	z-index:2;
+	background-color: #ffffff !important;
+	margin-top:0px !important;
+	width:100% !important;
+	margin-bottom:0px !important;
+}
+
+body#ext-tinyrte-rte-select-image-php table.printTree {	margin-bottom:5px }
+
+body#ext-tinyrte-rte-select-image-php td.bgColor4,
+body#ext-tinyrte-rte-select-image-php td.bgColor5,
+body#typo3-browse-links-php #typo3-tabmenu .tab,
+body#typo3-browse-links-php #typo3-tabmenu .tabact,
+.tabact *,
+.tab * {
+	border-width:0 !important; 
+	background-color: transparent !important;
+}
+
+.tabTable .left, .tabTable .middle, .tabTable .right {
+	height: 18px !important; 
+	overflow:hidden; 
+	padding:0 !important
+}
+
+#typo3-alt-doc-php .tabact,
+#typo3-alt-doc-php .tab {
+	padding-left:0 !important;
+	padding-right:0 !important;
+	width:auto !important;
+	heigh:18px;
+}
+
+#typo3-alt-doc-php .tabact .tabTable .left, 
+#typo3-alt-doc-php .tabact .tabTable .middle, 
+#typo3-alt-doc-php .tabact .tabTable .right { height:17px !important; }
+
+.tabTable .left, 
+.tabTable .right { width:8px !important; }
+
+.bgColor4 .left, .tab .left { background: transparent url(tinyrte_images/leftNoActive.gif) repeat-x; } 
+.bgColor4 .middle, .tab .middle { background: transparent url(tinyrte_images/middleNoActive.gif) repeat-x; } 
+.bgColor4 .right, .tab .right {	background: transparent url(tinyrte_images/rightNoActive.gif) repeat-x; } 
+.bgColor5 .left, .tabact .left { background: transparent url(tinyrte_images/leftActive.gif) repeat-x; } 
+.bgColor5 .middle, .tabact .middle { background: transparent url(tinyrte_images/middleActive.gif) repeat-x; } 
+.bgColor5 .right, .tabact .right { background: transparent url(tinyrte_images/rightActive.gif) repeat-x;}
+
+body#ext-tinyrte-rte-select-image-php td.bgColor4 a,
+body#ext-tinyrte-rte-select-image-php td.bgColor5 a,
+body#typo3-browse-links-php #typo3-tabmenu .tab a,
+body#typo3-browse-links-php #typo3-tabmenu .tabact a,
+.tabact a,
+.tab a,
+.tabTable a, 
+.tabTable a:link, 
+.tabTable a:visited, 
+.tabTable a:hover {	
+	border-width:0 !important; 
+	padding:2px 0px !important;
+	background-color: transparent !important;
+}
+
+.c-tablayer, .c-tablayer table,.typo3-dyntabmenu-divs { margin-top:0 !important; } 
+
+.tabTable a:hover,
+TABLE.typo3-dyntabmenu TD A:hover {  }
+
+
+
+/* esim. mainospalkit */
+#typo3-alt-doc-php .firstOptions,
+#typo3-alt-doc-php .otherOptions { margin-top:-1px; }
+
+#typo3-alt-doc-php .wrapperTable .class-main2 {background-color: #E6E6E6; height: 24px; background-image: url(backgrounds/h3_bg.gif) !important; background-repeat : repeat-x;}
+
+#typo3-alt-doc-php .wrapperTable strong {
+	display:block; 
+	padding-top:5px;
+	padding-left:10px;
+}
+
+#typo3-alt-doc-php .tabact .tabTable td { border-bottom:1px solid #dedede !important; }
+
+#typo3-alt-doc-php .class-main51 .tabact .tabTable td { border-bottom:1px solid #f2f2f2 !important; /*#f9f9f9*/ }
+
+/* esim. news. plugin-valinnat */
+#typo3-alt-doc-php .class-main51 .firstOptions, 
+#typo3-alt-doc-php .class-main51 .otherOptions { margin-top:0; }
+
+input {}
+input.checkbox { border-width:0; }
+input.submit {
+   font-weight: bold;
+   width: 90px;
+   height: 21px;
+   border-width: 0;
+   background-image: url('../tinyrte/tiny_mce/themes/advanced/images/insert_button_bg.gif');
+   cursor: pointer;
+}
+
+.mceButtonOver,
+.mceButtonDown,
+.mceButtonSelected,
+.mceButtonDisabled { cursor: default !important; }
+
+.mceSelectList { font-family: "MS Sans Serif"; }
+
+.mceLabel, 
+.mceLabelDisabled,
+.mceStatusbarTop .mceStatusbarPathText, 
+.mceStatusbarBottom .mceStatusbarPathText, 
+.mceStatusbar .mceStatusbarPathText,
+.mcePathItem, .mcePathItem:link, 
+.mcePathItem:visited, .mcePathItem:hover { font-family: 'MS Sans Serif', Verdana, Arial, sans-serif; }
+
+.mcePathItem:hover { text-decoration: none !important; /* underline */ }
+
+/*
+
+.mceStatusbarTop, .mceStatusbarBottom, .mceStatusbar {
+}
+
+.mceLabel {
+}
+
+.mceLabelDisabled {
+}
+
+.mceEditor {
+}
+
+.mceSeparator {
+}
+
+.mceSeparatorLine {
+}
+
+.mceToolbarTop {
+}
+
+.mceToolbarBottom {
+}
+
+
+.mceToolbarTop {
+}
+
+.mceToolbarBottom {
+}
+.mceStatusbarTop {
+}
+
+.mceStatusbarBottom {
+}
+
+.mceStatusbar {
+}
+
+.mceStatusbarPathText {
+}
+
+.mceStatusbarResize {
+}
+
+.mceResizeBox {
+}
+
+
+.mceToolbarTop a, .mceToolbarTop a:visited, .mceToolbarTop a:hover, .mceToolbarBottom a, .mceToolbarBottom a:visited, .mceToolbarBottom a:hover {
+}
+
+.mceButtonNormal, .mceButtonOver, .mceButtonDown, .mceSeparator, .mceSeparatorLine, .mceButtonDisabled, .mceButtonSelected {
+}
+
+.mceButtonNormal {
+}
+*/

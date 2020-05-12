@@ -1,0 +1,67 @@
+/* This file contains the CSS data for the editor UI of TinyMCE instances for skin_grey_2 */
+@import url(TinyMCEStyles_fullgray.css);
+#nav li ul.secondary { 
+	left: 0px !important;
+	margin-left:0px !important;
+}
+#nav .tab a:link, #nav li li a:link, 
+#nav .tab a:visited, #nav li li a:visited { 
+	color:black !important;
+	font-weight:normal !important;
+}
+#nav .tab a:hover, #nav a:hover, #nav li li a:hover { 
+	color:#BD7A1D !important;
+	text-decoration: none !important;
+}
+body#typo3-alt-topmenu-dummy-php-iconmenu { 
+	margin:0 !important;
+	padding:0 !important;
+}
+#typo3-topMenu {
+	position:absolute;
+	top:0px;
+	left:0px;
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+body.background_high table#typo3-shortcuts { margin-top:5px !important; }
+.middle a { height:1.0em !important; }
+.middle .disabled { color: black !important }
+
+
+/* tabbed menu for default Web > Page selecting the mode */
+table#topTextFunctionMenu {
+	top:30px !important;
+	left:0px !important;
+	z-index:2;
+	height:16px !important;
+	width:auto !important;
+}
+table#topTextFunctionMenu,
+table#topTextFunctionMenu table.tabTable { width:auto !important; }
+table#topTextFunctionMenu td.middle { 
+	padding-top:2px !important;
+	padding-bottom:2px;
+	overflow:hidden;
+	height:16px !important;
+}
+table#topTextFunctionMenu td.tab input,
+table#topTextFunctionMenu td.tabact input { 
+	background: transparent none;
+	border-width:0;
+	padding:0 !important;
+	position:relative;
+	top:-3px;
+}
+table#topTextFunctionMenu td.middle a {
+	margin:0 !important;
+	padding:0 !important;
+}
+table#topTextFunctionMenu,
+table#topTextFunctionMenu table.tabTable { width:auto !important; }
+body.topmenu *,
+body.topmenu_high * { font-size:11px; font-family:Arial, sans-serif; } 
+body.topmenu .toolbar-item img,
+body.topmenu_high .toolbar-item img,
+body.topmenu .toolbar-item-menu img,
+body.topmenu_high .toolbar-item-menu img { border-width:0; }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'q4u_search'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Q4U Search</label>
+			<label index="tt_content.list_type_pi2">Q4U Extended-Search</label>
+			<label index="tt_content.list_type_pi3">Q4U GeoRSS</label>
+			<label index="tt_content.list_type_pi4">Q4U TagCloud</label>
+			<label index="tt_content.flexform_pi3.sheet_settings">Settings</label>
+			<label index="tt_content.flexform_pi3.sheet_settings_desc">Plugin settings</label>
+			<label index="tt_content.flexform_pi3.sheet_settings_short">Plugin settings</label>
+			<label index="tt_content.flexform_pi3.path">Path to GeoRSS-File</label>
+			<label index="tt_content.flexform_pi3.url">URL to GeoRSS</label>
+			<label index="tt_content.flexform_pi3.count">Number of items to display (0 for all)</label>
+			<label index="tt_content.flexform_pi3.detail">Show abstract</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Q4U Suche</label>
+			<label index="tt_content.list_type_pi2">Q4U Erweiterte Suche</label>
+			<label index="tt_content.list_type_pi3">Q4U GeoRSS</label>
+			<label index="tt_content.list_type_pi4">Q4U TagCloud</label>
+			<label index="tt_content.flexform_pi3.sheet_settings">Einstellungen</label>
+			<label index="tt_content.flexform_pi3.sheet_settings_desc">Plugin-Einstellungen</label>
+			<label index="tt_content.flexform_pi3.sheet_settings_short">Plugin-Einstellungen</label>
+			<label index="tt_content.flexform_pi3.path">Serverpfad der GeoRSS-Datei</label>
+			<label index="tt_content.flexform_pi3.url">URL zur GeoRSS</label>
+			<label index="tt_content.flexform_pi3.count">Anzahl der Einträge (0 für alle)</label>
+			<label index="tt_content.flexform_pi3.detail">Details anzeigen</label>
+		</languageKey>
+	</data>
+</T3locallang>

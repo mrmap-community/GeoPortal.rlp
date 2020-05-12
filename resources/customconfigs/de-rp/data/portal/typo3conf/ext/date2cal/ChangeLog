@@ -1,0 +1,246 @@
+07-04-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.1.0
+	* 7.1.0: fixed problem with first day of week
+	* 7.1.0: added attention of global extension configuration in the date2cal API
+
+20-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.6
+	* 7.0.6: removed usage of XCLASS for the quickedit mode if TYPO3 version >= 4.2
+
+19-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0.6: increased maximum php version to 5.0.0
+	* 7.0.6: updated the manual
+
+18-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.5
+	* 7.0.5: fixed further problem with multiple date fields and time switching
+
+17-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.4
+	* 7.0.4: fixed problem with multiple date fields and date/datetime switching
+
+07-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.3
+	* 7.0.3: fixed invalid code for retrieving the image sources (Thanks to Jörg Sauskat)
+
+06-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.2
+	* 7.0.2: fixed a problem with the german language labels (Thanks to Sebastian Fischer)
+	* 7.0.2: fixed some FE rendering related problems (Thanks to Bastian Ahrens)
+
+02-03-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0.1
+	* 7.0.1: fixed several issues with the rendering of the date2cal documentation on typo3.org
+	* 7.0.1: fixed php warnings which caused a disfunctionality of the calendar
+
+28-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	RELEASE OF VERSION 7.0
+	* 7.0: added name property to the render method of the JSCalendar API
+	* 7.0: added default to the setCSS method
+	* 7.0: added css classes to the rendered input fields
+	* 7.0: added an example how to add the calendar to the documentation
+	* 7.0: changed JSCalendar constructor (removed parameters!)
+	* 7.0: fixed language problem (always english if it wasn't explicitly set)
+	* 7.0: fixed duplicate class setting in the renderImages method
+
+27-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: fixed problem with TYPO3 4.1 and loading of prototype
+
+26-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: updated documentation
+	* 7.0: fixed some documentation errors
+	* 7.0: improved generation of inline documentation
+
+25-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added new improved caching system (own file => less evil!; TYPO3 4.2 compatibility)
+	* 7.0: fixed the rendering functions to work with the new be css of TYPO3 4.2 correctly
+	* 7.0: cleanups in ext_tables.php
+
+24-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added typo3 date behaviour to the render function
+	* 7.0: added another t3skin theme (Thanks to Noel Bossart)
+	* 7.0: added doxygen file and generated inline documentation
+	* 7.0: moved existing skins to own directories
+	* 7.0: removed lots of unnecessary skins
+	* 7.0: fixed some documentation issues
+	* 7.0: fixed some TYPO3 4.2 compatility issues (Thanks to Stefan Ritter and Benjamin Mack)
+	* 7.0: fixed IE7 problem (Thanks to Sebastian Fischer)
+	* 7.0: fixed a problem with incorrect setting of a  background color in the aqua theme
+	* 7.0: fixed compatibility problems with other extensions regarding the quickedit xclass
+	* 7.0: fixed some problems with the render function
+	* 7.0: fixed theme selection code
+
+21-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added improvements to the renderImage function of the JSCalendar API
+	* 7.0: added new render function which renders an complete calendar input element
+	* 7.0: added automatic generation of field ids if you don't want to specify them
+	* 7.0: added automatic generation of the button configuration option (<inputId>_trigger)
+	* 7.0: added setDateFormat method which generates the format automatically
+
+17-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added render function to the JSCalendar API class to generate the images
+	* 7.0: removed alternative language setting in the JSCalendar API class
+	* 7.0: removed checkboxField option (its not needed anymore)
+	* 7.0: fixed problems if PATH_site contains only a single slash
+	* 7.0: cleanups and refactoring (wizard and JSCalendar API class)
+
+16-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added a js directory and moved the jscalendar and the natural language parser herein
+	* 7.0: added several functions to add/change options to the jscalendar API class
+	* 7.0: changed name of datetime_toolbocks.js to naturalLanguageParser.js
+	* 7.0: changed jscalendar API class to work with the new singleton approach
+	* 7.0: removed typo3/typo3US format in the natural language parser (format = ifFormat)
+	* 7.0: cleanups and refactoring (wizard and JSCalendar API class)
+
+11-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added real singleton approach with php4 support
+	* 7.0: cleanups and refactoring (wizard and JSCalendar class)
+
+07-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added possibility to override all global options of date2cal by the user/group ts config
+	* 7.0: added "secOptionAlwaysOn" to the global configuration
+	* 7.0: cleanups and refactoring (wizard class)
+
+06-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added maximum versions and a conflict with erotea_date2cal
+	* 7.0: cleanups and refactoring (wizard class)
+
+05-02-08 Stefan Galinski  <stefan.galinski@gmail.com>
+	* 7.0: added changelog file
+	* 7.0: added a src directory and moved all class files herein
+	* 7.0: added a shared functions class
+	* 7.0: updated documentation, extension description and several inline comments
+	* 7.0: updated copyright and email address
+	* 7.0: fixed a double call of the loadTCA function for tables pages and tt_content
+	* 7.0: several cleanups and refactoring (ext_tables.php and hook class)
+
+## Older Releases ##
+##############
+
+Version 6.1.1 (stable)
+	* fixed first day of week support, changed to a boolean field
+	* fixed some xhtml strict problems
+	* fixed problems with formsonpage mode
+
+Version 6.1.0 (stable)
+	* added first day of week support (Thanks to Stano Paška)
+
+Version 6.0.4 (stable)
+	* fixes unattended file references in flexforms (Thanks to René Fritz)
+	* added additional calendar image
+	* changed default calendar image
+	* changed extension icon
+
+Version 6.0.3 (stable)
+	* fixed broken time insertion in relation with natural language parsing feature
+
+Version 6.0.2 (stable)
+	* fixed php error from code change in the 6.0.1 release
+
+Version 6.0.1 (stable)
+	* smashed some stupid warnings about missing files
+	* added some additional information for the extension manager
+	  (fixes hopefully the loading order problem permanently)
+
+Version 6.0.0 (stable)
+	* added natural language parsing extension support
+	* fixed flexform bug (Thanks to Martin Holtz)
+
+Version 5.1.1 (stable)
+	* added option which disables the caching mechanism
+	* fixed css skin checking code (Thanks to Tobias ROHRLE)
+
+Version 5.1 (stable)
+	* added themes for t3skin (Thanks to Tomas Mrozek) and skin_grey2
+
+Version 5.0.3 - 5.0.4 (stable)
+	* fixed annoying cache problem (Thanks to Tomas Mrozek)
+	* fixed bug in not tabbed flexforms (Thanks to Kasper Ligaard)
+	* fixed TYPO3 3.8.x incompatibility (regression in 5.x series)
+	* fixed some small documentation glitches
+
+Version 5.0.2 (stable)
+	* fixed small datetime bug for the start time field in the TCA table “pages”
+
+Version 5.0.1 (stable)
+	* fixed problem that the alternative image isn't used
+	* fixed major php4 error
+
+Version 5.0.0 (stable)
+	* added JSCalendar implementation class to offer some external methods
+	   for other extension authors
+
+Version 4.0.2 (stable)
+	* added missing attention of TYPO3_CONF_VARS['EXT']['extCache']
+
+Version 4.0.1 (stable)
+	* fixed small performance issue
+
+Version 4.0.0 (stable)
+	* added support for flexforms
+	* increased performance
+	* some clean-ups
+
+Version 3.2.0 (stable)
+	* added configuration option to replace the calendar image
+
+Version 3.1.0 (stable)
+	* added limited option to activate always “show secondary options (palette)”
+
+Version 3.0.5 (stable)
+	* fixed “Warning: Cannot modify header information” in some installations
+
+Version 3.0.4 (stable)
+	* fixed clearCacheOnLoad
+
+Version 3.0.3 (stable)
+	* fixed possible problem with twice loading of ext_tables.php file
+
+Version 3.0.2 (stable)
+	* fixed small issue with default value in skin selection
+
+Version 3.0.1 (stable)
+	* fixed support of quick edit mode if php4 is used
+
+Version 3.0.0 (stable)
+	* added usage of cache file to improve the performance
+	* fixed problem with configuration option aqua/theme.css
+
+Version 2.2.2 (stable)
+	* fixed problem with TYPO3 4.x (used variable which is only accessible
+	  if you use tm_contentaccess and/or skin_grey2)
+
+Version 2.2.1 (stable)
+	* fixed problem with phpmyadmin (don't use $_GET to get user variables)
+
+Version 2.2.0 (stable)
+	* fixed problem with loading in quick edit mode
+	* fixed problems with loading through some language files
+
+Version 2.1.0 (stable)
+	* added support of TYPO3 3.8.1
+	* fixed problems with PHP4
+
+Version 2.0.0 (stable)
+	* added preferred usage of utf-8 language files if force charset is set to “utf-8”
+	* added date2datetime feature for start time to end time fields (Thanks to Peter Klein)
+	* added user/group configuration option to set a preferred language
+	* changed functionality from xclasses to wizards (Thanks to Bernhard Kraft)
+	* changed default skin to “aqua”
+	* fixed problem with “aqua” skin
+	* heavily reduced size of extension
+
+Version 1.1.1 (stable)
+	* added support for PHP versions < 4.3 (version below 4.0 not tested)
+
+Version 1.1 (stable)
+	* added support of “USdateFormat”
+
+Version 1.0 (stable)
+	Differences between “erotea_date2cal” and “date2cal”
+	* update to JSCalendar 1.0
+	* automatic language detection
+	* support of quick edit mode
+	* some code improvements
+	* configuration option for different skins
+	* added documentation

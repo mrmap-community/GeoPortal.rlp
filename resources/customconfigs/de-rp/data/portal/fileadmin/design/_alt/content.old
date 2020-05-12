@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+
+<head>
+	<title>GeoPortal Rheinland-Pfalz - ###TITLEDES###</title>
+	<base href="http://rlp.lab.q4u.de/" />
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<meta name="description" content="###METADES###" xml:lang="de" />
+	<meta name="keywords" content="###KEYWORDS###" xml:lang="de" />
+	<meta name="author" content="Q4U GmbH" />
+	<meta name="publisher" content="Q4U GmbH" />
+	<meta name="copyright" content="Q4U GmbH" />
+
+	<meta http-equiv="content-language" content="de" />
+	<meta http-equiv="content-style-type" content="text/css" />
+
+	<link rel="shortcut icon" href="/favicon.ico" />
+
+	<link rel="stylesheet" type="text/css" href="/fileadmin/design/css/screen.css" media="screen" />
+
+	<script type="text/javascript" src="/fileadmin/design/scripts/functions.js"></script>
+</head>
+
+<body id="top">
+
+<div class="width">
+<div class="minwidth">
+<div class="container">
+
+<ul id="skip">
+<li><a href="###REALURL####navi1" accesskey="7">Zur Navigation springen</a></li>
+<li><a href="###REALURL####content" accesskey="8">Zum Inhalt springen</a></li>
+</ul>
+
+<div id="header">
+<img id="rlp_logo" src="/fileadmin/design/images/rlp_logo.gif" width="215" height="109" alt="Rheinland Pfalz Schriftzug und Wappen" />
+<div id="navi0">###NAVI0###</div>
+<div id="navi1">###NAVI1###</div>
+<div id="bilder">
+<img id="bild1" src="/fileadmin/design/images/header_bild_01.jpg" width="95" height="70" alt="" />
+<img id="bild2" src="/fileadmin/design/images/header_bild_02.jpg" width="95" height="70" alt="" />
+<div id="gdi-rp_logo"><img src="/fileadmin/design/images/gdi-rp_logo.gif" width="74" height="65" alt="GDI-RP" /></div>
+</div>
+<img id="geoportal_logo" src="/fileadmin/design/images/geoportal.rlp_logo.gif" width="159" height="27" alt="GeoPortal.rlp" />
+</div>
+
+<div id="left">
+
+<div class="box" id="navi2">
+<h2><span>Navi2</span></h2>
+###NAVI2###
+</div>
+
+
+<div class="box" id="anmelden">
+<h2><span>Anmelden</span><a href=""><img src="/fileadmin/design/images/questionmark.gif" width="14" height="14" alt="Hilfe" /></a></h2>
+<form action="">
+<fieldset class="data">
+<label for="user">Benutzername</label>
+<input id="user" type="text" />
+<label for="password">Passwort</label>
+<input id="password" type="password" />
+</fieldset>
+<fieldset class="control">
+<input type="submit" value="Anmelden" />
+</fieldset>
+</form>
+</div>
+
+<div class="box" id="suchen">
+<h2><span>Suche</span><a href=""><img src="/fileadmin/design/images/questionmark.gif" width="14" height="14" alt="Hilfe" /></a></h2>
+<form action="">
+<fieldset class="data">
+<label for="searchword">Suchbegriff</label>
+<input id="searchword" type="text" />
+</fieldset>
+<fieldset class="control">
+<input type="submit" value="Suchen" />
+</fieldset>
+</form>
+</div>
+</div>
+
+<div id="wrapper">
+<div id="center_wrapper">
+<div id="center" class="content">
+###BREADCRUMB###
+###CONTENT###
+</div>
+</div>
+
+<div id="right_wrapper">
+<div id="right" class="content">
+###RIGHT###
+
+<div class="box" id="glossar">
+<h2><span>Glossar</span><a href=""><img src="/fileadmin/design/images/arrow_right.gif" width="14" height="14" alt="Hilfe" /></a></h2>
+###GLOSSAR###
+</div>
+
+<div class="box">
+<h2><span>Aktuelles</span><a href=""><img src="/fileadmin/design/images/arrow_right.gif" width="14" height="14" alt="Hilfe" /></a></h2>
+	<ul class="news">
+		<li>
+		<p class="news-date">07.03.2006</p>
+		<h3><a href="">Flyer zur Geodateninfrastruktur Rheinland-Pfalz</a></h3>
+		<p>Eine Informationsbroschüre zur Geodateninfrastruktur in Rheinland-Pfalz wurde in Form eines Flyers von der Kompetenz- und Geschäftsstelle der GDI-RP herausgegeben.</p>
+		</li>
+	</ul>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+
+</html>

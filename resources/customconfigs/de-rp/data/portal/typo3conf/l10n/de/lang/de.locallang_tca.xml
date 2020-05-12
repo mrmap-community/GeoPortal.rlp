@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="pages">Seite</label>
+			<label index="doktype.I.0">Standard</label>
+			<label index="doktype.I.1">SysOrdner</label>
+			<label index="doktype.I.2">Papierkorb</label>
+			<label index="title">Seitentitel:</label>
+			<label index="php_tree_stop">Seitenbaum stoppen:</label>
+			<label index="is_siteroot">Ist Anfang der Webseite:</label>
+			<label index="storage_pid">Allgemeine Datensatzsammlung:</label>
+			<label index="be_users">Backend Benutzer</label>
+			<label index="be_groups">Backend Benutzergruppe</label>
+			<label index="sys_filemounts">Dateifreigaben</label>
+			<label index="sys_language">Website Sprache</label>
+			<label index="sys_language.isocode">Wähle Sprache (ISO Code):</label>
+			<label index="sys_language.flag">Wähle Flaggen-Symbol:</label>
+			<label index="sys_workspace">Workspace</label>
+			<label index="editlock">Bearbeitung erfordert Admin-Rechte:</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="pages" type="integer">26464201</label>
+			<label index="doktype.I.0" type="integer">246864046</label>
+			<label index="doktype.I.1" type="integer">260649090</label>
+			<label index="doktype.I.2" type="integer">184146156</label>
+			<label index="title" type="integer">66854616</label>
+			<label index="php_tree_stop" type="integer">90999720</label>
+			<label index="is_siteroot" type="integer">250187229</label>
+			<label index="storage_pid" type="integer">147559019</label>
+			<label index="be_users" type="integer">104926801</label>
+			<label index="be_groups" type="integer">190780417</label>
+			<label index="sys_filemounts" type="integer">140334923</label>
+			<label index="sys_language" type="integer">144875845</label>
+			<label index="sys_language.isocode" type="integer">49440593</label>
+			<label index="sys_language.flag" type="integer">145114393</label>
+			<label index="editlock" type="integer">177820058</label>
+			<label index="sys_workspace" type="double">3809681</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="pages">Page</label>
+			<label index="doktype.I.0">Standard</label>
+			<label index="doktype.I.1">SysFolder</label>
+			<label index="doktype.I.2">Recycler</label>
+			<label index="title">Pagetitle:</label>
+			<label index="php_tree_stop">Stop page tree:</label>
+			<label index="is_siteroot">Is root of website:</label>
+			<label index="storage_pid">General Record Storage page:</label>
+			<label index="be_users">Backend user</label>
+			<label index="be_groups">Backend usergroup</label>
+			<label index="sys_filemounts">Filemount</label>
+			<label index="sys_language">Website Language</label>
+			<label index="sys_language.isocode">Select Official Language (ISO code):</label>
+			<label index="sys_language.flag">Select flag icon:</label>
+			<label index="sys_workspace">Workspace</label>
+			<label index="editlock">Restrict editing by non-Admins:</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

@@ -1,0 +1,1 @@
+<?php print "http://".$_SERVER["SERVER_NAME"]."/"; ?>

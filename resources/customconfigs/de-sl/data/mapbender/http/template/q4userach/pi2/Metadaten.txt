@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output encoding="utf-8" method="html" media-type="text/html" />
+<xsl:template match="/" xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+<xsl:for-each select="soap-env:Envelope/soap-env:Body/searchResponse/searchResults/MD_Metadata">
+
+<table width="531" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<th height="15" width="31" align="left" valign="top">
+			<div id="ptltxtor">1.</div>
+		</th>
+		<td>
+			<table width="100%" height="100%" cellpadding="1" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<table style="border-collapse:collapse" width="500" height="10%" cellpadding="2" cellspacing="0" border="0" bordercolor="F2F2F2" bgcolor="F2F2F2">
+							<tr>
+								<th style="border:1px solid gray" height="15" width="140" align="left">
+									<div id="ptltxtor"> Titel</div>
+								</th>
+								<td style="border:1px solid gray" height="15" width="351">
+<xsl:value-of select="identificationInfo/MD_DataIdentification/citation/title" />
+                 </td>
+							</tr>
+							<tr>
+								<th style="border:1px solid gray" height="15" width="140" align="left">
+									<div id="ptltxt"> Veröffentlichungsdatum</div>
+								</th>
+								<td style="border:1px solid gray" height="15" width="351">
+<xsl:value-of select="identificationInfo/MD_DataIdentification/citation/date/date" />
+								</td>
+							</tr>
+							<tr>
+								<th style="border:1px solid gray" height="15" width="140" align="left">
+									<div id="ptltxt"> Zusammenfassung</div>
+								</th>
+								<td style="border:1px solid gray" height="15" width="351">
+<xsl:value-of select="substring(identificationInfo/MD_DataIdentification/abstract,0,40)"/>
+								</td>
+							</tr>
+							<tr>
+								<th style="border:1px solid gray" height="15" width="140" align="left">
+									<div id="ptltxt"> Schlagwörter</div>
+								</th>
+								<td style="border:1px solid gray" height="15" width="351">
+<xsl:value-of select="concat(identificationInfo/MD_DataIdentification/descriptiveKeywords/MD_Keywords/keyword,',')" />
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid gray" height="18" width="145" align="left">vollständig anzeigen</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</xsl:for-each>
+</xsl:template>
+</xsl:stylesheet>

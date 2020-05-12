@@ -1,0 +1,88 @@
+169dadd2cad88f89a22863a6d7cc5e60:0:0000001551:a:4:{s:8:"pagetree";a:1:{i:60;a:1:{s:3:"uid";s:2:"60";}}s:7:"records";a:2:{s:5:"pages";a:1:{i:60;a:5:{s:3:"uid";s:2:"60";s:3:"pid";s:2:"59";s:5:"title";s:13:"Testpage HTML";s:4:"size";i:1519;s:4:"rels";a:0:{}}}s:12:"sys_template";a:1:{i:22;a:6:{s:3:"uid";s:2:"22";s:3:"pid";s:2:"60";s:5:"title";s:24:"+ tmplselector html mode";s:4:"size";i:2843;s:4:"rels";a:2:{s:18:"static_template:45";a:2:{s:2:"id";i:45;s:5:"table";s:15:"static_template";}s:18:"static_template:43";a:2:{s:2:"id";i:43;s:5:"table";s:15:"static_template";}}s:8:"filerefs";a:4:{i:0;s:32:"04888616e6972e678812a5e8887b0b9a";i:1;s:32:"3524d90731fb76259be6c087f8eabb27";i:2;s:32:"eef7ce9210c5405b42970b7a604cf0ad";i:3;s:32:"3afbc1a946f9c2970fc25ccfa6aa0b53";}}}}s:10:"pid_lookup";a:2:{i:59;a:1:{s:5:"pages";a:1:{i:60;i:1;}}i:60;a:1:{s:12:"sys_template";a:1:{i:22;i:1;}}}s:5:"files";a:4:{s:32:"04888616e6972e678812a5e8887b0b9a";a:4:{s:8:"filesize";i:316;s:8:"filename";s:6:"1m.gif";s:9:"filemtime";i:1062866000;s:10:"record_ref";s:25:"sys_template:22/resources";}s:32:"3524d90731fb76259be6c087f8eabb27";a:4:{s:8:"filesize";i:338;s:8:"filename";s:6:"2m.gif";s:9:"filemtime";i:1062866007;s:10:"record_ref";s:25:"sys_template:22/resources";}s:32:"eef7ce9210c5405b42970b7a604cf0ad";a:4:{s:8:"filesize";i:302;s:8:"filename";s:6:"1s.gif";s:9:"filemtime";i:1062866014;s:10:"record_ref";s:25:"sys_template:22/resources";}s:32:"3afbc1a946f9c2970fc25ccfa6aa0b53";a:4:{s:8:"filesize";i:322;s:8:"filename";s:6:"2s.gif";s:9:"filemtime";i:1062866023;s:10:"record_ref";s:25:"sys_template:22/resources";}}}:656283719bf19e0a399c9a9a3c57e67c:0:0000006150:a:2:{s:8:"pages:60";a:2:{s:4:"data";a:56:{s:3:"uid";s:2:"60";s:3:"pid";s:2:"59";s:6:"tstamp";s:10:"1067462995";s:7:"sorting";s:3:"256";s:7:"deleted";s:1:"0";s:12:"perms_userid";s:1:"1";s:13:"perms_groupid";s:1:"0";s:10:"perms_user";s:2:"31";s:11:"perms_group";s:2:"27";s:15:"perms_everybody";s:1:"0";s:6:"crdate";s:10:"1062837998";s:9:"cruser_id";s:1:"1";s:5:"title";s:13:"Testpage HTML";s:7:"doktype";s:1:"1";s:8:"TSconfig";s:0:"";s:11:"storage_pid";s:1:"0";s:11:"is_siteroot";s:1:"0";s:13:"php_tree_stop";s:1:"0";s:17:"tx_impexp_origuid";s:1:"0";s:3:"url";s:0:"";s:6:"hidden";s:1:"0";s:9:"starttime";s:1:"0";s:7:"endtime";s:1:"0";s:7:"urltype";s:1:"1";s:8:"shortcut";s:1:"0";s:13:"shortcut_mode";s:1:"0";s:8:"no_cache";s:1:"1";s:8:"fe_group";s:1:"0";s:8:"subtitle";s:0:"";s:6:"layout";s:1:"0";s:6:"target";s:0:"";s:5:"media";s:0:"";s:11:"lastUpdated";s:1:"0";s:8:"keywords";s:0:"";s:13:"cache_timeout";s:1:"0";s:8:"newUntil";s:1:"0";s:11:"description";s:0:"";s:9:"no_search";s:1:"0";s:15:"SYS_LASTCHANGED";s:10:"1067450504";s:8:"abstract";s:0:"";s:6:"module";s:0:"";s:16:"extendToSubpages";s:1:"0";s:6:"author";s:0:"";s:12:"author_email";s:0:"";s:9:"nav_title";s:0:"";s:16:"content_from_pid";s:1:"0";s:9:"mount_pid";s:1:"0";s:5:"alias";s:0:"";s:29:"tx_rlmptmplselector_main_tmpl";s:1:"0";s:27:"tx_rlmptmplselector_ca_tmpl";s:1:"0";s:17:"tx_templavoila_ds";s:1:"0";s:17:"tx_templavoila_to";s:1:"0";s:19:"tx_templavoila_flex";s:0:"";s:22:"tx_templavoila_next_ds";s:1:"0";s:22:"tx_templavoila_next_to";s:1:"0";s:29:"tx_httpsenforcer_force_secure";s:1:"0";}s:4:"rels";a:10:{s:11:"storage_pid";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:8:"shortcut";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:8:"fe_group";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:5:"media";a:2:{s:4:"type";s:4:"file";s:13:"newValueFiles";a:0:{}}s:16:"content_from_pid";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:9:"mount_pid";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:17:"tx_templavoila_ds";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:17:"tx_templavoila_to";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:22:"tx_templavoila_next_ds";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:22:"tx_templavoila_next_to";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}}}s:15:"sys_template:22";a:2:{s:4:"data";a:26:{s:3:"uid";s:2:"22";s:3:"pid";s:2:"60";s:6:"tstamp";s:10:"1067462919";s:7:"sorting";s:3:"256";s:6:"crdate";s:10:"1062837544";s:9:"cruser_id";s:1:"1";s:5:"title";s:24:"+ tmplselector html mode";s:9:"sitetitle";s:0:"";s:6:"hidden";s:1:"0";s:9:"starttime";s:1:"0";s:7:"endtime";s:1:"0";s:4:"root";s:1:"1";s:5:"clear";s:1:"3";s:14:"include_static";s:5:"45,43";s:19:"include_static_file";s:0:"";s:9:"constants";s:0:"";s:6:"config";s:2129:"// --- SET UP TEMPLATE SELECTOR -----------------------------------------------
+
+plugin.tx_rlmptmplselector_pi1 {
+
+      // Define the paths leading to our HTML template files
+   templatePathMain = fileadmin/assets/templates/main/
+   templatePathSub = fileadmin/assets/templates/sub/
+
+      // Define the filenames used as the default HTML templates
+   defaultTemplateFileNameMain = template_1.html
+   defaultTemplateFileNameSub = subtemplate_1.html
+
+      // If there is a page having no template selected, use a template
+      // selected earlier in the rootline. If there is none, use the default
+    inheritMainTemplates = 1
+    inheritSubTemplates = 1
+}
+
+// --- CONFIGURE THE AUTOMAKETEMPLATE EXTENSION --------------------------
+
+plugin.tx_automaketemplate_pi1 {
+
+  content < plugin.tx_rlmptmplselector_pi1
+  elements {
+    BODY.all = 1
+    BODY.all.subpartMarker = DOCUMENT_BODY
+ 
+    HEAD.all = 1
+    HEAD.all.subpartMarker = DOCUMENT_HEADER
+    HEAD.rmTagSections = title
+ 
+    TD.all = 1
+    DIV.all = 1
+  }
+ 
+  relPathPrefix = fileadmin/assets/templates/main/
+} 
+
+// --- CREATE TS TEMPLATES FOR MAIN AND CONTENT AREA ------------------
+
+temp.headTemplate = TEMPLATE
+temp.headTemplate {
+  template =< plugin.tx_automaketemplate_pi1
+  workOnSubpart = DOCUMENT_HEADER
+}
+
+temp.contentAreaTemplate = TEMPLATE
+temp.contentAreaTemplate {
+
+   template =< plugin.tx_automaketemplate_pi1
+
+      // Modify the template selector config: This is a sub template!
+   template.content.templateType = sub
+
+   workOnSubpart = DOCUMENT_BODY
+   subparts.content < styles.content.get
+}
+
+temp.mainTemplate  = TEMPLATE
+temp.mainTemplate {
+
+  template =< plugin.tx_automaketemplate_pi1
+
+      // Modify the template selector config: This is a sub template!
+   template.content.templateType = main
+
+  workOnSubpart = DOCUMENT_BODY
+  subparts.content-normal < temp.contentAreaTemplate
+}
+
+// --- CREATE THE MAIN PAGE OBJECT -------------------------------------------
+ 
+page = PAGE
+page {
+   typeNum = 0
+   headerData.10 < temp.headTemplate
+   10 < temp.mainTemplate
+}";s:9:"editorcfg";s:0:"";s:9:"resources";s:27:"1m.gif,2m.gif,1s.gif,2s.gif";s:9:"nextLevel";s:0:"";s:11:"description";s:0:"";s:7:"basedOn";s:0:"";s:7:"deleted";s:1:"0";s:25:"includeStaticAfterBasedOn";s:1:"0";s:16:"static_file_mode";s:1:"0";s:17:"tx_impexp_origuid";s:1:"0";}s:4:"rels";a:4:{s:14:"include_static";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:2:{i:0;a:2:{s:2:"id";i:45;s:5:"table";s:15:"static_template";}i:1;a:2:{s:2:"id";i:43;s:5:"table";s:15:"static_template";}}}s:9:"resources";a:2:{s:4:"type";s:4:"file";s:13:"newValueFiles";a:4:{i:0;a:3:{s:10:"fieldvalue";s:6:"1m.gif";s:2:"ID";s:32:"04888616e6972e678812a5e8887b0b9a";s:10:"ID_absFile";s:32:"/var/www/t3dev/uploads/tf/1m.gif";}i:1;a:3:{s:10:"fieldvalue";s:6:"2m.gif";s:2:"ID";s:32:"3524d90731fb76259be6c087f8eabb27";s:10:"ID_absFile";s:32:"/var/www/t3dev/uploads/tf/2m.gif";}i:2;a:3:{s:10:"fieldvalue";s:6:"1s.gif";s:2:"ID";s:32:"eef7ce9210c5405b42970b7a604cf0ad";s:10:"ID_absFile";s:32:"/var/www/t3dev/uploads/tf/1s.gif";}i:3;a:3:{s:10:"fieldvalue";s:6:"2s.gif";s:2:"ID";s:32:"3afbc1a946f9c2970fc25ccfa6aa0b53";s:10:"ID_absFile";s:32:"/var/www/t3dev/uploads/tf/2s.gif";}}}s:9:"nextLevel";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}s:7:"basedOn";a:2:{s:4:"type";s:2:"db";s:9:"itemArray";a:0:{}}}}}:33cc6faf3f4905c99888f1e212872316:0:0000002312:a:4:{s:32:"04888616e6972e678812a5e8887b0b9a";a:6:{s:8:"filesize";i:316;s:8:"filename";s:6:"1m.gif";s:9:"filemtime";i:1062866000;s:10:"record_ref";s:25:"sys_template:22/resources";s:7:"content";s:316:"GIF89a( ( ƒ     ˇˇˇÓÓÓ›››ÃÃÃªªª™™™ôôôàààwwwfffUUUDDD333"""ˇˇˇ                                             !˘   ,    ( (  π` édiûh™ÆlÎæp,œtmﬂxÆÔ|ÔÛ £Ñ  • † SIE ¢¥02aJ!—ÿ 	åK,XF—ã1~¢¡âQ|u	£[}8D V3z[ 
+ 	àÑ2Üeäàìj1ëo  †ò0ö|Få ñ£u•dõFQÆ/¶∂Ññ
+ª§,Q√HøLE…è.lcè∑á∏+Uœj—í”?€‹›ﬁﬂ‡·‚„‰ÂÊ‚! ;";s:11:"content_md5";s:32:"15729759a58161d2cfc596337c8d27e8";}s:32:"3524d90731fb76259be6c087f8eabb27";a:6:{s:8:"filesize";i:338;s:8:"filename";s:6:"2m.gif";s:9:"filemtime";i:1062866007;s:10:"record_ref";s:25:"sys_template:22/resources";s:7:"content";s:338:"GIF89a( ( ƒ     ˇˇˇÓÓÓ›››ÃÃÃªªª™™™ôôôàààwwwfffUUUDDD333"""ˇˇˇ                                             !˘   ,    ( (  œ` édiûh™ÆlÎæp,œtmﬂxÆÔ|@Åètx éÄÖPÑ8Jác·E"£& QZH_å#¢`h|ZÏHÄúRπ"Éòâ$d€5˘ñ~LåÃg2F vhG" Ñn0Z w 
+ 	ñÅ.Ä Káòñ• è-ÉH~$ZIµ™0®°Ü∞Gö ®∑´+∑¢'Zà§ƒ*Zô»_®
+Õ/Z
+⁄⁄O÷MSZŒ)íV∏÷ΩÊ-‰Vn·%ÓCÒÚÛÙıˆ˜¯˘˙˚¸˝! ;";s:11:"content_md5";s:32:"1d0a4a2b2f79326665fad145e1f68818";}s:32:"eef7ce9210c5405b42970b7a604cf0ad";a:6:{s:8:"filesize";i:302;s:8:"filename";s:6:"1s.gif";s:9:"filemtime";i:1062866014;s:10:"record_ref";s:25:"sys_template:22/resources";s:7:"content";s:302:"GIF89a( ( ƒ     ˇˇˇÓÓÓ›››ÃÃÃªªª™™™ôôôàààwwwfffUUUDDD333"""ˇˇˇ                                             !˘   ,    ( (  ´` édiûh™ÆlÎæp,œtmﬂxÆÔ|ﬂÖÅÓ `òÄíA∏ã%Ñr
+xjO()˘8 -´î	—@!§1®∆—†–	Üe)	X¥sz$dlÄe#|U8Å%kS4ç&` 7î&õ2õu"ùÜ0R ®B©
+@Jô3oTJãâêí0±∂ ãTM>#@º»ÕŒœ–—“”‘’÷◊ÿ'! ;";s:11:"content_md5";s:32:"e918de9d70caa7e35d034e17f998a3c8";}s:32:"3afbc1a946f9c2970fc25ccfa6aa0b53";a:6:{s:8:"filesize";i:322;s:8:"filename";s:6:"2s.gif";s:9:"filemtime";i:1062866023;s:10:"record_ref";s:25:"sys_template:22/resources";s:7:"content";s:322:"GIF89a( ( ƒ     ˇˇˇÓÓÓ›››ÃÃÃªªª™™™ôôôàààwwwfffUUUDDD333"""ˇˇˇ                                             !˘   ,    ( (  ø` édiûh™ÆlÎæp,œtmﬂxÆÔ|@
+8∏Ä$`!!êIÅvPZNkÚ—å1íàÇ°ë,àêèCÅ8P#8PH&DE1'¿Î 
+>PSP{8J#UJz7l ]GJf4ÑJw&yúä1IÜ(lp2Äò,Q3ç CÇ"¥ è2∑
+√√E¡@s¿ZJfPV¶/∑Ãû®J´>D›·‚„‰ÂÊÁËÈÍÎÏ,! ;";s:11:"content_md5";s:32:"8c73077d42f5a42562ad91b90aa8e731";}}:

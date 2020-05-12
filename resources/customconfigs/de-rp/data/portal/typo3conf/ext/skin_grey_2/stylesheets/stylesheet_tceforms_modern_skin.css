@@ -1,0 +1,268 @@
+/*
+ * typo3-TCEforms.css
+ */
+
+div#typo3-docheader {
+	background: #c0c0c0 url(../backgrounds/docheader_bg.gif) top left repeat-x;
+	border-bottom: 1px solid #949494;
+	padding: 1px 0 0 0;
+	margin: 0;
+	right: 0px;
+	left: 0px;
+	width: auto;
+	}
+	
+div#typo3-docbody { 
+	padding: 5px 10px 0 10px; 
+	overflow: auto;
+	top: 60px; 
+	bottom: 0;
+	right: 0px;
+	left: 0px;
+	width: auto;
+	position: absolute; 
+	z-index: 2;
+	background: transparent url(../backgrounds/docbody_bggif) top left repeat-x;
+	border-left: 1px solid #949494;
+	}
+
+div#typo3-docheader-row1 {
+	background: transparent;
+	height: 28px;
+	line-height: 28px;
+	clear: both;
+	padding: 0px 0 0 0px;
+	color: #fff;
+	border-top: 0px solid #979797;
+	border-bottom: 0px solid #bebebe;
+	cursor: default;
+}
+
+div#typo3-docheader div.buttonsleft {
+	margin-left: 10px;
+	}
+
+div#typo3-docheader div.buttonsleft div.buttongroup,
+div#typo3-docheader div.buttonsright div.buttongroup {
+	height: 26px; 
+	float: left; 
+	padding: 0px;
+	border: 0px solid #949494;
+	border-right: 0px solid #949494;
+	margin-right: 15px;
+	background: transparent;
+	}
+
+div#typo3-docheader div.buttonsright div.buttongroup {
+	margin-left: 10px;
+	margin-right: 15px;
+	}
+
+div#typo3-docheader-row2 {
+	background: transparent;
+	height: 26px;
+	line-height: 26px;
+	padding: 4px 5px 0px 0px;
+	border-top: 0px solid #e0e0e0;
+	border-bottom: 0px solid #b4b4b4;
+	border-left: 0px solid #6f6f6f;
+	clear: both;
+}
+
+div#typo3-docheader select {
+	margin: 0px 15px 0 0px;
+	}
+
+div#typo3-docheader div.buttonsleft div.buttongroup a img, 
+div#typo3-docheader div.buttonsright div.buttongroup a img,
+div#typo3-docheader div.buttonsleft div.buttongroup input.c-inputButton
+{
+	background: transparent url(../backgrounds/docheader_icon_bg.png) top left repeat-x;
+	padding: 4px 10px 5px 10px;
+	line-height: 26px;
+	border: 0px solid transparent;
+	margin: 0px 1px 1px 0px;
+	z-index: 1;
+	}
+	
+div#typo3-docheader div.buttonsleft div.buttongroup a:hover img,
+div#typo3-docheader div.buttonsright div.buttongroup a:hover img,
+#table.typo3-dblist tr td div.typo3-DBctrl a:hover,
+div#typo3-docheader div.buttonsleft div.buttongroup input.c-inputButton:hover {
+	background: transparent url(../backgrounds/docheader_icon_bg_o.png) center left repeat-x;
+	border: 0px solid #c0c0c0;
+	z-index: 1000;
+	}
+
+.pagepath {
+	color: #949494;
+	padding: 4px 10px 4px 10px;
+	cursor: default;
+	float: left;
+	}
+	
+.typo3-docheader-pagePath {
+	color: #6f6f6f;
+	cursor: default;
+	font-size: 12px;
+	}
+	
+.infooptions {
+	color: #e0e0e0;
+	padding: 4px 10px 4px 10px;
+	}
+	
+	
+body#typo3-alt-doc-php .c-tablayer {
+	padding: 0;
+	}
+
+table.typo3-TCEforms {
+	width: 100%;
+	}
+
+table.typo3-TCEforms .bgColor2,
+table.typo3-TCEforms tr.bgColor2 td {
+	background-color: transparent;
+	color: #474747;
+	padding-bottom: 5px;
+}
+
+table#typo3-altdoc-header input,
+.c-inputButton {
+	background: none;
+	border: 0;
+}
+
+.checkbox,
+.checkbox:hover {
+	background: #EFEFF4;
+	border: 0;
+	margin: 4px 0 4px 2px;
+}
+
+table.typo3-TCEforms table#typo3-altdoc-header input:hover,
+.c-inputButton:hover {
+	background: none;
+	border: 0;
+}
+
+table.typo3-TCEforms span.typo3-TCEforms-helpText {
+	color: #FFFFFF;
+	background: transparent;
+}
+
+
+/* Default. Always used on main-palettes in the bottom of the forms */
+TABLE.typo3-TCEforms .class-main1,
+TABLE.typo3-TCEforms .class-main11,
+TABLE.typo3-TCEforms .class-main21,
+TABLE.typo3-TCEforms .class-main31,
+TABLE.typo3-TCEforms .class-main41,
+TABLE.typo3-TCEforms .class-main51 {
+	background: #fff;
+	border-top: 1px solid #d9e4ee;
+	}
+
+TABLE.typo3-TCEforms .class-main1 td,
+TABLE.typo3-TCEforms .class-main11 td,
+TABLE.typo3-TCEforms .class-main21 td,
+TABLE.typo3-TCEforms .class-main31 td,
+TABLE.typo3-TCEforms .class-main41 td,
+TABLE.typo3-TCEforms .class-main51 td {
+	padding: 2px 0px 2px 0px;
+	}
+
+TABLE.typo3-TCEforms .class-main2 td,
+TABLE.typo3-TCEforms .class-main12 td,
+TABLE.typo3-TCEforms .class-main22 td,
+TABLE.typo3-TCEforms .class-main32 td,
+TABLE.typo3-TCEforms .class-main42 td,
+TABLE.typo3-TCEforms .class-main52 td {
+	padding: 2px 0px 2px 0px;
+	color: #3c3c3c;
+	}
+
+TABLE.typo3-TCEforms .class-main2 td,
+TABLE.typo3-TCEforms .class-main12 td,
+TABLE.typo3-TCEforms .class-main22 td,
+TABLE.typo3-TCEforms .class-main32 td,
+TABLE.typo3-TCEforms .class-main42 td,
+TABLE.typo3-TCEforms .class-main52 td {
+	background: #ebebeb url(../backgrounds/headlinetable_bg.gif) top left repeat-x;
+	border-bottom: 1px solid #c0c0c0;
+	line-height: 24px;
+	color: #3c3c3c;
+	padding: 1px 5px 1px 5px;
+	border-top: 1px solid #e0e0e0;
+}
+
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main2,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main12,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main22,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main32,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main42,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .class-main52 {
+	background-color: #A30904;
+	background-image: none;
+	background-position: top left;
+	background-repeat: repeat-x;
+}
+
+TABLE.typo3-TCEforms .class-main3,
+TABLE.typo3-TCEforms .class-main13,
+TABLE.typo3-TCEforms .class-main23,
+TABLE.typo3-TCEforms .class-main33,
+TABLE.typo3-TCEforms .class-main43,
+TABLE.typo3-TCEforms .class-main53 {
+	padding: 2px 0px 2px 0px;
+	}
+
+TABLE.typo3-TCEforms .class-main4,
+TABLE.typo3-TCEforms .class-main14,
+TABLE.typo3-TCEforms .class-main24,
+TABLE.typo3-TCEforms .class-main34,
+TABLE.typo3-TCEforms .class-main44,
+TABLE.typo3-TCEforms .class-main54 {
+	color: #474747;
+	}
+
+TABLE.typo3-TCEforms .class-main5,
+TABLE.typo3-TCEforms .class-main15,
+TABLE.typo3-TCEforms .class-main25,
+TABLE.typo3-TCEforms .class-main35,
+TABLE.typo3-TCEforms .class-main45,
+TABLE.typo3-TCEforms .class-main55 {
+	color: #3C3C44;
+	}
+
+TABLE.typo3-TCEforms .formField,
+TABLE.typo3-TCEforms .formField1,
+TABLE.typo3-TCEforms .formField2,
+TABLE.typo3-TCEforms .formField3,
+TABLE.typo3-TCEforms .formField4,
+TABLE.typo3-TCEforms .formField5 {
+	margin: 4px 2px 4px 2px;
+	}
+
+TABLE.typo3-TCEforms .wrapperTable,
+TABLE.typo3-TCEforms .wrapperTable1,
+TABLE.typo3-TCEforms .wrapperTable2,
+TABLE.typo3-TCEforms .wrapperTable3,
+TABLE.typo3-TCEforms .wrapperTable4,
+TABLE.typo3-TCEforms .wrapperTable5 {
+	border: 0px solid #c0c0c0;
+	background: #fff;
+	margin: 0px 10px 10px 0px;
+	width: 100%;
+	}
+
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable1,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable2,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable3,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable4,
+TABLE.typo3-TCEforms TABLE.wrapperAttention .wrapperTable5 {
+	border: 1px solid #d9e4ee;
+	width: 100%;
+	}

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Backend Benutzer können sich im TYPO3 Backend-Bereich anmelden und dort Inhaltselemente anlegen oder bearbeiten.</label>
+			<label index=".details">Die Haupteinstellungen für einen Backend Benutzer bestehen aus einem eindeutigen Benutzernamen, einem Passwort und ein oder mehreren Gruppenmitgliedschaften. 
+Mit seinem Benuternamen und dem Passwort authentifiziert sich ein Benutzer gegenüber dem System und durch Gruppenmitgliedschaften werden dem Benutzer bestimmte Rechte innerhalb des TYPO3 Systems eingeräumt.
+Benutzergruppen stellen die Hauptquelle für Benutzerberechtigungen dar. Sie können Backend Benutzergruppen auch als &quot;Benutzerrollen&quot; verstehen: mit einer Benutzergruppe können Sie die Rechte definieren, die ein Benutzer benötigt, um eine bestimmte Aufgabe oder Rolle innerhalb des Systems wahrzunehmen, z.B. als Text-Redakteur, Designer oder Systemadministrator.
+
+&lt;b&gt;Der &quot;Admin&quot; Benutzer&lt;/b&gt;
+Es gibt einen besondere Benutzertyp, den &quot;Admin&quot; Benutzer. Dieser Benutzer hat auf alle Bereiche von TYPO3 Zugriff, d.h. für ihn existieren keinerlei Beschränkungen. Normalerweise sollten Sie in Ihrem System nur ein oder zwei Admin Benutzer anlegen. Admin Benutzer sind die einzigen, die andere Benutzer anlegen können. Sie können jedoch auch eine Aktion definieren, durch die ein normaler Benutzer dazu in der Lage versetzt wird (mit bestimmten Einschränkungen).
+
+&lt;b&gt;Speicherort für Backend Benutzer und Gruppen&lt;/b&gt;
+Backend Benutzer (und Benutzergruppen) werden immer in der Wurzel des Seitenbaumes angelegt. 
+
+&lt;b&gt;Benutzer vergleichen&lt;/b&gt;
+Um Benutzer verwalten und vergleichen und sich einen Überblick über  Benutzerrechte verschaffen zu können, können Sie das Tool &quot;Benutzer Administrator&quot; verwenden (Tools &gt; Benutzer Administrator). Damit lassen sich u.a. Benutzer nach verschiedenen Kategorien sortieren und vergleichen. Hier können Sie auch mit einem einzigen Mausklick  die Identität eines anderen Benutzers annehmen, um dessen Benutzerrechte direkt zu überprüfen.</label>
+			<label index=".image_descr">Backend Benutzer und Backend Benutzergruppen werden in der Wurzel des Seitenbaumes angelegt. &quot;Admin&quot; Benutzer können Sie immer daran erkennen, dass deren Benutzeicon in rot dargestellt wird (normale  Benutzer werden in blau dargestellt).
+Die Eingabemaske zum Anlegen oder Editieren von Backend Benutzern.
+Die Eingabemaske des Tools &quot;Backend Administrator&quot;, mit dem Sie sich einen Überblick über alle Backend Benutzer verschaffen können. Mit der Schaltfläche &quot;SU&quot; (Switch User&quot;) können Sie als Administrator die Identität des entsprechenden Benutzers annehmen, um dessen Rechte zu überprüfen.</label>
+			<label index="username.description">Geben Sie den Benutzernamen (Benutzerkennung) des Backend Benutzers an.</label>
+			<label index="username.details">Der Benutzername ist - ebenso wie das Passwort - ein Pflichtfeld und muss ausgefüllt werden. Der Benutzername muss eindeutig sein und darf nur aus Kleinbuchstaben bestehen. Leerzeichen sind nicht erlaubt! Sollte der Benutzername nicht eindeutig sein, fügt TYPO3 automatisch eine Ziffer an.</label>
+			<label index="password.description">Geben Sie das Passwort für diese Benutzerkennung an. Das Passwort wird während der Eingabe im Klartext angezeigt.</label>
+			<label index="password.details">Der Passwort ist - ebenso wie der Benutzername - ein Pflichtfeld und muss ausgefüllt werden. Passwörter werden verschlüsselt (als MD5 Hash), sobald Sie dieses Eingabefeld verlassen. Damit wird sicher gestellt, dass keinerlei Klartextpasswörter über das Internet gesendet werden. Dieser Vorgang findet auch beim Einloggen in das System statt.
+Auch wenn mit dieser Methode prinzipiell sichergestellt wird, dass keine Klartextpasswörter übertragen werden, entspricht dies &lt;i&gt;nicht&lt;/i&gt; einer verschlüsselten Kommunikation! Die größtmögliche Sicherheit für Ihr System erreichen Sie, wenn Sie TYPO3 auf einem sicheren Server (mit SSL und HTTPS) installieren.
+Das Passwort wird in der Datenbank als sogenannter MD5 Hashwert gespeichert und kann deshalb nicht rückübersetzt werden. Aus diesem Grund müssen verloren gegangene oder vergessene Benutzer-Passwörter durch neue ersetzt werden.
+
+&lt;b&gt;Bemerkung&lt;/b&gt;
+Bei der Eingabe erscheint im Eingabefeld das Passworts zunächst im Klartext (unverschlüsselt). Beim Verlassen des Feldes erscheinen dann die gewohnten &quot;Passwortpunkte&quot;.
+
+&lt;b&gt;Passwortänderung durch Benutzer&lt;/b&gt;
+Benutzer können ihr Passwort innerhalb ihres Benutzerprofils auch selber ändern.</label>
+			<label index="usergroup.description">Weisen Sie den Benutzer einer oder mehreren Benutzergruppen zu.</label>
+			<label index="usergroup.details">Erst durch das Zuweisen von Backend Benutzergruppen können Sie festlegen, welche Rechte ein Benutzer erhält. Ein Benutzer verfügt über praktisch keine Rechte, solange er noch keiner Benutzergruppe zugewiesen wurde (diese Einschränkung gilt nicht für Admin Benutzer). Die Rechte verschiedener Gruppen werden dabei größtenteils zusammengefasst.
+Die erste (oberste) Gruppe in der Liste legt fest, welcher Gruppe neu erstellte Seiten des Benutzers gehören (Standardgruppe).</label>
+			<label index="lockToDomain.description">Geben Sie den Rechnerenamen oder die Netzwerkadresse an, von welchem sich der Benutzer einloggen muss.</label>
+			<label index="lockToDomain.details">Ein TYPO3 System kann unter Umständen über mehrere verschiedene Domainnamen erreichbar sein. Deshalb kann mit dieser Einstellung sicher gestellt werden, dass sich Benutzer nur von einer bestimmten Domain aus einloggen können.</label>
+			<label index="disableIPlock.description">Mit dieser Option können Sie bestehende Anmeldebeschränkungen (IP-Adressen) für diesen Benutzer deaktivieren.</label>
+			<label index="disableIPlock.details">Sie müssen diese Option für  Benutzer wählen, die über eine Internet Wählverbindung (Modem, ISDN, DSL) auf TYPO3 zugreifen. Solche Benutzer erhalten bei jeder Internet-Einwahl eine andere IP-Adresse zugewiesen. Gleiches gilt auch für Benutzer, die per DHCP am Netzwerk angemeldet sind. Auch hier ändern sich deren IP-Adressen ständig, sodass Sie in diesem Fall keine IP-basierte Anmeldebeschränkungen vornehmen sollten.</label>
+			<label index="db_mountpoints.description">Definieren Sie den Seitenbaum des Benutzers.</label>
+			<label index="db_mountpoints.details">Um normalen Backend Benutzern (Nicht-Administratoren) überhaupt einen Seitenbaum darstellen zu können, ist es zunächst notwendig, festzulegen, auf welche Bereiche der Website die Benutzer Zugriff erhalten sollen. Dazu weist man ihnen hier ein oder mehrere Seiten des Seitenbaumes zu. Aus diesen Startseiten (inklusive aller Unterseiten) wird dann der benutzereigene Seitenbaum gebildet. Da der Begriff &quot;Startseite&quot; eigentlich lediglich eine Referenz zu einem Datenbankeintrag darstellt, wird solch eine Startseite auch als &quot;Datenbankfreigabe&quot; (Database Mount oder DB Mount) bezeichnet.
+
+&lt;strong&gt;Anmerkung&lt;/strong&gt;
+Backend Benutzergruppen können ebenfalls Datenbankfreigaben erteilt werden. Diese Freigaben werden an alle Gruppenmitglieder vererbt. Der resultierende Seitenbaum setzt sich somit aus den persönlichen und den Gruppenfreigaben zusammen! Es wird empfohlen, Datenbankfreigaben auf Gruppenebene zu erstellen.
+
+&lt;strong&gt;Wichtig&lt;/strong&gt;
+Damit die Benutzer die angezeigten Seiten auch bearbeiten können, müssen Sie dem Benutzer auch entsprechende Bearbeitungsrechte einräumen (im Modul Web&gt;Zugriff).</label>
+			<label index="db_mountpoints.image_descr">Dem Benutzer wurde eine Datenbankfreigabe zugewiesen. Benutzer können lediglich Seiten und Datensätze bearbeiten, die ihnen hier auch zugewiesen wurden.
+Zugewiesene Datenbankfreigaben bilden die Wurzel des Seitenbaums. Sie müssen dem Benutzer auch entsprechende Bearbeitungsrechte einräumen (im Modul Web&gt;Zugriff).</label>
+			<label index="file_mountpoints.description">Definieren Sie den Dateibaum des Benutzers.</label>
+			<label index="file_mountpoints.details">Der Dateibaum wird von allen TYPO3 Datei-Modulen benutzt, um zwischen den verschiedenen Ordner auf dem Webserver navigieren zu können. Genau wie bei den Datenbankfreigaben werden auch hier Gruppenrechte vererbt. Lesen Sie dazu bitte die Beschreibung für &quot;Backend Benutzergruppen&quot;.</label>
+			<label index="email.description">Geben Sie die Email-Adresse des Benutzers an.</label>
+			<label index="email.details">Diese Adresse ist ziemlich wichtig, denn hierhin werden TYPO3 Systemmeldungen versendet.
+
+&lt;strong&gt;Bemerkung&lt;/strong&gt;
+Benutzer können diesen Wert innerhalb ihres Benutzerprofils auch selber ändern (im Modul Benutzer&gt;Einstellungen).</label>
+			<label index="realName.description">Geben Sie vollständigen Namen des Benutzers an (z.B. Petra Mustermann).</label>
+			<label index="realName.details">&lt;strong&gt;Bemerkung&lt;/strong&gt;
+Benutzer können diesen Wert innerhalb ihres Benutzerprofils auch selber ändern (im Modul Benutzer&gt;Einstellungen).</label>
+			<label index="disable.description">Mit dieser Option können Sie dem Benutzer den Systemzugang verwehren.</label>
+			<label index="admin.description">&quot;Admin&quot; Benutzer haben VOLLSTÄNDIGEN Zugang zum System!</label>
+			<label index="admin.details">&quot;Admin&quot; Benutzer können alle Funktionen nutzen, die TYPO3 bietet und deshalb sollten solche Benutzer nur für administrative Aufgaben verwendet werden. Alle täglich anfallenden Aufgaben können auch mit normalen oder speziell angepassten Benutzern  und Benutzergruppen durchgeführt werden.
+Admin Benutzer müssen nicht Mitglied einer Benutzergruppe sein. Sie sollten sich aber darüber im Klaren sein, dass Aufgrund dieser Tatsache neu von solchen Admins angelegte Seiten deshalb auch keine Besitzergruppe haben und somit für andere Benutzer unter Umständen unsichtbar sind. 
+Wenn das ein Problem darstellt, so können Sie Admin Benutzer einer Benutzergruppe zuweisen. Natürlich werden die Bearbeitungs- und Zugriffsrechte dadurch nicht berührt, denn Admin Benutzer haben nach wie vor uneingeschränkte Rechte. Neue Seiten werden dadurch jedoch mit den entsprechenden Gruppenrechten angelegt.
+Sie erkennen Admin Benutzer an dem roten Benutzericon, normale Benutzer werden mit einem blauen Icon dargestellt.
+
+Ausser sich selbst sollten Sie keinem anderen Benutzer Admin Rechte einräumen.</label>
+			<label index="options.description">Mit dieser Option wird festgelegt, ob dem Benutzer die Seiten- und Dateifreigaben der ihm zugeordneten Benutzergruppen zugewiesen (vererbt) werden sollen.</label>
+			<label index="options.details">Das Vererben von Seiten- und Dateifreigaben durch die Zugehörigkeit zu einer Benutzergruppen macht es Administratoren sehr einfach, eine Freigabe für viele Benutzer zu erstellen und zu verwalten.
+Wenn Sie diese Option nicht wählen, müssen Sie solchen Benutzern entsprechende Seitenbaum und Dateifreigaben seperat einrichten.</label>
+			<label index="fileoper_perms.description">Legen Sie die Dateibearbeitungsrechte des Benutzers fest.</label>
+			<label index="fileoper_perms.details">Diese Einstellungen wirken sich auf die verfügbaren Funktionen innerhalb des Datei&gt;Liste Moduls aus. Allgemeine Dateiuploads werden hierdurch auch beeinflusst.</label>
+			<label index="starttime.description">Geben Sie das Datum an, ab dem die Benutzerkennung gültig sein soll.</label>
+			<label index="endtime.description">Geben Sie das Datum an, ab dem die Benutzerkennung ungültig sein soll.</label>
+			<label index="lang.description">Wählen Sie die &lt;i&gt;Standardsprache&lt;/i&gt;.</label>
+			<label index="lang.details">Hier legen Sie die Sprache für das Backend fest. Alle Hauptmenüpunkte normaler  Benutzer wurden in die hier gewählte Sprache übersetzt. Admin Benutzer werden jedoch feststellen, dass die speziellen Admin Menüs lediglich in englisch verfügbar sind. Das betrifft zum Beispiel alle Module innerhalb von &quot;Tools&quot; und im Web&gt;Template Modul.
+
+&lt;b&gt;Anmerkung:&lt;/b&gt;
+Die hier gewählte Sprache legt lediglich den Standardwert fest. Nach erfolgreicher Anmeldung kann jeder Benutzer seine persönlichen (Sprach-) Einstellungen im Benutzer&gt;Einstellungen Modul vornehmen. Für jede gewünschte Systemsprache muss der Admin aber zunächst das entsprechende Sprachpaket installieren. Diese Sprachpakete können von TYPO3.org als Extensions heruntergeladen werden (z.B. &quot;csh_DE&quot;, wobei DE für den TYPO3 Sprachschlüssel Deutsch steht).</label>
+			<label index="userMods.description">Weisen Sie dem Benutzer bestimmte Backend Module zu.</label>
+			<label index="userMods.details">Mit dieser Option legen Sie das Aussehen und den Funktionsumfang des Benutzermenüs fest.
+
+Bitte beachten Sie, dass die gleichen Module evtl. schon innerhalb einer Benutzergruppe festgelegt wurden und diese an den Benutzer vererbt werden. Sie sollten alle allgemeinen Module innerhalb der Benutzergruppe definieren und dem Benutzer hier lediglich einzelne, ganz spezielle Module zuweisen.</label>
+			<label index="TSconfig.description">Definieren Sie hier zusätzliche, benutzerspezifische TSconfig Einstellungen (fortgeschrittene Konfiguration)</label>
+			<label index="TSconfig.details">Mit dieser Einstellung können Sie dem Benutzer ganz spezielle Konfigurationen (etwa für den RTE oder Optionen einzelner Module etc.) zuweisen. Mit  dem Eintrag &quot;mod.SHARED.colPos_list = 1,0,2,3&quot; könnte man z.B. festlegen, dass der Benutzer in allen Spalten Inhalte anlegen darf.</label>
+			<label index="allowed_languages.description">Legen Sie fest, in welchen Sprachen der Benutzer Inhaltselemente editieren darf.</label>
+			<label index="allowed_languages.details">Diese Einstellung können Sie auch für Benutzergruppen vornehmen. Details dazu entnehmen Sie bitte der Beschreibung des gleichnamigen Feldes im Bereich &quot;Benutzergruppen&quot;.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="lang.description" type="integer">107431137</label>
+			<label index="username.description" type="integer">169225297</label>
+			<label index="password.description" type="integer">182240439</label>
+			<label index="username.details" type="integer">26517555</label>
+			<label index="password.details" type="integer">135612209</label>
+			<label index="usergroup.description" type="integer">162325927</label>
+			<label index="lockToDomain.description" type="integer">139426379</label>
+			<label index="lockToDomain.details" type="integer">140149042</label>
+			<label index="db_mountpoints.description" type="integer">83626085</label>
+			<label index="db_mountpoints.details" type="integer">21669967</label>
+			<label index="db_mountpoints.image_descr" type="integer">267115070</label>
+			<label index="file_mountpoints.description" type="integer">103273463</label>
+			<label index="file_mountpoints.details" type="integer">170613745</label>
+			<label index="email.description" type="integer">102465996</label>
+			<label index="email.details" type="integer">119942305</label>
+			<label index="realName.description" type="integer">49868929</label>
+			<label index="realName.details" type="integer">184974335</label>
+			<label index="disable.description" type="integer">36519200</label>
+			<label index="admin.description" type="integer">200276487</label>
+			<label index="fileoper_perms.description" type="integer">25345447</label>
+			<label index="starttime.description" type="integer">167831915</label>
+			<label index="endtime.description" type="integer">184097136</label>
+			<label index="usergroup.details" type="integer">30843346</label>
+			<label index=".description" type="integer">174805996</label>
+			<label index=".details" type="integer">100963793</label>
+			<label index=".image_descr" type="integer">98434337</label>
+			<label index="disableIPlock.description" type="integer">204135236</label>
+			<label index="disableIPlock.details" type="integer">27220559</label>
+			<label index="admin.details" type="integer">124287279</label>
+			<label index="options.description" type="integer">91490880</label>
+			<label index="options.details" type="integer">184652761</label>
+			<label index="fileoper_perms.details" type="integer">136693371</label>
+			<label index="lang.details" type="integer">182178186</label>
+			<label index="userMods.description" type="integer">247677460</label>
+			<label index="userMods.details" type="integer">132513125</label>
+			<label index="TSconfig.description" type="integer">177543566</label>
+			<label index="TSconfig.details" type="integer">220754092</label>
+			<label index="allowed_languages.description" type="integer">33891430</label>
+			<label index="allowed_languages.details" type="integer">83437235</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="lang.description">Select the &lt;i&gt;default&lt;/i&gt; language.</label>
+			<label index="username.description">Enter the login name of the backend user.</label>
+			<label index="password.description">Enter the password for the backend username above (Notice the value you enter &lt;i&gt;will&lt;/i&gt; be readable in the field!).</label>
+			<label index="username.details">A username is required and must be in lowercase without spaces in it. Furthermore the username must be unique. If it is not unique a number will be appended automatically.</label>
+			<label index="password.details">The password is required. Before the password is sent to the server it's md5-hashed, so the password value itself is not transferred over the Internet. This is true both when editing the password and when the user logs in.
+While this principle does not reveal the raw password it is &lt;i&gt;not&lt;/i&gt; the same as real encryption. If you need the highest degree of security you should install the TYPO3 backend on a secure server.
+The password is stored in the database as an md5-hash and thus it's not possible to extract the original password from the database either. This means that 'lost passwords' must be substituted with a new password for the user.
+
+&lt;b&gt;Notice&lt;/b&gt;
+When you enter the password in the password field it is initially visible in clear text! First when the password field focus is lost will the password become a &quot;list of dots&quot;.
+
+&lt;b&gt;User changing password&lt;/b&gt;
+Users can change their password from the User &gt; Setup module</label>
+			<label index="usergroup.description">Assign backend user groups to the user.</label>
+			<label index="lockToDomain.description">Enter the host name from which the user is forced to login.</label>
+			<label index="lockToDomain.details">A TYPO3 system may have multiple domains pointing to it. Therefore this option secures that users can login only from a certain host name.</label>
+			<label index="db_mountpoints.description">Assign startpoints for the users page tree.</label>
+			<label index="db_mountpoints.details">The page tree used my all Web-submodules to navigate must have some points-of-entry defined. Here you should insert one or more references to a page which will represent a new root page for the page tree. This is called a 'Database mount'.
+
+&lt;strong&gt;Notice&lt;/strong&gt; that backend user groups also has DB mounts which can be inherited by the user. So if you want a group of users to share a page tree, you should probably mount the page tree in the backend user group which they share instead.</label>
+			<label index="db_mountpoints.image_descr">A DB mount is assigned to the user. Users can only operate on pages and records which are inside their DB mounts!
+When a page is mounted for a user it will become the root of their page tree. The user must have access to the page through the regular page permissions set in the Web &gt; Access module.</label>
+			<label index="file_mountpoints.description">Assign startpoints for the file folder tree.</label>
+			<label index="file_mountpoints.details">The file folder tree is used by all File-submodules to navigate between the file folders on the webserver.
+Notice as with 'DB mounts' the file folder mounts may be inherited from the member groups of the user.
+See Backend Groups for details</label>
+			<label index="email.description">Enter the email address of the user.</label>
+			<label index="email.details">This address is rather important to enter because this is where messages from the system is sent.
+&lt;strong&gt;Notice&lt;/strong&gt; the user is able to change this value by himself from within the User&gt;Setup module.</label>
+			<label index="realName.description">Enter the ordinary name of the user, eg. John Doe.</label>
+			<label index="realName.details">&lt;strong&gt;Notice&lt;/strong&gt; the user is able to change this value by himself from within the User&gt;Setup module.</label>
+			<label index="disable.description">This option will temporarily disable the user from logging in.</label>
+			<label index="admin.description">'Admin' users have TOTAL access to the system!</label>
+			<label index="fileoper_perms.description">Select file operation permissions for the user.</label>
+			<label index="starttime.description">Enter the date from which the account is active.</label>
+			<label index="endtime.description">Enter the date from which the account is disabled.</label>
+			<label index="usergroup.details">The backend user groups defines the permissions which the backend user will inherit. So unless the backend user is an 'Admin' user, he needs to be a member of one or more user groups in order to have practically any permissions assigned. The properties set in the user groups are mostly added together.
+The first (top) group in the list is the group which will, by default, be the owner of pages the user creates.</label>
+			<label index=".description">This is the table of backend administration users. Backend users can login in the backend of TYPO3 and are typically producers of content on a website.</label>
+			<label index=".details">The main settings for a backend user is a username, password and group memberships. The username and password authenticates the user to the system. The group memberships enables the user to perform actions in TYPO3 since groups are the main source of permission settings for a backend user.
+Backend usergroups can also be understood as &quot;roles&quot;. A usergroup can contain a configuration of permissions which allows the user to play a certain role in the system.
+
+&lt;b&gt;The &quot;Admin&quot; user&lt;/b&gt;
+There is a special kind of user, the &quot;Admin&quot; user. This user has access to everything in TYPO3. There are no limits for Admin-users at all. You should normally have only a single or two admin-users in your system.
+Admin-users are the only users who can create other backend users. Alternatively you can create an &quot;Action&quot; which enables other normal users to do it as well (with certain restrictions of course).
+
+&lt;b&gt;Location&lt;/b&gt;
+Backend users are always created in the root of the page tree (like Backend groups are).
+
+&lt;b&gt;Comparing Users&lt;/b&gt;
+To manage and compare users, getting an overview of their access credentials etc. you can use the Tools &gt; User Admin module (extension: beuser). It allows you to group users by various categories of permissions. You can also switch to another users account by a single click of a button.</label>
+			<label index=".image_descr">Backend users are found in the root of the page tree. &quot;Admin&quot; backend users can always be recognized on their icon being red while normal users have a blue icon.
+The editing form of a backend users record.
+The &quot;Tools &gt; User Admin&quot; module where you can get an overview of the users on the system and what permissions they have. Click the &quot;SU&quot; button to switch to a users account.</label>
+			<label index="disableIPlock.description">Disable the lock of the backend users session to the remote IP number.</label>
+			<label index="disableIPlock.details">You will have to disable this lock if backend users are accessing TYPO3 from ISDN or modem connections which may shutdown and reconnect with a new IP. The same would be true for DHCP assignment of IP numbers where new IP numbers are frequently assigned.</label>
+			<label index="admin.details">'Admin' can do anything TYPO3 allows and this kind of user should be used only for administrative purposes. All daily handling should be done with regular users.
+'Admin' users don't need to be members of any backend user groups. However you should be aware that any page created by an admin user without a group will not have any owner-group assigned and thus it will probably be invisible for other users. If this becomes a problem you can easily solve it by assigning a user group to the 'Admin' user anyway. This does of course not affect the permissions since they are unlimited, but the first group listed is by default the owner group of newly created pages.
+'Admin' users are easily recognized as they appear with a red icon instead of the ordinary blue user-icon.
+
+You should probably not assign any other users than yourself as an 'Admin' user.</label>
+			<label index="options.description">Select if the user should inherit page tree or folder tree mountpoints from member groups.</label>
+			<label index="options.details">It's a great advantage to let users inherit mountpoints from membergroups because it makes administration of the same mountpoints for many users extremely easy.
+If you don't check these options, you must make sure the mount points for the page tree and file folder tree is set specifically for the user.</label>
+			<label index="fileoper_perms.details">These settings relates to the functions found in the File&gt;List module as well as general upload of files.</label>
+			<label index="lang.details">This determines the language of the backend interface for the user. All mainstream parts available for regular users are available in the system language selected.
+'Admin'-users however will experience that the 'Admin'-only parts of TYPO3 is in english. This includes all submodules in &quot;Tools&quot; and the Web&gt;Template module.
+
+&lt;b&gt;Notice&lt;/b&gt; this is only setting the default language. As soon as the user has logged in the language must be changed through the User&gt;Setup module. Also you will have to install the corresponding language pack which can be found as an extension on TYPO3.org with the prefix &quot;csh_XX&quot; where XX is the TYPO3 language key.</label>
+			<label index="userMods.description">Select available backend modules for the user.</label>
+			<label index="userMods.details">This determines which 'menu items' are available for the user in the backend.
+
+Notice that the same list of modules may be configured for the backend user groups and that these will be inherited by the user in addition to the modules you select here. It's highly likely that you should not set any modules for the user himself but rather select the modules in the backend groups he's a member of. However this list provides a great way to add a single module for specific users.</label>
+			<label index="TSconfig.description">Enter additional TSconfig for the user (advanced).</label>
+			<label index="TSconfig.details">This field allows you to extend the configuration of the user in severe details. A brief summary of the options include a more detailed configuration of the backend modules, setting of user specific default table field values, setting of Rich Text Editor options etc.</label>
+			<label index="allowed_languages.description">Select which record languages the group members are limited to edit.</label>
+			<label index="allowed_languages.details">You can also limit users to specific languages with user group settings. Please see the same field for backend user groups for more details.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

@@ -1,0 +1,153 @@
+
+Fixes and new additions:
+ 28-Jul-06
+- JumpToLine now positions the cursor correctly in IE.
+  (It turned out that I had forgot to write the IE specific code ;)
+
+- Find Button now works.
+  (I had copied the code from the Jump button, and as a result it checked if the 
+  input was numeric, so searching was only possible when the searchstring was a 
+  number!)
+
+- Mozilla now does horizontal scrolling in Search.
+  Before when searching, Mozilla only scrolled in vertical direction, to the 
+  position of the found text.
+
+- The textarea scrolling problem in IE is now (partly) fixed.
+  The problem was that once more than one textarea was present, the scrolling 
+  would only work on the last textarea. (Wrong variable scope)
+  There's still a problem with the linenumbers not getting updated, when using 
+  the Cut/Paste functions. To fix this, the "updateNum" function will have to be 
+  rewritten.
+
+- Added fix for problem in Konqueror, where the text got deselected after 
+  indenting a block.
+  (I can't test this myself, so I don't know if it works or not.)
+
+- Added function to Minimize/Maximize textarea, by doubleclicking on the RIGHT 
+  side of the topbar. (Maybe it has to minimize more?)
+
+- Added Focus/Blur handler to textarea. When textarea is inactive, the fontcolor 
+  is dimmed. (Mainly done for testing purpose.)
+
+ 29-Jul-06
+- The search function now can continue search from top of document, if no match 
+  is found.
+
+- Added function to inject LINK tag on page to load external stylesheet, but 
+  removed it again, since the only style that where really changable, was the 
+  colors. So instead I'll make the text-, background- and border- color 
+  configurable in the setup.
+
+ 30-Jul-06
+
+- Added loader for TYPO3's XML language files (locallang.xml). This is a 
+  seperate javascript 'class', and can be used in other scripts.
+
+- Added support for external configurations. So far it covers the various colors 
+  used, starting with linenumbers turned on/off and starting with wrap turned 
+  on/off.
+
+- Corrected bug in resizing when linenumbercolumn was turned off.
+
+ 30-Jul-06
+- Added some missing onfocus() to various button functions.
+
+- Improved the handeling of the configuration object, and added more options. 
+  Now the visibility of the buttons can be turned on/off. Either seperately, or 
+  the entire buttonset. The with of the linenumber column is now also 
+  configurable.
+
+- Converted the minimize/maximize function into a button. If the textarea is 
+  minimized, and the user resizes it manually, the minimine/maximize button will 
+  revert to maximized state.
+
+ 01-Aug-06
+- Added a function to create toolbar buttons, and converted all the other button 
+  code into the new format. The new button function sets events for mouseover -
+  out & mouseup -down, to create a 'click effect'.
+
+- Fixed a couple minor bugs in the config routines, and added more config 
+  options: defaultHeight, defaultWidth, minHeight, maxHeight, minWidth & 
+  maxWidth. (Note: They has no effect on textarea yet.)
+
+- Fixed bug in the min. value for Minimizing in IE.
+
+ 02-Aug-06
+- Added config option for textarea default fontsize.
+
+ 03-Aug-06
+- Added functionality for the config options: defaultHeight, defaultWidth, 
+  minHeight, maxHeight, minWidth & maxWidth.
+
+- Improved the Wraptoggle function. Now Mozilla (and maybe Opera) saves the 
+  position/selection before toggling, and restore it again afterwards.
+
+ 05-Aug-06
+- Now the showButtons option removes the topbar entirely, if set to "0"
+
+- Added a new config option called buttonPath, which is the (absolute) path to 
+  the folder holding the button images.
+
+ 06-Aug-06
+- Cleaned up the Tab handling, and moved the get/set selection to seperate 
+  functions, as much of the code is reused in the 2 new commenting commands.
+
+- Now pressing Shift/Ctrl-Tab WITHOUT a selection, also deletes the previous 
+  tabchar.
+
+- Added 2 new keyboard commands: 
+   Ctrl + numeric * key, which is use to toggle "/ * * /" type of comments on 
+   the selected block.
+   Ctrl + numeric / key, which is use to toggle "/ /" type of comments on the 
+   selected lines.
+
+- Found out why the script disn't work in IE 5. It turned out to be something
+  as simple as the style settings for the cursor! Apparently IE5 chokes on
+  "cursor = pointer", so I had to use "cursor = document.all?'hand':'pointer'"
+  It took some time to find the error, since TYPO3's backend produces a lot of
+  Javascript errors. :/
+  (One weird problem still exists in IE5: The mimimize/maximize icon is gone!?!)
+
+07-Aug-06  
+- Added German translations. (Thanks to Stefan Galinski)
+
+08-Aug-06
+- Fixed bug when deindenting in Mozilla.
+  Before fixing, the cursor just moved one step back. Thats why I thought it
+  was working. (I never checked if the character was actually deleted!)
+
+12-Aug-06
+- Added a check, so the script doesn't get applied to textareas which allready
+  has been enhanced by the script.
+  
+- Added an override check to the Javascript code generated by the TYPO3 extension.
+  So now the settings defined when installing, can be overridden in other extensions.
+  
+- Fixed a problem in IE5, where the height of the textarea wrapper doubled up.
+  Turened out to be very simple to fix. Just had to move the 
+  "this.numwrapper.style.display ='';" to the end of the function. ;)
+
+15-Aug-06
+- Fixed a couple problems with the linenumber and wrap toggle functions.
+  Now the linenumber column can be turned off at start, and toggling works
+  when the buttons are disabled.
+
+
+16-Aug-06
+- Added a new config option called "typo3Colors". Setting this option to true,
+  will override the colorsettings defined in the extension, with the TYPO3 
+  CSS-classes "bgColor3" & "bgColor4"
+
+- Added Polish translations. (Thanks to Cyprian Kowalczyk)
+
+- Fixed a bug in the Search confirmation box, where the text wasn't taken from
+  the locallang.xml file.
+
+
+18-Aug-06
+- Added fontsize changing in Opera. Thanks to Christophe Dolivet for telling me
+  how this could be done.
+  NOTE: Fontsize changing in Opera, using keybord shortcuts is NOT possible.
+  Only the buttons work!
+  

@@ -1,0 +1,125 @@
+BODY#ext-templavoila-mod1-index-php .typo3-page-ceHeader .titleBarLeft { 
+	vertical-align:middle !important;
+	height:16px !important;
+	padding:3px 3px 3px 0px;
+}
+BODY#ext-templavoila-mod1-index-php table { border-width:0 !important }
+BODY#ext-templavoila-mod1-index-php .typo3-page-ceHeader .normalOptions { width: 100%; }
+BODY#ext-templavoila-mod1-index-php { width:96% !important; }
+BODY#ext-templavoila-mod1-index-php .finalContent { border-width:0 !important }
+BODY#ext-templavoila-mod1-index-php FORM TABLE { border-width:0px; } /*width: 470px; */
+BODY#ext-templavoila-mod1-index-php #typo3-clipboard { width:100% }
+BODY#ext-templavoila-mod1-index-php #typo3-clipboard td {
+	vertical-align:middle; 
+	height:18px;
+}
+BODY#ext-templavoila-mod1-index-php #typo3-clipboard td span.button {
+	text-align:center;
+	display:block;
+	width:100%;
+	height:16px;
+	padding:1px;
+}
+
+.topLinkContainer { margin:10px 0 20px 0 }
+.endLinkContainer { margin:20px 0 }
+.topLinkContainer, 
+.contentElementWizardTable .endLinkContainer { margin:10px 0 }
+
+#contentTable { 
+	position:relative;
+	top:-5px;
+}
+#contentTable .contentArea { 
+	padding:5px;
+	height:auto;
+	_height:250px;
+	min-height:250px;	
+}
+ins,del { display:block; } 
+.titlebarLeftTopButtons {
+	height:18px !important;
+	margin:0 !important;
+	display:block;
+	width:100%;
+}
+.titlebarLeftTopButtons a { float:left; }
+#ext-templavoila-mod1-index-php .titlebarLeftContentButtons span.contentIcon,
+#ext-templavoila-mod1-index-php .otherCell span.contentIcon,
+#ext-templavoila-mod1-index-php .header-icon-title .contentIcon { 
+	cursor:pointer !important;
+	float:left;
+	margin-right:2px; 
+}
+.otherCell a img {
+	padding:0 !important;
+	margin:0 !important;
+}
+BODY#ext-templavoila-mod1-index-php .bgColor4 .typo3-page-ceHeader {  } /* margin-top:15px*/
+
+.typo3-page-ceHeaderContent, .typo3-page-ceHeadersubContent, .normalOptions  { width:100% }
+
+
+/* iconMode */
+
+.titleBarRightContenticonMode, .titleBarRightsubContenticonMode { 
+	white-space:nowrap;
+	height:18px;
+}
+.titleBarRightContenticonMode *, .titleBarRightsubContenticonMode * { float:none !important }
+
+/* buttonMode/textMode */
+#ext-templavoila-mod1-index-php .otherCell a.buttonMode { 
+	margin-bottom:1px !important;
+	margin-right:2px !important;
+	display:block !important; 
+}
+#ext-templavoila-mod1-index-php .otherCell span.buttonMode,
+#ext-templavoila-mod1-index-php .otherCell span.textMode,
+#ext-templavoila-mod1-index-php .endLinkContainer span.textMode,
+#ext-templavoila-mod1-index-php .commandLink span.buttonMode { 
+	display:block; 
+	float:left;
+	padding: 0 2px 0 0 !important;
+	margin: 0 1px 1px 0 !important;
+}
+.commandLink:link, .commandLink:visited, .buttonsBottom a:link, .buttonsBottom a:visited, .buttonsBottom * { text-decoration:none !important }
+#ext-templavoila-mod1-index-php .commandLink:hover span.buttonMode { cursor:pointer; }
+#ext-templavoila-mod1-index-php .otherCell span.textMode { padding: 0 2px !important; }
+
+
+/* bothMode */
+#ext-templavoila-mod1-index-php .otherCell a.bothMode {
+	display:block; 
+	float:left;	
+	padding: 0 2px 0 0 !important;
+	margin: 0 1px 1px 0 !important;
+}
+#ext-templavoila-mod1-index-php .endLinkContainer a.bothMode  { 
+	float:none !important;
+	width: 120px;
+	display:block;
+}
+#ext-templavoila-mod1-index-php .endLinkContainer a.bothMode span.textMode { padding-left:2px !important; }
+#ext-templavoila-mod1-index-php .endLinkContainer a.bothMode span.textMode,
+#ext-templavoila-mod1-index-php .endLinkContainer a.bothMode img { 
+	float:none !important;
+	display:inline !important;
+}
+#ext-templavoila-mod1-index-php .otherCell a.bothMode span.textMode {
+	float:none;
+	display:inline;
+	margin:0 !important;
+	padding: 0 !important;
+	padding: 2px 0 !important;
+}
+.editPageProperties a  { 
+	width:250px !important;
+	display:block !important;
+}
+
+.normalOptions .buttonModeText {
+	white-space:nowrap;
+	position:relative;
+	top:-3px;
+}

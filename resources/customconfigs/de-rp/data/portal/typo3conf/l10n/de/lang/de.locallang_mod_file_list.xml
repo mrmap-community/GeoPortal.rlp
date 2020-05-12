@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="clipBoard">Klemmbrett anzeigen</label>
+			<label index="clip_paste">Klemmbrettinhalt einfügen</label>
+			<label index="clip_pasteInto">Einfügen in: der Inhalt des Klemmbretts wird in diesen Ordner eingefügt</label>
+			<label index="clip_markRecords">Alles/nichts markieren</label>
+			<label index="clip_selectMarked">Ausgewählte Dateien auf das Klemmbrett transferieren</label>
+			<label index="clip_deleteMarked">Markierte löschen</label>
+			<label index="clip_deleteMarkedWarning">Sind Sie sicher, dass alles markierten Dateien aus diesem Ordner gelöscht werden sollen?</label>
+			<label index="displayThumbs">Thumbnails anzeigen</label>
+			<label index="c_file">Dateiname</label>
+			<label index="c_size">Grösse</label>
+			<label index="c_fileext">Typ</label>
+			<label index="c_tstamp">Datum</label>
+			<label index="c_rw">RW</label>
+			<label index="c__REF_">Ref</label>
+			<label index="files">Dateien</label>
+			<label index="mlang_labels_tablabel">Anzeige von Dateien im Ordner</label>
+			<label index="mlang_labels_tabdescr">Dies ist das Dateiverwaltungssystem von TYPO3. Es erlaubt den Zugriff auf die für Ihren Login gültigen Dateifreigaben. Mit diesem Modul können Sie Dateien auf dem Server hochladen, kopieren, verschieben und löschen.</label>
+			<label index="mlang_tabs_tab">Dateiliste</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="clipBoard" type="integer">249278403</label>
+			<label index="clip_paste" type="integer">25920339</label>
+			<label index="clip_pasteInto" type="integer">24767218</label>
+			<label index="clip_markRecords" type="integer">58652945</label>
+			<label index="clip_selectMarked" type="integer">231792509</label>
+			<label index="clip_deleteMarked" type="integer">126346891</label>
+			<label index="clip_deleteMarkedWarning" type="integer">236800089</label>
+			<label index="displayThumbs" type="integer">15222013</label>
+			<label index="c_file" type="integer">20254743</label>
+			<label index="c_size" type="integer">116837234</label>
+			<label index="c_fileext" type="integer">169845367</label>
+			<label index="c_tstamp" type="integer">71780721</label>
+			<label index="c_rw" type="integer">96918589</label>
+			<label index="files" type="integer">73111091</label>
+			<label index="mlang_labels_tablabel" type="integer">240946544</label>
+			<label index="mlang_labels_tabdescr" type="integer">48584464</label>
+			<label index="mlang_tabs_tab" type="integer">36854838</label>
+			<label index="c__REF_" type="integer">101427931</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="clipBoard">Show clipboard</label>
+			<label index="clip_paste">Paste in clipboard content</label>
+			<label index="clip_pasteInto">Paste into: Clipboard content is inserted into this folder</label>
+			<label index="clip_markRecords">Mark All/Mark none</label>
+			<label index="clip_selectMarked">Transfer the selection of files to clipboard</label>
+			<label index="clip_deleteMarked">Delete marked</label>
+			<label index="clip_deleteMarkedWarning">Are you sure you want to delete all marked files from this folder?</label>
+			<label index="displayThumbs">Display thumbnails</label>
+			<label index="c_file">Filename</label>
+			<label index="c_size">Size</label>
+			<label index="c_fileext">Type</label>
+			<label index="c_tstamp">Date</label>
+			<label index="c_rw">RW</label>
+			<label index="files">files</label>
+			<label index="mlang_labels_tablabel">Listing of files in the directory</label>
+			<label index="mlang_labels_tabdescr">This is the file administration system in TYPO3. It allows you to access the file mounts of your login. Through this module you can upload, copy, move an delete files on the server.</label>
+			<label index="mlang_tabs_tab">Filelist</label>
+			<label index="c__REF_">Ref</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

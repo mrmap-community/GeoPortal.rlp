@@ -1,0 +1,74 @@
+/* This file contains the CSS data for the editor UI of TinyMCE instances for skin_grey_2 */
+@import url(TinyMCEStyles_fullgray.css);
+#nav li ul.secondary { 
+	left: 0px !important;
+	margin-left:0px !important;
+}
+#nav .tab a:link, #nav li li a:link, 
+#nav .tab a:visited, #nav li li a:visited { 
+	color:black !important;
+	font-weight:normal !important;
+}
+#nav .tab a:hover, #nav a:hover, #nav li li a:hover { 
+	color:#BD7A1D !important;
+	text-decoration: none !important;
+}
+body#typo3-alt-topmenu-dummy-php-iconmenu { 
+	margin:0 !important;
+	padding:0 !important;
+}
+#typo3-topMenu {
+	position:absolute;
+	top:0px;
+	left:0px;
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+body.background_high table#typo3-shortcuts { margin-top:5px !important; }
+.middle a { height:1.0em !important; }
+.middle .disabled { color: black !important; }
+
+/* extra for tinymcestyles */
+.tabTable .middle input { 
+	position:relative;
+	top:-4px;
+	color: #336699;
+}
+#ext-templavoila-mod1-index-php .middle a,
+#tx_templavoila_mod1_sidebar-bar .middle a {
+	display:block;
+	position:relative;
+	top:-3px;
+}
+
+/* new in Typo3 4.2 */
+/* user settings */
+#ext-setup-mod-index-php table.typo3-dyntabmenu td.tabact a {
+	/*background-color: #eee;*/
+}
+
+#ext-setup-mod-index-php DIV.typo3-dyntabmenu-divs {
+	padding-bottom: 12px;
+	border: 1px solid #aaa;
+	/*background-color: #eee;*/
+}
+
+#ext-setup-mod-index-php #user-setup-wrapper {
+	float:left;
+}
+
+.tabTable a:link, .tabTable a:visited, .tabTable a:hover, .tabTable .middle * { 
+	background-color: transparent !important;
+	background-image:none !important;
+	color:#2270c3 !important;
+}
+
+body#ext-cms-layout-db-layout-php #div-editNav {
+	position: absolute;
+	top:0;
+	left:0;
+	height:20px;
+	margin-bottom:20px !important;
+	width:100%;
+	padding-left:0;
+}

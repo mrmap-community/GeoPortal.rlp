@@ -1,0 +1,96 @@
+/* t3skin uses currently default stylesheet for Typo3 */
+@import url(../../../../typo3/stylesheet.css);
+div#typo3-docheader-row2,
+.docheader-row2-left {	
+	position:relative !important;
+	width:100%; 
+}
+.docheader-row2-left .docheader-funcmenu { 
+	position:relative !important;
+	z-index:3 !important;
+}
+.docheader-row2-right { 
+	padding-right:18px;
+	position:absolute; 
+	top:3px;
+	right:0;
+	z-index:1 !important;
+}
+.columns_alt .docheader-row2-right, .qe_alt .docheader-row2-right { margin-top:-5px;}
+
+body#ext-cms-layout-db-layout-php .columns_no #select_menus { 
+	position:relative;
+	z-index:3;
+}
+body#ext-cms-layout-db-layout-php .columns_alt #select_menus { 
+	position:absolute;
+	top:-18px;
+	right:120px;	
+	height:21px;
+	z-index:3;
+}
+body#ext-cms-layout-db-layout-php .qe_alt #select_menus_qe { 
+	position:absolute;
+	top:-24px;
+	left:350px;	
+	height:21px;
+	width: 300px;
+	z-index:3;
+}
+body#ext-cms-layout-db-layout-php .qe_no #select_menus_qe select,
+body#ext-cms-layout-db-layout-php .qe_alt #select_menus_qe select { 
+	margin:0 !important; 
+	float:none !important;
+}
+div#typo3-docheader div.docheader-row2-left select { margin:0 !important; }
+body#ext-cms-layout-db-layout-php .columns_alt .pageinformation,
+body#ext-cms-layout-db-layout-php .qe_alt .pageinformation { 
+	display:block; 
+	padding-top:5px; 
+}
+div#typo3-docheader div.docheader-row2-left select { margin-top:11px; }
+body#ext-cms-layout-db-layout-php .columns_no div.docheader-row2-left select { margin-top:-6px; }
+body#typo3-mod-web-func-index-php div.docheader-row2-left select,
+body#typo3-mod-web-info-index-php div.docheader-row2-left select { margin-top:-6px; }
+
+div#typo3-docheader .docheader-csh { 
+	position:absolute; 
+	top:-8px;
+	right:5px;
+	z-index:4 !important;
+}
+div#typo3-docheader .typo3-csh-link .typo3-csh-icon { float:right; }
+div#typo3-docheader .typo3-csh-link .typo3-csh-inline {
+	position:absolute;
+	right:5px;
+	top:15px;
+}
+body#typo3-pagetree .buttonsright { width: 80px  !important; }
+body#typo3-pagetree .buttonsright .typo3-csh-link { 
+	position:absolute; 
+	right:5px;
+	width:20px;
+}
+body#typo3-pagetree div#typo3-docheader .buttonsright .typo3-csh-link .typo3-csh-inline { top:20px; } /* 33,37*/
+
+body#ext-cms-layout-db-layout-php .buttonsrightbottom { 
+	height:22px; 
+	float:right;
+	text-align:right !important;                         
+	width:130px;
+	padding-right:5px;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom .buttongroup { 
+	white-space:nowrap  !important; 
+	display:inline;
+}
+body#ext-cms-layout-db-layout-php .buttonsrightbottom .buttongroup a { 
+	text-align:right !important;
+	display:inline !important;
+}
+body#typo3-pagetree .buttonsright { 
+	width: 60px; 
+	text-align:right;
+}
+div#typo3-docheader { z-index:2 !important;}
+div#typo3-docbody { z-index:1 !important; }

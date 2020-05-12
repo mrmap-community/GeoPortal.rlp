@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">TYPO3 Extension Manager</label>
+			<label index="mlang_labels_tabdescr">Verwaltet TYPO3 Erweiterungen (Extensions), wozu Plugins, Module, Konfiguationen und Übersetzungen zählen.</label>
+			<label index="mlang_tabs_tab">Ext Manager</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel" type="integer">107630623</label>
+			<label index="mlang_labels_tabdescr" type="integer">182827319</label>
+			<label index="mlang_tabs_tab" type="integer">199372037</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">TYPO3 Extension Manager</label>
+			<label index="mlang_labels_tabdescr">Manages TYPO3 extensions from a central repository,  which includes plugins, modules, class extensions, configuration code etc.</label>
+			<label index="mlang_tabs_tab">Ext Manager</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Web &gt; Info</label>
+			<label index=".description">Das Web &gt; Info Modul dient als &quot;Container&quot; für all diejenigen Backend Erweiterungen, welche Informationen oder Analysen zu einzelne Seiten oder den gesamten Seitenbaum liefern möchten. Darunter fallen z.B. Informationen wie Zugriffstatistiken, Cache Informationen, Änderungsverläufe, Logfiles etc.</label>
+			<label index=".details">Konzeptionell unterscheidet sich das Web &gt; Info- vom Web &gt; Funktionen-Modul dadurch, dass es primär Informationen statt Änderungsmöglichkeiten bietet. Es liegt am Programmierer zu entscheiden, in welchem dieser Module seine Backend Erweiterung erscheinen soll.</label>
+			<label index=".image_descr">Der TYPO3 Kern liefert mit dem Web &gt; Info Modul lediglich einen leeren Container. Durch eine Programmierschnittstelle (API) können Backend Erweiterungen Menüeinträge innerhalb des Web &gt; Info Moduls zur Verfügung stellen. Hier sehen Sie die &quot;Seiten TSconfig&quot; Übersicht der &quot;info_pagetsconfig&quot; Erweiterung.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle" type="integer">100519543</label>
+			<label index=".description" type="integer">76935227</label>
+			<label index=".details" type="integer">130648442</label>
+			<label index=".image_descr" type="integer">62510793</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Web &gt; Info module</label>
+			<label index=".description">The idea of the Web&gt;Info module is to be a host module for backend applications that wish to present information / analysis of pages or branches of the page tree. This could be website statistics, caching status information etc.</label>
+			<label index=".details">Conceptually the Web&gt;Info module is different from the Web&gt;Functions module only by primarily showing information rather than offering functionality. It is up to extension programmers to decide in which of these two modules they want to insert functionality.</label>
+			<label index=".image_descr">The Web&gt;Info module as provided by the core is an empty shell. It provides an API that extensions can use to attach function menu items to the Info module. Here you see the &quot;Page TSconfig&quot; overview from the extension &quot;info_pagetsconfig&quot;.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

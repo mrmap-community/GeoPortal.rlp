@@ -1,0 +1,2 @@
+# cat=basic//; type=string; label=Template Selector Mode: You may use the Template Selector either with external HTML files or with pure TypoScript. Values: file, ts
+templateMode = file

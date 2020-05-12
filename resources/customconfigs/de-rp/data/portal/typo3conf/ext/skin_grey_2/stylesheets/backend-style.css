@@ -1,0 +1,390 @@
+/* - - - - - - - - - - - - - - - - - - - - -
+
+Title  : TYPO3 backend styles
+Author : Ingo Renner <ingo@typo3.org>
+URL    : http://typo3.org
+
+Description : styles the TYPO3 backend
+
+	$Id$
+
+- - - - - - - - - - - - - - - - - - - - - */
+
+
+#typo3-top-container {
+	background: #515151 url(../backgrounds/bar.png) bottom left repeat-x;
+	padding: 0px;
+	margin: 0;
+	height: 40px;
+	border-bottom: 0px solid #e4e4e4;
+	border-top: 0px solid #949494;
+}
+
+#typo3-logo {
+	padding: 0px;
+}
+
+#typo3-logo img {
+	padding: 0px;
+}
+
+#typo3-logo a {
+	display: block;
+	width: 250px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	background: transparent url(../backgrounds/typo3logo_mini.) top left no-repeat;
+}
+
+.typo3-top-toolbar {
+	position: absolute;
+	right: 10px;
+	margin: 0 0 0 0;
+	background: transparent;
+}
+
+/* ----- Toolbar ----- */
+
+
+#typo3-toolbar {
+	display: inline;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#typo3-toolbar li {
+	display: inline;
+	float: left;
+	margin-right: -1px; /* necessary for overlaying the separators with the active state background */
+}
+
+#typo3-toolbar * li {
+	display: list-item;
+}
+
+.toolbar-item {
+	padding-top: 2px;
+	padding-bottom: 9px;
+	margin: 0px 5px;
+	display: block;
+	text-align: center;
+	background-image: url(../backgrounds/toolbar_separator.png);
+	background-repeat: no-repeat;
+}
+
+.toolbar-item-menu {
+	top: 30px;
+}
+
+#typo3-toolbar .no-separator {
+	background-image: none;
+}
+
+.toolbar-item-active {
+	background-image: url(../backgrounds/toolbar_item_active_bg.png);
+}
+
+
+/* ----- logged in user ----- */
+
+#username {
+	padding-top: 4px;
+}
+
+#username.su-user {
+	background: #f7989f;
+	padding-left: 4px;
+	color: #2270c3;
+}
+
+#username a {
+	text-decoration: none;
+	line-height: 22px;
+	color: #f0f0f0;
+}
+
+#username img {
+	padding: 0px 5px 0 0;
+	vertical-align: center;
+	display: none;
+}
+
+#username span {
+	padding-right: 4px;
+}
+
+
+/* ----- Logout ----- */
+
+#typo3-side-menu form,
+#login-info p {
+	text-align: center;
+}
+
+#login-info p {
+	padding-top: 5px;
+	padding-bottom: 30px;
+}
+
+#logout-button {
+	padding: 2px 12px 2px 4px;
+	border: 0;
+	background: transparent;
+}
+
+#logout-button input {
+	background: transparent url(../backgrounds/logoutbutton.png) center right no-repeat;
+	color: #f0f0f0;
+	font-weight: normal;
+	border: 0;
+	padding: 5px 25px 3px 3px;
+	margin: 0;
+}
+
+#logout-button input:hover {
+	color: #fff;
+}
+
+
+/* ----- Workspace Selector ----- */
+
+#workspace-selector a img {
+	display: none;
+	}
+	
+#workspace-selector a {
+	width: 28px;
+	height: 29px;
+	display: block;
+	float: left;
+	margin: 0px;
+	background: transparent url(../backgrounds/workspaceicon.png) center center no-repeat;
+	}
+
+#workspace-selector span {
+	padding-top: 2px;
+	padding-left: 10px;
+	margin-right: 20px;
+}
+
+#workspace-selector select {
+	background: #fbfbfb;
+	color: #3b3b3b;
+	border: 0;
+	padding: 0px;
+	margin: 5px 5px 0 5px;
+	clear: none;
+	float: left;
+}
+
+#workspace-selector select option {
+	background: #fff;
+	color: #3b3b3b;
+	border: 0;
+	padding: 1px 4px;
+}
+
+/* ----- Caching ----- */
+
+#clear-cache-actions-menu {
+	width: 30px;
+	background: transparent url(../backgrounds/topicons_bg.png) top left repeat-x;
+	padding: 0px;
+}
+
+
+#clear-cache-actions-menu a {
+}
+
+#clear-cache-actions-menu ul {
+	position: absolute;
+	list-style: none;
+	padding: 5px;
+	margin: 0;
+	background-color: #fefefe;
+	border: 1px solid #6f6f6f;
+	border-top: 0;
+	width: 180px;
+}
+
+#clear-cache-actions-menu li {
+	padding: 2px;
+	text-align: left;
+	float: none;
+	vertical-align: middle;
+	height: 19px;
+}
+
+#clear-cache-actions-menu a.toolbar-item {
+	width: 30px;
+	height: 30px;
+	display: block;
+	background: transparent url(../backgrounds/clearcacheicon.png) center center no-repeat;
+	padding: 0px;
+	margin: 0 0 0 0;
+}
+
+#clear-cache-actions-menu a.toolbar-item-active {
+	background: #fefefe url(../backgrounds/clearcacheicon.png) center center no-repeat;
+}
+
+#clear-cache-actions-menu a.toolbar-item img {
+	display: none;
+}
+
+#clear-cache-actions-menu li img {
+	display: block;
+	float: left;
+	padding-right: 5px;
+}
+
+#clear-cache-actions-menu li a {
+	text-decoration: none;
+	line-height: 12px;
+	vertical-align: middle;
+	display: block;
+	padding-bottom: 2px;
+	padding-left: 3px;
+	font-size: 11px;
+}
+
+
+/* ----- Shortcuts ----- */
+
+#shortcut-menu {
+	width: 30px;
+	background: transparent url(../backgrounds/topicons_bg.png) top left repeat-x;
+	padding: 0px;
+}
+
+#shortcut-menu a.toolbar-item img {
+	display: none;
+	}
+
+#shortcut-menu a.toolbar-item {
+	width: 30px;
+	height: 30px;
+	display: block;
+	background: transparent url(../backgrounds/shortcuticon.png) center center no-repeat;
+	padding: 0px;
+	margin: 0 0 0 0;
+}
+
+#shortcut-menu a.toolbar-item-active {
+	background: #fefefe url(../backgrounds/shortcuticon_act.png) center center no-repeat;
+}
+
+#shortcut-menu .toolbar-item-menu {
+	position: absolute;
+	list-style: none;
+	padding: 2px;
+	margin: 0;
+	background-color: #fefefe;
+	border: 1px solid #6f6f6f;
+	border-top: 0;
+	width: 220px;
+}
+
+#shortcut-menu .shortcut-list {
+	width: 100%;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut td {
+	padding: 2px 1px;
+	line-height: 16px;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut.first-row td {
+	background: #fff url(../gfx/shortcutgroups-bg.png);
+	background-repeat: repeat-x;
+	padding-top: 4px;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut-group td.shortcut-group-icon,
+#shortcut-menu .shortcut-list tr.shortcut td.shortcut-icon,
+#shortcut-menu .shortcut-list td.shortcut-edit,
+#shortcut-menu .shortcut-list td.shortcut-delete {
+	width: 18px;
+	text-align: center;
+	vertical-align: top;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut td.shortcut-label a {
+	display: block;
+	cursor: pointer;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut td.shortcut-edit img,
+#shortcut-menu .shortcut-list tr.shortcut td.shortcut-delete img {
+	display: none;
+	cursor: pointer;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut:hover td.shortcut-edit img,
+#shortcut-menu .shortcut-list tr.shortcut:hover td.shortcut-delete img {
+	display: inline;
+}
+
+#shortcut-menu .shortcut-list tr.shortcut-group td.shortcut-group-icon,
+#shortcut-menu .shortcut-list tr.shortcut td.shortcut-icon {
+	padding-left: 7px;
+	vertical-align: top;
+}
+
+#shortcut-menu .shortcut-list .shortcut-group td {
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	background-color: #f4f4f4;
+	padding: 4px 0 4px 0;
+}
+
+
+/* ----- Backend Search ----- */
+
+#backend-search-menu {
+	width: 30px;
+	background: transparent url(../backgrounds/topicons_bg.png) top left repeat-x;
+	padding: 0px;
+}
+
+#backend-search-menu a.toolbar-item img {
+	display: none;
+	}
+
+#backend-search-menu a.toolbar-item {
+	width: 30px;
+	height: 30px;
+	display: block;
+	background: transparent url(../backgrounds/searchicon.png) center center no-repeat;
+	padding: 0px;
+	margin: 0px;
+}
+
+#backend-search-menu a.toolbar-item-active {
+	background: #fefefe url(../backgrounds/searchicon_act.png) center center no-repeat;
+	}
+
+#backend-search-menu div {
+	position: absolute;
+	padding: 3px 5px;
+	text-align: center;
+	margin: 0 -3px 0 0;
+	background-color: #fefefe;
+	border: 1px solid #6f6f6f;
+	border-top: none;
+	width: 180px;
+}
+
+#search-query {
+	width: 170px;
+	border: 1px #848484 solid;
+	padding: 2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+iframe {
+	width: 100%;
+}

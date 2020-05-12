@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="tsconfig_hierarchy.alttitle">Seiten TSconfig Hierarchie Betrachter</label>
+			<label index="tsconfig_hierarchy.description">Zeigt dem Benutzer eine Übersicht der TSconfig Struktur, nachdem alle relavanten TSconfig Konfigurationen für diesen Teil des Seitenbaumes eingelesen wurden.</label>
+			<label index="tsconfig_hierarchy.details">Diese Übersicht ist unverzichtbar, wenn Sie sich einen Überblick über die TSconfig Werte für die verschiedenen Bereiche des Seitenbaumes verschaffen wollen. Hier können Sie sich direkt die Konfigurationsstruktur jeder Seite anzeigen lassen, und zwar nachdem alle Seiten TSconfig Werte (inklusive der geerbten) eingelesen und ausgewertet wurden. Dies hilft Ihnen dabei, zu überprüfen, ob die von Ihnen gesetzten Werte auch wirklich für die Seite übernommen wurden und sich an der richtigen Stelle des Konfigurationsbaumes befinden.
+Zudem können Sie sich auch den Seiten TSconfig TypoScript Programmcode für jede Seite, die sich innerhalb der Root Line befindet, anzeigen lassen.
+
+Lesen Sie die unten aufgeführten Dokumente, um mehr über die Seiten TSconfig zu erfahren.</label>
+			<label index="tsconfig_hierarchy.image_descr">So könnte der vollständig ausgewertete Seiten TSconfig Baum für eine &quot;Intro&quot;-Seite aussehen. Dieser Baum bildet die Summe aller Konfigurationseinstellungen aus der Root Line und den Standardwerten. Hier sehen Sie den kompletten Baum abgebildet, Sie können sich aber auch andere Top Level Objekte (TLO) mit Hilfe der Auswahlbox anzeigen lassen, wenn Sie sich nur für Teilbereiche interessieren.</label>
+			<label index="tsconfig_edit.alttitle">Seiten TSconfig Inhalte Betrachter</label>
+			<label index="tsconfig_edit.description">Zeigt den uninterpretierten TSconfig Code aller Seiten innerhalb der gewählten Root Line (inklusive aller Standardwerte).</label>
+			<label index="tsconfig_edit.details">Der ausgewertete Seiten TSconfig Baum, welchen Sie in der Standardansicht sehen, wird eigentlich aus dem hier angezeigten Seiten TSconfig Code und in dieser Reihenfolge gebildet. Somit können Sie ersehen, wie der vollständig ausgewerteten Seiten TSconfig Baum zustande kam.
+Mit einem Mausklick auf das Bearbeitungssymbol gelangen Sie direkt zu den Seiten TSconfig Feldern der entsprechenden Seiten.</label>
+			<label index="tsconfig_edit.image_descr">Zeigt den uninterpretierten Seiten TSconfig Code. Zuerst werden die Standardwerte aus TYPO3_CONF_VARS angezeigt (diese können aus Erweiterungen stammen), dann der Inhalt des TSconfig Feldes der ersten Seite innerhalb der Root Line (in diesem Fall der &quot;Intro&quot;-Seite) und dann der Code aller Seiten innerhalb der Root Line bis zur gewählten Seite (hier nicht abgebildet).
+Am Ende der Seite wird das Bearbeitungssysmbol angezeigt, welches Sie durch Anklicken direkt zum TSconfig Feld der entsprechenden Seite bringt!
+Hier sehen Sie die TSconfig Felder der ersten und zweiten Seite innerhalb der Root Line. Beachten Sie das &quot;TS&quot; Symbol neben dem ersten Feld. Mit einem Klick können Sie einen Assistenten aufrufen, der Ihnen die an dieser Stelle erlaubten Seiten TSconfig Optionen erklärt.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="tsconfig_hierarchy.alttitle" type="integer">57288638</label>
+			<label index="tsconfig_hierarchy.description" type="integer">34139528</label>
+			<label index="tsconfig_hierarchy.details" type="integer">177660665</label>
+			<label index="tsconfig_hierarchy.image_descr" type="integer">188033426</label>
+			<label index="tsconfig_edit.alttitle" type="integer">123654165</label>
+			<label index="tsconfig_edit.description" type="integer">148641553</label>
+			<label index="tsconfig_edit.details" type="integer">105827446</label>
+			<label index="tsconfig_edit.image_descr" type="integer">142598899</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="tsconfig_hierarchy.alttitle">Page TSconfig hierarchy viewer</label>
+			<label index="tsconfig_hierarchy.description">Allows the user to view the compiled Page TSconfig structure for a branch of the pagetree.</label>
+			<label index="tsconfig_hierarchy.details">This viewer is indispensable for getting an overview of Page TSconfig settings as they apply to various branches in the page tree. You can see the configuration structure of any page where all inherited Page TSconfig is parsed and the result shown. This helps you to evaluate that the settings you have applied are actually found at the correct position in the configuration tree.
+You can also see the Page TSconfig TypoScript code for each page in the root line with the viewer.
+
+See the links for more information about what Page TSconfig is.</label>
+			<label index="tsconfig_hierarchy.image_descr">This is how the parsed Page TSconfig tree can look. It contains the &quot;sum&quot; of all the configuration code from the root line and any default settings. This shows the whole tree but you can also select other top level objects (TLO) in the selector box in the top if you want to limit the view to a single branch
+One of the branches in Page TSconfig has the special property that it is overridden with any User TSconfig in the same object path given for the current backend user. When you view only the &quot;mod&quot; TLO any user settings for the current backend user are applied as well. Here it is evident that some additional settings must apply for the user since only &quot;mod.SHARED.colPos_list&quot; was actually found in Page TSconfig (according to the &quot;All&quot; view in the first image).</label>
+			<label index="tsconfig_edit.alttitle">Page TSconfig content viewer</label>
+			<label index="tsconfig_edit.description">Displays the raw TSconfig code of all pages in the current root line including any default code.</label>
+			<label index="tsconfig_edit.details">The parsed Page TSconfig tree you see in the default view is actually compiled from this TSconfig code in the order it appears here. This view lets you see how the parsed version came to be.
+You can also click the edit-icons of the various pages to go directly to the TSconfig fields of the pages.</label>
+			<label index="tsconfig_edit.image_descr">Shows the raw Page TSconfig code. First you see the default content from TYPO3_CONF_VARS (probably added by extensions), then the content from the &quot;TSconfig&quot; field of the first page in the root line (&quot;Intro&quot;) and then for each root line page up to the current page (not shown in screenshot).
+In the bottom of the page you will see a link which will open editing forms for all of the TSconfig fields shown in the list!
+Here you see specifically the TSconfig fields of the first and second page in the rootline being edited. Notice the &quot;TS&quot; icon next to the first field - this will bring up a wizard that helps you to select among available Page TSconfig properties.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

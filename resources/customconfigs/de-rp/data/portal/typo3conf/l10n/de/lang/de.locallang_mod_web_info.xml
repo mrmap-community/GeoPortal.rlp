@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="title">Seiteninformation</label>
+			<label index="depth_0">Diese Seite</label>
+			<label index="depth_1">Inkl. 1 Ebene</label>
+			<label index="depth_2">Inkl. 2 Ebenen</label>
+			<label index="depth_3">Inkl. 3 Ebenen</label>
+			<label index="mlang_labels_tablabel">Seitenbezogene Informationen, z.B. Zugriffsstatistik, Änderungsprotokollierung, Datensatzanzahl</label>
+			<label index="mlang_labels_tabdescr">Das Web-Info Modul ist spezialisiert auf statistische Informationen über Webseiten. Dies beinhaltet Statistiken über Seitenzugriffe und eine Änderungsprotokollierung, welche Sie durch alle Änderung der Seite navigieren lässt. Sie können sich ebenso eine Übersicht der verwendeten Datensätze auf den einzelnen Seiten als auch die Seiteneinstellungen in Form einer Baumansicht ansehen.</label>
+			<label index="mlang_tabs_tab">Info</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="title" type="integer">9265976</label>
+			<label index="depth_0" type="integer">98872550</label>
+			<label index="depth_1" type="integer">200641290</label>
+			<label index="depth_2" type="integer">228799796</label>
+			<label index="depth_3" type="integer">195275893</label>
+			<label index="mlang_labels_tablabel" type="integer">71381826</label>
+			<label index="mlang_labels_tabdescr" type="integer">207029193</label>
+			<label index="mlang_tabs_tab" type="integer">67476226</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

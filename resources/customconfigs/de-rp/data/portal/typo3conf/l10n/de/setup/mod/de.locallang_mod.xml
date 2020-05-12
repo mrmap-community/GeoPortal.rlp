@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">Benutzerprofil bearbeiten</label>
+			<label index="mlang_labels_tabdescr">Dieses Modul dient zur Konfiguration Ihres Backend Benutzerprofils. Hier können Sie Ihren Namen, Ihre Email Adresse, die benutzte Backend Sprache und viele andere allgemeine Systemeigenschaften für Ihr eigenes Benutzerkonto festlegen.</label>
+			<label index="mlang_tabs_tab">Einstellungen</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel" type="integer">39109629</label>
+			<label index="mlang_labels_tabdescr" type="integer">237774117</label>
+			<label index="mlang_tabs_tab" type="integer">181548907</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="mlang_labels_tablabel">Personal user setup</label>
+			<label index="mlang_labels_tabdescr">This module allows you to customize your backend user profile. Here you can change your active system language, name and email address. You may also configure other general features in the system.</label>
+			<label index="mlang_tabs_tab">Setup</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

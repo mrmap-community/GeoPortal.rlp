@@ -1,0 +1,222 @@
+MAP
+NAME "extents"
+STATUS ON
+SIZE 600 600
+MAXSIZE 5000
+UNITS METERS
+SYMBOLSET  "symbolset_mapbender.sym"
+PROJECTION
+	"init=epsg:4326"
+END
+EXTENT 2475000 5425000 2724000 5658000
+WEB	
+	IMAGEPATH "/tmp/"
+	METADATA
+		WMS_TITLE "Layer Extent"
+		WMS_ABSTRACT "Geoportal Rheinland Pfalz, Layer Extent"
+		WMS_ONLINERESOURCE "http://localhost/cgi-bin/mapserv?map=%%INSTALLATIONFOLDER%%mapbender/tools/extents.map"
+		WMS_FEATURE_INFO_MIME_TYPE    "text/html"	
+		WMS_SRS "epsg:4326 epsg:31467 epsg:31466 epsg:31468 epsg:31469 epsg:31462 epsg:31463 epsg:31492 epsg:31493"
+		wms_extent "2508083 5427840 2681976 5646760"
+		"ows_keywordlist" "Geoportal RLP, Service Layer, WMS, WFS"
+		"ows_fees" "none"
+		"ows_accessconstraints" "none"
+		"ows_addresstype" "postal"
+		"ows_address" "Ferdinand-Sauerbruch-Str. 15"
+		"ows_city" "Koblenz"
+		"ows_stateorprovince" "Rheinland-Pfalz"
+		"ows_postcode" "56073"
+		"ows_country" "Germany"
+		"ows_contactperson" "Armin Retterath" 
+		"ows_contactinformation" "Infos Geoportal-RLP"
+		"ows_contactorganization" "Landesamt für Vermessung und Geobasisinformation Rheinland-Pfalz"
+		"ows_contactposition" "Vermessung und Geobasisinformation"
+		"ows_contactelectronicmailaddress" "armin.retterath@lvermgeo.rlp.de"
+		"wms_contactfacsimiletelephone" "0261/492-466"
+		"wms_contactvoicetelephone" "0261/492-492"
+		"wms_enable_request" "*"
+	END
+	VALIDATION
+		'minx' '^(\+|-)?[0-9]*\.?[0-9]*$'
+		'miny' '^(\+|-)?[0-9]*\.?[0-9]*$'
+		'maxx'  '^(\+|-)?[0-9]*\.?[0-9]*$'
+		'maxy' '^(\+|-)?[0-9]*\.?[0-9]*$'
+		'metadata_uuid' '^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{12}\}?$'
+	END
+END
+SYMBOL
+	NAME 'my_hatch'
+	TYPE hatch
+END
+OUTPUTFORMAT
+  NAME 'png'
+  DRIVER 'AGG/PNG'
+  MIMETYPE 'image/png'
+  EXTENSION PNG
+  IMAGEMODE PC256
+  TRANSPARENT ON
+END
+LEGEND
+  STATUS ON
+  KEYSIZE 10 8
+  KEYSPACING 10 10
+  IMAGECOLOR 255 255 255
+  LABEL
+    COLOR 128 128 128
+    TYPE TRUETYPE
+    FONT "arial"
+    SIZE 8
+  END
+END
+
+#--------------------------------------------------- use this to have a global map background
+#please set the right tmp path above
+LAYER
+  NAME "demis"
+  TYPE RASTER
+ 
+  #CONNECTION "http://www2.demis.nl/wms/wms.asp?wms=WorldMap&"
+  CONNECTION "http://sg.geodatenzentrum.de/wms_topplus_web_open?"
+  CONNECTIONTYPE WMS
+  METADATA
+    "wms_srs"             "EPSG:4326"
+    "wms_name"            "Bathymetry,Countries,Topography,Hillshading,Coastlines,Waterbodies,Rivers,Streams,Railroads,Highways,Roads,Borders,Cities,Settlements,Airports"
+    "wms_name"            "web_grau"
+    "wms_connectiontimeout" "2"
+    "wms_server_version"  "1.1.1"
+    "wms_format"          "image/png"
+  END
+END
+
+#---------------------------------------------------
+
+LAYER
+	NAME "background"
+	STATUS ON
+	TYPE LINE
+	CONNECTIONTYPE postgis 
+	CONNECTION   "dbname=geoportal_gaz_2011 user=postgres port=5433 host=localhost"
+	DATA "the_geom from (select gid , the_geom from landes) as foo using unique gid using SRID=25832"  
+	METADATA
+		WMS_TITLE "Rheinland-Pfalz"
+		WMS_SRS "epsg:25832"
+		WMS_ABSTRACT "Bounding Box Rectangles of Geo Resources registered with the Geoportal Rhineland Palatinate"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://www.mapbender.org/"
+		wms_keywordlist "Geoportal, RLP, Rheinland Pfalz, Umgebungsrechteck, Kartensuche, Dienst, OGC WMS, Open Source Geospatial Foundation, OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://wiki.osgeo.org/"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+	MINSCALE 0
+	MAXSCALE 0
+	PROJECTION
+		"init=epsg:31466"
+	END
+	CLASS
+		NAME "Rheinland_Pfalz"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR -1 -1 -1
+		END 
+	END
+END
+#---------------------------------------------------
+LAYER
+	NAME "extent"
+	STATUS ON
+	TYPE POLYGON
+	CONNECTIONTYPE postgis 
+	CONNECTION   "dbname=geoportal user=postgres port=5436 host=localhost"
+	DATA "the_geom from (select GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326) as the_geom,area2d(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326)) as area, 1 as oid ) as foo USING UNIQUE oid USING SRID=4326"
+	METADATA
+		WMS_TITLE "RLP Geo-Services"
+		WMS_SRS "epsg:4326"
+		WMS_ABSTRACT "Bounding Box Rectangles of OWS Services registered with thte Geoportal Rhineland Palatinate"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://www.geoportal.rlp.de"
+		wms_keywordlist "Geoportal, RLP, Rheinland Pfalz, Umgebungsrechteck, Kartensuche, Dienst, OGC WMS, Open Source Geospatial Foundation. OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://www.geoportal.rlp.de"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+	PROJECTION
+		"init=epsg:4326"
+	END
+ 	CLASS
+		EXPRESSION ([area] > 0.005)
+		NAME "bbox2"
+		STYLE
+        		OUTLINECOLOR 135 30 50 
+        		WIDTH 2 
+      		END 
+	END
+END
+#-------------------------------------
+LAYER
+	NAME "ows_layer_target"
+	
+	TYPE POINT 
+	LABELMAXSCALE 5000000000
+	LABELMINSCALE 0
+	CONNECTIONTYPE postgis
+	CONNECTION   "dbname=geoportal user=postgres port=5436 host=localhost"
+	DATA "the_geom from (select centroid(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326)) as the_geom,area2d(GeomFromText('POLYGON((%minx% %miny%,%minx% %maxy%,%maxx% %maxy%,%maxx% %miny%, %minx% %miny%))',4326)) as area, 1 as oid ) as foo USING UNIQUE oid USING SRID=4326"
+	LABELCACHE ON
+	METADATA
+		WMS_TITLE "RLP Geo-Services Annotations"
+		WMS_SRS "epsg:4326"
+		WMS_ABSTRACT "Bounding Box Rectangles of OWS Services registered with thte Geoportal Rhineland Palatinate"
+		wms_dataurl_format "text/html"
+		wms_dataurl_href "http://www.mapbender.org/"
+		wms_keywordlist "Geoportal, RLP, Rheinland Pfalz, Umgebungsrechteck, Kartensuche, Dienst,OGC WMS, Open Source Geospatial Foundation. OSGeo"
+		wms_metadataurl_format "text/html"
+		wms_metadataurl_href "http://wiki.osgeo.org/"
+		wms_metadataurl_type "TC211"
+		wms_extent "2508083.25 5427840 2681976 5646759.5"
+	END
+	PROJECTION
+		"init=epsg:4326"
+	END
+	CLASS
+		EXPRESSION ([area] <= 0.005)
+		NAME "bbox"
+		STYLE
+			SYMBOL 'target'
+		END
+	END
+END
+#-------------------------------------
+LAYER
+	NAME "metadata_polygon"
+	STATUS ON
+	TYPE POLYGON
+	CONNECTIONTYPE postgis 
+	CONNECTION   "dbname=geoportal user=postgres port=5436 host=localhost"
+	DATA "geom FROM (SELECT (st_dumprings((ST_Dump(bounding_geom)).geom)).path[1],(st_dumprings((ST_Dump(bounding_geom)).geom)).geom
+FROM mb_metadata WHERE uuid = \'%metadata_uuid%\') AS rings USING UNIQUE path USING SRID=4326"
+	METADATA
+		WMS_TITLE "Metadata polygon"
+		WMS_SRS "EPSG:4326"
+		WMS_ABSTRACT "Polygon of a special metadataset from the mapbender registry"
+		include "include_metadata_layer.map"
+	END
+
+	PROJECTION
+		"init=epsg:4326"
+	END
+
+	CLASS
+		NAME "Metadata polygon"
+		STYLE
+			OUTLINECOLOR 255 0 0 
+			WIDTH 2 
+		END 
+	END
+END
+
+#-------------------------------------
+
+END

@@ -1,0 +1,170 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "L",
+    "units" : "mm",
+    "format" : "a3",
+    "controls" : [
+    	{
+    		"id" : "title",
+    		"label" : "Titel",
+    		"type" : "text",
+    		"size" : 20,
+    		"pageElementsLink" : {
+    			"titel" : "value"
+    		}
+    	},
+    	{
+    		"id" : "dpi",
+    		"label" : "DPI",
+    		"type" : "select",
+    		"size" : 20,
+    		"pageElementsLink" : {
+    			"karte" : "res_dpi"
+    		},
+    		"options" : [
+    			{
+    			"value" : "144",
+    			"label" : "hoch (144 dpi)"
+    			},{
+    			"value" : "72",
+    			"label" : "normal (72 dpi)"
+    			}
+    		]
+    	},
+    	{
+    		"id" : "comment1",
+    		"label" : "Kommentar 1 (30 Zeichen)",
+    		"type" : "textarea",
+    		"size" : 5,
+    		"pageElementsLink" : {
+    			"kommentar1" : "value"
+    		}
+    	},
+    	{
+    		"id" : "comment2",
+    		"label" : "Kommentar 2 (30 Zeichen)",
+    		"type" : "textarea",
+    		"size" : 5,
+    		"pageElementsLink" : {
+    			"kommentar2" : "value"
+    		}
+    	},
+    	{
+    		"id" : "angle",
+    		"label" : "Winkel",
+    		"type" : "text",
+    		"pageElementsLink" : {
+    			"nordpfeil" : "angle",
+    			"karte" : "angle",
+    			"minikarte" : "angle"
+    		}
+    	},
+    	{
+    		"id" : "coordinates",
+    		"type" : "hidden"
+    	},
+    	{
+    		"id" : "scale",
+    		"label" : "Maßstab",
+    		"type" : "text",
+    		"pageElementsLink" : {
+    			"scale" : "value"
+    		}
+    	}
+    ],
+    "pages" : [
+    	{
+    	 "tpl" : "../print/A3_landscape_official_template.pdf",
+    	 "useTplPage" : 1,
+    	 "elements" : {
+	    	 "karte" : {
+    			"type" : "map",
+    			"res_dpi" : 72,
+    			"x_ul" : 25.2,
+	    		"y_ul" : 10.2,
+	    		"width" : 384.5,
+    			"height" : 256.5,
+    			"coords" : 1,
+    			"coords_font_family" : "Arial",
+    			"coords_font_size" : 7
+	   			},
+	   		"messung" : {
+    			"type" : "measure",
+    			"do_fill" : 0,
+    			"fill_color" : {
+    				"r" : 255,
+    				"g" : 0,
+    				"b" : 0
+    				},
+    			"do_stroke" : 0,
+    			"stroke_color" : {
+    				"r" : 0,
+    				"g" : 0,
+    				"b" : 0
+    				},
+    			"line_style" : {
+    				"width" : 1.0
+    				}
+	   			},
+	   		"titel" : {
+    			"type" : "text",
+    			"x_ul" : 142,
+	    		"y_ul" : 277.8,
+	    		"font_family" : "Arial",
+	    		"font_size" : 14
+	   			},
+	   		"scale" : {
+    			"type" : "text",
+    			"x_ul" : 331.6,
+	    		"y_ul" : 280,
+	    		"font_family" : "Arial",
+	    		"font_size" : 12,
+				"value" : "scale"
+	   		},
+	   		"date" : {
+    			"type" : "text",
+    			"x_ul" : 331.6,
+	    		"y_ul" : 290,
+	    		"font_family" : "Arial",
+	    		"font_size" : 12,
+				"value" : "date"
+	   		},
+	   		"nordpfeil" : {
+    			"type" : "image",
+    			"x_ul" : 30,
+	    		"y_ul" : 282,
+	    		"width" : 6,
+	    		"height" : 12,
+	    		"angle" : 0,
+				"filename" : "../print/img/northarrow_simple.png"
+	   		},
+	   		"kommentar1" : {
+    			"type" : "para",
+    			"x_ul" : 108.5,
+	    		"y_ul" : 279.6,
+	    		"font_family" : "Arial",
+	    		"font_size" : 12,
+	    		"width" : 30,
+	    		"height" : 5,
+	    		"align" : "L",
+	    		"border" : 0,
+	    		"fill" : 1,
+	    		"border_width" : 0.5
+	   			},
+	   		"kommentar2" : {
+    			"type" : "para",
+    			"x_ul" : 108.5,
+	    		"y_ul" : 284.8,
+	    		"font_family" : "Arial",
+	    		"font_size" : 12,
+	    		"width" : 30,
+	    		"height" : 5,
+	    		"align" : "L",
+	    		"border" : 0,
+	    		"fill" : 1,
+	    		"border_width" : 0.5
+	   			}
+	   		}
+	   	}
+	]
+}

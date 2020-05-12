@@ -1,0 +1,20 @@
+plugin.pmkslimboxmagnify {
+
+	# cat=pmkslimboxmagnify/dims/d1; type=int; label= Magnify image bottom margin, in pixels.
+	magnifyImgMarginB = 8
+
+	# cat=pmkslimboxmagnify/dims/d2; type=int; label= Magnify image right margin, in pixels.
+	magnifyImgMarginR = 8
+	
+	# cat=pmkslimboxmagnify/file/f1; type=file[css]; label= Magnify image.
+	magnifyImg = EXT:pmkslimbox/res/images/magnify.png
+
+	# cat=pmkslimboxmagnify/file/f2; type=file[js]; label= Slimbox Magnify Javascript Library: You will only need to change this, if you want to use a different version of the slimbox magnify script.
+	magnifyJS = EXT:pmkslimbox/res/scripts/slimboxMagnify.js
+	
+	# cat=pmkslimboxmagnify//o1; type=int+; label= Resizing Duration: The duration for the magnify image to become visible, in milliseconds.
+	magnifyDuration = 400
+
+	# cat=pmkslimboxmagnify//o2; type=options[linear,quadIn,quadOut,quadInOut,cubicIn,cubicOut,cubicInOut,quartIn,quartOut,quartInOut,quintIn,quintOut,quintInOut,sineIn,sineOut,sineInOut,expoIn,expoOut,expoInOut,circIn,circOut,circInOut,elasticIn,elasticOut,elasticInOut,backIn,backOut,backInOut,bounceIn,bounceOut,bounceInOut]; label= Magnify Opacity Transition: The transition you want to use for the fadein/fadeout animation.
+	magnifyTransition = sineInOut
+}

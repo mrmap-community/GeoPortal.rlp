@@ -1,0 +1,516 @@
+/* Takes account the standard RTE of Typo3 3.x, HTMLAREA and TinyMCE */
+html, body#typo3-alt-toplogo-php, 
+body#typo3-alt-toplogo-php, 
+body#typo3-alt-toplogo-php a, 
+body#typo3-alt-toplogo-php img {
+	margin:0 !important;
+	padding:0 !important;
+}
+
+#typo3-alt-doc-php #typo3-altdoc-header { margin-top:15px !important; }
+#typo3-alt-doc-php .c-inputButton { margin-bottom:2px; }
+
+/* toplogo */
+body#typo3-alt-toplogo-php a.backendlogo img.backendlogo { height:60px !important; }
+.container_tt_content { width:500px !important; }
+.container_tt_content input, .container_tt_content a { float:left; }
+
+/* shortcut/topmenu/palettes */
+.backendlogo { display:block !important; }
+body.highPalette form { margin-top:9px; }
+td.workspaceselector { vertical-align:middle }
+div.workspaceselector {
+	position:absolute;
+	top:1px;
+	right:2px;
+	width:200px;
+}
+.workspaceselector img {
+	vertical-align:middle;
+	margin-top:-3px;
+}
+.workspaceselector select {
+	margin:0;
+	height:11px;
+}
+
+body.background_high div.workspaceselector { top:6px !important; }
+
+body.doubleID #typo3-shortcuts,
+body.doubleID #typo3-shortcuts td,
+body.doubleID #urlform {
+	margin-bottom:0 !important;
+	padding:0 !important;
+}
+div.switchMode {
+	position:absolute;
+	bottom:1px;
+	right:1px; /*
+	height:28px;*/
+}
+div.switchMode a {
+	line-height:12px;
+	display:block;
+	border:1px solid rgb(171,171,171);
+	padding:1px 2px 0 2px;
+	background-color:#F0F0EE;
+}
+.contentArea option { background-color:#F0F0EE; }
+body.doubleID input {
+	height:12px;
+	border: 1px solid gray;
+	margin:1px 0;
+}
+body.doubleID input.submit { height:auto; }
+body.doubleID #typo3-shortcuts { margin-top:-4px !important; }
+body.doubleID #urlform { margin-top:-5px !important; }
+body[class="doubleID"] #urlform { margin-top:-3px !important; }
+body.background_high #urlform { margin-top:5px !important; }
+
+/* generic pop up dialog definitions starts */
+body#typo3-browse-links-php h3.bgColor5, 
+body#ext-rtehtmlarea-mod3-browse-links-php h3.bgColor5 {
+	font-size:11px; 
+	color:black !important; 
+	padding:5px 2px; 
+	margin-bottom:2px;
+}
+
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-curUrl { width:96% }
+#typo3-curUrl {
+	font-size: 9px;
+	padding-top: 4px;
+	padding-left: 4px;
+	text-align: left;
+}
+
+body#typo3-browse-links-php .hr, 
+body#ext-rtehtmlarea-mod3-browse-links-php .hr,
+body#ext-tinyrte-mod1-browse-links-php .hr { display:none !important; }
+body#ext-rte-app-rte-select-image-php table,
+body#ext-rtehtmlarea-mod4-select-image-php table,
+body#ext-tinyrte-rte-select-image-php table {
+	border-collapse:collapse;
+	border-width:0;
+}
+body#ext-rte-app-rte-select-image-php table td,
+body#ext-rtehtmlarea-mod4-select-image-php table td,
+body#ext-tinyrte-rte-select-image-php table td {
+	border-width:0 !important; 
+	border-collapse:collapse;
+	padding:0 !important;
+	text-align:left;
+}
+
+/* generic pop up dialog definitions ends */
+.header-icon-title .contentIcon a { background-color:#cecece; }
+div.singleElement {
+	margin:2px; 
+	border-top: 1px solid #F9F9F9 !important;
+}
+div.singleElement .typo3-page-ceHeader,
+div.singleElement .exampleContent {
+	background-color: rgb(245,245,245) !important;
+	margin-top:0 !important;
+	margin-bottom:0 !important;
+}
+div.contentWrap input.t3button {
+	margin: 0 1px 1px 1px; 
+	width:99% !important;
+}
+
+.commandLink-paste-whole-column a.iconMode {
+	background-color:transparent; 
+	border-width: 0px !important;
+}
+a.iconMode { background-color: transparent; }
+a.bothMode {
+	border-width:0 !important; 
+	background-color: transparent !important; 
+}
+td.editIcon { vertical-align:top; }
+.typo3-page-cols input, 
+.typo3-page-langMode input, 
+td.commandLink-edit-whole-column_button span.button, 
+td.commandLink-new-record-whole-column_button span.button, 
+td.toolbar_button span.button,
+.commandLinks a.buttonMode, 
+.topFuncMenuToolbar a.buttonMode, 
+#ext-cms-layout-db-layout-php #typo3-clipboard span.button,
+#ext-cms-layout-db-layout-php .pasteLink span.button,
+table.newButtonTable span.buttonMode {
+	border:1px solid rgb(171,171,171) !important;
+	background-color:rgb(238,238,238) !important;
+	padding-right:2px;
+	display:block;
+}
+td.toolbar_button span.button { height:18px; } 
+.buttonMode:hover,
+.commandLink:hover span.buttonMode,
+.commandLink-new-record-whole-column_button:hover,
+.commandLink-new-record-whole-column_button .button:hover,
+.commandLink-new-record-whole-column_button .new:hover,
+.commandLink-edit-whole-column_button:hover,
+.commandLink-edit-whole-column_button .button:hover,
+.commandLink-edit-whole-column_button .edit:hover,
+.commandLink-paste-whole-column .buttonMode:hover { 
+	background-color: #f9f9f9 !important; 
+	cursor:pointer;
+}	
+.commandLink {
+	float:left;
+	display:inline;
+}
+.commandLink-paste img { }
+.commandLink span.buttonMode {
+    min-width:45px;
+    _width:45px;
+    white-space:nowrap;
+    text-align:left;
+}
+
+table.newButtonTable span.buttonMode {	width:120px; }
+.lrPadding { clear: left; }
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc .contentIcon a IMG {
+	border:1px solid rgb(171,171,171);
+	background-color:rgb(238,238,238) !important;
+	cursor: pointer;
+}
+
+table.newButtonTable td, 
+td.commandLink-paste-whole-column {
+	border-width:0 !important; 
+	background-color:transparent !important;
+	vertical-align:middle;
+}
+table.newButtonTable td img { vertical-align:middle }
+table.newButtonTable .commandLink-paste {
+	border-width:0 !important;
+	background-color:transparent !important;
+	}
+td.commandLink-new-record-whole-column_button span.button,
+td.commandLink-edit-whole-column_button span.button,
+td.commandLink-paste-whole-column span.button { margin-top:2px !important; }
+td.pasteLink a.buttonMode { margin-top:5px }
+td.commandLink-new-record-whole-column_text a,
+td.commandLink-edit-whole-column_text a,
+td.commandLink-new-record-whole-column_img a,
+td.commandLink-edit-whole-column_img a,
+td.pasteLink a.textMode,
+td.pasteLink a.iconMode,
+td.pasteLink a.bothMode{
+	margin-top: 7px; 
+	display:block;
+}
+span.textMode { padding:0 2px; }
+
+td.commandLink-new-record-whole-column_button span.button a,
+td.commandLink-edit-whole-column_button span.button a,
+td.pasteLink span.button a { margin-top:0; }
+
+.commandLinks img { vertical-align:middle; }
+td.toolbar_button span.button { margin-right:1px; }
+.commandLinks a.buttonMode {
+	float:left; 
+	padding-top:0 !important;
+	padding-bottom:0 !important;
+	margin-right:1px; 
+	padding-right:2px;
+	margin-bottom:1px;
+}
+#ext-cms-layout-db-layout-php .typo3-clipboard-head img {
+	vertical-align:middle;
+	margin-right:2px;
+}
+.commandLinks a.buttonMode img { margin-right:1px }
+span.buttonModeInfo {
+	float:left;
+	padding-top:3px;
+}
+.topFuncMenuToolbar a.buttonMode {
+	display:block; 
+	padding:1px; 
+	margin-right:1px; 
+	height:100%;
+}
+.commandrow-info { padding-left:2px }
+.newRecordMarker img {
+	height:8px !important;
+	width:100px !important;
+}
+span.pasteLinkbuttonMode {
+	float:left;
+	margin-right:2px;
+}
+td.commandLink-edit-whole-column_button, 
+td.commandLink-new-record-whole-column_button, 
+td.toolbar_button,  
+#ext-cms-layout-db-layout-php #typo3-clipboard td { vertical-align:middle; }
+td.commandLink-edit-whole-column_button span.button, 
+td.commandLink-new-record-whole-column_button span.button, 
+td.toolbar_button span.button {
+	padding:0px 3px 0 0px; 
+	display:block;
+}
+td.toolbar_button a {
+	display:block; 
+	float:left; 
+	padding-left:0px; 
+	text-align:left;
+}
+td.commandLink-edit-whole-column_button a.edit { margin-right:1px; }
+td.commandLink-edit-whole-column_button a, 
+td.commandLink-new-record-whole-column_button a { width:134px; }
+
+td.toolbar_button img {	float:left; }
+td.commandLink-edit-whole-column_button span.text, 
+td.commandLink-new-record-whole-column_button span.text, 
+td.toolbar_button span.text {
+	padding-left:1px; 
+	padding-top:1px;
+}
+td.toolbar_button span.text { float:left; }
+td.commandLink-edit-whole-column_text span, 
+td.commandLink-new-record-whole-column_text span, 
+.toolbar_text span {
+	display:block; 
+	padding:0 2px 0 1px !important; 
+	text-align:left;
+}
+td.commandLink-edit-whole-column_text a, 
+td.commandLink-new-record-whole-column_text a {
+	width:140px; 
+	display:block; 
+	margin-left:1px;
+}
+#ext-cms-layout-db-layout-php #typo3-clipboard span.button {
+	display:block;
+	padding-top:2px; 
+	text-align:center;
+}
+#ext-cms-layout-db-layout-php #typo3-clipboard { 
+	width: 99%;
+	border-width:0;
+}
+#ext-cms-layout-db-layout-php #typo3-clipboard span.button { width:auto; }
+.commandLinks-startCell td { white-space: nowrap; }
+table.typo3-page-colHeader td.bgColor2 b { text-transform:uppercase; }
+.typo3-page-cols { margin-top:3px !important; }
+.typo3-page-cols input { width:99%; }
+table.typo3-TCEforms select { margin-right:3px; }
+table.typo3-TCEforms-palette select { width:170px !important; }
+
+TABLE#typo3-about-modules TR.c-mainitem TD { 
+	padding: 6px 4px;
+	padding-bottom: 0px;
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom:4px;
+}
+
+body#ext-rte-app-rte-select-image-php table.bgColor5 strong,
+body#ext-rtehtmlarea-mod4-select-image-php table.bgColor5 strong,
+body#ext-tinyrte-rte-select-image-php table.bgColor5 strong {
+	display:block;
+	padding-top: 10px;
+	padding-left: 4px;
+	padding-bottom: 4px;
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom:2px;
+}
+
+/* module configs ends */
+
+.typo3-moduleHeader {
+	width: 425px !important; 
+	display:block;
+}
+table.typo3-TCEforms { width:400px !important; }
+td.noactiveClassSave * { 
+	margin:0;
+	padding:0;
+}
+.topFuncLanguages select {float:right}
+#ext-cms-layout-db-layout-php #typo3-clipboard,
+#ext-cms-layout-db-layout-php #typo3-clipboard tr, 
+#ext-cms-layout-db-layout-php #typo3-clipboard td { background-color:white !important; }
+table.typo3-page-langMode td { width:1%; }
+table.typo3-page-langMode {
+	margin-top:5px; 
+	width:550px;
+}
+table.typo3-page-langMode .typo3-page-colHeader {}
+table.typo3-page-langMode .bgColor6 { background-color:white !important; }
+table.typo3-page-langMode .bgColor6 strong {
+	display:block; 
+	margin:5px 0; 
+	padding:2px 0; 
+	background-color: #D9d9d9 !important; /* #D9E5EC */
+}
+table.typo3-page-langMode td { padding:2px; }
+.typeInfoBoxTemplaVoila {
+	border: 1px solid #EEEEEE; 
+	background-color:#F9F9F9; 
+	float:left;
+	padding:1px;
+}
+
+div.infoBelowElement, 
+.commandLinks {
+	border: 1px solid #EEEEEE !important;
+	background-color:#F9F9F9 !important;
+}
+.commandLinks {	padding:2px 0; }
+.infoBelowElement { 
+	padding:3px 2px; 
+	margin-top:0px !important;
+	margin-bottom:5px;
+}
+td.commandLinks-startCell {
+	border:none !important; 
+	background-color:transparent !important;
+} 
+div.newButtonTableContainer {
+	margin-bottom:-5px;
+	width:100% !important;
+}
+.exampleContent_kb_nescefe .headerWrap, .exampleContent_kb_nescefe_pi1 .headerWrap { margin-bottom:5px !important; }
+.exampleContent_kb_nescefe .commandLinks-startCell table,
+.exampleContent_kb_nescefe_pi1 .commandLinks-startCell table { margin-bottom:15px; }
+exampleContent_kb_nescefe .typeInfoBoxTemplaVoila,
+.exampleContent_kb_nescefe_pi1 .typeInfoBoxTemplaVoila { 
+	clear:both;
+	height:20px;
+}
+
+.exampleContent_kb_nescefe,
+.exampleContent_kb_nescefe_pi1, 
+.exampleContent_kb_nescefe table,
+.exampleContent_kb_nescefe_pi1 table { float:left; }
+.exampleContent_kb_nescefe .newButtonTable, 
+.exampleContent_kb_nescefe_pi1 .newButtonTable {
+	margin-top:3px !important;
+	margin-bottom:3px !important;
+}
+table.newButtonTable {
+	margin-top:15px !important;
+	width:auto;
+}
+table.newButtonTable td { padding:5px !important}
+.typo3-page-colHeader b {
+	display:block; 
+	padding-bottom:2px; 
+	text-align:center;
+	/*text-align: left; padding: 0px 4px 0px 4px;*/
+}
+.exampleContent { 
+	padding: 5px 5px 10px 5px;
+	display:block;
+}
+.exampleContent_header,
+.exampleContent_menu, 
+.exampleContent_shortcut,
+.exampleContent_list,
+.exampleContent_script {
+	height:35px;
+	overflow:hidden;
+}
+.exampleContent_textpict,
+.exampleContent_table {
+	height:108px;
+	overflow:hidden;
+}
+.exampleContent_default,
+.exampleContent_uploads,
+.exampleContent_bullets,
+.exampleContent_multimedia,
+.exampleContent_mailform,
+.exampleContent_kb_nescefe .exampleContent_textpict,
+.exampleContent_kb_nescefe .exampleContent_table,
+.exampleContent_kb_nescefe_pi1 .exampleContent_textpict,
+.exampleContent_kb_nescefe_pi1 .exampleContent_table {
+	height:50px;
+	overflow:hidden;
+}
+.exampleContent_kb_nescefe div.newButtonTableContainer,
+.exampleContent_kb_nescefe,
+.exampleContent_kb_nescefe .typo3-page-colHeader,
+.exampleContent_kb_nescefe_pi1 div.newButtonTableContainer,
+.exampleContent_kb_nescefe_pi1,
+.exampleContent_kb_nescefe_pi1 .typo3-page-colHeader { background-color:white !important }
+.exampleContent_kb_nescefe, .exampleContent_kb_nescefe_pi1 {
+	height:auto; 
+	overflow:scroll; 
+}
+.typo3-page-ceHeader-top-space-row { display:none !important }
+.typo3-page-ceHeader-top-space-row img { height:5px !important }
+td.commandLinks-startCell { padding:0 !important}
+td.commandLinks-startCell div {
+	margin-top:0px; 
+	padding: 2px 5px;
+}
+div.colWrap { margin-right:0px;}
+.header-icon-title { background-color:transparent !important }
+table.typo3-page-colHeader { width:100% } 
+div.headerWrap span.button {
+	margin-top:5px !important; 
+	display:block; 
+	z-index:2;
+}
+div.headerWrap {background-color:transparent !important;}
+div.contentWrap {
+	z-index:0; 
+	margin-top:-25px !important; 
+	padding-top:30px !important; 
+	border-width: 1px 1px 1px 1px !important; 
+	height:200px; 
+	border-style:dashed !important;
+	border-color: #ABABAB !important;
+	padding-bottom:15px;
+}
+div[class~="contentWrap"] {
+	height:auto !important; 
+	min-height:200px;
+}
+.leftMargin img { width:0 !important}
+.leftMargin, .spacerLeft, 
+.spacerRight, .spacerMiddle, 
+.blackLineSeparator {
+	display:none;
+	width: 0 !important; 
+	background-color:transparent !important;
+}
+.spacerLeft img, .spacerRight img, 
+.spacerMiddle img,
+.blackLineSeparator, 
+td.blackLineSeparator img { display:none !important; }
+.db-layout-shortcutlink a img {} /*26x22,18x18*/
+.toolbarTableTextTopFuncMenu { width: 548px !important; }
+.endLinkContainer { margin-top:15px; }
+.endLinkContainer,
+.topLinkContainer { margin-bottom:20px; }
+
+body#typo3-alt-doc-php #div-editNav,
+body#ext-cms-layout-db-layout-php #div-editNav,
+body#ext-templavoila-mod1-index-php #div-editNav {
+	margin-bottom:20px !important;
+	width:100%;
+	padding-left:0;	
+	position: absolute;
+	top:0px;
+	left:0;
+	height:20px !important;
+}
+body#typo3-alt-doc-php #div-extraTopNav,
+body#ext-cms-layout-db-layout-php #div-extraTopNav,
+body#ext-templavoila-mod1-index-php #div-extraTopNav { 	
+	position: absolute;
+	top:20px;
+	left:0;
+	height:20px;
+}
+div.buttonContainer { 
+	_width:310px; 
+	min-width:310px;
+}

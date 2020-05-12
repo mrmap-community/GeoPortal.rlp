@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="RemoveFormatTooltip">Formatierung entfernen</label>
+			<label index="Cleaning Area">Bereich</label>
+			<label index="Selection">Auswahl</label>
+			<label index="All">Alle</label>
+			<label index="Remove formatting">Formatierung entfernen</label>
+			<label index="Cleaning options">Art der Formatierung, die entfernt werden soll</label>
+			<label index="Formatting:">HTML-Formatierung:</label>
+			<label index="MS Word Formatting:">MS Word-Formatierung:</label>
+			<label index="Images:">Bilder:</label>
+			<label index="All HTML:">All HTML-Tags:</label>
+			<label index="Select the type of formatting you wish to remove.">Wählen Sie die Art der Formatierung, die entfernt werden soll.</label>
+			<label index="OK">OK</label>
+			<label index="Cancel">Abbrechen</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="RemoveFormatTooltip" type="integer">187827535</label>
+			<label index="Cleaning Area" type="integer">111670107</label>
+			<label index="Selection" type="integer">117415376</label>
+			<label index="All" type="integer">186422474</label>
+			<label index="Remove formatting" type="integer">187827535</label>
+			<label index="Cleaning options" type="integer">120951142</label>
+			<label index="Formatting:" type="integer">241123716</label>
+			<label index="MS Word Formatting:" type="integer">232036571</label>
+			<label index="Images:" type="integer">160221445</label>
+			<label index="All HTML:" type="integer">60736661</label>
+			<label index="Select the type of formatting you wish to remove." type="integer">46612032</label>
+			<label index="OK" type="integer">235577377</label>
+			<label index="Cancel" type="integer">245659783</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>
