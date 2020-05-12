@@ -1212,7 +1212,7 @@ update(){
           read -p "Do you want to use a custom update script? Should lie under ${installation_folder}custom_update.sh y/n?" yn
           case $yn in
               [Yy]* ) source ${installation_folder}custom_update.sh;break;;
-              [Nn]* ) exit;break;;
+              [Nn]* ) break;;
               * ) echo "Please answer yes or no.";;
           esac
       done
