@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+<redirect>muss noch...</redirect>
+<overlimit>true</overlimit>
+ <category name="XYZ" count="4">
+   <member>
+   <wms_id>123</wms_id>
+   <queryable>true</queryable>
+   <epsg>false</epsg>
+   <federalstate>DE-RP</federalstate>
+   <last_monitoring>1</last_monitoring>
+   <availability>100</availability>
+   <relevance>0</relevance>
+   <type>wfs</type>
+   <wfs_conf_id>1704</wfs_conf_id>
+   <id>20454</id>
+   <title>RLP_GEO</title>
+   <abstract>LVermGeo Rheinland-Pfalz RLP_GEO Web Map Service</abstract>
+   <accessconstraints>none</accessconstraints>
+   <termsofuse>1</termsofuse>
+   <permission>true</permission>
+   <date>13.10.2006</date>
+   <department>LVermGeo</department>
+   <member>
+      <nutzungsbedingungen>http://XXXXXYYYYYYZZZZZZ</nutzungsbedingungen>
+      <queryable>---VARIABLE:---true/false / false</queryable>
+      <epsg>---VARIABLE:---true/false</epsg>
+      <state>RLP</state>
+      <last_monitoring>true/false</last_monitoring>
+      <availability>100</availability>
+      <relevance/>
+      <type>layer</type>
+      <layername>Hanswurst</layername>
+      <id>20456</id>
+      <title>UEKRLP</title>
+      <abstract>Strassen </abstract>
+      <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+      <date>13.10.2006</date>
+      <department>LVermGeo</department>
+      <member>
+        <nutzungsbedingungen>http://XXXXXYYYYYYZZZZZZ</nutzungsbedingungen>
+        <queryable>---VARIABLE:---true/false / false</queryable>
+        <epsg>---VARIABLE:---true/false</epsg>
+        <state>RLP</state>
+        <last_monitoring>true/false</last_monitoring>
+        <availability>100</availability>
+        <relevance/>
+        <type>layer</type>
+        <id>20457</id>
+        <title>UEKRLP</title>
+        <abstract>Landstrassen</abstract>
+        <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+        <date>13.10.2006</date>
+        <department>LVermGeo</department>
+      </member>
+   </member>
+  </member>
+
+  <member>
+   <queryable></queryable>
+   <epsg>false</epsg>
+   <federalstate>DE-RP</federalstate>
+   <last_monitoring>false</last_monitoring>
+   <availability>100</availability>
+   <relevance>0</relevance>
+   <type>wms</type>
+   <id>20454</id>
+   <title>RLP_GEO</title>
+   <abstract>LVermGeo Rheinland-Pfalz RLP_GEO Web Map Service</abstract>
+   <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+   <termsofuse>1</termsofuse>
+   <permission>true</permission>
+   <date>13.10.2006</date>
+   <department>LVermGeo</department>
+  </member>
+  <member>
+   <queryable>true</queryable>
+   <epsg>false</epsg>
+   <federalstate>DE-RP</federalstate>
+   <last_monitoring>false</last_monitoring>
+   <availability>100</availability>
+   <relevance>0</relevance>
+   <type>wms</type>
+   <id>20454</id>
+   <title>RLP_GEO</title>
+   <abstract>LVermGeo Rheinland-Pfalz RLP_GEO Web Map Service</abstract>
+   <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+   <termsofuse>1</termsofuse>
+   <permission>true</permission>
+   <date>13.10.2006</date>
+   <department>LVermGeo</department>
+   <member>
+      <nutzungsbedingungen>http://XXXXXYYYYYYZZZZZZ</nutzungsbedingungen>
+      <queryable>---VARIABLE:---true/false / false</queryable>
+      <epsg>---VARIABLE:---true/false</epsg>
+      <state>RLP</state>
+      <last_monitoring>true/false</last_monitoring>
+      <availability>100</availability>
+      <relevance/>
+      <type>layer</type>
+      <id>20456</id>
+      <title>UEKRLP</title>
+      <abstract>Strassen </abstract>
+      <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+      <date>13.10.2006</date>
+      <department>LVermGeo</department>
+      <member>
+        <nutzungsbedingungen>http://XXXXXYYYYYYZZZZZZ</nutzungsbedingungen>
+        <queryable>---VARIABLE:---true/false / false</queryable>
+        <epsg>---VARIABLE:---true/false</epsg>
+        <state>RLP</state>
+        <last_monitoring>true/false</last_monitoring>
+        <availability>100</availability>
+        <relevance/>
+        <type>layer</type>
+        <id>20457</id>
+        <title>UEKRLP</title>
+        <abstract>Landstrassen</abstract>
+        <accessconstraints>dierk.deussen@lvermgeo.rlp.de</accessconstraints>
+        <date>13.10.2006</date>
+        <department>LVermGeo</department>
+      </member>
+   </member>
+  </member>
+  ...
+ </category>
+<ready>true</ready>
+</result>

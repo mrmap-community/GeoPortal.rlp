@@ -1,0 +1,1443 @@
+@import url(stylesheet_basic.css); /* basic style sheet (based on stylesheet.css) - background-colors deleted */
+@import url(stylesheet_post_extra.css); /* extra settings to the original CSS-file */
+
+/*********************************************
+ * MAIN STYLES:
+ *********************************************/
+
+
+/* Setting general styles */
+FORM { 
+	margin: 0 0 0 0; 
+}
+SELECT, TEXTAREA, INPUT, TD, BODY, .defstyle, P, DIV {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 10px;
+	font-size: 10px;
+	margin: 0 0 0 0;
+	color: black;
+}
+
+/* INPUT - Button 
+	INPUT.c-inputButton {
+		margin: 0px;
+		padding: 0px;
+		border: 1px solid;
+		background-color: transparent;
+	}
+
+SELECT, TEXTAREA, INPUT {
+	border-top: 1px solid #ABABAB;
+	border-left: 1px solid #ABABAB;
+	border-bottom: 1px solid #ABABAB;
+	border-right: 1px solid #ABABAB;
+	background-color: #FEFEFE;
+	}
+
+SELECT:hover, TEXTAREA:hover, INPUT:hover {
+	border: 1px solid #FFB936;
+	background-color: #FFFFFF;
+	}
+	
+SELECT:focus, TEXTAREA:focus, INPUT:focus {
+	border: 1px solid #BD7A1D;
+	background-color: #FFFFFF;
+	}
+*/
+/* Page headers: */
+H1, H2, H3, H4 {
+	font-family: Geneva, Verdana, Arial, sans-serif;
+}
+H1 { 
+	font-size: 9px;
+	font-color: #FFB936;
+	padding-top: 8px;
+	padding-left: 6px;
+	padding-bottom: 4px;
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB;
+	border-top: 3px solid #FFB936;
+/*	background-image: url(backgrounds/h2_bg.gif); background-repeat : repeat-x; */
+	text-align: left;
+	text-transform: uppercase;
+	color: #000000; 
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+H2 { /* Normal section headers */
+	font-size: 9px;
+	font-color: #FFB936;
+	padding-top: 10px;
+	padding-left: 6px;
+	padding-bottom: 4px;
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB;
+	border-top: 0px solid #FFB936;
+	background-image: url(backgrounds/h2_bg.gif); background-repeat : repeat-x; 
+	text-align: left;
+	text-transform: uppercase;
+	color: #000000;
+}
+H3 {/* Normal section headers */
+	font-size: 9px;
+	font-color: #FFB936;
+	margin: 8px 0px 5px 0px;
+	padding-top: 10px;
+	padding-left: 4px;
+	padding-bottom: 4px;
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB;
+	border-top: 0px solid #8BDE00;
+	background-image: url(backgrounds/h2_bg.gif); background-repeat : repeat-x; 
+	text-align: left;
+	text-transform: uppercase;
+	color: #000000; 
+	}
+H4 {/* Discrete section headers (no background) */
+	font-size: 10px;
+	font-weight: bold;
+	margin: 3px 0px 3px 0px;
+	margin-top: 6px;
+	color: #333333;
+}
+
+/* Links in general */
+A {
+	color : black;
+	text-decoration: none;
+}
+A:hover {
+	color: #BD7A1D;
+}
+
+/* horizontal ruler */
+HR, DIV.HR {
+	border: 0px;
+	height: 1px;
+	color: #DDDDDD;
+	background-color: #ddd;
+	border-top: 1px solid #7a7a7a;
+	border-bottom: 1px solid #000;
+}
+
+IMG {  border: 0px; }
+
+UL {
+	/*list-style-image: url(backgrounds/ul.gif);*/
+	padding: 4px;
+}
+LI {
+	list-style-type:none;
+	/*list-style-image: url(backgrounds/ul.gif);*/
+	margin-top: 3px;
+}
+
+/* Preformatted text - not used so much in TYPO3 */
+PRE   {
+	font-family: monospace;
+	font-size:11px;
+	margin: 0 0 0 0;
+}
+
+
+/*********************************************
+ * Background color classes:
+ *********************************************/
+
+.bgColor {background-color: #F4F4F4;}
+.bgColor-10 {background-color: #EEEEEE;}
+.bgColor-20 {background-color: #F2F2F2;}
+.bgColor2 {background-color: #F2F2F2;}
+.bgColor3 {background-color: #EEEEEE;}
+.bgColor3-20 {background-color: #F8F8F8;}
+.bgColor4 {background-color: #F2F2F2;}
+A.typo3-goBack {background-color: transparent;}
+.bgColor4-20 {background-color: #F6F6F6;}
+.bgColor5 {background-color: #F9F9F9;}
+DIV.typo3-view-help H3 { background-color: #FEFEFE;}
+.bgColor6 {background-color: #ABABAB;}
+
+
+
+/*********************************************
+ * CONTEXT MENU:
+ *********************************************/
+/* Context Sensitive Menu / Layer (alt_clickmenu.php creates it) */
+/* Notice: Rollover color is set by ->bgColor5 in the template object of alt_clickmenu.php */
+/* Context Sensitive Menu / Layer (alt_clickmenu.php creates it) */
+TABLE.typo3-CSM { 
+	border: #ABABAB 1px solid; 
+	background-color: #F9F9F9;
+}
+TABLE.typo3-CSM TD.typo3-CSM-item { white-space: nowrap; }
+TABLE.typo3-CSM TR.typo3-CSM-itemRow TD { padding: 1px 2px 1px 5px; }
+TABLE.typo3-CSM TR.typo3-CSM-itemRow TD IMG {
+	border: 1px solid #D9E1EA; 
+	background-color: #E8F0F5;
+}
+TABLE.typo3-CSM TR.typo3-CSM-itemRow { 
+	height: 16px;
+	cursor: default; 
+}
+
+/*********************************************
+ * END CONTEXT MENU:
+ *********************************************/
+
+ /* Set default values for bodytags: */
+BODY {
+	margin: 6px 0px 0px 6px;
+	background-color: #FBFBFB;
+	background-image: url(backgrounds/doc_bg.gif);
+	background-repeat: repeat-x;
+}
+
+/*********************************************
+ * TREES:
+ *********************************************/
+
+BODY#typo3-alt-db-navframe-php,
+BODY#typo3-alt-file-navframe-php {
+	background-color: #FFFFFF;
+	background-image: url(backgrounds/navframe_bg.gif); 
+	margin: 10px 0px 0px 5px;
+}
+BODY#typo3-alt-db-navframe-php .c-recLink img,
+#typo3-tree .c-recIcon img {
+	width:16px !important;
+	height:16px !important;
+}
+/*********************************************
+ * END TREES:
+ *********************************************/
+
+
+
+/*********************************************
+ * DEFINING DOCS:
+ *********************************************/
+DIV.typo3-bigDoc, 
+DIV.typo3-noDoc, 
+DIV.typo3-bigDoc H2, 
+DIV.typo3-noDoc H2, 
+DIV.typo3-bigDoc H3, 
+DIV.typo3-noDoc H3 { width: 740px; }
+DIV.typo3-bigDoc, 
+DIV.typo3-noDoc { 
+	margin-top: 5px; 
+	margin-left: 10px;
+}
+DIV.typo3-mediumDoc,
+DIV.typo3-mediumDoc H2, 
+DIV.typo3-mediumDoc H3 { width: 470px; }
+DIV.typo3-smallDoc, 
+DIV.typo3-smallDoc H2 { width: 350px; }
+
+/*********************************************
+ * MENU SYSTEMS:
+ *********************************************/
+/* Vertical Module Menu script, left frame (alt_menu.php): */
+BODY#typo3-alt-menu-php {
+	margin: 0px;
+	background-color: #FEFEFE; 
+	background-image: url(backgrounds/vmenu_bg.gif); 
+	background-position : left top; 
+	background-repeat : repeat;}
+DIV.vertical-menu {
+	padding-left: 4px; 
+	padding-top: 4px; 
+	overflow: hidden; 
+}
+DIV.vertical-menu TABLE#typo3-vmenu { 
+	border-left: 1px solid #EEEEEE; 
+	border-right: 1px solid #EEEEEE; 
+	border-bottom: 1px solid #EEEEEE; 
+	background-color: #FFFFFF;
+}
+
+
+/* MainItem */
+TABLE#typo3-vmenu TR.c-mainitem TD, 
+TABLE#typo3-vmenu TR.c-mainitem-HL TD { 
+	margin 0px;
+	height: 28px;
+	width: 135px;
+	padding: 0px 0px 0px 5px; 
+	background-color: #FEFEFE; 
+	vertical-align: middle;
+	border-left: 0px solid #ABABAB;
+	border-right: 0px solid #ABABAB;
+	background-image: url(backgrounds/menu_bg.gif); 
+	background-repeat : repeat-x;}
+TABLE#typo3-vmenu TR.c-mainitem TD IMG {}
+TABLE#typo3-vmenu TR.c-mainitem TD SPAN.c-iconCollapse {
+	position:absolute; 
+	left:120px; 
+	cursor:pointer; 
+}
+TABLE#typo3-vmenu TR.c-mainitem TD SPAN.c-label A, 
+TABLE#typo3-vmenu TR.c-mainitem-HL TD SPAN.c-label A { text-decoration : none; }
+
+
+/* SubItem */
+TABLE#typo3-vmenu TR.c-endrow TD {
+	height: 2px; 
+	background-color: #F9F9F9; 
+}
+TABLE#typo3-vmenu TR.c-first TD {height: 0px;}
+TABLE#typo3-vmenu TR.c-subitem-row { background-color: transparent; }
+TABLE#typo3-vmenu TR.c-subitem-row TD.c-subitem-label A { 
+	display: block; 
+	width: 100%; 
+	vertical-align: middle; 
+}
+TABLE#typo3-vmenu TR.c-subitem-row-HL TD.c-subitem-label A { 
+	background-image: url(backgrounds/small_arrow.gif); 
+	background-position : center left; 
+	background-repeat : no-repeat; 
+	padding-left:10px
+}
+TABLE#typo3-vmenu TR.c-subitem-row TD { 
+	background-color: transparent; 
+	height: 18px; 
+}
+TABLE#typo3-vmenu TR.c-subitem-row TD IMG {background-color: #FEFEFE; }
+TABLE#typo3-vmenu TR.c-subitem-row-HL TD { 
+	height: 18px;
+	background-color: #FAFFF2; 
+	background-image: url(backgrounds/menu_sub_bg.gif); 
+	background-repeat : repeat-x;
+}
+TABLE#typo3-vmenu TR.c-subitem-row-HL TD IMG {background-color: #F2F2F2; }
+
+/* Admin functions */
+DIV#typo3-alt-menu-php-adminFunc TABLE { 
+	width: 135px; 
+	border: 1px solid #DDDDDD; 
+	background-color: #FEFEFE;
+}
+DIV#typo3-alt-menu-php-adminFunc H2 { 
+	width: 120px; 
+	vertical-align: middle; 
+}
+DIV#typo3-alt-menu-php-adminFunc TABLE TR { 
+	background-color: #FEFEFE; 
+	vertical-align: middle; 
+}
+DIV#typo3-alt-menu-php-adminFunc TABLE TR TD IMG { margin: 4px 0px 4px 4px; }
+DIV#typo3-alt-menu-php-logininfo { width: 135px; }
+DIV#typo3-alt-menu-php-logininfo FORM INPUT {
+	width: 70px; 
+	height: 26px; 
+	background-image: url(backgrounds/logout_bg.gif); 
+}
+DIV#typo3-alt-menu-php-logininfo P#username { color: #ABABAB; }
+
+/* Top menu (alt_topmenu_dummy.php) */
+TABLE#typo3-topMenu TR TD {
+	white-space: nowrap; 
+	vertical-align: top; 
+}
+TABLE#typo3-topMenu TR TD.c-menu IMG {
+	margin: 2px 1px 0px 1px; 
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-subitem { 
+	border: 1px solid #F2F2F2; 
+	padding: 1px; 
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-subitem:hover {
+	background-color: #FEFEFE; 
+	border: 1px solid #FFB936; 
+	padding: 1px; 
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-subitem-HL {
+	background-color: #FEFEFE; 
+	border: 1px solid #BD7A1D; 
+	padding: 1px; 
+	cursor: default;
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-mainitem { 
+	padding: 0px 0px 0px 0px; 
+	border: 1px solid #F2F2F2; 
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-mainitem-HL {
+	background-color: #8BDE00;
+	padding: 0px 0px 0px 0px;
+	border: 1px solid #71C100; 
+}
+TABLE#typo3-topMenu TR TD.c-menu A.c-mainitem:hover {
+	background-color: transparent; 
+	border: 1px solid #C0FF54; 
+}
+TABLE#typo3-topMenu TR TD.c-admin A IMG {
+	background-color: transparent; 
+	border: 1px solid #F2F2F2; 
+	padding: 1px;
+}
+TABLE#typo3-topMenu TR TD.c-admin A:hover IMG {
+	background-color: #FEFEFE; 
+	border: 1px solid #FFB936; 
+	padding: 1px;
+}
+TABLE#typo3-topMenu TR TD.c-logout, 
+TABLE#typo3-topMenu TR TD.c-admin {
+	padding-left: 8px;
+}
+TABLE#typo3-topMenu TR TD.c-logout FORM INPUT {
+	height: 19px; 
+	background-color: #F2F2F2; 
+	border: 1px solid #F2F2F2; 
+	padding-left: 10px; 
+	background-image: url(backgrounds/logout_small.gif); 
+	background-position : middle left; 
+	background-repeat : no-repeat; 
+}
+
+/*********************************************
+ * END MENU SYSTEMS:
+ *********************************************/
+
+
+
+
+/* Dynamic Tab menu (template.php) */
+#ext-templavoila-mod1-index-php table { border-width:0 !important }
+DIV.typo3-dyntabmenu-tabs { 
+	margin-top: 5px; 
+	padding-right: 20px; 
+}
+DIV.typo3-dyntabmenu-divs P.c-descr { 
+	font-style : italic;
+	padding: 3px 10px 5px 10px;
+	background: #e7dba8;  
+}
+#tx_templavoila_mod1_sidebar-bar {
+	border-width:0 !important; 
+	background-color:transparent !important
+}
+
+TABLE.typo3-dyntabmenu TD {
+	border-width:0 !important; 
+	padding-right:2px; 
+}
+TABLE.typo3-dyntabmenu TD.tab, 
+TABLE.typo3-dyntabmenu TD.tabact 
+{
+	background-color:transparent;
+	/*background-color:rgb(238,238,238)
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	border-bottom: 0px; 
+	*/
+} 
+TABLE.typo3-dyntabmenu TD A {
+	margin-right:0px;
+	margin-left:0px;
+	color:#222; 
+	text-decoration:none; 
+	display: block; 
+	width:auto; 
+	padding-top:3px;
+	padding-left:5px; 
+	padding-right:5px; 
+	padding-bottom:3px;
+	border:1px solid rgb(171,171,171) !important; 
+}
+TABLE[class="typo3-dyntabmenu"] TD A {margin-right:1px;}
+
+TABLE.typo3-dyntabmenu TD.tab a 
+{
+	background: #DBE9F7;
+	color:#222;
+	/*color:grey; border: solid #555 1px; */
+}
+
+TABLE.typo3-dyntabmenu TD.tabact a, 
+TABLE.typo3-dyntabmenu TD.tab_over A {
+	color: #000; 
+	background: #e7dba8; 
+	/*
+	border: solid black 1px; 
+	padding-left:10px; 
+	padding-right:10px; 
+	*/
+}
+TABLE.typo3-dyntabmenu TD.disabled,
+TABLE.typo3-dyntabmenu TD.disabled a {
+	color:#999999;  
+	background: #c4d4cd;
+	/*
+	border:1px solid rgb(171,171,171) !important; 
+	padding-left: 5px;	 
+	border: solid #555 1px;  
+	*/
+} 
+TABLE.typo3-dyntabmenu TD A:hover {
+	color:#000; 
+	background: #f6eab7; 
+	text-decoration:none;
+	display: block; 
+	width:auto; 
+	padding-top:3px;
+	padding-left:5px; 
+	padding-right:5px; 
+	padding-bottom:3px;
+	border:1px solid rgb(171,171,171)
+}
+
+DIV.typo3-dyntabmenu-divs-foldout DIV.disabled {
+	background: #DBE9F7;  
+}
+
+/* About modules */
+BODY#typo3-about-modules {
+	margin-left: 6px; 
+	margin-top: 6px; 
+}
+TABLE#typo3-about-modules TR.c-subitem-row TD IMG {margin-left: 4px; }
+TABLE#typo3-about-modules TR.c-mainitem TD { 	
+	height: 24px;
+	font-size: 9px;
+	font-color: #FFB936;
+	padding-top: 12px;
+	padding-left: 4px;
+	padding-bottom: 0px;
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB;
+	border-top: 0px;
+	background-image: url(backgrounds/header_bg.gif); background-repeat : repeat-x; 
+	text-align: left;
+	text-transform: uppercase;
+	color: #000000;
+	}
+TABLE#typo3-about-modules { margin-bottom: 4px; }
+
+/************* background for top and bottom frames starts **************/
+BODY#typo3-alt-toplogo-php, 
+BODY#typo3-alt-menu-sel-php, 
+BODY#typo3-alt-topmenu-dummy-php, 
+BODY#typo3-alt-topmenu-dummy-php-iconmenu, 
+BODY#typo3-alt-clickmenu-php, 
+BODY#typo3-alt-clickmenu-php-notop, 
+BODY#typo3-alt-palette-php  { background-color: #FEFEFE; /*F4F4F4*/ }
+BODY#typo3-alt-topmenu-dummy-php, 
+BODY#typo3-alt-clickmenu-php, 
+BODY#typo3-alt-clickmenu-php-notop 
+{
+	background-color: #FEFEFE; 
+	background-image: url(backgrounds/topframe_back.gif); 
+	/*background-image: url(backgrounds/topframe_back_full.gif);  */
+	background-position: left 0px; 
+	background-repeat: repeat-x;
+}
+BODY#typo3-alt-menu-sel-php, 
+BODY#typo3-alt-palette-php,
+BODY#typo3-alt-topmenu-dummy-php-iconmenu {
+	background-color: #FEFEFE; 
+	background-image: url(backgrounds/topframe_back.gif);
+	/*background-image: url(backgrounds/topframe_back_full.gif);  */
+	background-position: left 0px; /* 30px*/
+	background-repeat : repeat-x;
+	margin-top: 13px; /* 44px */
+	margin-left: 6px;
+}
+BODY#typo3-alt-toplogo-php, 
+BODY#typo3-alt-empty-php  {
+	background-color: #FEFEFE;
+	background-image: url(backgrounds/topframe_back.gif); 
+	background-position : left 0px; 
+	background-repeat : repeat-x;
+}
+BODY#typo3-alt-toplogo-php img {
+	height:41px !important;
+	width:150px /* hides the logo image; alternatively: margin-top:-10px */
+} 
+BODY#typo3-alt-shortcut-php { 
+	background-color: #FEFEFE; 
+	background-image: url(backgrounds/bottomframe_back.gif);
+	background-position: left 0px; 
+	background-repeat : repeat-x;
+	margin: 0px 1px 1px 1px; /* - 4px */
+	padding-top:0px; /* 10px */
+}
+BODY#typo3-alt-shortcut-php table, BODY#typo3-alt-shortcut-php form {margin-top:0 !important}
+/************* background for top and bottom frames ends **************/
+
+
+/*********************************************
+ * TCEforms:
+ *********************************************/
+ 
+
+/* Default. Always used on main-palettes in the bottom of the forms */
+TABLE.typo3-TCEforms .class-main1 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main2 { background-color: #E6E6E6; }
+TABLE.typo3-TCEforms .class-main3 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main4 { color: #000000; }
+TABLE.typo3-TCEforms .class-main5 { color: #333333; }
+TABLE.typo3-TCEforms .formField { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+
+/* Typically hidden, type and other primary 'meta' fields */
+TABLE.typo3-TCEforms .class-main11 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main12 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : repeat-x; 
+	margin-top: 4px;
+}
+TABLE.typo3-TCEforms .class-main13 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main14 { color: #000000; }
+TABLE.typo3-TCEforms .class-main15 { color: #333333; }
+TABLE.typo3-TCEforms .formField1 { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable1 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For headers */
+TABLE.typo3-TCEforms .class-main21 { background-color: #F2F2F2; }
+
+TABLE.typo3-TCEforms .class-main22 { 
+	background-color: #E6E6E6; 
+	height: 24px; padding-top: 2px; 
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : 
+	repeat-x;
+}
+TABLE.typo3-TCEforms .class-main23 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main24 { color: #000000; }
+TABLE.typo3-TCEforms .class-main25 { color: #333333; }
+TABLE.typo3-TCEforms .formField2 {  
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable2 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For main content */
+TABLE.typo3-TCEforms .class-main31 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main32 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px; 
+	background-image: url(backgrounds/h3_bg.gif);
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main33 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main34 { color: #000000; }
+TABLE.typo3-TCEforms .class-main35 { color: #333333; }
+TABLE.typo3-TCEforms .formField3 {
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable3 { 
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px;
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For extra content, like images, files etc. */
+TABLE.typo3-TCEforms .class-main41 { background-color: #F2F2F2; }
+TABLE.typo3-TCEforms .class-main42 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px;
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main43 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main44 { color: #000000; }
+TABLE.typo3-TCEforms .class-main45 { color: #333333; }
+TABLE.typo3-TCEforms .formField4 { 
+	margin-right: 2px; 
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable4 {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/* For special content */
+TABLE.typo3-TCEforms .class-main51 {
+	background-color: #F2F2F2; 
+	margin: 4px; 
+}
+TABLE.typo3-TCEforms .class-main52 { 
+	background-color: #E6E6E6; 
+	height: 24px; 
+	padding-top: 2px; 
+	background-image: url(backgrounds/h2_bg.gif); 
+	background-repeat : repeat-x; 
+}
+TABLE.typo3-TCEforms .class-main53 { background-color: #F9F9F9; }
+TABLE.typo3-TCEforms .class-main54 { color: #000000; }
+TABLE.typo3-TCEforms .class-main55 { color: #111111; }
+TABLE.typo3-TCEforms .formField5 { 
+	margin-right: 2px;
+	margin-bottom: 4px; 
+}
+TABLE.typo3-TCEforms .wrapperTable5 { 
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	margin-top: 8px; 
+	padding: 0px 0px 4px 0px; 
+}
+
+/*********************************************
+ * END TCEforms:
+ *********************************************/
+
+
+/* Web > List */
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top { 
+	width: 530px; 
+	height: 26px; 
+	background-color: #FEFEFE; 
+	border-left: 1px solid #ABABAB;
+	border-right: 1px solid #ABABAB;
+	border-top: 0px solid #ABABAB;
+	border-bottom: 1px solid #ABABAB;
+	background-image: url(backgrounds/header_bg.gif); 
+	background-repeat : repeat-x; 
+	background-position : left top;
+	padding: 6px 0px 0px 4px;
+	}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR { 
+	vertical-align: middle;
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE { 
+	margin-top: 5px; 
+	margin-bottom: 1px;
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE#typo3-dblist-ctrltop {
+	margin-top: 0px; 
+	margin-bottom: 1px;
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD A IMG {
+	height: 14px; 
+	width: 14px; 
+	margin-top: 5px; 
+	margin-bottom: 1px;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist { 
+	width: 530px; 
+	margin-top: 4px; 
+	border: 1px solid #DDDDDD; 
+	background-color: #FEFEFE; 
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR {
+	background-color: transparent; 
+	border-bottom: 4px solid #FEFEFE;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR:hover {
+	background-color: #F6F6F6; 
+	/*
+	border-bottom: 1px solid #F2F2F2;
+	*/
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD {
+	vertical-align:middle;
+	height:18px;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR .typo3-DBctrl A {
+	font-size: 12px; 
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR .typo3-DBctrl IMG {
+	font-size: 12px; 
+	margin:0 1px;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD IMG {
+	margin-left: 2px; 
+	vertical-align:bottom;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD A IMG { margin-left: 3px; }
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD.c-headLineTable {
+	height: 28px; 
+	background-color: transparent; 
+	padding: 0px 0px 0px 0px; 
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : repeat-x;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD.c-headLineTable A IMG.absmiddle { border: 0px; }
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD.c-headLine {
+	height:24px; 
+	background-color: #F6F6F6; 
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD.c-headLine A IMG {
+	margin-left: 0px; 
+	background-color: #FEFEFE;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD A IMG {
+	border: 1px solid #FEFEFE;
+	cursor: default;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD A:hover IMG {
+	border: 1px solid #BD7A1D; 
+	background-color: #F6F6F6;
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-DBctrl { 
+	width: 200px; 
+	background-color: transparent; 
+	border: 0px solid #F6F6F6; 
+	padding: 0px; margin: 0px; 
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-DBctrl A IMG 
+{
+	width: 14px; 
+	height: 14px; 
+	margin: 0px; 
+	background-color: transparent; 
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-DBctrl IMG 
+{	
+	width: 14px; 
+	height: 14px; 
+	margin: 0 1px 0 1px;
+	/*
+	width: 13px;
+	*/
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-clipCtrl { 
+	background-color: transparent; 
+	border: 0px; 
+	padding: 0px; 
+	margin: 0px; 
+	/*
+	text-align: center;
+	*/
+}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-clipCtrl IMG {
+	background-color: #FEFEFE; 
+	width: 14px; 
+	height: 14px; 
+	margin: 0px 1px;
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard {
+	width: 530px; 
+	margin-top: 10px; 
+	border: 1px solid #DDDDDD; 
+	background-color: #FEFEFE; 
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor2 {
+	background-color: #FEFEFE; 
+	vertical-align: left;
+}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-search {
+	width: 315px; 
+	margin-top: 10px; 
+	border: 1px solid #F2F2F2;
+}
+BODY#typo3-db-list-php FORM TABLE.bgColor4 TR {	background-color: #FEFEFE; }
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes {
+	width: 530px; 
+	margin-top: 10px; 
+	border: 1px solid #F2F2F2; 
+	background-color: #FEFEFE; 
+	padding: 5px;
+}
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes TR TD.bgColor2 { 
+	height: 28px; 
+	background-image: url(backgrounds/h3_bg.gif); 
+	background-repeat : repeat-x; 
+	background-color: #FEFEFE;
+}
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes TR TD.bgColor2 IMG {	margin-left: 5px; }
+
+TABLE#typo3-dblist IMG { vertical-align: middle; }
+TABLE#typo3-dblist TR TD.c-headLineTable A { 
+	text-decoration: none;
+	font-weight: bold; 
+}
+DIV#typo3-listOptions { margin: 10px 0px 10px 0px; }
+
+/* version selector */
+TABLE#typo3-versionSelector { 
+	background-color: #ABBBB4; 
+	margin-top: 5px; 
+	margin-bottom: 5px; 
+}
+TABLE#typo3-versionSelector TD { 
+	padding-left: 2px; 
+	padding-right: 2px; 
+}
+
+/* new record link */
+DIV#typo3-newRecordLink { 
+	margin: 5px 0px 5px 0px; 
+	font-weight: bold;
+}
+DIV#typo3-newRecordLink IMG { 
+	margin-right: 5px; 
+	vertical-align: middle; 
+}
+INPUT.smallCheckboxes { 
+	vertical-align: middle; 
+	margin: 0 0 0 0; 
+	padding: 0 0 0 0; 
+	width: 12px; 
+	height: 12px; 
+}
+TABLE#typo3-dblist-overview { 
+	width: 410px; 
+	margin-top: 10px; 
+	margin-left:1px;
+}
+TABLE#typo3-dblist-overview TD.c-tableDescription {
+	padding-left: 10px; 
+	font-style: italic; 
+	color: #333333;
+}
+TABLE#typo3-dblist-overview TD.c-tableDescription IMG { margin-right: 10px; }
+/*
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes TR TD.bgColor4 { background-color: #FEFEFE; }
+*/
+/*
+BODY#typo3-db-list-php FORM TABLE.bgColor4 TR TD {}
+BODY#typo3-db-list-php FORM TABLE.bgColor4 TR TD INPUT {}
+BODY#typo3-db-list-php FORM TABLE.bgColor4 TR TD SELECT {}
+BODY#typo3-db-list-php FORM TABLE.bgColor4 TR TD SELECT OPTION {}
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes TR {}
+BODY#typo3-db-list-php TABLE#typo3-dblist-sysnotes TR TD.bgColor2 STRONG {}
+BODY#typo3-db-list-php A {}
+BODY#typo3-db-list-php A IMG {}
+BODY#typo3-db-list-php DIV#contentMenu0 {}
+BODY#typo3-db-list-php DIV#contentMenu1 {}
+BODY#typo3-db-list-php {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top IMG {}
+BODY#typo3-db-list-php FORM {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD A {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD A IMG.absmiddle {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD IMG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD SPAN {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE.bgColor4 TR {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD {padding: 1px;}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE.bgColor4 TR TD {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE.bgColor4 TR TD A {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE.bgColor4 {background-color: transparent;}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD TABLE.bgColor4 TR TD A IMG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD A {}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD.c-headLineTable A SPAN.c-table {}
+BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD A {}
+BODY#typo3-db-list-php FORM TABLE {}
+BODY#typo3-db-list-php FORM TABLE TR {}
+BODY#typo3-db-list-php FORM TABLE TR TD {}
+BODY#typo3-db-list-php FORM INPUT {}
+BODY#typo3-db-list-php DIV#typo3-listOptions {}
+BODY#typo3-db-list-php DIV#typo3-listOptions FORM {}
+BODY#typo3-db-list-php DIV#typo3-listOptions FORM INPUT {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor2 TD {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor2 TD SPAN.uppercase {}
+BODY#typo3-db-list-php FORM A {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor2 TD SPAN.uppercase STRONG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head TD {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head TD A {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head TD A IMG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head TD SELECT {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.typo3-clipboard-head TD SELECT OPTION {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor5 {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor5 TD {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor5 TD A {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor5 TD A IMG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR.bgColor5 TD A SPAN.typo3-dimmed {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR TD.bgColor4 {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR TD.bgColor4 IMG {}
+BODY#typo3-db-list-php FORM TABLE#typo3-clipboard TR TD.bgColor4 EM {}
+BODY#typo3-db-list-php DIV#typo3-newRecordLink {}
+BODY#typo3-db-list-php DIV#typo3-newRecordLink A {}
+BODY#typo3-db-list-php DIV#typo3-newRecordLink A IMG {}
+BODY#typo3-db-list-php FORM TABLE.bgColor4 {}
+*/
+
+
+
+/* TemplaVoila */
+
+/********** my own TemplaVoila modifications start ***************************/
+
+BODY#ext-templavoila-mod1-index-php {
+	width:96%; 
+	background-color: #fff !important
+}
+BODY#ext-templavoila-mod1-index-php .finalContent {border-width:0 !important}
+/*
+BODY#ext-templavoila-mod1-index-php .finalContent .finalContent {border: 1px solid #000 !important;}
+*/
+
+BODY#ext-templavoila-mod1-index-php tr.elementPageTitlebarStyle td {background-color: #fff}
+BODY#ext-templavoila-mod1-index-php tr.elementPageTitlebarStyle td {background-color:#F8F8F8 !important}
+BODY#ext-templavoila-mod1-index-php div.typo3-dyntabmenu-tabs {
+	margin-top:0; 
+	margin-bottom:0; 
+	padding-top:0 !important; 
+	margin-bottom:0 !important
+}
+BODY#ext-templavoila-mod1-index-php #tx_templavoila_mod1_sidebar-bar {
+	margin-top:5px; 
+	border-bottom:none !important; 
+	height: auto !important; 
+	padding: 0 !important
+}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu {
+	margin-top:0 !important; 
+	height: auto !important;
+	/*border:0px solid  #000 !important; FF0000*/
+} 
+BODY#ext-templavoila-mod1-index-php .headerCell {
+	background-color: #F8F8F8 !important; 
+	padding: 2px; 
+	border: 0px solid #ABABAB !important; 
+	border-bottom: 2px solid #8BDE00 !important; 
+}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu td  {padding:0 3px !important}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a, 
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a:hover {
+	display:block !important; 
+	padding-left:3px !important; 
+	padding-right:3px !important 
+}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a:hover { padding: 1px; } /* border: 1px solid #FFB936*/
+BODY#ext-templavoila-mod1-index-php FORM TABLE { border:0px; } /*width: 470px; */
+/********** my own TemplaVoila modifications end *****************************/
+
+/*
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE {} 
+BODY#ext-templavoila-mod1-index-php FORM {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD A IMG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV#tx_templavoila_mod1_sidebar-bar {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD.tab {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD#DTM-ecb6fdee89-1-MENU {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD.tab A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD.disabled {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD#DTM-ecb6fdee89-2-MENU {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-tabs TABLE.typo3-dyntabmenu TR TD#DTM-ecb6fdee89-3-MENU {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV#DTM-ecb6fdee89-1-DIV {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV#DTM-ecb6fdee89-3-DIV {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4-20 {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4-20 TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4 {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4 TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4 TD A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD DIV.bgColor-10 DIV.typo3-dyntabmenu-divs DIV.c-tablayer TABLE.lrPadding TR.bgColor4 TD A IMG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD STRONG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD A IMG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD A IMG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD A STRONG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE TR {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE TR TD {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE TR TD A {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE TR TD A STRONG {}
+BODY#ext-templavoila-mod1-index-php FORM TABLE TR TD TABLE TR TD TABLE TR TD TABLE TR TD STRONG {}
+BODY#ext-templavoila-mod1-index-php FORM A {}
+BODY#ext-templavoila-mod1-index-php FORM A IMG {}
+BODY#ext-templavoila-mod1-index-php FORM INPUT {}
+BODY#ext-templavoila-mod1-index-php FORM DIV#contentMenu0 {}
+BODY#ext-templavoila-mod1-index-php FORM DIV#contentMenu1 {}
+*/
+
+
+
+/* Web > Page */
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc a IMG {
+	border: 1px solid #FEFEFE; /* change - border for images only if they are links */
+	background-color: transparent; 
+	cursor: default;
+}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc A:hover IMG {
+	border: 1px solid #FFB936; 
+	background-color: #FEFEFE;
+}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD TABLE.bgColor4 { padding: 4px; }
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV H3 { 
+	width: 541px; 
+	margin-bottom: 0px;
+}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV A IMG 
+{ 
+	/*height: 14px; width: 14px; - cause serious problems for 'Quick Edit' */
+}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE.typo3-page-buttons {
+	border: 1px solid #ABABAB; 
+	border-top: 0px; 
+	width: 550px; 
+	margin: 0px;
+}
+
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE.typo3-page-buttons TR TD {
+	padding: 4px; height: 28px; 
+	background-color: #F8F8F8; 
+	border-top: 2px solid #F2F2F2; 
+	border-bottom: 1px solid #F2F2F2; 
+	text-align: center; 
+}
+/*
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD TABLE.bgColor4 TR TD A IMG {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD TABLE.bgColor4 TR {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD TABLE.bgColor4 TR TD {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD TABLE.bgColor4 TR TD A {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV IMG { }
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD SPAN.typo3-moduleHeader {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD SPAN.typo3-moduleHeader A {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD SPAN.typo3-moduleHeader A IMG {}
+BODY#ext-cms-layout-db-layout-php DIV.typo3-mediumDoc FORM DIV TABLE TR TD SPAN {}
+*/
+TABLE.typo3-page-buttons TR TD INPUT { width: 125px; }
+TABLE.typo3-page-ceHeader { width: 100%; }
+TABLE.typo3-page-ceHeader IMG { vertical-align: middle; }
+TABLE.typo3-page-columnsMode IMG.c-divider { margin: 10px 0px 5px 0px; }
+TABLE.typo3-page-columnsMode TR TD A { text-decoration: none; }
+TABLE.typo3-page-columnsMode TR TD A B { text-decoration: underline; }
+TABLE.typo3-page-cols TR TD SPAN.exampleContent A { text-decoration: none; }
+TABLE.typo3-page-cols, 
+TABLE.typo3-page-columnsMode {
+	background-color: #FEFEFE; 
+	width: 550px; margin: 0px; 
+	padding: 8px 4px 8px 0px;
+}
+TABLE.typo3-page-cols:hover, TABLE.typo3-page-columnsMode:hover {
+	background-color: #FEFEFE; 
+	/* border: 1px dotted #FFB936; -- work in FF but doesn't look good */
+} 
+TABLE.typo3-page-cols TR TD, TABLE.typo3-page-columnsMode TR TD { background-color: transparent; }
+TABLE.typo3-page-cols TR TD IMG, 
+TABLE.typo3-page-columnsMode TR TD IMG 
+{
+/* can't be used anymore because no size for
+	width: 1px; height: 0px;
+*/
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor2, 
+.typo3-page-colHeader .colHeader {
+	height: 20px;
+	background: #FEFEFE url(backgrounds/greenline.gif) 0 100% repeat-x;
+	/* border-bottom: 2px solid #00b25b; original: 8BDE00; fron logo: #00b25b */
+} 
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor2 DIV {
+	text-align: left; 
+	padding: 0px 4px 0px 4px;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor5 {
+	background-color: #F8F8F8; 
+	border: 1px solid #EEEEEE; 
+	padding: 4px 2px 2px 4px;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader {
+	margin-bottom: 6px;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD {
+	padding: 2px;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor4 
+{
+	height: 20px; 
+	background-color: #FEFEFE; 
+	padding: 2px; 
+	border: 0px solid #C3C3C3; 
+	border-bottom: 0px; 
+	text-align: left;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor5 {
+	height: 20px; 
+	border: 1px solid #EEEEEE; 
+	padding: 2px 2px 2px 4px; 
+	background-color: #F8F8F8;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor5 A IMG {
+	width: 14px; 
+	height: 14px;
+}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor4-20 {
+	border: 0px solid #C3C3C3; 
+	border-top: 0px; 
+	padding: 4px 0px 0px 4px; 
+	background-color: #EEEEEE;
+}
+TABLE.typo3-page-cols TR TD INPUT { margin-top: 6px; }
+
+/* not needed anymore
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor5 A IMG,
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor4 A IMG 
+{
+	
+	width: 14px; 
+	height: 14px;
+	
+}
+*/
+/*
+TABLE.typo3-page-cols TR {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor2 DIV B {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-colHeader TR TD.bgColor5 A {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor4 A {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD IMG {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor4 B {}
+TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor5 A {}
+TABLE.typo3-page-cols TR TD B {}
+TABLE.typo3-page-cols TR TD B A {}
+TABLE.typo3-page-cols TR TD SPAN.exampleContent {}
+TABLE.typo3-page-cols TR TD SPAN.exampleContent A {}
+TABLE.typo3-page-cols TR TD SPAN.exampleContent IMG {}
+TABLE.typo3-page-cols TR TD SPAN.exampleContent A IMG {}
+*/
+
+
+/* Help > About */
+
+BODY#typo3-mod-help-about-index-php {
+	background-color: #FBFBFB; 
+	margin-top: 0px;
+}
+#typo3-mod-help-about-index-php-outer { 
+	margin: 0 auto; 
+	width: 333px; 
+}
+DIV#typo3-mod-help-about-index-php-inner {
+	background-color: #F2F2F2; 
+	border: 1px solid #ABABAB; 
+	width: 330px; 
+	height: 300px; 
+	margin: 0 auto; 
+	padding: 5px;
+}
+DIV#typo3-mod-help-about-index-php-inner H2,
+DIV#typo3-mod-help-about-index-php-inner H3 {
+	background-color: #FEFEFE; 
+}
+#typo3-mod-help-about-index-php-inner h2 { 
+	margin-top: 0; 
+}
+#typo3-mod-help-about-index-php-inner h3 { 
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	font-size: 14px; 
+	text-align: center; 
+}
+#typo3-mod-help-about-index-php-inner a { color: black; }
+#typo3-mod-help-about-index-php-inner a:hover { text-decoration: none; }
+BODY#typo3-view-help-php {
+	margin-left: 6px; 
+	margin-top: 6px; 
+}
+BODY#typo3-view-help-php DIV.typo3-view-help H1 { margin: 0px; }
+BODY#typo3-view-help-php DIV.typo3-view-help P {
+	margin-bottom: 12px; 
+	margin-top: 12px; 
+}
+DIV.typo3-view-help { width:740px; }
+DIV.typo3-view-help DIV.c-toc {
+	background-color: #FEFEFE; 
+	border: 1px solid #ABABAB; 
+	border-top: 0px;
+}
+TABLE#typo3-page-stdlist TR TD.c-headLine { background-color: #DBE9F7; }
+TABLE#typo3-dblist-sysnotes { 
+	border: 1px solid #DCDCDC; 
+	padding: 10px; 
+}
+/*
+DIV#typo3-mod-help-about-index-php-outer IMG {}
+DIV#typo3-mod-help-about-index-php-inner P {}
+DIV#typo3-mod-help-about-index-php-inner P B {}
+DIV#typo3-mod-help-about-index-php-inner P A {}
+*/
+
+
+/* Clipboard */
+TABLE#typo3-clipboard, 
+DIV#typo3-newRecordLink, 
+TABLE#typo3-dblist-search { margin-top: 10px; }
+TABLE#typo3-dblist-search {
+	width: 350px; 
+	border: 1px solid #ABABAB; 
+	padding: 4px 4px 2px 4px; 
+}
+TABLE#typo3-clipboard TR.bgColor5 TD A { 
+	text-decoration: none; 
+}
+TABLE#typo3-clipboard TR.bgColor5 TD IMG { 
+	vertical-align: middle; 
+}
+
+
+/* Extension Manager (primarily just colors) */
+BODY#typo3-mod-tools-em-index-php .em-private {	background-color: #DBE9F7; }
+BODY#typo3-mod-tools-em-index-php .em-listbg1 {	background-color: #EEF5D6; }
+BODY#typo3-mod-tools-em-index-php .em-listbg2 {	background-color: #F2F2F2; }
+BODY#typo3-mod-tools-em-index-php .em-listbg3 { background-color: #efefef; }
+BODY#typo3-mod-tools-em-index-php TR.bgColor5 TD { font-weight: bold; }
+
+
+/* Login Screen
+
+	 * Warning:
+	 * DO NOT prevent the copyright notice from being shown!
+	 * According to the GPL license an interactive application must show such a notice on start-up ('If the program is interactive, make it output a short notice... ' - see GPL.txt)
+	 * Therefore preventing this notice from being properly shown is a violation of the license, regardless of whether you remove it or use the stylesheet to obstruct the display.
+
+	 Color set: #8A4308 / #4d1300
+
+*/
+BODY#typo3-index-php { 
+	background-color: white; 
+	margin: 0px 0px 0px 0px; 
+}
+DIV#loginNews { 
+	width: 70%; 
+	margin-top: 30px; 
+}
+DIV#loginNews H2 { 
+	background-color: #E26816; 
+	color: white; 
+	font-size: 12px; 
+}
+DIV#loginNews TABLE TR TD { 
+	padding-right: 10px; 
+	padding-left: 10px; 
+}
+DIV#loginNews TABLE TR TD.c-header { 
+	font-weight: bold; 
+	background-color: #FFD8A9;  
+}
+DIV#loginNews TABLE TR.c-spacer { 
+	height: 10px; 
+}
+BODY#typo3-index-php TABLE#wrapper { 
+	width: 100%; 
+	margin-top: 100px; 
+	background-image: url(backgrounds/login_back.gif); 
+}
+BODY#typo3-index-php TABLE#loginwrapper { 
+	width: 500px; 
+	height: 300px; 
+	border: #ABABAB solid 1px; 
+	background-color: #DBE9F7; 
+	text-align: left; 
+	background-image: url(backgrounds/login_table_bg.gif); 
+}
+BODY#typo3-index-php DIV#copyrightnotice { 
+	width: 500px; 
+	text-align: left; 
+	margin-top: 10px; 
+	font-weight: normal; 
+	color: #ABABAB; 
+}
+BODY#typo3-index-php DIV#copyrightnotice IMG { 
+	margin-right:5px; 
+	margin-bottom:5px; 
+}
+BODY#typo3-index-php DIV#loginimage {
+	text-align: right; 
+	padding-right: 0px; 
+	margin-bottom: 5px; 
+}
+TABLE#logintable {
+	position:static !important; 
+	background-color: #FEFEFE; 
+	border: #ABABAB solid 1px; 
+	width: 300px; 
+	height: 150px; 
+	margin: 145px 5px 5px 185px;
+}
+TABLE#logintable TR TD { 
+	padding: 4px 5px 5px 5px; 
+}
+TABLE#logintable H2 { 
+	border: #E6E6E6 solid 1px; 
+	background-color: #FFFFFF;
+	background-image: url(backgrounds/menu_bg.gif); 
+	font-size: 10px; 
+	color: black; 
+	text-align: left; 
+}
+TABLE#logintable P { 
+	font-size: 10px; 
+	font-weight: semibold; 
+	color: #ABABAB;
+}
+TABLE#logintable P.c-info { 
+	font-size: 10px; 
+	font-weight: normal; 
+	color: #ABABAB; 
+}
+TABLE#logintable P.c-wrong { 
+	font-size: 9px; 
+	font-weight:normal; 
+	width: 275px; 
+	border: #DEEAF5 solid 1px; 
+	margin: 0px 0px 0px 0px; 
+	padding: 5px 5px 5px 5px; 
+}
+TABLE#logintable INPUT.c-username, 
+TABLE#logintable INPUT.c-password, 
+TABLE#logintable SELECT.c-interfaceselector { width: 150px; }
+TABLE#logintable INPUT { 
+	border: #E6E6E6 solid 1px; 
+	background-color: white; 
+}
+TABLE#logintable INPUT.c-submit { 
+	background-color: transparent;
+	width: 80px; 
+	height: 20px; 
+	padding: 0px 0px 0px 10px; 
+	border: 0px; 
+	background-image: url(backgrounds/login_submit_bg.gif); 
+}
+
+
+/* Context Sensitive Help window (view_help.php) */
+DIV.typo3-view-help H3 { background-color: transparent; }
+DIV.typo3-view-help H4 { 
+	font-weight: bold; 
+	font-size: 10px; 
+}

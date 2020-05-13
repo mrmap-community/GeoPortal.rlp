@@ -1,0 +1,39 @@
+@import url(../../../../typo3/sysext/t3skin/stylesheets/stylesheet_post.css);
+@import url(stylesheet_post_extra_t3skin.css); /* extra settings to the original CSS-file */
+@import url(stylesheet_post_templavoila_t3skin.css);
+@import url(tm_topapps.css); 
+
+/* some necessary changes */
+table.typo3-page-langMode .bgColor6 { background-color: transparent !important }
+
+/* AJAX page tree redefined */
+table#typo3-tree tr td { padding:0px; }
+/*
+UL.tree UL LI.expanded UL	{ background: transparent url('../icons_modern/gfx/ol/line.gif') repeat-y top left; }
+UL.tree UL LI.last		{ background: transparent url('../icons_modern/gfx/ol/joinbottom.gif') no-repeat top left; } 
+*/
+/* highlight naviframe */
+.navFrameHL,
+UL.tree LI.active, 
+UL.tree LI.navFrameHL { background-color: #ebebeb !important} 
+UL.tree LI.active UL, UL.tree LI.active LI, UL.tree LI.navFrameHL UL, UL.tree LI.navFrameHL LI { background-color: #f7f3efb !important; }
+.active .dragTitle, .navFrameHL .dragTitle { font-weight:bold; }
+.active ul .dragTitle, .navFrameHL ul .dragTitle { font-weight:normal; } 
+
+
+div#treeFilterBox { 
+	position:relative;
+	top:-8px;
+	background-color:transparent !important;
+}
+
+/* for dam */
+DIV#c-upload input { display: block; }
+
+
+
+/* list module fixes */
+table.typo3-dblist tr td div.typo3-DBctrl * { 
+	display: inline !important; 
+	float:none !important; 
+}

@@ -1,0 +1,25 @@
+td{font-size:100%;font-family:Verdana, sans-serif}
+h1{font-size:150%;margin:0 0 1em 0;color:#A60A21;font-family:Verdana, sans-serif}
+h2{font-size:110%;margin:0 0 1em 0;color:#333;font-family:Verdana, sans-serif}
+h3{font-size:100%;margin:0 0 1em 0;color:#333;font-family:Verdana, sans-serif}
+p{font-size:100%;line-height:150%;margin:0 0 1em 0;font-family:Verdana, sans-serif}
+dl{font-size:100%;font-family:Verdana, sans-serif}
+ol,ul{font-size:100%;line-height:150%;margin:0 0 1em 0;font-family:Verdana, sans-serif}
+ul li{margin:0 0 .5em 0;padding:0 0 0 2em;background:url(../images/bullet.gif) .75em .6em no-repeat;font-family:Verdana, sans-serif}
+ol li{margin:0 0 .5em 2em;list-style:decimal;font-family:Verdana, sans-serif}
+
+caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
+
+table.contenttable-0{border:1px solid #b0b0b0;border-collapse:collapse;margin:0 0 1em 0}
+table.contenttable-0 td{padding:0.4em 1em 0.4em 0.5em;border:1px solid #cfcfcf;}
+
+table.contenttable-0-wide{border:1px solid #b0b0b0;border-collapse:collapse;margin:0 0 1em 0;width:100%}
+table.contenttable-0-wide td{padding:0.4em 1em 0.4em 0.5em;border:1px solid #cfcfcf;}
+
+table.contenttable-1{border:1px solid #b0b0b0;border-collapse:collapse;margin:0 0 1em 0}
+table.contenttable-1 td{border-left:1px solid #cfcfcf;padding:0.2em 1em 0.2em 0.5em;}
+table.contenttable-1 tr.tr-0 td{border-bottom:1px solid #b0b0b0;border-left:1px solid #cfcfcf;text-align:left;padding:0.6em 1em 0.6em 0.5em;background-color:#f0f0f0;}
+
+table.contenttable-1-wide{border:1px solid #b0b0b0;border-collapse:collapse;margin:0 0 1em 0;width:100%}
+table.contenttable-1-wide td{border-left:1px solid #cfcfcf;padding:0.2em 1em 0.2em 0.5em;}
+table.contenttable-1-wide tr.tr-0 td{border-bottom:1px solid #b0b0b0;border-left:1px solid #cfcfcf;text-align:left;padding:0.6em 1em 0.6em 0.5em;background-color:#f0f0f0;}

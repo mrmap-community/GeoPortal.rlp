@@ -1,0 +1,186 @@
+{
+    "type" : "templatePDF",
+    "orientation" : "P",
+    "units" : "mm",
+    "format" : "a4",
+    "controls" : [
+	{
+            "id" : "title",
+            "label" : "Titel (40 Zeichen)",
+            "type" : "text",
+            "size" : 18,
+	    "maxCharacter" : 40,
+            "pageElementsLink" : {
+                "titel" : "value"
+            }
+        },
+        
+        {
+            "id" : "dpi",
+            "label" : "Auflösung",
+            "type" : "select",
+            "size" : 23,
+            "pageElementsLink" : {
+                "karte" : "res_dpi"
+            },
+            "options" : [
+                {
+                    "value" : "72",
+                    "label" : "72 dpi"
+                },
+                {
+                    "value" : "144",
+                    "label" : "144 dpi"
+                }
+            ]
+	},
+        {
+            "id" : "comment1",
+            "label" : "Notiz (350 Zeichen)",
+	    "type" : "textarea",
+             "maxCharacter" : 350,
+	     "size" : 10,
+            "pageElementsLink" : {
+                "kommentar1" : "value"
+            }
+        },
+        
+        {
+            "id" : "angle",
+            "label" : "Drehwinkel",
+            "type" : "text",
+            "pageElementsLink" : {
+                "nordpfeil" : "angle",
+                "karte" : "angle",
+                "minikarte" : "angle"
+            }
+        },
+     
+        {
+            "id" : "scale",
+            "label" : "Maßstab",
+            "type" : "select",
+            "size" : 23,
+			"pageElementsLink" : {
+                "scale" : "value"
+            },
+			"options" : [
+                {
+                    "value" : "100000",
+                    "label" : "1:100000"
+                },
+                {
+                    "value" : "200000",
+                    "label" : "1:200000"
+                },
+				{
+                    "value" : "300000",
+                    "label" : "1:300000"
+                },
+				{
+                    "value" : "500000",
+                    "label" : "1:500000"
+                }
+            ]
+        },
+	{
+    		"id" : "coordinates",
+    		"type" : "hidden"
+    	}
+    ],
+    "pages" : [
+        {
+            "tpl" : "Hochformat_LPP_A4.pdf",
+            "useTplPage" : 1,
+            "elements" : {
+                "karte" : {
+                    "type" : "map",
+                    "res_dpi" : 72,
+                    "x_ul" : 18.5,
+                    "y_ul" : 28.6,
+                    "width" : 179.7,
+                    "height" : 204.0,
+                    "coords" : 1,
+                    "coords_font_family" : "Arial",
+                    "coords_font_size" : 8
+                },
+                
+                "minikarte" : {
+                    "type" : "overview",
+                    "res_dpi" : 72,
+                    "x_ul" : 200.7,
+                    "y_ul" : 24.9,
+                    "width" : 1,
+                    "height" : 1
+                },
+            
+                "scale" : {
+                    "type" : "text",
+                    "x_ul" : 106.0,
+                    "y_ul" : 243.0,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "scale"
+                },
+                "date" : {
+                    "type" : "text",
+                    "x_ul" : 41.0,
+                    "y_ul" : 243.0,
+                    "font_family" : "Arial",
+                    "font_size" : 11,
+                    "value" : "date"
+                },
+              
+                "nordpfeil" : {
+                    "type" : "image",
+                    "x_ul" : 194,
+                    "y_ul" : 249,
+                    "width" : 1,
+                    "height" : 1,
+                    "angle" : 0,
+                    "filename" : "./img/northarrowdummy.png"
+                },
+		"titel" : {
+                    "type" : "text",
+                    "x_ul" : 120.2,
+                    "y_ul" : 18,
+                    "font_family" : "Arial",
+                    "font_size" : 12
+                },
+		"messung" : {
+                 "type" : "measure",
+                 "do_fill" : 0,
+                 "fill_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "do_stroke" : 1,
+                 "stroke_color" : {
+                     "r" : 255,
+                     "g" : 0,
+                     "b" : 0
+                     },
+                 "line_style" : {
+                     "width" : 2.0
+                     }
+                    },
+
+                "kommentar1" : {
+                    "type" : "para",
+                    "x_ul" : 40.0,
+                    "y_ul" : 246.0,
+                    "font_family" : "Arial",
+                    "font_size" : 10,
+                    "width" : 138.4,
+                    "height" : 5,
+                    "align" : "L",
+                    "border" : 0,
+                    "fill" : 0,
+                    "border_width" : 0.3
+                }
+            }
+        }
+        
+    ]
+}

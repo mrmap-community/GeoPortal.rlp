@@ -1,0 +1,4 @@
+/*mod_coords_div.php*/
+div.actualcoords {margin-top:-660px;margin-left:540px;background-color:#EFEFEF;width:160px;padding:10px}
+div.selectedcoords {margin-left:540px;background-color:#EFEFEF;width:160px;padding:0 10px 10px 10px}
+.actualcoords div.selectedcoords {margin-left:0px;margin-top:0px;padding:0px;background-color:#EFEFEF;width:160px}

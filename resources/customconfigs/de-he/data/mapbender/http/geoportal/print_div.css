@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+#printPDF input, #printPDF select, #printPDF textarea {
+	display: block;
+	width: 154px;
+	float: left;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+#printPDF label {
+	display: block;
+        width: 100px;
+        float: left;
+        margin-bottom: 2px;
+        margin-top: 2px;
+}
+#printPDF input#submit {
+	display: block;
+	width: 100px;
+	float: left;
+	margin-bottom: 2px;
+	margin-top: 2px;
+	margin-left: 0px;
+}
+
+#printPDF select {
+	width: 160px;
+}
+
+#printPDF label {
+	text-align: left;
+	padding-right: 5px;
+}
+
+#printPDF br {
+	clear: left;
+}
+#printPDF_input {
+	display:block;
+	z-index:1;	
+}
+#printPDF_working {
+	position:absolute;
+	z-index: 4;
+	display: none;
+	visibility: visible;
+	padding: 50px 0 0 20px;
+}
+#printPDF_working_bg {
+	position:absolute;
+	z-index: 3;
+	display: none;
+	visibility: visible;
+	background-color: #bbbbbb;
+	opacity: 0.75;
+	width:100%;
+	height:100%;
+}

@@ -1,0 +1,103 @@
+*{margin:0;padding:0;text-decoration:none}
+
+html,body{background:#F3F3F3 url(../images/bg.gif) 0 0 repeat-x;color:#000}
+
+body{font-size:1em}
+body,textarea,input{font-family:arial,helvetica,sans-serif}
+
+img{border:0}
+li,ol,ul{list-style:none}
+
+.left{margin-right:auto;text-align:left}
+.center{margin-left:auto;margin-right:auto;text-align:center}
+.right{margin-left:auto;text-align:right}
+
+.floatleft{float:left}
+.floatright{float:right}
+
+.jumplabel{height:1px;display:none}
+
+#skip{position:absolute;visibility:hidden}
+
+#header{height:110px;margin:0 0 20px 0;background:url(../images/header_bg.jpg) 0 0 repeat-x}
+#rlp_logo{float:left}
+#geoportal_logo{position:absolute;top:79px;left:217px}
+
+#header #bilder{position:absolute;top:0;left:0;width:100%;min-width:995px;height:70px;overflow:hidden;display:none}
+#header #bilder #bild1{position:absolute;left:600px;border-left:1px solid #FFF;border-right:1px solid #FFF}
+#header #bilder #bild2{position:absolute;left:696px;border-left:1px solid #FFF;border-right:1px solid #FFF}
+#header #bilder #gdi-rp_logo{position:absolute;top:0;right:20px;width:995px;text-align:right}
+
+#navi0{position:absolute;top:57px;left:214px;height:14px;overflow:hidden;font-size:10px;background:#FFF;padding:0 0 0 1px}
+#navi0 li{display:block;float:left}
+#navi0 a{background:#E3E3E3;color:#333;margin:0 1px 0 0;padding:0 3px}
+#navi0 a:hover{background:#A60A21;color:#FFF}
+#navi0 li.CUR a{background:#A60A21;color:#FFF}
+
+#navi1{position:absolute;top:0;left:215px;width:400px;height:56px;overflow:hidden;font-size:100%}
+#navi1 ul{padding:5px}
+#navi1 li{display:block;float:left;width:126px;height:21px;margin:0 2px 4px 0}
+* html #navi1 li{margin:0 2px -3px 0}
+#navi1 a{display:block;padding:2px 5px;background:transparent;color:#333;font-weight:bold;white-space:nowrap}
+#navi1 a:hover{background:#A60A21;color:#FFF}
+#navi1 li.CUR a{background:#A60A21;color:#FFF}
+
+#navi2 li{border-bottom:1px solid #FFF}
+#navi2 li a{border-left:10px solid #A60A21;color:#333;font-weight:bold;font-size:80%;padding:0 0 0 5px;display:block}
+#navi2 li.CUR a{background:#A60A21;color:#FFF}
+#navi2 li:hover a{background:#A60A21;color:#FFF}
+
+#left{position:absolute;top:130px;left:20px;z-index:100}
+#left .box{width:175px;margin:0 0 16px 0}
+
+#left fieldset{text-align:center;border:0}
+#left fieldset.data{padding:5px}
+#left fieldset.data label{display:none}
+#left fieldset input{font-size:12px}
+#left fieldset.data input{height:17px;padding:3px 5px 0 5px;background:#FFF url(../images/input_bg.gif) 0 0 repeat-x;border:1px solid #333}
+#left fieldset.control{padding:5px 10px 10px 10px}
+#left fieldset.control input{width:75px;padding:0 5px}
+
+.box{background:#E3E3E3;margin:0 0 1em 0}
+.content .box h2,.box h2{background:#A60A21 url(../images/corner_tl.gif) 0 0 no-repeat;color:#FFF;border-bottom:1px solid #FFF;font-size:14px;padding:0 0 0 5px;text-align:right;height:1.15em;overflow:hidden}
+.box h2 span{float:left}
+.box h2 img{margin:1px}
+
+#left #anmelden fieldset.data input{width:65px}
+#left #suchen fieldset.data input{width:145px}
+
+.content a{color:#024470;text-decoration:underline}
+.content a:hover{color:#FFF;background:#A60A21;text-decoration:underline}
+
+#wrapper{min-width:995px}
+
+#right_wrapper{width:29%;float:left}
+#right{margin:0 20px 0 0}
+#center_wrapper{width:70%;float:left}
+#center{margin:0 20px 0 225px}
+
+.content h1{font-size:150%;margin:0 0 1em 0;color:#A60A21}
+.content h2{font-size:110%;margin:0 0 1em 0;color:#333}
+.content h3{font-size:90%;margin:0 0 1em 0;color:#333}
+.content p{font-size:80%;line-height:150%;margin:0 0 1em 0}
+.content dl{font-size:80%}
+.content ul{font-size:80%;line-height:150%;margin:0 0 1em 0}
+.content li{margin:0 0 .5em 2em;list-style:square}
+
+#right ul.news li{border-bottom:1px solid #FFF;margin:0;list-style:none}
+#right ul.news li h3{font-size:100%;margin:0;padding:0 0 0 5px;border-left:10px solid #A60A21;line-height:120%}
+#right ul.news li p{font-size:100%;line-height:1.25em;margin:0;padding:0 10px 10px 15px;color:#333}
+#right ul.news li p.news-date{font-size:80%;margin:0;padding:10px 10px 0 15px;color:#333}
+
+#breadcrumb{margin:0}
+#breadcrumb li{list-style:none;margin:0;display:inline;quotes:"\00BB" ""}
+#breadcrumb li:before{content:open-quote}
+#breadcrumb li a{margin:0 5px;color:#333;text-decoration:none}
+#breadcrumb li a:hover{color:#FFF}
+#breadcrumb li.first a{margin:0 5px 0 0}
+#breadcrumb li.first:before{content:no-open-quote}
+
+.box h2{margin:0}
+#glossar dl{border-bottom:1px solid #FFF}
+#glossar dt{font-weight:bold;margin:.5em 0 0 0;border-left:10px solid #A60A21;padding:0 10px 0 5px}
+#glossar dd{padding:0 10px 10px 15px}

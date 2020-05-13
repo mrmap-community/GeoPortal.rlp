@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="wiz_lWizards">Wähle Assistenten</label>
+			<label index="mod_wizards">Assistenten</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="wiz_lWizards" type="integer">90660162</label>
+			<label index="mod_wizards" type="integer">252927306</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

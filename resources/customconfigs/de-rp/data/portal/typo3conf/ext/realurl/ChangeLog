@@ -1,0 +1,298 @@
+2008-08-25	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed bug #9190: Missing argument 2 for tx_realurl_tcemain::clearBranchCache()
+	* reapplyAbsRefPrefix is not on if not set explicitely
+	* add page exclusion from path also to "not in menu" and sysfolders
+	* Released version 1.5.1
+
+2008-08-15	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed bug #6513: Small improvements (multi-language, URL length, page type)
+	* Fixed bug #7444: Wrong resolving of shortcut pages leading to double content
+	* Fixed bug #8683: Improve domain handling in dependency to query parameters (patch by Oliver Hader)
+	* Fixed bug #5506: Redirects set in BE doesn't work
+	* Released version 1.5.0
+
+2008-08-14	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Added more methods to determine root page id
+	* Fixed bug #7111: noMatch = bypass makes prevents realurl to decode fileName on root page
+	* Added search for site root in autoconf
+	* Fixed bug #9042: Pagetitle with ® sign not working (sometimes)
+	* Fixed bug #9013: tx_realurl_advanced ignores deleted and hidden flag of table pages_language_overlay
+	* Added "exclude" flag for pages
+
+2008-05-26	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* New feature: reapply config.absRefPrefix to URL if configured so
+	* Added information to the manual about removing empty segments
+
+2008-05-23	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* New feature: remove postVar segment completely if it it produces only empty values
+
+2008-05-14	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed bug #8406: config.absRefPrefix crashes realurl
+
+2008-04-29	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Added compatibility with 4.2 (bugs #8026, #7941)
+	* Added handling of nested domains
+	* Added an option to enable/disable devLog without using Install tool (see also bug #8125)
+	* Moved locallang*.php to locallang*.xml (see #6911)
+	* Release of version 1.3.2
+
+2008-03-17	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed wrong spelling of RealURL everywhere in the manual
+
+2008-03-10	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Fixed bug #6567: autoconfgeneration create wrong config for defaultToHTMLsuffixOnPrev and acceptHTMLsuffix
+	* Fixed problem: fatal error in BE when sysfolder/shortcut/MP is renamed
+	* Release of version 1.3.0
+	* Fix for PHP4 error in BE
+	* Release of version 1.3.1
+
+2008-03-06  Dmitry Dulepov  <dmitry@typo3.org>
+
+	* Fixed bug #7486: tx_realurl_pathsegment is now exclude field
+	* Fixed: _DEFAULT was ignored in TCEmain hook
+	* Change path expiration behavior
+
+2008-03-05  Dmitry Dulepov  <dmitry@typo3.org>
+
+	* Fixed bug #6952: expireDays is not set correctly
+	* Fixed bug #6416: if autoUpdatePathCache is true old urls are redirected not as 301
+	* Added TCEMain hook to update path cache if page is renamed
+
+2008-02-06  Dmitry Dulepov  <dmitry@typo3.org>
+
+	* Fixed error #6849: Error on 404/Page Not Found
+	* Updated function index with extdeveval
+
+2008-01-18  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Added eol-style property for all text files
+ * Fixed another incarnation of postVarSet issue
+
+2008-01-07  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Updated logo in manual
+
+2007-11-28  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Update information about config.baseURL in the documentation
+
+2007-10-22  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Removed svn:eol-style=native from all files because it caused problems with EM on *nix systems
+
+2007-10-21  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Updated documentation
+ * Some files are reformatted according to conding conventions
+ * Updated function index
+
+2007-10-07  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fix: query string was reconstructed only when cache was not in use
+
+2007-10-07  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Added hooks for extensions to provide configuration
+ * Autoconfiguration is moved to processing class
+ * Removed lateAddToCache because it had bad side effects
+
+2007-10-01  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed wrong intval on string md5
+
+2007-09-20  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Changed tx_realurl_urlencodecache and tx_realurl_urldecodecache to use full md5
+ * Added lots of calls to TYPO3_DB->sql_free_result to free PHP resources
+ * Default autoconfiguration file location is now in typo3conf
+ * Fixed bug 4995: 301 redirection for expired pagepaths broken
+
+2007-09-18  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Removed "DEFAULT '0'" from "uid" column in tx_realurl_uniqalias
+ * Fixed bug 5369: Converting to InnoDB
+ * Changed primary key for tx_realurl_errorlog to prevent errors about duplicate entries
+ * Optimized query to tx_realurl_errorlog
+ * 'suggest' static_info_tables instead of requiring it
+
+2007-09-14  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * If decoded entry is not in cache, it will be added there when TSFE has completed request
+
+2007-09-12  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed bug 2402: RealURL+tx_realurl_advanced: xxx was not a keyword for a postVarSet
+ * Fixed bug 4495: When logged in from BE, produces error: Segment "zzz" was not a keyword for a postVarSet as expected
+ * Fixed bug 5784: function pageAliasToId is not DBAL-safe
+
+2007-09-11  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Added searching for rootpage_id by domain name (taking redirects into account)
+
+2007-09-10  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed bug 4994: tx_realurl_pathcache must not be flushed!
+ * Fixed bug 5150: Remove tx_realurl_pathcache table from MySQL Query Cache
+ * Fixed bug 6257: pointless rootline lookup in multi-domain enviroment
+ * Fixed bug 6051: RealURL does not set GET vars for use with TypoLink
+ * Forced firstHitPathCache if no postVarSets or fixedPostVars defined
+
+2007-09-10  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Added autoconfiguration feature
+
+2007-07-09  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed error in regular expression
+
+2007-01-24  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Removed enableDomainLookup and rootPageID from another place in the manual (thanks to Chris Paige for noticing it!)
+
+2007-01-12  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Release of RealURL 1.1.4
+
+2007-01-04  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed bug 4007: realurl path in workspace is kept when published
+ * Fixed bug 4395: Specified key was too long; max key length is 1000 bytes
+ * Fixed bug 4485: RealURLs with no spaceCharacter
+ * Fixed bug 4528: Deprecated function in documentation
+ * Fixed bug 4559: Fails to crate/update table tx_realurl_uniqalias when db is set to utf8 with max key restriction
+ * Renamed isInFEEditing() to IsBEUserLoggedIn()
+ * Added tx_realurl_pathcache to list of table for clearing when all cache is cleared
+
+2006-10-13  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * enableDomainLookup and rootPageID is removed from manual.sxw because they do not exist
+ * Added TS log message in case if root page cannot be determined from configuration
+
+2006-10-06  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Release of RealURL 1.1.3
+
+2006-10-06  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed compatibility issue for wrong realurl configuration (see bug #4352)
+ * Updated class/function index
+
+2006-10-05  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Release of RealURL 1.1.2
+
+2006-10-05  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Added patch by Andreas Otto (field order and sorting in mod1 for Redirect view)
+ * Fixed bug 1530: defaultToHTMLsuffixOnPrev has to be cleaned in decodeSpURL
+ * Fixed bug 2439: [RealURL] Prepend domain name before path in realurl modules
+ * Fixed bug 3441: Real url's with .html without using defaultToHTMLsuffixOnPrev
+ * Fixed bug 3988: /start/Feedback gets not found because of uppercase; searchTitle_searchPid() return does not use "encoded" version in lookup
+
+2006-10-03  Dmitry Dulepov  <dmitry@typo3.org>
+
+ * Fixed bug #3517: Impossible to have same path on 2 domains
+
+2006-09-07  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Release of RealURL 1.1.1
+
+2006-08-28  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Fixed bug #3078: realurl doesn't take config.typolinkLinkAccessRestrictedPages into account
+
+2006-08-25  Dmitry Dulepov  <typo3@accio.lv>
+
+ * bk_realurl02 was too large
+
+2006-08-17  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Made a workaround for error in parse_url() when parsing multiple arrays
+
+2006-02-16  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Updated compatibility version
+
+2006-01-29  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Fixed repeated message in EM to drop/add bk_realurl02 index
+
+2006-01-27  Dmitry Dulepov  <typo3@accio.lv>
+
+ * Fixed bug #2413: RealURL: wrong paths are generated if mount points are used
+ * Fixed bug #2416: RealURL: wrong page is displayed
+ * Fixed bug #1814: RealURL = MySQL database optimisation
+ * Code cleanup (uninitialized vars, debuging messages, etc).
+ * Updated extension API data
+ * Changed XCLASS name of modfunc1 to match file name
+
+2005-10-14  Kasper Skårhøj  <kasper2005@typo3.com>
+
+ * en/decode caches will expire after 24 hours
+ * Adding "userFunc" for id-alias translation (alternative to built in "lookUpTable")
+ * Fixed a few bugs
+ * Implemented "301 Moved Permanently" headers
+ * Implemented a table where you can define permanent redirect URLs, for instance for keep backwards compatibility with specific old urls.
+ * Implemented an error log that will track all URLs which resulted in a 404 - useful for checking most typical "lost links" and creating a redirect. Can be disabled with ['init']['disableErrorLog']
+ * By default realurl will return 404 if the whole url is not used in the decoding.
+ * Can throw a 404 if the alias mapping to id didn't succed (configuration)
+ * Supports localization for alias-id mapping, eg. when titles of news elements are used in realurl and the language is different than default it will take the localized title and use that (if configured for it). (lookUpTable feature)
+ * Supports auto-update of aliases if titles of eg. news items changed. Must be configured. (lookUpTable feature)
+ * Improved the lookUp_cleanAlias function to respect charset - should fix clean up on non danish/german titles, just like it has been done for page titles some time ago.
+ * Implemented that expired URLs will redirect to new ones, sending "301 Moved Permanently" headers
+ * Improved many management functions in backend module.
+
+2005-10-11  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+ * Introduced feature "autoUpdatePathCache" which will allow changes to eg. page title to be made instant in the URL plus keeping backwards compatibility for a period of time with the previous URL.
+ * You can add additional pathCache entries in the management module.
+
+2005-04-19  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+ * Added "redirects_regex" feature to match URLs with a regex for initial redirection.
+
+2005-02-22  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+ * Added Web>Info / Speaking Url Management module: Finally it does something. Can manage the pagepath cache, show decode and encode cached content and manage unique-alias maps.
+
+2004-12-20  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+	* Added support for frontend login triggered bypass keywords (for proxy cache-control situations) (look for "feLogin" in manual)
+	* Added registration of page id for url encoding  - for cache management.
+
+2004-09-01  Kasper Sk�hj,,,  <kasper@typo3.com>
+	* encodeTitle(): Support of multibyte encodings like UTF-8 in the encoding of page titles. Also extended letters => ASCII equivalents are working now (using t3lib_cs)
+	* Implemented support for usage over multiple domains. Manual has been updated. Basically you have to configure the id-resolver (like "tx_realurl_advanced") to know of its root page id so it has a starting point. This is cannot be automatic and therefore you have to configure it to correspond with the root page UID in the page tree. This is documented with examples in the manual.
+	* !!! Changed return values type for some functions, in particular observe that the user processing of path-to-id is now returning and ARRAY NOT AN INTEGER (Id)!
+	* &MP vars are now encoded with page id. Works with both pagepath cache and without.
+	* Generally, the manual URL decoding (without pagepath cache) has been updated and tested to work well.
+	* Fixed bug with ".html" prefix when page path is blank
+	(This development was sponsored by Forbrugernes Hus in Denmark. Thanks.)
+
+2004-06-10  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+	* Added option to disable pathcache (and more for that)
+	* For 404 handling, realurl will now use the default TYPO# pageNotFound handling.
+	* "Admin" jump functionality had a new feature which can link people into the backend for editing the page rather than showing frontend icons only.
+	* Created modes for "soft" segment-not-found handling.
+	* Implemented true URL decode/encode caching
+	* All document, but some features depends on TYPO3 3.7.0-dev+
+
+2004-04-22  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+	* Added new option "appendMissingSlash" which appends a trailing slash to the path if it was not set by the user.
+
+2004-03-23  Kasper Sk�hj,,,  <kasper@typo3.com>
+
+	* Added the possibility of specifying more than just the "nav_title,title" fields from the rootline in the generation/resolve of the speaking URL. Documentation updated accordingly.
+
+

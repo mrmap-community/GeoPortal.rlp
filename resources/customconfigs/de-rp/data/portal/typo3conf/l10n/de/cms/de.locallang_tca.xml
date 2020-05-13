@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="mod_tx_cms_webinfo_page">Seitenbaum-Übersicht</label>
+			<label index="mod_tx_cms_webinfo_lang">Übersetzungs-Übersicht</label>
+			<label index="pages.doktype.I.0">Erweitert</label>
+			<label index="pages.doktype.I.2">Shortcut</label>
+			<label index="pages.doktype.I.3">Nicht im Menü</label>
+			<label index="pages.doktype.I.4">Backend Benutzer Bereich</label>
+			<label index="pages.doktype.I.5">Mount Seite</label>
+			<label index="pages.doktype.I.7">Abstand</label>
+			<label index="pages.hidden">Seite verstecken:</label>
+			<label index="pages.layout.I.1">Layout 1</label>
+			<label index="pages.layout.I.2">Layout 2</label>
+			<label index="pages.layout.I.3">Layout 3</label>
+			<label index="pages.extendToSubpages">Inklusive Unterseiten:</label>
+			<label index="pages.nav_title">Navigationstitel:</label>
+			<label index="pages.nav_hide">Im Menü verstecken:</label>
+			<label index="pages.subtitle">Untertitel:</label>
+			<label index="pages.target">Ziel:</label>
+			<label index="pages.alias">Alias:</label>
+			<label index="pages.url">URL:</label>
+			<label index="pages.lastUpdated">Letzte Änderung:</label>
+			<label index="pages.newUntil">'Neu' bis:</label>
+			<label index="pages.cache_timeout">Cache verfällt:</label>
+			<label index="pages.cache_timeout.I.1">1 Min</label>
+			<label index="pages.cache_timeout.I.2">5 Min</label>
+			<label index="pages.cache_timeout.I.3">15 Min</label>
+			<label index="pages.cache_timeout.I.4">30 Min</label>
+			<label index="pages.cache_timeout.I.5">1 Stunde</label>
+			<label index="pages.cache_timeout.I.6">4 Stunden</label>
+			<label index="pages.cache_timeout.I.7">1 Tag</label>
+			<label index="pages.cache_timeout.I.8">2 Tage</label>
+			<label index="pages.cache_timeout.I.9">7 Tage</label>
+			<label index="pages.cache_timeout.I.10">1 Monat</label>
+			<label index="pages.no_cache">Nicht cachen:</label>
+			<label index="pages.no_search">Nicht suchen:</label>
+			<label index="pages.shortcut_mode">Shortcut Modus:</label>
+			<label index="pages.shortcut_mode.I.1">Erste Unterseite</label>
+			<label index="pages.shortcut_mode.I.2">Zufällige Unterseite</label>
+			<label index="pages.content_from_pid">Zeige den Inhalt dieser Seite an:</label>
+			<label index="pages.mount_pid">Mount Point (erweitert):</label>
+			<label index="pages.mount_pid_ol">Ersetze Mount Point (diese Seite) durch gemountete Seite:</label>
+			<label index="pages.abstract">Inhaltsangabe:</label>
+			<label index="pages.media">Dateien:</label>
+			<label index="pages.is_siteroot">Ist Anfang der Webseite:</label>
+			<label index="pages.module">Enthält Erweiterung:</label>
+			<label index="pages.module.I.1">Shop</label>
+			<label index="pages.module.I.2">Forum</label>
+			<label index="pages.module.I.3">News</label>
+			<label index="pages.module.I.4">Website Benutzer</label>
+			<label index="pages.module.I.5">Direct Mail</label>
+			<label index="pages.module.I.6">Abstimmungen</label>
+			<label index="pages.l18n_cfg">Spracheinstellungen:</label>
+			<label index="pages.l18n_cfg.I.1">Standard-Übersetzung verstecken</label>
+			<label index="pages.l18n_cfg.I.2">Verstecke Seite wenn keine Übersetzung für die aktuelle Sprache existiert</label>
+			<label index="pages.l18n_cfg.I.2a">Zeige Seite auch wenn keine Übersetzung exisitiert</label>
+			<label index="tt_content">Seiteninhalt</label>
+			<label index="fe_users">Website Benutzer</label>
+			<label index="fe_users.username">Benutzername:</label>
+			<label index="fe_users.password">Passwort:</label>
+			<label index="fe_users.usergroup">Benutzergruppe:</label>
+			<label index="fe_users.lockToDomain">An Domain binden:</label>
+			<label index="fe_groups">Website Benutzergruppe</label>
+			<label index="fe_groups.title">Gruppenname:</label>
+			<label index="fe_groups.lockToDomain">An Domain binden:</label>
+			<label index="fe_groups.subgroup">Untergruppen:</label>
+			<label index="sys_domain">Domain</label>
+			<label index="sys_domain.domainName">Domain:</label>
+			<label index="sys_domain.redirectTo">Umleiten zu:</label>
+			<label index="sys_domain.prepend_params">Parameter zur Umleitungs-URL übertragen:</label>
+			<label index="pages_language_overlay">Alternative Seiten Sprache</label>
+			<label index="sys_template">Template</label>
+			<label index="static_template">Statische Templates</label>
+			<label index="pages.fe_login_mode">Login Modus:</label>
+			<label index="pages.fe_login_mode.disable">Sperren</label>
+			<label index="pages.fe_login_mode.enable">Freigeben</label>
+			<label index="sys_language">Website Sprache</label>
+			<label index="sys_language.isocode">Offizielle Sprache auswählen (ISO Code):</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="mod_tx_cms_webinfo_page" type="integer">46867233</label>
+			<label index="pages.doktype.I.0" type="integer">162944094</label>
+			<label index="pages.doktype.I.2" type="integer">123085069</label>
+			<label index="pages.doktype.I.3" type="integer">172261511</label>
+			<label index="pages.doktype.I.4" type="integer">213052016</label>
+			<label index="pages.doktype.I.5" type="integer">167908391</label>
+			<label index="pages.doktype.I.7" type="integer">111909417</label>
+			<label index="pages.hidden" type="integer">65518437</label>
+			<label index="pages.layout.I.1" type="integer">186159068</label>
+			<label index="pages.layout.I.2" type="integer">144093188</label>
+			<label index="pages.layout.I.3" type="integer">85298801</label>
+			<label index="pages.extendToSubpages" type="integer">113222983</label>
+			<label index="pages.nav_title" type="integer">213163145</label>
+			<label index="pages.nav_hide" type="integer">163349812</label>
+			<label index="pages.subtitle" type="integer">252742192</label>
+			<label index="pages.target" type="integer">253363033</label>
+			<label index="pages.alias" type="integer">169830525</label>
+			<label index="pages.url" type="integer">62115936</label>
+			<label index="pages.lastUpdated" type="integer">68543275</label>
+			<label index="pages.newUntil" type="integer">15740872</label>
+			<label index="pages.cache_timeout" type="integer">250768080</label>
+			<label index="pages.cache_timeout.I.1" type="integer">17751255</label>
+			<label index="pages.cache_timeout.I.2" type="integer">226471786</label>
+			<label index="pages.cache_timeout.I.3" type="integer">25025547</label>
+			<label index="pages.cache_timeout.I.4" type="integer">63694871</label>
+			<label index="pages.cache_timeout.I.5" type="integer">120240592</label>
+			<label index="pages.cache_timeout.I.6" type="integer">182216352</label>
+			<label index="pages.cache_timeout.I.7" type="integer">238766109</label>
+			<label index="pages.cache_timeout.I.8" type="integer">3514198</label>
+			<label index="pages.cache_timeout.I.9" type="integer">213446991</label>
+			<label index="pages.cache_timeout.I.10" type="integer">23285350</label>
+			<label index="pages.no_cache" type="integer">221004140</label>
+			<label index="pages.no_search" type="integer">8650986</label>
+			<label index="pages.shortcut_mode" type="integer">49005128</label>
+			<label index="pages.shortcut_mode.I.1" type="integer">115282268</label>
+			<label index="pages.shortcut_mode.I.2" type="integer">93918891</label>
+			<label index="pages.content_from_pid" type="integer">151843742</label>
+			<label index="pages.mount_pid" type="integer">258972787</label>
+			<label index="pages.mount_pid_ol" type="integer">72364821</label>
+			<label index="pages.abstract" type="integer">268186811</label>
+			<label index="pages.media" type="integer">147226768</label>
+			<label index="pages.is_siteroot" type="integer">250187229</label>
+			<label index="pages.module" type="integer">136180287</label>
+			<label index="pages.module.I.1" type="integer">167257368</label>
+			<label index="pages.module.I.2" type="integer">100887818</label>
+			<label index="pages.module.I.3" type="integer">231848472</label>
+			<label index="pages.module.I.4" type="integer">164445273</label>
+			<label index="pages.module.I.5" type="integer">141759446</label>
+			<label index="pages.module.I.6" type="integer">19589821</label>
+			<label index="tt_content" type="integer">102203127</label>
+			<label index="fe_users" type="integer">178974165</label>
+			<label index="fe_users.username" type="integer">212632006</label>
+			<label index="fe_users.password" type="integer">187963993</label>
+			<label index="fe_users.usergroup" type="integer">142097351</label>
+			<label index="fe_users.lockToDomain" type="integer">230344003</label>
+			<label index="fe_groups" type="integer">102868901</label>
+			<label index="fe_groups.title" type="integer">76352857</label>
+			<label index="fe_groups.lockToDomain" type="integer">230344003</label>
+			<label index="sys_domain" type="integer">246309786</label>
+			<label index="sys_domain.domainName" type="integer">198572531</label>
+			<label index="sys_domain.redirectTo" type="integer">31400985</label>
+			<label index="sys_domain.prepend_params" type="integer">103981266</label>
+			<label index="pages_language_overlay" type="integer">56559649</label>
+			<label index="sys_language" type="integer">144875845</label>
+			<label index="sys_template" type="integer">41469073</label>
+			<label index="static_template" type="integer">141130377</label>
+			<label index="sys_language.isocode" type="integer">49440593</label>
+			<label index="pages.l18n_cfg.I.2" type="integer">219008572</label>
+			<label index="pages.l18n_cfg" type="double">4046046</label>
+			<label index="pages.l18n_cfg.I.1" type="integer">248921960</label>
+			<label index="mod_tx_cms_webinfo_lang" type="integer">255687278</label>
+			<label index="pages.l18n_cfg.I.2a" type="integer">27002828</label>
+			<label index="pages.fe_login_mode" type="integer">87698450</label>
+			<label index="pages.fe_login_mode.disable" type="integer">198159566</label>
+			<label index="pages.fe_login_mode.enable" type="integer">49998879</label>
+			<label index="fe_groups.subgroup" type="integer">19345373</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="mod_tx_cms_webinfo_page">Pagetree overview</label>
+			<label index="mod_tx_cms_webinfo_lang">Localization overview</label>
+			<label index="pages.doktype.I.0">Advanced</label>
+			<label index="pages.doktype.I.2">Shortcut</label>
+			<label index="pages.doktype.I.3">Not in menu</label>
+			<label index="pages.doktype.I.4">Backend User Section</label>
+			<label index="pages.doktype.I.5">Mount Point</label>
+			<label index="pages.doktype.I.7">Spacer</label>
+			<label index="pages.hidden">Hide page:</label>
+			<label index="pages.layout.I.1">Layout 1</label>
+			<label index="pages.layout.I.2">Layout 2</label>
+			<label index="pages.layout.I.3">Layout 3</label>
+			<label index="pages.extendToSubpages">Include subpages:</label>
+			<label index="pages.nav_title">Navigation title:</label>
+			<label index="pages.nav_hide">Hide in menu:</label>
+			<label index="pages.subtitle">Subtitle:</label>
+			<label index="pages.target">Target:</label>
+			<label index="pages.alias">Alias:</label>
+			<label index="pages.url">URL:</label>
+			<label index="pages.lastUpdated">Last updated:</label>
+			<label index="pages.newUntil">'New' until:</label>
+			<label index="pages.cache_timeout">Cache expires:</label>
+			<label index="pages.cache_timeout.I.1">1 min</label>
+			<label index="pages.cache_timeout.I.2">5 min</label>
+			<label index="pages.cache_timeout.I.3">15 min</label>
+			<label index="pages.cache_timeout.I.4">30 min</label>
+			<label index="pages.cache_timeout.I.5">1 hour</label>
+			<label index="pages.cache_timeout.I.6">4 hours</label>
+			<label index="pages.cache_timeout.I.7">1 day</label>
+			<label index="pages.cache_timeout.I.8">2 days</label>
+			<label index="pages.cache_timeout.I.9">7 days</label>
+			<label index="pages.cache_timeout.I.10">1 month</label>
+			<label index="pages.no_cache">No cache:</label>
+			<label index="pages.no_search">No search:</label>
+			<label index="pages.shortcut_mode">Shortcut mode:</label>
+			<label index="pages.shortcut_mode.I.1">First subpage</label>
+			<label index="pages.shortcut_mode.I.2">Random subpage</label>
+			<label index="pages.content_from_pid">Show content from this page instead:</label>
+			<label index="pages.mount_pid">Mount Point (advanced):</label>
+			<label index="pages.mount_pid_ol">Substitute Mount Point (this page) with Mounted page:</label>
+			<label index="pages.abstract">Abstract:</label>
+			<label index="pages.media">Files:</label>
+			<label index="pages.is_siteroot">Is root of website:</label>
+			<label index="pages.module">Contains plugin:</label>
+			<label index="pages.module.I.1">Shop</label>
+			<label index="pages.module.I.2">Board</label>
+			<label index="pages.module.I.3">News</label>
+			<label index="pages.module.I.4">Website users</label>
+			<label index="pages.module.I.5">Direct Mail</label>
+			<label index="pages.module.I.6">Approvals</label>
+			<label index="pages.l18n_cfg">Localization settings:</label>
+			<label index="pages.l18n_cfg.I.1">Hide default translation of page</label>
+			<label index="pages.l18n_cfg.I.2">Hide page if no translation for current language exists</label>
+			<label index="tt_content">Pagecontent</label>
+			<label index="fe_users">Website user</label>
+			<label index="fe_users.username">Username:</label>
+			<label index="fe_users.password">Password:</label>
+			<label index="fe_users.usergroup">Groups:</label>
+			<label index="fe_users.lockToDomain">Lock to domain:</label>
+			<label index="fe_groups">Website usergroup</label>
+			<label index="fe_groups.title">Grouptitle:</label>
+			<label index="fe_groups.lockToDomain">Lock to domain:</label>
+			<label index="sys_domain">Domain</label>
+			<label index="sys_domain.domainName">Domain:</label>
+			<label index="sys_domain.redirectTo">Redirect to:</label>
+			<label index="sys_domain.prepend_params">Transfer parameters to Redirect URL:</label>
+			<label index="pages_language_overlay">Alternative Page Language</label>
+			<label index="sys_template">Template</label>
+			<label index="static_template">Static templates</label>
+			<label index="pages.l18n_cfg.I.2a">Show page even if no translation exists</label>
+			<label index="pages.fe_login_mode">Login Mode:</label>
+			<label index="pages.fe_login_mode.disable">Disable</label>
+			<label index="pages.fe_login_mode.enable">Enable</label>
+			<label index="fe_groups.subgroup">Subgroups:</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

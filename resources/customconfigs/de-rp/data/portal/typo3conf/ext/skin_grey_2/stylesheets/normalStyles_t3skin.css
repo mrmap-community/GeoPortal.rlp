@@ -1,0 +1,247 @@
+@import url(topmenustyles_basic.css);
+#typo3-curUrl {	margin-top:2px; }
+
+/* tab menu */
+
+.wrapperTable { margin-top:-0px !important; }
+.wrapperTable1 { margin-top:-4px !important }
+body#ext-taskcenter-task-index-php .typo3-dyntabmenu-divs-foldout { width:260px; } 
+body#typo3-browse-links-php #typo3-tabmenu, 
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu {
+	border-width:0 !important;
+	border-collapse:collapse;
+}
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu td { width:auto !important }
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu a { 
+	margin-right:2px !important;
+	display:block;
+}
+TABLE#typo3-tabmenu { margin-top:5px; }
+body#typo3-browse-links-php #typo3-tabmenu, 
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu { margin-bottom:15px; }
+body#typo3-browse-links-php #typo3-tabmenu,
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu { width:auto}
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-curUrl { width:96% }
+body#typo3-browse-links-php #typo3-tabmenu td, 
+body#ext-rtehtmlarea-mod3-browse-links-php #typo3-tabmenu td {
+	width:0;
+	border-width:0;
+}
+.tabTable .left, .tabTable .right { display:none }
+#typo3-tabmenu .tab,
+#typo3-tabmenu .tabact,
+#typo3-tabmenu .tab_over,
+#typo3-tabmenu .tabact_over {
+	vertical-align:middle; 	
+	background-color:transparent !important;
+	width:auto !important;
+	font-weight:normal !important;
+	display:block;
+	margin:0 !important;
+	border-width:0 !important;
+}
+span.disabled { display:block }
+.tabact a, 
+.tab_over a, 
+.typo3-imageMenu {
+	margin-bottom:5px; 
+	width:auto !important;
+}
+.typo3-imageMenu td { width:auto; }
+.typo3-imageMenu td a {margin-right:2px !important }
+body#ext-rte-app-rte-select-image-php td.bgColor4 a,
+body#ext-rtehtmlarea-mod4-select-image-php td.bgColor4 a,
+body#ext-tinyrte-rte-select-image-php td.bgColor4 a,
+body#ext-rte-app-rte-select-image-php td.bgColor5 a,
+body#ext-rtehtmlarea-mod4-select-image-php td.bgColor5 a,
+body#ext-tinyrte-rte-select-image-php td.bgColor5 a {	
+	display:block;
+	margin:0;
+	text-align:left; 
+	padding-left:4px;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-right:4px;
+}
+body#ext-rte-app-rte-select-image-php td.bgColor4 strong,
+body#ext-rtehtmlarea-mod4-select-image-php td.bgColor4 strong,
+body#ext-tinyrte-rte-select-image-php td.bgColor4 strong,
+body#ext-rte-app-rte-select-image-php td.bgColor5 strong,
+body#ext-rtehtmlarea-mod4-select-image-php td.bgColor5 strong,
+body#ext-tinyrte-rte-select-image-php td.bgColor5 strong {	 
+	display:block;
+	margin:2px 2px 2px 0 !important;
+	text-align:left; 
+	font-weight:normal;
+}
+
+
+DIV.typo3-dyntabmenu-divs-foldout DIV.c-tablayer { margin-left: 20px; }
+
+DIV.typo3-dyntabmenu-tabs { 
+	margin-top: 5px; 
+	padding-right: 20px; 
+}
+DIV.typo3-dyntabmenu-divs P.c-descr { 
+	font-style : italic;
+	padding: 3px 10px 5px 10px;
+	background: #e7dba8;  
+}
+#tx_templavoila_mod1_sidebar-bar {
+	border-width:0 !important; 
+	background-color:transparent !important
+}
+
+TABLE.typo3-dyntabmenu TD {
+	border-width:0 !important; 
+	padding-right:2px; 
+}
+TABLE.typo3-dyntabmenu TD A {
+	margin-right:0px;
+	margin-left:0px;
+	text-decoration:none; 
+	display: block; 
+	width:auto; 
+	padding-top:3px;
+	padding-left:5px; 
+	padding-right:5px; 
+	padding-bottom:3px;
+}
+TABLE[class="typo3-dyntabmenu"] TD A {margin-right:1px;}
+
+/* Dyn-tab-menu and sidebar for TemplaVoila */
+BODY#ext-templavoila-mod1-index-php div.typo3-dyntabmenu-tabs {
+	margin-top:0; 
+	margin-bottom:0; 
+	padding-top:0 !important; 
+	margin-bottom:0 !important
+}
+
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu {
+	margin-top:0 !important; 
+	height: auto !important;
+} 
+
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu td  {padding:0 3px !important}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a, 
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a:hover {
+	display:block !important; 
+	padding-left:3px !important; 
+	padding-right:3px !important 
+}
+BODY#ext-templavoila-mod1-index-php .typo3-dyntabmenu a:hover { padding: 1px; }
+
+BODY#ext-templavoila-mod1-index-php #tx_templavoila_mod1_sidebar-bar {
+	margin-top:5px; 
+	border-bottom:none !important; 
+	height: auto !important; 
+	padding: 0 !important
+}
+#div-editNav table { width:auto !important }
+body#typo3-alt-doc-php #div-editNav td a,
+body#ext-cms-layout-db-layout-php #div-editNav td a ,
+body#ext-templavoila-mod1-index-php #div-editNav td a {
+	padding:2px;
+	display:block;
+	margin:1px;
+}
+
+#nav .tab a:link, #nav li li a:link, #nav .tab a:visited, #nav li li a:visited { 
+	color:black !important;
+	font-weight:normal !important;
+}
+#nav .tab a:hover, #nav a:hover, #nav li li a:hover { 
+	color:#BD7A1D !important;
+	text-decoration: none !important;
+}
+body#typo3-alt-topmenu-dummy-php-iconmenu { 
+	margin:0 !important;
+	padding:0 !important;
+}
+#typo3-topMenu {
+	position:absolute;
+	top:0px;
+	left:0px;
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+
+body.background_high table#typo3-shortcuts { margin-top:5px !important; }
+#div-editNav .tab, #div-editNav .tabact,
+#div-editNav_upper .tab, #div-editNav_upper .tabact { 
+	height:16px  !important;
+	overflow:hidden;
+	padding:0 !important;
+}
+#div-editNav .tabTable, #div-editNav_upper .tabTable { 
+	margin:0;
+	height:18px;
+}
+#nav .tab a, #nav .tabact a,	
+#div-editNav .tab a, #div-editNav .tabact a,
+#div-editNav_upper .tab a:link, #div-editNav_upper .tab a:visited,  
+#div-editNav_upper .tabact span { 
+	display:block;
+	padding:2px !important;
+	height:auto !important;
+	border:1px solid #838EA0;
+	color:black;
+}
+td.disabled { border:1px solid #838EA0; }
+#div-editNav_upper .tab a, 
+#nav .tab a { background-color: #F0F0EE }
+#nav .tabact a, #div-editNav .tabact a, 
+#div-editNav_upper .tabact span { background-color: white }
+
+.typo3-dyntabmenu .tab, typo3-dyntabmenu .tabact,
+.typo3-dyntabmenu .tabact_over,
+.typo3-dyntabmenu .tab_over { padding:0 !important }
+
+.typo3-dyntabmenu .tab a:link, .typo3-dyntabmenu .tab a:hover,
+.typo3-dyntabmenu .tabact a:link, .typo3-dyntabmenu .tabact a:hover,
+.typo3-dyntabmenu .tabact_over a:link, .typo3-dyntabmenu .tabact_over a:hover ,
+.typo3-dyntabmenu .tab_over a:link, .typo3-dyntabmenu .tab_over a:hover,
+.disabled .disabled {
+	padding:2px !important;
+	height: auto !important;
+	display:block;
+}
+td.disabled span.disabled { 
+	border:1px solid #838EA0; 
+	border-bottom-width:0;
+}
+.typo3-dyntabmenu .tab a:hover, .typo3-dyntabmenu .tabact a:hover,
+.typo3-dyntabmenu .tabact_over a:hover,
+.typo3-dyntabmenu .tab_over a:hover { background-color: transparent }
+
+.tabTable td { white-space:nowrap }
+
+/* tabbed menu for default Web > Page selecting the mode */
+#top_function_menu { 
+	position:relative;
+	z-index:250;
+}
+table#topTextFunctionMenu {
+	height:22px;
+	top:28px !important;
+	left:0px !important;
+	z-index:2;
+	margin:0;
+}
+table#topTextFunctionMenu td.tab,
+table#topTextFunctionMenu td.tabact {
+	height:18px !important;
+}
+table#topTextFunctionMenu td.tab a,
+table#topTextFunctionMenu td.tabact a {
+	height:20px;
+	padding-top:2px !important;
+	padding-bottom:2px !important;
+}
+table#topTextFunctionMenu td.tab input,
+table#topTextFunctionMenu td.tabact input {
+	padding: 0px !important;
+}
+table#topTextFunctionMenu,
+table#topTextFunctionMenu table.tabTable { width:auto !important; }
+table#topTextFunctionMenu td.tab input { background-color: transparent !important; }

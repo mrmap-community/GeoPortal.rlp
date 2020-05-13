@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Interne Erinnerungsnotiz auf einer Seite.</label>
+			<label index=".details">Bietet eine einfache Möglichkeit, um interne Informationen und Anweisungen mit einer Seite zu verknüpfen.</label>
+			<label index="category.description">Wählen Sie eine die Notiz beschreibende Kategorie aus.</label>
+			<label index="subject.description">Geben Sie einen Titel für die Notiz ein.</label>
+			<label index="message.description">Dies ist die eigentliche Notiz.</label>
+			<label index="author.description">Geben Sie Ihren Namen ein.</label>
+			<label index="email.description">Geben Sie Ihre EMail-Adresse ein.</label>
+			<label index="personal.description">Notiz auch anderen Benutzern anzeigen.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">112425504</label>
+			<label index=".details" type="integer">141602016</label>
+			<label index="category.description" type="integer">222277377</label>
+			<label index="subject.description" type="integer">58235458</label>
+			<label index="message.description" type="integer">268248387</label>
+			<label index="author.description" type="integer">205434485</label>
+			<label index="email.description" type="integer">259302369</label>
+			<label index="personal.description" type="integer">172550456</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Internal reminder note placed on a the page.</label>
+			<label index=".details">This provides a simple way to attach instructional notes to a page regarding backend related issues. Use it as you like for reminders, instructions etc. </label>
+			<label index="category.description">Select a category which describes the character of the note.</label>
+			<label index="subject.description">Enter a title for the note.</label>
+			<label index="message.description">This is the note itself.</label>
+			<label index="author.description">Enter your name. </label>
+			<label index="email.description">Enter your email address.</label>
+			<label index="personal.description">Check this, if you don't want other users to see this note.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

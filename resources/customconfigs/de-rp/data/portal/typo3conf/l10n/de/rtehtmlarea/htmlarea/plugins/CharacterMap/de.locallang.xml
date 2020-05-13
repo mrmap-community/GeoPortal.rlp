@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="CharacterMapTooltip">Fügen Sie Sonderzeichen ein</label>
+			<label index="Insert special character">Fügen Sie Sonderzeichen ein</label>
+			<label index="HTML value:">HTML-Wert:</label>
+			<label index="Close">Schließen</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="CharacterMapTooltip" type="integer">211069571</label>
+			<label index="Insert special character" type="integer">211069571</label>
+			<label index="HTML value:" type="integer">111194696</label>
+			<label index="Close" type="integer">222113377</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="CharacterMapTooltip">Insert special character</label>
+			<label index="Insert special character">Insert special character</label>
+			<label index="HTML value:">HTML value:</label>
+			<label index="Close">Close</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

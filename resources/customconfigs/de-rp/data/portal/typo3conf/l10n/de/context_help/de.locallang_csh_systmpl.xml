@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">TypoScript Template Datensatz.</label>
+			<label index=".details">Die Template Datensätze bilden das Herzstück für das gesamte Design Ihrer Website. Ganz gleich, wie Sie Ihre Website gestalten wollen, alles fängt damit an, dass ein Template Datensatz am Anfang Ihres Seitenbaumes steht.
+Im Grunde genommen legen Sie dazu einfach einen Template Datensatz an, geben diesem einen Namen und vergewissern sich, dass Sie die Option &quot;Lösche Konstanten, Setup und Rootline&quot; gewählt haben. Dann geben Sie noch einige TypoScript Zeilen innerhalb des Setup Feldes ein und schon kann es losgehen.
+Das ist natürlich eine stark vereinfachte Darstellung. Für ein erfolgreiches, produktives Arbeiten mit TYPO3 ist es sehr wichtig, dass Sie sich die unten aufgeführten Dokumente sehr aufmerksam durchlesen!
+Benutzen Sie für Ihre Arbeit mit Templates stets das Web&gt;Template Modul. Es bietet Ihnen spezielle Funktionen, die den Umgang und die Arbeit mit Templates sehr vereinfachen können.</label>
+			<label index=".image_descr">Ein Template Datensatz mit Konstanten und Setup Code.
+Das Web&gt;Template Modul enthält Werkzeuge, die Ihnen beim Erstellen und Testen von Templates hilfreich sein können.</label>
+			<label index="hidden.description">Mit dieser Option können Sie den Template Datensatz verstecken byw. deaktivieren.</label>
+			<label index="hidden.details">Wenn der Template Datensatz der erste Template Eintrag einer Seite war, so wird stattdessen automatisch der nächste Template Eintrag aktiviert.</label>
+			<label index="starttime.description">Startzeit. Verwenden Sie diese Option, um ein Template zu einer bestimmten Zeit zu aktivieren.</label>
+			<label index="endtime.description">Stopzeit. Verwenden Sie diese Option, um ein Template zu einer bestimmten Zeit zu deaktivieren.</label>
+			<label index="title.description">Der Titel des Template Datensatzes wird lediglich intern verwendet und erscheint zu keiner Zeit innerhalb der Website.</label>
+			<label index="sitetitle.description">Website Titel. Entspricht dem HTML &lt;titel&gt;-Tag und wird normalerweise innerhalb der Titelleiste des Browsers auf jeder Seite angezeigt.</label>
+			<label index="constants.description">TypoScript Konstanten</label>
+			<label index="config.description">TypoScript Setup Code</label>
+			<label index="config.details">Hinter TypoScript steckt ein sehr mächtiges Konzept zur Gestaltung dynamischer Websites auf Basis von TYPO3. TypoScript an dieser Stelle zu erklären, würde den Rahmen dieser Onlinehilfe sprengen. Mehr über TypoScript Templates erfahren Sie deshalb in den Referenzdokumenten &lt;em&gt;TSref&lt;/em&gt;, &lt;em&gt;TypoScript by Example&lt;/em&gt; und &lt;em&gt;Getting Started&lt;/em&gt;.</label>
+			<label index="resources.description">Resourcen für das Template, z.B. Bilddateien, True Type Fonts, HTML Vorlagen usw.</label>
+			<label index="resources.details">Datei-Resourcen können innerhalb des TypoScript Template Codes durch [dateiname]*.ext angesprochen werden. Der Vorteil dieser Methode: werden Template Datensätze kopiert oder exportiert, bleiben die Referenzen auf die dazugehörigen Resourcen erhalten und zwar auch für den Fall, dass die Resourcen geänderte Dateinamen erhalten.</label>
+			<label index="clear.description">Mit diesen Optionen wird die Vererbung des TypoScript Codes übergeordenter (d.h. im Seitenbaum näher an der Wurzel angesiedelter Templates) unterbunden. Diese Option kann für Konstanten und Setup Code gesetzt werden.</label>
+			<label index="clear.details">Innerhalb des Web&gt;Template Moduls können Sie sich mit dem Template Analyzer die Vererbungsstruktur für Konstanten und Setup Code innerhalb des Template-Baumes anzeigen lassen.</label>
+			<label index="root.description">Legt fest, dass mit diesem Template die Wurzel des Seitenbaumes (inklusive aller Unterseiten) dargestellt wird.</label>
+			<label index="includeStaticAfterBasedOn.description">Mit dieser Option wird festgelegt, dass statische Templates nach den Basis Templates eingebunden werden (die Reihenfolge der Einbindung also umgekehrt).</label>
+			<label index="includeStaticAfterBasedOn.details">Innerhalb des Web&gt;Template Moduls können Sie sich mit dem Template Analyzer die Reihenfolge der Einbindung aller TypoScript Daten, welche Ihr Template verwendet, anzeigen lassen.</label>
+			<label index="include_static.description">Einzubindende statische Template Datensätze</label>
+			<label index="include_static_file.description">Einzubindende statische Template Dateien</label>
+			<label index="include_static_file.details">Statische Template Dateien werden durch Erweiterungen registriert bzw. zur Verfügung gestellt, im Gegensatz zu den statischen Template Datensätzen, welche aus einer statischen Datenbanktabelle (static_template) stammen.</label>
+			<label index="basedOn.description">Andere Template Datensätze, die wie &quot;Statische Templates&quot; eingebunden werden.</label>
+			<label index="static_file_mode.description">Mit dieser Option legen Sie die Reihenfolge beim Einbinden statischer Template Dateien fest.</label>
+			<label index="static_file_mode.details">Wenn Sie sich über die Reihenfolge im Unklaren sind, können Sie sich diese mit dem Web&gt;Template Modul (Template Analyser) auch anzeigen lassen.</label>
+			<label index="nextLevel.description">Definiert die &quot;Zuständigkeit&quot; eines Template-Datensatzes für die nächst tiefere Ebene innerhalb der Seitenbaumes. Dadurch kann man beispielsweise der Einstiegsseite einer Website ein spezielles Design zuweisen, während alle untergeordenten Seiten ein anderes Design erhalten.</label>
+			<label index="description.description">Geben Sie hier eine Beschreibung für dieses Template an.</label>
+			<label index="editorcfg.description">Editor Konfiguration für die Stylesheet Editor Erweiterung.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">48577171</label>
+			<label index=".details" type="integer">31901980</label>
+			<label index=".image_descr" type="integer">34751722</label>
+			<label index="hidden.description" type="integer">165916776</label>
+			<label index="hidden.details" type="integer">198600233</label>
+			<label index="starttime.description" type="integer">233646736</label>
+			<label index="endtime.description" type="integer">23552607</label>
+			<label index="title.description" type="integer">261538508</label>
+			<label index="sitetitle.description" type="integer">238031316</label>
+			<label index="constants.description" type="integer">254401529</label>
+			<label index="config.description" type="integer">214015943</label>
+			<label index="config.details" type="integer">58707367</label>
+			<label index="resources.description" type="integer">99516465</label>
+			<label index="resources.details" type="integer">110839343</label>
+			<label index="clear.description" type="integer">151164366</label>
+			<label index="clear.details" type="integer">137952541</label>
+			<label index="root.description" type="integer">49046128</label>
+			<label index="includeStaticAfterBasedOn.description" type="integer">63212350</label>
+			<label index="includeStaticAfterBasedOn.details" type="integer">92376705</label>
+			<label index="include_static.description" type="integer">19421470</label>
+			<label index="include_static_file.description" type="integer">199479612</label>
+			<label index="include_static_file.details" type="integer">261693166</label>
+			<label index="basedOn.description" type="integer">11395224</label>
+			<label index="static_file_mode.description" type="integer">236592272</label>
+			<label index="static_file_mode.details" type="integer">17143581</label>
+			<label index="nextLevel.description" type="integer">222981704</label>
+			<label index="description.description" type="integer">115472033</label>
+			<label index="editorcfg.description" type="integer">181379116</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">TypoScript template record.</label>
+			<label index=".details">The 'Template' records are the vital components used to set the design of the webpages. No matter how (almost) you would like to build your website, it must be initiated by a 'Template' record placed in the root of the page tree of the site.
+Basically, create a 'Template' record, enter a title and make sure to check of Clear constants, setup and Rootline. Then enter some TypoScript configuration in the Setup field and you're set.
+It's very important to read how to do all this in the documents listed below! Also make sure you use the Web&gt;Template module to do all the working with templates. It's a specialized tool to help you with this.</label>
+			<label index=".image_descr">A Template Record with constants and setup code.
+The Web&gt;Template module contains tools which will help you to edit and validate TypoScript structures.</label>
+			<label index="hidden.description">Hiding the template will deactivate the template record.</label>
+			<label index="hidden.details">If the Template Record was the first record on a page hiding it will expose the second record on the page instead.</label>
+			<label index="starttime.description">Start time. Use this to enable a template on a certain date.</label>
+			<label index="endtime.description">End time. Use this to disable a template on a certain date.</label>
+			<label index="title.description">The title of the template record is only an internal label and does not have any effect on the output in the frontend.</label>
+			<label index="sitetitle.description">Website title. Typically this will automatically be prefixed all page titles in the &lt;title&gt; tag of the frontend pages.</label>
+			<label index="constants.description">TypoScript Constants.</label>
+			<label index="config.description">TypoScript Setup code</label>
+			<label index="config.details">Read more about TypoScript Templates in TSref, TypoScript by Example and Getting Started.</label>
+			<label index="resources.description">Resource files for the template. For example a logo, a TTF-font etc.</label>
+			<label index="resources.details">Resource files can be referenced in TypoScript Template code by [filename]*.[ext] and has the advantage that the reference from TypoScript is not broken if you copy or export a Template Record where the resources ends up with new names.</label>
+			<label index="clear.description">Flags that will clear the inheritance of TypoScript code from former templates in the root line. There is a flag for Constants and one for Setup code.</label>
+			<label index="clear.details">In the Web &gt; Template / Template Analyser module you can see how far back in the template tree that constants and setup code is inherited.</label>
+			<label index="root.description">Defines that the template represents a root of a website.</label>
+			<label index="includeStaticAfterBasedOn.description">If set, static templates will be included after &quot;based-on&quot; templates. It basically swaps the order of inclusion of these external TypoScript sources.</label>
+			<label index="includeStaticAfterBasedOn.details">The Web &gt; Template / Template Analyser module allows you to view the order of inclusion of all TypoScript sources your template uses.</label>
+			<label index="include_static.description">Static Template records to include.</label>
+			<label index="include_static_file.description">Static Template files to include.</label>
+			<label index="include_static_file.details">Static template files are registered by extensions contrary to Static Template records which come from the static database table, &quot;static_template&quot;.</label>
+			<label index="basedOn.description">Other Template Records that are included like &quot;static templates&quot;.</label>
+			<label index="static_file_mode.description">Define the mode of inclusion of static template files.</label>
+			<label index="static_file_mode.details">If you are in doubt about the inclusion order, make sure to use the Web &gt; Template / Template Analyser to view the order.</label>
+			<label index="nextLevel.description">Defines a template record to make active one level out in the page tree of this branch. This can be used to define another template record for the general website while having a special template for the frontpage.</label>
+			<label index="description.description">Enter a description of the template if you like.</label>
+			<label index="editorcfg.description">Editor Configuration for the stylesheet editor extension.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

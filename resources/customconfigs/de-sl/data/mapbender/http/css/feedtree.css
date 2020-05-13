@@ -1,0 +1,135 @@
+/*
+li{ border: 1px solid black; }
+ul{ border: 1px dotted blue; }
+a{ border: 1px dotted red; }
+*/
+
+
+/* The Whole feed Tree */
+
+ul.feedtree {
+	overflow: auto;
+	width: 10em;
+/*	background-image: url("http://localhost:8888/vertical_dots.png");*/
+	background-repeat: repeat-y	;
+	background-position: 20px;
+	
+}
+ul.feedtree, ul.feedtree ul {
+	list-style-type: none !important;
+	margin-left: 0;
+	padding: 0 !important;
+    margin-top: 0;
+}
+
+ul.feedtree a{
+	font-size: x-small;
+}
+
+
+ul.feedtree  li{
+	padding-left: 2px;
+/*	margin-left: 1em;*/
+}
+
+ul.feedtree button {
+	padding: 0;
+	margin-left: 0;
+	background-color: transparent;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	border: none;
+}
+
+ul.feedtree a:link, ul.feedtree a:visited, ul.feedtree a:hover, ul.feedtree a:active {
+	background-color: transparent;
+	text-decoration: none;
+	color: black;
+}
+
+
+/* a Root Node  */
+
+ul.feedtree  li.rss.open{
+	padding-left: 0;
+}
+
+ul.feedtree li.rss ul li{
+	margin-left:  0.2em;
+}
+
+ul.feedtree li.rss > button.add{
+	background-image:  url("../img/add.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+ul.feedtree li.open.rss > button.toggle{
+	background-image: url("../img/georss_logo_folder.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+ul.feedtree li.closed.rss > button.toggle{
+	background-image: url("../img/georss_logo_folder.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+ul.feedtree li.rss.open, ul.feedtree li.rss.closed {
+	background-image: none;
+}
+
+
+/*  a Feed Node */
+
+ul.feedtree li.open > button.toggle{
+	background-image: url("../img/tree_new/expanded_folder.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+ul.feedtree li.closed >  button.toggle{
+	background-image: url("../img/tree_new/closed_folder.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+ul.feedtree li button.remove{
+	background-image: url("../img/button_digitize/geomRemove.png");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+ul.feedtree li.open, ul.feedtree li.closed {
+/*	background-image: url("http://localhost:8888/vertical_dots.png");*/
+	background-repeat: repeat-x	;
+	background-position: 10px 10px;
+	padding-bottom: 0.5em;
+}
+
+ul.feedtree li.closed >ul{
+	display: none;
+}
+
+
+
+ul.feedtree li.rss  li input{
+	vertical-align: middle;
+	margin: 0;
+}
+
+
+/* a FeedItem Node */
+
+ul.feedtree  ul ul {
+	padding: 0;
+}
+
+ul.feedtree  ul ul li {
+	padding: 0;
+	border: 1px solid transparent;
+}
+ul.feedtree  ul ul li:hover {
+	border: 1px dotted gray;
+}

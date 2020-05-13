@@ -10,9 +10,7 @@ ipaddress="127.0.0.1"
 hostname="127.0.0.1"
 
 # mapbender/phppgadmin/mysql database config
-#mb
 mapbender_database_name="mapbender"
-mapbender_database_host="127.0.0.1"
 mapbender_database_port="5432"
 mapbender_database_user="mapbenderdbuser"
 mapbender_database_password="mapbenderdbpassword"
@@ -49,7 +47,6 @@ maxx="465000"
 maxy="5647000"
 epsg="EPSG:25832"
 bbox_current_epsg_csv="$minx,$miny,$maxx,$maxy"
-bbox_current_epsg_space="$minx $miny $maxx $maxy"
 
 # define name of the default gui -
 # don't use spaces, cause the gui names are used for filenames!!!! - TBD not already operabel!
@@ -64,6 +61,5 @@ center_y_i="5543000"
 # config.js - mm2_config.js
 bbox_wgs84="6.05 48.9 8.6 50.96"
 initial_scale_i="1500000"
-map_extent_csv=$bbox_wgs84
 
 

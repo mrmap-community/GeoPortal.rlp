@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="Quick Tag Editor">Quick TAG Editor</label>
+			<label index="Enter the TAG you want to insert">Geben Sie den gewünschten TAG an</label>
+			<label index="You have to select some text">Sie müssen einen Text markieren</label>
+			<label index="There are some unclosed quote">Nicht geschlossene Anführungszeichen gefunden</label>
+			<label index="This attribute already exists in the TAG">Dieses Attribut existiert bereits für diesen TAG</label>
+			<label index="No CSS class avaiable">Keine CSS Klassen verfügbar</label>
+			<label index="OPTIONS">OPTIONEN</label>
+			<label index="ATTRIBUTES">ATTRIBUTE</label>
+			<label index="TAGs">TAGs</label>
+			<label index="Colors">Farben</label>
+			<label index="Ok">OK</label>
+			<label index="Cancel">Abbrechen</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="Quick Tag Editor" type="integer">42781729</label>
+			<label index="Enter the TAG you want to insert" type="integer">105221784</label>
+			<label index="You have to select some text" type="integer">71928577</label>
+			<label index="There are some unclosed quote" type="integer">205096681</label>
+			<label index="This attribute already exists in the TAG" type="integer">200900540</label>
+			<label index="No CSS class avaiable" type="integer">241415811</label>
+			<label index="OPTIONS" type="integer">23387490</label>
+			<label index="ATTRIBUTES" type="integer">231553312</label>
+			<label index="TAGs" type="integer">235329720</label>
+			<label index="Colors" type="integer">97847433</label>
+			<label index="Ok" type="integer">174097711</label>
+			<label index="Cancel" type="integer">245659783</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

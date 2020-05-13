@@ -1,0 +1,25 @@
+  # cat=basic; type=string; label=No access: filenames not allowed to access: (uses PCRE regex syntax).
+no_access = ^\.ht
+
+  # cat=basic; type=boolean; label=Show hidden files: Show files starting with '.', (works on Linux/UNIX).
+show_hidden = 1
+
+  # cat=basic; type=string; label=Home URL: the url corresponding with the home directory (e.g. http://www.example.com). If set, this will used as an alternative baseurl for filelinks. Otherwise Quixplorer will use the current HTTP_HOST. Important:no trailing '/'.
+home_url = 
+
+
+  # cat=basic; type=string; label=Home directory: If set, this will be used as an alternative root directory (e.g. '/var/www/htdocs'). Otherwise Quixplorer will use TYPO3's site path (PATH_site) as root. Important: Use '/', not '\' or '\\', no trailing '/'.
+home_dir =  
+
+
+  # cat=basic; type=boolean; label=Show thumbs: show thumbs for image files.
+show_thumbs = 1
+
+  # cat=basic; type=string; label=Textarea height: The height of the textarea in edit mode.
+textarea_height =  30
+
+  # cat=basic; type=string; label=Editable file extensions: the edit-function will be available for these file types (uses POSIX syntax)
+editable_ext = \.phpcron$|\.ts$|\.tmpl$|\.txt$|\.php$|\.php3$|\.phtml$|\.inc$|\.sql$|\.pl$|\.htm$|\.html$|\.shtml$|\.dhtml$|\.xml$|\.js$|\.css$|\.cgi$|\.cpp$\.c$|\.cc$|\.cxx$|\.hpp$|\.h$|\.pas$|\.p$|\.java$|\.py$|\.sh$\.tcl$|\.tk$
+
+
+

@@ -1,0 +1,64 @@
+<T3DataStructure>
+	<sheets>
+		<settings>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.sheet_settings</sheetTitle>
+					<sheetDescription>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.sheet_settings_desc</sheetDescription>
+					<sheetShortDescr>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.sheet_settings_short</sheetShortDescr>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<path>
+						<TCEforms>
+							<label>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.path</label>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</path>
+					<url>
+						<TCEforms>
+							<label>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.url</label>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</url>
+					<count>
+						<TCEforms>
+							<label>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.count</label>
+							<config>
+								<type>input</type>
+								<size>24</size>
+							</config>
+						</TCEforms>
+					</count>
+					<detail>
+						<TCEforms>
+							<label>LLL:EXT:q4u_search/locallang_db.xml:tt_content.flexform_pi3.detail</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">Hide abstract</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">Show abstract</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+								</items>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<multiple>0</multiple>
+								<selectedListStyle>width:150px</selectedListStyle>
+								<itemListStyle>width:150px</itemListStyle>
+							</config>
+						</TCEforms>
+					</detail>
+				</el>
+			</ROOT>
+		</settings>
+	</sheets>
+</T3DataStructure>

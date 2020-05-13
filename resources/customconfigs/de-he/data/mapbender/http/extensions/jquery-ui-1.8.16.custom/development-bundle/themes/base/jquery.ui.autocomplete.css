@@ -1,0 +1,98 @@
+/*
+ * jQuery UI Autocomplete 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Autocomplete#theming
+ */
+.ui-autocomplete { position: absolute; cursor: default; }	
+
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+/*
+ * jQuery UI Menu 1.8.16
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+
+/*#jsonAutocompleteGazetteer {
+*	border:solid 1px red;
+*	background-color:white;
+*}
+*/
+	/*SUCHSCHLITZ ANPASSEN*/
+  /*
+	#geographicName {
+		height:17px;
+		padding-left: 6px;
+		padding-bottom: 7px;
+		padding-top: 6px;
+		border: none;
+		border-right:1px solid #347fa7;
+		border-top:1px solid #347fa7;
+		border-bottom:1px solid #347fa7;
+		}
+	#symboldForInputId {
+		background-color:white;
+		margin-bottom:-0.98em;
+		border:1px solid #347fa7;
+		height: 30px;
+		width: 30px;
+		}
+	#helpSymbolId {
+		margin-left:-23px;
+		margin-bottom:-4px;
+		padding-right:10px;
+		}
+  */
+
+
+.ui-menu {
+	list-style:none;
+	padding: 2px;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: 0.6em;       /*angepasst - vorher -3px*/
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding:.2em .4em;
+	line-height:2.0;        /*angepasst - vorher 1.5*/
+	zoom:1;
+	font-family: Verdana,Arial,sans-serif;       /*neu*/
+	font-size: 12px;       /*neu*/
+	border-bottom: solid 1px #efefef;       /*neu*/
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: 0px;       /*angepasst - vorher -1px*/
+	font-family: Verdana,Arial,sans-serif;       /*neu*/
+	font-size: 12px;       /*neu*/
+	background-color: #efefef;       /*neu*/
+	background-image: none;       /*neu*/
+	border-top:none;       /*neu*/
+	border-left:none;       /*neu*/
+	border-right:none;	       /*neu*/
+	border-bottom: solid 1px #efefef;       /*neu*/
+	padding:.2em .4em;       /*neu*/
+	
+}

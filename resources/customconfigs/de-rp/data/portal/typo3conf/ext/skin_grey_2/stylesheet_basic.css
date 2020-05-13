@@ -1,0 +1,544 @@
+/****************************************
+
+	GENERAL STYLE FOR TYPO3 BACKEND:
+
+Stylesheet for the TYPO3 backend.
+You can configure another/additional stylesheet for use by the $TBE_STYLES global var
+
+TYPO3 CVS ID: $Id: stylesheet.css,v 1.45.2.1 2005/05/22 13:57:31 typo3 Exp $
+
+Basic style sheet (based on stylesheet.css) - background-colors deleted 
+Some of this stuff has moved to stylesheet_post
+In this file such CSS, which is not defined in stylesheet_post.css
+
+
+*****************************************/
+
+
+
+
+/*********************************************
+ * MAIN STYLES: - stylesheet_post.css
+ *********************************************/
+
+/****************************************
+ * SPECIFIC WRAPPERS
+ *
+ * The "template" class is usually instantiated as either
+ * bicDoc, mediumDoc, smallDoc or noDoc
+ * Each of these will result in the whole page content between the bodytags being wrapped in a DIV-section with a class.
+ * The class name will be "typo3-[classname]"
+ * In particular we set the width of these wrapper-sections:
+ *****************************************/
+/*********************************************
+ * DEFINING DOCS: - stylesheet_post.css
+ *********************************************/
+
+/*********************************************
+ * SPECIAL ELEMENTS IN THE BACKEND
+ *********************************************/
+
+/* Context Sensitive Menu / Top frame (alt_clickmenu.php): */
+BODY#typo3-alt-clickmenu-php {
+	margin-top: 10px; 
+}
+TABLE#typo3-CSM-top A { text-decoration: none;}
+TABLE#typo3-CSM-top IMG { vertical-align: middle; margin-bottom:2px; }
+TABLE#typo3-CSM-top TR TD { white-space: nowrap; }
+TABLE#typo3-CSM-top TR TD.c-closebutton { padding-left: 10px; }
+TABLE#typo3-CSM-top TR TD.c-itemicon { padding-left: 10px; font-weight: bold; }
+TABLE#typo3-CSM-top IMG.c-roimg { margin-right: 2px; }
+/* Context Sensitive Menu / Layer (alt_clickmenu.php creates it)  - stylesheet_post.css */
+
+/* Top menu (alt_topmenu_dummy.php) - stylesheet_post.css  */
+
+/* Tab menu (template.php) */
+TABLE#typo3-tabmenu { 
+	margin-top:5px; 
+}
+TABLE#typo3-tabmenu TD.tabact { 
+	color: #000; border: solid black 1px; 
+	background: #e7dba8; 
+}
+	TABLE#typo3-tabmenu TD.tab { 
+	color:grey; border: solid #555 1px; 
+	border-left: solid #aaa 3px; 
+	background: #c4d4cd; 
+}
+TABLE#typo3-tabmenu TD A { 
+	color:grey; 
+	text-decoration:none; 
+	display: block; 
+	width:100%; 
+	padding:2px; 
+	padding-left:3px; 
+	padding-right:5px; 
+}
+TABLE#typo3-tabmenu TD.tabact A { 
+	color:#000; 
+	padding-left:10px;
+	padding-right:10px; 
+}
+TABLE#typo3-tabmenu TD A:hover { 
+	color:#000; 
+	background: #f6eab7; 
+	text-decoration:none; 
+}
+
+/* Dynamic Tab menu (template.php) */
+TABLE.typo3-dyntabmenu TD.tabact { 
+	color: #000; border: 
+	solid black 1px; 
+}
+TABLE.typo3-dyntabmenu TD.tab { 
+	color:grey; border: solid #555 1px;
+}
+TABLE.typo3-dyntabmenu TD.tab_over, 
+TABLE.typo3-dyntabmenu TD.tabact_over, 
+TABLE.typo3-dyntabmenu TD.disabled_over {
+	color:#000; 
+	border: solid #555 1px; 
+	background: #f6eab7; 
+}
+TABLE.typo3-dyntabmenu TD.disabled { 
+	color:#999999; 
+	border: solid #555 1px;  
+	background: #cccccc; 
+}
+TABLE.typo3-dyntabmenu TD.tab_over, 
+TABLE.typo3-dyntabmenu TD.tabact_over, 
+TABLE.typo3-dyntabmenu TD.disabled_over 
+{ 
+	color:#000; 
+	border: solid #555 1px;  
+	background: #f6eab7; 
+}
+TABLE.typo3-dyntabmenu TD.disabled, 
+TABLE.typo3-dyntabmenu TD.tab_over, 
+TABLE.typo3-dyntabmenu TD.tabact_over, 
+TABLE.typo3-dyntabmenu TD.disabled_over  { 
+/*
+border-radius: 3px; -moz-border-radius: 3px; border-bottom: 0px;
+*/
+}
+
+DIV.typo3-dyntabmenu-divs-foldout DIV.c-tablayer { margin-left: 20px; }
+DIV.typo3-dyntabmenu-divs-foldout DIV.tab { 
+	background: #c4d4cd; 
+	background-image: url(gfx/ol/plusbullet.gif); 
+	background-repeat: no-repeat; 
+	border: solid black 1px; 
+	margin-top: 5px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.tab_over {
+	background: #f6eab7; 
+	background-image: url(gfx/ol/arrowbullet.gif); 
+	background-repeat: no-repeat; 
+	border: solid black 1px; 
+	margin-top: 5px; 
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.tabact {  
+	background: #e7dba8; 
+	background-image: url(gfx/ol/minusbullet.gif); 
+	background-repeat: no-repeat; 
+	border: solid black 1px;  
+	margin-top: 5px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.tabact_over { 
+	background: #f6eab7; 
+	background-image: url(gfx/ol/arrowbullet.gif); 
+	background-repeat: no-repeat; 
+	border: solid black 1px;  
+	margin-top: 5px; border-radius: 3px; -moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.disabled { 
+	color:#999999; 
+	border: solid black 1px; 
+	padding: 2px 2px 2px 18px; 
+	margin-top: 5px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.disabled_over {
+	color:#999999; 
+	border: solid black 1px; 
+	background: #f6eab7;  
+	padding: 2px 2px 2px 18px; 
+	margin-top: 5px; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+}
+DIV.typo3-dyntabmenu-divs-foldout DIV.tab A, 
+DIV.typo3-dyntabmenu-divs-foldout DIV.tabact A, 
+DIV.typo3-dyntabmenu-divs-foldout DIV.tab_over A,
+DIV.typo3-dyntabmenu-divs-foldout DIV.tabact_over A {
+	text-decoration:none; 
+	display: block; 
+	padding: 2px 2px 2px 18px;
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+}
+
+
+/* Logo frame (alt_toplogo.php) */
+BODY#typo3-alt-toplogo-php {margin: 0px 0px 0px 0px;}
+
+/* Help > About modules (alt_intro.php) */
+TABLE#typo3-about-modules TR TD { 
+	vertical-align: top; 
+	padding: 2px 2px 2px 2px; 
+}
+TABLE#typo3-about-modules TR.c-mainitem TD IMG {
+	vertical-align: middle;  
+	padding: 0px 2px 0px 2px; 
+}
+
+
+/* Vertical Module Menu script, left frame (alt_menu.php): */
+
+BODY#typo3-alt-menu-php A { text-decoration: none; }
+TABLE#typo3-vmenu TR.c-mainitem TD {
+	background-color: #D9D9D8; 
+	padding: 1px 1px 1px 1px; 
+	border: #9BA1A8 1px solid; 
+	vertical-align: middle; 
+	width: 100px; 
+}
+TABLE#typo3-vmenu TR.c-mainitem TD SPAN.c-label A { text-decoration : underline; }
+TABLE#typo3-vmenu TR.c-mainitem TD IMG { 
+	vertical-align: middle; 
+	margin-right: 2px;
+}
+TABLE#typo3-vmenu TR.c-mainitem TD SPAN.c-label { 
+	position: relative; 
+	top: 1px;
+}
+TABLE#typo3-vmenu TR.c-mainitem TD SPAN.c-iconCollapse { 
+	position:absolute; 
+	left:90px; 
+	cursor:pointer; 
+}
+TABLE#typo3-vmenu TR.c-mainitem-HL TD { 
+	background-color: #AAAAAA; 
+	padding: 1px 1px 1px 1px; 
+	border: #9BA1A8 1px solid; 
+	vertical-align: middle;
+}
+TABLE#typo3-vmenu TR.c-mainitem-HL TD SPAN.c-label A { text-decoration : underline; }
+TABLE#typo3-vmenu TR.c-mainitem-HL TD IMG { 
+	vertical-align: middle; 
+	margin-right: 2px;
+}
+TABLE#typo3-vmenu TR.c-mainitem-HL TD SPAN.c-label { 
+	position: relative; 
+	top: 1px;
+}
+TABLE#typo3-vmenu TR.c-endrow TD {height: 5px;}
+TABLE#typo3-vmenu TR.c-first TD {height: 2px;}
+TABLE#typo3-vmenu TD.c-subitem-label A { display: block; width: 100%; }
+TABLE#typo3-vmenu TR.c-subitem-row-HL { background-color: #e3dfdb; }
+DIV#typo3-alt-menu-php-logininfo { 
+	text-align: center; 
+	width: 90px; 
+	margin-top:15px; 
+	margin-bottom: 15px;
+}
+DIV#typo3-alt-menu-php-logininfo P { margin-top:5px; }
+DIV#typo3-alt-menu-php-adminFunc { 
+	text-align: left;
+	width: 110px; 
+	margin-top:15px; 
+}
+DIV#typo3-alt-menu-php-adminFunc IMG { margin: 0px 2px 0px 2px;}
+
+
+/* Trees */
+TABLE#typo3-tree A { text-decoration: none; }
+TABLE#typo3-tree TR TD { white-space: nowrap; }
+TABLE#typo3-tree TR TD IMG { vertical-align: middle; }
+TABLE#typo3-tree TR TD IMG.c-recIcon { margin-right: 1px;}
+TABLE#typo3-tree { 
+	margin-bottom: 10px; 
+	width: 95%; 
+}
+P.c-refresh IMG { 
+	vertical-align: middle;  
+	margin-right: 7px; 
+}
+BODY#typo3-alt-db-navframe-php DIV.c-notice { 
+	border: 1px solid black; 
+	padding: 5px 5px 5px 5px; 
+	margin-top: 5px; 
+	margin-bottom: 10px; 
+	width : 95%; 
+}
+
+/* TCEforms */
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-recHeader { font-weight: bold; color: #333366; }
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-newToken { font-weight: bold; color: #990000; }
+TABLE.typo3-TCEforms SPAN.typo3-TCEforms-helpText { color: #666666; }
+TABLE.typo3-TCEforms OPTION.c-divider { font-style: italic; color: #666666; background-color: #eeeeee; text-transform : uppercase; margin-top: 10px; border-bottom: 1px solid #666666; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-selectedItem {background-color: #c5c1b5; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-invalidItem {background-color: #ff6600; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD {border-bottom: 1px #999999 dashed; padding: 1px 3px 1px 3px; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD.c-labelCell { padding-right: 30px; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR TD.c-labelCell P.c-descr {margin-left: 30px; font-style: italic;}
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox TR.c-header TD { font-weight: bold; padding-top: 10px; border-bottom: none; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-checkbox { margin-top: 4px; margin-bottom: 10px; }
+TABLE.typo3-TCEforms TABLE.typo3-TCEforms-select-singlebox { margin-top: 4px; margin-bottom: 10px; }
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-originalLanguageValue { background-color: #bbccbb; }
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-diffBox { background-color: white; border: 1px solid black; }
+TABLE.typo3-TCEforms DIV.typo3-TCEforms-diffBox-header { background-color: red; font-weight: bold; }
+
+/* Element Browser / RTE link selection: */
+TABLE#typo3-curUrl { font-weight: bold; width: 100%; margin-bottom: 2px;}
+TABLE#typo3-RTElinkMenu TR TD { text-align: center; white-space: nowrap; width: 15%; font-weight: bold; }
+TABLE#typo3-linkTarget { margin-bottom: 25px; }
+TABLE#typo3-linkPages TR TD.c-wCell, 
+TABLE#typo3-linkFiles TR TD.c-wCell, 
+TABLE#typo3-EBrecords TR TD.c-wCell, 
+TABLE#typo3-EBfiles TR TD.c-wCell 
+{ 
+	padding-right: 5px; 
+	white-space: nowrap; 
+}
+
+BODY#typo3-browse-links-php IMG, 
+BODY#ext-rte-app-rte-select-image-php IMG { vertical-align: middle; }
+BODY#typo3-browse-links-php IMG.c-blinkArrowL { margin: 0px 3px 0px 3px; }
+TABLE#typo3-linkMail, 
+TABLE#typo3-linkURL, 
+TABLE#typo3-linkTarget { margin-top: 5px; }
+BODY#typo3-browse-links-php H3.bgColor5 { margin-top: 2px; }
+BODY#typo3-browse-links-php A { text-decoration: none; }
+TABLE#typo3-msgBox { 
+	margin-top: 10px; 
+	margin-bottom: 10px;
+}
+TABLE#typo3-msgBox TR TD { padding: 10px 50px 10px 50px; }
+
+/* RTE select image */
+BODY#ext-rte-app-rte-select-image-php A { text-decoration : none; }
+BODY#ext-rte-app-rte-select-image-php TABLE TR TD TABLE TR.bgColor4 TD A { text-decoration : underline; }
+
+/* Palette display for TCEforms (top frame, alt_palette.php) */
+TABLE#typo3-TCEforms-palette TD {
+	white-space: nowrap; 
+	vertical-align: top;
+}
+TABLE#typo3-TCEforms-palette TR TD.c-label { padding-top: 3px; }
+TABLE#typo3-TCEforms-palette TR TD.c-close { padding-top: 3px; }
+
+/* Context Sensitive Help window (view_help.php) */
+DIV.typo3-view-help { margin-top: 6px; margin-left: 3px; }
+DIV.typo3-view-help IMG.c-inlineimg { border: 1px solid black; margin-top:5px; margin-bottom:3px;}
+DIV.typo3-view-help H2 { font-size: 16px; text-align: left; margin: 20px 0px 10px 0px; padding: 3px 3px 3px 3px;}
+DIV.typo3-view-help H3 {margin-top: 0px;}
+DIV.typo3-view-help H4 { margin-top: 15px; border-bottom: 1px black solid; }
+DIV.typo3-view-help DIV.c-toc UL LI { font-size: 11px; font-weight: bold; margin-top: 10px;}
+DIV.typo3-view-help DIV.c-toc UL LI UL LI { font-size: 12px; font-weight: normal; margin-top: 0px;}
+DIV.typo3-view-help P.c-nav { padding: 6px 0px 0px 0px; }
+DIV.typo3-view-help P.c-nav A { background-color: #E7DBA8; font-weight: bold;padding: 2px 2px 2px 2px; }
+DIV.typo3-view-help A.glossary-term { color: maroon; font-style: italic;}
+
+/* Shortcut frame (alt_shortcut.php) */
+BODY#typo3-alt-shortcut-php { border-top: #9BA1A8 1px solid; margin: 0px 0px 0px 0px; padding: 2px 0px 0px 5px;}
+BODY#typo3-alt-shortcut-php {background-color:rgb(155,161,168);}
+/* Document, listing recently edited records if no records were open (alt_doc_nodoc.php) - this is effectively the Doc module */
+TABLE.typo3-recent-edited { width: 100%; }
+TABLE.typo3-recent-edited IMG.c-recicon { margin-right: 5px; vertical-align: middle; }
+TABLE.typo3-recent-edited TD { white-space: nowrap; }
+BODY#typo3-alt-doc-nodoc-php P IMG { vertical-align: middle; margin-left: 5px; }
+BODY#typo3-alt-doc-nodoc-php { margin-left: 5px; }
+
+
+/* Wizards: */
+BODY#typo3-wizard-tsconfig-php { margin-left: 5px; }
+TABLE#typo3-tablewizard SPAN.c-wizButtonsH INPUT { margin-right: 2px;  vertical-align: middle; }
+TABLE#typo3-tablewizard SPAN.c-wizButtonsV INPUT { margin-right: 2px;  vertical-align: middle; }
+TABLE#typo3-formwizard SPAN.c-wizButtonsV INPUT { margin-bottom: 2px; }
+INPUT.c-inputButton, IMG.c-inputButton { margin-right: 2px;  vertical-align: middle; }
+DIV#c-saveButtonPanel, DIV#c-inputMode { margin-top: 10px; }
+TABLE#typo3-formwizard TR#typo3-formWizardHeader TD { font-weight: bold; text-align: center; }
+TABLE#typo3-formwizard TR TD { padding: 0px 2px 0px 2px; }
+BODY#typo3-wizard-rte-php, BODY#typo3-wizard-rte-php TABLE#typo3-rtewizard { height: 98%; }
+BODY#typo3-wizard-rte-php TABLE#typo3-rtewizard TR TD#c-formContent { height: 100%; vertical-align: top; }
+BODY#typo3-wizard-colorpicker-php P.c-head {font-weight: bold; margin-top: 4px;}
+
+/* History / Undo */
+TABLE#typo3-history TR TD, TABLE#typo3-history-item TR TD { vertical-align: top; }
+TABLE#typo3-history TR.c-head TD, TABLE#typo3-history-item TR.c-head TD { font-weight: bold; }
+TABLE#typo3-history IMG, TABLE#typo3-history-item IMG { margin: 1px 1px 1px 1px;}
+
+/* Move element */
+BODY#typo3-move-el-php IMG { vertical-align: middle; }
+BODY#typo3-move-el-php TABLE#typo3-ttContentList IMG, BODY#typo3-move-el-php IMG#c-recIcon {margin-right: 4px; }
+
+/* File scripts */
+BODY#typo3-file-upload-php DIV#c-submit, BODY#typo3-file-upload-php DIV#c-upload, BODY#typo3-file-upload-php DIV#c-override, BODY#typo3-file-upload-php DIV#c-select {
+	margin-top: 10px;
+}
+BODY#typo3-file-rename-php DIV#c-submit, BODY#typo3-file-rename-php DIV#c-rename  {
+	margin-top: 10px;
+}
+BODY#typo3-file-newfolder-php DIV#c-select, BODY#typo3-file-newfolder-php DIV#c-createFolders, BODY#typo3-file-newfolder-php DIV#c-submitFolders, BODY#typo3-file-newfolder-php DIV#c-newFile, BODY#typo3-file-newfolder-php DIV#c-submitFiles {
+	margin-top: 10px;
+}
+BODY#typo3-file-edit-php DIV#c-submit, BODY#typo3-file-edit-php DIV#c-edit {
+	margin-top: 10px;
+}
+
+/* Web > Page - stylesheet_post.css */
+
+/* Web > List - stylesheet_post.css */
+
+/*
+TABLE#typo3-dblist TR TD { 
+	padding-left: 1px; 
+	padding-right: 6px; 
+}
+TABLE#typo3-dblist-overview { 
+	width: 410px; 
+	margin-top: 10px; 
+	margin-left:1px;
+}
+TABLE#typo3-dblist-overview TD.c-tableDescription {
+	padding-left: 10px; 
+	font-style: italic; 
+	color: #333333;
+}
+TABLE#typo3-dblist-overview TD.c-tableDescription IMG { 
+	margin-right: 10px; 
+}
+TABLE#typo3-versionSelector { 
+	background-color: #ABBBB4; 
+	margin-top: 5px; 
+	margin-bottom: 5px; 
+}
+TABLE#typo3-versionSelector TD { 
+	padding-left: 2px; 
+	padding-right: 2px; 
+}
+DIV#typo3-newRecordLink { 
+	margin: 5px 0px 5px 0px; 
+	font-weight: bold;
+}
+DIV#typo3-newRecordLink IMG { 
+	margin-right: 5px; 
+	vertical-align: middle; 
+}
+INPUT.smallCheckboxes { 
+vertical-align: middle; 
+margin: 0 0 0 0; 
+padding: 0 0 0 0; 
+width: 12px; 
+height: 12px; 
+}
+DIV#typo3-listOptions { 
+margin: 10px 0px 10px 0px; 
+}
+*/
+/* File > List */
+TABLE#typo3-filelist IMG { vertical-align: middle; }
+TABLE#typo3-filelist TR TD { padding-left: 1px; padding-right: 6px; }
+TABLE#typo3-filelist TR TD.c-headLine  { background-color: #cccccc; font-weight: bold; height: 16px; }
+TABLE#typo3-filelist TR TD DIV.typo3-clipCtrl {background-color: #ABBBB4; text-align: center; }
+
+/* Page info */
+TABLE.typo3-page-pages TR TD.c-headLine { background-color: #ABBBB4; }
+BODY#typo3-mod-web-info-index-php IMG { vertical-align: middle; }
+TABLE.typo3-page-sysnote TR TD { background-color: #D9D5C9 }
+TABLE.typo3-page-sysnote TR TD.c-headLine { background-color: #c5c1b5 }
+
+/* Web > Access */
+TABLE#typo3-permissionList IMG { vertical-align: middle; }
+TABLE#typo3-permissionMatrix TD { text-align: center; width: 16%; }
+TABLE#typo3-permissionMatrix TD.bgColor2 { font-weight: bold; padding-left: 10px; padding-right: 10px; }
+
+/* Help > About - stylesheet_post */
+
+/* New element */
+BODY#typo3-db-new-php IMG { vertical-align: middle; }
+BODY#typo3-db-new-php A IMG { margin-right: 5px; }
+BODY#typo3-db-new-php A { text-decoration: none; }
+BODY#typo3-db-new-php IMG.c-helpImg { margin-left: 20px; text-align: right; }
+BODY#typo3-db-new-php DIV#typo3-newPageLink { margin-top: 20px; }
+BODY#typo3-db-new-php  TABLE#typo3-newRecord TR TD { padding-right: 20px;}
+
+
+/*********************************************
+ * VARIOUS STAND-ALONE classes:
+ *********************************************/
+
+/* Dimmed span tag color (disabled) */
+.typo3-dimmed {color: #666666;}
+.c-na {color: #666666; font-style: italic; }
+
+/* Red span tag color (warning, notice) */
+.typo3-red {color: red;}
+TABLE.warningbox { border: solid 2px black; background-color: yellow; margin: 20px 0px 20px 0px; }
+TABLE.warningbox TD { padding: 20px 20px 20px 20px; font-weight: bold; }
+
+/* Various classes: */
+.nobr {white-space: nowrap;}
+.diff-r {color: red;}
+.diff-g {color: green;}
+IMG.absmiddle { vertical-align: middle; }
+.smallCheckboxes { width:12px; height:12px; margin:0 0 0 0; }
+.uppercase { text-transform : uppercase; }
+.tableheader TD { font-weight: bold; padding-left: 2px; padding-right: 2px; }
+.lrPadding TD { padding-left: 2px; padding-right: 2px; }
+
+/* Permissions, green and red */
+.perm-allowed {color: green; font-weight: bold;}
+.perm-denied {color: red; font-weight: bold;}
+
+/* Clipboard  */
+TR.typo3-clipboard-head {
+	background-color: #cccccc;
+}
+
+/* Go back A-tags */
+A.typo3-goBack {
+	font-weight: bold;
+	background-color: #D9D5C9;
+	padding: 1px 1px 1px 1px;
+}
+A.typo3-goBack IMG { margin-right: 5px; vertical-align: middle; }
+SPAN.typo3-moduleHeader IMG { vertical-align: middle; margin-right: 4px; }
+
+/* TYPO3 CSH */
+TABLE.typo3-csh-inline { border: solid 1px #6f3833; background-color: #af8883; margin: 5px 4px 20px 0px; }
+TABLE.typo3-csh-inline TR TD H4 { margin-top: 0px; margin-bottom: 0px; }
+IMG.typo3-csh-icon { vertical-align: middle; cursor: help; }
+
+
+/* Login Screen - stylesheet_post.css */
+
+/* Extension Manager - stylesheet_post.css */
+
+/*********************************************
+ * TypoScript Highlighting:
+ *********************************************/
+
+PRE.ts-hl {font-size: 11px; font-family : monospace;}
+PRE.ts-hl .ts-prespace {}
+PRE.ts-hl .ts-objstr_postspace {}
+PRE.ts-hl .ts-operator_postspace {}
+PRE.ts-hl .ts-operator { color: black; font-weight: bold; }
+PRE.ts-hl .ts-value {color: #cc0000;}
+PRE.ts-hl .ts-objstr {color: #0000cc;}
+PRE.ts-hl .ts-value_copy {color: #006600;}
+PRE.ts-hl .ts-value_unset {background-color: #66cc66;}
+PRE.ts-hl .ts-ignored {background-color: #66cc66;}
+PRE.ts-hl .ts-default {background-color: #66cc66;}
+PRE.ts-hl .ts-comment {color: #666666; font-style: italic;}
+PRE.ts-hl .ts-condition {background-color: maroon; color: #ffffff; font-weight: bold;}
+PRE.ts-hl .ts-error {background-color: yellow; border: 1px red dashed; font-weight: bold;}
+PRE.ts-hl .ts-linenum {background-color: #eeeeee;}

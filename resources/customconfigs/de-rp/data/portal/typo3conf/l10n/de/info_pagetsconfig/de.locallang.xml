@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="tsconf_title">Seiten TSconfig</label>
+			<label index="tsconf_parts_0">Alles</label>
+			<label index="tsconf_parts_1">Modulschlüssel ('mod') mit Überschreibungen der Benutzereinstellungen</label>
+			<label index="tsconf_parts_1a">Modul: Web&gt;Seite</label>
+			<label index="tsconf_parts_1b">Modul: Web&gt;Anzeigen</label>
+			<label index="tsconf_parts_1c">Modul: Web&gt;Module</label>
+			<label index="tsconf_parts_1d">Modul: Web&gt;Liste</label>
+			<label index="tsconf_parts_1e">Modul: Web&gt;Info</label>
+			<label index="tsconf_parts_1f">Modul: Web&gt;Funktionen</label>
+			<label index="tsconf_parts_1g">Modul: Web&gt;Templates</label>
+			<label index="tsconf_configFields">Inhalt des TSconfig-Felds anzeigen</label>
+			<label index="editThisColumn">Bearbeite das Feld '%s' für alle aufgelisteten Seiten</label>
+			<label index="editTSconfig">Inhalt des TSconfig-Felds dieser Seite bearbeiten</label>
+			<label index="editTSconfig_all">Inhalt des TSconfig-Felds aller angezeigter Seiten bearbeiten</label>
+			<label index="editTSconfig_default">Standard-Konfiguration aus TYPO3_CONF_VARS</label>
+			<label index="mod_pagetsconfig">Seiten TSconfig</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="tsconf_title" type="integer">102716901</label>
+			<label index="tsconf_parts_0" type="integer">186422474</label>
+			<label index="tsconf_parts_1" type="integer">72569551</label>
+			<label index="tsconf_parts_1a" type="integer">52234483</label>
+			<label index="tsconf_parts_1b" type="integer">150910794</label>
+			<label index="tsconf_parts_1c" type="integer">94827801</label>
+			<label index="tsconf_parts_1d" type="integer">213817282</label>
+			<label index="tsconf_parts_1e" type="integer">162251880</label>
+			<label index="tsconf_parts_1f" type="integer">206456787</label>
+			<label index="tsconf_parts_1g" type="integer">242913604</label>
+			<label index="tsconf_configFields" type="integer">41802033</label>
+			<label index="editThisColumn" type="integer">35820296</label>
+			<label index="editTSconfig" type="integer">88216336</label>
+			<label index="editTSconfig_all" type="integer">218125815</label>
+			<label index="editTSconfig_default" type="integer">153424219</label>
+			<label index="mod_pagetsconfig" type="integer">102716901</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

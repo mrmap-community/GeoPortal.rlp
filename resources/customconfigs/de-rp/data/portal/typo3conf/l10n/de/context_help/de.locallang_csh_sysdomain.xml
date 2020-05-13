@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Legt den Einstiegspunkt für einen bestimmten Hostnamen fest.</label>
+			<label index=".details">Wenn in einer TYPO3 Datenbank mehr als eine Website enthalten ist, müssen Sie üblicherweise jeder neuen Root-Seite einen Domainnamen zuordnen. 
+Technisch gesehen zeigen alle Domains auf dieselbe TYPO3 Datenbank des Servers, aber mit Hilfe dieser Domaineinträgen wird innerhalb des Seitenbaumes ein Sprungziel für Webanfragen definiert. Seiten, die außerhalb des so definierten Teilbaumes liegen, sind somit nicht für diese Domain erreichbar. Dieses Konzept entspricht in etwa dem der Virtuellen Hosts des Apache Webservers.
+
+(Diese Option sollte nur für Administratoren verfügbar sein!)</label>
+			<label index="domainName.description">Geben Sie eine Hostnamen ein, z.B. &quot;www.meine-domain.de&quot;.</label>
+			<label index="domainName.details">Bevor Sie einen neuen Domaineintrag verwenden können, müssen Sie zunächst sicherstellen, dass der sogenannte &quot;A Record&quot; der Domain auf Ihren Server zeigt und Ihr Webserver Seitenanfragen auch an die TYPO3 Datenbank weiterleitet!
+Bevor Sie hier also etwas eintragen, stellen Sie zunächst sicher, dass alle Anfragen zur gewünschten Domain auch an der Wurzel des Seitenbaumes landen.
+
+Wenn Sie einen Domaineintrag erstellen und der darin enthaltene Hostname (sei es ein wirklicher Domainname oder eine IP-Adresse) stimmt mit dem Hostnamen der URL überein, wird das TypoScript basierte Frontend nur solche Seiten anzeigen, die im Seitenbaum unterhalb dieses Domaineintrags liegen. Datensätze anderer Domaineinträge bleiben dem Besucher verborgen.
+
+&lt;strong&gt;Achtung:&lt;/strong&gt; wenn Sie TYPO3 in einem Unterverzeichnis der Domain installiert haben, müssen Sie dieses Verzeichnis ebenfalls mit angeben, z.B. so &quot;www.meine-domain.org/typo3_subdir/&quot;.</label>
+			<label index="redirectTo.description">Alle Webanfragen an diese Domain werden zu dieser URL umgeleitet.</label>
+			<label index="redirectTo.details">Stellen Sie sicher, dass Sie dem Wert ein &quot;http://&quot; oder ähnliches voranstellen! Technisch gesehen wird der hier eingetragenen Wert einem &quot;Location: &quot;-Header übergeben, welcher eine gültige, vollständige URL erwartet!
+&lt;strong&gt;Warnung:&lt;/strong&gt; Sie können diese Option nicht dazu verwenden, um Anfragen auf eine bestimmte Seiten ID innerhalb der gleichen Domain umzulenken! Wenn Sie dies dennoch versuchen, produzieren Sie damit eine Endlosschleife, weil die Umleitung auf sich selbst zeigt!
+
+Ein gültiges Beispiel:
+Domain:  &quot;my-domain.org&quot;
+Umleiten zu:  &quot;www.my-domain.org&quot;
+
+Diese Konfiguration leitet Anfragen tatsächlich zu einer anderen Domain um, nämlich &quot;www.my-domain.org&quot;.
+
+Ein ungültiges Beispiel:
+Domain: &quot;www.my-domain.org&quot;
+Umleiten zu: &quot;www.my-domain.org/?id=10&quot;
+
+Diese Konfiguration erzeugt eine Endlosschleife, der eigentlich Domainname &quot;www.my-domain.org&quot; wurde &lt;em&gt;nicht&lt;/em&gt; geändert!
+
+Virtuelle Verzeichnisse:
+Wenn Sie TYPO3 auf einem Unix-System betreiben, können Sie &quot;virtuelle Unterverzeichnisse&quot; zu einer Website erstellen, welche sich nach wie vor in der gleichen Datenbank befinden. Lesen Sie die Dokumentation, um mehr über dieses Konzept zu erfahren. In diesem Fall sollten Sie den Hostnamen folgendermaßen angeben: &quot;my-domain.org/subdir/&quot;. Wenn die Kombination aus Hostnamen und derzeitigem Unterverzeichnis diesem Wert entspricht, wird der Domaineintrag richtig erkannt und Seitenanfragen auf den Seitenbaum unterhalb dieses Domaineintrages umgeleitet.</label>
+			<label index="hidden.description">Verwenden Sie diese Option, um die Domain zeitweilig zu deaktivieren.</label>
+			<label index="prepend_params.description">Mit dieser Option werden alle GET Parameter in der aufrufenden URL auch an die Umleitungs-URL übergeben.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">102441634</label>
+			<label index=".details" type="integer">232530587</label>
+			<label index="domainName.description" type="integer">15093983</label>
+			<label index="domainName.details" type="integer">164327412</label>
+			<label index="redirectTo.description" type="integer">191995947</label>
+			<label index="redirectTo.details" type="integer">253314629</label>
+			<label index="hidden.description" type="integer">31618732</label>
+			<label index="prepend_params.description" type="integer">132631349</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Determines the entrypoint of a certain host name.</label>
+			<label index=".details">When a TYPO3 database contains more than a single website, you'll typically have to assign a domain name to each new websites &quot;root-page&quot;. In practice you point all the domains to the same TYPO3 database on the server, but then you insert these Domain records at the positions in the page tree where you want to direct requests to the domain. And thus pages 'outside' that point will not be accessible from that domain.
+This is like &quot;Virtual hosts&quot; in Apache servers.
+
+(Should probably be available for admin only.)</label>
+			<label index="domainName.description">Enter the host name, eg. &quot;www.my-domain.com&quot;.</label>
+			<label index="domainName.details">Before a domain record will have any effect you must make sure that the domains A-record is pointed towards the server and that your server is setup to direct requests to this TYPO3 database. So basically before entering anything here, make sure a request to the domain you wish to enter arrives at the root of the current page tree.
+When you create a domain record and the host name in it (be it a real domain name or an IP address) matches the hostname of the URL, the TypoScript based front end will limit the available page to only those in the page tree from this point and outwards. In effect you will 'arrive' at the page where this record is and furthermore users cannot see pages with ids outside this branch.
+
+&lt;strong&gt;Notice, &lt;/strong&gt;if you run TYPO3 from a subdirectory of the domain name, you must include the subdirectory as well, eg. &quot;www.my-domain.org/typo3_subdir/&quot;</label>
+			<label index="redirectTo.description">All requests to the domain will be redirected to this URL, if any value is entered.</label>
+			<label index="redirectTo.details">Make sure to prepend &quot;http://&quot; or equally to the value! Basically a &quot;Location: &quot; header is just issued to this value!
+&lt;strong&gt;Warning:&lt;/strong&gt; You cannot use this to 'redirect' to a specific page id within the same domain as the record has! If you do that it'll just go into an endless loop because the redirect is redirecting to itself!
+
+Good Example:
+Domain: &quot;my-domain.org&quot;
+Redirect: &quot;www.my-domain.org&quot;
+
+This redirects requests to what is infact another domain name, namely &quot;www.my-domain.org&quot;
+
+Bad Example:
+Domain: &quot;www.my-domain.org&quot;
+Redirect: &quot;www.my-domain.org/?id=10&quot;
+
+This will go into an eternal loop because the domain name has in fact not changed!
+
+
+Virtual directories:
+If you're using TYPO3 on a unix computer you can make 'virtual subdirectories' to a website, still within the same database. See document list for more information. In that case you should enter the hostname with the subdirectory appended, like this: &quot;my-domain.org/subdir/&quot;. If the combination of host name and current subdirectory matches the value, the domain record will be correctly detected and limit page access to the page tree below the Domain record.</label>
+			<label index="hidden.description">Use this option to temporarily disable the Domain record.</label>
+			<label index="prepend_params.description">If set, any GET parameters in the calling URL will be transferred to the redirect URL.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

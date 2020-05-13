@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="type_1">DB</label>
+			<label index="action_1_1">Einfügen</label>
+			<label index="action_1_2">Aktualisieren</label>
+			<label index="action_1_3">Löschen</label>
+			<label index="action_1_4">Prüfen</label>
+			<label index="msg_1_0_1">Refrerer Host '%s' und Server Host '%s' stimmen nicht überein.</label>
+			<label index="msg_1_1_11">Versuch einen Datensatz auf Seite '%s' (%s) einzufügen, wo diese Tabelle, %s, nicht erlaubt ist</label>
+			<label index="msg_1_1_12">Versuch einen Datensatz auf Seite '%s' (%s) ohne die nötigen Berechtigungen einzufügen. (Oder die Seite existiert nicht!)</label>
+			<label index="msg_1_2_1">Versuch Tabelle '%s' ohne Berechtigung zu modifizieren.</label>
+			<label index="msg_1_2_2">Versuch den Datensatz '%s' (%s) ohne Berechtigung zu modifizieren. (Oder die Seite existiert nicht!)</label>
+			<label index="msg_1_2_10">Datensatz '%s' (%s) wurde aktualisiert.</label>
+			<label index="msg_1_2_12">MySQL-Fehler: '%s' (%s)</label>
+			<label index="msg_1_4_1">Versuch den Datensatz '%s' (%s) hinter einen nicht existierenden Datensatz (uid=%s) zu verschieben</label>
+			<label index="msg_1_4_2">Datensatz '%s' (%s) verschoben auf Seite '%s' (%s)</label>
+			<label index="msg_1_4_3">Datensatz '%s' (%s) verschoben von Seite '%s' (%s)</label>
+			<label index="msg_1_4_4">Datensatz '%s' (%s) verschoben innerhalb der Seite '%s' (%s)</label>
+			<label index="msg_1_4_10">Versuch die Seite '%s' (%s) in ihre eigene Wurzel zu verschieben (in Seite '%s' (%s))</label>
+			<label index="msg_1_4_11">Versuch einen Datensatz auf Seite '%s' (%s) einzufügen, auf der die Tabelle , %s, nicht zugelassen ist.</label>
+			<label index="msg_1_4_12">Versuch einen Datensatz auf Seite '%s' (%s) von Tabelle '%s' ohne Berechtigung einzufügen. (Oder die Seite existiert nicht!)</label>
+			<label index="msg_1_4_13">Versuch den Datensatz '%s' (%s) hinter einen anderen Datensatz zu verschieben, obwohl die Tabelle keine Spalte zur Sortierung vorsieht.</label>
+			<label index="msg_1_4_14">Versuch den Datensatz '%s' (%s) ohne Berechtigung zu verschieben.</label>
+			<label index="msg_1_5_1">Der 'doktype' der Seite kann nicht auf den gewünschten Wert geändert werden.</label>
+			<label index="msg_1_5_2">Der 'doktype' der Seite '%s' konnte nicht auf den gewünschten Wert geändert werden, da die Seite Datensätze nicht erlaubter Tabellen enthält. (%s)</label>
+			<label index="msg_1_5_3">Zu viele Elemente in der Liste der Werte. (%s)</label>
+			<label index="msg_1_5_10">Datei '%s' konnte nicht gelöscht werden (nicht vorhanden!) (%s)</label>
+			<label index="msg_1_5_11">Kopieren der Datei '%s' fehlgeschlagen: Keine Zieldatei möglich! (%s)</label>
+			<label index="msg_1_5_12">Dateiendung '%s' nicht erlaubt. (%s)</label>
+			<label index="msg_1_5_13">Dateigrösse (%s) von Datei '%s' erreicht Limit (%s). (%s)</label>
+			<label index="msg_1_5_14">Die Zieldatei (%s) oder Quelldatei (%s) existieren nicht. (%s)</label>
+			<label index="msg_1_5_15">Kopieren zu Datei '%s' fehlgeschlagen! (%s)</label>
+			<label index="msg_1_5_16">Kopieren der Datei '%s' fehlgeschlagen: Der Zielpfad (%s) ist eventuell schreibgeschützt. Bitte deaktivieren Sie den Schreibschutz! (%s)</label>
+			<label index="type_2">DATEI</label>
+			<label index="action_2_1">Hochladen</label>
+			<label index="action_2_2">Kopieren</label>
+			<label index="action_2_3">Verschieben</label>
+			<label index="action_2_4">Löschen</label>
+			<label index="action_2_5">Umbenennen</label>
+			<label index="action_2_6">Neu</label>
+			<label index="action_2_7">Dekomprimieren</label>
+			<label index="action_2_8">Neue Datei</label>
+			<label index="action_2_9">Bearbeiten</label>
+			<label index="msg_2_9_1">Datei gespeichert unter '%s', Grösse: %s Bytes, MD5: %s</label>
+			<label index="type_254">EINSTELLUNGEN</label>
+			<label index="action_254_1">Ändern</label>
+			<label index="type_255">LOGIN</label>
+			<label index="action_255_1">LOGIN</label>
+			<label index="action_255_2">LOGOUT</label>
+			<label index="action_255_3">VERSUCH</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="type_1" type="integer">10855639</label>
+			<label index="action_1_1" type="integer">172329952</label>
+			<label index="action_1_2" type="integer">6894342</label>
+			<label index="action_1_3" type="integer">254438473</label>
+			<label index="action_1_4" type="integer">6340397</label>
+			<label index="msg_1_0_1" type="integer">70548717</label>
+			<label index="msg_1_1_11" type="integer">113973720</label>
+			<label index="msg_1_1_12" type="integer">167498403</label>
+			<label index="msg_1_2_1" type="integer">187428754</label>
+			<label index="msg_1_2_2" type="integer">168680547</label>
+			<label index="msg_1_2_10" type="integer">50242733</label>
+			<label index="msg_1_2_12" type="integer">164149189</label>
+			<label index="msg_1_4_1" type="integer">75848781</label>
+			<label index="msg_1_4_2" type="integer">24550273</label>
+			<label index="msg_1_4_3" type="integer">243438751</label>
+			<label index="msg_1_4_4" type="integer">159912378</label>
+			<label index="msg_1_4_10" type="integer">219657970</label>
+			<label index="msg_1_4_11" type="integer">113973720</label>
+			<label index="msg_1_4_12" type="integer">167498403</label>
+			<label index="msg_1_4_13" type="integer">45136571</label>
+			<label index="msg_1_4_14" type="integer">258165763</label>
+			<label index="msg_1_5_1" type="integer">166647972</label>
+			<label index="msg_1_5_2" type="integer">78624514</label>
+			<label index="msg_1_5_3" type="integer">38942153</label>
+			<label index="msg_1_5_10" type="integer">254767008</label>
+			<label index="msg_1_5_11" type="integer">205650444</label>
+			<label index="msg_1_5_12" type="integer">31746478</label>
+			<label index="msg_1_5_13" type="integer">105741654</label>
+			<label index="msg_1_5_14" type="integer">88412649</label>
+			<label index="msg_1_5_15" type="integer">117185361</label>
+			<label index="msg_1_5_16" type="integer">51969264</label>
+			<label index="type_2" type="integer">167532679</label>
+			<label index="action_2_1" type="integer">152310342</label>
+			<label index="action_2_2" type="integer">100361047</label>
+			<label index="action_2_3" type="integer">112997933</label>
+			<label index="action_2_4" type="integer">254438473</label>
+			<label index="action_2_5" type="integer">151300144</label>
+			<label index="action_2_6" type="integer">3944062</label>
+			<label index="action_2_7" type="integer">31401173</label>
+			<label index="action_2_8" type="integer">109175050</label>
+			<label index="action_2_9" type="integer">131916066</label>
+			<label index="msg_2_9_1" type="integer">149514802</label>
+			<label index="type_254" type="integer">161787140</label>
+			<label index="action_254_1" type="integer">256820725</label>
+			<label index="type_255" type="integer">77032828</label>
+			<label index="action_255_1" type="integer">77032828</label>
+			<label index="action_255_2" type="integer">112519785</label>
+			<label index="action_255_3" type="integer">161988289</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="type_1">DB</label>
+			<label index="action_1_1">Insert</label>
+			<label index="action_1_2">Update</label>
+			<label index="action_1_3">Delete</label>
+			<label index="action_1_4">Check</label>
+			<label index="msg_1_0_1">Referer host '%s' and server host '%s' did not match!</label>
+			<label index="msg_1_1_11">Attempt to insert record on page '%s' (%s) where this table, %s, is not allowed</label>
+			<label index="msg_1_1_12">Attempt to insert a record on page '%s' (%s) from table '%s' without permissions. Or non-existing page.</label>
+			<label index="msg_1_2_1">Attempt to modify table '%s' without permission</label>
+			<label index="msg_1_2_2">Attempt to modify record '%s' (%s) without permission. Or non-existing page.</label>
+			<label index="msg_1_2_10">Record '%s' (%s) was updated.</label>
+			<label index="msg_1_2_12">MySQL error: '%s' (%s)</label>
+			<label index="msg_1_4_1">Attempt to move record '%s' (%s) to after a non-existing record (uid=%s)</label>
+			<label index="msg_1_4_2">Moved record '%s' (%s) to page '%s' (%s)</label>
+			<label index="msg_1_4_3">Moved record '%s' (%s) from page '%s' (%s)</label>
+			<label index="msg_1_4_4">Moved record '%s' (%s) on page '%s' (%s)</label>
+			<label index="msg_1_4_10">Attempt to move page '%s' (%s) to inside of its own rootline (at page '%s' (%s))</label>
+			<label index="msg_1_4_11">Attempt to insert record on page '%s' (%s) where this table, %s, is not allowed</label>
+			<label index="msg_1_4_12">Attempt to insert a record on page '%s' (%s) from table '%s' without permissions. Or non-existing page.</label>
+			<label index="msg_1_4_13">Attempt to move record '%s' (%s) to after another record, although the table has no sorting row.</label>
+			<label index="msg_1_4_14">Attempt to move record '%s' (%s) without having permissions to do so</label>
+			<label index="msg_1_5_1">You cannot change the 'doktype' of page '%s' to the desired value.</label>
+			<label index="msg_1_5_2">'doktype' of page '%s' could not be changed because the page contains records from disallowed tables; %s</label>
+			<label index="msg_1_5_3">Too few items in the list of values. (%s)</label>
+			<label index="msg_1_5_10">Could not delete file '%s' (does not exist). (%s)</label>
+			<label index="msg_1_5_11">Copying file '%s' failed!: No destination file (%s) possible!. (%s)</label>
+			<label index="msg_1_5_12">Fileextension '%s' not allowed. (%s)</label>
+			<label index="msg_1_5_13">Filesize (%s) of file '%s' exceeds limit (%s). (%s)</label>
+			<label index="msg_1_5_14">The destination (%s) or the source file (%s) does not exist. (%s)</label>
+			<label index="msg_1_5_15">Copying to file '%s' failed! (%s)</label>
+			<label index="msg_1_5_16">Copying file '%s' failed!: The destination path (%s) may be write protected. Please make it write enabled!. (%s)</label>
+			<label index="type_2">FILE</label>
+			<label index="action_2_1">Upload</label>
+			<label index="action_2_2">Copy</label>
+			<label index="action_2_3">Move</label>
+			<label index="action_2_4">Delete</label>
+			<label index="action_2_5">Rename</label>
+			<label index="action_2_6">New</label>
+			<label index="action_2_7">Unzip</label>
+			<label index="action_2_8">New file</label>
+			<label index="action_2_9">Edit</label>
+			<label index="msg_2_9_1">File saved to '%s', bytes: %s, MD5: %s </label>
+			<label index="type_254">SETTING</label>
+			<label index="action_254_1">Change</label>
+			<label index="type_255">LOGIN</label>
+			<label index="action_255_1">LOGIN</label>
+			<label index="action_255_2">LOGOUT</label>
+			<label index="action_255_3">ATTEMPT</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="folderTree">Verzeichnisbaum</label>
+			<label index="uploadImage">Bild hochladen</label>
+			<label index="path">Pfad</label>
+			<label index="images">Bilder</label>
+			<label index="magicImage_msg">Im &quot;Zauber&quot; Modus können Sie eine (in Grenzen) beliebige Grafik mit beliebiger Größe auswählen. Die Grafik wird automatisch in ein Web-Grafikformat umgewandelt. Grössenänderungen werden nachträglich vorgenommen, um die Grafikgröße und die Anzeigequalität zu optimieren.</label>
+			<label index="plainImage_msg">Im &quot;Normal&quot; Modus können Sie nur Web-Grafikformate (JPG, GIF und PNG), bis zu einer Auflösung von 640x480 Pixeln verwenden. Dieser Modus ist zur Verwendung bereits für das Web optimierter Grafiken vorgesehen.</label>
+			<label index="class">Stil</label>
+			<label index="width">Breite</label>
+			<label index="height">Höhe</label>
+			<label index="border">Rand</label>
+			<label index="margin_tb">Seitenrand oben/unten</label>
+			<label index="margin_lr">Seitenrand links/rechts</label>
+			<label index="float">Umfließen</label>
+			<label index="notSet">Nicht gesetzt</label>
+			<label index="nonFloating">Nicht umfließen</label>
+			<label index="left">Links</label>
+			<label index="right">Rechts</label>
+			<label index="title">Titel</label>
+			<label index="alt">Alternativ-Text</label>
+			<label index="update">Aktualisieren</label>
+			<label index="magicImage">Neues Zauber-Bild</label>
+			<label index="plainImage">Neues normales Bild</label>
+			<label index="dragDropImage">Drag'n'Drop</label>
+			<label index="currentImage">Aktuelles Bild</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="folderTree" type="integer">62125109</label>
+			<label index="uploadImage" type="integer">33130562</label>
+			<label index="path" type="integer">180814866</label>
+			<label index="images" type="integer">268373344</label>
+			<label index="magicImage_msg" type="integer">36451032</label>
+			<label index="plainImage_msg" type="integer">227989181</label>
+			<label index="class" type="integer">182617337</label>
+			<label index="width" type="integer">53040229</label>
+			<label index="height" type="integer">250375243</label>
+			<label index="border" type="integer">7361862</label>
+			<label index="margin_tb" type="integer">127734039</label>
+			<label index="margin_lr" type="integer">82280674</label>
+			<label index="float" type="integer">36364514</label>
+			<label index="notSet" type="integer">163210921</label>
+			<label index="nonFloating" type="integer">169566595</label>
+			<label index="left" type="integer">155571682</label>
+			<label index="right" type="integer">153815495</label>
+			<label index="title" type="integer">192455458</label>
+			<label index="alt" type="integer">237067341</label>
+			<label index="update" type="integer">6894342</label>
+			<label index="magicImage" type="integer">87595471</label>
+			<label index="plainImage" type="integer">174130358</label>
+			<label index="dragDropImage" type="integer">228115367</label>
+			<label index="currentImage" type="integer">205301887</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

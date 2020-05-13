@@ -1,0 +1,168 @@
+
+<!-- ###TEMPLATE_LATEST### begin This is the template for the latest news, typically displayed on a frontpage -->
+<div class="news-latest-container">
+	<div style="margin-bottom:15px;padding-bottom:5px;border-bottom: 1px solid #909090;" class="rss-span-links">
+	<span class="rss2-link" style="margin-right:5px;"><a style="height:22px;" href="index.php?type=100&tx_ttnews[cat]=5"><img  style="margin-bottom:-6px;" src="fileadmin/design/icn_rssfeed_22.png" alt="RSS" title="RSS"></a></span>
+	<span class="rdf-link" style="margin-right:5px;"><a style="height:22px;" href="index.php?type=102&tx_ttnews[cat]=5"><img  style="margin-bottom:-6px;" src="fileadmin/design/icn_rdffeed_22.png" alt="RDF" title="RDF"></a></span>
+	<!--<span class="atom-link"></span>--></div>
+	<!-- ###CONTENT### begin This is the part of the template substituted with the list of news: -->
+	<!-- ###NEWS### begin Template for a single item -->
+			<div class="news-latest-item">
+				<span class="news-latest-date">###NEWS_DATE### ###NEWS_TIME###</span>
+				<h2>###NEWS_TITLE###</h2>
+				###NEWS_IMAGE###
+				###NEWS_SUBHEADER###
+				
+			</div>
+	<!-- ###NEWS### end-->
+	<!-- ###CONTENT###  end -->
+<div class="news-latest-gotonews"><a class="internal-link" href="aktuelles/meldungen.html">Weiter zu: Meldungen</a></div>
+</div>
+<!-- ###TEMPLATE_LATEST### end -->
+
+<!-- ###TEMPLATE_LIST### begin 	This is the template for the list of news in the archive or news page or search -->
+<div class="news-list-container">
+	<!--<div style="margin-bottom:15px;padding-bottom:15px;border-bottom: 1px solid #d9dada;" class="rss-span-links">
+        <span class="rss2-link" style="margin-right:5px;"><a style="height:22px;" href="index.php?type=100&tx_ttnews[cat]=5"><img style="margin-bottom:-6px;" src="fileadmin/design/icn_rssfeed_22.png" alt="RSS" title="RSS"></a></span>
+        <span class="rdf-link" style="margin-right:5px;"><a style="height:22px;" href="index.php?type=102&tx_ttnews[cat]=5"><img style="margin-bottom:-6px;" src="fileadmin/design/icn_rdffeed_22.png" alt="RDF" title="RDF"></a></span></div>-->
+	<!-- ###CONTENT### begin  This is the part of the template substituted with the list of news: -->
+	<!-- ###NEWS### begin Template for a single item -->
+			<div class="news-list-item">
+				<div class="news-list-item-image"><!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###--></div>
+				<div class="news-list-item-content">
+					<span class="news-list-date">###NEWS_DATE###</span>
+			  		<h2><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h2>
+					###NEWS_SUBHEADER###
+					###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
+				</div>
+			</div>
+	<!-- ###NEWS### end-->
+	<!-- ###CONTENT###  end -->
+###BROWSE_LINKS###
+</div>
+<!-- ###TEMPLATE_LIST### end -->
+
+
+<!-- ###TEMPLATE_SINGLE### begin This subpart is used to display single news items -->
+<div class="news-single-item">
+	<span class="header-spitzmarke">###NEWS_KEYWORDS###</span>
+	<h1>###NEWS_TITLE###</h1>
+	###NEWS_SUBHEADER###
+	
+	<div class="news-single-rightbox">
+                ###NEWS_DATE### ###NEWS_TIME### ###TEXT_NEWS_AGE### ###NEWS_AGE###
+                ###CATWRAP_B### ###TEXT_CAT### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E###
+                ###NEWS_AUTHOR###
+        </div>	
+
+		###NEWS_IMAGE###
+		###NEWS_CONTENT###
+		<hr class="cl-right" />
+			###ADDINFO_WRAP_B###
+
+				  	###TEXT_RELATED###
+				 	###NEWS_RELATED###
+
+					###TEXT_FILES###
+				 	###FILE_LINK###
+
+					###TEXT_LINKS###
+					###NEWS_LINKS###
+
+					###TEXT_RELATEDBYCATEGORY###
+					###NEWS_RELATEDBYCATEGORY###
+
+			###ADDINFO_WRAP_E###
+			
+			###NEWS_SINGLE_PAGEBROWSER###
+	<div class="news-single-backlink">
+	<!--###LINK_ITEM###-->###BACK_TO_LIST###<!--###LINK_ITEM###-->
+	</div>
+</div>
+<!-- ###TEMPLATE_SINGLE### end -->
+
+<!-- ###TEMPLATE_ARCHIVE### begin Subpart for the news archive menu  -->
+<div class="news-amenu-container">
+	<ul>
+	<li><a href="aktuelles/meldungsarchiv.html">Kein Filter</a></li>
+	<!-- ###CONTENT### begin -->
+		<!-- ###MENUITEM### begin -->
+		<li ###ARCHIVE_ACTIVE###><!--###LINK_ITEM###-->###ARCHIVE_TITLE###<!--###LINK_ITEM###--></li>
+		<!-- ###MENUITEM### end-->
+	<!-- ###CONTENT###  end -->
+	</ul>
+</div>
+<!-- ###TEMPLATE_ARCHIVE### end -->
+
+
+<!-- ###TEMPLATE_ARCHIVE_NOITEMS### begin Shown if the archive has no items! -->
+<div class="news-amenu-container">
+	    <ul>
+		<li>###ARCHIVE_EMPTY_MSG###</li>
+		</ul>
+</div>
+<!-- ###TEMPLATE_ARCHIVE_NOITEMS### end -->
+
+
+<!-- ###TEMPLATE_SEARCH### begin Subpart for the search-form -->
+<div class="news-search-form">
+<form method="post" action="###FORM_URL###">
+	<input size="30" maxlength="100" type="text" name="tx_ttnews[swords]" value="###SWORDS###" />
+	<span class="news-search-form-submit"><input type="submit" name="search" value="###SEARCH_BUTTON###" /></span>
+</form></div>
+<!-- ###TEMPLATE_SEARCH### end -->
+
+
+<!-- ###TEMPLATE_SEARCH_EMPTY### begin -->
+<div class="news-search-emptyMsg">###SEARCH_EMPTY_MSG###</div>
+<!-- ###TEMPLATE_SEARCH_EMPTY### end -->
+
+
+<!-- ###TEMPLATE_HEADER_LIST### begin -->
+
+	<!-- ###CONTENT### begin
+		  This is the part of the template substituted with the list of news:
+	-->
+		<!-- ###NEWS### begin
+			Template for a single item
+		-->
+			<div class="news-header-list-container">
+					<div class="news-header-list-title"> <!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></div>
+					<div class="news-header-list-time"> ###NEWS_TIME###</div>
+					<div class="news-header-list-categories">###TEXT_CAT_LATEST### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE###</div>
+
+			</div>
+
+		<!-- ###NEWS### end-->
+
+	<!-- ###CONTENT###  end -->
+ ###BROWSE_LINKS###
+
+<!-- ###TEMPLATE_HEADER_LIST### end -->
+
+
+<!-- ###TEMPLATE_CAT_RELATED### begin -->
+	<!-- ###CONTENT### begin
+		  This is the part of the template substituted with the list of news:
+	-->
+		<!-- ###NEWS### begin
+			Template for a single item
+		-->
+		###GW2B### <!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###-->  ###NEWS_DATE### ###NEWS_TIME###  ###GW2E###
+		<!-- ###NEWS### end-->
+	<!-- ###CONTENT###  end -->
+<!-- ###TEMPLATE_CAT_RELATED### end -->
+
+<!-- ###TEMPLATE_RELATED### begin -->
+	<!-- ###CONTENT### begin
+		  This is the part of the template substituted with the list of news:
+	-->
+		<!-- ###NEWS### begin
+			Template for a single item
+		-->
+		<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
+		###GW2B### <!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###-->  ###NEWS_DATE### ###NEWS_TIME###  ###GW2E###
+		<!-- ###NEWS### end-->
+	<!-- ###CONTENT###  end -->
+<!-- ###TEMPLATE_RELATED### end -->
+

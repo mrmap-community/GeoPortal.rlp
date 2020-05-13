@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Web &gt; Funktionen</label>
+			<label index=".description">Die Web &gt; Funktionen Erweiterung ist als &quot;Container&quot; für all diejenigen Backend Erweiterungen gedacht, die Veränderungen an einzelnen Seiten oder am Seitenbaum vornehmen.</label>
+			<label index=".details">Konzeptionell unterscheidet sich die Web&gt;Funktionen von der Web&gt;Info Erweiterung lediglich dadurch, dass die Erweiterung die Möglichkeit bietet, auch &lt;em&gt;Änderungen&lt;/em&gt; an den angezeigten Datensätzen vorzunehmen (im Gegensatz zur Info Erweiterung, die lediglich Informationen zu den Datensatzen anzeigt). Es ist Sache des Entwickler zu entscheiden, in welcher der beiden &quot;Container&quot; seine Erweiterung erscheinen soll.</label>
+			<label index=".image_descr">Die Web &gt; Funktionen Erweiterung - so, wie sie vom TYPO3 Core bereitgestellt wird - ist lediglich ein leerer &quot;Container&quot;. Sie bietet eine Programmierschnittstelle (API), welche andere Erweiterungen nutzen können, um neue Funktionalitäten innerhalb dieser Erweiterung bereitzustellen. Hier ist die Assistenten Erweiterung (func_wizards) abgebildet, welche das Hauptfunktionsmenü in der rechten oberen Ecke liefert. Die &quot;Wähle Assistenten:&quot; Auswahlbox erlaubt es dem Benutzer, andere Funktionen (also andere Assistenten) auszuwählen, welche durch andere Erweiterungen bereitgestellt werden - hier zum Beispiel der Sortierungs-Assistent.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle" type="integer">71377935</label>
+			<label index=".description" type="integer">14650895</label>
+			<label index=".details" type="integer">131063786</label>
+			<label index=".image_descr" type="integer">75524368</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Web &gt; Functions module</label>
+			<label index=".description">The idea of the Web&gt;Functions module is to be a host module for backend applications that wish to perform processing of pages or branches of the page tree.</label>
+			<label index=".details">Conceptually the Web&gt;Functions module is different from the Web&gt;Info module only by offering processing  functionality rather than offering information only. It is up to extension programmers to decide in which of these two modules they want to insert functionality.</label>
+			<label index=".image_descr">The Web&gt;Functions module as provided by the core is an empty shell. It provides an API that extensions can use to attach function menu items to the Web&gt;Function module. This shows the Wizard extension (func_wizards) providing the main Function Menu item in upper right corner. The &quot;Select Wizard&quot; selectorbox allows the user to select another level of functionality (different wizards) which are provided by other extensions, here the &quot;wizard_sortpages&quot; extension.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

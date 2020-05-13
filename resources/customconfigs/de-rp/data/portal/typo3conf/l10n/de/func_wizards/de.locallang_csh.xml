@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="tx_funcwizards.alttitle">Seiten Assistenten</label>
+			<label index="tx_funcwizards.description">Dieses Modul bietet ein Framework, um neue Assistenten einzufügen. Bereits verfügbare Assistenten bieten Funktionalitäten wie mehrfache Seitenerzeugung und alphabetische Seitensortierung.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="tx_funcwizards.alttitle" type="integer">159573226</label>
+			<label index="tx_funcwizards.description" type="integer">97945442</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="tx_funcwizards.alttitle">Page Wizards</label>
+			<label index="tx_funcwizards.description">This submodule provides a framework where wizards can be added. Available wizards currently include a wizard for creating pages and sorting pages by title etc.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

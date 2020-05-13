@@ -1,0 +1,12 @@
+# cat=basic/enable; type=options[inaktiv=0,Faktor 12.8=1,Faktor 16=2,Faktor 10=3]; label=px->em-Faktor:Faktor für die Größenanpassung von px->em.
+emFactor = 0
+# cat=basic/enable; type=boolean;label=Anker umwandeln:Links auf Anker innerhalb einer Seite von #999 nach #j_999 wandeln. Dies wird benötigt, falls man für die Anker statt <a name="999"> <div id="j_999"> einsetzen möchte (XHTML 1.1).
+modifyAnchor = 0
+# cat=basic/enable; type=boolean;label=Border-Attribut entfernen:Border-Attribute entfernen, da diese nach XHTML 1.0 nicht mehr gültig sind.
+clearBorder = 0
+# cat=basic/enable; type=boolean;label=Sonderzeichenumwandlung:Umwandeln von Sonderzeichen in HTML-Umschreibungen (bei UTF-8 nicht mehr nötig)
+htmlCharacter = 0
+# cat=basic/enable; type=boolean;label=Special-Highlighting:mit ###QHIGHLIGHT### und ###/QHIGHLIGHT### markierte Suchbegriffe werden in <span class="highlight"> und </span> umgewandelt
+specialHighlight = 0
+# cat=basic/enable; type=boolean;label=Different Linklayout:für Verschiedenartige Links können verschiedene wraps angegeben werden
+linkLayout = 0

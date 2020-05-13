@@ -1,0 +1,66 @@
+#! /usr/bin/php4 -q
+<?php
+
+// *****************************************
+// Standard initialization of a CLI module:
+// *****************************************
+
+	// Defining circumstances for CLI mode:
+define('TYPO3_cliMode', TRUE);
+
+	// Defining PATH_thisScript here: Must be the ABSOLUTE path of this script in the right context:
+	// This will work as long as the script is called by it's absolute path!
+define('PATH_thisScript',$_ENV['_']?$_ENV['_']:$_SERVER['_']);
+
+set_include_path(get_include_path.PATH_SEPARATOR.dirname(PATH_thisScript).'/'.$BACK_PATH.'/mod/tools/em/');
+
+	// Include configuration file:
+require(dirname(PATH_thisScript).'/conf.php');
+
+	// Include init file:
+require(dirname(PATH_thisScript).'/'.$BACK_PATH.'init.php');
+
+require_once(PATH_t3lib.'class.t3lib_div.php');
+
+require(dirname(PATH_thisScript).'/'.$BACK_PATH.'template.php');
+
+
+# HERE you run your application!
+require_once(dirname(PATH_thisScript).'/'.$BACK_PATH.'/mod/tools/em/class.em_index.php');
+require(dirname(PATH_thisScript).'/class.tx_terupdatecheck2_cli.php');
+
+require(dirname(PATH_thisScript).'/../modfunc1/locallang.php');
+
+	// Call the functionality
+
+// require (PATH_typo3.'sysext/lang/lang.php');
+// $LANG = t3lib_div::makeInstance('language');
+// $LANG->init('de'/*$BE_USER->uc['lang']*/);
+
+if (in_array('-h',$_SERVER["argv"]))    {
+        echo "
+	Options:
+	-d = show development updates of extensions
+	-s = show updates of shy extensions
+	-n = show updates of not loaded extensions
+	-h = This help screen.\n";
+        exit;
+}
+
+$dev = in_array('-d',$_SERVER["argv"]);
+$shy = in_array('-s',$_SERVER["argv"]);
+$not = in_array('-n',$_SERVER["argv"]);
+
+$emObj = t3lib_div::makeInstance('SC_mod_tools_em_index');
+$emObj->init();
+$emObj->MOD_SETTINGS['rep_url'] = 'http://typo3.org/fileadmin/ter/';
+
+echo "Updating extension information...\n";
+echo strip_tags($emObj->fetchMetaData('extensions'));
+echo "\n\n";
+
+$cli =& t3lib_div::makeInstance('tx_terupdatecheck2_cli');
+$cli->pObj = $emObj;
+$cli->main($dev, $shy, $not);
+
+?>

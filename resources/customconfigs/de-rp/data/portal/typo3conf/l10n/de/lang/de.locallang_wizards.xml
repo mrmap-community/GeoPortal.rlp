@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index="rte_undoLastChange">Letzte Änderung zurücknehmen/ausführen (%s Schritte)</label>
+			<label index="tsprop">TypoScript Eigenschaften-Anzeige</label>
+			<label index="tsprop_TSref">TSref Online</label>
+			<label index="tsprop_tsconfig">TSconfig Online</label>
+			<label index="tsprop_title">Objekttitel</label>
+			<label index="tsprop_prefix">Objektpräfix</label>
+			<label index="tsprop_mixer_indent">Einzug +2</label>
+			<label index="tsprop_mixer_outdent">Einzug -2</label>
+			<label index="tsprop_mixer_wrap">Wrap</label>
+			<label index="tsprop_mixer_transfer">Übertragen &amp; Schließen</label>
+			<label index="tsprop_addToList">Zur Liste hinzufügen...</label>
+			<label index="table_title">Tabellen-Assistent</label>
+			<label index="table_smallFields">Kleine Felder</label>
+			<label index="table_addColumn">Spalte rechts hinzufügen</label>
+			<label index="table_removeColumn">Spalte entfernen</label>
+			<label index="table_addRow">Zeile unten hinzufügen</label>
+			<label index="table_removeRow">Zeile entfernen</label>
+			<label index="table_left">Bewege nach links</label>
+			<label index="table_right">Bewege nach rechts</label>
+			<label index="table_up">Bewege nach oben</label>
+			<label index="table_down">Bewege nach unten</label>
+			<label index="table_top">Bewege zum Anfang</label>
+			<label index="table_bottom">Bewege zum Ende</label>
+			<label index="table_start">Bewege zur ersten Spalte</label>
+			<label index="table_end">Bewege zur letzten Spalte</label>
+			<label index="table_noData">Kein(e) Tabelle, Feld oder UID angegeben</label>
+			<label index="forms_title">Formular-Assistent</label>
+			<label index="forms_refresh">Aktualisierung ohne speichern</label>
+			<label index="forms_label">Beschriftung</label>
+			<label index="forms_type">Typ</label>
+			<label index="forms_type_textarea">Textbereich</label>
+			<label index="forms_type_input">Eingabefeld</label>
+			<label index="forms_type_password">Passwortfeld</label>
+			<label index="forms_type_file">Dateitransfer</label>
+			<label index="forms_type_check">Markierungsfeld</label>
+			<label index="forms_type_select">Auswahlfeld</label>
+			<label index="forms_type_radio">Radio Button</label>
+			<label index="forms_type_hidden">Versteckter Wert</label>
+			<label index="forms_type_submit">Absende-Button</label>
+			<label index="forms_type_property">Eigenschaft</label>
+			<label index="forms_type_label">Beschriftung</label>
+			<label index="forms_required">Benötigt</label>
+			<label index="forms_fieldName">Feld</label>
+			<label index="forms_cols">Spalten</label>
+			<label index="forms_rows">Zeilen</label>
+			<label index="forms_size">Größe</label>
+			<label index="forms_max">Max</label>
+			<label index="forms_autosize">Automatische Größenanpassung</label>
+			<label index="forms_extra">Kein Umbruch</label>
+			<label index="forms_default">Wert</label>
+			<label index="forms_multiple">Mehrfach</label>
+			<label index="forms_options">Optionen anzeigen</label>
+			<label index="forms_checked">Markiert</label>
+			<label index="forms_preview">Vorschau des Elements</label>
+			<label index="forms_element">Elementtyp</label>
+			<label index="forms_config">Detailierte Konfiguration</label>
+			<label index="forms_eform_subject">Betreff</label>
+			<label index="forms_eform_recipient">Empfänger EMail</label>
+			<label index="forms_eform_html_enabled">HTML-Modus aktiviert</label>
+			<label index="forms_eform_formtype_mail">Beschriftung des Absende-Buttons</label>
+			<label index="forms_special_eform">Spezielle Konfiguration für Mail-Formulare</label>
+			<label index="colorpicker_title">Farbauswahl</label>
+			<label index="colorpicker_setClose">Speichern und Schließen</label>
+			<label index="colorpicker_colorValue">Gewählte Farbe:</label>
+			<label index="colorpicker_fromImage">Farbe aus dem Bild übernehmen (Klick auf das Bild):</label>
+			<label index="colorpicker_fromMatrix">Farbe aus der Matrix auswählen (Web-sichere Farben):</label>
+			<label index="colorpicker_fromList">HTML Farbbezeichnung auswählen:</label>
+			<label index="colorpicker_black">SCHWARZ</label>
+			<label index="colorpicker_white">WEISS</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index="rte_undoLastChange" type="integer">109787245</label>
+			<label index="tsprop" type="integer">45073770</label>
+			<label index="tsprop_TSref" type="integer">119834162</label>
+			<label index="tsprop_tsconfig" type="integer">243384557</label>
+			<label index="tsprop_title" type="integer">172299654</label>
+			<label index="tsprop_prefix" type="integer">35102440</label>
+			<label index="tsprop_mixer_indent" type="integer">48148976</label>
+			<label index="tsprop_mixer_outdent" type="integer">36140827</label>
+			<label index="tsprop_mixer_wrap" type="integer">169945881</label>
+			<label index="tsprop_mixer_transfer" type="integer">47301371</label>
+			<label index="tsprop_addToList" type="integer">135970903</label>
+			<label index="table_title" type="integer">252535019</label>
+			<label index="table_smallFields" type="integer">116673870</label>
+			<label index="table_addColumn" type="integer">4457870</label>
+			<label index="table_removeColumn" type="integer">5198593</label>
+			<label index="table_addRow" type="integer">240730244</label>
+			<label index="table_removeRow" type="integer">253938706</label>
+			<label index="table_left" type="integer">234587254</label>
+			<label index="table_right" type="integer">195367589</label>
+			<label index="table_up" type="integer">259501942</label>
+			<label index="table_down" type="integer">232386759</label>
+			<label index="table_top" type="integer">120043265</label>
+			<label index="table_bottom" type="integer">181578777</label>
+			<label index="table_start" type="integer">192358879</label>
+			<label index="table_end" type="integer">140964884</label>
+			<label index="table_noData" type="integer">166317379</label>
+			<label index="forms_title" type="integer">202256935</label>
+			<label index="forms_refresh" type="integer">17773422</label>
+			<label index="forms_label" type="integer">184688118</label>
+			<label index="forms_type" type="integer">169845367</label>
+			<label index="forms_type_textarea" type="integer">135041913</label>
+			<label index="forms_type_input" type="integer">163951494</label>
+			<label index="forms_type_password" type="integer">185890512</label>
+			<label index="forms_type_file" type="integer">205677908</label>
+			<label index="forms_type_check" type="integer">35664037</label>
+			<label index="forms_type_select" type="integer">189682630</label>
+			<label index="forms_type_radio" type="integer">146641062</label>
+			<label index="forms_type_hidden" type="integer">122270803</label>
+			<label index="forms_type_submit" type="integer">71911650</label>
+			<label index="forms_required" type="integer">191176445</label>
+			<label index="forms_fieldName" type="integer">116484703</label>
+			<label index="forms_cols" type="integer">23640109</label>
+			<label index="forms_rows" type="integer">87094408</label>
+			<label index="forms_size" type="integer">116837234</label>
+			<label index="forms_max" type="integer">111173937</label>
+			<label index="forms_autosize" type="integer">219459941</label>
+			<label index="forms_extra" type="integer">60246377</label>
+			<label index="forms_default" type="integer">109649956</label>
+			<label index="forms_multiple" type="integer">168554857</label>
+			<label index="forms_options" type="integer">117958823</label>
+			<label index="forms_checked" type="integer">40007223</label>
+			<label index="forms_preview" type="integer">17911285</label>
+			<label index="forms_element" type="integer">144583413</label>
+			<label index="forms_config" type="integer">46269441</label>
+			<label index="forms_eform_subject" type="integer">209228523</label>
+			<label index="forms_eform_recipient" type="integer">9763756</label>
+			<label index="forms_eform_html_enabled" type="integer">15828015</label>
+			<label index="forms_eform_formtype_mail" type="integer">113492555</label>
+			<label index="forms_special_eform" type="integer">236376464</label>
+			<label index="forms_type_property" type="integer">95232844</label>
+			<label index="forms_type_label" type="integer">184688118</label>
+			<label index="colorpicker_title" type="integer">90157489</label>
+			<label index="colorpicker_setClose" type="integer">253538544</label>
+			<label index="colorpicker_colorValue" type="integer">54418585</label>
+			<label index="colorpicker_fromImage" type="integer">45057637</label>
+			<label index="colorpicker_fromMatrix" type="integer">40876189</label>
+			<label index="colorpicker_fromList" type="integer">120567904</label>
+			<label index="colorpicker_black" type="integer">9240594</label>
+			<label index="colorpicker_white" type="integer">190576167</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index="rte_undoLastChange">Undo/Redo last change (%s ago)</label>
+			<label index="tsprop">TypoScript property lookup</label>
+			<label index="tsprop_TSref">TSref online</label>
+			<label index="tsprop_tsconfig">TSconfig online</label>
+			<label index="tsprop_title">Object title</label>
+			<label index="tsprop_prefix">Object prefix</label>
+			<label index="tsprop_mixer_indent">Indent +2</label>
+			<label index="tsprop_mixer_outdent">Outdent -2</label>
+			<label index="tsprop_mixer_wrap">Wrap</label>
+			<label index="tsprop_mixer_transfer">Transfer &amp; Close</label>
+			<label index="tsprop_addToList">Add to list...</label>
+			<label index="table_title">Table wizard</label>
+			<label index="table_smallFields">Small fields</label>
+			<label index="table_addColumn">Add column to the right</label>
+			<label index="table_removeColumn">Remove column</label>
+			<label index="table_addRow">Add row below</label>
+			<label index="table_removeRow">Remove row</label>
+			<label index="table_left">Move left</label>
+			<label index="table_right">Move right</label>
+			<label index="table_up">Move up</label>
+			<label index="table_down">Move down</label>
+			<label index="table_top">Move to top</label>
+			<label index="table_bottom">Move to bottom</label>
+			<label index="table_start">Move to first column</label>
+			<label index="table_end">Move to last column</label>
+			<label index="table_noData">No table,field or uid given</label>
+			<label index="forms_title">Forms wizard</label>
+			<label index="forms_refresh">Refresh without saving</label>
+			<label index="forms_label">Label</label>
+			<label index="forms_type">Type</label>
+			<label index="forms_type_textarea">Text area</label>
+			<label index="forms_type_input">Input field</label>
+			<label index="forms_type_password">Password field</label>
+			<label index="forms_type_file">File upload</label>
+			<label index="forms_type_check">Check box</label>
+			<label index="forms_type_select">Selector box</label>
+			<label index="forms_type_radio">Radio buttons</label>
+			<label index="forms_type_hidden">Hidden value</label>
+			<label index="forms_type_submit">Submit Button</label>
+			<label index="forms_type_property">Property</label>
+			<label index="forms_type_label">Label</label>
+			<label index="forms_required">Required</label>
+			<label index="forms_fieldName">Field</label>
+			<label index="forms_cols">Columns</label>
+			<label index="forms_rows">Rows</label>
+			<label index="forms_size">Size</label>
+			<label index="forms_max">Max</label>
+			<label index="forms_autosize">Auto size</label>
+			<label index="forms_extra">No Wrap</label>
+			<label index="forms_default">Value</label>
+			<label index="forms_multiple">Multiple</label>
+			<label index="forms_options">List options</label>
+			<label index="forms_checked">Checked</label>
+			<label index="forms_preview">Preview of element</label>
+			<label index="forms_element">Element type</label>
+			<label index="forms_config">Detailed configuration</label>
+			<label index="forms_eform_subject">Subject</label>
+			<label index="forms_eform_recipient">Recipient email</label>
+			<label index="forms_eform_html_enabled">HTML mode enabled</label>
+			<label index="forms_eform_formtype_mail">Send button label</label>
+			<label index="forms_special_eform">Special configuration for mail forms</label>
+			<label index="colorpicker_title">Color Picker</label>
+			<label index="colorpicker_setClose">Save and Close</label>
+			<label index="colorpicker_colorValue">Selected Color:</label>
+			<label index="colorpicker_fromImage">Capture color from image (click on image):</label>
+			<label index="colorpicker_fromMatrix">Select color from matrix (websafe colors):</label>
+			<label index="colorpicker_fromList">Select HTML color name:</label>
+			<label index="colorpicker_black">BLACK</label>
+			<label index="colorpicker_white">WHITE</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

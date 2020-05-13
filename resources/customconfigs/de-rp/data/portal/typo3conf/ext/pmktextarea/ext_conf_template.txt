@@ -1,0 +1,88 @@
+## enable features
+
+# cat=basic/enable/b; type=boolean; label=Linenumber column turned ON at start?
+linenumState = 1
+
+# cat=basic/enable/b; type=boolean; label=Textarea wrap turned OFF at start?
+wrapState = 1
+ 
+# cat=basic/enable/b; type=boolean; label=Show buttons?
+showButtons = 1
+
+# cat=basic/enable/c1; type=boolean; label=Show minimize/maximize button?
+showMinMaxButton = 1
+
+# cat=basic/enable/c2; type=boolean; label=Show wraptoggle button?
+showWrapButton = 1
+
+# cat=basic/enable/c3; type=boolean; label=Show linenumtoggle button?
+showLinenumButton = 1
+
+# cat=basic/enable/c4; type=boolean; label=Show find button?
+showFindButton = 1
+
+# cat=basic/enable/c5; type=boolean; label=Show jump button?
+showJumpButton = 1
+
+# cat=basic/enable/c6; type=boolean; label=Show fontsize buttons?
+showFontButtons = 1
+
+# cat=basic/enable/c7; type=boolean; label=Use TYPO3 colorscheme?
+typo3Colors = 1
+
+## dimensions. widths, heights, sizes etc.
+
+# cat=basic/dims/d1; type=int[45-70]; label=Width of linenumber column: (in px)
+linenumColWidth = 47
+
+# cat=basic/dims/d2; type=int[8-12]; label=Fontsize in textarea at startup? (in pt)
+defaultFontSize = 9
+
+# cat=basic/dims/d3; type=int; label=Default Height of textarea: Normally the script adapts to the height of the original textarea, but setting this value will override this.
+defaultHeight = 
+
+# cat=basic/dims/d4; type=int; label=Default Width of textarea: Normally the script adapts to the width of the original textarea, but setting this value will override this.
+defaultWidth =
+
+# cat=basic/dims/d5; type=int; label=Minimum height of textarea: The user will not be able to resize the textarea  height to a size smaller than this.
+minHeight =
+
+# cat=basic/dims/d6; type=int; label=Maximum height of textarea: The user will not be able to resize the textarea  height to a size greater than this.
+maxHeight =
+
+# cat=basic/dims/d7; type=int; label=Minimum width of textarea: The user will not be able to resize the textarea  width to a size smaller than this.
+minWidth =
+
+# cat=basic/dims/d8; type=int; label=Maximum width of textarea: The user will not be able to resize the textarea  width to a size greater than this.
+maxWidth =
+
+# cat=basic/dims/d9; type=boolean; label=Lock height?: No resizing of the height is possible.
+lockH = 0
+
+# cat=basic/dims/d10; type=boolean; label=Lock width?: No resizing of the width is possible.
+lockW = 0
+
+## Color settings
+
+# cat=basic/color/a; type=color; label=Background color of toolbar & resizebar
+backColor = #C8C8CD
+  
+# cat=basic/color/a; type=color; label=Border color of textarea, toolbar & resizebar
+borderColor = #808080
+
+# cat=basic/color/b; type=color; label=Background color of linenumber column
+backColorLn = #F0F0F0
+
+# cat=basic/color/b; type=color; label=Border color of linenumber column
+borderColorLn = #96969B
+
+# cat=basic/color/b; type=color; label= Color of text in linenumber column
+textColorLn = #808080
+
+## other settings
+
+# cat=basic/other/a1; type=options[Tabchar,1 Space,2 Spaces,3 Spaces,4 Spaces]; label=Char(s) to insert when Tabkey is pressed?: Note: This only applies when inserting/indenting. De-indenting only works with one character!
+tabChar = Tabchar
+
+# cat=basic/other/a2; type=string; label=Alternate path to button images: (Full path including http://)
+buttonPath = 

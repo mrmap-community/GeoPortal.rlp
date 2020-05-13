@@ -1,0 +1,132 @@
+<?php
+/**
+ * Language labels for database tables/fields belonging to extension "rlmp_tmplselector"
+ * 
+ * This file is detected by the translation tool.
+ */
+
+$LOCAL_LANG = Array (
+	'default' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Select template:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Select content area template:',
+	),
+	'dk' => Array (
+	),
+	'de' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Standard',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Wählen Sie eine Vorlage:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Standard',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Wählen Sie eine Inhaltsvorlage:',
+	),
+	'no' => Array (
+	),
+	'it' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Seleziona un template:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Selezione un template per l\'area contenuti:',
+	),
+	'fr' => Array (
+	),
+	'es' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Por defecto',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Seleccione plantilla:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Por defecto',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Seleccione plantilla de contenido:',
+	),
+	'nl' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Standaard',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Selecteer sjabloon:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Standaard',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Selecteer sjabloon voor inhoud:',
+	),
+	'cz' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Zvolte šablonu:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Default',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Zvolte šablonu oblasti obsahu:',
+	),
+	'pl' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Domy¶lnie',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Wybierz szablon:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Domy¶lnie',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Wybierz szablon dla obszaru tre¶ci:',
+	),
+	'si' => Array (
+	),
+	'fi' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Oletus',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Valitse template:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Oletus',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Valitse sisältöalueen template:',
+	),
+	'tr' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Standart',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Þablonu Seç:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Standart',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Ýçerik bölgesinin þablonunu seç:',
+	),
+	'se' => Array (
+	),
+	'pt' => Array (
+	),
+	'ru' => Array (
+	),
+	'ro' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Implicit',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Selecteaza Sablon',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Implicit',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Selecteaza sablon pentru continut',
+	),
+	'ch' => Array (
+	),
+	'sk' => Array (
+	),
+	'lt' => Array (
+	),
+	'is' => Array (
+	),
+	'hr' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Zadano',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Odaberi predložak:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Zadano',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Odaberi predložak za sadržaj',
+	),
+	'hu' => Array (
+	),
+	'gl' => Array (
+	),
+	'th' => Array (
+	),
+	'gr' => Array (
+	),
+	'hk' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => '¹w³]',
+		'pages.tx_rlmptmplselector_main_tmpl' => '¿ï¾Ü¼ËªO',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => '¹w³]',
+		'pages.tx_rlmptmplselector_ca_tmpl' => '¿ï¾Ü¤º®e°Ï°ì¼ËªO',
+	),
+	'eu' => Array (
+	),
+	'bg' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Ïî ïîäðàçáèðàíå',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Èçáåðè øàáëîí:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Ïî ïîäðàçáèðàíå',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Èçáåðåòå øàáëîí çà îáëàñòòà ñúñ ñúäúðæàíèå:',
+	),
+	'br' => Array (
+	),
+	'et' => Array (
+		'pages.tx_rlmptmplselector_main_tmpl.I.0' => 'Vaikimisi',
+		'pages.tx_rlmptmplselector_main_tmpl' => 'Vali kujundusmall:',
+		'pages.tx_rlmptmplselector_ca_tmpl.I.0' => 'Vaikimisi',
+		'pages.tx_rlmptmplselector_ca_tmpl' => 'Vali sisu kujundusmall:',
+	),
+	'ar' => Array (
+	),
+	'he' => Array (
+	),
+);
+?>

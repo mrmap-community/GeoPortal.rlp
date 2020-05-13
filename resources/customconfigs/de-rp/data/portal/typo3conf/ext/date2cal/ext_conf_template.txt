@@ -1,0 +1,23 @@
+# cat=basic/; type=options[aqua,t3skin,t3skin2,skin_grey2]; label=Calendar Theme; Theme of the calendar
+calendarCSS = aqua
+
+# cat=basic/enable; type=boolean; label=Week Starts with Monday; enabled - Monday (default); disabled - Sunday
+firstDay = 1
+
+# cat=basic/enable; type=boolean; label=Caching; enable this setting to use the internal cache system
+doCache = 1
+
+# cat=basic/enable; type=boolean; label=Natural Language Parser (TYPO3 >= 4.1 required); enable this setting to get the natural language parser
+natLangParser = 1
+
+# cat=basic/enable; type=boolean; label=Time Selection in Start/Stop Fields; enable this option to get a time selector for all page and content start/stop fields
+datetime = 1
+
+# cat=basic/enable; type=boolean; label=Secondary palette always visible; enable this option to activate the secondary option palette always by default
+secOptionsAlwaysOn = 1
+
+# cat=basic/file; type=string; label=Calendar Image: Path to the calendar image. An alternative can be found in the res directory of the extension.
+calImg = EXT:date2cal/res/calendar.png
+
+# cat=basic/file; type=string; label=Help Icon Image: Path to the help icon image.
+helpImg = EXT:date2cal/res/helpIcon.gif

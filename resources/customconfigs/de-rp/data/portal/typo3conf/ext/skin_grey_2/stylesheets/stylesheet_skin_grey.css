@@ -1,0 +1,105 @@
+	td.commandLink-edit-whole-column_button span.button, 
+	td.commandLink-new-record-whole-column_button span.button, 
+	.toolbarTable td.toolbar_button span.button { height:16px !important; }
+	
+	td.commandLink-edit-whole-column_text span, 
+	td.commandLink-new-record-whole-column_text span, 
+	.toolbar_text span { height:16px; }
+	
+	td.toolbar_button img {	width:14px; }
+	a.iconMode { width:16px; } 
+	
+	#ext-cms-layout-db-layout-php #typo3-clipboard span.button,
+	span.buttonMode { height:16px; }
+	
+	td.commandLink-edit-whole-column_text a, 
+	td.commandLink-new-record-whole-column_text a {	line-height:14px; }
+	
+	BODY#ext-templavoila-mod1-index-php #typo3-clipboard td span.button,
+	#ext-templavoila-mod1-index-php .otherCell a.bothMode span.textMode,
+	.titlebarLeftTopButtons a,
+	#ext-templavoila-mod1-index-php .titlebarLeftContentButtons span.contentIcon,
+	#ext-templavoila-mod1-index-php .otherCell span.contentIcon,
+	#ext-templavoila-mod1-index-php .header-icon-title .contentIcon { height:16px !important; }
+	
+	#ext-templavoila-mod1-index-php .otherCell span.buttonMode,
+	#ext-templavoila-mod1-index-php .otherCell span.textMode,
+	#ext-templavoila-mod1-index-php .endLinkContainer span.textMode,
+	#ext-templavoila-mod1-index-php .commandLink span.buttonMode,
+	.commandLinks a.buttonMode { height:16px !important; }
+	
+	#ext-templavoila-mod1-index-php .otherCell a.bothMode,
+	#ext-cms-layout-db-layout-php #typo3-clipboard span.button { height:18px; }
+	
+	#ext-templavoila-mod1-index-php .otherCell a.bothMode span.textMode { height:16px !important; }
+	
+	.editPageProperties a { height:18px !important; }
+	
+	.commandLinks img,
+	#ext-templavoila-mod1-index-php .otherCell span.buttonMode a img,
+	#ext-templavoila-mod1-index-php .text-paste img {
+		height:14px !important; 
+		width:14px !important;
+	}
+	
+	.commandLink-paste img,
+	#ext-cms-layout-db-layout-php .typo3-clipboard-head img { 
+		height:14px; 
+		width:14px; 
+	}
+	
+	div.workspaceselector {	height:16px !important; }
+	body.background_high .workspaceselector select { height:16px !important; }
+	
+	/*extra for some buttons */
+	/* special button settings */
+	#topPanel, #bottomPanel { 
+		height: 26px !important;
+		padding-bottom:2px;
+	}
+	
+	.savedokview, .savedoknew, 
+	.savedokclose, .closedok,
+	.deletedok, .undodok {
+		width:36px !important; 
+		height:26px !important
+	}
+	
+	a.fullform img {
+		padding:6px 1px; 
+		background: transparent url(../backgrounds/buttonbase.gif) no-repeat 50% 50%;
+	}
+	td.reloadIcon span {
+		padding:5px 10px; 
+		display:block;
+		float:left;
+		background: transparent url(../backgrounds/buttonbase.gif) no-repeat 50% 50%;
+	}
+	td.noactiveClassSave span {
+		padding:0px 5px !important; 
+		margin-top:0 !important;
+		display:block;
+		position:relative;
+		top:0px;
+		float:left;
+		background: transparent url(../backgrounds/buttonbase.gif) no-repeat 50% 50%;
+	}
+	
+	/* image sizes in various modules */
+	BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-DBctrl A IMG,
+	BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-DBctrl IMG,
+	BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD DIV.typo3-clipCtrl IMG,
+	TABLE.typo3-page-cols TR TD TABLE.typo3-page-ceHeader TR TD.bgColor5 A IMG,
+	BODY#typo3-db-list-php FORM TABLE#typo3-dblist-top TR TD TABLE TR TD A IMG {
+		width: 14px;
+		height: 14px;
+	}
+	TABLE.typo3-CSM TR.typo3-CSM-itemRow { height: 16px; }
+	TABLE#typo3-vmenu TR.c-subitem-row TD,
+	TABLE#typo3-vmenu TR.c-subitem-row-HL TD,
+	BODY#typo3-db-list-php FORM TABLE.typo3-dblist TR TD { height: 18px; }
+	BODY#typo3-alt-db-navframe-php .c-recLink img,
+	#typo3-tree .c-recIcon img {
+		width:16px !important;
+		height:16px !important;
+	}

@@ -1,0 +1,20 @@
+page.1230 {
+	40 = USER
+	40.userFunc = tx_t3mootools->addJS
+	40.jsfile.dataWrap = {$plugin.pmkslimboxmagnify.magnifyJS}
+	
+	50 = USER
+	50.userFunc = tx_t3mootools->addJS
+	50.jsdata.cObject = COA
+	50.jsdata.cObject {  
+		1 = TEXT
+		1.value = window.addEvent('domready', slimboxMagnify.init.bind(slimboxMagnify,{magnifyDuration: {$plugin.pmkslimboxmagnify.magnifyDuration}, magnifyTransition: Fx.Transitions.{$plugin.pmkslimboxmagnify.magnifyTransition}, magnifyImgMarginB: {$plugin.pmkslimboxmagnify.magnifyImgMarginB}, magnifyImgMarginR: {$plugin.pmkslimboxmagnify.magnifyImgMarginR},
+		2 = IMG_RESOURCE
+		2.file = {$plugin.pmkslimboxmagnify.magnifyImg}
+		2.stdWrap.dataWrap = magnifyImg: '|', magnifyImgWidth: {TSFE:lastImgResourceInfo|0}, magnifyImgHeight: {TSFE:lastImgResourceInfo|1},
+		3 = TEXT
+		3.value = magnifyTitle: '{LLL:EXT:pmkslimbox/locallang.xml:magnify}'}));
+		3.insertData = 1
+	}
+}
+

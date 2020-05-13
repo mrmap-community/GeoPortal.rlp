@@ -1,0 +1,22 @@
+/*********************************************
+ * TCEforms:
+ *********************************************/
+ 
+@import url(../../../../typo3/sysext/t3skin/stylesheets/typo3-TCEforms.css); 
+
+/* special setting for the frontend mode 'Forms on page' */
+TABLE.formsOnPage { 
+	background-color:white;
+	border:1px solid black;
+}
+.editButtonsForFormsOnPage * { border-width: 0 !important }
+TABLE.typo3-TCEforms .typo3-TCEforms-selectIcons,
+TABLE.typo3-TCEforms .class-main13,
+TABLE.typo3-TCEforms .class-main23,
+TABLE.typo3-TCEforms .class-main33,
+TABLE.typo3-TCEforms .class-main43,
+TABLE.typo3-TCEforms .class-main53 { padding: 3px 0; }
+
+/*********************************************
+ * END TCEforms:
+ *********************************************/

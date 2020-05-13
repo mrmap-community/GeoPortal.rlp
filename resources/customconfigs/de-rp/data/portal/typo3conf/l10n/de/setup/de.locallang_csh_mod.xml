@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">Benutzer &gt; Einstellungen</label>
+			<label index=".description">Dieses Modul dient der Konfiguration Ihres TYPO3 Backend Benutzerprofils. Hier können Sie Ihren Namen, Ihre Email Adresse, die benutzte Backend Sprache und viele andere allgemeine Eigenschaften des Systems einstellen.</label>
+			<label index=".details">&lt;b&gt;Anmerkung [für Admins]:&lt;/b&gt; All diese Einstellungen können durch &quot;Seiten TSconfig&quot;-Werte überschrieben oder durch Standardwerte vorbelegt werden. Klicken Sie auf untenstehenden Verweis, um mehr über dieses Konzept zu erfahren!</label>
+			<label index=".image_descr">Das Einstellungen Menü befindet sich im Backend Hauptmenü.
+Und so sieht das Menü aus - zahlreiche benutzerspezifische Einstellungen können hier vorgenommen werden.</label>
+			<label index="language.alttitle">Backend Sprache</label>
+			<label index="language.description">Wählen Sie hier Ihre bevorzugte Sprache. Nahezu alle TYPO3 Backend Bereiche wurden mittlerweile in die verfügbaren Systemsprachen übersetzt.</label>
+			<label index="language.details">&lt;b&gt;Warnung [Technik]:&lt;/b&gt; Falls TYPO3 nicht durch die Option $TYPO3_CONF_VARS[BE][forceCharset] dahingehend konfiguriert wurde, nur einen einzigen Zeichensatz zu verwenden, werden alle BE Benutzereingaben in der hier gewählten Backend Sprache gespeichert. Das kann zur Dateninkonsistenzführen, wenn einige Benutzer zum Beispiel Russisch und andere Englisch benutzen (diese Sprachen benutzen unterschiedliche Zeichensätze).
+Die Lösung für dieses Problem liegt darin, mittels $TYPO3_CONF_VARS[BE][forceCharset] einen Wert wie z.B. &quot;utf-8&quot;  (also einen Unicode Zeichensatz) einzustellen. Diese Einstellung muss durch den verantwortlichen TYPO3 Administrator vorgenommen werden.</label>
+			<label index="language.image_descr">TYPO3 wurde mittlerweile in mehr als 40 Sprachen übersetzt. Englisch ist aber die Standardsprache und &lt;u&gt;alle&lt;/u&gt; Bezeichnungen müssen zuallererst in Englisch verfügbar sein. Hier sehen Sie die hebräische, arabische, russische und chinesische Übersetzung.</label>
+			<label index="option_condensedMode.alttitle">Schmale Ansicht im Backend verwenden</label>
+			<label index="option_condensedMode.description">Normalerweise werden Web- und Dateiuntermenüs im mittleren Frame dargestellt. Mit dieser Option können Sie dieses Verhalten ausschalten - die Untermenüs erscheinen dann im Hauptframe. Das sorgt für eine übersichtlichere Darstellung speziell bei niedrigen Bildschirmauflösungen.</label>
+			<label index="option_condensedMode.image_descr">In diesem Beispiel ist die schmale Ansicht aktiviert. Der Seitenbaum wird &lt;em&gt;nicht&lt;/em&gt; im mittleren Frame, sondern im Hauptframe dargestellt.
+Wenn Sie in der Seitenbaumansicht einen Seitentitel anklicken (hier im Web&gt;Liste Modul) erscheint die gewählte Seite anschliessend im &lt;em&gt;gleichen&lt;/em&gt; Frame. Mit der schmalen Ansicht wird dadurch die Breite des Bildschirms besser ausgenutzt, indem das mittlere Navigationsmenü ausgeblendet wird - Sie brauchen allerdings auch einen Mausklick mehr, um zu anderen Seiten zu gelangen.</label>
+			<label index="option_noMenuMode.alttitle">TYPO3 Navigationsmenü</label>
+			<label index="option_noMenuMode.description">Bestimmt die Darstellung des TYPO3 Navigationsmenüs</label>
+			<label index="option_noMenuMode.details">Normalerweise wird das TYPO3 Navigationsmenü (das Hauptmenü) am linken Fensterrand angezeigt. Es existieren aber noch zwei weitere Darstellungsarten, welche Sie hier auswählen können:
+
+&lt;b&gt;Auswahlbox im oberen Frame:&lt;/b&gt;
+Alle Funktionen des TYPO3 Navigationsmenüs werden in einer Auswahlbox im oberen Frame dargestellt. Dadurch wird bei niedrigen Bildschirmauflösungen viel Platz gespart.
+
+&lt;b&gt;Symbole im oberen Frame:&lt;/b&gt;
+Alle Funktionen des TYPO3 Navigationsmenüs werden durch ihre jeweiligen Symbole im oberen Frame  dargestellt. Diese Art der Darstellung ist eigentlich nur erfahrenen Benutzern, welche die Reihenfolge der Funktionen und die Bedeutung der Symbole kennen, zu empfehlen.</label>
+			<label index="option_noMenuMode.image_descr">Das &quot;Auswahlbox&quot; Menü. Wählen Sie einfach eine Funktion aus der Liste.
+Das &quot;Symbol&quot; Menü. Wie Sie sehen: Sie müssen sich schon sehr gut mit TYPO3 auskennen, um die Funktionen anhand dieser Symbole zu erkennen. Wenn Sie mit der Maus über eines der Symbole fahren, erhalten Sie eine Kurzbeschreibung der entsprechenden Funktion eingeblendet.</label>
+			<label index="option_showThumbs.alttitle">Thumbnails standardmäßig anzeigen</label>
+			<label index="option_showThumbs.description">Innerhalb von Modulen wie &quot;Web &gt; Liste&quot; oder &quot;Datei &gt; Dateiliste&quot; können Sie sich kleine Vorschaubilder (Thumbnails) für Bilder, Schriftarten oder Datensätze mit angehängten Bildern anzeigen lassen. Diese Option aktiviert die Anzeige von Vorschaubilder standardmäßig.</label>
+			<label index="option_showThumbs.image_descr">Thumbnail Ansicht innerhalb des &quot;Web &gt; Liste&quot; Moduls.</label>
+			<label index="option_helpText.alttitle">Zeige vorhandene Hilfetexte</label>
+			<label index="option_helpText.description">Wenn diese Option gewählt wurde, werden zu den einzelnen Eingabefeldern oder Schaltern Hilfetexte eingeblendet.</label>
+			<label index="option_maxTitleLen.alttitle">Maximale Titellänge</label>
+			<label index="option_maxTitleLen.description">TYPO3 kürzt innerhalb des Backend oftmals überlange Seitenüberschriften oder Datensatztitel, sodass nur die ersten n Zeichen angezeigt werden. Die Anzahl der angezeigten Zeichen hängt oftmals von diesem Wert ab. So wird hiermit z.B. die Länge der Seitentitel im Seitenbaum festgelegt.</label>
+			<label index="option_maxTitleLen.image_descr">In diesem Fall wurde die &quot;Maximale Titellänge&quot; auf 10 Zeichen gesetzt. Dementsprechend werden Seitentitel im Seitenbaum und an anderen Stellen im Backend nach 10 Zeichen abgeschnitten und &quot;...&quot; angehängt. Der Standardwert liegt bei 30.</label>
+			<label index="option_copyLevels.alttitle">Rekursives Kopieren</label>
+			<label index="option_copyLevels.description">Mit Hilfe dieser Option können Sie festlegen, dass bei Seitenkopieraktionen Unterseiten ebenfalls einbezogen werden. Der hier festgelegte Wert bestimmt die Anzahl der Ebenen unterhalb der ausgewählten Seite, die bei Kopieraktionen mit eingeschlossen werden sollen.</label>
+			<label index="option_recursiveDelete.alttitle">Rekursives Löschen</label>
+			<label index="option_recursiveDelete.description">Im Backend können Sie normalerweise keine Seiten löschen, zu denen noch Unterseiten existieren. Mit dieser Option können Sie dieses Verhalten deaktivieren.
+&lt;strong&gt;VORSICHT:&lt;/strong&gt; mit dieser Option können Sie - auch aus Versehen - eine ganze Website mit nur einem Knopfdruck löschen! Sie sollten daher genau überlegen, ob Sie diese Sicherheitsmaßnahme deaktivieren.</label>
+			<label index="option_recursiveDelete.details">Wenn Sie vorhaben, einen großen Seitenbaum mit vielen Seiten zu löschen, sollten Sie sich über die Auswirkungen auf die Systemleistung im Klaren sein. Aufgrund der vielen benötigten Datenbankoperationen in so einem Fall könnte es durchaus sein, dass PHP noch vor Beendigung der Operation auf ein Timeout läuft. Die Auswirkungen auf das System wären nicht vorhersagbar!</label>
+			<label index="option_edit_wideDocument.alttitle">Breiten Hintergrund anzeigen</label>
+			<label index="option_edit_wideDocument.description">Mit dieser Option können Sie die TYPO3 Eingabeformulare um rund 50% verbreitern.</label>
+			<label index="option_edit_RTE.alttitle">Rich Text Editor (RTE) verwenden (falls verfügbar)</label>
+			<label index="option_edit_RTE.description">Aktiviert für Ihre Benutzersitzungen den TYPO3 Rich Text Editor. Diese Option ist normalerweise immer aktiviert.</label>
+			<label index="option_edit_RTE.details">Rich Text Editoren (RTE) ermöglichen es Ihnen, innerhalb von Eingabefeldern Textattribute (fett, kursiv, unterstrichen etc.) per Knopfdruck zu setzen - in etwa so, wie Sie es von Textverarbeitungsprogrammen gewohnt sind. Ob Sie einen RTE überhaupt benutzen können, hängt u.a. davon ab, ob innerhalb von TYPO3 eine RTE Erweiterung installiert wurde und ob Ihr Browser diese darstellen kann. Der RTE wird nur bei einigen Eingabefeldern verwendet - das prominenteste Beispiel ist natürlich das Textfeld innerhalb eines Inhaltelements.</label>
+			<label index="option_edit_docModuleUpload.alttitle">Erlaube Dateiuploads in Eingabefeldern</label>
+			<label index="option_edit_docModuleUpload.description">Mit dieser Option aktivieren Sie direkte Dateiuploads für alle Backend Eingabefelder, die Dateianhänge (Bilder, Dokumente etc.) als Eingabe erlauben. Normalerweise sollten Sie diese Option nicht deaktivieren, weil Sie eine sehr bequeme Möglichkeit bietet, Inhalte in TYPO3 einzupflegen.</label>
+			<label index="option_edit_docModuleUpload.details">Sie können immer noch den TYPO3 Dateibrowser dazu verwenden, Dateien oder Bilder anzuhängen, sollte diese Option deaktiviert sein.</label>
+			<label index="option_edit_showFieldHelp.alttitle">Kontext-sensitive Hilfe aktivieren</label>
+			<label index="option_edit_showFieldHelp.description">Legt die Art der Darstellung der Kontext-sensitiven Hilfe innerhalb von TYPO3 fest. Normalerweise werden Hilfesymbole (in Form kleiner Fragezeichen) neben denjenigen Optionen angezeigt, zu denen Hilfetexte verfügbar sind. Sobald Sie auf eines dieser Symbole klicken, öffnet sich ein Hilfefenster.</label>
+			<label index="option_edit_showFieldHelp.details">Sie können mit dieser Option festlegen, dass anstelle der Hilfesymbole die Kurzform der zugehörigen Hilfetexte direkt auf allen Seiten angezeigt werden. Für TYPO3 Neulinge kann es sehr hilfreich sein, wenn Sie jederzeit eine Beschreibung der Funktionen vor sich haben.
+Erfahrene Benutzer hingegen schalten häufig die Kontext-sensitiven Hilfe völlig aus.
+
+Die Kontext-sensitiven Hilfe ist außerdem in Form eines vollständigen Benutzerhandbuchs innerhalb des Hilfe&gt;Handbuch Moduls verfügbar.</label>
+			<label index="option_edit_showFieldHelp.image_descr">Standardmäßig ist die Option &quot;Nur Hilfesymbole anzeigen&quot; gesetzt, Sie erhalten die zugehörigen Hilfetexte durch einen Klick auf das Hilfesymbol.
+Mit der Option &quot;Kompletten Text anzeigen&quot; erscheinen die Kurzformen der jeweiligen Hilfetexte in eingerahmten Kästchen. Auch hier öffnet sich ein Hilfefenster mit der Langform des Hilfetextes, sobald sie das Hilfesymbol anklicken.</label>
+			<label index="option_disableCMlayers.alttitle">Deaktiviere Popup Kontextmenüs</label>
+			<label index="option_disableCMlayers.description">Durch Anklicken der Symbole, welche oft innerhalb des Backends neben einem Dateinamen oder Datensatz angezeigt wird, lässt sich ein Kontextmenü (Klickmenü) öffnen. Dieses Verhalten lässt sich mit dieser Option abschalten (nicht empfohlen).</label>
+			<label index="option_disableCMlayers.image_descr">Das ist das Kontextmenü (oder &quot;Klickmenü&quot;) eines Datensatzes innerhalb des Seitenbaumes. Bitte beachten Sie, das TYPO3 eine Webanwendung ist, welche innerhalb eines Browsers dargestellt wird. Dass bedeutet, dass der normale Rechtsklick, wie Sie ihn von anderen Betriebssystemen und Programmen her kennen, hier nicht funktioniert (ein Rechtklick öffnet vielmehr das Kontextmenü des Browsers). Stattdessen müssen Sie das Symbol mit der linken Maustaste anklicken, um das Menü zu aktivieren.</label>
+			<label index="option_beUser_realName.alttitle">Ihr Name</label>
+			<label index="option_beUser_realName.description">Geben Sie hier Ihren Namen ein.</label>
+			<label index="option_beUser_email.alttitle">Ihre Emailadresse</label>
+			<label index="option_beUser_email.description">Stellen Sie sicher, dass die hier eingestellte Emailadresse auch gültig ist.</label>
+			<label index="option_emailMeAtLogin.alttitle">Unterrichte mich per Email wenn sich jemand 
+mit meinem Account anmeldet</label>
+			<label index="option_emailMeAtLogin.description">Mit dieser Option können Sie festlegen, dass jeder Login unter ihrer Benutzerkennung per Email an Sie gemeldet wird. Mit dieser Sicherheitsmassnahme können Sie überprüfen, ob jemand anderes in Besitz Ihres Passworts gelangt ist und Ihre Benutzerkennung missbraucht.</label>
+			<label index="option_newPassword.alttitle">Neues Passwort</label>
+			<label index="option_newPassword.description">Geben Sie ein neues Passwort für Ihre Backend Benutzerkennung ein.</label>
+			<label index="option_newPassword.details">Passwörter werden verschlüsselt (als MD5 Hash), sobald Sie dieses Eingabefeld verlassen. Damit wird sicher gestellt, dass keinerlei Klartextpasswörter über das Internet gesendet werden.</label>
+			<label index="option_newPasswordAgain.alttitle">Neues Passwort (Wiederholung)</label>
+			<label index="option_newPasswordAgain.description">Wiederholen Sie Ihr neues Passwort. Sollten die beiden Passwörter nicht übereinstimmen, so wird Ihr Passwort nicht geändert.</label>
+			<label index="reset.alttitle">Alle Werte auf Standard zurücksetzen</label>
+			<label index="reset.description">Mit dieser Option können Sie alle Werte innerhalb dieses Moduls auf ihre Standardwerte zurücksetzen.</label>
+			<label index="reset.details">Natürlich sind Ihr Benutzername, Ihre Emailadresse und Ihr Passwort nicht davon betroffen, denn diese Werte haben keinen Standardwert.</label>
+			<label index="simuser.alttitle">Simuliere Backend Benutzer</label>
+			<label index="simuser.description">Mit dieser Option können Admin-Benutzer bestimmte Backend Benutzer simulieren. Das Backend wird mit den Benutzereinstellungen des hier ausgewählten Benutzers neu geladen und Admins können dessen Systemeinstellungen überprüfen.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle" type="integer">146242724</label>
+			<label index=".description" type="integer">129920709</label>
+			<label index=".details" type="integer">127028415</label>
+			<label index=".image_descr" type="integer">55722408</label>
+			<label index="language.alttitle" type="integer">189480609</label>
+			<label index="language.description" type="integer">107138542</label>
+			<label index="language.details" type="integer">13611574</label>
+			<label index="language.image_descr" type="integer">67910929</label>
+			<label index="option_condensedMode.alttitle" type="integer">195403291</label>
+			<label index="option_condensedMode.description" type="integer">263779261</label>
+			<label index="option_condensedMode.image_descr" type="integer">64262732</label>
+			<label index="option_noMenuMode.alttitle" type="integer">146834180</label>
+			<label index="option_noMenuMode.description" type="integer">43681789</label>
+			<label index="option_noMenuMode.details" type="integer">63013137</label>
+			<label index="option_noMenuMode.image_descr" type="integer">206430016</label>
+			<label index="option_showThumbs.alttitle" type="integer">111890184</label>
+			<label index="option_showThumbs.description" type="integer">261154751</label>
+			<label index="option_showThumbs.image_descr" type="integer">182315096</label>
+			<label index="option_helpText.alttitle" type="integer">40561585</label>
+			<label index="option_helpText.description" type="integer">985533</label>
+			<label index="option_maxTitleLen.alttitle" type="integer">119741080</label>
+			<label index="option_maxTitleLen.description" type="integer">233830264</label>
+			<label index="option_maxTitleLen.image_descr" type="integer">158787531</label>
+			<label index="option_copyLevels.alttitle" type="integer">28112499</label>
+			<label index="option_copyLevels.description" type="integer">29159056</label>
+			<label index="option_recursiveDelete.alttitle" type="integer">169322059</label>
+			<label index="option_recursiveDelete.description" type="integer">213702407</label>
+			<label index="option_recursiveDelete.details" type="integer">237219119</label>
+			<label index="option_edit_wideDocument.alttitle" type="integer">47472072</label>
+			<label index="option_edit_wideDocument.description" type="integer">139642801</label>
+			<label index="option_edit_RTE.alttitle" type="integer">241224049</label>
+			<label index="option_edit_RTE.description" type="integer">244751398</label>
+			<label index="option_edit_RTE.details" type="integer">4695323</label>
+			<label index="option_edit_docModuleUpload.alttitle" type="integer">191752606</label>
+			<label index="option_edit_docModuleUpload.description" type="integer">249009123</label>
+			<label index="option_edit_docModuleUpload.details" type="integer">213009802</label>
+			<label index="option_edit_showFieldHelp.alttitle" type="integer">156260410</label>
+			<label index="option_edit_showFieldHelp.description" type="integer">29048466</label>
+			<label index="option_edit_showFieldHelp.details" type="integer">38461946</label>
+			<label index="option_edit_showFieldHelp.image_descr" type="integer">38749169</label>
+			<label index="option_disableCMlayers.alttitle" type="integer">256285755</label>
+			<label index="option_disableCMlayers.description" type="integer">167086611</label>
+			<label index="option_disableCMlayers.image_descr" type="integer">12432975</label>
+			<label index="option_beUser_realName.alttitle" type="integer">117879142</label>
+			<label index="option_beUser_realName.description" type="integer">257488800</label>
+			<label index="option_beUser_email.alttitle" type="integer">26761284</label>
+			<label index="option_beUser_email.description" type="integer">170498615</label>
+			<label index="option_emailMeAtLogin.alttitle" type="integer">54992831</label>
+			<label index="option_emailMeAtLogin.description" type="integer">101170650</label>
+			<label index="option_newPassword.alttitle" type="integer">11770970</label>
+			<label index="option_newPassword.description" type="integer">165291839</label>
+			<label index="option_newPassword.details" type="integer">209512178</label>
+			<label index="option_newPasswordAgain.alttitle" type="integer">34314409</label>
+			<label index="option_newPasswordAgain.description" type="integer">264203021</label>
+			<label index="reset.alttitle" type="integer">243973144</label>
+			<label index="reset.description" type="integer">206520611</label>
+			<label index="reset.details" type="integer">55338225</label>
+			<label index="simuser.alttitle" type="integer">213794209</label>
+			<label index="simuser.description" type="integer">51461529</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".alttitle">User &gt; Setup module</label>
+			<label index=".description">The Setup module allows the backend user to customize TYPO3 for his own login sessions. This includes the backend language and various other interface features.</label>
+			<label index=".details">&lt;b&gt;Notice [For Admins]:&lt;/b&gt; These settings can all be overridden or have their default values changed by &quot;User TSconfig&quot;. To read more about this concept, see the link below!</label>
+			<label index=".image_descr">The Setup module is selected in the left menu.
+This is how the Setup module interface looks like - a list of options to configure.</label>
+			<label index="language.alttitle">Backend Language selection</label>
+			<label index="language.description">Select the backend language you prefer. Most parts of TYPO3s backend (for regular users) are translated into other languages.</label>
+			<label index="language.details">&lt;b&gt;Warning [technical]:&lt;/b&gt; If TYPO3 is not configured to use a single character set (through $TYPO3_CONF_VARS[BE][forceCharset]) then all data entered in the backend is submitted in the character set of the selected backend language. This leads to inconsistent data storage if some users are using the backend in Russian and others in English which uses different character sets.
+The solution clearly is to set the configuration option mentioned above to a value like &quot;utf-8&quot;. This must be done by the developers responsible for the whole system configuration.</label>
+			<label index="language.image_descr">TYPO3 is translated into around 40 languages. English is the default language and all labels must be available in English first and foremost. This screenshot shows translations for Hebrew, Arabic, Russian and Chinese.</label>
+			<label index="option_condensedMode.alttitle">Condensed Mode</label>
+			<label index="option_condensedMode.description">If set, the backend will not load the Web-submodules and File-submodules in a frameset but allow the page and folder trees to load the submodule in the main content frame. This allows for a better display on small screens.</label>
+			<label index="option_condensedMode.image_descr">In this example Condensed Mode is enabled. The page tree is &lt;em&gt;not&lt;/em&gt; shown in the normal navigation frame but rather in the full content frame to the right of the menu.
+When a page title is clicked in the page tree the module page (here the Web &gt; List module) will be loaded in the &lt;u&gt;same&lt;/u&gt; frame of the backend. In this way Condensed Mode saves horizontal screen space since the navigation frame is removed - but it takes an extra click if you need to go to another page.</label>
+			<label index="option_noMenuMode.alttitle">Navigation Mode</label>
+			<label index="option_noMenuMode.description">Setting alternative backend menu modes</label>
+			<label index="option_noMenuMode.details">By default you navigate between backend modules with the menu in the left frame. By this option you can select alternative navigation modes:
+
+&lt;b&gt;Selectorbox in top frame:&lt;/b&gt;
+If set, the backend will not load the left menu frame but rather put a selector-box menu in the topframe. This saves a lot of space on small screens.
+
+&lt;b&gt;Icons in top frame&lt;/b&gt;
+This option shows all menu items in the top frame as a horizontal list of icons. This is for experienced users only who knows the order of modules and can recognize them based on their icon.</label>
+			<label index="option_noMenuMode.image_descr">The &quot;Selectorbox&quot; menu. Selecting an item makes the backend jump to that module.
+The &quot;Icons&quot; menu. As you can see you will need to know the icons by heart. You can also position the mouse over the icon and the tool-tip text will reveal the module name.</label>
+			<label index="option_showThumbs.alttitle">Show Thumbnails by default</label>
+			<label index="option_showThumbs.description">In modules like the &quot;Web &gt; List&quot; and &quot;File &gt; Filelist&quot; you can enable the display of thumbnails of files (images/fonts) and records (if images are attached) with a checkbox. Setting this option will enable the display by default.</label>
+			<label index="option_showThumbs.image_descr">When thumbnails display is enabled, files attached to records will be shown in the &quot;Web &gt; List&quot; module like this.</label>
+			<label index="option_helpText.alttitle">Show help text when applicable</label>
+			<label index="option_helpText.description">If set, some help texts will appear by default. Applies to the &quot;Legend&quot; text in the Web&gt;Access module for instance.</label>
+			<label index="option_maxTitleLen.alttitle">Maximum title length</label>
+			<label index="option_maxTitleLen.description">TYPO3 will often crop long titles of records etc. so only the first X characters are shown. Often the number of shown characters depends on this variable. For instance the length of page titles in the page tree is determined by this value.</label>
+			<label index="option_maxTitleLen.image_descr">In this case the Maximum Title lenght is set to 10 - and the result is that titles in the page tree - as well as other places in the backend - will be cropped after 10 characters, then suffixed by &quot;...&quot;. The default value is &quot;30&quot;.</label>
+			<label index="option_copyLevels.alttitle">Recursive Copy</label>
+			<label index="option_copyLevels.description">When you copy a page, subpages can also be copied along if you set this option. The number you set here defines the number of levels under a page to include in a copy operation.</label>
+			<label index="option_recursiveDelete.alttitle">Recursive Delete</label>
+			<label index="option_recursiveDelete.description">You cannot delete a page with subpages unless this flag is set. Be careful - setting this option means that TYPO3 will allow a whole tree of pages to be deleted in one go!</label>
+			<label index="option_recursiveDelete.details">You should also consider the performance issues involved when deleting a large page tree. It might take a considerable amount of time to do that and if PHP times out before the operation is finished the results might be unpredictable.</label>
+			<label index="option_edit_wideDocument.alttitle">Wide document background</label>
+			<label index="option_edit_wideDocument.description">Setting this option will enlarge the default width of record editing forms in TYPO3 by around 50%</label>
+			<label index="option_edit_RTE.alttitle">Enable Rich Text Editor</label>
+			<label index="option_edit_RTE.description">If set, the Rich Text Editor in TYPO3 will be enabled for you. Normally you wouldn't want to disable this option.</label>
+			<label index="option_edit_RTE.details">A Rich Text Editor (RTE) means that a text editing field has buttons for making selected text bold, italic etc. Whether a RTE is available also depends on factors like the browser you are using and which extensions are installed. Finally RTEs are applied to only a few record fields. The most wellknown example would be the Text field of a Content Element.</label>
+			<label index="option_edit_docModuleUpload.alttitle">Enable File Uploads in editing forms</label>
+			<label index="option_edit_docModuleUpload.description">This option will enable an &quot;Upload&quot; box for each field in TYPO3 records where you can attach a file or image. Most likely you don't want to disable this since it is usually just a nice thing to have.</label>
+			<label index="option_edit_docModuleUpload.details">If you disable the Upload box there is still the TYPO3 Element Browser left for attaching files and images.</label>
+			<label index="option_edit_showFieldHelp.alttitle">Context Sensitive Help mode</label>
+			<label index="option_edit_showFieldHelp.description">Defines the mode of Context Sensitive Help (CSH) in TYPO3. The default is that small help icons are shown everywhere a help item is available. You can click the icon and help will appear in a window for you.</label>
+			<label index="option_edit_showFieldHelp.details">Alternatively you can select that descriptions are shown inline. This is useful for people who are still learning how TYPO3 works and want to browse the backend with descriptions shown directly.
+Finally experienced users will want to totally disable the help icons if they seem to just bloat the backend interface.
+
+Context Sensitive Help is also available as a full user manual in the Help&gt;Manual module.</label>
+			<label index="option_edit_showFieldHelp.image_descr">The default mode, &quot;Display help icon only&quot;, will show the help icons with no additional text.
+When &quot;Display full text message&quot; is selected you will see a short description shown together with the help icon and framed into a box. Clicking the help icon always links to the full description of the element shown in a pop-up window.</label>
+			<label index="option_disableCMlayers.alttitle">Disable Popup Context Menus</label>
+			<label index="option_disableCMlayers.description">When an icon for a file or database record is shown inside the TYPO3 backend you can often click on the icon and a contextual menu will appear over the icon with options related to it. You can disable this behaviour by this option. However you probably don't want to do that.</label>
+			<label index="option_disableCMlayers.image_descr">This is the context menu (or &quot;Clickmenu&quot;) of a page in the page tree. Notice that it is activated by a regular &quot;left-click&quot; opposite to the normal &quot;right-click&quot; activation known from most Operating Systems.</label>
+			<label index="option_beUser_realName.alttitle">Your real name</label>
+			<label index="option_beUser_realName.description">Enter your real name here.</label>
+			<label index="option_beUser_email.alttitle">Your email address</label>
+			<label index="option_beUser_email.description">Make sure this is a valid email address for you. This is the contact address that the backend administrator will use if he needs to contact you. Also, the TYPO3 system might need to send you messages at various times and this will be the recipient address.</label>
+			<label index="option_emailMeAtLogin.alttitle">Notify by login</label>
+			<label index="option_emailMeAtLogin.description">If you set this option you will receive an email from TYPO3 each time you (or &quot;someone&quot;) logs in using your username. You might like to receive such a &quot;warning&quot; as a security measure so you will know if someone else picks up your password and uses your account.</label>
+			<label index="option_newPassword.alttitle">Change password</label>
+			<label index="option_newPassword.description">Enter a new password for your backend account:</label>
+			<label index="option_newPassword.details">The passwords are encrypted to an MD5 hash when you leave the field so no plain text password is sent over the wire.</label>
+			<label index="option_newPasswordAgain.alttitle">Change password, confirm</label>
+			<label index="option_newPasswordAgain.description">Confirm the new password by entering it again, exactly like above. If the two new passwords do not match, the password will not be changed.</label>
+			<label index="reset.alttitle">Reset all Values to default</label>
+			<label index="reset.description">If you select this option all settings in this module will be reset to the default settings of the system.</label>
+			<label index="reset.details">This does not apply to user name, email and password settings of course.</label>
+			<label index="simuser.alttitle">Simulate backend user</label>
+			<label index="simuser.description">This option allows &quot;admin&quot;-users to change settings for another backend user in the system.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

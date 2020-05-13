@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+	<data type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Ein Datensatz 'Seite' repräsentiert üblicherweise eine Webseite in TYPO3. Alle Seiten haben eine ID-Nummer, über die sie verlinkt und referenziert werden können. Ein Seiten-Datensatz enthält nicht selbst den Inhalt der Seite - für diesen Zweck sollten Sie 'Seiteninhalte' erstellen.</label>
+			<label index=".details">Die Seitentabelle ist das Rückgrat von TYPO3. Alle Datensätze der Standardmodule müssen zu einer Seite 'gehören'. Dies entspricht in etwa Dateien und Ordnern auf der Festplatte Ihres PCs. Mit einem wesentlichen Unterschied: Ordner der Festplatte sind &lt;b&gt;nur&lt;/b&gt; Behälter für Dateien. Aber 'Seiten' im WEB und TYPO3 sind gleichzeitig 'Dateien' &lt;b&gt;und&lt;/b&gt; 'Ordner'. Jede beliebige Seite kann Unterseiten besitzen.
+
+&lt;b&gt;Der Seitenbaum&lt;/b&gt;
+Die Seiten sind in einer Baumstruktur angeordnet, was nicht nur ein handlicher Weg der Organisation ganz allgemein ist, sondern auch der Art und Weise entspricht, wie Sie die Seiten Ihrer Webpräsenz anordnen sollten. Daher entspricht der Seitenbaum üblicherweise auch der Webseiten-Navigation.
+
+&lt;b&gt;uid, pid und die Wurzel des Baums&lt;/b&gt;
+Technisch gesehen haben alle Daten(bank)elemente ein Feld 'uid', das eine eindeutige Identifikation enthält (eine Zahl, die von TYPO3 vollautomatisch erzeugt und verwaltet wird und die Sie praktisch nie zu Gesicht bekommen). Zusätzlich müssen alle Datenelemente ein Feld 'pid' besitzen, welches die 'uid' der Seite ('page id') enthält, zu der sie gehören (TYPO3 handhabt das automatisch). Falls das Feld 'pid' gleich 0 ist, so befindet sich der Datensatz in der Wurzel ('root') des Baums. Nur Administratoren ist der Zugriff auf die Wurzel gestattet und Tabelleneinträge müssen entweder einer Seite angehören oder der Wurzel.
+
+&lt;b&gt;Speicherung von Datensätzen&lt;/b&gt;
+In Abhängigkeit vom 'Typ' der Seite kann sie auch einen allgemeines Speicher für beliebige Daten(bank)objekte in TYPO3 darstellen. In diesem Fall ist sie nicht zwangsläufig als Webseite verfügbar, sondern nur intern im Seitenbaum als Speicherort für Objekte wie Benutzer, Abonnnements, Domains, usw. Solche Seiten haben in der Regel den Typ &quot;SystemOrdner&quot;.</label>
+			<label index=".image_descr">Die wichtigsten Felder einer 'Seite' sind: die 'versteckt' Markierung (&quot;hidden&quot;), der Typ der Seite (&quot;doktype&quot;) und der Seitentitel. Es können weitere Felder existieren, die aber typisch durch TYPO3 Erweiterungen hinzugefügt werden.
+Seiten sind in TYPO3 in einem Baum organisiert. Die gezeigte Seite des Bearbeitungsformulars im Bild ist die &quot;Intro&quot; Seite des Seitenbaums. Wie Sie sehen können ist sie der Wurzel des Baums zugeordnet und besitzt eine Reihe von &quot;Kind-Seiten&quot;.</label>
+			<label index="title.description">Geben Sie den Titel der Seite ein! Dieses Feld ist ein Pflichtfeld.</label>
+			<label index="title.details">Der Seitentitel repräsentiert die Seite im System, z.B. im Seitenbaum. Außerdem wird der Titel als Standard-Text für die Navigation von Seite zu Seite verwendet. Der Titel kann jederzeit geändert werden, ohne die Navigation selbst zu verändern. Intern werden die Seiten über ihre &quot;uid&quot; referenziert, statt über den Titel, der geänderte Titel wird aber überall sofort sichtbar.
+In diesem Feld sind beliebige Zeichen erlaubt, Sie sollten aber einen kurzen, prägnanten und möglichst eindeutigen Titel eingeben.</label>
+			<label index="title.image_descr">Das Feld für den Titel der Seite ist mit einem kleinen &quot;Pflichtfeld&quot; Symbol ausgezeichnet: Sie &lt;b&gt;müssen&lt;/b&gt; einen Seitentitel eingeben, sonst können Sie die Seite nicht speichern! Möglichst kurz, prägnant und eindeutig.</label>
+			<label index="doktype.description">Wählen Sie den Seitentyp aus. Dies hat Einfluss darauf, ob die Seite als normale Webseite dargestellt oder für andere Zwecke genutzt wird.</label>
+			<label index="doktype.details">'Standard' repräsentiert eine normale Webseite.
+'SysOrdner' ist eine Seite, die niemals als Webseite angezeigt wird, sondern als Behälter (&quot;Container&quot;) für beliebige Daten dient.
+'Papierkorb'. Seiten und Datensätze im Papierkorb werden auf den Webseiten nicht angezeigt. Sie sind jedoch noch nicht endgültig gelöscht, sondern können zurück an eine geeignete Stelle verschoben werden.
+
+&lt;b&gt;Hinweis:&lt;/b&gt;
+Jedem Typ ist ein spezielles Symbol zugewiesen. Manche Typen stehen einem Anwender möglicherweise auch nicht zur Verfügung  (Sie werden eventuell feststellen, dass einige Optionen nicht zur Auswahl stehen!). Beachten Sie ausserdem, dass jeder Seitentyp nur bestimmte Inhalte/Datensätze erlaubt. (im Zweifel erlaubt 'SysOrdner' beliebige Daten).
+
+&lt;b&gt;[Technisch] $PAGES_TYPES&lt;/b&gt;
+Die Einschränkungen zu jedem Seitentyp sind im globalen Array $PAGES_TYPES definiert. Dort ist festgelegt, welche Tabellen auf den Seiten eines Typs erlaubt sind. Wenn Erweiterungen neue Tabellen zu TYPO3 hinzufügen ist es eventuell erforderlich, dass sie ihre Tabellen in $PAGES_TYPES registrieren, so dass Daten für diese Tabellen auf normalen Seiten hinzugefügt werden können.</label>
+			<label index="doktype.image_descr">Dieser Ausschnitt des Seitenbaums zeigt einige normale Seiten (schwach gelbe Symbole, im oberen Teil). Der Papierkorb (&quot;Garbage&quot;) mit seinem besonderen Symbol ist ebenfalls sichtbar. Die Seiten im Papierkorb werden im Webauftritt nicht angezeigt und sind Kandidaten für eine endgültige Löschung. Im unteren Teil sehen Sie (graue) &quot;SystemOrdner&quot;. Diese werden ebenfalls niemals als Webseiten angezeigt, sondern ermöglichen die Speicherung beliebiger Daten.</label>
+			<label index="TSconfig.description">Spezielle TypoScript-Konfiguration dieser Seite.</label>
+			<label index="TSconfig.details">Grundsätzlich ist 'TypoScript' ein Konzept zur Konfiguration von Werten in einer Baumstruktur. Es wird vor allem für die Konfiguration von TYPO3 WEB Auftritten verwendet.
+
+Hier wird das gleiche Prinzip der Eingabe von Werten in einer Hierarchie verwendet, um verschiedene Eigenschaften in Bezug auf das Backend, Funktionen in Modulen, dem &quot;Rich Text Editor&quot; usw. einzustellen.
+
+Das endgültige 'TSconfig' für eine Seite ist die Summe aller 'TSconfig' Werte von der Wurzel des Seitenbaums bis zur aktuellen Seite. So werden alle Kindseiten der aktuellen Seite ebenfalls beeinflusst, sie ererben die Konfiguration ihrer Vaterseite. Eine Darstellung des wirksamen Seiten 'TSconfig' können Sie über das Menü 'Seiten TSconfig' im 'Web&gt;Info' Modul einsehen (wenn die Erweiterung &quot;info_pagetsconfig&quot; installiert ist).</label>
+			<label index="TSconfig.syntax">Einfache TypoScript Syntax &lt;em&gt;ohne&lt;/em&gt; 'Konditionen' und 'Konstanten'.
+
+Es wird dringend empfohlen, dass nur erfahrene Administratoren Zugriff auf dieses Feld haben!</label>
+			<label index="TSconfig.image_descr">Seiten TSconfig zur Anpassung des &quot;Rich Text Editor&quot; Verhaltens in diesem Zweig des Seitenbaums. Eine pfiffige Eigenschaft des Seiten TSconfig ist, dass die Konfiguration für die aktuelle Seite und alle Kindseiten gilt: Kindseiten erben die Konfiguration von Vaterseiten.</label>
+			<label index="php_tree_stop.description">Stoppt die Darstellung des Seitenbaums in der Navigation und Listen.</label>
+			<label index="php_tree_stop.details">Ist dieser Schalter an, ist im Seitenbaum im Navigations Frame dieser Ast nicht mehr aufgeklappt darstellbar. Stattdessen ist ein rotes &quot;+&quot; zu sehen, das darauf hinweist, dass dieser Schalter an ist.
+
+Der Sinn der Sache ist, zu verhindern, dass Äste mit ungewöhnlich vielen Kindseiten (hunderte) angezeigt werden und dabei ungewöhlich viel Zeit und Resourcen verbrauchen.
+
+Wird das rote &quot;+&quot; Zeichen angeklickt, wird die Seite als &quot;Temporärer Einstiegspunkt&quot; im Navigations Frame an Stelle des ganzen Seitenbaums dargestellt.</label>
+			<label index="php_tree_stop.image_descr">Hier ist der Schalter &quot;Seitenbaum stoppen&quot; gesetzt. Er bfindet sich unterhalb des Feldes 'TSconfig'.
+Im Seitenbaum ist der gesetzte Schalter sichtbar durch das rote &quot;+&quot; und der Ast des Baums kann nicht mehr aufgeklappt werden.
+Nach Anklicken des roten &quot;+&quot; wird der Ast als &quot;Temporärer Einstiegspunkt&quot; an Stelle des Seitenbaums dargestellt.</label>
+			<label index="storage_pid.description">Legen Sie fest, welche &quot;Allgemeinen Datensatzsammlungen&quot; von dieser Seite verwendet werden sollen.</label>
+			<label index="storage_pid.details">Eine &quot;Allgemeine Datensatzsammlung&quot; ist eine globale Seite zur Aufbewahrung von Daten aller Art. Das könnten Templates sein, oder Frontend Benutzer usw. die eher zum gesamten WEB Auftritt gehören als zu einer einzelnen Seite.
+
+Es wird dringend empfohlen, dass Anwendungen das Konzept der &quot;Allgemeinen Datensatzsammlung&quot; unterstützen, so dass sie standardmäßig ihre Daten dort suchen und nur durch spezielle Konfiguration dazu gebracht werden anderswo danach zu suchen.
+
+Seiten, die als &quot;Allgemeine Datensatzsammlung&quot; dienen sind oft vom Typ &quot;SystemOrdner&quot;.</label>
+			<label index="editlock.description">Bewirkt, dass Benutzer, die nicht Administratoren sind, weder die Seiteneigenschaften noch Seiteninhalte bearbeiten können. Sie können auch keine neuen Seitennhalte und keine neuen Kindseiten erzeugen. Existierende Kindseiten können sie aber immer noch bearbeiten.</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">118490002</label>
+			<label index=".details" type="integer">266524571</label>
+			<label index=".image_descr" type="integer">154282212</label>
+			<label index="title.description" type="integer">16113526</label>
+			<label index="title.details" type="integer">92653950</label>
+			<label index="title.image_descr" type="integer">103204111</label>
+			<label index="doktype.description" type="integer">238659907</label>
+			<label index="doktype.details" type="integer">173538316</label>
+			<label index="doktype.image_descr" type="integer">177111079</label>
+			<label index="TSconfig.description" type="integer">129650006</label>
+			<label index="TSconfig.details" type="integer">216590510</label>
+			<label index="TSconfig.syntax" type="integer">6236841</label>
+			<label index="TSconfig.image_descr" type="integer">213516592</label>
+			<label index="php_tree_stop.description" type="integer">87402840</label>
+			<label index="php_tree_stop.details" type="integer">49793750</label>
+			<label index="php_tree_stop.image_descr" type="integer">38957251</label>
+			<label index="storage_pid.description" type="integer">154894460</label>
+			<label index="storage_pid.details" type="integer">263556132</label>
+			<label index="editlock.description" type="integer">82976191</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">A 'Page' record usually represents a webpage in TYPO3. All pages have an id-number by which they can be linked and referenced. The 'Page' record does not itself contain the content of the page - for this purpose you should create 'Page content' records (Content Elements).</label>
+			<label index=".details">The pages table is the very backbone in TYPO3. All records editable by the mainstream modules in TYPO3 must 'belong' to a page. It's exactly like files and folders on your computers harddrive.
+
+&lt;b&gt;The page tree&lt;/b&gt;
+The pages are organized in a tree structure which is not only a very handy way of organizing in general but also a optimal reflection of how you should organize the pages on your website. And thus you'll normally find that the page tree is a reflection of the website navigation itself.
+
+&lt;p&gt;uid, pid and the pagetree root&lt;/b&gt;
+Technically all database elements has a field 'uid' which is a unique identification number. Further they must have a field 'pid' which holds the uid-number of the page (page id) to which they belong. If the 'pid' field is zero the record is found in the so called 'root'. Only administrators are allowed access to the root and furthermore table records must be configured to either belonging to a page or being found in the root.
+
+&lt;b&gt;Storage of database records&lt;/b&gt;
+Depending on the 'Type' of the page, it may also represent a general storage for database elements in TYPO3. In that case it is not necessarily available as a webpage but only internally in the page tree as a place to store items such as users, subscriptions etc. Such pages are typically of the type &quot;SysFolder&quot;.</label>
+			<label index=".image_descr">The most basic fields of a page is the hidden flag, the type of page (&quot;doktype&quot;) and the page title. Other fields are also available but typically added by extensions in TYPO3.
+Pages are arranged in a page tree in TYPO3. The page from the editing form in the previous screenshot was the &quot;Intro&quot; page from this page tree. As you can see it belongs in the root of the page tree and has a number of &quot;child&quot; pages under it.</label>
+			<label index="title.description">Enter the title of the page or folder. You must enter a page title. The field is required.</label>
+			<label index="title.details">The page title is used to represent the page visually in the system, for example in the page tree. Also the page title is used by default for navigation links on webpages.
+You can always change a page title without affecting links to a page. This is because pages are always referenced by their &quot;uid&quot; number, not their title.
+You can use any characters in the page title.</label>
+			<label index="title.image_descr">The field for the page title has a little &quot;required&quot; icon next to it; You must supply a page title and you cannot save the new page unless you enter a title for it.</label>
+			<label index="doktype.description">Select the page type. This affects whether the page represents a visible webpage or is used for other purposes.</label>
+			<label index="doktype.details">The 'Standard' type represents a webpage.
+'SysFolder' represents a non-webpage - a folder acting as a storage for records of your choice.
+'Recycler' is a garbage bin.
+
+&lt;b&gt;Notice:&lt;/b&gt; Each type usually has a specific icon attached. Also certain types may not be available for a user (so you may experience that some of the options are not available for you!). And finally each type is configured to allow only certain table records in the page (SysFolder will allow any record if you have any problems).
+
+&lt;b&gt;$PAGES_TYPES [Technical]&lt;/b&gt;
+The restrictions that apply to each page type is defined in the global array $PAGES_TYPES. Here it is defined which tables are allowed on a page. When extensions adds tables to TYPO3 they may need to register their tables in $PAGES_TYPES so they can be created on standard pages.</label>
+			<label index="doktype.image_descr">This snippet of the page tree shows regular pages which usually have the yellow icons in top of this screenshot. You also see a Garbage bin page. Any records stored in a garbage bin should be regarded as waste and therefore not shown on the website etc. Finally the gray folders are &quot;SysFolders&quot;. They cannot be viewed as regular webpages but serve as storage pages for database records of some kind.</label>
+			<label index="TSconfig.description">Page TypoScript configuration.</label>
+			<label index="TSconfig.details">Basically 'TypoScript' is a concept for entering values in a tree-structure. This is known especially in relation to creating templates for TYPO3 websites.
+However the same principle for entering the hierarchy of values is used here to configure various features in relation to the backend, functions in modules, the Rich Text Editor etc.
+The resulting 'TSconfig' for a page is actually an accumulation of all 'TSconfig' values from the root of the page tree and outwards to the current page. And thus all subpages are affected as well. A print of the page TSconfig is available from the 'Page TSconfig' menu in the 'Web&gt;Info' module (requires the extension &quot;info_pagetsconfig&quot; to be installed).</label>
+			<label index="TSconfig.syntax">Basic TypoScript syntax &lt;em&gt;without&lt;/em&gt; 'Conditions' and 'Constants'.
+
+It's recommended that only admin-users are allowed access to this field!</label>
+			<label index="TSconfig.image_descr">Page TSconfig customizing the Rich Text Editors behaviour in this branch of the page tree. The cool thing about Page TSconfig is that the configuration is specific for that page and subpages since the configuration settings are inherited down the page tree.</label>
+			<label index="php_tree_stop.description">Stops backend rendering of the page tree in navigation and lists.</label>
+			<label index="php_tree_stop.details">If you set this flag the page tree in the navigation frame will not expand that branch. Rather you will see a red &quot;+&quot; which indicates that the tree stopped here due to this flag being set.
+
+The point with this flag is to prevent descendence into a branch that might have an unusual amount of subpages (hundreds).
+
+You can click the red &quot;+&quot; and the page will become a temporary mount point in the navigation frame.</label>
+			<label index="php_tree_stop.image_descr">Here the &quot;Stop page tree&quot; flag is set. It is a palette field under &quot;TSconfig&quot;.
+In the pagetree the setting is reflected with the red &quot;+&quot; and it is not possible to expand that branch of the tree.
+If you click the red &quot;+&quot; you will get the page mounted temporarily in the navigation frame.</label>
+			<label index="storage_pid.description">A General Storage Folder is meant to be a global page for storage of general database elements of a website. That could be for templates, frontend users etc. which does not really relate to a single page but more to the whole site.</label>
+			<label index="storage_pid.details">It is recommended that applications support &quot;General Storage pages&quot; so that they look for records in the sites general storage folder by default and that they should be specifically configured to look elsewhere.
+
+A General Record Storage Page is typically a page of the &quot;SysFolder&quot; type.</label>
+			<label index="editlock.description">If set, non-Admin users cannot edit the page properties or any records on the page (except subpages). They cannot create new records or pages on the page either.</label>
+		</languageKey>
+	</orig_text>
+</T3locallangExt>

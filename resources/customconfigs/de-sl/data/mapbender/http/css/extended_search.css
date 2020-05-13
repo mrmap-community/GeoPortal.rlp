@@ -1,0 +1,266 @@
+/* Die Umrandungen*/
+
+.searchFieldset {
+	border: 1px solid #000000;
+	font-family: Verdana,Arial,sans-serif; 
+	font-size: 1.1em; 
+}
+
+
+/* Styles der SeachFields */
+
+.searchlegend {
+	font-family: Verdana,Arial,sans-serif;
+	position: relative;
+/*
+	right: 115px;
+	top: -31px;
+*/
+}
+
+#form1 label {
+    display: inline;
+    float: none;
+}
+
+/* Positionierung der img für IE7 */
+
+#form1 img {
+    float:right;
+}
+
+/* Suchfeld Suchbegriffe*/
+
+.searchTexta {
+	left: 11px;
+	position: relative;
+	top: 3px;
+}
+
+/* Sortieren nach Icons - Nachfrage*/
+
+.orderByRanka {
+	position: relative;
+	right: 353px;
+	top: 10px;
+}
+
+.orderByRankb {
+	left: 31px;
+	position: relative;
+	top: 13px;
+	font-family: Verdana,Arial,sans-serif; 
+	/*font-size: 1.1em;*/
+}
+
+/*
+/* Sortieren nach Icons - Alphabetisch */
+
+
+.orderByTitlea {
+	position: relative;
+	top: 11px;
+	right: 284px;
+}
+
+
+.orderByTitleb {
+	left: 4px;
+	position: relative;
+	top: 13px;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+/* Sortieren nach Icons - Id */
+
+
+.orderByIda {
+	position: relative;
+	top: 11px;
+	right: 208px;
+}
+
+
+.orderByIdb {
+	right: 16px;
+	position: relative;
+	top: 13px;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+
+/* Sortieren nach Icons - Name */
+
+.orderByDatea {
+	position: relative;
+	top: -10px;
+	left: 193px; 
+}
+
+
+.orderByDateb {
+	position: relative;
+	top: -8px;
+	left: 339px;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+/* Checkbox 3 - SpatialFilter */
+
+.searchlabelSpatialFilter {
+	position: relative;
+	left: 34px;
+	font-family: Verdana,Arial,sans-serif;
+	white-space: nowrap;
+}
+
+/*
+.searchcheckbox {
+	position: relative;
+	right: 115px;
+}
+*/
+
+/* ----------------------------------------------------------------- */
+/* Checkbox 3 - Angeschnitten */
+
+.searchTypeBbox-a {
+	position: relative;
+	right: 356px;
+}
+
+.labelIntersects-a {
+	left: 33px;
+	position: relative;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+/* Checkbox 3 - Außerhalb */
+
+.searchTypeBbox-b {
+	position: relative;
+	right: 257px;
+}
+
+
+.labelOutside-b {
+	left: 38px;
+	position: relative;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+/* Checkbox 3 - komplett innerhalb */
+
+
+.searchTypeBbox-c {
+	position: relative;
+	right: 180px;
+}
+
+
+.labelInside-c {
+	left: 20px;
+	position: relative;
+	font-family: Verdana,Arial,sans-serif;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* ---------------  WAS ??? --------------------------------------------------- */
+
+/*
+
+.checkResourcesWms-a {
+	position: relative;
+	right: 474px;
+}
+
+
+
+.labekCheckResourcesWms-a {
+	left: 36px;
+	position: relative;
+}
+
+
+.checkResourcesWfs-b {
+	position: relative;
+	right: 361px;
+}
+
+.labelCheckResourcesWfs-b {
+	left: 51px;
+	position: relative;
+}
+
+.checkResourcesWmc-c {
+	position: relative;
+	right: 227px;
+}
+
+.labelCheckResourcesWmc-c {
+	left: 97px;
+	position: relative;
+}
+
+.disabled-d {
+	position: relative;
+	right: 89px;
+}
+
+.disabledbox-d {
+	left: 134px;
+	position: relative;
+}
+
+*/
+/* ------------------------------------------------------------------ */
+/* --------------- Coloring --------------------------------------------------- */
+
+#mb_tabs_horizontal ul, #mb_tabs_horizontal ol {
+	padding:0;
+}
+
+#mb_tabs_horizontal	.ui-state-default, .ui-widget-content .ui-state-default {	
+	background:url("images/bg-navigation.gif") repeat-x scroll 0 0 transparent;
+}
+
+#mb_tabs_horizontal .ui-widget-header {
+	background:white;	
+	
+}
+
+#navFrame .ui-state-default, .ui-widget-content .ui-state-default {
+    background: none repeat scroll 0 0 #e0e0e0;
+}
+
+/* Interaction states
+----------------------------------*/
+
+#mb_tabs_horizontal .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { 
+	border: 1px solid #DDDDDD; 
+	background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x; 
+	font-weight: bold;
+}
+
+#mb_tabs_horizontal .ui-state-hover a, .ui-state-hover a:hover { 
+	text-decoration: none; 
+	background-color:#D9E7FF 
+}
+
+#mb_tabs_horizontal .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { 
+	border: 1px solid #DDDDDD; 
+	background-image:none; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+#mb_tabs_horizontal .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+	color: #4F4F4F; text-decoration: none; 
+}
+
+#mb_tabs_horizontal .ui-widget :active { 
+	outline: none; 
+}
+
+	

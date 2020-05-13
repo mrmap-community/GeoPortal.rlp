@@ -1,0 +1,72 @@
+body, .body, td, form, input, select {
+  font-size: 12px;
+  font-family: "Verdana","Arial","Tahoma",sans-serif;
+}
+
+td h2, td h3, div h2, div h3, div h4 {
+  margin-top: 0px;
+}
+
+/* body colors */
+body, .body {
+  background-color:#F4F4F4;
+}
+body table, h1 {
+  margin:0px;
+  background-color:#FFFFFF;
+  /*
+margin-left: 15px;
+*/
+}
+body table tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* links */
+a {
+  text-decoration:none;
+  color:#000099;
+  font-size: 12px;
+}
+a:visited {
+  color:#555555;
+}
+a:active {
+  color:#4241DE;
+  background-color:#ce0000;
+}
+a:hover {
+  
+  color:#FF0000;
+}
+
+.a_small {
+  color:#000099;
+  font-size: 12px;
+}
+
+.mapbender_headline{
+	font-size: 32px; 
+	font-stretch:extra-expanded;
+	font-weight:bold;
+	margin-bottom:4px;
+}
+
+.mapbender_welcome{
+	font-size: 20px; 
+	font-weight:bold;
+	margin-top:3px;
+	margin-bottom:4px;
+}
+
+
+
+
+img{
+	border:0;
+	
+}
+label { 
+	cursor:pointer; 
+}

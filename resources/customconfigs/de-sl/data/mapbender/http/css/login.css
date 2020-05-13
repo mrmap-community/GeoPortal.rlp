@@ -1,0 +1,178 @@
+body{
+	font-family: Verdana
+	font-size : 12px;
+	color: #909090;
+	background-color: White;
+}
+
+table{
+	font-family: Verdana
+	font-size : 12px;
+	color: #909090;
+}
+
+
+input{
+	width: 180px;
+	font-size : 12px;
+}
+
+.myButton{
+	font-size : 12;
+	width: 100px;
+	height: 20px;
+}
+
+a:link moduletable{
+	text-decoration : none;
+	color: #FFFFFF;
+}
+
+a:visited {
+	text-decoration : none;
+}
+
+a:hover {
+	/*color: #808080;*/
+	text-decoration : none;
+	
+}
+
+a:active {
+	text-decoration : none;
+}
+
+.login_text{
+	width: 150px;
+}
+
+/* BEGIN gui listing */
+ul.gui_list {
+	padding: 2px;
+}
+
+img {
+	border: 0;
+}
+
+ul.gui_list {
+	list-style: none;
+}
+
+ul.gui_list li {
+	clear: both;
+	margin-top: -1px;
+	padding: .25em .5em;
+	background-color: #fff;
+	border: 0px solid #666;
+}
+
+div.categoryDescription {
+	font-size: 15px;
+	color: #808080;
+}
+
+div.guiDescription {
+	font-size: 12px;
+	color: #808080;
+}
+
+div.guiListTabs {
+	margin-top:15px;
+}
+
+a.guiLink {
+	color:#000000;
+}
+
+#loginForm {
+    background: none repeat scroll 0 0 #F0F0F0;
+    border-bottom: 1px solid #858585;
+    border-top: 1px solid #858585;
+    padding: 1em 0.5em 0.5em;
+    width: 100%;
+}
+	
+#registrationForm {
+    background: none repeat scroll 0 0 #F0F0F0;
+    border-bottom: 1px solid #858585;
+    border-top: 1px solid #858585;
+/*    margin: 2em auto;*/
+    padding: 1em 0.5em 0.5em;
+/*    width: 42em;*/
+    }
+	
+#fields label {
+    display: block;
+    float: left;
+    font-size: 115%;
+    font-weight: bold;
+    margin: 0 0 0.6em;
+    width: 14em;
+}
+#control_code label {
+    display: block;
+    float: none;
+    font-size: 115%;
+    font-weight: bold;
+    margin: 0 0 0.6em;
+    width: 14em;
+}
+
+#fields input {
+    display: block;
+    float: left;
+    font-size: 12px;
+    margin: 0 0 0.6em;
+	width:100%;
+/*    width: 40em;*/
+}
+
+#fields textarea {
+    display: block;
+    float: left;
+    font-size: 12px;
+    margin: 0 0 0.6em;
+	width:100%;
+/*    width: 40em;*/
+	height: 15em;
+}
+
+fieldset br.clr {
+    clear: both;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+}
+
+#_button input {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin: 1em 0 0 16em;
+    width: 10em;
+}
+
+/* END gui listing */
+
+/* ARP */
+
+#login_form {
+	margin: 50px auto;
+	width: 600px;
+}
+
+div.error, div.success {
+	width: 100%;
+	padding:4px;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.error {
+	background-color: #FFD3D3;
+	border: 1px dashed #FE9792;
+}
+
+div.success {
+	background-color: #D5FFD7;
+	border: 1px dashed #ABFFA7;	
+}

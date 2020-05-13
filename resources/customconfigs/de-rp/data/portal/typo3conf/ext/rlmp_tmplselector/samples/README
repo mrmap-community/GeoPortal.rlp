@@ -1,0 +1,15 @@
+rlmp_templselector/sample
+
+This directory contains two .t3d files containing sample typoscript
+templates for both ways of using the template selector.
+
+Just copy one or both of the files into your fileadmin folder,
+select a sysfolder or page in the backend and choose "import".
+
+The templates are commented and you should (almost) easily understand
+them after reading the manual of this extension.
+
+Have fun!
+
+--
+robert

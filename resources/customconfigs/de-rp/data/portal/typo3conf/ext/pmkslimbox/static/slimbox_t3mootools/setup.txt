@@ -1,0 +1,133 @@
+includeLibs.t3mootools = EXT:t3mootools/class.tx_t3mootools.php
+page.1230 = COA
+page.1230 {
+	10 = USER
+	10.userFunc = tx_t3mootools->addMooJS
+
+	20 = USER
+	20.userFunc = tx_t3mootools->addJS
+	20.jsfile.dataWrap = {$plugin.pmkslimbox.slimboxJS}
+
+	30 = USER
+	30.userFunc = tx_t3mootools->addJS
+	30.jsdata.cObject = COA
+	30.jsdata.cObject {  
+		1 = TEXT
+		1.value = Slimbox.scanPage = function() {var links = $$("a").filter(function(el) {return el.rel && el.rel.test(/^lightbox/i);});
+		2 = TEXT
+		2.value = $$(links).slimbox({resizeDuration: {$plugin.pmkslimbox.resizeDuration}, resizeTransition: Fx.Transitions.{$plugin.pmkslimbox.resizeTransition}, opacity: {$plugin.pmkslimbox.opacity}, opacityDuration: {$plugin.pmkslimbox.opacityDuration}, loop: {$plugin.pmkslimbox.loop}, initialWidth: {$plugin.pmkslimbox.initialWidth}, initialHeight: {$plugin.pmkslimbox.initialHeight}, animateCaption: {$plugin.pmkslimbox.animateCaption}, showCounter: {$plugin.pmkslimbox.showCounter}, enablePrintButton: {$plugin.pmkslimbox.enablePrintButton}, enableSaveButton: {$plugin.pmkslimbox.enableSaveButton},
+		3 = TEXT
+		3.value = counterText: '{LLL:EXT:pmkslimbox/locallang.xml:counterText}', psScriptPath: '{path:EXT:pmkslimbox/savefile.php}'
+		3.insertData = 1
+		4 = TEXT
+		4.value = }, null, function(el) {return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));});};window.addEvent("domready", Slimbox.scanPage);
+	}
+}
+page.headerData.1230 = TEXT
+page.headerData.1230.dataWrap (
+	<link rel="stylesheet" href="{path:{$plugin.pmkslimbox.slimboxCSS}}" type="text/css" media="screen" />
+)
+
+tt_content.image.20.1 {
+
+	titleText.field = {$plugin.pmkslimbox.imgtext.captionField}
+	titleText.htmlSpecialChars = 1
+	
+	# Removing the default "imageLinkWrap" TS code, and add new one to enable Lightbox effect.
+	imageLinkWrap >
+	imageLinkWrap = 1
+	imageLinkWrap {
+
+		# Enable linkwrapping if either click-enlarge is selected or a link is defined.
+		enable.field = image_zoom
+		enable.ifEmpty.typolink.parameter.field = image_link
+		enable.ifEmpty.typolink.parameter.listNum.stdWrap.data = register : IMAGE_NUM_CURRENT
+		enable.ifEmpty.typolink.returnLast = url
+
+		# Add new typolink wrapping code
+		typolink {
+			target = {$styles.content.links.target}
+			extTarget = {$styles.content.links.extTarget}
+
+			# This returns a link, pointing to the path + name of the original image.
+			# or to the path + name of the resized lightbox image (if maxH or maxW is reached.)
+			parameter.cObject = IMG_RESOURCE
+			parameter.cObject.file.import.data = TSFE:lastImageInfo|origFile
+			parameter.cObject.file.maxW = {$plugin.pmkslimbox.slimBoxMaxW}
+			parameter.cObject.file.maxH = {$plugin.pmkslimbox.slimBoxMaxH}
+	
+			# Except if the linkfield is not empty
+			parameter.override.field = image_link
+			parameter.override.listNum.stdWrap.data = register : IMAGE_NUM_CURRENT
+			parameter.override.if.isTrue.field = image_link
+		
+			# Add the "rel" attribute needed to activate the lightbox effect.
+			ATagParams = rel="lightbox"
+			ATagParams.override = rel="lightbox[sb{field:uid}]"
+			ATagParams.override.if.isTrue = {$plugin.pmkslimbox.imgtext.navigable}
+			ATagParams.insertData = 1
+			ATagParams.if.isTrue.field = image_zoom
+
+		}
+	}
+}
+
+
+temp.imageLinkWrap = 1
+temp.imageLinkWrap {
+	enable = 1
+	
+	# Add new typolink wrapping code
+	typolink {
+		# Set the title of the A tag, which is used as caption inside the Lightbox
+		title.field = {$plugin.pmkslimbox.tt_news.captionField}
+		title.split.token.char = 10
+		title.split.returnKey.data = register : IMAGE_NUM_CURRENT
+		title.htmlSpecialChars = 1
+		#title.if.isTrue = {$plugin.pmkslimbox.tt_news.enableSplit}
+				
+		# This returns a link, pointing to the path + name of the original image.
+		# or to the path + name of the resized lightbox image (if maxH or maxW is reached.)
+		parameter.cObject = IMG_RESOURCE
+		parameter.cObject.file.import.data = TSFE:lastImageInfo|origFile
+		parameter.cObject.file.maxW = {$plugin.pmkslimbox.slimBoxMaxW}
+		parameter.cObject.file.maxH = {$plugin.pmkslimbox.slimBoxMaxH}
+	
+		# Add the "rel" attribute needed to activate the lightbox effect.
+		ATagParams = rel="lightbox"
+		ATagParams.override = rel="lightbox[sb{field:uid}]"
+		ATagParams.override.if.isTrue = {$plugin.pmkslimbox.tt_news.navigable}
+		ATagParams.insertData = 1
+	}
+}
+
+
+[globalVar = LIT:1 = {$plugin.pmkslimbox.tt_news.enableSplit}]
+# include the php script
+includeLibs.imageMarkerFunc = EXT:pmkslimbox/tt_news_imageMarkerFunc.php
+plugin.tt_news.imageMarkerFunc = user_imageMarkerFunc
+[GLOBAL]
+
+[globalVar = LIT:1 = {$plugin.pmkslimbox.tt_news.displaySingle.slimBoxEnable}]
+# Change "imageLinkWrap" for the "displaySingle" object of tt_news
+plugin.tt_news.displaySingle.image.imageLinkWrap >
+plugin.tt_news.displaySingle.image.imageLinkWrap < temp.imageLinkWrap
+[GLOBAL]
+
+[globalVar = LIT:1 = {$plugin.pmkslimbox.tt_news.displayLatest.slimBoxEnable}]
+# Change "imageLinkWrap" for the "displayLatest" object of tt_news
+plugin.tt_news.displayLatest.image.imageLinkWrap >
+plugin.tt_news.displayLatest.image.imageLinkWrap < temp.imageLinkWrap
+[GLOBAL]
+
+[globalVar = LIT:1 = {$plugin.pmkslimbox.tt_news.displayList.slimBoxEnable}]
+# Change "imageLinkWrap" for the "displayList" object of tt_news
+plugin.tt_news.displayList.image.imageLinkWrap >
+plugin.tt_news.displayList.image.imageLinkWrap < temp.imageLinkWrap
+[GLOBAL]
+
+[globalVar = LIT:1 = {$plugin.pmkslimbox.tt_news.displayList.slimBoxSingleView}]
+# Enable displaying tt_news singleView inside the Lightbox
+plugin.tt_news.displayList.linkTitleField = title
+plugin.tt_news.displayList.linkTitleField.wrap = |" rel="lightbox" rev="width={$plugin.pmkslimbox.tt_news.displayList.slimboxWidth}, height={$plugin.pmkslimbox.tt_news.displayList.slimboxHeight}
+[GLOBAL]

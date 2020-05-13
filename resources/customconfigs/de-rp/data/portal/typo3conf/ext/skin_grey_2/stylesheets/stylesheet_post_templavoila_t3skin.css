@@ -1,0 +1,165 @@
+@import url(stylesheet_post_templavoila.css);
+body#ext-templavoila-mod1-index-php { width: 100%;}
+body#ext-templavoila-mod1-index-php .bgColor4 .typo3-page-ceHeader { margin-top:15px }
+body#ext-templavoila-mod1-index-php .headerCell {
+	padding:2px 0 !important;
+	padding:0;
+	overflow:hidden;
+	text-align:center;
+	font-weight:bold;
+	text-transform:uppercase;
+	color: #FFFFFF;	
+	background-color: #B8BEC9;
+	background-image: url('../../../../typo3/sysext/t3skin/icons/gfx/alt_menu_mainitem_bg.gif');
+	background-position: top left;
+}
+.infoTable { background-color: #F2F2F2 }
+
+#contentTable .otherCell { border:1px dashed #ABABAB !important; }
+
+.contentArea { }
+#contentTable .contentArea { border:1px solid white; }
+#contentTable .contentArea:hover,
+#contentTable .sfhover { border: 1px solid red }
+
+
+body#ext-templavoila-mod1-index-php .bgColor4 .bgColor4  { background-color:#F5F5F5 !important } /*#f2f2f2*/
+body#ext-templavoila-mod1-index-php .bgColor5 {
+	background-color: #F9F9F9;
+	border:1px solid #EEEEEE
+}
+body#ext-templavoila-mod1-index-php .otherCell span.buttonMode,
+body#ext-templavoila-mod1-index-php .otherCell span.textMode,
+body#ext-templavoila-mod1-index-php .endLinkContainer span.textMode,
+body#ext-templavoila-mod1-index-php .commandLink span.buttonMode { 
+	border:1px solid rgb(171,171,171) !important;
+	background-color:rgb(238,238,238) !important;
+	vertical-align:middle;
+}
+body#ext-templavoila-mod1-index-php .commandLink:hover span.buttonMode { background-color: #f9f9f9 !important; }
+body#ext-templavoila-mod1-index-php .otherCell {
+	padding:0 5px 5px 5px 5px;
+	border:1px dashed rgb(171, 171, 171);
+}
+body#ext-templavoila-mod1-index-php .otherCell span.buttonMode { padding:0 !important; }
+body#ext-templavoila-mod1-index-php .titlebarLeftContentButtons span.contentIcon,
+body#ext-templavoila-mod1-index-php .otherCell span.contentIcon,
+body#ext-templavoila-mod1-index-php .header-icon-title .contentIcon { background-color:#cecece; }
+body#ext-templavoila-mod1-index-php .titlebarLeftContentButtons span.contentIcon,
+body#ext-templavoila-mod1-index-php .otherCell span.contentIcon,
+body#ext-templavoila-mod1-index-php .header-icon-title .contentIcon { border:1px solid rgb(171,171,171) !important; }
+body#ext-templavoila-mod1-index-php .titlebarLeftContentButtons a:hover span.contentIcon { border: 1px solid #FFB936 !important; }
+
+
+/* iconMode */
+body#ext-templavoila-mod1-index-php .bgColor4 #contentTable { background-color: #f9f9f9 !important; }
+
+/* buttonMode/textMode */
+body#ext-templavoila-mod1-index-php .otherCell span.buttonMode,
+body#ext-templavoila-mod1-index-php .otherCell span.textMode,
+body#ext-templavoila-mod1-index-php .endLinkContainer span.textMode,
+body#ext-templavoila-mod1-index-php .commandLink span.buttonMode,
+body#ext-templavoila-mod1-index-php #typo3-clipboard td span.button { 
+	border:1px solid rgb(171,171,171) !important;
+	background-color:rgb(238,238,238) !important;
+}
+body#ext-templavoila-mod1-index-php .commandLink:hover span.buttonMode { background-color: #f9f9f9 !important; }
+body#ext-templavoila-mod1-index-php .otherCell a.buttonMode img { border:1px solid #fefefe; }
+body#ext-templavoila-mod1-index-php .otherCell a.buttonMode:hover img { border: 1px solid #FFB936 !important; }
+
+
+/* bothMode */
+body#ext-templavoila-mod1-index-php a.bothMode img { /*  .otherCell */
+	border:1px solid rgb(171,171,171) !important;
+	background-color:rgb(238,238,238) !important;
+}
+body#ext-templavoila-mod1-index-php .endLinkContainer a.bothMode span.textMode { 
+	background-color:transparent !important;
+	border-width: 0 !important;
+}
+body#ext-templavoila-mod1-index-php .otherCell a.bothMode img  { border:1px solid #fefefe  !important; }
+body#ext-templavoila-mod1-index-php .otherCell a.bothMode:hover img { border: 1px solid #FFB936 !important; }
+body#ext-templavoila-mod1-index-php .otherCell a.bothMode span.textMode { border-width:0 !important; }
+
+/* extra for new version of tm_contentaccess .titleBarRightPage { display:none }*/
+
+body#ext-templavoila-mod1-index-php .titleBarLeftPage { background-color: transparent !important }
+body#ext-templavoila-mod1-index-php, body#ext-templavoila-mod1-index-php table.lrPadding, 
+body#ext-templavoila-mod1-index-php table.typo3-page-ceHeaderPage, 
+body#ext-templavoila-mod1-index-php td.titleBarLeftPage, 
+body#ext-templavoila-mod1-index-php form { width:100% !important; }
+body#ext-templavoila-mod1-index-php td.titleBarRightPage { display:none; }
+body#ext-templavoila-mod1-index-php table#contentTable { width:99%  !important; }
+
+/* Typo3 4.2 related stuff */
+body#ext-templavoila-mod1-index-php #typo3-docheader { 
+	height:59px !important;
+	width:100% important; /*
+	background-color: red;#b8bdc6
+	background:  url('../../../typo3/sysext/t3skin/icons/gfx/alt_menu_mainitem_bg.gif') top left repeat-x;*/
+}
+body#ext-templavoila-mod1-index-php #tabbarcontainer { 
+	position:absolute;
+	top:0px !important;
+	left:0;
+	width:100%;
+	height:25px;
+}
+body#ext-templavoila-mod1-index-php table#contentTable { width:99% !important; }
+body#ext-templavoila-mod1-index-php #typo3-docbody table#contentTable { 
+	position:relative;
+	top:45px;
+	margin-left:-10px; 
+}
+body#ext-templavoila-mod1-index-php .titleBarLeft .pagepath { 
+	margin-left:5px !important;
+}
+body#ext-templavoila-mod1-index-php #sidebartopcontainer {
+	margin-top:-10px;
+	margin-left:-10px;
+	margin-bottom:20px;
+	width:100%;
+}
+
+body#ext-templavoila-mod1-index-php .T42_container { margin-top:-30px !important; }
+body#ext-templavoila-mod1-index-php .buttonsleft {
+	position:relative;
+	height:22px;
+	white-space:nowrap;
+}
+body#ext-templavoila-mod1-index-php .buttonsleft .buttongroup { 
+	position:relative;
+	height:22px;
+	white-space:nowrap;
+	float:left;
+}
+/*commandLink commandLink-edit iconMode*/
+body#ext-templavoila-mod1-index-php div.buttonsleft a,
+body#ext-templavoila-mod1-index-php .buttonsleft .buttongroup a.commandLink,
+body#ext-templavoila-mod1-index-php div.buttonsleft a img { 
+	float:none !important;
+	display:inline !important;
+	white-space:nowrap !important;
+}
+body#ext-templavoila-mod1-index-php .buttonsright .buttongroup { 
+	white-space:nowrap; 
+	float:right;
+}
+body#ext-templavoila-mod1-index-php .buttonsright {
+	float:right;
+	margin-right:15px;
+	white-space:nowrap;
+	height:18px;
+	width:100px;
+}
+
+body#ext-templavoila-mod1-index-php .buttonsright .buttongroup {
+	white-space:nowrap;
+	text-align:right;
+	position:relative;
+	display:inline !important;
+}
+body#ext-templavoila-mod1-index-php div#typo3-docbody {	left:0px; }
+body#ext-templavoila-mod1-index-php div#typo3-docbody .typo3-sidebar-left { margin-top:-10px; }
+body#ext-templavoila-mod1-index-php div#typo3-docbody td.sidebar-obj { padding-right:6px !important; }
+body#ext-templavoila-mod1-index-php div#typo3-docbody td.sidebar-shortcut { padding-top:30px !important}
