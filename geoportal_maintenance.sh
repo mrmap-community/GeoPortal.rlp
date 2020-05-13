@@ -18,7 +18,6 @@ mode="none"
 
 # mapbender/phppgadmin database config
 mapbender_database_name="mapbender"
-mapbender_database_host="127.0.0.1"
 mapbender_database_port="5432"
 mapbender_database_user="mapbenderdbuser"
 mapbender_database_password="mapbenderdbpassword"
@@ -39,7 +38,6 @@ http_proxy_pass=""
 webadmin_email="test@test.de"
 email_hosting_server="mail.domain.tld"
 use_ssl="false"
-not_proxy_hosts="localhost,127.0.0.1"
 
 
 # mapbender specific stuff
@@ -55,7 +53,6 @@ maxx="465000"
 maxy="5647000"
 epsg="EPSG:25832"
 bbox_current_epsg_csv="$minx,$miny,$maxx,$maxy"
-bbox_current_epsg_space="$minx $miny $maxx $maxy"
 
 ############################################################
 # define name of the default gui -
@@ -72,7 +69,6 @@ center_y_i="5543000"
 # config.js - mm2_config.js
 bbox_wgs84="6.05 48.9 8.6 50.96"
 initial_scale_i="1500000"
-map_extent_csv=$bbox_wgs84
 
 background_hybrid_tms_url="http://www.gdi-rp-dienste2.rlp.de/mapcache/tms/1.0.0/topplusbkg@UTM32"
 background_aerial_wms_url="http://geo4.service24.rlp.de/wms/dop_basis.fcgi"
@@ -85,7 +81,6 @@ checkout_geoportal_git="true"
 install_mapbender_source="true"
 install_mapbender_database="true"
 install_mapbender_conf="true"
-configure_mapbender="true"
 configure_apache="true"
 configure_cronjobs="true"
 
