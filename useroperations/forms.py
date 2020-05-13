@@ -21,7 +21,7 @@ class RegistrationForm(forms.Form):
     organization = forms.CharField(max_length=100, label=_("Organization"), required=False, widget=forms.TextInput(attrs={'title': _("Please enter the organization you are working for.")}))
     department = forms.CharField(max_length=100, label=_("Departement"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter the departement you are working in.")}))
     phone = forms.CharField(max_length=100, label=_("Phone"), required=False,widget=forms.TextInput(attrs={'title': _("Please enter your phone number.")}))
-    description = forms.CharField(max_length=1000, label=_("Description"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter a description.")}))
+    description = forms.CharField(max_length=255, label=_("Description"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter a description.")}))
     newsletter = forms.BooleanField(initial=True, label=_("I want to sign up for the newsletter"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Sign up for the newsletter.")}))
     survey = forms.BooleanField(initial=True, label=_("I want to participate in surveys"), required=False, widget=forms.CheckboxInput(attrs={'title':_("Participate in surveys.")}))
     dsgvo = forms.BooleanField(initial=False, label=_("I understand and accept that my data will be automatically processed and securely stored, as it is stated in the general data protection regulation (GDPR)."), required=True, widget=forms.CheckboxInput(attrs={'title':_("Accept privacy policy.")}))
