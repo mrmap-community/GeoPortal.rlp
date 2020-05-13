@@ -1264,19 +1264,20 @@ echo "Checking differences in config files"
 check_django_settings
 
 #update mapbender
+mkdir ${installation_folder}config_backup_for_update/
 echo "Backing up Mapbender Configs"
-cp -av ${installation_folder}mapbender/conf/mapbender.conf ${installation_folder}mapbender.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/geoportal.conf ${installation_folder}geoportal.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installation_folder}extents_geoportal_rlp.map_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}config.js_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/ckan.conf ${installation_folder}ckan.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/mobilemap2.conf ${installation_folder}mobilemap2.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/linkedDataProxy.json ${installation_folder}linkedDataProxy.json_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}twitter.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}bkgGeocoding.conf_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}excludeproxyurls.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/mapbender.conf ${installation_folder}config_backup_for_update/mapbender.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/geoportal.conf ${installation_folder}config_backup_for_update/geoportal.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/tools/wms_extent/extents.map ${installation_folder}config_backup_for_update/extents_geoportal_rlp.map_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/tools/wms_extent/extent_service.conf ${installation_folder}config_backup_for_update/extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js ${installation_folder}config_backup_for_update/config.js_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/atomFeedClient.conf ${installation_folder}config_backup_for_update/atomFeedClient.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/ckan.conf ${installation_folder}config_backup_for_update/ckan.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/mobilemap2.conf ${installation_folder}config_backup_for_update/mobilemap2.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/linkedDataProxy.json ${installation_folder}config_backup_for_update/linkedDataProxy.json_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y")
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
@@ -1285,18 +1286,18 @@ su -c 'git pull'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
 
 echo "Restoring Mapbender Configs"
-cp -av ${installation_folder}mapbender.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mapbender.conf
-cp -av ${installation_folder}geoportal.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/geoportal.conf
-cp -av ${installation_folder}extents_geoportal_rlp.map_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extents.map
-cp -av ${installation_folder}extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
-cp -av ${installation_folder}config.js_$(date +"%m_%d_%Y") ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
-cp -av ${installation_folder}atomFeedClient.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/atomFeedClient.conf
-cp -av ${installation_folder}ckan.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/ckan.conf
-cp -av ${installation_folder}mobilemap2.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap2.conf
-cp -av ${installation_folder}linkedDataProxy.json_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/linkedDataProxy.json
-cp -av ${installation_folder}twitter.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/twitter.conf
-cp -av ${installation_folder}bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
-cp -av ${installation_folder}excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
+cp -av ${installation_folder}config_backup_for_update/mapbender.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mapbender.conf
+cp -av ${installation_folder}config_backup_for_update/geoportal.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/geoportal.conf
+cp -av ${installation_folder}config_backup_for_update/extents_geoportal_rlp.map_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extents.map
+cp -av ${installation_folder}config_backup_for_update/extent_service_geoportal_rlp.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
+cp -av ${installation_folder}config_backup_for_update/config.js_$(date +"%m_%d_%Y") ${installation_folder}mapbender/http/extensions/mobilemap2/scripts/netgis/config.js
+cp -av ${installation_folder}config_backup_for_update/atomFeedClient.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/atomFeedClient.conf
+cp -av ${installation_folder}config_backup_for_update/ckan.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/ckan.conf
+cp -av ${installation_folder}config_backup_for_update/mobilemap2.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap2.conf
+cp -av ${installation_folder}config_backup_for_update/linkedDataProxy.json_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/linkedDataProxy.json
+cp -av ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/twitter.conf
+cp -av ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
+cp -av ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
 
 
 cd ${installation_folder}mapbender/tools
@@ -1334,15 +1335,15 @@ echo "Mapbender Update Done"
 echo "Updating Geoportal Project"
 cd ${installation_folder}GeoPortal.rlp
 echo "Backing up Django Configs"
-cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}settings.py_$(date +"%m_%d_%Y")
-cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}useroperations_conf.py_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y")
 
 git reset --hard
 git pull
 
 echo "Restoring Django Configs"
-cp -av ${installation_folder}settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-cp -av ${installation_folder}useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
+cp -av ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
 
 # copy some scripts that are needed for django mapbender integration
 cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
