@@ -830,7 +830,7 @@ EOF
   #sed -i s/"SecRuleEngine DetectionOnly"/"SecRuleEngine On"/g /etc/modsecurity/modsecurity.conf
   rm -rf /usr/share/modsecurity-crs
   echo -e "\n Downloading Modsecurity Ruleset! \n" | tee -a $installation_log
-  git clone --progress https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs | tee -a $installation_log
+  git clone --progress https://github.com/coreruleset/coreruleset /usr/share/modsecurity-crs | tee -a $installation_log
   if [ $? -eq 0 ];then
     echo -e "\n ${green}Successfully downloaded Modsecurity Ruleset! ${reset}\n" | tee -a $installation_log
   else
