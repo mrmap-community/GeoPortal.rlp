@@ -1009,8 +1009,6 @@ mkdir -pv ${installation_folder}mapbender/http/local | tee -a $installation_log
 
 # copy some mapbender related scripts
 cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
-cp -a ${installation_folder}mapbender/http/geoportal/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php.backup
-cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php
 cp -a ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 cp -a ${installation_folder}mapbender/conf/mapbender.conf /${installation_folder}mapbender/conf/mapbender.conf.backup
 #only neeed if mass download should be enabled
@@ -1347,7 +1345,6 @@ cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(d
 
 # copy some scripts that are needed for django mapbender integration
 cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
-cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/authentication.php ${installation_folder}mapbender/http/geoportal/authentication.php
 cp -av ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 #only needed if multi download should be enabled
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
