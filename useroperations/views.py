@@ -447,6 +447,7 @@ def pw_reset_view(request):
     btn_label = _("Submit")
     context = {
         'form': form,
+        'headline': _("Password reset"),
         "btn_label2": btn_label,
     }
     geoportal_context.add_context(context)
