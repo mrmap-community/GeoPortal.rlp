@@ -1256,6 +1256,10 @@ while true; do
     esac
 done
 
+# needed for building new postgres python modules psycop2
+apt-get update
+apt-get install -y libpq-dev
+
 custom_update "save"
 
 echo "Checking differences in config files"
@@ -1359,11 +1363,13 @@ custom_update "restore"
 # this can used be to do some special tasks that may be needed by other users than rlp, eg. copy files that are overwritten by the update from the customconfig folder to another location
 custom_update "script"
 # create and activate virtualenv
+rm -r ${installation_folder}env
 virtualenv -ppython3 ${installation_folder}env
 source ${installation_folder}env/bin/activate
-
+pip install pur
 # install needed python packages
 cd ${installation_folder}GeoPortal.rlp
+pur -r requirements.txt
 pip install -r requirements.txt
 rm -r ${installation_folder}GeoPortal.rlp/static
 python manage.py collectstatic
