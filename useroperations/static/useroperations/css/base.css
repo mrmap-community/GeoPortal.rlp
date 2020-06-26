@@ -260,7 +260,8 @@ footer{
     width: 100%;
     overflow: hidden;
     padding: 10px;
-    display: block; }
+    display: block;
+    box-sizing: border-box;}
 
 .simple-search-autocomplete .headline{
     font-weight: bold;
