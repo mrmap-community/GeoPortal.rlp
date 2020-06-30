@@ -179,3 +179,18 @@ form input[type=text], form input[type=password], form input[type=email]{
 .captcha-refresh:hover{
     background-color: var(--primary-light-hover);
 }
+@media screen and (max-width: 600px){
+    .form-wrapper{display:block;justify-content:unset;padding:15px;margin: 0;box-sizing: border-box;}
+    .field-wrapper{display:unset;padding:0px;}
+    .field-wrapper td{display:block;width: calc(100vw - 50px);box-sizing: border-box;}
+    .field-value{min-width:unset;width:calc(100vw - 30px);}
+    .field-value input{box-sizing:border-box;}
+    .field-label{width: calc(100vw - 30px);}
+    .submit-button-wrapper{margin:1rem 0.1rem 0 0.2rem;}
+    .forgot-pw-button{display:block;padding:12px 0 10px 0}
+    .form-submit-button{display:block;}
+    .title{padding:0 18px;}
+    .description{padding:0 18px;}
+    .foot-note{margin:0 3px;}
+    .messages-container{margin:0 1.2rem 0 0.2rem;}
+}
