@@ -956,4 +956,20 @@ ul {
         font-weight: bold;
     }
 
+    .popup-landing .popuptext-landing {
+     margin-left: -100px;
+    }
+
+    .popup-landing .popuptext-landing::after {
+     left: 50%;
+    }
+
+    .popup-search .popuptext-search {
+      bottom: 125%;
+      left: 350%;
+    }
+
+
+
+
 }
