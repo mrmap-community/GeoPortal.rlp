@@ -132,6 +132,108 @@ footer{
     /*background-color: var(--secondary);*/
 }
 
+.popup-search {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+}
+
+.popup-search .popuptext-search {
+ visibility: hidden;
+ width: 180px;
+ font-size: 15px;
+ font-family: arial,helvetica;
+ font-weight: bold;
+ background-color: var(--secondary);
+ color: var(--secondary-font);
+ border-color: var(--primary);
+ border-style: solid;
+ text-align: center;
+ border-radius: 0.5px;
+ position: absolute;
+ bottom: 10%;
+ right: 50px;
+ margin-left: -150px;
+}
+
+/* Popup arrow */
+.popup-search .popuptext-search::after {
+ content: "";
+ position: absolute;
+ right: -15px;
+ top: 10px;
+ margin-left: -5px;
+ border-width: 8px;
+ border-style: solid;
+ border-color: transparent var(--primary) transparent transparent;
+}
+
+.popup-search .show-popup {
+  visibility: hidden;
+  animation: fade 3s cubic-bezier(0,2.07,.58,2.07);
+}
+
+.popup-landing {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+}
+
+.popup-landing .popuptext-landing {
+ visibility: hidden;
+ width: 180px;
+ font-size: 15px;
+ font-family: arial,helvetica;
+ font-weight: bold;
+ background-color: var(--secondary);
+ color: var(--secondary-font);
+ border-color: var(--primary);
+ border-style: solid;
+ text-align: center;
+ border-radius: 0.5px;
+ position: absolute;
+ top: 125%;
+ left: 50%;
+ margin-left: -150px;
+}
+
+/* Popup arrow */
+.popup-landing .popuptext-landing::after {
+ content: "";
+ position: absolute;
+ bottom:110%;
+ left: 80%;
+ margin-left: -5px;
+ border-width: 8px;
+ border-style: solid;
+ border-color: var(--primary) transparent transparent transparent;
+ transform: rotate(180deg);
+}
+
+.popup-landing .show-popup {
+  visibility: hidden;
+  animation: fade 3s cubic-bezier(0,2.07,.58,2.07);
+}
+
+
+@keyframes fade {
+  0%,100% { visibility: hidden; }
+  50% { visibility: visible; }
+}
+
+.share-button{
+  padding-left: 10px;
+    opacity: 0.75;
+    font-size: 2em;
+    padding: 0 0.25em;
+}
+.share-button:hover{
+    opacity: 1;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+
 /* FOR MOBILE USERS */
 @media only screen and (max-width: 1000px){
     .body-content{
@@ -853,5 +955,21 @@ ul {
     .mobile-advice{
         font-weight: bold;
     }
+
+    .popup-landing .popuptext-landing {
+     margin-left: -100px;
+    }
+
+    .popup-landing .popuptext-landing::after {
+     left: 50%;
+    }
+
+    .popup-search .popuptext-search {
+      bottom: 125%;
+      left: 350%;
+    }
+
+
+
 
 }

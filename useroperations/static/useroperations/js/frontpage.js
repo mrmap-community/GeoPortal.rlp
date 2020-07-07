@@ -161,6 +161,69 @@ function startAutomaticSearch(){
     });
 }
 
+function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
+
+$(document).on("click", ".share-button", function(){
+
+    //landing page
+    if ($(".landing-page-headline")[0]){
+      var elem = $(this).parents(".tile").find(".tile-header");
+    //search
+    } else {
+      var elem = $(this).parents(".resource-element-actions").find(".share-button")
+    }
+
+    var id = elem.attr("data-id");
+    type = id.split("=")[0];
+    id = id.split("=")[1];
+
+    copyTextToClipboard(window.location.origin+"/map?"+type+"="+id);
+    var popup = document.getElementsByName("sharepopup"+id);
+
+    for (var i = 0; i < popup.length; i++) {
+      popup[i].classList.add("show-popup");
+
+      setTimeout(function(){
+        $(".popuptext-landing."+id).removeClass( "show-popup" );
+        $(".popuptext-search."+id).removeClass( "show-popup" )  }, 3000);
+
+    }
+
+});
+
 
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
@@ -542,4 +605,3 @@ $(document).ready(function(){
     $(".messages-container").delay(500).slideToggle("medium");
     $(".messages-container").delay(5000).slideToggle("medium");
 });
-

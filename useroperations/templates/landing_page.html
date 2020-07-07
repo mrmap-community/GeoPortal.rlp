@@ -74,6 +74,12 @@
                             <i class="fas fa-eye"></i>
                             <span>{{ result.loadCount|intcomma }}</span>
                         </div>
+                        <div class="placeholder">
+                        </div>
+                        <div title="{% trans 'Share' %}" class="share-button popup-landing">
+                          <span class="popuptext-landing {{ result.id }}" name="sharepopup{{ result.id }}">{% trans 'Map URL copied to clipboard' %}</span>
+                            <i class="fa fa-share-alt"></i>
+                        </div>
                         <div title="{% trans 'Open in mobile viewer' %}" class="mobile-button">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
