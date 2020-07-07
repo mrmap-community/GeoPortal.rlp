@@ -168,7 +168,7 @@ footer{
  border-color: transparent var(--primary) transparent transparent;
 }
 
-.popup-search .show {
+.popup-search .show-popup {
   visibility: hidden;
   animation: fade 3s cubic-bezier(0,2.07,.58,2.07);
 }
@@ -210,7 +210,7 @@ footer{
  transform: rotate(180deg);
 }
 
-.popup-landing .show {
+.popup-landing .show-popup {
   visibility: hidden;
   animation: fade 3s cubic-bezier(0,2.07,.58,2.07);
 }

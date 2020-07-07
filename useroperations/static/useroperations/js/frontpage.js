@@ -214,14 +214,14 @@ $(document).on("click", ".share-button", function(){
     var popup = document.getElementsByName("sharepopup"+id);
 
     for (var i = 0; i < popup.length; i++) {
-      popup[i].classList.add("show");
+      popup[i].classList.add("show-popup");
 
       setTimeout(function(){
-        $(".popuptext-landing."+id).removeClass( "show" );
-        $(".popuptext-search."+id).removeClass( "show" )  }, 3000);
+        $(".popuptext-landing."+id).removeClass( "show-popup" );
+        $(".popuptext-search."+id).removeClass( "show-popup" )  }, 3000);
 
     }
-    
+
 });
 
 
