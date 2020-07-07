@@ -1660,6 +1660,15 @@ msgstr ""
 #: useroperations/views.py:967
 msgid "Feedback from "
 msgstr "Feedback Formular"
+  
+  
+#: searchCatalogue/templates/search_result_list_entry.html:57
+#: searchCatalogue/templates/search_result_list_entry.html:80
+#: searchCatalogue/templates/search_result_list_entry.html:102
+#: useroperations/templates/landing_page.html:80
+msgid "Map URL copied to clipboard"
+msgstr "Link zur Karte wurde in Zwischenablage kopiert"
+
 
 #~ msgid "The letter W, as used for wikipedia"
 #~ msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"
