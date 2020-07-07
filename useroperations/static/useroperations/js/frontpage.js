@@ -162,6 +162,44 @@ function startAutomaticSearch(){
 }
 
 
+
+$(document).on("click", ".share-button", function(){
+
+    //landing page
+    if ($(".landing-page-headline")[0]){
+      var elem = $(this).parents(".tile").find(".tile-header");
+    //search
+    } else {
+      var elem = $(this).parents(".resource-element-actions").find(".share-button")
+    }
+    //var elem = $(this).parents(".tile").find(".tile-header");
+    //var elem = $(this).parents(".resource-element-actions").find(".share-button");
+    var id = elem.attr("data-id");
+    // get rid of 'WMC=' which is needed for the usual call
+    type = id.split("=")[0];
+    id = id.split("=")[1];
+    navigator.clipboard.writeText(window.location.origin+"/map?"+type+"="+id)
+    .then(() => {
+      var popup = document.getElementsByName("sharepopup"+id);
+
+      for (var i = 0; i < popup.length; i++) {
+        popup[i].classList.toggle("show");
+
+        setTimeout(function(){
+          $(".popuptext-landing."+id).removeClass( "show" );
+          $(".popuptext-search."+id).removeClass( "show" )  }, 3000);
+
+      }
+
+      //var popup = $('#sharepopup'+id);
+      //console.log(popup)
+      //popup.classList.toggle("show");
+    })
+    .catch((error) => { alert(`Copy failed! ${error}`) })
+
+});
+
+
 $(document).on("click", ".mobile-button", function(){
     // get wmc id
     var elem = $(this).parents(".tile").find(".tile-header");
@@ -542,4 +580,3 @@ $(document).ready(function(){
     $(".messages-container").delay(500).slideToggle("medium");
     $(".messages-container").delay(5000).slideToggle("medium");
 });
-

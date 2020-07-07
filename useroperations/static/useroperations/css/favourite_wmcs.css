@@ -133,8 +133,12 @@
 
 .sub-tile-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+}
+
+.placeholder{
+  width:110px;
 }
 
 .mobile-button{
