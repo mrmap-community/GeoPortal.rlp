@@ -216,11 +216,9 @@ All organization related images can be found in `useroperations/static/useropera
 `logo-`. Simply changing these (while keeping the same name) will directly change the appearance on the pages.
 All other images that have the prefix `icn_` are used as icons and can be changed the same way.
 
-
-
 ## License
 
-Licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
+For information about the licensing of the software read the current version of the [LICENSE file](https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/src/branch/master/LICENCE) included in the project.
 
 ### Attributions
 #### Fontawesome
