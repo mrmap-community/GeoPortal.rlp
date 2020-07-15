@@ -35,7 +35,7 @@ def __set_tag(dom, tag, attribute, prefix):
         attrib = elem.get(attribute)
         if tag == 'a':
             # check if the page we want to go to is an internal or external page
-            title = elem.get("title").replace(" ", "_")
+            title = elem.get("title", "").replace(" ", "_")
             if searcher.is_article_internal(title):
                 attrib = "/article/" + title
         if protocol not in attrib:
