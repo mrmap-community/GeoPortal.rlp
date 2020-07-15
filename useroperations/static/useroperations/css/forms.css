@@ -9,16 +9,17 @@
 .field-wrapper{
     padding: 5px;
     display: flex;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
     align-items: center;
 }
+.form-wrapper * {box-sizing:border-box;}
 
 .warning{
     color: red;
     font-weight: bold;
 }
 
-form input[type=text], form input[type=password], form input[type=email]{
+form input[type=text], form input[type=password], form input[type=email], form textarea{
     padding: 10px;
     border: 2px solid var(--secondary);
     border-radius: 5px;
@@ -53,7 +54,7 @@ form input[type=text], form input[type=password], form input[type=email]{
     color: var(--primary-light-hover);
 }
 
-.form-submit-button, .form-cancel-button{
+.form-submit-button, .form-cancel-button, .form-change-submit-button, .form-delete-submit-button {
     padding: 10px;
     font-size: 1.2em;
     color: white;
@@ -63,31 +64,11 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 
 .form-delete-submit-button{
-    padding: 10px;
-    font-size: 1.2em;
-    color: white;
-    border: none;
     border: 1px solid;
-    font-weight: bold;
-    background-color: var(--primary);
     order:-1;
 }
 
-.form-change-submit-button{
-    padding: 10px;
-    font-size: 1.2em;
-    color: white;
-    border: none;
-    font-weight: bold;
-    background-color: var(--primary);
-    }
-
-.form-change-submit-button:hover{
-    cursor: pointer;
-    background-color: var(--primary-hover);
-}
-
-.form-submit-button:hover, .form-cancel-button:hover{
+.form-submit-button:hover, .form-cancel-button:hover, .form-change-submit-button:hover{
     cursor: pointer;
     background-color: var(--primary-light-hover);
 }
@@ -95,7 +76,7 @@ form input[type=text], form input[type=password], form input[type=email]{
 
 .form-wrapper{
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .small-label label{
@@ -110,7 +91,7 @@ form input[type=text], form input[type=password], form input[type=email]{
     width: 300px;
 }
 .field-value{
-    min-width: 200px;
+    /*min-width: 200px;*/
     width: 100%;
 }
 
@@ -131,7 +112,7 @@ form input[type=text], form input[type=password], form input[type=email]{
 }
 
 .sliding.in{
-    height: 120px;
+    height: 200px;
 }
 
 .valid {
@@ -179,18 +160,13 @@ form input[type=text], form input[type=password], form input[type=email]{
 .captcha-refresh:hover{
     background-color: var(--primary-light-hover);
 }
-@media screen and (max-width: 600px){
-    .form-wrapper{display:block;justify-content:unset;padding:15px;margin: 0;box-sizing: border-box;}
-    .field-wrapper{display:unset;padding:0px;}
-    .field-wrapper td{display:block;width: calc(100vw - 50px);box-sizing: border-box;}
-    .field-value{min-width:unset;width:calc(100vw - 30px);}
-    .field-value input{box-sizing:border-box;}
-    .field-label{width: calc(100vw - 30px);}
-    .submit-button-wrapper{margin:1rem 0.1rem 0 0.2rem;}
-    .forgot-pw-button{display:block;padding:12px 0 10px 0}
-    .form-submit-button{display:block;}
-    .title{padding:0 18px;}
-    .description{padding:0 18px;}
-    .foot-note{margin:0 3px;}
-    .messages-container{margin:0 1.2rem 0 0.2rem;}
+
+@media screen and (max-width: 500px){
+    .field-wrapper{flex-wrap:wrap;}
+    .field-wrapper td{display:block;width:100%;max-width:300px;}
+}
+
+@media screen and (max-width: 800px){
+    .body-content.sidebar-open .field-wrapper{flex-wrap:wrap;}
+    .body-content.sidebar-open .field-wrapper td{display:block;width:100%;max-width:300px;}
 }
