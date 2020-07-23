@@ -32,6 +32,7 @@ class Rehasher:
         self.__parent_categories = []
         self.__rehash()
         self.__sort_by_count()
+        self.__mapbender_category_translation()
 
     def __search_and_handle_subcat(self, c_subcat, rehashed_categories):
         """ Searches a specific subcategory and recalculates the parent category count number
@@ -129,6 +130,16 @@ class Rehasher:
                 del self.all_filters[key]
         self.rehashed_filters = self.all_filters
 
+    def __mapbender_category_translation(self):
+        """ Translates the rehashed categories
+        
+        This is nessesary, as the return values are sometimes handled in German.
+
+        Returns:
+            nothing
+        """
+        translated_facets = OrderedDict(("Custom" if rehashed_key == "Sonstige" else rehashed_key, rehashed_value) for rehashed_key, rehashed_value in self.rehashed_categories.items())
+        self.rehashed_categories = translated_facets
 
     def get_rehashed_categories(self):
         """ Getter for rehashed categories
