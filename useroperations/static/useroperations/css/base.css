@@ -370,15 +370,22 @@ footer{
 }
 
 .simple-search-autocomplete .suggestion{
+    display: flex;
     cursor: pointer;
     font-size: 0.9rem;
     color: var(--primary);
 }
 
+.simple-search-autocomplete .location-suggestion{
+    width: auto;
+}
+
 .simple-search-autocomplete .suggestion-copy{
     float: right;
-    padding: 0.5rem;
-    border-radius: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 50%;
+    text-align: center;
+    width: auto;
 }
 
 .simple-search-autocomplete .suggestion:hover,
