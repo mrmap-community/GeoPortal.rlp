@@ -5,7 +5,10 @@
     </div>
     {% for sugg in data_suggestions %}
         <div class="suggestion" >
-            {{ sugg.keywordHigh|safe }}
+            <span class="suggestion-item">
+                {{ sugg.keywordHigh|safe }}
+            </span>
+            <i class="far fa-copy suggestion-copy" title="{% trans 'Copy to search' %}"></i>
         </div>
     {% empty %}
         <div>
