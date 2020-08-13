@@ -9,7 +9,7 @@
         <div class="img-area result-overview">
             <div class="flex-row">
                 <img alt="{% trans 'Smaller version of map preview' %}" title="{% trans 'Click for large image' %}" class="img-preview" style="max-width:100px;" src="{% if layer.previewURL is not None %}{{ layer.previewURL }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
-                <img alt="{% trans 'Bounding box around area of interest on a map' %}" title="{% trans 'Click for large image' %}" class="img-preview" style="max-width:100px;" src="{% if layer.extent_url is not None or layer.extent_url|length == 0 %}{{ layer.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
+                <img alt="{% trans 'Bounding box around area of interest on a map' %}" title="{% trans 'Click for large image' %}" class="img-preview" style="max-width:100px;" src="{% if layer.extent_url is not None or layer.extent_url|length != 0 %}{{ layer.extent_url }}{% else %}{% static 'searchCatalogue/images/no_image.png' %}{% endif %}">
             </div>
             <article class="search-result-detail">{{ layer.abstract }}</article>
         </div>
