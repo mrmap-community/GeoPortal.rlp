@@ -148,8 +148,10 @@ def applications_view(request: HttpRequest):
     Returns:
          A rendered view
     """
-    geoportal_context = GeoportalContext(request)
+    request.session["current_page"] = "apps"
 
+    geoportal_context = GeoportalContext(request)
+    
     order_by_options = OrderedDict()
     order_by_options["rank"] = _("Relevance")
     order_by_options["title"] = _("Alphabetically")
