@@ -82,7 +82,7 @@
         </div>
         <div class="sidebar-content">
             <a href="{% url 'useroperations:index' %}">
-                <div class="sidebar-area-title">
+                <div class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
                     <div class="sidebar-area-title-icon">
                         <i class="fas fa-home" alt="{% trans 'A stylized house' %}"></i>
                     </div>
@@ -124,7 +124,7 @@
 
         <a style="color:white;text-decoration:none;" href="/article/Meldungen/">
 	        <div class="sidebar-area" id="news">
-                <div class="sidebar-area-title">
+                <div class="sidebar-area-title {% if request.session.current_page == "Meldungen" or request.session.current_page == "News" %}current-page{% endif %}">
                     <div class="sidebar-area-title-icon">
                         <i class="far fa-newspaper" alt="{% trans 'A newspaper' %}" ></i>
                     </div>
