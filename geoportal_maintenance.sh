@@ -1361,7 +1361,7 @@ cp -av ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.s
 # restore custom Files
 custom_update "restore"
 # this can used be to do some special tasks that may be needed by other users than rlp, eg. copy files that are overwritten by the update from the customconfig folder to another location
-custom_update "script"
+# custom_update "script"
 # create and activate virtualenv
 rm -r ${installation_folder}env
 virtualenv -ppython3 ${installation_folder}env
