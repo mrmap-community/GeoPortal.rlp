@@ -115,6 +115,7 @@ def index_view(request, wiki_keyword=""):
         template = "wiki.html"
         try:
             output = useroperations_helper.get_wiki_body_content(wiki_keyword, lang)
+            request.session["current_page"] = wiki_keyword
         except (error.HTTPError, FileNotFoundError) as e:
             template = "404.html"
             output = ""
@@ -926,7 +927,7 @@ def feedback_view(request: HttpRequest):
     Returns:
 
     """
-    request.session["current_page"] = "feedback"
+    request.session["current_page"] = "Feedback"
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
