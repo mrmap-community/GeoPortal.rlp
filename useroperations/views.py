@@ -1035,7 +1035,7 @@ def open_linked_data(request: HttpRequest):
     Returns:
 
     """
-    request.session["current_page"] = "open_linked_data"
+    request.session["current_page"] = "linked_open_data"
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
