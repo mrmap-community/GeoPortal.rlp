@@ -927,7 +927,7 @@ def feedback_view(request: HttpRequest):
     Returns:
 
     """
-    request.session["current_page"] = "Feedback"
+    request.session["current_page"] = "feedback"
 
     geoportal_context = GeoportalContext(request)
     context_data = geoportal_context.get_context()
