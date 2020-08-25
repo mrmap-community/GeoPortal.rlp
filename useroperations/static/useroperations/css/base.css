@@ -310,6 +310,11 @@ footer{
   display: inline-block;
   position: relative; }
 
+.middle-header-top:hover{
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
 .simple-search-field{
     font: inherit;
     width: 100%;
