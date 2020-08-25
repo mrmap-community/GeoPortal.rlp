@@ -399,6 +399,8 @@ footer{
 .simple-search-autocomplete .suggestion-copy:hover{
     background-color: white;
     color: var(--primary);
+    width: 2rem;
+    height: 2rem;
 }
 
 .simple-search-autocomplete.active {
