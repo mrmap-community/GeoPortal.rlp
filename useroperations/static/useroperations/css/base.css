@@ -322,11 +322,6 @@ footer{
     padding: 0 10px 0 10px;
 }
 
-.simple-search-field:focus{
-    border-color: var(--primary);
-    box-shadow: 0 0 10px var(--primary);
-}
-
 .search-submit-button{
     display: flex;
     align-items: center;
@@ -382,10 +377,12 @@ footer{
 
 .simple-search-autocomplete .suggestion-copy{
     float: right;
-    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 50%;
     text-align: center;
     width: auto;
+    transform: rotate(-45deg);
 }
 
 .simple-search-autocomplete .suggestion:hover,
@@ -393,14 +390,27 @@ footer{
     background-color: var(--primary);
     color: white;
     }
+
 .simple-search-autocomplete .suggestion-copy:hover{
     background-color: white;
     color: var(--primary);
-
 }
 
 .simple-search-autocomplete.active {
   display: block; }
+
+.empty-search-button:hover{
+    cursor: pointer;
+}
+
+.empty-search-button{
+    display: none;
+    align-items: center;
+    background-color: white;
+    color: grey;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
 
 /* LANGUAGE SELECTOR */
 .flag-selector{

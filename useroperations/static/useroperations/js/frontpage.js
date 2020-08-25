@@ -605,3 +605,10 @@ $(document).ready(function(){
     $(".messages-container").delay(500).slideToggle("medium");
     $(".messages-container").delay(5000).slideToggle("medium");
 });
+
+$(document).on("click", "#geoportal-empty-search-button", function(){
+    document.getElementById("geoportal-search-field").value = '';
+    document.getElementById("geoportal-empty-search-button").style.display = 'none';
+    $(".simple-search-autocomplete").hide();
+
+});
