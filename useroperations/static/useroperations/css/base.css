@@ -370,15 +370,34 @@ footer{
 }
 
 .simple-search-autocomplete .suggestion{
+    display: flex;
     cursor: pointer;
     font-size: 0.9rem;
     color: var(--primary);
 }
 
-.simple-search-autocomplete .suggestion:hover, .simple-search-autocomplete .suggestion.active{
-  background-color: var(--primary);
-  color: white;
-  }
+.simple-search-autocomplete .location-suggestion{
+    width: auto;
+}
+
+.simple-search-autocomplete .suggestion-copy{
+    float: right;
+    padding: 0.5rem 0.75rem;
+    border-radius: 50%;
+    text-align: center;
+    width: auto;
+}
+
+.simple-search-autocomplete .suggestion:hover,
+.simple-search-autocomplete .suggestion.active{
+    background-color: var(--primary);
+    color: white;
+    }
+.simple-search-autocomplete .suggestion-copy:hover{
+    background-color: white;
+    color: var(--primary);
+
+}
 
 .simple-search-autocomplete.active {
   display: block; }

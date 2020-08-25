@@ -5,7 +5,12 @@
     </div>
     {% for sugg in data_suggestions %}
         <div class="suggestion" >
-            {{ sugg.keywordHigh|safe }}
+            <div class="suggestion-item">
+                {{ sugg.keywordHigh|safe }}
+            </div>
+            <div class="suggestion-copy" title="{% trans 'Copy to search' %}">
+                <i class="far fa-copy"></i>
+            </div>
         </div>
     {% empty %}
         <div>
@@ -17,8 +22,10 @@
     </div>
     {% for sugg in location_suggestions %}
         <div class="location suggestion" data-location="{{ sugg.minx }},{{ sugg.miny }},{{ sugg.maxx }},{{ sugg.maxy }}" data-location-miny="{{ sugg.miny }}" data-location-minx="{{ sugg.minx }}" data-location-maxx="{{ sugg.maxx }}" data-location-maxy="{{ sugg.maxy }}">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>{{ sugg.title }}</span>
+            <div class="location-suggestion">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>{{ sugg.title }}</div>
         </div>
     {% endfor %}
 

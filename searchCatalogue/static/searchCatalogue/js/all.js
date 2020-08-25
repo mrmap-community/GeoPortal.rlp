@@ -400,40 +400,12 @@ var Autocomplete = function(search) {
             }, _search.timeoutDelay);
         }
     };
-
     this.onSelect = function(e) {
-        var el = $(e.target);
-        var srs = 25832;
-
-        // resolve into possible suggestion element where only name was clicked
-        var el = el.closest(".suggestion");
-
         // if click is outside of the .middle-header element (where the search field and suggestion list lives), we close the list
-        if(el.is(".middle-header, .middle-header *")){
-
-            if(el.hasClass("location")){
-                // for location suggestions
-                var bbox = el.attr("data-location");
-
-                // create parameter string, which defines a zoom to the given bbox
-                var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
-                startAjaxMapviewerCall(param);
-                self.hide();
-
-            }else{
-                // for regular data search suggestions
-                var keyword = el.text().trim();
-                if (keyword) {
-                    _input.val(keyword);
-                    self.hide();
-                    $("#geoportal-search-button").click();
-                }
-            }
-        }else{
-            self.hide();
+        if(!$(e.target).is(".middle-header, .middle-header *")){
+            self.hide()
         }
     };
-
     this.nav = function(p) {
         var alldivs = _div.find('.suggestion');
         if (alldivs.length) {
@@ -1650,6 +1622,47 @@ $(document).ready(function() {
             }
         });
         prepareAndSearch(undefined, true);
+    });
+
+
+    /**
+    * Suggestion copy functionality
+    */
+    $(document).on("click", ".suggestion-copy", function(){
+        var el = $(this);
+        var suggElem = el.parent().find(".suggestion-item");
+        var searchBar = $("#geoportal-search-field");
+        searchBar.val(suggElem.text().trim());
+        searchBar.focus();
+        $(".simple-search-autocomplete").hide();
+    });
+
+    /**
+    * Suggestion search functionality
+    */
+    $(document).on("click", ".suggestion-item", function(){
+        var elem = $(this);
+        var keyword = elem.text().trim();
+        var searchBar = $("#geoportal-search-field");
+        if (keyword) {
+            searchBar.val(keyword);
+            $("#geoportal-search-button").click();
+            $(".simple-search-autocomplete").hide();
+        }
+    });
+
+    /**
+    * Suggestion location functionality
+    */
+    $(document).on("click", ".suggestion.location", function(){
+        var el = $(this)
+        var srs = 25832;
+        // for location suggestions
+        var bbox = el.attr("data-location");
+        // create parameter string, which defines a zoom to the given bbox
+        var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
+        startAjaxMapviewerCall(param);
+        $(".simple-search-autocomplete").hide();
     });
 
     autocomplete = new Autocomplete(search);
