@@ -491,11 +491,6 @@ dl dd {
   line-height: 30px;
   display: inline-block; }
 
-.simple-search-field:focus{
-    border-color: var(--primary);
-    box-shadow: 0 0 10px var(--primary);
-}
-
 .search-result-body{
     padding: 10px 0;
     display: flex;

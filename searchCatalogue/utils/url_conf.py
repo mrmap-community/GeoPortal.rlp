@@ -7,11 +7,12 @@ Organization: Spatial data infrastructure Rheinland-Pfalz, Germany
 Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 """
-from Geoportal.settings import HTTP_OR_SSL, HOSTNAME
+from Geoportal.settings import HTTP_OR_SSL, HOSTNAME, DEBUG
 
-#URL_BASE = HTTP_OR_SSL + HOSTIP + "/mapbender/"
+# URL_BASE_LOCALHOST is used for internal calls
+# URL_BASE is used for everything which can be seen from outside
 URL_BASE_LOCALHOST = HTTP_OR_SSL + "127.0.0.1/mapbender/"
-
+URL_BASE = URL_BASE_LOCALHOST if DEBUG else HTTP_OR_SSL + HOSTNAME + "/mapbender/"
 
 URL_AUTO_COMPLETE_SUFFIX = "geoportal/mod_getCatalogueKeywordSuggestion.php"
 URL_SEARCH_PRIMARY_SUFFIX = "php/mod_callMetadata.php"
