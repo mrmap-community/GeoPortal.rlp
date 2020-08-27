@@ -629,6 +629,11 @@ $(document).ready(function(){
     resetSearchCatalogue("primary");
     startAutomaticSearch();
 
+    if ($(window).width() < 689) {
+        if(!$(".sidebar-wrapper").hasClass("closed")){
+            $(".sidebar-toggler").click();
+        }
+    }
 
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");
