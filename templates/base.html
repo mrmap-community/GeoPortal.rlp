@@ -84,7 +84,7 @@
             {% trans 'Menu' %}
         </div>
         <div class="sidebar-content">
-            <a href="{% url 'useroperations:index' %}">
+            <a href="{% url 'useroperations:index' %}" class="sidebar-area">
                 <div class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
                     <div class="sidebar-area-title-icon">
                         <i class="fas fa-home" alt="{% trans 'A stylized house' %}"></i>
@@ -137,7 +137,7 @@
             </div>
         </a>
 	
-        <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()">
+        <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()" mobile_wmc="{{ mobile_wmc_id }}">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
                     <i class="far fa-map" alt="{% trans 'A lying map' %}"></i>

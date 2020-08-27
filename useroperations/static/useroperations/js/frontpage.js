@@ -95,39 +95,43 @@ function toggleMapviewer(){
     return;
     }
 
-    // get preferred gui
-    var toggler = $(".map-viewer-toggler");
-    var preferred_gui = toggler.attr("data-gui");
-
-    // start loading the iframe content
-    var iframe = $("#mapviewer");
-    var src = iframe.attr("src");
-    var dataParams = iframe.attr("data-resource");
-
-    // change mb_user_gui Parameter if default gui  differs
-    var url = new URL(dataParams)
-    var params = new URLSearchParams(url.search);
-    if(preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
-        params.set('gui_id',"Geoportal-RLP")
+    if ($(window).width() < 689 || /Mobi|Tablet|android|iPad|iPhone/.test(navigator.userAgent)) {
+	window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
     }else{
-        params.set('gui_id', preferred_gui)
-    }
-    url.search = params.toString();
-    dataParams = url.toString();
-    var dataToggler = iframe.attr("data-toggle");
+        // get preferred gui
+        var toggler = $(".map-viewer-toggler");
+        var preferred_gui = toggler.attr("data-gui");
 
-    if(dataParams !== src && (dataToggler == src || src == "about:blank")){
-        iframe.attr("src", dataParams);
-    }
-    // resize the overlay
-    var mapLayer = $(".map-viewer-overlay");
-    resizeMapOverlay();
-    // let the overlay slide in
-    mapLayer.slideToggle("slow")
-    mapLayer.toggleClass("closed");
-    // close the sidebar
-    if(!$(".sidebar-wrapper").hasClass("closed")){
-        $(".sidebar-toggler").click();
+        // start loading the iframe content
+        var iframe = $("#mapviewer");
+        var src = iframe.attr("src");
+        var dataParams = iframe.attr("data-resource");
+
+        // change mb_user_gui Parameter if default gui  differs
+        var url = new URL(dataParams)
+        var params = new URLSearchParams(url.search);
+        if(preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
+            params.set('gui_id',"Geoportal-RLP")
+        }else{
+            params.set('gui_id', preferred_gui)
+        }
+        url.search = params.toString();
+        dataParams = url.toString();
+        var dataToggler = iframe.attr("data-toggle");
+
+        if(dataParams !== src && (dataToggler == src || src == "about:blank")){
+            iframe.attr("src", dataParams);
+        }
+        // resize the overlay
+        var mapLayer = $(".map-viewer-overlay");
+        resizeMapOverlay();
+        // let the overlay slide in
+        mapLayer.slideToggle("slow")
+        mapLayer.toggleClass("closed");
+        // close the sidebar
+        if(!$(".sidebar-wrapper").hasClass("closed")){
+            $(".sidebar-toggler").click();
+        }
     }
 }
 
@@ -483,6 +487,31 @@ $(document).on('keyup', "#id_password", function(){
   }
 
 });
+
+$(document).on('click', ".sidebar-area", function(){
+
+if ($(window).width() < 689) {
+    var elem = this.innerHTML;
+    // check if there is a submenu at the sidebar area
+    if (elem.indexOf("toggleSubMenu") < 0){
+        if(!$(".sidebar-wrapper").hasClass("closed")){
+                $(".sidebar-toggler").click();
+        }
+
+    }
+}
+});
+
+
+$(document).on('click', ".sidebar-list-element", function(){
+if ($(window).width() < 689) {
+         if(!$(".sidebar-wrapper").hasClass("closed")){
+            $(".sidebar-toggler").click();
+         }
+}
+
+});
+
 
 
 $(document).on('click', "#change-form-button", function(){

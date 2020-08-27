@@ -20,7 +20,7 @@ from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HTTP_OR_SSL, INTERNAL_SSL, \
     SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, \
-    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, EMAIL_HOST_USER
+    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, EMAIL_HOST_USER, MOBILE_WMC_ID
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from searchCatalogue.settings import PROXIES
@@ -127,6 +127,7 @@ def index_view(request, wiki_keyword=""):
     context = {
                "content": output,
                "results": results,
+                "mobile_wmc_id": MOBILE_WMC_ID,
                }
     geoportal_context.add_context(context=context)
 
