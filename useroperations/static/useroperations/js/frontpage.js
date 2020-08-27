@@ -95,8 +95,8 @@ function toggleMapviewer(){
     return;
     }
 
-    if ($(window).width() < 689) {
-         window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
+    if ($(window).width() < 689 || /Mobi|Tablet|android|iPad|iPhone/.test(navigator.userAgent)) {
+	window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
     }else{
         // get preferred gui
         var toggler = $(".map-viewer-toggler");
