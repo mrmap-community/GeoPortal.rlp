@@ -10,6 +10,7 @@
 
 .mediawiki-article{
     padding: 0 50px 0 0;
+    max-width:900px;
 }
 
 .mediawiki-article p, .mediawiki-article li{
@@ -59,7 +60,7 @@ h3 .mw-headline{
     color: var(--primary);
     text-decoration: none;
 }
-.external:hover, a:hover{
+.external:hover{
     color: var(--primary-light-hover);
     text-decoration: underline;
 }
@@ -74,11 +75,41 @@ h3 .mw-headline{
     height: auto;
 }
 
+#toc {
+    list-style-type: none;
+    background-color: #e2e2e2;
+    padding: 15px;
+    margin-top: 15px;
+    display: inline-block;
+}
 
+#toc h2 {
+    margin-top: 0;
+}
+
+#toc a:hover {
+    text-decoration: underline;
+}
+
+.wikitable {
+    border: 0px !important;
+    margin: 0;
+    padding: 10px;
+    background-color: #e2e2e2;
+}
+
+.iframedatenanbieter {
+    width: 100%;
+    max-width: 900px;
+}
 
 /* FOR MOBILE USERS */
 @media only screen and (max-width: 1000px){
     .mediawiki-article{
-        padding: 0;
+        padding: 10px;
     }
+}
+
+.djangodeactivate{
+display:none;
 }

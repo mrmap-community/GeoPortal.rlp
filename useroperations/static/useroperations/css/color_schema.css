@@ -2,12 +2,20 @@
 DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
 */
 :root{
-    --primary: #871d33;
+    --primary: #444444;
     --primary-invert: #78e2cc;
-    --primary-hover: #b77784;
-    --primary-light: #a7233f;
-    --primary-light-hover: #c82a4b;
-
+    --primary-hover: #888888;
+    --primary-light: #868686;
+    --primary-light-hover: #d51f28;
+    --primary-complementary: #fff;
+    
+    --hesse-red: #d51f28;
+    --hesse-blue: #0362b9;
+    --hesse-lightblue: #68a1d5;
+    --hesse-lighterblue: #D8E4ED;
+    --hesse-grey: #303030;
+    --viewer-darkgrey: #555555;
+        
     --secondary: #e2e2e2;
     --secondary-font: #666;
     --secondary-hover: #aeaeae;

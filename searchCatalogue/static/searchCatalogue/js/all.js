@@ -609,7 +609,7 @@ function startAjaxMapviewerCall(value, mobile){
             // internal mapviewer call
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
                 window.scrollTo({
-                    top:150,
+                    top:0,
                     left:0,
                     behavior:'smooth'
                 });

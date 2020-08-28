@@ -6,6 +6,17 @@
 {% endblock %}
 
 {% block body %}
+<div class="landing-page-body">
+    <div class="landing-page-headline">
+        <h2>{% trans 'Herzlich willkommen im Geoportal Hessen' %}</h2>
+    </div>
+    <div class="w3-container">
+        <p><strong>{% trans 'der Informations- und Interaktionsplattform der Geodateninfrastruktur Hessen (GDI-HE). Sie erhalten einen einheitlichen Zugang zu den raumbezogenen Daten des Landes Hessen über Geodatendienste.' %}</strong>
+        </p>
+        <p><strong>{% trans 'Hier stehen die Karten der verschiedensten (Geo-)Daten Anbieter Hessens im Mittelpunkt.' %}</strong>
+        </p>
+    </div>
+</div>
 <div class="quickstart-container">
     <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">

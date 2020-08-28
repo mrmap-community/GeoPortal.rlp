@@ -61,28 +61,25 @@
     </div>
     <div class="right-header">
         <div class="right-header-bottom">
-            <!--<a href="/"><img id="logo-gdi-rp" src="{% static 'useroperations/images/logo-gdi.png' %}" title="GDI-RP Rheinland Pfalz"/></a>-->
-            <!--<a href="http://www.rlp.de" target="_blank"><img id="logo-country" src="{% static 'useroperations/images/logo-rlp.png' %}" title="Rheinland Pfalz"/></a>-->
         </div>
     </div>
+    <div class="lower-header">Geoportal Hessen</div>
 </div>
 </header>
 
 <body>
     <nav>
     <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
+        <span>KARTE</span>
         <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}"></i>
     </div>
     <div class="map-viewer-overlay closed">
         {% include 'geoportal.html' %}
     </div>
     <div class="sidebar-toggler">
-        <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i>
+        <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i><span>MENÜ</span>
     </div>
     <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
-        <div class="sidebar-title">
-            {% trans 'Menu' %}
-        </div>
         <div class="sidebar-content">
             <a href="{% url 'useroperations:index' %}" class="sidebar-area">
                 <div class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
@@ -151,8 +148,7 @@
         {% for main_page_key, main_page_val in navigation.items %}
             <div class="sidebar-area">
                     <div class="sidebar-area-title {% if request.session.current_page == main_page_val.parent.name %}current-page{% endif %}" onclick="{% if main_page_val.children %} toggleSubMenu(this) {% else %} location.href = '{{ main_page_val.parent.url }}' {% endif %}">
-                        <div class="sidebar-area-title-icon">
-                            <img alt="{% trans 'A navigation menu icon' %}" width="40px" title="{% trans main_page_key %}" src="{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}">
+                        <div class="sidebar-area-title-icon" menuicon" alt="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');">
                         </div>
                         <div class="sidebar-area-title-text">
                             {% trans main_page_key %}
@@ -208,17 +204,13 @@
 </body>
 
 <footer>
-    <div class="left-footer">
-        <a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}{{ LOGO_COUNTRY_LINK_DE }}{% else %}{{ LOGO_COUNTRY_LINK_EN }}{% endif %}"><img alt="{% trans 'State coat of arms of Rhineland-Palatinate' %}" id="logo_country" src="{% static 'useroperations/images/logo-country.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
-    </div>
+    <div id="backtotop" type="button" value=" " onclick="goToTop();" style="display: none;"> </div>
     <div class="footer-col-wrapper">
         <div id="footer-legal" class="footer-col">
             <ul class="footer-list">
                 <li><a href="/article/Kontakt">{% trans 'Contact' %}</a></li>
                 <li><a href="/article/Impressum">{% trans 'Legal Disclosure' %}</a></li>
                 <li><a href="/article/Datenschutz">{% trans 'Privacy' %}</a></li>
-                <li><a href="/article/Rechtshinweis">{% trans 'Legal Notice' %}</a></li>
-                <li><a href="/article/Transparenzgesetz">{% trans 'Transparency law' %}</a></li>
             </ul>
         </div>
         <div id="footer-news-api" class="footer-col">
@@ -227,14 +219,7 @@
                     <i class="fas fa-rss-square icn-rss" title="{% trans 'RSS Newsfeed' %}"></i>
                     {% trans 'RSS Newsfeed' %}
                 </a></li>
-                <li><a class="image-text-container" href="/news/twitter">
-                    <i class="fab fa-twitter-square icn-twitter" title="{% trans 'Twitter' %}"></i>
-                    {% trans 'Twitter' %}
-                </a></li>
             </ul>
         </div>
-    </div>
-    <div class="right-footer">
-        <a href="/"><img alt="{% trans 'The logo of Geoportal Rhineland-Palatinate' %}" id="logo_geoportal" src="{% static 'useroperations/images/logo-geoportal.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
 </footer>

@@ -286,7 +286,7 @@ $(document).on("click", ".map-viewer-list-entry", function(){
 
     // move viewport for user
     window.scrollTo({
-        top:150,
+        top:0,
         left:0,
         behavior:'smooth'
     });
@@ -324,7 +324,7 @@ $(document).on("click", ".map-applications-list-entry", function(){
 
     // move viewport for user
     window.scrollTo({
-        top:150,
+        top:0,
         left:0,
         behavior:'smooth'
     });
@@ -646,3 +646,42 @@ $(document).on("click", "#geoportal-empty-search-button", function(){
     $(".simple-search-autocomplete").hide();
 
 });
+
+/*
+ * Scroll to Top Button
+ */
+function fadedHide () {
+        // hide #backtotop
+        $( "#backtotop" ).hide ();
+        // fade in #backtotop
+        $( function () {
+                $( window ).scroll( function () {
+                        if ( $( this ).scrollTop () > ButtonStart ) {
+                                $( '#backtotop' ).fadeIn ();
+                        } else {
+                                $( '#backtotop' ).fadeOut ();
+                        }
+                });
+        });
+}
+
+function goToTop (){
+        $( 'body,html' ).animate ({
+                scrollTop: 0
+        }, ScrollSpeed );
+        return false;
+}
+
+function addBackToTopButton () {
+                $('<div id="backtotop" type="button" value=" " onClick="goToTop();"> </div>').appendTo('#mw-content');
+                fadedHide ();
+}
+
+var ButtonStart = 400;
+var ScrollSpeed = 600;
+
+if( !window.BackToTop  ) {
+        $( document ).ready( function () {
+                addBackToTopButton ();
+        });
+}
