@@ -1213,9 +1213,9 @@ msgid "Why should I create an account?"
 msgstr "Wozu brauche ich ein Benutzerkonto?"
 
 #: useroperations/templates/crispy_form_no_action.html:12
-msgid "A short explanation of the benefits of an account for Geoportal.rlp!"
+msgid "A short explanation of the benefits of an account for this Geoportal!"
 msgstr ""
-"Eine kurze Erklärung der Vorteile eines Benutzerkontos auf dem Geoportal.rlp!"
+"Eine kurze Erklärung der Vorteile eines Benutzerkontos auf diesem Geoportal!"
 
 #: useroperations/templates/crispy_form_no_action.html:21
 msgid "Password must contain the following:"
