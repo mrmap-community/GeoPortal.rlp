@@ -219,7 +219,9 @@ Search.prototype = {
                 self.setParam("searchBbox", "");
                 self.setParam("searchTypeBbox", "");
                 toggleSearchArea();
-                toggleFilterArea();
+                if($(window).width() > 705){
+                    toggleFilterArea();
+                };
                 openSpatialArea();
                 enableSearchInputField();
                 //focus_on_search_input();
