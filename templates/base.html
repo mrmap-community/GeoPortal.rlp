@@ -148,7 +148,7 @@
         {% for main_page_key, main_page_val in navigation.items %}
             <div class="sidebar-area">
                     <div class="sidebar-area-title {% if request.session.current_page == main_page_val.parent.name %}current-page{% endif %}" onclick="{% if main_page_val.children %} toggleSubMenu(this) {% else %} location.href = '{{ main_page_val.parent.url }}' {% endif %}">
-                        <div class="sidebar-area-title-icon" menuicon" alt="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');">
+                        <div class="sidebar-area-title-icon menuicon" alt="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');">
                         </div>
                         <div class="sidebar-area-title-text">
                             {% trans main_page_key %}
