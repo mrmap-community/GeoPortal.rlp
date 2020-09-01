@@ -1366,10 +1366,8 @@ custom_update "restore"
 rm -r ${installation_folder}env
 virtualenv -ppython3 ${installation_folder}env
 source ${installation_folder}env/bin/activate
-pip install pur
 # install needed python packages
 cd ${installation_folder}GeoPortal.rlp
-pur -r requirements.txt
 pip install -r requirements.txt
 rm -r ${installation_folder}GeoPortal.rlp/static
 python manage.py collectstatic
