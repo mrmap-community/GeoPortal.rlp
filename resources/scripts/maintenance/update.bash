@@ -72,16 +72,6 @@ check_django_settings(){
 
 }
 
-# check for backup
-while true; do
-    read -p "Do you want me to make a backup before updating y/n?" yn
-    case $yn in
-        [Yy]* ) backup; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
 # needed for building new postgres python modules psycop2
 apt-get update
 apt-get install -y libpq-dev
