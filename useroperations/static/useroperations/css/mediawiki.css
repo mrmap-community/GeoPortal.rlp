@@ -7,6 +7,9 @@
 
 @import 'color_schema.css';
 
+.mediawiki-article > * {
+    line-height: 1.5;
+}
 
 .mediawiki-article{
     padding: 0 50px 0 0;
@@ -19,6 +22,17 @@
     -moz-hyphens: auto;
     hyphens: auto;
     text-align: justify
+}
+
+.mediawiki-article h1, .mediawiki-article h2{
+    padding-bottom: .5em;
+    border-bottom: 1px solid #444444;
+}
+
+.mediawiki-article hr{
+    margin: 1em 0 1em 0;
+    border:none;
+    border-bottom: 1px solid #444444;
 }
 
 h1 .mw-headline{
@@ -57,7 +71,7 @@ h3 .mw-headline{
 }
 
 .external, a{
-    color: var(--primary);
+    color: var(--hesse-red);
     text-decoration: none;
 }
 .external:hover{
