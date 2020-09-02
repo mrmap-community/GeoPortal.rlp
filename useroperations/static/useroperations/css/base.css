@@ -879,7 +879,7 @@ ul {
 }
 
 .current-page{
-    background-color: var(--primary-light-hover);
+    background-color: var(--hesse-lightblue);
     color: white;
     /*
     padding: 15px 0 15px 45px;
