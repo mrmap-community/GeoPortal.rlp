@@ -431,7 +431,7 @@ def __gen_single_extent_graphic_url(result: dict):
 
     boundingBoxIsValid = validate_geographic_coordinate_bounding_box_values(area_bbox)
     if boundingBoxIsValid:
-        url = EXTENT_SERVICE_URL + "VERSION=1.1.1&REQUEST=GetMap&SERVICE=WMS&LAYERS=" + EXTENT_SERVICE_LAYER + "&STYLES=&SRS=EPSG:4326&BBOX=" + area_bbox[0] + "," + area_bbox[1] + "," + area_bbox[2] + "," + area_bbox[3] + "&WIDTH=120&HEIGHT=120&FORMAT=image/png&BGCOLOR=0xffffff&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_inimage&minx=" + bbox[0] + "&miny=" + bbox[1] + "&maxx=" + bbox[2] + "&maxy=" + bbox[3]
+        url = EXTENT_SERVICE_URL + "VERSION=1.1.1&REQUEST=GetMap&SERVICE=WMS&LAYERS=" + EXTENT_SERVICE_LAYER + "&STYLES=&SRS=" + EXTENT_SERVICE_SRS + "&BBOX=" + area_bbox[0] + "," + area_bbox[1] + "," + area_bbox[2] + "," + area_bbox[3] + "&WIDTH=120&HEIGHT=120&FORMAT=image/png&BGCOLOR=0xffffff&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_inimage&minx=" + bbox[0] + "&miny=" + bbox[1] + "&maxx=" + bbox[2] + "&maxy=" + bbox[3]
 
     return url
 
@@ -458,7 +458,7 @@ def validate_geographic_coordinate_bounding_box_values(coordinates: list):
         isValid = False
     return isValid
 
-    
+
 def __handle_extent_graphics_for_layers_recursive(child_layers: dict):
     """ Walk recursively through all sublayers and generates the urls for extent graphics
 
