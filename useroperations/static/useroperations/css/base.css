@@ -52,7 +52,7 @@ body{
     /*width: 70%;*/
     transition-duration: 0.8s;
     padding: 1em 3em 1em 3em;
-    color: var(--secondary-font);
+    color: var(--hesse-grey);
     /*
     margin: 0 200px 0 200px;
     */
@@ -65,20 +65,22 @@ body{
 }
 
 footer{
-    border-top: 5px solid var(--primary);
-    padding: 5px;
+    /*border-top: 5px solid var(--primary);*/
+    /*padding: 5px;*/
     /*background-image: linear-gradient(var(--secondary), white);*/
-    background-color: var(--primary);
+    background-color: var(--hesse-grey);
     display: flex;
-    justify-content: space-evenly;
+    /*justify-content: space-between;*/
     position:sticky;
     bottom:0px;
     z-index:1;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 
 #logo_geoportal{
-    max-height: 50px;
 }
 
 #logo_country{
@@ -261,7 +263,7 @@ footer{
         width: 100%;
     }
     #logo_geoportal{
-        width: 100%;
+        width: 50%;
     }
 }
 
@@ -879,7 +881,7 @@ ul {
 }
 
 .current-page{
-    background-color: var(--primary-light-hover);
+    background-color: var(--hesse-lightblue);
     color: white;
     /*
     padding: 15px 0 15px 45px;
@@ -914,12 +916,14 @@ ul {
 
 .footer-col-wrapper{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 7px 12px;
 
 }
 .footer-col{
     align-items: flex-start;
-    margin: 0 40px 0 40px;
+    margin: 0;
 }
 
 .footer-col > h6{
@@ -928,12 +932,12 @@ ul {
 }
 
 .footer-list{
-    list-style-type: none !importan;
+    list-style-type: none !important;
 }
 
 .footer-list li{
     line-height: 2em;
-    margin: 0 20px;
+    margin: 0 15px;
     float: left;
     font-size: 18px;
     padding: 0;
@@ -941,11 +945,13 @@ ul {
 
 .footer-list a{
     color: #fff !important;
+    font-size:0.85em;
+    text-transform:uppercase;
 }
 
 .footer-col a{
     text-decoration: none;
-    color: var(--primary-complementary);
+    padding-left:20px;
 }
 .footer-col a:hover{
     /*color: var(--primary);*/
@@ -1204,15 +1210,36 @@ ul {
     }
     .footer-col-wrapper{
         flex-direction: column;
+        margin: 7px 0px;
     }
+    
+    .footer-list li{
+    float:unset;
+    margin: 0px;
+    line-height:2.6em;
+    }
+    
+    .footer-list li a{
+    }
+
     .right-footer{
         display: none;
     }
     #footer-legal{
-        margin: 0 0 1em 0;
+        margin: 0 0 0 0;
     }
+    
+    #footer-legal > .footer-list li a{
+        font-weight:bold;
+        font-size:
+    }
+
     #footer-news-api{
         margin: 0;
+    }
+
+    #footer-news-api > .footer-list li{
+    border-top: 1px solid #666;
     }
 
     .sidebar-wrapper.closed{
