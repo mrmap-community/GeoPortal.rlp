@@ -81,6 +81,9 @@ footer{
 
 
 #logo_geoportal{
+    width: 50%;
+    background-color:white;
+    padding:10px 25%;
 }
 
 #logo_country{
@@ -522,6 +525,20 @@ ul {
 
 .icn-licence.error{
     color: var(--error-red);
+}
+
+.icn-link{
+    color: #fff;
+    font-size: 0.6em;
+    margin:-2px 0 0 10px;
+}
+
+.easy-to-read {
+    background-image: url(/static/useroperations/images/icon-book.svg);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 23px;
+    margin:0 -0.5em 0 20px;
 }
 
 .metadata-link-element:hover .icn-licence.error{
