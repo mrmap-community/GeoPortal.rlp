@@ -418,15 +418,26 @@ footer{
     display: block;
     box-sizing: border-box; }
 
+.simple-search-autocomplete .headline,.simple-search-autocomplete .suggestion {
+    padding:0;
+}
+
+
 .simple-search-autocomplete .headline{
     font-weight: bold;
+    margin-top: 20px;
+}
+
+.simple-search-autocomplete .headline:nth-child(1) {
+    margin-top: 0;
 }
 
 .simple-search-autocomplete .suggestion{
-    /*display: flex;*/
+    display: flex;
     cursor: pointer;
     font-size: 0.9rem;
     color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
 }
 
 /*.simple-search-autocomplete .suggestion:hover, .simple-search-autocomplete .suggestion.active{
@@ -441,11 +452,11 @@ footer{
 
 .simple-search-autocomplete .suggestion-copy{
     float: right;
-    margin-top: 0.5rem;
     padding: 0.5rem 0.5rem;
     border-radius: 50%;
     text-align: center;
     width: auto;
+    height:100%;
     transform: rotate(-45deg);
 }
 
@@ -476,6 +487,7 @@ footer{
     color: grey;
     padding: 0.5em;
     font-size: 1.2em;
+    margin-left:-0.5em;
 }
 
 /* LANGUAGE SELECTOR */
@@ -1056,7 +1068,7 @@ ul {
     }
 
     .body-content{
-        padding: 0 10px;
+        padding: 10px;
         border: unset;
     }
 
@@ -1064,9 +1076,33 @@ ul {
         font-size: 1em;
         height:unset;
     }
+    .header > * {
+    box-sizing: border-box;
+    }
     .simple-search-field{
     box-sizing:border-box;
     }
+
+    .simple-search-autocomplete{
+        box-shadow: none;
+        top: 51px;
+        left: -58px;
+        width: 100vw;
+        height: calc(100vh - 60px);
+        overflow-y: scroll;
+    }
+
+    .middle-header-top.sticky-top > .simple-search-autocomplete{
+        left:0;
+    }
+
+    .simple-search-autocomplete .headline,.simple-search-autocomplete .suggestion {
+    padding:0;
+    }
+    .simple-search-autocomplete .suggestion .suggestion-item{}
+    .simple-search-autocomplete .suggestion .suggestion-copy{}
+    
+
     .upper-header {
     display:none;
     }
@@ -1113,8 +1149,14 @@ ul {
         margin: 0 0 0 0;
     }
 
-    #geoportal-search-field{
+    .middle-header-top{
+        margin-left:12px;
     }
+
+    .middle-header-top.sticky-top{
+       margin-left:0; 
+    }
+
 
     #middle-header-bottom{
         display: none;
