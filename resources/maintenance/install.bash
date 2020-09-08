@@ -11,9 +11,10 @@
 
 # Variables
 installation_folder="/data/"
+# dont change $ipaddress, only for internal communication
 ipaddress="127.0.0.1"
+# use your public ip address or hostname for $hostname
 hostname="127.0.0.1"
-mode="none"
 
 # mapbender/phppgadmin database config
 mapbender_database_name="mapbender"
@@ -27,9 +28,13 @@ mysql_user_pw="geoportal"
 mysql_root_pw="root"
 
 #proxy config
+# example:
+# http_proxy="192.168.1.123:3128"
 http_proxy=""
+# will be filled automatically from http_proxy
 http_proxy_host=""
 http_proxy_port=""
+# user and password if needed
 http_proxy_user=""
 http_proxy_pass=""
 
