@@ -430,42 +430,6 @@ var Autocomplete = function(search) {
     this.init(search);
 };
 
-/**
- * Leaflet Map
- * @param $searchBbox
- * @param conf
- * @constructor
- */
-/*
-function Map($searchBbox, conf) {
-    var _map = null;
-    var _$searchBbox = null;
-    this.init = function(conf) {
-        _$searchBbox = $searchBbox;
-        _map = L.map(
-            conf.mapId, {
-                'center': new L.LatLng(conf.center.lat, conf.center.lon),
-                'zoom': conf.zoom,
-                'crs': L.CRS.EPSG4326
-            }
-        );
-        L.tileLayer.wms(
-            conf.wms.url, {
-                'layers': conf.wms.layers,
-                'format': conf.wms.format,
-                'transparent': true
-            }
-        ).addTo(_map);
-        _map.on('moveend', function() {
-            _$searchBbox.val(_map.getBounds().toBBoxString());
-        });
-    };
-    this.getBbox = function() {
-        return _map.getBounds().toBBoxString();
-    };
-    this.init(conf);
-}
-*/
 
 /**
  * Group 1 = coming from download, shut down view
