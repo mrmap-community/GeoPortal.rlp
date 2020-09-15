@@ -96,6 +96,8 @@ cp -av ${installation_folder}mapbender/conf/linkedDataProxy.json ${installation_
 cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/mobilemap.conf ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y")
+
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
@@ -116,6 +118,7 @@ cp -av ${installation_folder}config_backup_for_update/linkedDataProxy.json_$(dat
 cp -av ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/twitter.conf
 cp -av ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
 cp -av ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
+cp -av ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap.conf
 
 
 cd ${installation_folder}mapbender/tools
