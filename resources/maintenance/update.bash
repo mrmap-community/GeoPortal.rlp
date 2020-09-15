@@ -168,7 +168,7 @@ cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(d
 cp -av ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py
 
 # copy some scripts that are needed for django mapbender integration
-cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
+cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local/
 cp -av ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 #only needed if multi download should be enabled
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
