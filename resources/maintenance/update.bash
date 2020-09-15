@@ -154,6 +154,7 @@ cd ${installation_folder}GeoPortal.rlp
 echo "Backing up Django Configs"
 cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y")
 
 git reset --hard
 git pull
@@ -161,6 +162,7 @@ git pull
 echo "Restoring Django Configs"
 cp -av ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
+cp -av ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py
 
 # copy some scripts that are needed for django mapbender integration
 cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
