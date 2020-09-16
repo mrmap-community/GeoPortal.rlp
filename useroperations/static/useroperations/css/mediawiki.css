@@ -52,6 +52,13 @@ h3 .mw-headline{
     padding: 0 0 0 20px;
 }
 
+.mediawiki-article dd {
+    margin-left: unset;
+}
+.mediawiki-article li {
+    padding-bottom: 0.5em;
+}
+
 .tright{
     float: right;
 }
@@ -84,7 +91,7 @@ h3 .mw-headline{
     justify-content: center;
 }
 
-.image > img{
+.image > img, a > img{
     max-width: 100%;
     height: auto;
 }
