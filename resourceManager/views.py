@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from useroperations.models import Wfs, Wms, InspireDownloads
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
-from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, PROJECT_DIR, EMAIL_HOST_USER
+from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, EMAIL_HOST_USER, INSPIRE_ATOM_DIR, INSPIRE_ATOM_ALIAS
 from django.utils.translation import gettext as _
 from email.utils import parseaddr
 import json
@@ -80,7 +80,7 @@ def download(request):
         response = HttpResponse("maximum 20 tiles allowed", status=409)
 
     # check if directory has space left
-    disk = shutil.disk_usage(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/")
+    disk = shutil.disk_usage(INSPIRE_ATOM_DIR)
 
     if "image" in body['urls'][0]:
         format = ".tiff"
@@ -99,7 +99,7 @@ def download(request):
     # download and send email
     if response is "":
 
-        os.mkdir(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'])
+        os.mkdir(INSPIRE_ATOM_DIR + body['uuid'])
 
         for id, url in enumerate(body['urls']):
 
@@ -108,20 +108,20 @@ def download(request):
 
             response = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
 
-            with open(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
+            with open(INSPIRE_ATOM_DIR + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)
             del response
 
-        shutil.make_archive(PROJECT_DIR + '/mapbender/http/tmp/InspireDownload/InspireDownload_' + body['uuid'], 'zip',
-                            PROJECT_DIR + '/mapbender/http/tmp/InspireDownload/' + body['uuid'])
-        shutil.rmtree(PROJECT_DIR + "/mapbender/http/tmp/InspireDownload/" + body['uuid'])
+        shutil.make_archive(INSPIRE_ATOM_DIR + 'InspireDownload_' + body['uuid'], 'zip',
+                            INSPIRE_ATOM_DIR + body['uuid'])
+        shutil.rmtree(INSPIRE_ATOM_DIR + body['uuid'])
 
         if body['lang'] == 'de':
             message = "Dies ist Ihre Inspire Download Anfrage! Der Link wird für 24 Stunden gültig sein!" + "\n Link: " \
-                      + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
+                      + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
         else:
             message = "This is your Inspire Download request! The Link will be valid  for 24 hours!" + "\n Link: " \
-                      + HTTP_OR_SSL + HOSTNAME + '/mapbender/tmp/InspireDownload/InspireDownload_' + body['uuid'] + '.zip'
+                      + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
 
         download_request.user_id = body['user_id']
         download_request.user_email = body['user_email']
@@ -129,7 +129,7 @@ def download(request):
         download_request.no_of_tiles = numURLs
         download_request.save()
 
-
+        #print(message)
 
         response = HttpResponse("ok")
 
