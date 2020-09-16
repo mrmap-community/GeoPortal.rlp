@@ -33,50 +33,35 @@ https://www.geoportal.rlp.de/
 
 ### Installation
 
-Fast install on local system (only for testing, default passwords!):
-```shell
-wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/geoportal_maintenance.sh
-wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/options.txt
-
-FILL THE OPTIONS FILE!
-
-Default path is options.txt in same directory as geoportal_maintenance.sh,
-other location can be specified with --options_file=/full/path/options.txt
-Place it somewhere where it wont be replaced by updates.
-
-CHANGE RIGHTS OF OPTIONS FILE TO 600 and have it owned by root!
-chmod 600 options.txt
-chown root options.txt
-
-bash geoportal_maintenance.sh --mode=install [--options_file=/full/path/options.txt]
-```
-
-
 Requirements:
 
 * Debian 9 with working internet connection.   
 
+Install:  
+
+* Download with:  
+
 ```shell
-./geoportal_maintenance.sh --help
+wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/resources/
+maintenance/install.bash
 ```
 
-This script is for installing and maintaining your geoportal solution
-You can choose from the following options:
+* Fill out the variables at the start of the script.
 
-        --options_file=File with install options 		| Default "options.txt"
-        --mode=what you want to do			            | Default "none" [install,update,delete,backup]
+* Execute with:  
 
-
-Examples:  
-
-Install:  
 ```shell
-geoportal_maintenance.sh --mode=install --options_file=/data/options.txt
+bash install.bash
 ```
 
 Update:
+
+* Change your install path and geoportal url at the beginning of the script.  
+
+* Execute with:  
+
 ```shell
-geoportal_maintenance.sh --mode=update --options_file=/data/options.txt
+bash /data/GeoPortal.rlp/resources/maintenance/update.bash
 
 You can create a file called custom_files.txt in the $installation_directory.  
 Files mentioned in this document are saved before update and restored afterwards.  
@@ -91,13 +76,18 @@ cat /data/custom_files.txt
 ```
 
 Delete:  
+
+* This will delete everything and drops the mysql and psql databases.  
+
+* Execute with:  
+
 ```shell
-geoportal_maintenance.sh --mode=delete
+bash /data/GeoPortal.rlp/resources/maintenance/delete.bash
 ```
 
 Backup:  
 ```shell
-geoportal_maintenance.sh --mode=backup --options_file=/data/options.txt
+bash /data/GeoPortal.rlp/resources/maintenance/backup.bash
 ```
 
 default credentials:  
