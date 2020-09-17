@@ -90,11 +90,9 @@ def download(request):
     if format == ".tiff":
         if disk.free < numURLs * 60000000:
             response = HttpResponse("No space left please try again later!",status=400)
-            message = _("No space left please try again later!")
     else:
         if disk.free < numURLs * 10000000:
             response = HttpResponse("No space left please try again later!",status=400)
-            message = _("No space left please try again later!")
 
     # download and send email
     if response is "":
@@ -133,14 +131,14 @@ def download(request):
 
         response = HttpResponse("ok")
 
-    send_mail(
-        _("Inspire Download"),
-        _("Hello ") + body['user_name'] +
-        ", \n \n" +
-        message,
-        EMAIL_HOST_USER,
-        [body['user_email']],
-        fail_silently=False,
-    )
+        send_mail(
+            _("Inspire Download"),
+            _("Hello ") + body['user_name'] +
+            ", \n \n" +
+            message,
+            EMAIL_HOST_USER,
+            [body['user_email']],
+            fail_silently=False,
+        )
 
     return response
