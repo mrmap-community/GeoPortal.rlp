@@ -580,11 +580,22 @@ function startAjaxMapviewerCall(value, mobile){
                     behavior:'smooth'
                 });
 
+                var params = decodeURIComponent(data["mapviewer_params"]);
+                var wms = params.match(/LAYER\[id\]=\d+/);
+                var wmc = params.match(/WMC=\d+/);
+                var servicetype;
+
+                if (wms) {servicetype="wms="+wms[0]};
+                if (wmc) {servicetype="wmc="+wmc[0]};
+
+
                 // Open the map overlay only if it wasn't opened yet!
                 var mapOverlay = $(".map-viewer-overlay");
                 if(mapOverlay.hasClass("closed")){
-                    $(".map-viewer-toggler").click();
+                    //$(".map-viewer-toggler").click();
+                    toggleMapviewer(servicetype);
                 }
+                // not used atm
                 if(mobile){
                     $(".map-viewer-selector").click();
                 }
@@ -1144,6 +1155,7 @@ $(document).ready(function() {
                 var html = data["html"];
                 var infoOverlay = $("#info-overlay");
                 if(html.length == 0){
+                    // this is for external search, not used atm
                     startAjaxMapviewerCall(elem_href);
                 }else{
                     infoOverlay.html(html);

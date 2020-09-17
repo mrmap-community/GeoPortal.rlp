@@ -88,15 +88,29 @@ function toggleSubMenu(elem){
     elem.parents().children(".sidebar-area-content").slideToggle("slow");
 }
 
-function toggleMapviewer(){
+function toggleMapviewer(servicetype){
     // for dsgvo not accepted
     if ($("#dsgvo").val() == "False"){
     window.location.href = "/change-profile";
     return;
     }
-
+    //mobile
     if ($(window).width() < 689 || /Mobi|Tablet|android|iPad|iPhone/.test(navigator.userAgent)) {
-	window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
+        // servicetype is true when coming from search
+        if (servicetype) {
+            // start mobile from wms search
+            if (servicetype.match(/wms/)){
+                var layerid=servicetype.match(/\d+/);
+                window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?layerid='+layerid[0];
+            // start mobile from wmc search
+            } else if (servicetype.match(/wmc/)) {
+                var wmcid=servicetype.match(/\d+/);
+                window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+wmcid[0];
+            // start mobile with default mobile wmc (from index)
+            }
+        }else{
+            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
+        }
     }else{
         // get preferred gui
         var toggler = $(".map-viewer-toggler");
