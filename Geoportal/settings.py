@@ -75,6 +75,9 @@ DEFAULT_GUI = "Geoportal-RLP"
 
 # WMC ID that should be loaded on mobile devices
 MOBILE_WMC_ID = None
+# Directory for inspire Downloads
+INSPIRE_ATOM_DIR = "" # eg: "/var/www/html/inspiredownloads/"
+INSPIRE_ATOM_ALIAS = "" # eg: "/inspiredownloads/"
 
 # Social networking and news feeds
 TWITTER_NAME = "GeoPortalRLP"

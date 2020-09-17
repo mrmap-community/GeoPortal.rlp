@@ -96,6 +96,8 @@ cp -av ${installation_folder}mapbender/conf/linkedDataProxy.json ${installation_
 cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}mapbender/conf/mobilemap.conf ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y")
+
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
@@ -116,6 +118,7 @@ cp -av ${installation_folder}config_backup_for_update/linkedDataProxy.json_$(dat
 cp -av ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/twitter.conf
 cp -av ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
 cp -av ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
+cp -av ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap.conf
 
 
 cd ${installation_folder}mapbender/tools
@@ -154,6 +157,7 @@ cd ${installation_folder}GeoPortal.rlp
 echo "Backing up Django Configs"
 cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y")
 
 git reset --hard
 git pull
@@ -161,9 +165,10 @@ git pull
 echo "Restoring Django Configs"
 cp -av ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
+cp -av ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py
 
 # copy some scripts that are needed for django mapbender integration
-cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local
+cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local/
 cp -av ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 #only needed if multi download should be enabled
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
