@@ -809,16 +809,17 @@ def map_viewer_view(request):
         # If this failed, the wms_id is not an integer, so we assume it must be some kind of link
         pass
 
+    # MOBILE DETECTION IS NOW IN JAVASCRIPT all.js and frontpage.js, NOT SURE IF THIS MIGHT BE NEEDED LATER
     # check if the request comes from a mobile device
-    is_mobile = request.user_agent.is_mobile
-    if is_mobile:
+    #is_mobile = request.user_agent.is_mobile
+    #if is_mobile:
         # if so, just call the mobile map viewer in a new window
-        mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
-        if wmc_id != "":
-            mobile_viewer_url += "&wmc_id={}".format(wmc_id)
-        if wms_id != "":
-            mobile_viewer_url += "&wms_id={}".format(wms_id)
-        return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
+    #    mobile_viewer_url = "{}{}/mapbender/extensions/mobilemap2/index.html?".format(HTTP_OR_SSL, HOSTNAME)
+    #    if wmc_id != "":
+    #        mobile_viewer_url += "&wmc_id={}".format(wmc_id)
+    #    if wms_id != "":
+    #        mobile_viewer_url += "&wms_id={}".format(wms_id)
+    #    return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
 
     mapviewer_params_dict = {
         "LAYER[id]": request_get_params.get("LAYER[id]", ""),
