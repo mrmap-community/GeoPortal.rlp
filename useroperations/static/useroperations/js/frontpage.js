@@ -623,12 +623,16 @@ $(document).on("scroll", function(){
     var searchbarPositionHeight = searchbar.outerHeight() + searchbar.innerHeight();
     // get viewport Y offset
     var viewportOffset = window.pageYOffset;
-    if(searchbarPositionHeight <= viewportOffset){
-        // make searchbar sticky to the viewport top
-        searchbar.addClass("sticky-top");
-    }else{
-        // revert this effect
-        searchbar.removeClass("sticky-top");
+
+    // sticky search bar makes mobile search unusable 
+    if ($(window).width() > 689) {
+        if(searchbarPositionHeight <= viewportOffset){
+            // make searchbar sticky to the viewport top
+            searchbar.addClass("sticky-top");
+        }else{
+            // revert this effect
+            searchbar.removeClass("sticky-top");
+        }
     }
 })
 
