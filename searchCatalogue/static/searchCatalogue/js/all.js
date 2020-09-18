@@ -1641,9 +1641,17 @@ $(document).ready(function() {
         var srs = 25832;
         // for location suggestions
         var bbox = el.attr("data-location");
-        // create parameter string, which defines a zoom to the given bbox
-        var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
-        startAjaxMapviewerCall(param);
+
+        if ($(window).width() < 689 || /Mobi|Tablet|android|iPad|iPhone/.test(navigator.userAgent)) {
+            var coords = bbox.split(",");
+            var x = (parseFloat(coords[0])+parseFloat(coords[2]))/2;
+            var y = (parseFloat(coords[1])+parseFloat(coords[3]))/2;
+            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?x='+x+'&y='+y+'&z=12';
+        }else{
+            // create parameter string, which defines a zoom to the given bbox
+            var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
+            startAjaxMapviewerCall(param);
+        }
         $(".simple-search-autocomplete").hide();
     });
 
