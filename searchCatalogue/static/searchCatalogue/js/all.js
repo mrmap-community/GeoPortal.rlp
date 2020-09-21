@@ -1646,7 +1646,22 @@ $(document).ready(function() {
             var coords = bbox.split(",");
             var x = (parseFloat(coords[0])+parseFloat(coords[2]))/2;
             var y = (parseFloat(coords[1])+parseFloat(coords[3]))/2;
-            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?x='+x+'&y='+y+'&z=12';
+            var z;
+            var diff_x = (parseFloat(coords[2])-parseFloat(coords[0]));
+            var diff_y = (parseFloat(coords[3])-parseFloat(coords[1]));
+            var diff = (diff_x+diff_y)/2;
+
+            if (diff > 0){z=20;}
+            if (diff > 100){z=19;}
+            if (diff > 400){z=17;}
+            if (diff > 1000){z=15;}
+            if (diff > 5000){z=13;}
+            if (diff > 10000){z=12;}
+            if (diff > 25000){z=10;}
+            if (diff > 50000){z=9;}
+            if (diff > 100000){z=8;}
+
+            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?x='+x+'&y='+y+'&z='+z;
         }else{
             // create parameter string, which defines a zoom to the given bbox
             var param = "ZOOM=" + bbox + ",EPSG%3A" + srs
