@@ -266,7 +266,7 @@ fi
 if [ $install_system_packages = 'true' ]; then
   echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
   apt-get update | tee -a $installation_log
-  apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
+  apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgresql-server-dev-all postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
   echo -e "\n ${green}Successfully installed Debian packages for Mapbender!${reset} \n" | tee -a $installation_log
 fi
 
