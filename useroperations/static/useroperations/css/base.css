@@ -1059,9 +1059,23 @@ ul {
     cursor: default;
 }
 
-@media screen and (max-width: 900px){
-
+@media screen and (min-width: 1048px) and (max-width: 1208px){
+	#footer-news-api ul li:nth-last-child(1){display:none !important;}
 }
+
+@media screen and (min-width: 850px) and (max-width: 1048px){
+        #footer-news-api ul li:nth-last-child(1){display:none !important;}
+        #footer-news-api ul li:nth-last-child(2){display:none !important;}
+}
+
+@media screen and (min-width: 700px) and (max-width: 850px){
+	#footer-news-api ul li:nth-last-child(1){display:none !important;}
+	#footer-news-api ul li:nth-last-child(2){display:none !important;}
+        #footer-news-api ul li:nth-last-child(3){display:none !important;}
+}
+
+
+
 @media screen and (max-width: 700px){
 
     #logo_gdi{
