@@ -7,10 +7,11 @@ EXTENT_SERVICE_URL = HTTP_OR_SSL + HOSTNAME + "/cgi-bin/mapserv?map=" + PROJECT_
 EXTENT_SERVICE_LAYER = "demis,ows_layer_target,extent,metadata_polygon"
 EXTENT_SERVICE_BBOX = "6.05,48.9,8.6,50.96"
 EXTENT_SERVICE_SRS = "EPSG:4258"
+DEFAULT_MAX_SEARCH_RESULTS = 10 # use False to deactivate
 
 PROXIES = {
-    "http": "",
-    "https": "",
+        "http": "",
+        "https": "",
 }
 
 iso3166_folder = "iso3166States/"
