@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 ############################################################
 # Geoportal-RLP install script for debian 9 server environment
 # 2019-07-04
@@ -11,6 +11,7 @@
 
 # Variables
 installation_folder="/data/"
+installation_log=$installation_folder/install.log
 # dont change $ipaddress, only for internal communication
 ipaddress="127.0.0.1"
 # use your public ip address or hostname for $hostname
@@ -213,30 +214,6 @@ if [ "$http_proxy" != "" ];then
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       fi
     fi
-
-apt-get update | tee -a $installation_log
-apt-get install -y subversion | tee -a $installation_log
-
-    if [ "$custom_proxy" == true ];then
-      if [ "$svn_proxy" != "" ];then
-        http_proxy_host=`echo $svn_proxy | cut -d: -f1`
-        http_proxy_port=`echo $svn_proxy | cut -d: -f2`
-      else
-        http_proxy_host=""
-        http_proxy_port=""
-      fi
-    fi
-
-    if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
-      # svn proxy
-      cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-      sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
-      sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
-      if [ "$http_proxy_user" != "" ]  && [  "$http_proxy_pass" != "" ];then
-        sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $http_proxy_user/g" /etc/subversion/servers
-        sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
-      fi
-    fi
 fi
 
 export no_proxy="localhost,127.0.0.1"
@@ -324,7 +301,6 @@ fi
 if [ $install_mapbender_source = 'true' ]; then
     echo -e "\n Copying Mapbender Source to ${installation_folder} \n"  | tee -a $installation_log
     cp -a ${installation_folder}svn/mapbender ${installation_folder}
-    svn info https://svn.osgeo.org/mapbender/trunk/mapbender | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}mapbender/lastinstalled
     echo -e "\n ${green}Successfully copied Mapbender Source to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
@@ -333,7 +309,8 @@ fi
 ############################################################
 if [ $install_mapbender_conf = 'true' ]; then
     echo -e "\n Copying Mapbender Conf to ${installation_folder} \n"  | tee -a $installation_log
-    cp -a ${installation_folder}GeoPortal.rlp/resources/customconfigs/de-rp/data/conf/ ${installation_folder}
+    cp -a ${installation_folder}svn/mapbender/conf/ ${installation_folder}
+    rename "s/-dist//" ${installation_folder}/conf/*
     echo -e "\n ${green}Successfully copied Mapbender Conf to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
@@ -591,6 +568,7 @@ fi
     sed -i "s#localhost,127.0.0.1,%%DOMAINNAME%%#localhost,127.0.0.1,$hostname,$hostip#g" ${installation_folder}conf/mapbender.conf
     sed -i "s#http://%%DOMAINNAME%%#http://$hostname#g" ${installation_folder}conf/mapbender.conf
     sed -i "s/%%DOMAINNAME%%,vmlxgeoportal1/$hostname,$hostip/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s#define(\"HOSTNAME_WHITELIST\", \"\");#define(\"HOSTNAME_WHITELIST\", \"$hostname,$hostip,127.0.0.1,localhost\");#g" ${installation_folder}conf/mapbender.conf
 
 
     #####################
@@ -655,7 +633,7 @@ fi
     sed -i "s#%%catalogue_interface%%#${catalogue_interface}#g" ${installation_folder}conf/mobilemap.conf
     sed -i "s#%%background_wms_csv%%#${background_wms_csv}#g" ${installation_folder}conf/mobilemap.conf
     cp ${installation_folder}conf/mobilemap.conf ${installation_folder}mapbender/conf/mobilemap.conf
-
+    cp -a ${installation_folder}conf/ ${installation_folder}mapbender/
     # alter group id for subadministrators in monitoring tool - use group_id 21 - this is the subadmin mb_group_id
     echo ". /etc/profile
     [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.0 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null" >> ${installation_folder}mapbender/tools/monitorCapabilities.sh
