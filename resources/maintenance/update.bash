@@ -38,39 +38,61 @@ custom_update(){
     fi
 }
 
-check_django_settings(){
-     missing_items=()
+check_settings(){
+   missing_items=()
 
-     rm /tmp/settings.py
-     cd /tmp/
-     wget https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/Geoportal/settings.py
+   cd /tmp/
+   dottedname=`echo $1 | sed s/"\/"/"."/g`
+   rm $dottedname
 
-     while IFS="" read -r p || [ -n "$p" ]
-       do
+   if [ $2 == "django" ]; then
+     wget https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/$1 -O $dottedname
+   fi
+
+   if [ $2 == "mapbender" ]; then
+     wget https://git.osgeo.org/gitea/GDI-RP/Mapbender2.8/raw/branch/master/$1-dist -O $dottedname
+   fi
+
+   while IFS="" read -r p || [ -n "$p" ]
+     do
+
+        if [ $2 == "django" ]; then
           h=`printf '%s\n' "$p" | cut -d = -f 1`
           h_full=`printf '%s\n' "$p"`
-          if ! grep -Fq "$h" ${installation_folder}/GeoPortal.rlp/Geoportal/settings.py
+
+          if ! grep -Fq "$h" ${installation_folder}/GeoPortal.rlp/$1
           then
               missing_items+=("$h_full")
-           fi
+          fi
+        fi
 
-     done < /tmp/settings.py
+        if [ $2 == "mapbender" ]; then
+          h=`printf '%s\n' "$p" | cut -d , -f 1`
+          h_full=`printf '%s\n' "$p"`
+          if ! grep -Fq "$h" ${installation_folder}/mapbender/$1
+          then
+              missing_items+=("$h_full")
+          fi
+        fi
 
-     if [ ${#missing_items[@]} -ne 0 ]; then
-       echo "The following items are present in the masters settings.py but are missing in your local settings.py!"
-       printf '%s\n' "${missing_items[@]}"
+   done < /tmp/$dottedname
 
-       while true; do
-           read -p "Do you want to continue y/n?" yn
-           case $yn in
-               [Yy]* ) break;;
-               [Nn]* ) exit;break;;
-               * ) echo "Please answer yes or no.";;
-           esac
-       done
-    fi
+   if [ ${#missing_items[@]} -ne 0 ]; then
+     echo "The following items are present in the masters $1 but are missing in your local $1"
+     printf '%s\n' "${missing_items[@]}"
+
+     while true; do
+         read -p "Do you want to continue y/n?" yn
+         case $yn in
+             [Yy]* ) break;;
+             [Nn]* ) exit;break;;
+             * ) echo "Please answer yes or no.";;
+         esac
+     done
+  fi
 
 }
+
 
 # needed for building new postgres python modules psycop2
 apt-get update
@@ -79,7 +101,9 @@ apt-get install -y libpq-dev
 custom_update "save"
 
 echo "Checking differences in config files"
-check_django_settings
+check_settings "Geoportal/settings.py" "django"
+check_settings "searchCatalogue/settings.py" "django"
+check_settings "conf/mapbender.conf" "mapbender"
 
 #update mapbender
 mkdir ${installation_folder}config_backup_for_update/
