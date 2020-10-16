@@ -6,7 +6,30 @@
 {% endblock %}
 
 {% block body %}
-<div class="landing-page-body">
+
+<!--<div class="landing-page-body" style="background-color: var(--hesse-lighterblue);padding: 30px;border: 2px solid orange;margin: 0 10px 20px 10px;">
+<div class="landing-page-headline" style="display:unset;">
+    <h2>WMS-Dienste der HVBG zeitweise überlastet</h2>
+</div>
+<div class="w3-container">
+    <p style="text-align: center;line-height:1.5;">folgende Dienste werden ggf. nicht angezeigt:</p>
+    <p style="text-align: center;line-height:1.5;"><strong>BORIS Hessen | Liegenschaftskarte | Orthophotos (Luftbilder)</strong></p>
+    <p style="text-align: center;line-height:1.5;">Sollte eine der o.g. Karten nicht angezeigt werden, versuchen Sie es später noch einmal.</p>
+    <p style="text-align: center;line-height:1.5;">Bodenrichtwerte können Sie auch bei den jeweiligen Gutachterausschüssen erfragen. Entsprechende Kontaktdaten finden Sie unter folgendem <strong><span><a href="https://hvbg.hessen.de/sites/hvbg.hessen.de/files/Anschriften%20GAA.pdf" target="_blank">Link </a></span></strong></p>
+</div>-->
+
+<!--<div class="landing-page-body" style="background-color: var(--hesse-lighterblue);padding: 30px;border: 2px solid orangered;margin: 0 10px 20px 10px;">
+<div class="landing-page-headline" style="display:unset;">
+    <h2><img src="https://www.geoportal.hessen.de/mapbender/img/120px-Baustelle.PNG" style="margin-right:10px;" width="35">WMS-Dienste der <span><a style="color:var(--primary);text-decoration:none;" href='https://hvbg.hessen.de/kontakt'>HVBG</a></span> derzeit überlastet<img src="https://www.geoportal.hessen.de/mapbender/img/120px-Baustelle.PNG" style="margin-left:10px;" width="35"></h2>
+</div>
+<div class="w3-container">
+    <p style="text-align: center;">u.a. sind folgende Dienste nicht oder nur sporadisch erreichbar:</p>
+    <p style="text-align: center;"><strong>BORIS Hessen, die Liegenschaftskarte und die Orthophotos (Luftbilder)</strong></p>
+    <p style="text-align: center;">Sollten Sie dennoch Auskünfte benötigen, wenden Sie sich bitte an die entsprechenden Datenanbieter.</p>
+    <p style="text-align: center;">Auskünfte zu Bodenrichtwerten können Sie z.B. bei den jeweiligen Gutachterausschüssen unter folgendem <strong><span><a href="https://hvbg.hessen.de/sites/hvbg.hessen.de/files/Anschriften%20GAA.pdf" target="_blank">Link </a></span></strong>erfragen.</p>
+</div>-->
+
+<div class="landing-page-body" style="background-color: var(--hesse-lighterblue);padding: 30px;border: 2px solid orangered;margin: 0 10px 20px 10px;">
     <div class="landing-page-headline">
         <h2>{% trans 'Herzlich willkommen im Geoportal Hessen' %}</h2>
     </div>
@@ -16,6 +39,7 @@
         <p><strong>{% trans 'Hier stehen die Karten der verschiedensten (Geo-)Daten Anbieter Hessens im Mittelpunkt.' %}</strong>
         </p>
     </div>
+
 </div>
 <div class="quickstart-container">
     <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
