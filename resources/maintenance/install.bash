@@ -599,11 +599,10 @@ fi
     echo -e "\n ${green}Successfully copied configurations! ${reset}\n" | tee -a $installation_log
 
     # mapfile for metadata wms
-    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents.map
-    sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents.map
-    sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents.map
-    sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents.map
-    sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84/g" ${installation_folder}conf/extents.map
+   
+    sed -i "s/dbname=mapbender /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents.map
+    sed -i "s/user=USERNAME /user=$mapbender_database_user /g" ${installation_folder}conf/extents.map
+    sed -i "s/password=PASSWORD /password=$mapbender_database_password /g" ${installation_folder}conf/extents.map
     sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents.map
     sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents.map
 
