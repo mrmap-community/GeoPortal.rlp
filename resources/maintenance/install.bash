@@ -510,12 +510,6 @@ fi
     chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/news/
     chown -R www-data:www-data ${installation_folder}mapbender/metadata/
 
-    # alter connection type to use curl
-    #####################
-    sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}conf/mapbender.conf
-    ####################
-
     #####################
     # define proxy settings
     #####################
@@ -583,9 +577,7 @@ fi
     #####################
     # enable public user auto session
     #####################
-    sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
 
     echo -e "\n Copying configurations! \n" | tee -a $installation_log
     # copy conf files to right places
