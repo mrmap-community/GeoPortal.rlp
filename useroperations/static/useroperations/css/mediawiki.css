@@ -163,6 +163,28 @@ margin: 10px 0 0 0;
 .mediawiki-article .infobox-image > div a img {
     min-width: 100%;
 }
+
+/* B U T T O N  */
+.custom-button {
+}
+
+.custom-button a {
+    color: white;
+    padding: 10px;
+    font-size: 1.2em;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background-color: var(--hesse-grey);
+}
+
+.custom-button a:hover {
+    color: white;
+    background-color: var(--primary-light-hover);
+    text-decoration:none;
+}
+
+
 /* FOR MOBILE USERS */
 @media only screen and (max-width: 700px){
     .mediawiki-article{
