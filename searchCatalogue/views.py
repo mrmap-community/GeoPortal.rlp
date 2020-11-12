@@ -412,12 +412,12 @@ def get_data_primary(request: HttpRequest):
     # prepare rpp parameter
     max_results = post_params.get("maxResults", 5)
     if max_results == "":
-        max_results = 5
+        max_results = DEFAULT_MAX_SEARCH_RESULTS5
     elif isinstance(max_results, str):
         max_results = int(max_results)
 
-    if DEFAULT_MAX_SEARCH_RESULTS:
-        max_results = DEFAULT_MAX_SEARCH_RESULTS
+    if max_results == False:
+        max_results = 5
 
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
