@@ -214,7 +214,6 @@
                 <li><a href="/article/Kontakt">{% trans 'Contact' %}</a></li>
                 <li><a href="/article/Datenschutz">{% trans 'Privacy' %}</a></li>
                 <li><a href="/article/Impressum">{% trans 'Legal Disclosure' %}</a></li>
-                <li><a href="/feedback">{% trans 'Feedback' %}</a></li>
             </ul>
         </div>
         <div id="footer-news-api" class="footer-col">
@@ -222,9 +221,8 @@
                 <li style="display:flex;align-items:center;"><span class="easy-to-read"></span><a href="/article/Leichte_Sprache">
                     Leichte Sprache
                 </a></li>
-                <li><a class="image-text-container" target="_blank" href="{{ rss_file }}">
-                    <i class="fas fa-rss-square icn-rss" title="{% trans 'RSS Newsfeed' %}"></i>
-                    {% trans 'RSS Newsfeed' %}
+		<li style="display:flex;align-items:center;"><span class="accessibility"></span><a href="/article/Barrierefreiheit">
+                    Barrierefreiheit
                 </a></li>
                 <li style="display:flex;align-items:center;"><a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}{{ LOGO_COUNTRY_LINK_DE }}{% else %}{{ LOGO_COUNTRY_LINK_EN }}{% endif %}">hessen.de</a><i class="fas fa-external-link-alt icn-link"></i></li>
             </ul>
