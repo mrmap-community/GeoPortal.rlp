@@ -115,7 +115,7 @@ reset=`tput sgr0`
 
 determineEmailSettings(){
   sed -i s/"EMAIL_HOST = 'server.domain.tld'"/"EMAIL_HOST = \"$email_hosting_server\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-  sed -i s/"EMAIL_HOST_USER = 'geoportal@server.domain.tld'"/"EMAIL_HOST_USER = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+  sed -i s/"DEFAULT_FROM_EMAIL = 'geoportal@server.domain.tld'"/"DEFAULT_FROM_EMAIL = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 }
 
 ##################### Geoportal-RLP
