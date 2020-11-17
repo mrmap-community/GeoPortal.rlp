@@ -64,8 +64,8 @@ OPEN_DATA_URL = "https://okfn.org/opendata/"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'server.domain.tld'
-EMAIL_HOST_USER = 'geoportal@server.domain.tld'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_TO_EMAIL = 'geoportal@server.domain.tld'
+DEFAULT_FROM_EMAIL = DEFAULT_TO_EMAIL
 EMAIL_PORT = 25
 ROOT_EMAIL_ADDRESS = "geoportal-root@server.domain.tld"
 
