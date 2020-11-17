@@ -20,7 +20,7 @@ from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HTTP_OR_SSL, INTERNAL_SSL, \
     SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, \
-    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, EMAIL_HOST_USER, MOBILE_WMC_ID
+    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, DEFAULT_TO_EMAIL, MOBILE_WMC_ID
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from searchCatalogue.settings import PROXIES
@@ -974,7 +974,7 @@ def feedback_view(request: HttpRequest):
                     + ", \n \n" +
                     form.cleaned_data["message"],
                     form.cleaned_data["email"],
-                    [EMAIL_HOST_USER],
+                    [DEFAULT_TO_EMAIL],
                     fail_silently=False,
                 )
             except smtplib.SMTPException:
