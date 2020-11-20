@@ -408,9 +408,9 @@ def get_data_primary(request: HttpRequest):
     order_by = post_params.get("orderBy")
 
     # prepare rpp parameter
-    max_results = post_params.get("maxResults", 5)
+    max_results = post_params.get("maxResults", 15)
     if max_results == "":
-        max_results = 5
+        max_results = 10
     elif isinstance(max_results, str):
         max_results = int(max_results)
 
