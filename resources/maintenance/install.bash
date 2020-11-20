@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 ############################################################
 # Geoportal-RLP install script for debian 9 server environment
 # 2019-07-04
@@ -11,6 +11,7 @@
 
 # Variables
 installation_folder="/data/"
+installation_log=$installation_folder/install.log
 # dont change $ipaddress, only for internal communication
 ipaddress="127.0.0.1"
 # use your public ip address or hostname for $hostname
@@ -114,7 +115,7 @@ reset=`tput sgr0`
 
 determineEmailSettings(){
   sed -i s/"EMAIL_HOST = 'server.domain.tld'"/"EMAIL_HOST = \"$email_hosting_server\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
-  sed -i s/"EMAIL_HOST_USER = 'geoportal@server.domain.tld'"/"EMAIL_HOST_USER = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
+  sed -i s/"DEFAULT_FROM_EMAIL = 'geoportal@server.domain.tld'"/"DEFAULT_FROM_EMAIL = \"$webadmin_email\""/g ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 }
 
 ##################### Geoportal-RLP
@@ -213,30 +214,6 @@ if [ "$http_proxy" != "" ];then
           echo "Acquire::http::Proxy \"http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port\";" > /etc/apt/apt.conf
       fi
     fi
-
-apt-get update | tee -a $installation_log
-apt-get install -y subversion | tee -a $installation_log
-
-    if [ "$custom_proxy" == true ];then
-      if [ "$svn_proxy" != "" ];then
-        http_proxy_host=`echo $svn_proxy | cut -d: -f1`
-        http_proxy_port=`echo $svn_proxy | cut -d: -f2`
-      else
-        http_proxy_host=""
-        http_proxy_port=""
-      fi
-    fi
-
-    if [ "$http_proxy_host" != "" ] && [ "$http_proxy_port" != "" ];then
-      # svn proxy
-      cp /etc/subversion/servers /etc/subversion/servers_backup_geoportal
-      sed -i "s/# http-proxy-host = defaultproxy.whatever.com/http-proxy-host = $http_proxy_host/g" /etc/subversion/servers
-      sed -i "s/# http-proxy-port = 7000/http-proxy-port = $http_proxy_port/g" /etc/subversion/servers
-      if [ "$http_proxy_user" != "" ]  && [  "$http_proxy_pass" != "" ];then
-        sed -i "s/# http-proxy-username = defaultusername/http-proxy-username = $http_proxy_user/g" /etc/subversion/servers
-        sed -i "s/# http-proxy-password = defaultpassword/http-proxy-password = $http_proxy_pass/g" /etc/subversion/servers
-      fi
-    fi
 fi
 
 export no_proxy="localhost,127.0.0.1"
@@ -266,7 +243,7 @@ fi
 if [ $install_system_packages = 'true' ]; then
   echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
   apt-get update | tee -a $installation_log
-  apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
+  apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgresql-server-dev-all postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
   echo -e "\n ${green}Successfully installed Debian packages for Mapbender!${reset} \n" | tee -a $installation_log
 fi
 
@@ -324,7 +301,6 @@ fi
 if [ $install_mapbender_source = 'true' ]; then
     echo -e "\n Copying Mapbender Source to ${installation_folder} \n"  | tee -a $installation_log
     cp -a ${installation_folder}svn/mapbender ${installation_folder}
-    svn info https://svn.osgeo.org/mapbender/trunk/mapbender | grep Revision | grep -Eo '[0-9]{1,}' > ${installation_folder}mapbender/lastinstalled
     echo -e "\n ${green}Successfully copied Mapbender Source to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
@@ -333,7 +309,8 @@ fi
 ############################################################
 if [ $install_mapbender_conf = 'true' ]; then
     echo -e "\n Copying Mapbender Conf to ${installation_folder} \n"  | tee -a $installation_log
-    cp -a ${installation_folder}GeoPortal.rlp/resources/customconfigs/de-rp/data/conf/ ${installation_folder}
+    cp -a ${installation_folder}svn/mapbender/conf/ ${installation_folder}
+    rename "s/-dist//" ${installation_folder}/conf/*
     echo -e "\n ${green}Successfully copied Mapbender Conf to ${installation_folder}! ${reset}\n"  | tee -a $installation_log
 fi
 
@@ -533,12 +510,6 @@ fi
     chown -R www-data:www-data ${installation_folder}mapbender/http/geoportal/news/
     chown -R www-data:www-data ${installation_folder}mapbender/metadata/
 
-    # alter connection type to use curl
-    #####################
-    sed -i "s/define(\"CONNECTION\", \"http\");/#define(\"CONNECTION\", \"http\");/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"CONNECTION\", \"curl\");/define(\"CONNECTION\", \"curl\");/g" ${installation_folder}conf/mapbender.conf
-    ####################
-
     #####################
     # define proxy settings
     #####################
@@ -568,13 +539,13 @@ fi
         #####################
         # integrated mapserver mapfile for metadata footprints
         #####################
-        sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-        sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+        sed -i "s/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/\"wms_proxy_host\" \"${http_proxy_host}\"/g" ${installation_folder}conf/extents.map
+        sed -i "s/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/\"wms_proxy_port\" \"${http_proxy_port}\"/g" ${installation_folder}conf/extents.map
 
         if [ "$http_proxy_user" != "" ] && [ "$http_proxy_pass" != "" ];then
-          sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-          sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-          sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+          sed -i "s/#\"wms_auth_type\" \"%%AUTHTYPE%%\"/\"wms_auth_type\" \"digest\"/g" ${installation_folder}conf/extents.map
+          sed -i "s/#\"wms_auth_username\" \"%%USERNAME%%\"/\"wms_auth_username\" \"$http_proxy_user\"/g" ${installation_folder}conf/extents.map
+          sed -i "s/#\"wms_auth_password\" \"%%PASSWORD%%\"/\"wms_auth_password\" \"$http_proxy_pass\"/g" ${installation_folder}conf/extents.map
         fi
     fi
 
@@ -591,6 +562,7 @@ fi
     sed -i "s#localhost,127.0.0.1,%%DOMAINNAME%%#localhost,127.0.0.1,$hostname,$hostip#g" ${installation_folder}conf/mapbender.conf
     sed -i "s#http://%%DOMAINNAME%%#http://$hostname#g" ${installation_folder}conf/mapbender.conf
     sed -i "s/%%DOMAINNAME%%,vmlxgeoportal1/$hostname,$hostip/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s#define(\"HOSTNAME_WHITELIST\", \"\");#define(\"HOSTNAME_WHITELIST\", \"$hostname,$hostip,127.0.0.1,localhost\");#g" ${installation_folder}conf/mapbender.conf
 
 
     #####################
@@ -605,9 +577,7 @@ fi
     #####################
     # enable public user auto session
     #####################
-    sed -i "s/#define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/define(\"PUBLIC_USER_AUTO_CREATE_SESSION\", true);/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
-    sed -i "s/#define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/define(\"PUBLIC_USER_DEFAULT_SRS\", \"EPSG:25832\");/g" ${installation_folder}conf/mapbender.conf
+    sed -i "s/define(\"PUBLIC_USER_DEFAULT_GUI\", \"Geoportal-RLP\");/define(\"PUBLIC_USER_DEFAULT_GUI\", \"${default_gui_name}\");/g" ${installation_folder}conf/mapbender.conf
 
     echo -e "\n Copying configurations! \n" | tee -a $installation_log
     # copy conf files to right places
@@ -621,19 +591,18 @@ fi
     echo -e "\n ${green}Successfully copied configurations! ${reset}\n" | tee -a $installation_log
 
     # mapfile for metadata wms
-    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/dbname=geoportal /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/user=postgres /user=$mapbender_database_user password=$mapbender_database_password /g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/port=5436 /port=$mapbender_database_port /g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/%%BBOXWGS84SPACE%%/$bbox_wgs84/g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
-    sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents_geoportal_rlp.map
+   
+    sed -i "s/dbname=mapbender /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents.map
+    sed -i "s/user=USERNAME /user=$mapbender_database_user /g" ${installation_folder}conf/extents.map
+    sed -i "s/password=PASSWORD /password=$mapbender_database_password /g" ${installation_folder}conf/extents.map
+    sed -i "s/\"wms_proxy_host\" \"%%PROXYHOST%%\"/#\"wms_proxy_host\" \"%%PROXYHOST%%\"/g" ${installation_folder}conf/extents.map
+    sed -i "s/\"wms_proxy_port\" \"%%PROXYPORT%%\"/#\"wms_proxy_port\" \"%%PROXYPORT%%\"/g" ${installation_folder}conf/extents.map
 
-    cp ${installation_folder}conf/extents_geoportal_rlp.map ${installation_folder}mapbender/tools/wms_extent/extents.map
+    cp ${installation_folder}conf/extents.map ${installation_folder}mapbender/tools/wms_extent/extents.map
     # conf file for invocation of metadata wms
-    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-    sed -i "s/%%BBOXWGS84%%/$bbox_wgs84/g" ${installation_folder}conf/extent_service_geoportal_rlp.conf
-    cp ${installation_folder}conf/extent_service_geoportal_rlp.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
+    sed -i "s#%%INSTALLATIONFOLDER%%#${installation_folder}#g" ${installation_folder}conf/extent_service.conf
+    sed -i "s/%%BBOXWGS84%%/$bbox_wgs84/g" ${installation_folder}conf/extent_service.conf
+    cp ${installation_folder}conf/extent_service.conf ${installation_folder}mapbender/tools/wms_extent/extent_service.conf
 
     # conf file for atomFeedClient
     sed -i "s#%%center_x_i%%#${center_x_i}#g" ${installation_folder}conf/atomFeedClient.conf
@@ -655,7 +624,7 @@ fi
     sed -i "s#%%catalogue_interface%%#${catalogue_interface}#g" ${installation_folder}conf/mobilemap.conf
     sed -i "s#%%background_wms_csv%%#${background_wms_csv}#g" ${installation_folder}conf/mobilemap.conf
     cp ${installation_folder}conf/mobilemap.conf ${installation_folder}mapbender/conf/mobilemap.conf
-
+    cp -a ${installation_folder}conf/ ${installation_folder}mapbender/
     # alter group id for subadministrators in monitoring tool - use group_id 21 - this is the subadmin mb_group_id
     echo ". /etc/profile
     [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.0 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null" >> ${installation_folder}mapbender/tools/monitorCapabilities.sh

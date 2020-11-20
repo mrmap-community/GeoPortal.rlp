@@ -27,6 +27,7 @@ from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
 from searchCatalogue.utils.searcher import Searcher
 from searchCatalogue.utils.viewHelper import check_search_bbox
+from searchCatalogue.settings import DEFAULT_MAX_SEARCH_RESULTS
 from useroperations.models import MbUser
 from Geoportal.utils import utils
 
@@ -407,12 +408,16 @@ def get_data_primary(request: HttpRequest):
     # prepare order parameter
     order_by = post_params.get("orderBy")
 
+
     # prepare rpp parameter
     max_results = post_params.get("maxResults", 15)
     if max_results == "":
-        max_results = 10
+        max_results = DEFAULT_MAX_SEARCH_RESULTS
     elif isinstance(max_results, str):
         max_results = int(max_results)
+
+    if max_results == False:
+        max_results = 5
 
     # prepare selected facets for rendering
     selected_facets = post_params.get("facet").split(";")
