@@ -1,0 +1,16 @@
+footer {
+background-image: url(https://test.geoportal.hessen.de/mapbender/img/TEST.png);
+background-size: 1.7em;
+background-color: var(--primary);}
+
+.header {
+background-image: url(https://test.geoportal.hessen.de/mapbender/img/TEST.png);
+background-size: 1.7em;}
+
+.sidebar-wrapper {
+background-image: url(https://test.geoportal.hessen.de/mapbender/img/TEST.png);
+background-size: 1.7em;}
+
+.sidebar-content {
+border-left: 15px solid transparent;
+border-right: 15px solid transparent;}
