@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+{% load static i18n %}
+{% csrf_token %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Geoportal/fontawesome-5/css/all.css' %}">
+    <link rel="icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/base-test-override.css' %}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static '/useroperations/css/forms.css' %}" media="all" />
+    <script type="text/javascript" src="{% static 'searchCatalogue/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/vendor/leaflet/leaflet.js' %}"></script>
+    <script type="text/javascript" src="{% static 'searchCatalogue/vendor/zebra/javascript/zebra_datepicker.js' %}"></script>
+    <script id="all-script" type="text/javascript" src="{% static 'searchCatalogue/js/all.js' %}"></script>
+    <script type="text/javascript" src="{% static 'useroperations/js/frontpage.js' %}"></script>
+    <!--[if lt IE 9]>
+	<script src="{% static 'useroperations/js/html5shiv.js' %}"></script>
+	<script src="{% static 'useroperations/js/html5shiv-printshiv.js' %}"></script>
+    <![endif]-->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<header>
+
+<div class="header">
+    <div class="upper-header">
+        {% if MULTILINGUAL %}
+        <div class="language-selector-wrapper">
+            <img alt="{% trans 'The german flag, indicating the german language' %}" class="flag-selector {% if LANGUAGE_CODE == 'de' %}active-language{% endif %}" data-id="de" title="Deutsch" src="{% static 'useroperations/images/de_flag.png' %}">
+            <img alt="{% trans 'The United Kingdoms`s flag, indicating the english language' %}" class="flag-selector {% if LANGUAGE_CODE == 'en' %}active-language{% endif %}" data-id="en" title="English" src="{% static 'useroperations/images/uk_flag.png' %}">
+        </div>
+        {% endif %}
+    </div>
+    <div class="left-header">
+        <a href="/"><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
+    </div>
+    <div class="middle-header">
+        <div class="middle-header-top">
+            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
+            <div id="geoportal-empty-search-button" class="empty-search-button">
+                    <i class="fas fa-times"></i>
+            </div>
+            <div id="geoportal-search-button" class="search-submit-button">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
+        </div>
+        <div id="middle-header-bottom">
+            <div class="inline">
+                <input class="spatial-checkbox-item" id="spatial-checkbox" type="checkbox" title="{% trans 'Spatial Filter' %}">
+                <label class="spatial-checkbox-item" for="spatial-checkbox">{% trans 'Use spatial filter' %}</label>
+            </div>
+        </div>
+    </div>
+    <div class="right-header">
+        <div class="right-header-bottom">
+        </div>
+    </div>
+    <div class="lower-header">Geoportal Hessen</div>
+</div>
+</header>
+
+<body>
+    <nav>
+    <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
+        <span>KARTE</span>
+        <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}"></i>
+    </div>
+    <div class="map-viewer-overlay closed">
+        {% include 'geoportal.html' %}
+    </div>
+    <div class="sidebar-toggler">
+        <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i><span>MENÜ</span>
+    </div>
+    <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
+        <div class="sidebar-content">
+            <a href="{% url 'useroperations:index' %}" class="sidebar-area">
+                <div class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
+                    <div class="sidebar-area-title-icon">
+                        <i class="fas fa-home" alt="{% trans 'A stylized house' %}"></i>
+                    </div>
+                    <div class="sidebar-area-title-text">
+                        {% trans 'Home' %}
+                    </div>
+                </div>
+            </a>
+        <div class="sidebar-area login-status">
+            <div class="sidebar-area-title" onclick="toggleSubMenu(this)">
+                <div class="sidebar-area-title-icon">
+                    {% if loggedin %}
+                        <i class="fas fa-user-circle" alt="{% trans 'A filled stylized person shape in a circle' %}"></i>
+                    {% else %}
+                        <i class="far fa-user-circle" alt="{% trans 'An empty stylized person shape in a circle' %}"></i>
+                    {% endif %}
+                </div>
+                <div class="sidebar-area-title-text">
+                    {% if loggedin %}
+                        {{ user }}
+                    {% else %}
+                        {% trans 'My Profile' %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="sidebar-area-content">
+                {% if loggedin %}
+                <div>{% trans 'Hello' %}, {{ user }}!</div>
+                    <a href="{% url 'useroperations:change_profile' %}"><div class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</div></a>
+                    <a href="{% url 'useroperations:service_abo' %}"><div class="sidebar-list-element {% if request.session.current_page == 'service_abo' %}current-page{% endif %}">{% trans 'Show subscription' %}</div></a>
+                    <a href="{% url 'useroperations:logout' %}"><div class="sidebar-list-element {% if request.session.current_page == 'logout' %}current-page{% endif %}">{% trans 'Logout' %}</div></a>
+                {% else %}
+                <div>{% trans 'Not signed in' %}</div>
+                    <a href="{% url 'useroperations:login' %}"><div class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</div></a>
+                    <a href="{% url 'useroperations:register' %}"><div class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</div></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <a style="color:white;text-decoration:none;" href="/article/Meldungen/">
+	        <div class="sidebar-area" id="news">
+                <div class="sidebar-area-title {% if request.session.current_page == "Meldungen" or request.session.current_page == "News" %}current-page{% endif %}">
+                    <div class="sidebar-area-title-icon">
+                        <i class="far fa-newspaper" alt="{% trans 'A newspaper' %}" ></i>
+                    </div>
+                    <div class="sidebar-area-title-text">{% trans 'News' %}
+                    </div>
+                </div>
+            </div>
+        </a>
+	
+        <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()" mobile_wmc="{{ mobile_wmc_id }}">
+            <div class="sidebar-area-title">
+                <div class="sidebar-area-title-icon">
+                    <i class="far fa-map" alt="{% trans 'A lying map' %}"></i>
+                </div>
+                <div class="sidebar-area-title-text">
+                    {% trans 'Mapviewer' %}
+                </div>
+            </div>
+        </div>
+
+        {% for main_page_key, main_page_val in navigation.items %}
+            <div class="sidebar-area">
+                    <div class="sidebar-area-title {% if request.session.current_page == main_page_val.parent.name %}current-page{% endif %}" onclick="{% if main_page_val.children %} toggleSubMenu(this) {% else %} location.href = '{{ main_page_val.parent.url }}' {% endif %}">
+                        <div class="sidebar-area-title-icon menuicon" alt="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');">
+                        </div>
+                        <div class="sidebar-area-title-text">
+                            {% trans main_page_key %}
+                        </div>
+                    </div>
+                    <div class="sidebar-area-content">
+                        {% for sub_page in main_page_val.children %}
+                            {% if sub_page.name == "Kartenviewer" or sub_page.name == "Mapviewer" %}
+                                {% for gui in guis %}
+                                    <a href="{% url 'useroperations:map_viewer' %}?g={{ gui }}"><div class="sidebar-list-element">{{ gui }}</div></a>
+                                {% endfor %}
+                            {% else %}
+                                {% if selected_navigation == sub_page.url %}
+                                    <a href="{{ sub_page.url }}"><div class="sidebar-list-element current-page">{% trans sub_page.name %}</div></a>
+                                {% else %}
+                                    <a href="{{ sub_page.url }}" target="{% if sub_page.page_identifier == 'wiki' %}_blank{% endif %}"><div class="sidebar-list-element {% if request.session.current_page == sub_page.page_identifier %}current-page{% endif %}">{% trans sub_page.name %}</div></a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+            </div>
+        {% endfor %}
+    <div class="">
+        <a><img alt="Logo des Geoportal Hessen" id="logo_geoportal" src="{% static 'useroperations/images/GeoportalHessen.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
+    </div>
+    </div>
+    </div>
+    </nav>
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="messages {{ message.tags }}">
+            {{ message }}
+            <div class="message-toggler">
+                x
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div id="info-overlay" class="modalDialog">
+
+    </div>
+    <div class="search-overlay-content">
+    </div>
+    <div id="body-content" class="body-content {% if not sidebar_closed %} sidebar-open {% endif %}">
+
+    {% block body %}
+    {% endblock %}
+    </div>
+    {% if cookie is None %}
+        {% include 'cookie_banner.html' %}
+    {% endif %}
+
+</body>
+
+<footer>
+    <div id="backtotop" type="button" value=" " onclick="goToTop();" style="display: none;"> </div>
+    <div class="footer-col-wrapper">
+        <div id="footer-legal" class="footer-col">
+            <ul class="footer-list">
+                <li><a href="/article/Kontakt">{% trans 'Contact' %}</a></li>
+                <li><a href="/article/Datenschutz">{% trans 'Privacy' %}</a></li>
+                <li><a href="/article/Impressum">{% trans 'Legal Disclosure' %}</a></li>
+            </ul>
+        </div>
+        <div id="footer-news-api" class="footer-col">
+            <ul class="footer-list">
+                <li style="display:flex;align-items:center;"><span class="easy-to-read"></span><a href="/article/Leichte_Sprache">
+                    Leichte Sprache
+                </a></li>
+		<li style="display:flex;align-items:center;"><span class="accessibility"></span><a href="/article/Barrierefreiheit">
+                    Barrierefreiheit
+                </a></li>
+                <li style="display:flex;align-items:center;"><a target="_blank" href="{% if LANGUAGE_CODE == 'de' %}{{ LOGO_COUNTRY_LINK_DE }}{% else %}{{ LOGO_COUNTRY_LINK_EN }}{% endif %}">hessen.de</a><i class="fas fa-external-link-alt icn-link"></i></li>
+            </ul>
+        </div>
+    </div>
+</footer>
