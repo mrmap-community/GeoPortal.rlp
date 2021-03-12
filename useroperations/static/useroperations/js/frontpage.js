@@ -146,6 +146,9 @@ function toggleMapviewer(servicetype){
         if(!$(".sidebar-wrapper").hasClass("closed")){
             $(".sidebar-toggler").click();
         }
+        $('body').toggleClass("mapviewer-opened");
+        $('#sidebar').toggleClass("mapviewer-opened-force-scroll");
+        window.scrollTo({top:0,left:0,behavior:'smooth'});
     }
 }
 
@@ -300,7 +303,7 @@ $(document).on("click", ".map-viewer-list-entry", function(){
 
     // move viewport for user
     window.scrollTo({
-        top:150,
+        top:0,
         left:0,
         behavior:'smooth'
     });
