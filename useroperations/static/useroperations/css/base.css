@@ -691,7 +691,7 @@ ul {
     right:0px;
 }
 .map-applications-list {
-    height: calc(100vh - 181px);
+    max-height: calc(100vh - 181px);
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -1128,6 +1128,12 @@ ul {
         width: 100vw;
         height: calc(100vh - 60px);
         overflow-y: scroll;
+    }
+
+    .simple-search-autocomplete > div {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: calc(100vh - 117px);
     }
 
     .middle-header-top.sticky-top > .simple-search-autocomplete{
