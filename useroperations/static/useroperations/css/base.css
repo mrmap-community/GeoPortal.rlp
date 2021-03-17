@@ -413,7 +413,7 @@ footer{
     background-color: #fff;
     width: 100%;
     position: absolute;
-    top: 40px;
+    top: 51px;
     display: none;
     z-index: 3;
   }
@@ -424,6 +424,12 @@ footer{
     padding: 10px;
     display: block;
     box-sizing: border-box; }
+
+.simple-search-autocomplete > div {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 117px);
+}
 
 .simple-search-autocomplete .headline,.simple-search-autocomplete .suggestion {
     padding:0;
@@ -1124,16 +1130,8 @@ ul {
     .simple-search-autocomplete{
         box-shadow: none;
         top: 51px;
-        left: -58px;
-        width: 100vw;
-        height: calc(100vh - 60px);
-        overflow-y: scroll;
-    }
-
-    .simple-search-autocomplete > div {
-	overflow-y: auto;
-	overflow-x: hidden;
-	max-height: calc(100vh - 117px);
+        left: -52px;
+        width: calc(100vw - 1.2em);
     }
 
     .middle-header-top.sticky-top > .simple-search-autocomplete{
