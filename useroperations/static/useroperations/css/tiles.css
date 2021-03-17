@@ -225,7 +225,7 @@ input:checked + .slider:before {
     position: absolute;
     top: -0.75em;
     max-width: 5.5rem;
-    border-radius: 100%;
+    /*border-radius: 100%;*/
     padding: 1em;
     right: -0.75em;
 }
