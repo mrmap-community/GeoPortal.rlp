@@ -900,14 +900,26 @@ ul {
     color: inherit;
 }
 
+.sidebar-area-title-icon i {
+    padding-right: 5px;
+}
+
+.sidebar-area-title-icon .far.fa-user-circle {
+    font-size: 1.2em;
+}
+
 .sidebar-area-title-icon.menuicon {
     background-color: var(--hesse-grey);
     mask-repeat: no-repeat !important;
-    width: 22px;
-    height: 20px;
+    width: 28px;
+    height: 24px;
 }
 
 .sidebar-area-title:hover > .menuicon {
+    background-color: white;
+}
+
+.sidebar-area-title.current-page .sidebar-area-title-icon.menuicon {
     background-color: white;
 }
 
