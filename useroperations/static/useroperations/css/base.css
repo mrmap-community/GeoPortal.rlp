@@ -57,12 +57,6 @@ body{
     margin: 0 200px 0 200px;
     */
 }
-
-body.mapviewer-opened{
-    max-height:100%;
-    overflow:hidden;
-}
-
 .body-content.sidebar-open{
     transform: translateX(200px);
     margin-right: 200px;
@@ -565,21 +559,9 @@ ul {
     flex-direction: column;
     align-items: flex-end;
 }
-
-.map-applications-list{
+.map-applications-list, .map-viewer-list{
     display: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: calc(100vh - 339px);
 }
-
-.map-viewer-list{
-    display: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-
 .map-applications-list-entry, .map-viewer-list-entry{
     color: white;
     font-weight: bold;
@@ -592,10 +574,6 @@ ul {
     background-color: var(--primary-light-hover);
     cursor: pointer;
 }
-
-.mapviewer-opened-force-scroll {
-    max-height: calc(100% - 156px);
-    }
 
 .quickstart-container{
     display: flex;
@@ -1000,7 +978,7 @@ ul {
     }
 
     .sidebar-wrapper.closed{
-        transform: translateX(-270px);
+        transform: translateX(-75vw);
     }
 
     .cookie-container{
