@@ -913,6 +913,7 @@ ul {
     mask-repeat: no-repeat !important;
     width: 28px;
     height: 24px;
+    -webkit-mask-repeat: no-repeat;
 }
 
 .sidebar-area-title:hover > .menuicon {
