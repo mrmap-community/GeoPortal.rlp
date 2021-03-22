@@ -120,6 +120,10 @@ footer{
     display: block;
 }
 
+.visible{
+visibility:visible !important;
+}
+
 .header{
     height: 105px;
     display: flex;
@@ -358,14 +362,46 @@ footer{
     padding: 0 10px 0 10px;
 }
 
+.spatial-search-text{
+    padding-top:5px;
+    visibility:hidden;
+}
+
+.hidden{
+    display:none;
+}
+
+.spatial-checkbox-input{
+    display:none;}
+
+.spatial-submit-button{
+    background-color: white;
+    color: grey;
+    padding: 0.5em;
+    font-size: 1.5em;
+    margin-bottom: 2px;
+}
+
+.clicked{
+    color:var(--primary);
+}
+
+.spatial-submit-button:hover{
+    color:var(--primary-hover);
+}
+
+.hand{
+    cursor: pointer;
+}
+
 .simple-search-field:focus{
     border-color: var(--primary);
     box-shadow: 0 0 10px var(--primary);
 }
 
 .search-submit-button{
-    display: flex;
-    align-items: center;
+    /*display: flex;
+    align-items: center;*/
     font-size: 22px;
     padding:0.5em 0.65em;
     background-color:var(--hesse-blue);
