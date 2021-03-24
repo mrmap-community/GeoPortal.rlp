@@ -382,7 +382,7 @@ visibility:visible !important;
     font-size: 1.5em;
 }
 
-.clicked, .clicked:hover{
+#spatial-checkbox:checked + label{
     color:var(--hesse-blue) !important;
 }
 
@@ -1173,7 +1173,9 @@ ul {
     .middle-header-top{
         margin-left:12px;
     }
-
+    
+    #spatial-search-text{display:none !important}
+    
     .middle-header-top.sticky-top{
        margin-left:0; 
     }

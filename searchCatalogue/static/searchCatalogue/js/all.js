@@ -922,8 +922,11 @@ $(document).ready(function() {
     });
 
      $(document).on("change", "#spatial-checkbox", function(){
-        document.getElementById("spatial-submit-button").classList.toggle('clicked');
-        document.getElementById("spatial-search-text").classList.toggle('visible');
+        if($(this).is(':checked')){
+          document.getElementById("spatial-search-text").classList.add('visible');
+        }else{
+          document.getElementById("spatial-search-text").classList.remove('visible');
+        }
      });
 
     /**
