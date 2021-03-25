@@ -42,7 +42,14 @@
         <a href="/"><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
     <div class="middle-header">
+        <div id="spatial-search-text" class="spatial-search-text">
+                <a href="/article/spatialsearch" >Was ist der räumliche Filter?</a>
+        </div>
         <div class="middle-header-top">
+            <div class="spatial-submit-button" id="spatial-submit-button">
+                <input type="checkbox" class="spatial-checkbox-input" id="spatial-checkbox">
+                <label for="spatial-checkbox"><i title="{% trans 'Activate spatial filter' %}" class="hand fas fa-map-marked-alt"></i></label>
+            </div>
             <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
             <div id="geoportal-empty-search-button" class="empty-search-button">
                     <i class="fas fa-times"></i>
@@ -52,12 +59,12 @@
             </div>
             <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
         </div>
-        <div id="middle-header-bottom">
+        <!--<div id="middle-header-bottom">
             <div class="inline">
                 <input class="spatial-checkbox-item" id="spatial-checkbox" type="checkbox" title="{% trans 'Spatial Filter' %}">
                 <label class="spatial-checkbox-item" for="spatial-checkbox">{% trans 'Use spatial filter' %}</label>
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="right-header">
         <div class="right-header-bottom">
