@@ -35,6 +35,12 @@
     border-bottom: 1px solid #444444;
 }
 
+span.mw-headline {
+    display: block;
+    margin-top: -70px;
+    padding-top: 70px;
+}
+
 h1 .mw-headline{
     color: var(--primary);
 }
