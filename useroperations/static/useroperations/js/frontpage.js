@@ -664,3 +664,37 @@ $(document).on("click", "#geoportal-empty-search-button", function(){
     $(".simple-search-autocomplete").hide();
 
 });
+
+/*
+ * add badge to menu item NEWS if there is new content in the article Meldungen, keep the badge for 6 days
+ */
+
+function checkForNews (){
+        const currentDate = new Date();
+        const currentTimestamp = currentDate.getTime();
+        url = "https://" + location.hostname + "/mediawiki/api.php?action=query&prop=revisions&rvlimit=1&rvprop=timestamp&rvdir=older&titles=Meldungen&format=json";
+        fetch(url)
+        .then(function(response){return response.json();})
+        .then(function(response) {
+                var pages = response.query.pages;
+                for (var p in pages) {
+                        articleDate = pages[p].revisions[0].timestamp;
+                        articleDate = new Date(articleDate);
+                        articleTimestamp = articleDate.getTime();
+                }
+                showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
+                if (showIcon == true) {
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                }
+        })
+        .catch(function(error){console.log(error);});
+}
+
+var CheckForNewsPlaceIcon = false;
+
+if( CheckForNewsPlaceIcon == true ) {
+        $( document ).ready( function () {
+          checkForNews();
+        });
+}
+
