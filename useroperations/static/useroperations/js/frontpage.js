@@ -689,6 +689,12 @@ function checkForNews (){
         })
         .catch(function(error){console.log(error);});
 }
-$( document ).ready( function () {
-  checkForNews();
-});
+
+var CheckForNewsPlaceIcon = false;
+
+if( CheckForNewsPlaceIcon == true ) {
+        $( document ).ready( function () {
+          checkForNews();
+        });
+}
+
