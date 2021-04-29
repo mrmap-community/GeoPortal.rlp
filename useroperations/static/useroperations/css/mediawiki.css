@@ -190,6 +190,9 @@ margin: 10px 0 0 0;
     text-decoration:none;
 }
 
+.specialrsscss a {
+    padding-right: 40px;
+}
 
 /* FOR MOBILE USERS */
 @media only screen and (max-width: 700px){
