@@ -146,7 +146,7 @@ function toggleMapviewer(servicetype){
         if(!$(".sidebar-wrapper").hasClass("closed")){
             $(".sidebar-toggler").click();
         }
-        $('body').toggleClass("mapviewer-opened");
+	$('body').toggleClass("mapviewer-opened");
         $('#sidebar').toggleClass("mapviewer-opened-force-scroll");
         window.scrollTo({top:0,left:0,behavior:'smooth'});
     }
@@ -706,6 +706,10 @@ if( !window.BackToTop  ) {
                 addBackToTopButton ();
         });
 }
+
+/*
+ * add badge to menu item NEWS if there is new content in the article Meldungen, keep the badge for 6 days
+ */
 
 function checkForNews (){
         const currentDate = new Date();
