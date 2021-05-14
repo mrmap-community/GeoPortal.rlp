@@ -303,7 +303,7 @@ $(document).on("click", ".map-viewer-list-entry", function(){
 
     // move viewport for user
     window.scrollTo({
-        top:150,
+        top:0,
         left:0,
         behavior:'smooth'
     });
