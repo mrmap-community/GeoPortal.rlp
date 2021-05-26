@@ -46,11 +46,11 @@ check_settings(){
    rm $dottedname
 
    if [ $2 == "django" ]; then
-     wget https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/$1 -O $dottedname
+     wget https://raw.githubusercontent.com/mrmap-community/GeoPortal.rlp/master/$1 -O $dottedname
    fi
 
    if [ $2 == "mapbender" ]; then
-     wget https://git.osgeo.org/gitea/GDI-RP/Mapbender2.8/raw/branch/master/$1-dist -O $dottedname
+     wget https://raw.githubusercontent.com/mrmap-community/Mapbender2.8/master/$1-dist -O $dottedname
    fi
 
    while IFS="" read -r p || [ -n "$p" ]
