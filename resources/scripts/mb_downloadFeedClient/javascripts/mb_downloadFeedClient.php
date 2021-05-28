@@ -92,8 +92,115 @@ function init(){
 
 	updateFormats();
 
+  /*
+* generate gazetteer search form
+*/
+var options = {
+  id: "search_field",
+  inputWidth: 300,
+  searchEpsg: "4326",
+  maxResults: 15,
+  gazetteerUrl: "https://www.geoportal.rlp.de/mapbender/geoportal/gaz_geom_mobile.php?",
+  isGeonames: false,
+  minLength: 3,
+  delay: 3,
+  drawCentrePoint: true,
+  latLonZoomExtension: 0.1,
+  zIndex: 100,
+  gazetteerFrontImageOn: "../img/button_blue_red/gazetteer3_on.png"
+}
+
+var formContainer = $(document.createElement('form')).attr({'id':'json-autocomplete-gazetteer'}).appendTo('#' + options.id);
+formContainer.submit(function() {
+  return false;
+});
+if (options.isDraggable){
+  //formContainer.draggable();//problem with print module
+}
+var symbolForInput = $(document.createElement('img')).appendTo(formContainer);
+symbolForInput.attr({'id':'symboldForInputId'});
+symbolForInput.attr({'src':options.gazetteerFrontImageOn});
+symbolForInput.attr({'title':'<?php echo "Geographic names";?>'});
+/*$("#symboldForInputId").click(function() {
+  that.toggleInput();
+});*/
+var inputAddress = $(document.createElement('input')).appendTo(formContainer);
+inputAddress.attr({'id':'geographicName'});
+//default value
+inputAddress.val('Search for addresses');
+inputAddress.click(function() {
+  inputAddress.val('');
+});
+inputAddress.css('width',options.inputWidth);
+
+$(function() {
+  $( "#geographicName" ).autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: options.gazetteerUrl,
+        dataType: "jsonp",
+        data: {
+          outputFormat: 'json',
+          resultTarget: 'web',
+          searchEPSG: options.searchEpsg,
+          maxResults: options.maxResults,
+          maxRows: options.maxResults,
+          searchText: request.term,
+          featureClass: "P",
+          style: "full",
+          name_startsWith: request.term
+        },
+        success: function( data ) {
+          if (options.isGeonames) {
+            response( $.map( data.geonames, function( item ) {
+              return {
+                label: item.name+" - "+item.fclName+" - "+item.countryName,
+                minx: item.lng-options.latLonZoomExtension,
+                miny: item.lat-options.latLonZoomExtension,
+                maxx: item.lng+options.latLonZoomExtension,
+                maxy: item.lat+options.latLonZoomExtension
+              }
+            }));
+          } else {
+            response( $.map( data.geonames, function( item ) {
+              return {
+                label: item.title,
+                minx: item.minx,
+                miny: item.miny,
+                maxx: item.maxx,
+                maxy: item.maxy
+              }
+            }));
+          }
+        }
+      });
+    },
+    minLength: options.minLength,
+    delay: options.delay,
+    select: function( event, ui ) {
+      //that.zoomToExtent("EPSG:"+options.searchEpsg,ui.item.minx,ui.item.miny,ui.item.maxx,ui.item.maxy);
+      var bounds= new OpenLayers.Bounds(ui.item.minx,ui.item.miny,ui.item.maxx,ui.item.maxy);
+              mapframe_file_list.zoomToExtent(bounds);
+    },
+    open: function() {
+      $( "#search_field" ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      //set zindex of ui-autocomplete to high value to show text above map widget
+      $('.ui-autocomplete').css('z-index', 99999999999999);
+    },
+    close: function() {
+      $( "#search_field" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+
+    }
+  });
+});
+/*
+* end of search form
+*/
+
+
+
 	try {
-    		var django = document.getElementById("django").getAttribute("value"); 
+    		var django = document.getElementById("django").getAttribute("value");
 	}
 	catch(err) {
   		var django = false;
@@ -133,6 +240,15 @@ function init(){
             multiple: false, hover: false,
             toggleKey: "ctrlKey", // ctrl key removes from selection
             multipleKey: "shiftKey", // shift key adds to selection
+            onBeforeSelect: function(e) {
+              //this should pretend the selection of mor than x features when using the async download option ;-), put $maxTiles = x; in atomfeedclient.conf
+		    if (e.layer.selectedFeatures.length >= <?php if (isset($maxTiles)){ echo $maxTiles;}else{echo 20;} ?>) {
+              	    //alert("Only <?php echo $maxTiles?> allowed per download");
+              return false;
+              }
+              //console.log(e);
+
+            },
             box: true
         }
     ),
@@ -651,3 +767,4 @@ function highlightFeatureIndexById(id, open) {
 		window.open(bboxFiles.features[index].attributes.url,'download_window');
 	}
 }
+
