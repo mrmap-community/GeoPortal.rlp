@@ -956,8 +956,8 @@ cp -a ${installation_folder}mapbender/conf/mapbender.conf /${installation_folder
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}/mapbender/http/javascripts/
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/plugins/mb_downloadFeedClient.php ${installation_folder}/mapbender/http/plugins/
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/style.css ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/move.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/img/
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/select.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/theme/default/img/
+#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/move.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/img/
+#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/select.png ${installation_folder}/mapbender/http/extensions/OpenLayers-2.13.1/img/
 #cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
 
 # change mapbender login path
