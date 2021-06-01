@@ -2,16 +2,6 @@
 {% load i18n %}
 
 <div class="cookie-container">
-    {% if is_mobile %}
-    <article class="cookie-text mobile-advice">
-        {% blocktrans %}
-        You are using a mobile device. Not all functions of this webpage can be used on mobile devices.
-        For full functionality please visit us using a desktop browser.
-        <br>
-        Thank you very much.
-        {% endblocktrans %}
-    </article>
-    {% endif %}
     <article class="cookie-text">
 
         {% blocktrans %}
@@ -19,6 +9,7 @@
         On further questions regarding personal data security, please read our
         {% endblocktrans %}
         <a href="{%url 'useroperations:index' wiki_keyword='Datenschutz' %}">{% trans 'data policy' %}</a>.
+	Bitte lesen Sie auch unsere <a href="/article/Impressum/#Nutzungsbedingungen">Nutzungsbedingungen</a>.
     </article>
     <div class="cookie-button form-submit-button" onclick="sc()">{% trans 'I understand!' %}</div>
 </div>

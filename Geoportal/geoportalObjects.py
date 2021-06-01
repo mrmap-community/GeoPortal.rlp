@@ -63,8 +63,8 @@ class GeoportalContext:
             'gui': session_data.get("gui", None),
             'guis': session_data.get("guis", ""),
             'mapviewers': {
-                _("Modern"): MODERN_GUI,
-                _("Klassik"): DEFAULT_GUI,
+                _("Klassik"): MODERN_GUI,
+                _("Modern"): DEFAULT_GUI,
                 _("Mobil"): HTTP_OR_SSL + HOSTNAME + "/mapbender/extensions/mobilemap2/index.html?wmc_id=current",
             },
             'dsgvo': session_data.get("dsgvo", "no"),

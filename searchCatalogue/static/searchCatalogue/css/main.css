@@ -704,23 +704,16 @@ dl dd {
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: var(--primary);
-    color: white;
+    background-color: var(--secondary);
+    color: var(--hesse-grey);
     padding: 10px;
+    border: 1px solid var(--primary);
+    border-bottom: 2px solid var(--hesse-blue);
 }
 .area-title:hover{
     background-color: var(--primary-hover);
     border-color: var(--primary-hover);
-}
-
-#filter-area{
-    background-color: var(--primary);
-    border: 1px solid var(--primary);
-    color: white;
-}
-#filter-area:hover{
-    background-color: var(--primary-hover);
-    color: white;
+    color:#fff;
 }
 
 .filter-onlyOpenData-img{
@@ -860,9 +853,10 @@ dl dd {
   font-size: 18px;
   font-weight: bold;
   padding: 10px;
-  background-color: var(--primary);
-  color: var(--secondary);
-  cursor: pointer; }
+  background-color: var(--secondary);
+  color: var(--hesse-grey);
+  cursor: pointer;
+  border:1px solid var(--hesse-grey)}
 
 .source--title:hover {
   color: white;
@@ -1210,12 +1204,13 @@ dl dd {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #fff;
+    color: var(--hesse-grey);
     font-size: 18px;
-    background-color: var(--primary);
-    background: var(--primary) !important;
+    background-color: var(--secondary);
+    /*background: var(--primary) !important;*/
     padding: 10px;
-    height: 2em;
+    height: 1.55em;
+    border-bottom:2px solid var(--hesse-blue);
 }
 
 .facet-search-title{
