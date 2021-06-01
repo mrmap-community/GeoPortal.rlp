@@ -133,12 +133,8 @@
 
 .sub-tile-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-}
-
-.placeholder{
-  width:110px;
 }
 
 .mobile-button{
@@ -177,7 +173,16 @@
     padding: 0;
 }
 
+@media screen and (max-width: 540px){
+    .tile{width:100%;}
+    .tile-header{height:100%;}
+    .tile-title {font-size:1.5em;}
+    .tile-img{width:89vw;height:9em;}
+    .tile-content{padding: 0 10px 10px 10px;height:100%}
+    .tile-content-abstract{padding: 0 0 10px 0;}
+}
 
+}
 @media screen and (max-width: 700px){
 
     .mobile-button{
