@@ -698,7 +698,7 @@ function addBackToTopButton () {
                 fadedHide ();
 }
 
-var ButtonStart = 400;
+var ButtonStart = 50;
 var ScrollSpeed = 600;
 
 if( !window.BackToTop  ) {
