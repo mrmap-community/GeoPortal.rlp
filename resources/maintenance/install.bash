@@ -270,7 +270,7 @@ if [ $checkout_mapbender_svn = 'true' ]; then
     fi
     cd ${installation_folder}svn/
     echo -e "\n Downloading Mapbender Sources from Git! \n" | tee -a $installation_log
-    git clone --progress https://git.osgeo.org/gitea/GDI-RP/Mapbender2.8 mapbender | tee -a $installation_log
+    git clone --progress https://github.com/mrmap-community/Mapbender2.8 mapbender | tee -a $installation_log
     if [ $? -eq 0 ];then
       echo -e "\n ${green}Successfully downloaded Mapbender Source!${reset} \n"  | tee -a $installation_log
     else
@@ -286,7 +286,7 @@ if [ "$checkout_geoportal_git" = 'true' ]; then
   fi
   cd ${installation_folder}
   echo -e "\n Downloading Geoportal Source to ${installation_folder}! \n" | tee -a $installation_log
-  git clone --progress https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp | tee -a $installation_log
+  git clone --progress https://github.com/mrmap-community/GeoPortal.rlp/ | tee -a $installation_log
   if [ $? -eq 0 ];then
     echo -e "\n ${green}Successfully downloaded Geoportal Source! ${reset}\n" | tee -a $installation_log
   else
