@@ -121,7 +121,7 @@ cp -av ${installation_folder}mapbender/conf/twitter.conf ${installation_folder}c
 cp -av ${installation_folder}mapbender/conf/bkgGeocoding.conf ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/excludeproxyurls.conf ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}mapbender/conf/mobilemap.conf ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y")
-
+cp -av ${installation_folder}mapbender/conf/excludeHarvestMetadataUrls.json ${installation_folder}config_backup_for_update/excludeHarvestMetadataUrls.json_$(date +"%m_%d_%Y")
 
 echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
@@ -143,7 +143,7 @@ cp -av ${installation_folder}config_backup_for_update/twitter.conf_$(date +"%m_%
 cp -av ${installation_folder}config_backup_for_update/bkgGeocoding.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/bkgGeocoding.conf
 cp -av ${installation_folder}config_backup_for_update/excludeproxyurls.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeproxyurls.conf
 cp -av ${installation_folder}config_backup_for_update/mobilemap.conf_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/mobilemap.conf
-
+cp -av ${installation_folder}config_backup_for_update/excludeHarvestMetadataUrls.json_$(date +"%m_%d_%Y") ${installation_folder}mapbender/conf/excludeHarvestMetadataUrls.json
 
 cd ${installation_folder}mapbender/tools
 sh ./i18n_update_mo.sh
