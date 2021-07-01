@@ -52,6 +52,7 @@ body{
 body.mapviewer-opened{
     max-height:100%;
     overflow:hidden;
+    position:fixed;
 }
 
 .body-content.sidebar-open{
