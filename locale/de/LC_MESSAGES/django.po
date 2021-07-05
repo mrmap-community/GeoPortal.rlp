@@ -1669,6 +1669,9 @@ msgstr "Feedback Formular"
 msgid "Map URL copied to clipboard"
 msgstr "Link zur Karte wurde in Zwischenablage kopiert"
 
+#: useroperations/templates/base.html:222
+msgid "Accessibility"
+msgstr "Erklärung zur Barrierefreiheit"
 
 #~ msgid "The letter W, as used for wikipedia"
 #~ msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"
