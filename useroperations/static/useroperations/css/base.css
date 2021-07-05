@@ -39,6 +39,8 @@ body{
     position: relative;
 }
 
+.mw-parser-output{padding-top:1px;}
+
 .body-content{
     min-height: 800px;      /* ToDO: As long as the iframe mapviewer is used, we need to provide a minimum height for the body content */
     background-color: white;
@@ -52,7 +54,6 @@ body{
 body.mapviewer-opened{
     max-height:100%;
     overflow:hidden;
-    position:fixed;
 }
 
 .body-content.sidebar-open{
