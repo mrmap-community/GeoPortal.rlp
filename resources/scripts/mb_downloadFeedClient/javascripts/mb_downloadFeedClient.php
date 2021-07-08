@@ -100,7 +100,7 @@ var options = {
   inputWidth: 300,
   searchEpsg: "4326",
   maxResults: 15,
-  gazetteerUrl: "https://www.geoportal.rlp.de/mapbender/geoportal/gaz_geom_mobile.php?",
+  gazetteerUrl: "https://" + location.hostname + "/mapbender/geoportal/gaz_geom_mobile.php?",
   isGeonames: false,
   minLength: 3,
   delay: 3,
