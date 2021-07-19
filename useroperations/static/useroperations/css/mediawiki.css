@@ -194,6 +194,12 @@ margin: 10px 0 0 0;
     padding-right: 40px;
 }
 
+.rss-feed-button {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0 30px 20px 0;
+}
+
 /* FOR MOBILE USERS */
 @media only screen and (max-width: 700px){
     .mediawiki-article{
