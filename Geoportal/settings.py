@@ -17,7 +17,10 @@ from django.utils.log import DEFAULT_LOGGING
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = "/data/"
-SESSION_NAME = 'PHPSESSID'
+SESSION_NAME = 'MAPBENDER'
+SESSION_TYPE = 'memcached' # 'memcached' or 'file'
+SESSION_SAVE_PATH = '127.0.0.1:11211' # a path when using files eg. "/var/lib/php/sessions/" , tcp socket when using memcached eg. "128.0.0.1:11211"
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 

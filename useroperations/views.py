@@ -20,7 +20,7 @@ from Geoportal.decorator import check_browser
 from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
 from Geoportal.settings import DEFAULT_GUI, HOSTNAME, HTTP_OR_SSL, INTERNAL_SSL, \
     SESSION_NAME, PROJECT_DIR, MULTILINGUAL, LANGUAGE_CODE, DEFAULT_FROM_EMAIL, GOOGLE_RECAPTCHA_SECRET_KEY, \
-    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, DEFAULT_TO_EMAIL, MOBILE_WMC_ID
+    USE_RECAPTCHA, GOOGLE_RECAPTCHA_PUBLIC_KEY, DEFAULT_TO_EMAIL, MOBILE_WMC_ID, SESSION_TYPE, SESSION_SAVE_PATH
 from Geoportal.utils import utils, php_session_data, mbConfReader
 from searchCatalogue.utils.url_conf import URL_INSPIRE_DOC
 from searchCatalogue.settings import PROXIES
@@ -515,7 +515,10 @@ def change_profile_view(request):
     form = ChangeProfileForm()
     user = None
     if request.COOKIES.get(SESSION_NAME) is not None:
-        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
+        #session_data = php_session_data.get_mapbender_session_by_file(request.COOKIES.get(SESSION_NAME))
+        #print(session_data)
+        session_data = php_session_data.get_session_data(request)
+        session_data = session_data["session_data"]
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
                 userid = session_data[b'mb_user_id']
@@ -655,7 +658,9 @@ def delete_profile_view(request):
     """
     geoportal_context = GeoportalContext(request=request)
     if request.COOKIES.get(SESSION_NAME) is not None:
-        session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
+        session_data = php_session_data.get_session_data(request)
+        session_data = session_data["session_data"]
+        #session_data = php_session_data.get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
         if session_data != None:
             if b'mb_user_id' in session_data and session_data[b'mb_user_name'] != b'guest':
 
@@ -676,8 +681,10 @@ def delete_profile_view(request):
                 if request.method == 'POST':
                     if form.is_valid():
                         # get user
-                        session_id = request.COOKIES.get(SESSION_NAME)
-                        session_data = php_session_data.get_mapbender_session_by_memcache(session_id)
+                        session_data = php_session_data.get_session_data(request)
+                        session_data = session_data["session_data"]
+                        #session_id = request.COOKIES.get(SESSION_NAME)
+                        #session_data = php_session_data.get_mapbender_session_by_memcache(session_id)
                         try:
                             userid = session_data[b'mb_user_id']
                         except KeyError:
@@ -753,7 +760,12 @@ def logout_view(request):
 
     if request.COOKIES.get(SESSION_NAME) is not None:
         session_id = request.COOKIES.get(SESSION_NAME)
-        php_session_data.delete_mapbender_session_by_memcache(session_id)
+
+        if SESSION_TYPE == 'memcached':
+            php_session_data.delete_mapbender_session_by_memcache(session_id)
+        elif SESSION_TYPE == 'files':
+            php_session_data.delete_mapbender_session_by_file(session_id)
+
         messages.success(request, _("Successfully logged out"))
         return redirect('useroperations:index')
     else:
