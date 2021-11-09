@@ -84,6 +84,14 @@ footer{
     max-height: 75px;
 }
 
+#id_identity{
+    visibility:hidden;
+}
+
+label[for=id_identity]{
+    visibility:hidden;
+}
+
 .cookie-container{
     z-index: 100;
     position: fixed;
