@@ -329,6 +329,9 @@ def register_view(request):
                     messages.error(request, _("Invalid reCAPTCHA. Please try again."))
                     return redirect('useroperations:register')
 
+            #bot honeypot field
+            if form.cleaned_data['identity'] != "":
+                return redirect('useroperations:register')
 
             if MbUser.objects.filter(mb_user_name=form.cleaned_data['name']).exists():
                 messages.error(request, _("The Username") + " {str_name} ".format(str_name=form.cleaned_data['name']) + _("is already taken"))
