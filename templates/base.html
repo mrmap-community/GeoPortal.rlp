@@ -44,6 +44,9 @@
         <a href="/"><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
     <div class="middle-header">
+	<div id="spatial-search-text" class="spatial-search-text">
+                {% trans 'Spatial filter activated!' %} <a href="/mediawiki/index.php/Suchverfahren#R.C3.A4umlicher_Filter" > {% trans 'What is this?' %}</a>
+        </div>
         <div class="middle-header-top">
             <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
             <div id="geoportal-empty-search-button" class="empty-search-button">
