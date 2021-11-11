@@ -126,6 +126,10 @@ label[for=id_identity]{
     align-items: center;
 }
 
+.visible{
+visibility:visible !important;
+}
+
 .show{
     display: block;
 }
@@ -323,6 +327,20 @@ label[for=id_identity]{
     box-shadow: 0 0 10px var(--primary);
 }
 
+.spatial-search-text{
+    padding-top:5px;
+    visibility:hidden;
+}
+
+.hidden{
+    display:none;
+}
+
+.hand{
+    cursor: pointer;
+}
+
+
 .simple-search-field{
     font: inherit;
     width: 100%;
@@ -413,6 +431,9 @@ label[for=id_identity]{
 
 .simple-search-autocomplete.active {
   display: block; }
+
+.simple-search-autocomplete:not( :hover ) {
+  display: none; }
 
 .empty-search-button:hover{
     cursor: pointer;
