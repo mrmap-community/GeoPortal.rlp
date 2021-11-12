@@ -648,6 +648,10 @@ $(document).ready(function() {
         observer.observe(target, config);
     }
 
+    if ($("#spatial-checkbox").is(":checked")){
+        document.getElementById("spatial-search-text").classList.toggle('visible');
+    }
+
 
     checkForExternalMapviewerCall();
     var resources = null;
