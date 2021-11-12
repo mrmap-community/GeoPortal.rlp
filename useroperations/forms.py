@@ -10,6 +10,7 @@ class FeedbackForm(forms.Form):
     family_name = forms.CharField(max_length=200, label=_("Family name"), required=False, widget=forms.TextInput(attrs={'title':_("Please enter your last name.")}))
     email = forms.EmailField(label=_("E-Mail address"),  widget=forms.EmailInput(attrs={'title':_("Please enter your email.")}))
     message = forms.CharField(label=_("Your Message"), widget=forms.Textarea(attrs={"maxlength": 3000, 'title':_("Please enter your message.")}))
+    identity = forms.CharField(max_length=255, label=_("identity"), required=False, widget=forms.TextInput(attrs={'title':_("Identity.")}))
     if USE_RECAPTCHA == 0:
         captcha = CaptchaField(label=_("I'm not a robot"))
 
