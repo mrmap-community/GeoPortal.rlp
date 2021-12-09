@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _, activate, LANGUAGE_SESS
 
 from Geoportal import settings
 from Geoportal.settings import DEFAULT_GUI, RSS_FILE, HOSTNAME, HTTP_OR_SSL, IFRAME_HEIGHT, IFRAME_WIDTH, MODERN_GUI, \
-    MULTILINGUAL, LANGUAGE_CODE
+    MULTILINGUAL, LANGUAGE_CODE, USE_RECAPTCHA
 from Geoportal.utils import utils, php_session_data
 from useroperations.conf import COOKIE_VALUE, GEOPORTAL_IDENTIFIER, LOGO_GEOPORTAL_TITLE, LOGO_COUNTRY_LINK_DE, \
     LOGO_COUNTRY_LINK_EN
@@ -86,6 +86,7 @@ class GeoportalContext:
             "LOGO_GEOPORTAL_TITLE": LOGO_GEOPORTAL_TITLE,
             "LOGO_COUNTRY_LINK_DE": LOGO_COUNTRY_LINK_DE,
             "LOGO_COUNTRY_LINK_EN": LOGO_COUNTRY_LINK_EN,
+            "USE_RECAPTCHA": USE_RECAPTCHA,
         }
         if not MULTILINGUAL:
             activate(LANGUAGE_CODE)

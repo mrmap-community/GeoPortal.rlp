@@ -1673,6 +1673,12 @@ msgstr "Link zur Karte wurde in Zwischenablage kopiert"
 msgid "Accessibility"
 msgstr "Erklärung zur Barrierefreiheit"
 
+msgid "Spatial filter activated!"
+msgstr "Räumlicher Filter aktiviert!"
+
+msgid "What is this?"
+msgstr "Was ist das?"
+
 #~ msgid "The letter W, as used for wikipedia"
 #~ msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"
 

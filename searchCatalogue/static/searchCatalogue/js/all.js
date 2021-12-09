@@ -648,6 +648,10 @@ $(document).ready(function() {
         observer.observe(target, config);
     }
 
+    if ($("#spatial-checkbox").is(":checked")){
+        document.getElementById("spatial-search-text").classList.toggle('visible');
+    }
+
 
     checkForExternalMapviewerCall();
     var resources = null;
@@ -854,7 +858,7 @@ $(document).ready(function() {
             $autocompleteSelect.removeClass('active');
         }
     });
-
+	
     $(".-js-simple-search-autocomplete").mouseenter(function () {
         $(".-js-simple-search-autocomplete").stop().fadeTo('fast', 1).show()
     });
@@ -865,7 +869,13 @@ $(document).ready(function() {
             $(".-js-simple-search-autocomplete").fadeOut(MS_UNTIL_AUTOCOMPLETE_DIV_HIDES);
         }
     });
+	
+    $(document).on("change", "#spatial-checkbox", function(){
+        document.getElementById("spatial-search-text").classList.toggle('visible');
 
+    });
+	
+	
     /**
      *  Hide download options for search results
      */
