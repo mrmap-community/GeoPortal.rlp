@@ -955,9 +955,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"        Diese Webseite verwendet Cookies um die bestmögliche Nutzererfahrung "
+"        Diese Webseite verwendet ausschließlich technisch notwendige Cookies um Ihnen die bestmögliche Nutzererfahrung "
 "bieten zu können. <br>\n"
-"        Weitere Informationen zu unserem Datenschutz finden Sie in  unseren\n"
+"        Informationen zu unserem Datenschutz finden Sie in unseren\n"
 "        "
 
 #: templates/cookie_banner.html:21
@@ -966,7 +966,7 @@ msgstr "Datenschutzrichtlinien"
 
 #: templates/cookie_banner.html:23
 msgid "I understand!"
-msgstr "Ich verstehe!"
+msgstr "OK"
 
 #: templates/unsupported_browser.html:11
 msgid "Unsupported browser detected"
