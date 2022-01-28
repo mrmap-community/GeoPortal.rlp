@@ -96,9 +96,10 @@ label[for=id_identity]{
     z-index: 100;
     position: fixed;
     font-size: 1.2em;
-    bottom: 0;
+    bottom: 50px;
     min-height:200px;
-    width: 100%;
+    width: calc(100% - 220px);
+    margin: 0 110px;
     background-image: linear-gradient(var(--secondary), white);
     color: var(--primary);
     padding: 10px;
