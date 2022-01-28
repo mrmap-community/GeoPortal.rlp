@@ -9,7 +9,7 @@
         On further questions regarding personal data security, please read our
         {% endblocktrans %}
         {% trans 'data policy' %}.
-	Respektieren Sie bitte unsere Nutzungsbedingungen im Impressum sowie die der jeweiligen Daten- und Kartenanbieter in den Metadaten.
+	Respektieren Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.
     </article>
     <div class="cookie-button form-submit-button" onclick="sc()">{% trans 'I understand!' %}</div>
 </div>
@@ -17,6 +17,7 @@
     function sc(){
         var cookieBanner = $(".cookie-container");
         cookieBanner.toggle();
-        setCookie('{{ COOKIE_VALUE }}', true)
+        setCookie('{{ COOKIE_VALUE }}', true);
+	cookieBanner.toggleClass('cookie-container-hidden');
     }
 </script>
