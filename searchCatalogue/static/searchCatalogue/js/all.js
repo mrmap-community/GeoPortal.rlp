@@ -353,10 +353,10 @@ var Autocomplete = function(search) {
             document.getElementById("geoportal-empty-search-button").style.display = 'none';
             };
         });
-
 	_input.on('click', function(e) {
-	    self.keyUp(e.keyCode);
-	});
+            self.keyUp(e.keyCode);
+        });    
+	
     };
 
     this.hide = function() {

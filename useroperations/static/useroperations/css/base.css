@@ -359,9 +359,20 @@ label[for=id_identity]{
   position: relative;
 }
 
+.spatial-search-text{
+    padding:5px;
+    visibility:hidden;
+    font-size: 0.7em;
+}
+
+.hidden{
+    display:none;
+}
+
 .hand{
     cursor: pointer;
 }
+
 
 .simple-search-field{
     font: inherit;
@@ -373,16 +384,6 @@ label[for=id_identity]{
     height: 50px;
     line-height: 40px;
     padding: 0 10px 0 10px;
-}
-
-.spatial-search-text{
-    visibility:hidden;
-    font-size: 0.7em;
-    padding: 5px;
-}
-
-.hidden{
-    display:none;
 }
 
 .spatial-checkbox-input{
@@ -401,10 +402,6 @@ label[for=id_identity]{
 
 .spatial-submit-button:hover{
     color:var(--hesse-lightblue);
-}
-
-.hand{
-    cursor: pointer;
 }
 
 .middle-header-top:focus-within{
