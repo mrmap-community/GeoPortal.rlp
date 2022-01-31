@@ -363,6 +363,20 @@ label[for=id_identity]{
     cursor: pointer;
 }
 
+.spatial-search-text{
+    padding-top:5px;
+    visibility:hidden;
+}
+
+.hidden{
+    display:none;
+}
+
+.hand{
+    cursor: pointer;
+}
+
+
 .simple-search-field{
     font: inherit;
     width: 100%;
