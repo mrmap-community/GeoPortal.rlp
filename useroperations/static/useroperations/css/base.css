@@ -359,13 +359,10 @@ label[for=id_identity]{
   position: relative;
 }
 
-.hand{
-    cursor: pointer;
-}
-
 .spatial-search-text{
-    padding-top:5px;
+    padding:5px;
     visibility:hidden;
+    font-size: 0.7em;
 }
 
 .hidden{
@@ -389,16 +386,6 @@ label[for=id_identity]{
     padding: 0 10px 0 10px;
 }
 
-.spatial-search-text{
-    visibility:hidden;
-    font-size: 0.7em;
-    padding: 5px;
-}
-
-.hidden{
-    display:none;
-}
-
 .spatial-checkbox-input{
     display:none;}
 
@@ -415,10 +402,6 @@ label[for=id_identity]{
 
 .spatial-submit-button:hover{
     color:var(--hesse-lightblue);
-}
-
-.hand{
-    cursor: pointer;
 }
 
 .middle-header-top:focus-within{
