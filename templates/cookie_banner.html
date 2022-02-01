@@ -18,7 +18,8 @@
         var cookieBanner = $(".cookie-container");
         cookieBanner.toggle();
         setCookie('{{ COOKIE_VALUE }}', true);
-	cookieBanner.toggleClass('cookie-container-hidden');
+        cookieBanner.toggleClass('cookie-container-hidden');
         cookieBanner.toggleClass('cookie-container-visible');
+        document.getElementById("main-body-class").style.margin = 'unset';
     }
 </script>
