@@ -1,15 +1,15 @@
 
 {% load i18n %}
 
-<div class="cookie-container">
+<div class="cookie-container cookie-container-visible">
     <article class="cookie-text">
 
         {% blocktrans %}
-        This webpage uses cookies to provide you the best user experience. <br>
+        This webpage uses cookies to provide you the best user experience.
         On further questions regarding personal data security, please read our
         {% endblocktrans %}
         {% trans 'data policy' %}.
-	Respektieren Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.
+	<br><span style="">Respektieren Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.</span>
     </article>
     <div class="cookie-button form-submit-button" onclick="sc()">{% trans 'I understand!' %}</div>
 </div>
@@ -19,5 +19,6 @@
         cookieBanner.toggle();
         setCookie('{{ COOKIE_VALUE }}', true);
 	cookieBanner.toggleClass('cookie-container-hidden');
+        cookieBanner.toggleClass('cookie-container-visible');
     }
 </script>
