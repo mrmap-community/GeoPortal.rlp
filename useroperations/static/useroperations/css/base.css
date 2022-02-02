@@ -114,7 +114,7 @@ label[for=id_identity]{
 }
 
 .cookie-text{
-    padding: 30px;
+    padding: 20px;
 }
 
 .cookie-button{
@@ -1354,6 +1354,7 @@ ul {
         z-index: 100;
         top: 0;
         bottom: unset;
+        height: 175px;
     }
 
     .mobile-advice{
