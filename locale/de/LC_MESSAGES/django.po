@@ -946,19 +946,8 @@ msgstr ""
 "        "
 
 #: templates/cookie_banner.html:17
-msgid ""
-"\n"
-"        This webpage uses cookies to provide you the best user experience. "
-"<br>\n"
-"        On further questions regarding personal data security, please read "
-"our\n"
-"        "
-msgstr ""
-"\n"
-"        Diese Webseite verwendet ausschließlich technisch notwendige Cookies um Ihnen die bestmögliche Nutzererfahrung "
-"bieten zu können. <br>\n"
-"        Informationen zu unserem Datenschutz finden Sie in unseren\n"
-"        "
+msgid "This webpage uses cookies to provide you the best user experience. On further questions regarding personal data security, please read our "
+msgstr "Diese Webseite verwendet ausschließlich technisch notwendige Cookies. Informationen zu unserem Datenschutz finden Sie in unseren "
 
 #: templates/cookie_banner.html:21
 msgid "data policy"

@@ -3,13 +3,10 @@
 
 <div class="cookie-container cookie-container-visible">
     <article class="cookie-text">
-
-        {% blocktrans %}
-        This webpage uses cookies to provide you the best user experience. <br>
-        On further questions regarding personal data security, please read our
-        {% endblocktrans %}
+	<p>
+        {% trans 'This webpage uses cookies to provide you the best user experience. On further questions regarding personal data security, please read our ' %}
         {% trans 'data policy' %}.
-	<br><span style="">Respektieren Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.</span>
+	</p><p style="">Beachten Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.</p>
     </article>
     <div class="cookie-button form-submit-button" onclick="sc()">{% trans 'I understand!' %}</div>
 </div>
