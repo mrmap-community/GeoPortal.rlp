@@ -95,13 +95,13 @@ label[for=id_identity]{
 .cookie-container{
     z-index: 100;
     position: fixed;
-    font-size: 1.2em;
-    bottom: 0;
-    min-height:200px;
+    font-size: 0.9em;
+    top:0px;
+    height:122px;
     width: 100%;
     background-image: linear-gradient(var(--secondary), white);
     color: var(--primary);
-    padding: 10px;
+    padding: 10px 20px;
     -webkit-box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
     box-shadow: 0px -20px 45px 0px rgba(0,0,0,0.5);
@@ -110,11 +110,11 @@ label[for=id_identity]{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row-reverse;
 }
 
 .cookie-text{
-    padding: 30px;
+    padding: 20px;
 }
 
 .cookie-button{
@@ -1347,10 +1347,11 @@ ul {
     }
 
     .cookie-container{
-        position: absolute;
+        position: fixed;
         z-index: 100;
         top: 0;
         bottom: unset;
+        height: 175px;
     }
 
     .mobile-advice{

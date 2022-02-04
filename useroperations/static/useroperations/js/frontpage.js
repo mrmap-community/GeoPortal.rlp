@@ -737,3 +737,21 @@ if( CheckForNewsPlaceIcon == true ) {
           checkForNews();
         });
 }
+
+/*
+ * reposition body if cookie-banner showed
+*/
+$(document).ready(function(){
+    if($('.cookie-container-visible').length > 0){
+        document.getElementById("main-body-class").style.margin = '143px 0px 0px 0px';
+    }
+    if ($(window).width() < 800) {
+        if($('.cookie-container-visible').length > 0){
+        document.getElementById("main-body-class").style.margin = '196px 0px 0px 0px';
+        }
+    } 
+
+    if($('.cookie-container-hidden').length > 0){
+        document.getElementById("main-body-class").style.margin = 'unset';
+    }
+});
