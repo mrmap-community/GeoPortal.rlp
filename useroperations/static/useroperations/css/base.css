@@ -39,6 +39,11 @@ body{
     position: relative;
 }
 
+/* keyboard usability outline focus-visible */
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible{
+    outline: solid .125rem #f1b709;
+}
+
 .mw-parser-output{padding-top:1px;}
 
 .body-content{

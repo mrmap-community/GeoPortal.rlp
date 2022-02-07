@@ -18,6 +18,13 @@
 .tile-wrapper a{
     outline: none;
     text-decoration: none;
+    color: unset;
+}
+
+.tile-wrapper a:focus-visible {
+    outline: solid .125rem #f1b709;
+    color: unset;
+    outline-offset: -9px;
 }
 
 .tile{

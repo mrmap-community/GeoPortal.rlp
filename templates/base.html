@@ -72,16 +72,16 @@
 
 <body id="main-body-class">
     <nav>
-    <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
+    <a href="#" class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
         <span>KARTE</span>
         <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}"></i>
-    </div>
+    </a>
     <div class="map-viewer-overlay closed">
         {% include 'geoportal.html' %}
     </div>
-    <div class="sidebar-toggler">
+    <a href="#" class="sidebar-toggler">
         <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i><span>MENÜ</span>
-    </div>
+    </a>
     <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
         <div class="sidebar-content">
             <a href="{% url 'useroperations:index' %}" class="sidebar-area">

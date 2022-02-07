@@ -40,21 +40,21 @@
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <div class="quickstart-container">
-    <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">
             <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" ></i>
             <span>{% trans 'Map collections' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
     </a>
-    <a class="quickstart search" title="{% trans 'Search for all map layers' %}" data-resource="wms">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
             <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" ></i>
             <span>{% trans 'Map layers' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
     </a>
-    <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
             <i class="fas fa-globe" title="{% trans 'Datasets' %}"></i>
             <span>{% trans 'Datasets' %}</span>
@@ -91,7 +91,7 @@
 </div>
 <div class="tile-wrapper favourite-wmcs">
     {% for result in results.wmc %}
-        <div class="tile">
+        <a href="#"><div class="tile">
             <div class="tile-header" data-id="WMC={{result.id}}">
                 <div class="tile-title">
                     {{ result.title|safe }}
@@ -125,9 +125,9 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
+        </div></a>
     {% endfor %}
-        <div id="show-all-tile" class="tile">
+        <a href="#"><div id="show-all-tile" class="tile">
             <div id="show-all-tile-content" class="tile-header">
                 <div class="tile-title">{% trans 'Show all' %}</div>
                 <div class="tile-header-img">
@@ -140,7 +140,7 @@
                     {% trans "Start a search and explore all results. Let's go!" %}
                 </div>
             </div>
-        </div>
+        </div></a>
 </div>
 
 
