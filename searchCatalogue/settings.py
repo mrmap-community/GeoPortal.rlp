@@ -14,6 +14,8 @@ PROXIES = {
         "https": "",
 }
 
+DEFAULT_MAX_SEARCH_RESULTS = 10 # use False to deactivate
+
 iso3166_folder = "iso3166States/"
 __DE_DE = iso3166_folder + "wappen_DE.png"
 __DE_BW = iso3166_folder + "wappen_DE-BW.png"

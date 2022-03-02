@@ -40,7 +40,7 @@ body{
 }
 
 /* keyboard usability outline focus-visible */
-.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible{
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible{
     outline: solid .125rem #f1b709;
 }
 
@@ -847,7 +847,6 @@ ul {
     box-sizing: border-box;
 }
 .sidebar-content a{
-    color: white;
     outline: none;
     text-decoration: none;
 }
@@ -911,6 +910,22 @@ ul {
     text-align: left;
     text-indent: 5px;
 }
+
+.sidebar-area-content > li {
+    text-align: left;
+    background-color: var(--hesse-lighterblue);
+}
+
+span.sidebar-list-element {
+    display: block;
+}
+
+.sidebar-list-element.current-page {
+    display: block;
+}
+
+
+
 
 .sidebar-area.sidebar-content-opened div.sidebar-area-title {
     background-color: var(--hesse-lightblue);

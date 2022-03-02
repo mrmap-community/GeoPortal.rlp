@@ -41,7 +41,7 @@
         {% endif %}
     </div>
     <div class="left-header">
-        <a href="/"><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
+        <a href="/"  class="hessenlogotab" style="height:69px;><img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" id="logo_gdi" src="{% static 'useroperations/images/logo-gdi.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
     <div class="middle-header">
 	<div id="spatial-search-text" class="spatial-search-text">
@@ -52,7 +52,7 @@
                 <input type="checkbox" class="spatial-checkbox-input" id="spatial-checkbox">
                 <label for="spatial-checkbox"><i title="{% trans 'Activate spatial filter' %}" class="hand fas fa-map-marked-alt"></i></label>
             </div>
-            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}">
+            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" placeholder="{% trans 'Search term' %}" title="{% trans 'Search field' %}">
             <div id="geoportal-empty-search-button" class="empty-search-button">
                     <i class="fas fa-times"></i>
             </div>
@@ -82,50 +82,53 @@
     <a href="#" class="sidebar-toggler">
         <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}"></i><span>MENÜ</span>
     </a>
+
+<!-- BEGIN MAIN MENU -->
+
     <div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
-        <div class="sidebar-content">
-            <a href="{% url 'useroperations:index' %}" class="sidebar-area">
-                <div class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
-                    <div class="sidebar-area-title-icon">
-                        <i class="fas fa-home" alt="{% trans 'A stylized house' %}"></i>
-                    </div>
-                    <div class="sidebar-area-title-text">
+        <ul class="sidebar-content">
+            <li><a href="{% url 'useroperations:index' %}" class="sidebar-area">
+                <span class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
+                    <i class="sidebar-area-title-icon fas fa-home" alt="{% trans 'A stylized house' %}"></i>
+                    <span class="sidebar-area-title-text">
                         {% trans 'Home' %}
-                    </div>
-                </div>
-            </a>
-        <div class="sidebar-area login-status">
-            <div class="sidebar-area-title" onclick="toggleSubMenu(this)">
-                <div class="sidebar-area-title-icon">
+                    </span>
+                </span>
+            </a></li>
+        <li class="sidebar-area login-status">
+            <a href="#" class="sidebar-area-title" onclick="toggleSubMenu(this)">
                     {% if loggedin %}
-                        <i class="fas fa-user-circle" alt="{% trans 'A filled stylized person shape in a circle' %}"></i>
+                        <i class="sidebar-area-title-icon fas fa-user-circle" alt="{% trans 'A filled stylized person shape in a circle' %}"></i>
                     {% else %}
-                        <i class="far fa-user-circle" alt="{% trans 'An empty stylized person shape in a circle' %}"></i>
+                        <i class="sidebar-area-title-icon far fa-user-circle" alt="{% trans 'An empty stylized person shape in a circle' %}"></i>
                     {% endif %}
-                </div>
-                <div class="sidebar-area-title-text">
+                <span class="sidebar-area-title-text">
                     {% if loggedin %}
                         {{ user }}
                     {% else %}
                         {% trans 'My Profile' %}
                     {% endif %}
-                </div>
-            </div>
-            <div class="sidebar-area-content">
+                </span>
+            </a>
+            <ul class="sidebar-area-content">
                 {% if loggedin %}
                 <div>{% trans 'Hello' %}, {{ user }}!</div>
-                    <a href="{% url 'useroperations:change_profile' %}"><div class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</div></a>
-                    <a href="{% url 'useroperations:service_abo' %}"><div class="sidebar-list-element {% if request.session.current_page == 'service_abo' %}current-page{% endif %}">{% trans 'Show subscription' %}</div></a>
-                    <a href="{% url 'useroperations:logout' %}"><div class="sidebar-list-element {% if request.session.current_page == 'logout' %}current-page{% endif %}">{% trans 'Logout' %}</div></a>
+                    <li><a href="{% url 'useroperations:change_profile' %}"><span class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</span></a></li>
+                    <li><a href="{% url 'useroperations:service_abo' %}"><span class="sidebar-list-element {% if request.session.current_page == 'service_abo' %}current-page{% endif %}">{% trans 'Show subscription' %}</span></a></li>
+                    <li><a href="{% url 'useroperations:logout' %}"><span class="sidebar-list-element {% if request.session.current_page == 'logout' %}current-page{% endif %}">{% trans 'Logout' %}</span></a></li>
                 {% else %}
                 <div>{% trans 'Not signed in' %}</div>
-                    <a href="{% url 'useroperations:login' %}"><div class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</div></a>
-                    <a href="{% url 'useroperations:register' %}"><div class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</div></a>
+                    <li><a href="{% url 'useroperations:login' %}"><span class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</span></a></li>
+                    <li><a href="{% url 'useroperations:register' %}"><span class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</span></a></li>
                 {% endif %}
-            </div>
-        </div>
+            </ul>
+        </li>
 
-        <a style="color:white;text-decoration:none;" href="/article/Meldungen/">
+
+<!-- until here -->
+
+
+        <li><a style="color:white;text-decoration:none;" href="/article/Meldungen/">
 	        <div class="sidebar-area" id="news">
                 <div class="sidebar-area-title {% if request.session.current_page == "Meldungen" or request.session.current_page == "News" %}current-page{% endif %}">
                     <div class="sidebar-area-title-icon">
@@ -135,9 +138,9 @@
                     </div>
                 </div>
             </div>
-        </a>
+        </a></li>
 	
-        <div class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()" mobile_wmc="{{ mobile_wmc_id }}">
+        <li><a class="sidebar-area" id="mapviewer-sidebar" onclick="toggleMapviewer()" mobile_wmc="{{ mobile_wmc_id }}">
             <div class="sidebar-area-title">
                 <div class="sidebar-area-title-icon">
                     <i class="far fa-map" alt="{% trans 'A lying map' %}"></i>
@@ -146,10 +149,10 @@
                     {% trans 'Mapviewer' %}
                 </div>
             </div>
-        </div>
+        </a></li>
 
         {% for main_page_key, main_page_val in navigation.items %}
-            <div class="sidebar-area">
+            <li class="sidebar-area">
                     <div class="sidebar-area-title {% if request.session.current_page == main_page_val.parent.page_identifier %}current-page{% endif %}" onclick="{% if main_page_val.children %} toggleSubMenu(this) {% else %} location.href = '{{ main_page_val.parent.url }}' {% endif %}">
                         <div class="sidebar-area-title-icon menuicon" alt="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');">
                         </div>
@@ -172,12 +175,12 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-            </div>
+            </li>
         {% endfor %}
-    <div class="">
+    <li class="">
         <a><img alt="Logo des Geoportal Hessen" id="logo_geoportal" src="{% static 'useroperations/images/GeoportalHessen.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
-    </div>
-    </div>
+    </li>
+    </ul>
     </div>
     </nav>
 
