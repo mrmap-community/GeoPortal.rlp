@@ -472,7 +472,7 @@ def get_data_primary(request: HttpRequest):
     rehasher = Rehasher(search_results, search_filters)
     facets = rehasher.get_rehashed_categories()
     # set flag to indicate that the facet is one of the selected
-    for facet_key, facet_val in selected_facets.items():
+    for facet_key, facet_val in list(selected_facets.items()):
         facet_key_trans = _(facet_key)
         for k in facet_val:
             k["parent_category"] = _(k["parent_category"])
