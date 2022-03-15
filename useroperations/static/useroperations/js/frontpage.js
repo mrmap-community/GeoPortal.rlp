@@ -146,6 +146,12 @@ function toggleMapviewer(servicetype){
         if(!$(".sidebar-wrapper").hasClass("closed")){
             $(".sidebar-toggler").click();
         }
+	if(!$(".map-viewer-overlay").hasClass("closed")){
+            document.body.style.overflowY = "hidden";
+        }else{
+	    document.body.style.overflowY = "visible";
+	}
+
     }
 }
 
@@ -273,7 +279,28 @@ $(document).on("click", ".map-viewer-selector", function(){
     }
 });
 
+$(document).on("click", ".scroll-to-bottom", function(){
+  window.scrollTo(0,document.body.scrollHeight);
+
+});
+
+$(document).on("click", ".scroll-to-top", function(){
+  window.scrollTo({
+  top: 1,
+  behavior: 'smooth'
+});
+
+});
+
+
 $(document).on("click", ".map-applications-toggler", function(){
+
+  var mapViewerToggler = $(".map-applications-toggler");
+  if(mapViewerToggler.hasClass("open")){
+    document.getElementById("scroll-to-bottom").classList.remove("hidden");
+  }
+
+
     var elem = $(this);
     var mapViewerSelector = $(".map-viewer-selector");
 
@@ -297,13 +324,6 @@ $(document).on("click", ".map-applications-toggler", function(){
 $(document).on("click", ".map-viewer-list-entry", function(){
     var elem = $(this);
     var iFrame = $("#mapviewer");
-
-    // move viewport for user
-    window.scrollTo({
-        top:150,
-        left:0,
-        behavior:'smooth'
-    });
 
     gui_id = elem.attr("data-resource");
     if(gui_id.includes("http")){
@@ -335,13 +355,6 @@ $(document).on("click", ".map-viewer-list-entry", function(){
 $(document).on("click", ".map-applications-list-entry", function(){
     var elem = $(this);
     var iframe = $("#mapviewer");
-
-    // move viewport for user
-    window.scrollTo({
-        top:150,
-        left:0,
-        behavior:'smooth'
-    });
 
     iframeSrc = iframe.attr("src").toString();
     iframeDataParams = iframe.attr("data-resource").toString();
@@ -624,7 +637,7 @@ $(document).on("scroll", function(){
     // get viewport Y offset
     var viewportOffset = window.pageYOffset;
 
-    // sticky search bar makes mobile search unusable 
+    // sticky search bar makes mobile search unusable
     if ($(window).width() > 689) {
         if(searchbarPositionHeight <= viewportOffset){
             // make searchbar sticky to the viewport top
@@ -697,4 +710,3 @@ if( CheckForNewsPlaceIcon == true ) {
           checkForNews();
         });
 }
-

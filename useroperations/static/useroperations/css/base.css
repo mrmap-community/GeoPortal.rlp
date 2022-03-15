@@ -551,7 +551,7 @@ ul {
     width: 3em;
 }
 
-.map-viewer-selector, .map-applications-toggler{
+.map-viewer-selector, .map-applications-toggler, .scroll-to-bottom, .scroll-to-top{
     margin: 0.75em 0 0 0;
     background-color: var(--primary);
     font-size: 1.50em;
@@ -561,7 +561,7 @@ ul {
     width: 2.5em;
 }
 
-.map-viewer-selector:hover, .map-applications-toggler:hover{
+.map-viewer-selector:hover, .map-applications-toggler:hover, .scroll-to-bottom:hover, .scroll-to-top:hover{
     cursor: pointer;
 	-webkit-filter: drop-shadow(0 5px 2px rgba(0,0,0,.5));
 	-moz-filter:    drop-shadow(0 5px 2px rgba(0,0,0,.5));
@@ -575,6 +575,18 @@ ul {
     top: 50px;
     right: -2em;
     transition: all 0.25s ease-in-out;
+}
+.scroll-to-bottom{
+  position: absolute;
+  top: 600px;
+  right:-5px;
+}
+
+.scroll-to-top{
+
+  position: absolute;
+  bottom: 10px;
+  right:-35px;
 }
 
 .map-sidebar.open{
@@ -592,15 +604,20 @@ ul {
 .map-applications-list, .map-viewer-list{
     display: none;
 }
+.map-applications-list{
+  display: none;
+  overflow:auto;
+  height: 480px;
+}
 .map-applications-list-entry, .map-viewer-list-entry{
     color: white;
     font-weight: bold;
     padding: 0.5em;
     margin-top: 0.25em;
     background-color: var(--primary-light);
-    border-radius: 0.75em 0 0 0.75em;
+    border-radius: 0.75em 0.75em 0.75em 0.75em;
 }
-.map-applications-list-entry:hover, .map-viewer-list-entry:hover {
+.map-applications-list-entry:hover, .map-viewer-list-entry:hover{
     background-color: var(--primary-light-hover);
     cursor: pointer;
 }
