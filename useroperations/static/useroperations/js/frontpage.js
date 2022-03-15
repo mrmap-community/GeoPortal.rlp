@@ -281,10 +281,14 @@ $(document).on("click", ".map-viewer-selector", function(){
 
 $(document).on("click", ".scroll-to-bottom", function(){
   window.scrollTo(0,document.body.scrollHeight);
+  document.getElementById("scroll-to-bottom").classList.add("hidden");
+  document.getElementById("scroll-to-top").classList.remove("hidden");
 
 });
 
 $(document).on("click", ".scroll-to-top", function(){
+  document.getElementById("scroll-to-top").classList.add("hidden");
+  document.getElementById("scroll-to-bottom").classList.remove("hidden");
   window.scrollTo({
   top: 1,
   behavior: 'smooth'

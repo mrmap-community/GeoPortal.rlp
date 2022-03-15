@@ -36,7 +36,7 @@
 			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&gui_id={{ mapviewer_params }}" name="geop_map" width="{{ IFRAME_WIDTH }}x" height="{{ IFRAME_HEIGHT }}px"></iframe>
 		{% endif %}
 	</div>
-	<div id="scroll-to-top" class="scroll-to-top" title="{% trans 'Scroll to top' %}">
+	<div id="scroll-to-top" class="scroll-to-top hidden" title="{% trans 'Scroll to top' %}">
 		<i class="fa fa-arrow-up"></i>
 	</div>
 {% endblock %}
