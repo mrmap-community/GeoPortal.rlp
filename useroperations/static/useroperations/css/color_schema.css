@@ -2,7 +2,7 @@
 DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
 */
 :root{
-    --primary: #444444;
+    --primary: #16191f;
     --primary-invert: #78e2cc;
     --primary-hover: #888888;
     --primary-light: #868686;
@@ -11,8 +11,9 @@ DECLARE FIX COLOR CODES FOR CORPORATE DESIGN
     
     --hesse-red: #d51f28;
     --hesse-blue: #0362b9;
-    --hesse-lightblue: #68a1d5;
-    --hesse-lighterblue: #D8E4ED;
+    --hesse-lightblue: #eef2ee;
+    --hesse-lighterblue: #d9edfc;
+    --hesse-green: #137673;
     --hesse-grey: #303030;
     --viewer-darkgrey: #555555;
         

@@ -637,7 +637,6 @@ dl dd {
 
 .area-elements{
     padding-top: 10px;
-    padding-left: 50px;
     display: none;
 }
 
@@ -699,7 +698,9 @@ dl dd {
     color: var(--primary);
 }
 
-
+#search-area.area-title {
+    display: none;
+}
 .area-title{
     display: flex;
     align-items: center;
@@ -1360,7 +1361,6 @@ dl dd {
     }
 
     .area-elements{
-        padding-left: 1em;
     }
 
     .result-overview{
