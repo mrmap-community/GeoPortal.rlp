@@ -146,11 +146,12 @@ function toggleMapviewer(servicetype){
         if(!$(".sidebar-wrapper").hasClass("closed")){
             $(".sidebar-toggler").click();
         }
-	if(!$(".map-viewer-overlay").hasClass("closed")){
-            document.body.style.overflowY = "hidden";
-        }else{
-	    document.body.style.overflowY = "visible";
-	}
+        document.getElementById('scroll-to-top').click();
+	//if(!$(".map-viewer-overlay").hasClass("closed")){
+  //          document.body.style.overflowY = "hidden";
+  //      }else{
+	 //   document.body.style.overflowY = "visible";
+	//}
 
     }
 }
