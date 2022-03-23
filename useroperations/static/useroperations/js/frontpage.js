@@ -332,7 +332,7 @@ $(document).on("click", ".map-viewer-list-entry", function(){
     }
 
     // close menu
-    $(".map-viewer-selector").click();
+    //$(".map-viewer-selector").click();
 });
 
 $(document).on("click", ".map-applications-list-entry", function(){
@@ -359,7 +359,7 @@ $(document).on("click", ".map-applications-list-entry", function(){
     iframe.attr("src", src);
 
     // close list menu
-    $(".map-applications-toggler").click();
+    //$(".map-applications-toggler").click();
 
 });
 
