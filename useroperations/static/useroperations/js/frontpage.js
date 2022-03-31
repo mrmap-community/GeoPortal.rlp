@@ -147,7 +147,7 @@ function toggleMapviewer(servicetype){
             $(".sidebar-toggler").click();
         }
 	    
-	if(!$(".map-viewer-overlay").hasClass("closed")){
+	if(!$(".map-viewer-overlay").hasClass("closed") && $(window).height() > 900){
             document.body.style.overflowY = "hidden";
         }else{
 	    document.body.style.overflowY = "visible";
