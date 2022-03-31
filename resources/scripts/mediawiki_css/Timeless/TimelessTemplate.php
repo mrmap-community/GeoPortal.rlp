@@ -561,7 +561,7 @@ class TimelessTemplate extends BaseTemplate {
 			}
 		}
 		if ( count( $allCats ) > 0 ) {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 			$res = $dbr->select(
 				array( 'page', 'page_props' ),
 				array( 'page_id', 'page_title' ),
