@@ -23,7 +23,7 @@ function resizeIframe(obj) {
 }
 
 function setCookie(cname, cvalue){
-    document.cookie = cname + "=" + cvalue + ";path=/;";
+    document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Lax";
 }
 
 function startSearch(){
