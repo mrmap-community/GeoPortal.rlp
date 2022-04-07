@@ -39,11 +39,11 @@ if [ -e "/etc/apache2/phppgadmin.conf_backup_geoportal" ]; then
 fi
 if [ -e "/etc/php/7.0/apache2/php.ini_geoportal_backup" ]; then
         echo "Restoring Apache2 PHP.ini"
-        cp /etc/php/7.0/apache2/php.ini_geoportal_backup /etc/php/7.0/apache2/php.ini
+        cp /etc/php/7.4/apache2/php.ini_geoportal_backup /etc/php/7.4/apache2/php.ini
 fi
 if [ -e "/etc/php/7.0/cli/php.ini_geoportal_backup" ]; then
         echo "Restoring CLI PHP.ini"
-        cp /etc/php/7.0/cli/php.ini_geoportal_backup /etc/php/7.0/cli/php.ini
+        cp /etc/php/7.4/cli/php.ini_geoportal_backup /etc/php/7.4/cli/php.ini
 fi
 if [ -e "/etc/phppgadmin/config.inc.php_geoportal_backup" ]; then
         echo "Restoring PHPPgAdmin Conf"
@@ -68,7 +68,7 @@ rm ${installation_folder}cleanup_geoportal_installation.sh
 ############################################################
 su - postgres -c "dropdb -p $mapbender_database_port $mapbender_database_name"
 #restore old pg_hba.conf of main - default cluster
-cp /etc/postgresql/9.6/main/pg_hba.conf_backup /etc/postgresql/9.6/main/pg_hba.conf
+cp /etc/postgresql/13/main/pg_hba.conf_backup /etc/postgresql/13/main/pg_hba.conf
 service postgresql restart
 cp /etc/subversion/servers_backup_geoportal /etc/subversion/servers
 
