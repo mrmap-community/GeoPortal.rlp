@@ -700,7 +700,11 @@ $(document).ready(function() {
 
         // remove '*' from search line, since it would not be necessary!
         clearAsterisk();
-
+        if ($(window).width() < 960) {
+            if(!$(".sidebar-wrapper").hasClass("closed")){
+                $(".sidebar-toggler").click();
+            }
+	}
         // Check if there is a single resource request. This happens when a user selects the related button on the landing page
         if (search.getParam("singleResourceRequest") !== null){
             var singleResource = search.getParam("singleResourceRequest");
