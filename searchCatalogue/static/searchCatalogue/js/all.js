@@ -353,10 +353,10 @@ var Autocomplete = function(search) {
             document.getElementById("geoportal-empty-search-button").style.display = 'none';
             };
         });
+
 	_input.on('click', function(e) {
-            self.keyUp(e.keyCode);
-        });    
-	
+	    self.keyUp(e.keyCode);
+	});
     };
 
     this.hide = function() {
@@ -984,11 +984,11 @@ $(document).ready(function() {
             search.setParam("facet", facetData);
             prepareAndSearch();
         }
-        window.scrollTo({
-            top:150,
-            left:0,
-            behavior:'smooth'
-        });
+        //window.scrollTo({
+        //    top:150,
+        //    left:0,
+        //    behavior:'smooth'
+        //});
      });
 
      /**
@@ -1014,6 +1014,7 @@ $(document).ready(function() {
         var elem = $(this);
         elem.find('.accordion').toggleClass('closed').toggleClass('open');
         elem.parent().find(".area-elements").slideToggle("slow");
+        elem.toggleClass('manual_opened_elem');
       });
 
       /**
@@ -1378,11 +1379,11 @@ $(document).ready(function() {
         search.setParam('previousPage', search.getParam('pages', 1)); //alternativly we can use .-js-pager-item .active
         search.setParam('paginated', true);
         search.setParam('terms', $(".-js-simple-search-field").val());
-        window.scrollTo({
-            top:150,
-            left:0,
-            behavior:'smooth'
-        });
+        //window.scrollTo({
+        //    top:150,
+        //    left:0,
+        //    behavior:'smooth'
+        //});
         prepareAndSearch(undefined, true);
     });
 
@@ -1453,7 +1454,7 @@ $(document).ready(function() {
     /*
     * Show or hide the filter input field for facets when search icon is clicked
     */
-    $(document).on("click", ".facet-search-icon", function(){
+    $(document).on("click", ".facet-search-title", function(){
         var elem = $(this);
         toggleFacetInput(elem.parent());
     });
@@ -1493,11 +1494,11 @@ $(document).ready(function() {
         var v = elem.attr('data-resource');
         var active = elem.hasClass('chosen-subfacet');
         toggleResourceUsage(v, active);
-        window.scrollTo({
-            top:150,
-            left:0,
-            behavior:'smooth'
-        });
+        //window.scrollTo({
+        //    top:150,
+        //    left:0,
+        //    behavior:'smooth'
+        //});
         prepareAndSearch();
     });
 
@@ -1559,11 +1560,11 @@ $(document).ready(function() {
                 article.slideToggle("slow");
                 // collapse all search results
                 var wrapper = $(".source--title.-js-title").click();
-                window.scrollTo({
-                    top:150,
-                    left:0,
-                    behavior:'smooth'
-                });
+                //window.scrollTo({
+                //    top:150,
+                //    left:0,
+                //    behavior:'smooth'
+                //});
             }
         })
     });
