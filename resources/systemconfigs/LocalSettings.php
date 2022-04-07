@@ -133,27 +133,3 @@ wfLoadSkin( 'Vector' );
 
 # End of automatically generated settings.
 # Add more configuration options below.
-wfLoadExtension( 'Babel' );
-
-wfLoadExtension( 'cldr' );
-
-wfLoadExtension( 'CleanChanges' );
-$wgCCTrailerFilter = true;
-$wgCCUserFilter = false;
-$wgDefaultUserOptions['usenewrc'] = 1;
-
-wfLoadExtension( 'LocalisationUpdate' );
-$wgLocalisationUpdateDirectory = "$IP/cache";
-
-require_once "$IP/extensions/Translate/Translate.php";
-$wgGroupPermissions['user']['translate'] = true;
-$wgGroupPermissions['user']['translate-messagereview'] = true;
-$wgGroupPermissions['user']['translate-groupreview'] = true;
-$wgGroupPermissions['user']['translate-import'] = true;
-$wgGroupPermissions['sysop']['pagetranslation'] = true;
-$wgGroupPermissions['sysop']['translate-manage'] = true;
-$wgTranslateDocumentationLanguageCode = 'qqq';
-$wgExtraLanguageNames['qqq'] = 'Message documentation'; # No linguistic content. Used for documenting messages
-
-wfLoadExtension( 'UniversalLanguageSelector' );
-enableSemantics( '192.168.56.222' );
