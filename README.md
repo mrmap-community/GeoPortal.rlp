@@ -35,7 +35,7 @@ https://www.geoportal.rlp.de/
 
 Requirements:
 
-* Debian 9 with working internet connection.   
+* Debian 11 with working internet connection.   
 
 Install:  
 
