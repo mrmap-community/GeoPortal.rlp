@@ -42,21 +42,21 @@
 <div class="quickstart-container">
     <a class="quickstart search" href="#" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">
-            <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" ></i>
+            <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" aria-hidden= "true"></i>
             <span>{% trans 'Map collections' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
     </a>
     <a class="quickstart search" href="#" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
-            <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" ></i>
+            <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" aria-hidden= "true"></i>
             <span>{% trans 'Map layers' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
     </a>
     <a class="quickstart search" href="#" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
-            <i class="fas fa-globe" title="{% trans 'Datasets' %}"></i>
+            <i class="fas fa-globe" title="{% trans 'Datasets' %}" aria-hidden= "true"></i>
             <span>{% trans 'Datasets' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
@@ -65,21 +65,21 @@
 <div class="quickstart-container">
     <a class="quickstart" href="{% url 'useroperations:organizations' %}" title="{% trans 'Show all organizations' %}">
         <div class="quickstart-header">
-            <i class="fas fa-city" alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" ></i>
+            <i class="fas fa-city" alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" aria-hidden= "true"></i>
             <span>{% trans 'Organizations' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:apps' %}" title="{% trans 'Show all applications' %}">
         <div class="quickstart-header">
-            <i class="fas fa-cogs" alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}"></i>
+            <i class="fas fa-cogs" alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}" aria-hidden= "true"></i>
             <span>{% trans 'Applications' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_apps|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
         <div class="quickstart-header">
-            <i class="fas fa-filter" alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" ></i>
+            <i class="fas fa-filter" alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" aria-hidden= "true" ></i>
             <span>{% trans 'Categories and topics' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
@@ -94,7 +94,7 @@
         <div class="tile">
             <a href="#" class="tile-header" data-id="WMC={{result.id}}">
                 <div class="tile-title">
-                    {{ result.title|safe }}
+                   <p><strong>{{ result.title|safe }}</strong></p>
                 </div>
                 <div class="tile-header-img">
                     <img alt="{% trans 'Preview of the map combination' %}" title="{% trans 'Preview of the map combination' %}" class="tile-img" src="{{ result.previewURL }}">
@@ -131,7 +131,7 @@
     {% endfor %}
         <div id="show-all-tile" class="tile">
             <a href="#" id="show-all-tile-content" class="tile-header">
-                <div class="tile-title">{% trans 'Show all' %}</div>
+                <div class="tile-title"><p><strong>{% trans 'Show all' %}</strong></p></div>
                 <div class="tile-header-img">
                     <img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
                 </div>

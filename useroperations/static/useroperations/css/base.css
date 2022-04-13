@@ -449,8 +449,8 @@ label[for=id_identity]{
     color:var(--hesse-blue) !important;
 }
 
-.spatial-submit-button:hover{
-    color:var(--hesse-lightblue);
+.spatial-submit-button{
+    color: #d9edfc;
 }
 
 .hand{

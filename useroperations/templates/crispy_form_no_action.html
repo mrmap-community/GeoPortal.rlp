@@ -13,14 +13,17 @@
 </div>
 
 <hr>
-
+<div  style="color:gray; font-size:0.8em;">
+       {% trans '* The field is required.' %}
+</div>
 <div class="wrapper form-wrapper">
     <form method="post">
         {% csrf_token %}
-            <div class="sliding" id="password_message">
-                <h3>{% trans 'Password must contain the following:' %}</h3>
-                <p id="special" class="invalid"><b>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</b></p>
-                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
+			<div class="sliding" id="password_message">
+                <h2 style="font-size:150%">{% trans 'Password must contain the following:' %}</h2>
+                <ul style="list-style-type:none;">
+                <li id="special" class="invalid"><strong>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</strong></li>
+                <li id="length" class="invalid"><strong>{% trans 'Minimum 9 characters' %}</strong></li>
             </div>
             <table>
             {% for field in form %}

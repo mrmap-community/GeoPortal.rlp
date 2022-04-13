@@ -33,7 +33,7 @@
         {% endif %}
         <!-- Search tags -->
         <div>
-            <h4>{{ search_filters.searchText.title }}</h4>
+            <h2 style="font-size:120%">{{ search_filters.searchText.title }}</h2>
             <div class="search--list -js-keywords" data-id='geoportal-'>
                 {% for item in search_filters.searchText.item %}
                 <span class="search--list--item -js-term">{{ item.title }}

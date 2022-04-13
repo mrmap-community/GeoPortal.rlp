@@ -50,7 +50,9 @@
     align-items: center;
     padding: 10px;
     color: var(--primary);
+	/*
     font-weight: bold;
+	*/
     flex-direction: column;
     /*
     height: 70px;

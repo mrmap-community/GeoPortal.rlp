@@ -813,7 +813,7 @@ msgstr "Eine liegende Karte"
 
 #: templates/base.html:71
 msgid "Open and close map viewer"
-msgstr "Kartenviewer öffnen/schließen"
+msgstr "Kartenviewer öffnen oder schließen"
 
 #: templates/base.html:77
 msgid "Three horizontal lines, one below the other"
@@ -821,7 +821,7 @@ msgstr "Drei horizontale Linien untereinander"
 
 #: templates/base.html:77
 msgid "Open and close menu"
-msgstr "Menü ein-/ausklappen"
+msgstr "Menü auf- oder zuklappen"
 
 #: templates/base.html:81
 msgid "Menu"
@@ -1659,7 +1659,7 @@ msgid "Map URL copied to clipboard"
 msgstr "Link zur Karte wurde in Zwischenablage kopiert"
 
 #: useroperations/templates/base.html:222
-msgid "Accessibility"
+msgid "Accessibility statement"
 msgstr "Erklärung zur Barrierefreiheit"
 
 msgid "Spatial filter activated!"
@@ -1667,6 +1667,54 @@ msgstr "Räumlicher Filter aktiviert!"
 
 msgid "What is this?"
 msgstr "Was ist das?"
+
+#valid for Hesse
+#templates/base.html:42 useroperations/templates/landing_page.html:44
+msgid "Logo of the Hessian heraldic animal: to homepage"
+msgstr "Logo Hessisches Wappentier: zur Startseit"
+
+#templates/base.html:42 useroperations/templates/landing_page.html:44
+msgid "Back to homepage"
+msgstr "Zurück zur Startseite"
+
+#: GeoPortal.rlp/templates/base.html:55
+#: GeoPortal.rlp/searchCatalogue/templates/index.html:43
+msgid "Search field"
+msgstr "Suchfeld"
+
+#: GeoPortal.rlp/templates/base.html:65
+msgid "Activate spatial filter"
+msgstr "Räumlichen Filter aktivieren"
+
+#: GeoPortal.rlp/templates/base.html:216
+msgid "Easy to read"
+msgstr "Leichte Sprache"
+
+#: GeoPortal.rlp/templates/base.html:219
+msgid "Accessibility"
+msgstr "Barrierefreiheit"
+
+#: GeoPortal.rlp/templates/base.html:32
+msgid "Header"
+msgstr "Kopfzeile"
+
+#: GeoPortal.rlp/templates/base.html:191
+msgid "Main content"
+msgstr "Hauptinhalt"
+
+#: GeoPortal.rlp/templates/base.html:219
+msgid "Footer"
+msgstr "Fußzeile"
+
+#: useroperations/templates/landing_page.html:112
+msgid "Share"
+msgstr "Teilen"
+
+#: GeoPortal.rlp/templates/base.html:72
+msgid "Start search"
+msgstr "Suche starten"
+
+
 
 #~ msgid "The letter W, as used for wikipedia"
 #~ msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"

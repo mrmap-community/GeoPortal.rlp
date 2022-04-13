@@ -6,11 +6,11 @@
         <div id="search-main-content">
             {% if not is_info_search %}
             <div class="area-wrapper">
-                <h2 id="filter-area" class="area-title -js-accordion">
+                <h1 style="font-size:160%" id="filter-area" class="area-title -js-accordion">
                     <span class="accordion icon closed"></span>
                     <i class="fas fa-filter tab-icn" alt="{% trans 'A filter icon' %}" ></i>
                     {% trans 'Filter' %}
-                </h2>
+                </h1>
                 <div class="area-elements">
                     {% include 'filterarea.html' %}
                     <div id="mobile-categories">
