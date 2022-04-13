@@ -149,6 +149,10 @@ function toggleMapviewer(servicetype){
 	$('body').toggleClass("mapviewer-opened");
         $('#sidebar').toggleClass("mapviewer-opened-force-scroll");
         window.scrollTo({top:0,left:0,behavior:'smooth'});
+        // change mapviewer-button to back-button
+            /* mapviewer opened */
+            $('.map-viewer-toggler').toggleClass('backbutton');
+            $('.map-viewer-toggler').toggleClass('nobackbutton');
     }
 }
 
@@ -739,17 +743,19 @@ if( CheckForNewsPlaceIcon == true ) {
 }
 
 /*
- * reposition body if cookie-banner showed
+ * reposition cookie-banner
 */
 $(document).ready(function(){
+
     if($('.cookie-container-visible').length > 0){
         document.getElementById("main-body-class").style.margin = '143px 0px 0px 0px';
     }
+
     if ($(window).width() < 800) {
         if($('.cookie-container-visible').length > 0){
         document.getElementById("main-body-class").style.margin = '196px 0px 0px 0px';
         }
-    } 
+    }
 
     if($('.cookie-container-hidden').length > 0){
         document.getElementById("main-body-class").style.margin = 'unset';

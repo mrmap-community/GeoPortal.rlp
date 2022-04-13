@@ -708,6 +708,10 @@ ul {
     width: 3em;
 }
 
+.map-viewer-toggler.nobackbutton {
+    display: none;
+}
+
 .map-viewer-selector, .map-applications-toggler{
     font-size: 1em;
     color: var(--hesse-green);

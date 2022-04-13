@@ -56,6 +56,12 @@
             <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}" aria-hidden="true"></i>
         <span>Kartenviewer</span>
         </a>
+
+        <a href="#" class="map-viewer-toggler nobackbutton" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
+            <i class="fas fa-backward" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}" aria-hidden="true"></i>
+        <span>Zurück</span>
+        </a>
+
 	<div class="searchbar-container"><div id="spatial-search-text" class="spatial-search-text">
                 {% trans 'Spatial filter activated!' %} <a href="/article/spatialsearch/#R.C3.A4umlicher_Filter" > {% trans 'What is this?' %}</a>
         </div>
