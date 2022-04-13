@@ -49,7 +49,7 @@ body{
 .mw-parser-output{padding-top:1px;}
 
 .body-content{
-    min-height: 800px;      /* ToDO: As long as the iframe mapviewer is used, we need to provide a minimum height for the body content */
+    min-height: 1200px;      /* ToDO: As long as the iframe mapviewer is used, we need to provide a minimum height for the body content */
     background-color: white;
     transition-duration: 0.8s;
     padding: 1em 3em 1em 3em;
@@ -788,7 +788,7 @@ ul {
 }
 
 .mapviewer-opened-force-scroll {
-    max-height: calc(100% - 156px);
+    max-height: calc(100% - 193px);
     }
 
 .quickstart-container{
