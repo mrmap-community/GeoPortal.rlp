@@ -150,9 +150,8 @@ function toggleMapviewer(servicetype){
         $('#sidebar').toggleClass("mapviewer-opened-force-scroll");
         window.scrollTo({top:0,left:0,behavior:'smooth'});
         // change mapviewer-button to back-button
-            /* mapviewer opened */
-            $('.map-viewer-toggler').toggleClass('backbutton');
-            $('.map-viewer-toggler').toggleClass('nobackbutton');
+        $('.map-viewer-toggler').toggleClass('backbutton');
+        $('.map-viewer-toggler').toggleClass('nobackbutton');
     }
 }
 
@@ -421,6 +420,9 @@ $(document).on("click", "#geoportal-search-button", function(){
         window.location.href = "/search";
     }else{
         startSearch();
+        if (!$(".map-viewer-overlay").hasClass("closed")){
+            toggleMapviewer();
+        }
     }
 
 });
@@ -730,7 +732,7 @@ function checkForNews (){
                 }
                 showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
                 if (showIcon == true) {
-                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: var(--success-green);"></i>');
                 }
         })
         .catch(function(error){console.log(error);});
