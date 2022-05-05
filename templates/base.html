@@ -49,34 +49,36 @@
         </a>
     </div>
     <div class="middle-header">
-        <a href="#" class="sidebar-toggler" aria-haspopup="true" aria-expanded="true">
-            <i class="fas fa-bars" alt="{% trans 'Three horizontal lines, one below the other' %}" title="{% trans 'Open and close menu' %}" aria-label="{% trans 'Open and close menu' %}"></i><span>Menü</span>
-        </a>
-        <a href="#" class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
-            <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}" aria-hidden="true"></i>
+        <button class="sidebar-toggler nobuttoncss" aria-haspopup="true" aria-expanded="true" title="{% trans 'Open and close menu' %}" aria-label="{% trans 'Open and close     menu' %}">
+            <i class="fas fa-bars" aria-hidden="true"></i><span>Menü</span>
+        </button>
+        <button class="map-viewer-toggler nobuttoncss" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
+            <i class="far fa-map" aria-hidden="true"></i>
         <span>Kartenviewer</span>
-        </a>
+        </button>
 
-        <a href="#" class="map-viewer-toggler nobackbutton" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
-            <i class="fas fa-backward" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}" aria-hidden="true"></i>
+        <button class="map-viewer-toggler nobackbutton nobuttoncss" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
+            <i class="fas fa-backward" aria-hidden="true"></i>
         <span>Zurück</span>
-        </a>
+        </button>
 
-	<div class="searchbar-container"><div id="spatial-search-text" class="spatial-search-text">
-                {% trans 'Spatial filter activated!' %} <a href="/article/spatialsearch/#R.C3.A4umlicher_Filter" > {% trans 'What is this?' %}</a>
+        <div class="searchbar-container"><div id="spatial-search-text" class="spatial-search-text">
+                <span>{% trans 'Spatial filter activated!' %}</span><a href="/article/spatialsearch/#R.C3.A4umlicher_Filter" > {% trans 'What is this?' %}</a>
         </div>
         <div class="middle-header-top">
-            <div class="spatial-submit-button" id="spatial-submit-button">
-                <input type="checkbox" class="spatial-checkbox-input" id="spatial-checkbox">
-                <label for="spatial-checkbox"><i title="{% trans 'Activate spatial filter' %}" class="hand fas fa-map-marked-alt" aria-hidden="true" aria-label="{% trans 'Activate spatial filter' %}"></i></label>
+            <div class="spatial-submit-button nobuttoncss" id="spatial-submit-button">
+                <label for="spatial-checkbox" title="{% trans 'Activate spatial filter' %}" aria-label="{% trans 'Activate spatial filter' %}">
+                    <i class="hand fas fa-map-marked-alt" aria-hidden="true"></i>
+                    <input type="checkbox" class="spatial-checkbox-input" id="spatial-checkbox">
+                </label>
             </div>
-            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" title="{% trans 'Search field' %}" placeholder="{% trans 'Search term' %}">
-            <div id="geoportal-empty-search-button" class="empty-search-button">
-                    <i class="fas fa-times"></i>
-            </div>
-            <div id="geoportal-search-button" class="search-submit-button">
-                <i class="fas fa-search" aria-hidden="true" title="{% trans 'Start search'%}" aria-label="{% trans 'Start search'%}"></i>
-            </div></div>
+            <input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" title="{% trans 'Search field' %}" placeholder="{% trans 'Search term' %}" aria-label="{% trans 'Search field' %}">
+            <button id="geoportal-empty-search-button nobuttoncss" class="empty-search-button">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <button id="geoportal-search-button" class="search-submit-button nobuttoncss" title="{% trans 'Start search' %}" aria-label="{% trans 'Start search' %}">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </button></div>
             <div class="simple-search-autocomplete -js-simple-search-autocomplete"></div>
         </div>
     </div>
@@ -84,7 +86,8 @@
         <div class="right-header-bottom">
         </div>
     </div>-->
-</div>
+
+    </div>
 </header>
 
 <body id="main-body-class">

@@ -40,11 +40,14 @@ body{
 }
 
 /* keyboard usability outline focus-visible */
-.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible{
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible{
     outline: solid .125rem #f1b709;
 }
 
-
+.nobuttoncss{
+    background: none;
+    border: none;
+}
 
 .mw-parser-output{padding-top:1px;}
 
@@ -434,23 +437,22 @@ label[for=id_identity]{
     display:none;
 }
 
-.spatial-checkbox-input{
-    display:none;}
-
 .spatial-submit-button{
-    color:  var(--hesse-lighterblue);
+    color:  var(--hesse-green);
     padding: 0.4em;
     font-size: 1.5em;
     border-right: 1px solid var(--primary);
     margin: 2px 4px;
+    display: inherit;
 }
 
-#spatial-checkbox:checked + label{
-    color:var(--hesse-blue) !important;
+.spatial-submit-button label{
+    display: flex;
+    flex-direction: row;
 }
 
-.spatial-submit-button{
-    color: #d9edfc;
+.spatial-submit-button label i {
+    padding: 0 10px 0 0;
 }
 
 .hand{
@@ -467,7 +469,7 @@ label[for=id_identity]{
     align-items: center;*/
     font-size: 22px;
     padding:0.5em 0.5em;
-    color: var(--primary);
+    color: var(--hesse-green);
     border-left: 1px solid var(--primary);
     margin: 2px 0px;
 }
@@ -477,7 +479,6 @@ label[for=id_identity]{
 
 .search-submit-button:hover{
     cursor: pointer;
-    color: #137673;
 }
 
 #geoportal-search-button-icon{
