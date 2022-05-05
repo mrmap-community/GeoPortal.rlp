@@ -40,8 +40,12 @@ body{
 }
 
 /* keyboard usability outline focus-visible */
-.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible{
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible, input[type="checkbox" i]:focus-visible{ 
     outline: solid .125rem #f1b709;
+}
+
+input#geoportal-search-field:focus-visible, #geoportal-search-button:focus-visible{
+    outline-offset: -5px;
 }
 
 .nobuttoncss{
@@ -448,7 +452,7 @@ label[for=id_identity]{
 
 .spatial-submit-button label{
     display: flex;
-    flex-direction: row;
+    align-items: center;
 }
 
 .spatial-submit-button label i {
