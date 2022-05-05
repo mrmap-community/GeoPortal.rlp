@@ -730,7 +730,7 @@ function checkForNews (){
                 }
                 showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
                 if (showIcon == true) {
-                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: var(--success-green);"></i>');
                 }
         })
         .catch(function(error){console.log(error);});

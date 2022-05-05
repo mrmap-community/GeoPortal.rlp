@@ -1714,6 +1714,10 @@ msgstr "Teilen"
 msgid "Start search"
 msgstr "Suche starten"
 
+#: GeoPortal.rlp/searchCatalogue/templates/search_result.hmtl: 9
+msgid "Open and close filter settings"
+msgstr "Filtereinstellung auf- oder zuklappen"
+
 
 
 #~ msgid "The letter W, as used for wikipedia"
