@@ -578,12 +578,10 @@ label[for=id_identity]{
     align-items: center;
     background-color: white;
     color: var(--hesse-grey);
-    /**padding: 0.5em;**/
     font-size: 1.2em;
-    /**margin-left:-0.5em;**/
     height: 40px;
     width: 50px;
-    margin: 5px 5px 5px -45px;
+    margin: 6px 5px 5px -47px;
     justify-content: space-around;
 }
 
