@@ -26,7 +26,7 @@ CHANGE PLACEHOLDER COLORS
   color: var(--secondary-placeholder);
 }
 
-*{font-family:arial,helvetica,candara;}
+*{font-family:arial,helvetica,candara;word-break: break-word;}
 
 html{
     height: 100%;
