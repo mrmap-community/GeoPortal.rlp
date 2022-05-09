@@ -1295,7 +1295,9 @@ transition: all 0.2s ease-in-out;}
     }
     .sidebar-toggler{
         align-items: flex-start;
-        margin-top: 27px;
+        margin-top: 25px 0;
+        font-size: 1.5rem;
+        padding: 0.5rem;
     }
     .sidebar-toggler i{
         padding: 0 3px 0 0;
@@ -1376,10 +1378,6 @@ transition: all 0.2s ease-in-out;}
         width: 3.5em;
     }
 
-    .sidebar-toggler{
-        padding: 0.5rem;
-    }
-    
     #mapviewer{
     margin: 30px 0 0 0;
     min-height: calc(100vh - 120px);
