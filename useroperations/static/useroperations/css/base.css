@@ -446,7 +446,6 @@ label[for=id_identity]{
     padding: 0.4em;
     font-size: 1.5em;
     border-right: 1px solid var(--primary);
-    margin: 2px 4px;
     display: inherit;
 }
 
@@ -469,9 +468,7 @@ label[for=id_identity]{
 }
 
 .search-submit-button{
-    /*display: flex;
-    align-items: center;*/
-    font-size: 22px;
+    font-size: 20px;
     padding:0.5em 0.5em;
     color: var(--hesse-green);
     border-left: 1px solid var(--primary);
@@ -1266,7 +1263,13 @@ transition: all 0.2s ease-in-out;}
 
     .simple-search-autocomplete{
         box-shadow: none;
-        margin: -16px 0px 0px 12px;
+        margin: -16px 0px 0px 0px;
+        position: absolute;
+        top: 159px;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid var(--hesse-green);
     }
 
     .middle-header-top.sticky-top > .simple-search-autocomplete{
@@ -1322,6 +1325,10 @@ transition: all 0.2s ease-in-out;}
     .map-viewer-toggler{
     display:none;
     }
+
+    .spatial-submit-button {font-size: 1em;}
+    .spatial-submit-button label {flex-direction: column;}
+    .spatial-submit-button label i {padding:0 0 4px 0;}
 
     .spatial-search-text {margin-left:12px;padding:0px 5px 5px 5px;}
 
@@ -1548,7 +1555,7 @@ transition: all 0.2s ease-in-out;}
         font-weight: bold;
     }
     .wrapper{margin: 0 !important;}
-    .search-result-body{padding:0 !important;}
+    .search-result-body{padding:0 5px !important;}
     #search-main-content {padding:0 !important;}
 
     .popup-landing .popuptext-landing {

@@ -352,6 +352,11 @@ var Autocomplete = function(search) {
             if (document.getElementById("geoportal-search-field").value == ''){
             document.getElementById("geoportal-empty-search-button").style.display = 'none';
             };
+            if (document.getElementById("geoportal-search-field").value !== ''){
+                document.getElementById("geoportal-search-field").style.marginRight = '45px';
+            } else {
+                document.getElementById("geoportal-search-field").style.marginRight = '0px';
+            };
         });
 
 	_input.on('click', function(e) {
