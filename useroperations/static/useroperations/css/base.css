@@ -496,9 +496,7 @@ label[for=id_identity]{
     border-right: 1px solid #d5d5d5;
     border-bottom: 1px solid #d5d5d5;
     background-color: #fff;
-    width: calc(100% - 27.7em)
-    position: absolute;
-    top: 51px;
+    position: relative;
     display: none;
     z-index: 3;
   }
@@ -513,7 +511,7 @@ label[for=id_identity]{
 .simple-search-autocomplete > div {
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(100vh - 117px);
+    max-height: calc(100vh - 150px);
 }
 
 .simple-search-autocomplete .headline,.simple-search-autocomplete .suggestion {
