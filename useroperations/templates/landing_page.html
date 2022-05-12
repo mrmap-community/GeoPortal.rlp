@@ -36,8 +36,11 @@
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
+<div class="landing-page-box1"><!--landing-page-box-Begin -->
 <div class="landing-page-headline">
-    <h2>Suchen</h2>
+    <h2>Sie suchen Geodaten?</h2>
+    <p class="landing-page-first-paragraph">Hier erhalten Sie einen Vorsprung bei Ihrer Suche</p>
+    <p class="landing-page-second-paragraph">Starten Sie jetzt eine bereits gefilterte Suche durch die Auswahl einer der Kacheln</p>
 </div>
 <div class="quickstart-container">
     <a class="quickstart search" href="#" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
@@ -85,9 +88,12 @@
         <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
     </a>
 </div>
-
+</div><!--landing-page-box-END -->
+<div class="landing-page-box2"><!--landing-page-box-Begin -->
 <div class="landing-page-headline">
-    <h2>{% trans 'Most frequently used map combinations' %}</h2>
+    <h2>Häufig gestartete Karten</h2>
+    <p class="landing-page-first-paragraph">Hier starten Sie unsere Kartenanwendung mit bereits ausgewählten Kartenebenen</p>
+    <p class="landing-page-second-paragraph">Sie können im Anschluss Kartenebenen aus- oder einschalten und weitere Kartenebenen hinzuladen</p>
 </div>
 <div class="tile-wrapper favourite-wmcs">
     {% for result in results.wmc %}
@@ -146,6 +152,6 @@
             </div>
         </div>
 </div>
-
+</div><!--landing-page-box-END -->
 
 {% endblock %}
