@@ -1411,28 +1411,41 @@ transition: all 0.2s ease-in-out;}
         margin-right: unset;
     }
 
+    .body-content .title {
+        justify-content: center;
+        display: flex;
+    }
+
+    .form-wrapper {
+        justify-content: center;
+    }
+
+    .messages-container {
+        margin: 0 2rem;
+    }
+
     .sidebar-toggler img, .map-viewer-toggler img, .map-viewer-selector img{
         width: 3.5em;
     }
 
     #mapviewer{
     margin: 0 0 0 0;
-    min-height: calc(100vh - 120px);
-    max-height: calc(100vh - 120px);
     }
 
     .map-sidebar {
-    top: 2px;
-    right: 0px;
+        top: -6px;
+        left: 40px;
+        padding: 0;
     }
 
     .map-viewer-list {
     margin-right: 0px;
     }
+    
     .map-viewer-selector, .map-applications-toggler{
     padding: 0;
     margin: 0;
-    font-size: 1em;
+    font-size: 0.8em;
     }
     .map-viewer-toggler{
     top:31px;
