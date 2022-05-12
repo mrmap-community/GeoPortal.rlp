@@ -135,13 +135,21 @@ msgstr "Nur freie Daten"
 msgid "An open data icon"
 msgstr "Nur freie Daten"
 
-#: searchCatalogue/templates/hits_and_sort_option.html:49
+#: searchCatalogue/templates/hits_and_sort_option.html:
 msgid "Active"
 msgstr "Aktiv"
 
-#: searchCatalogue/templates/hits_and_sort_option.html:51
+#: searchCatalogue/templates/hits_and_sort_option.html:
 msgid "Not active"
 msgstr "Nicht aktiv"
+
+#: searchCatalogue/templates/hits_and_sort_option.html:49
+msgid "Filter only open data active"
+msgstr "Filter nur freie Daten aktiviert"
+
+#: searchCatalogue/templates/hits_and_sort_option.html:51
+msgid "Filter only open data deactivate"
+msgstr "Filter nur freie Daten deaktiviert"
 
 #: searchCatalogue/templates/index.html:43
 msgid "Insert search term here"
@@ -709,6 +717,10 @@ msgstr "Räumliche Einschränkung:"
 #: searchCatalogue/utils/viewHelper.py:258
 msgid "Hits per Page:"
 msgstr "Treffer pro Seite"
+
+#: searchCatalogue/utils/hits_and_sort.html:15
+msgid "Select hits per page:"
+msgstr "Treffer pro Seite wählen:"
 
 #: searchCatalogue/views.py:394
 msgid "Search-, Download-,Gathering-modules"

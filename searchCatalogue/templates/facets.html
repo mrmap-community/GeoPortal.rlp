@@ -9,8 +9,8 @@
         <form class="catalogue-form">
         {% for source_key, source_val in sources.items %}
             <input class="radio-button-catalogue" type="radio" name="catalogue" id="radio-{{ source_key }}" value="{{ source_key }}" {% if source == source_key %}checked="checked"{% endif %}/>
-            <label for="radio-{{ source_key }}">{{ source_val.key }}</label>
-            <br>
+            <label for="radio-{{ source_key }}" title="{% trans 'Search in ' %}: {{ source_val.key }}">{{ source_val.key }}</label>
+			<br>
         {% endfor %}
         </form>
     </div>
@@ -23,7 +23,7 @@
         </div>
         <ul>
         {% for resource_key, resource_val in all_resources.items %}
-            <li class="subfacet -js-resource {% if resource_key in resources %} chosen-subfacet {% endif %}" data-resource="{{ resource_key }}">
+            <li class="subfacet -js-resource {% if resource_key in resources %} chosen-subfacet {% endif %}" data-resource="{{ resource_key }}" title="{% trans 'Resource types' %}: {{ resource_val }}">
                 <span>{{ resource_val }}</span>
                 {% if resource_key in resources %}
                         <span class="icon-cross fs-10px"></span>
