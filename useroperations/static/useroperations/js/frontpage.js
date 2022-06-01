@@ -494,33 +494,6 @@ $(document).on('focus blur', "#id_password", function(){
     setTimeout(resizeSidebar, 1000);
 });
 
-// Client side password validation
-$(document).on('keyup', "#id_password", function(){
-
-  var PasswordInput = document.getElementById("id_password");
-  var special = document.getElementById("special");
-  var length = document.getElementById("length");
-
-  // Validate special chars
-  if(PasswordInput.value.match(/[@#$%&+=!:-_]/g)) {
-    special.classList.remove("invalid");
-    special.classList.add("valid");
-  } else {
-    special.classList.remove("valid");
-    special.classList.add("invalid");
-  }
-
-  // Validate length
-  if(PasswordInput.value.length >= 9) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-
-});
-
 $(document).on('click', ".sidebar-area", function(){
 
 if ($(window).width() < 689) {
