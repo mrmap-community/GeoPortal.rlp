@@ -17,11 +17,6 @@
 <div class="wrapper form-wrapper">
     <form method="post">
         {% csrf_token %}
-            <div class="sliding" id="password_message">
-                <h3>{% trans 'Password must contain the following:' %}</h3>
-                <p id="special" class="invalid"><b>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</b></p>
-                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
-            </div>
             <table>
             {% for field in form %}
             <tr class="field-wrapper {% if field.id_for_label in small_labels %}small-label{% endif %}">
