@@ -7,20 +7,23 @@
     <h1>{{ headline }}</h1>
 </div>
 
-<div class="description">
+<p class="description">
     <a target="_self" href="/article/Registrierung/">{% trans 'Why should I create an account?' %}</a>
     {% trans 'A short explanation of the benefits of an account for this Geoportal!' %}
-</div>
+</p>
 
 <hr>
-
+<p  style="color:gray; font-size:0.8em;">
+       {% trans '* The field is required.' %}
+</p>
 <div class="wrapper form-wrapper">
     <form method="post">
         {% csrf_token %}
-            <div class="sliding" id="password_message">
-                <h3>{% trans 'Password must contain the following:' %}</h3>
-                <p id="special" class="invalid"><b>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</b></p>
-                <p id="length" class="invalid"><b>{% trans 'Minimum 9 characters' %}</b></p>
+			<div class="sliding" id="password_message">
+                <h2 style="font-size:150%">{% trans 'Password must contain the following:' %}</h2>
+                <ul style="list-style-type:none;">
+                <li id="special" class="invalid"><strong>{% trans 'A special character, these are allowed: @#$%&+=!:-_' %}</strong></li>
+                <li id="length" class="invalid"><strong>{% trans 'Minimum 9 characters' %}</strong></li>
             </div>
             <table>
             {% for field in form %}
@@ -40,14 +43,14 @@
         {% if use_recaptcha == 1 and register == 1 %}
          <div class="g-recaptcha" data-sitekey="{{ recaptcha_public_key }}"></div>
         {% endif %}
-        <div class="foot-note">
+        <p class="foot-note">
             {% trans '* The field is required.' %}
-        </div>
+        </p>
         <hr>
-        <div class="foot-note">
+        <p class="foot-note">
             {% trans 'For additional information regarding your privacy and the GDPR, please read our ' %}
             <a target="_self" href="/article/Datenschutz">{% trans 'privacy rules' %}.</a>
-        </div>
+        </p>
         <div class="submit-button-wrapper">
             <input type="hidden" name="action" value="submit" />
 

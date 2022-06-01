@@ -7,13 +7,13 @@
 
 {% block body %}
 
-<div class="landing-page-body" style="background-color: var(--hesse-lighterblue);padding: 30px;border: 2px solid green;margin: 0 10px 20px 10px;">
+<div class="landing-page-body">
 
-    <div class="landing-page-headline" style="margin:0;">
-	    <h1 style="font-size: 1.5em;text-align: center;margin: 0 0 0.5em 0;">Herzlich willkommen im Geoportal Hessen</h1>
+    <div class="landing-page-headline">
+	    <h1>Herzlich willkommen im Geoportal Hessen</h1>
     </div>
     <div class="w3-container">
-        <p style="text-align: center;line-height:1.5;"><strong>Hier erhalten Sie einen einheitlichen Zugang zu den raumbezogenen Daten der Geodateninfrastruktur Hessen (GDI-HE)</strong></p>
+        <p><strong>Hier erhalten Sie einen einheitlichen Zugang zu den raumbezogenen Daten der Geodateninfrastruktur Hessen (GDI-HE)</strong></p>
     </div>
 </div>
 
@@ -21,42 +21,45 @@
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!--
-<div style="margin:0 auto;max-width:830px;">
-<div class="landing-page-body" style="background-color: var(--secondary);padding: 15px;border: 2px solid transparent;margin: 0 auto;max-width:830px;margin:0 10px 15px 10px;">
-        <div class="landing-page-alert" style="margin:0; border: 2px solid var(--hesse-red);background-color: var(--hesse-lighterblue);padding: 5px;">
-                    <h2 style="text-align: center;line-height:1.5;margin:0;font-size:1em;"2>Hinweis: Daten des Anbieters XY sind derzeit nicht über das Geoportal Hessen erreichbar.</h2>
-        </div>
-        <div class="w3-container">
-                <p style="text-align: center;line-height:1.5;margin:5px;font-size:0.8em;">Auf Grund von Wartungsarbeiten bis zum DAY. MONTH YEAR sind u.a. folgende Karten nicht erreichbar:</p>
-                <p style="text-align: center;line-height:1.5;margin:5px;font-size:0.8em;"><span><strong><a href="https://www.geoportal.hessen.de/mapbender/php/mod_showMetadata.php?resource=wms&layout=tabs&id=2184&languageCode=de" target="_blank">Layer1</a></strong></span> |
-                <span style="text-align: center;line-height:1.5;"><strong><a href="https://www.geoportal.hessen.de/mapbender/php/mod_showMetadata.php?languageCode=de&resource=layer&layout=tabs&id=52079#tabs-3" target="_blank">Layer2</a></strong></span> |
-                <span style="text-align: center;line-height:1.5;"><strong><a href="https://www.geoportal.hessen.de/mapbender/php/mod_showMetadata.php?languageCode=de&resource=layer&layout=tabs&id=52123#tabs-3" target="_blank">Layer3</a></strong></spanp></p>
-        </div>
+<div class="landing-page-body" style="background-color: var(--secondary);padding: 15px;border: 2px solid transparent;margin: 0 auto;max-width:830px;margin-bottom:15px;">
+	<div class="landing-page-alert" style="margin:0; border: 2px solid var(--hesse-red);background-color: var(--hesse-lighterblue);padding: 5px;">
+		    <h2 style="text-align: center;line-height:1.5;margin:0;font-size:1em;"2>Hinweis: Einige WMS-Dienste zeitweise überlastet</h2>
+	</div>
+	<div class="w3-container">
+		<p style="text-align: center;line-height:1.5;margin:5px;font-size:0.8em;">Auf Grund erhöhter Nutzungsintensität werden einige Karten zeitweise nicht angezeigt. Versuchen Sie es in diesem Fall später noch einmal. Die Diensteanbieter arbeiten daran, die Systemressourcen entsprechend der erhöhten Last auszubauen. Wir bitten um Ihr Verständnis.</p>
+		<p style="text-align: center;line-height:1.5;margin:5px;font-size:0.8em;"><span><strong><a href="https://hvbg.hessen.de/sites/hvbg.hessen.de/files/Anschriften%20GAA.pdf" target="_blank">Bodenrichtwerte</a></strong></span> | 
+		<span style="text-align: center;line-height:1.5;"><strong><a href="https://www.geoportal.hessen.de/mapbender/php/mod_showMetadata.php?languageCode=de&resource=layer&layout=tabs&id=52079#tabs-3" target="_blank">Liegenschaftskarte</a></strong></span> | 
+		<span style="text-align: center;line-height:1.5;"><strong><a href="https://www.geoportal.hessen.de/mapbender/php/mod_showMetadata.php?languageCode=de&resource=layer&layout=tabs&id=52123#tabs-3" target="_blank">Orthophotos (Luftbilder)</a></strong></spanp></p>
+	</div>
 </div>
-</div>
-
 -->
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
+<div class="landing-page-box1"><!--landing-page-box-Begin -->
+<div class="landing-page-headline">
+    <h2>Sie suchen Geodaten?</h2>
+    <p class="landing-page-first-paragraph">Hier erhalten Sie einen Vorsprung bei Ihrer Suche</p>
+    <p class="landing-page-second-paragraph">Starten Sie jetzt eine bereits gefilterte Suche durch die Auswahl einer der Kacheln</p>
+</div>
 <div class="quickstart-container">
-    <a class="quickstart search" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all map collections' %}" data-resource="wmc">
         <div class="quickstart-header">
-            <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" ></i>
+            <i class="fas fa-map" alt="{% trans 'A lying map in the background. A large plus in the foreground.' %}" title="{% trans 'Web Map Context' %}" aria-hidden= "true"></i>
             <span>{% trans 'Map collections' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wmc|intcomma }}</span>
     </a>
-    <a class="quickstart search" title="{% trans 'Search for all map layers' %}" data-resource="wms">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all map layers' %}" data-resource="wms">
         <div class="quickstart-header">
-            <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" ></i>
+            <i class="fas fa-layer-group" alt="{% trans 'A lying map' %}" title="{% trans 'Web Map Services' %}" aria-hidden= "true"></i>
             <span>{% trans 'Map layers' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_wms|intcomma }}</span>
     </a>
-    <a class="quickstart search" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
+    <a class="quickstart search" href="#" title="{% trans 'Search for all datasets' %}" data-resource="dataset">
         <div class="quickstart-header">
-            <i class="fas fa-globe" title="{% trans 'Datasets' %}"></i>
+            <i class="fas fa-globe" title="{% trans 'Datasets' %}" aria-hidden= "true"></i>
             <span>{% trans 'Datasets' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_dataset|intcomma }}</span>
@@ -65,41 +68,44 @@
 <div class="quickstart-container">
     <a class="quickstart" href="{% url 'useroperations:organizations' %}" title="{% trans 'Show all organizations' %}">
         <div class="quickstart-header">
-            <i class="fas fa-city" alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" ></i>
+            <i class="fas fa-city" alt="{% trans 'An organization icon' %}" title="{% trans 'Organizations' %}" aria-hidden= "true"></i>
             <span>{% trans 'Organizations' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_orgs|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:apps' %}" title="{% trans 'Show all applications' %}">
         <div class="quickstart-header">
-            <i class="fas fa-cogs" alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}"></i>
+            <i class="fas fa-cogs" alt="{% trans 'An application icon' %}" title="{% trans 'Applications' %}" aria-hidden= "true"></i>
             <span>{% trans 'Applications' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_apps|intcomma }}</span>
     </a>
     <a class="quickstart" href="{% url 'useroperations:categories' %}" title="{% trans 'Show all topics' %}">
         <div class="quickstart-header">
-            <i class="fas fa-filter" alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" ></i>
+            <i class="fas fa-filter" alt="{% trans 'A filter icon' %}" title="{% trans 'Filter by categories and topics' %}" aria-hidden= "true" ></i>
             <span>{% trans 'Categories and topics' %}</span>
         </div>
         <span class="quickstart-body">{{ results.num_topics|intcomma }}</span>
     </a>
 </div>
-
+</div><!--landing-page-box-END -->
+<div class="landing-page-box2"><!--landing-page-box-Begin -->
 <div class="landing-page-headline">
-    <h2>{% trans 'Most frequently used map combinations' %}</h2>
+    <h2>Häufig gestartete Karten</h2>
+    <p class="landing-page-first-paragraph">Hier starten Sie unsere Kartenanwendung mit bereits ausgewählten Kartenebenen</p>
+    <p class="landing-page-second-paragraph">Sie können im Anschluss Kartenebenen aus- oder einschalten und weitere Kartenebenen hinzuladen</p>
 </div>
 <div class="tile-wrapper favourite-wmcs">
     {% for result in results.wmc %}
         <div class="tile">
-            <div class="tile-header" data-id="WMC={{result.id}}">
+            <a href="#" class="tile-header" data-id="WMC={{result.id}}">
                 <div class="tile-title">
-                    {{ result.title|safe }}
+                   <p><strong>{{ result.title|safe }}</strong></p>
                 </div>
                 <div class="tile-header-img">
                     <img alt="{% trans 'Preview of the map combination' %}" title="{% trans 'Preview of the map combination' %}" class="tile-img" src="{{ result.previewURL }}">
                 </div>
-            </div>
+            </a>
             <div class="tile-content">
                 <div class="tile-content-abstract">
                     <div class="sub-tile-container">
@@ -118,30 +124,34 @@
                         </div>
                     </div>
                     <hr>
+                    <p>
                     {% if result.abstract|length == 0 %}
                         {% trans 'No description available' %}
                     {% else %}
                         {{ result.abstract|safe }}
                     {% endif %}
+                   </p>
                 </div>
             </div>
         </div>
     {% endfor %}
         <div id="show-all-tile" class="tile">
-            <div id="show-all-tile-content" class="tile-header">
-                <div class="tile-title">{% trans 'Show all' %}</div>
+            <a href="#" id="show-all-tile-content" class="tile-header">
+                <div class="tile-title"><p><strong>{% trans 'Show all' %}</strong></p></div>
                 <div class="tile-header-img">
                     <img alt="{% trans 'Logo of the spatial data infrastructure organization' %}" class="tile-img" src="{% static 'useroperations/images/logo-gdi.png' %}">
                 </div>
-            </div>
+            </a>
             <div class="tile-content">
                 <div class="tile-content-abstract">
                     <hr>
+                    <p>
                     {% trans "Start a search and explore all results. Let's go!" %}
+                    </p>
                 </div>
             </div>
         </div>
 </div>
-
+</div><!--landing-page-box-END -->
 
 {% endblock %}

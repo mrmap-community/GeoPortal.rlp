@@ -5,25 +5,26 @@
         <div class="map-sidebar">
             <div class="map-sidebar-actions">
                 <div class="map-viewer-selector" title="{% trans 'Switch between mapviewers' %}">
-					<i class="fas fa-exchange-alt"></i>
-		        </div>
-                <div class="map-viewer-list">
+			<i class="fas fa-exchange-alt"></i>
+			<a href="#">Kartenviewer auswählen</a>
+                	<div class="map-viewer-list">
 				{% for mapviewer_name, mapviewer_val in mapviewers.items %}
-                	<div class="map-viewer-list-entry" data-resource="{{ mapviewer_val }}">{{ mapviewer_name }}</div>
+                		<div class="map-viewer-list-entry" data-resource="{{ mapviewer_val }}">{{ mapviewer_name }}</div>
 				{% endfor %}
-                </div>
-				{% if guis|length > 1 %}
-		        	<div class="map-application-selector" title="{% trans 'Select other map application' %}">
-		        		<div class="map-applications-toggler">
-							<i class="far fa-folder-open"></i>
-		        		</div>
-		        	</div>
-				{% endif %}
-                <div class="map-applications-list">
-                    {% for gui in guis %}
-                    <div class="map-applications-list-entry" data-id="{{ gui }}">{{ gui }}</div>
-                    {% endfor %}
-                </div>
+                	</div>
+		</div>
+		{% if guis|length > 1 %}
+		<div class="map-application-selector" title="{% trans 'Select other map application' %}">
+			<div class="map-applications-toggler">
+				<i class="far fa-folder-open"></i>
+		        	<a href="#">Eigene Anwendung auswählen</a>
+                	<div class="map-applications-list">
+                		{% for gui in guis %}
+                    		<div class="map-applications-list-entry" data-id="{{ gui }}">{{ gui }}</div>
+                    		{% endfor %}
+                	</div></div>
+		</div>
+                {% endif %}
             </div>
         </div>
 

@@ -6,11 +6,11 @@
         <div id="search-main-content">
             {% if not is_info_search %}
             <div class="area-wrapper">
-                <h2 id="filter-area" class="area-title -js-accordion">
+                <div style="font-size:160%" id="filter-area" class="area-title -js-accordion" title="{% trans 'Open and close filter settings' %}" aria-label="{% trans 'Open and close filter settings' %}">
                     <span class="accordion icon closed"></span>
-                    <i class="fas fa-filter tab-icn" alt="{% trans 'A filter icon' %}" ></i>
-                    {% trans 'Filter' %}
-                </h2>
+                    <i class="fas fa-filter tab-icn" alt="{% trans 'A filter icon' %}" aria-hidden="true"></i><strong>
+                    {% trans 'Filter' %}</strong>
+                </div>
                 <div class="area-elements">
                     {% include 'filterarea.html' %}
                     <div id="mobile-categories">
@@ -20,11 +20,11 @@
             </div>
             {% endif %}
             <div class="area-wrapper">
-                <h2 id="search-area" class="area-title">
+                <a id="search-area" class="area-title">
                     <span class="accordion icon closed"></span>
-                    <i class="fas fa-database tab-icn"></i>
-                    {% trans 'Results' %}
-                </h2>
+                    <i class="fas fa-database tab-icn" aria-hidden="true"></i><strong>
+                    {% trans 'Results' %}</strong>
+                </a>
                 <div class="area-elements">
                     {% if is_de_search or is_eu_search%}
                         {% with search_results.dataset.dataset as dataset %}

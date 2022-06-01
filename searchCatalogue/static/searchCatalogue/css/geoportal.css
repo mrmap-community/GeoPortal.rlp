@@ -152,8 +152,12 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     display: flex;
 }
 
+.resource-element-map-thumbnails, .resource-element-info, .resource-element-actions {
+    margin: 5px;
+}
+
 .resource-element-action{
-    padding: .5em;
+    padding: .35em;
     border-style: solid;
     border-color: var(--primary);
     border-width:1px;
@@ -208,7 +212,6 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 
 .resource-element-info-state:hover{
     color: #fff;
-    background: var(--primary);
 }
 
 .resource-element-info-queryable{
@@ -353,9 +356,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
   }
 
 .view-count{
-    font-size: 1.0em;
-    opacity: 0.75;
-    padding: 1em 0 0 0;
+    margin: 0 0 1em 0;
 }
 .view-count:hover{
     cursor: default;
@@ -366,7 +367,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1em 0;
+    margin: 1em 0 1em -0.5em;
 }
 
 .metadata-link-element{
@@ -403,9 +404,11 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
 }
 
 .search-result-detail{
-    font-size: 0.8em;
-    padding: 0 5px;
+    font-size: 1em;
+    padding: 0;
     word-break: break-word;
+    line-height: 1.5;
+    margin-bottom: 1em;
 }
 
 .search-result-detail-table > tbody > tr > td{
@@ -581,7 +584,7 @@ caption{text-align:left;padding:2em 1em 0.4em 0.5em;font-weight:bold;}
     align-items: center;
     justify-content: space-evenly;
     border: 1px solid black;
-    margin: 0 .5em 0 0;
+    margin: 0 .5em .5em 0;
 }
 
 .view-button:hover, .download-button:hover{

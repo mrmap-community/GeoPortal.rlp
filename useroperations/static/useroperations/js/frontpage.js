@@ -23,7 +23,7 @@ function resizeIframe(obj) {
 }
 
 function setCookie(cname, cvalue){
-    document.cookie = cname + "=" + cvalue + ";path=/;";
+    document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Lax;";
 }
 
 function startSearch(){
@@ -149,6 +149,9 @@ function toggleMapviewer(servicetype){
 	$('body').toggleClass("mapviewer-opened");
         $('#sidebar').toggleClass("mapviewer-opened-force-scroll");
         window.scrollTo({top:0,left:0,behavior:'smooth'});
+        // change mapviewer-button to back-button
+        $('.map-viewer-toggler').toggleClass('backbutton');
+        $('.map-viewer-toggler').toggleClass('nobackbutton');
     }
 }
 
@@ -332,7 +335,7 @@ $(document).on("click", ".map-viewer-list-entry", function(){
     }
 
     // close menu
-    $(".map-viewer-selector").click();
+    //$(".map-viewer-selector").click();
 });
 
 $(document).on("click", ".map-applications-list-entry", function(){
@@ -359,7 +362,7 @@ $(document).on("click", ".map-applications-list-entry", function(){
     iframe.attr("src", src);
 
     // close list menu
-    $(".map-applications-toggler").click();
+    //$(".map-applications-toggler").click();
 
 });
 
@@ -417,6 +420,9 @@ $(document).on("click", "#geoportal-search-button", function(){
         window.location.href = "/search";
     }else{
         startSearch();
+        if (!$(".map-viewer-overlay").hasClass("closed")){
+            toggleMapviewer();
+        }
     }
 
 });
@@ -664,6 +670,7 @@ $(document).ready(function(){
 $(document).on("click", "#geoportal-empty-search-button", function(){
     document.getElementById("geoportal-search-field").value = '';
     document.getElementById("geoportal-empty-search-button").style.display = 'none';
+    document.getElementById("geoportal-search-field").style.marginRight = '0px';
     $(".simple-search-autocomplete").hide();
 
 });
@@ -726,7 +733,7 @@ function checkForNews (){
                 }
                 showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
                 if (showIcon == true) {
-                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: var(--success-green);"></i>');
                 }
         })
         .catch(function(error){console.log(error);});
@@ -739,17 +746,19 @@ if( CheckForNewsPlaceIcon == true ) {
 }
 
 /*
- * reposition body if cookie-banner showed
+ * reposition cookie-banner
 */
 $(document).ready(function(){
+
     if($('.cookie-container-visible').length > 0){
         document.getElementById("main-body-class").style.margin = '143px 0px 0px 0px';
     }
+
     if ($(window).width() < 800) {
         if($('.cookie-container-visible').length > 0){
         document.getElementById("main-body-class").style.margin = '196px 0px 0px 0px';
         }
-    } 
+    }
 
     if($('.cookie-container-hidden').length > 0){
         document.getElementById("main-body-class").style.margin = 'unset';

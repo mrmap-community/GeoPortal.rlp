@@ -2,9 +2,9 @@
 {% load static humanize i18n %}
 <div class="search-cat {% if 'dataset' in search_results %} active {% endif %}">
     <div class="search-header">
-        <div class="source--title -js-title -js-accordion">
+        <div class="source--title -js-title -js-accordion" title="{% trans 'Datasets' %}">
             <span class="accordion icon closed"></span>
-            <i class="fas fa-globe tab-icn" title="{% trans 'Datasets' %}"></i>
+            <i class="fas fa-globe tab-icn" title="{% trans 'Datasets' %}" aria-hidden="true"></i>
             <span>{{ all_resources.dataset }} ({{ search_results.dataset.dataset.dataset.md.nresults|intcomma }})</span>
 
         </div>
