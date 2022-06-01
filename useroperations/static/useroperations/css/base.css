@@ -78,15 +78,20 @@ body.mapviewer-opened{
 footer{
     background-color: var(--hesse-grey);
     display: flex;
-    position:sticky;
+    /*position:sticky;
     bottom:0px;
-    z-index:1;
+    z-index:1;*/
     font-size: 0.9em;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     clear:both;
 }
 
+.mapviewer-opened > footer {
+    position: sticky;
+    bottom: 0px;
+    z-index: 1;
+}
 
 #logo_geoportal{
     width: 50%;
@@ -1539,6 +1544,13 @@ transition: all 0.2s ease-in-out;}
         bottom:unset;
         z-index: unset;
     }
+
+    .mapviewer-opened > footer {
+        position: unset;
+        bottom: unset;
+        z-index: unset;
+    }
+
     .footer-col-wrapper{
         flex-direction: column;
         margin: 7px 0px;
