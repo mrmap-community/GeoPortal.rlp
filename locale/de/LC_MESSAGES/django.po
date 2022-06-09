@@ -22,6 +22,12 @@ msgstr ""
 msgid "Modern"
 msgstr ""
 
+msgid "Scroll to top"
+msgstr "Zum Seitenanfang"
+
+msgid "Scroll to bottom"
+msgstr "Zum Seitenanende"
+
 #: Geoportal/geoportalObjects.py:67
 msgid "Klassik"
 msgstr ""
@@ -1649,8 +1655,8 @@ msgstr ""
 #: useroperations/views.py:967
 msgid "Feedback from "
 msgstr "Feedback Formular"
-  
-  
+
+
 #: searchCatalogue/templates/search_result_list_entry.html:57
 #: searchCatalogue/templates/search_result_list_entry.html:80
 #: searchCatalogue/templates/search_result_list_entry.html:102
