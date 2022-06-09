@@ -26,7 +26,7 @@ def get_mapbender_session_by_memcache(session_id):
     client = base.Client(('localhost', 11211))
 
     try:
-        session_data = client.get('memc.sess.' + session_id)
+        session_data = client.get('memc.sess.key.' + session_id)
     except ConnectionRefusedError:
         print("Connection Refused!Memcached not running?")
 
@@ -39,7 +39,7 @@ def get_mapbender_session_by_memcache(session_id):
 
 def delete_mapbender_session_by_memcache(session_id):
     client = base.Client(('localhost', 11211))
-    client.delete('memc.sess.' + session_id)
+    client.delete('memc.sess.key.' + session_id)
 
 
 def get_session_data(request):

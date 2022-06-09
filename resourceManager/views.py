@@ -92,7 +92,7 @@ def download(request):
             response = HttpResponse("No space left please try again later!",status=400)
 
     # download and send email
-    if response is "":
+    if response == "":
 
         os.mkdir(INSPIRE_ATOM_DIR + body['uuid'])
 

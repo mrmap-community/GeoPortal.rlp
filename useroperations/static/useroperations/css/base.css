@@ -484,6 +484,7 @@ label[for=id_identity]{
 
 .search-submit-button:hover{
     cursor: pointer;
+    color: #137673;
 }
 
 #geoportal-search-button-icon{
@@ -1247,7 +1248,6 @@ z-index:1;
 .tile {
     border: 1px solid;
 }
-
 
 .-js-spatial-restriction {
     word-break: break-word;

@@ -35,15 +35,14 @@ https://www.geoportal.rlp.de/
 
 Requirements:
 
-* Debian 9 with working internet connection.   
+* Debian 11 with working internet connection.   
 
 Install:  
 
 * Download with:  
 
 ```shell
-wget --no-check-certificate https://git.osgeo.org/gitea/GDI-RP/GeoPortal.rlp/raw/branch/master/resources/
-maintenance/install.bash
+wget --no-check-certificate https://raw.githubusercontent.com/mrmap-community/GeoPortal.rlp/master/resources/maintenance/install.bash
 ```
 
 * Fill out the variables at the start of the script.
