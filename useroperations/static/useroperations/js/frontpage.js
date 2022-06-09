@@ -279,32 +279,7 @@ $(document).on("click", ".map-viewer-selector", function(){
     }
 });
 
-$(document).on("click", ".scroll-to-bottom", function(){
-  window.scrollTo(0,document.body.scrollHeight);
-  document.getElementById("scroll-to-bottom").classList.add("hidden");
-  document.getElementById("scroll-to-top").classList.remove("hidden");
-
-});
-
-$(document).on("click", ".scroll-to-top", function(){
-  document.getElementById("scroll-to-top").classList.add("hidden");
-  document.getElementById("scroll-to-bottom").classList.remove("hidden");
-  window.scrollTo({
-  top: 1,
-  behavior: 'smooth'
-});
-
-});
-
-
 $(document).on("click", ".map-applications-toggler", function(){
-
-  var mapViewerToggler = $(".map-applications-toggler");
-  if(mapViewerToggler.hasClass("open")){
-    document.getElementById("scroll-to-bottom").classList.remove("hidden");
-  }
-
-
     var elem = $(this);
     var mapViewerSelector = $(".map-viewer-selector");
 
@@ -658,7 +633,7 @@ $(document).on("scroll", function(){
     // get viewport Y offset
     var viewportOffset = window.pageYOffset;
 
-    // sticky search bar makes mobile search unusable
+    // sticky search bar makes mobile search unusable 
     if ($(window).width() > 689) {
         if(searchbarPositionHeight <= viewportOffset){
             // make searchbar sticky to the viewport top
