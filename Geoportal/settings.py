@@ -21,6 +21,8 @@ SESSION_NAME = 'PHPSESSID'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
+SESSION_COOKIE_SAMESITE_FORCE_ALL = True
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#m+rso_^a!ii6fg97kd7woxa$ttr&jn^!=_(!wgrukal81q(9+'
 

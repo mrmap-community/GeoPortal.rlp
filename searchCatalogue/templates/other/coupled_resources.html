@@ -2,13 +2,13 @@
     <div class="search-result-action-buttons">
         {% if coupled_resources.view_links|length > 0 %}
             <a class='button view-button' id="view_{{ coupled_resources.id }}">
-                <i class="fas fa-eye icn-show"></i>
+                <i class="fas fa-eye icn-show" aria-hidden="true"></i>
                 {% trans 'Show' %}
             </a>
         {% endif %}
         {% if coupled_resources.download_links|length > 0 %}
             <a id="download_{{ coupled_resources.id }}" class='button download-button'>
-                <i class="fas fa-download icn-download"></i>
+                <i class="fas fa-download icn-download" aria-hidden="true"></i>
                 {% trans 'Download' %}
             </a>
         {% endif %}
@@ -41,11 +41,11 @@
                         <div class="resource-element-info"></div>
                         <div class="feed-download-wrapper">
                             <a class="feed-download-button" href="{{ download.uri }}" target="_blank" title="{% trans 'Original atom feed' %}">
-                                <i class="fas fa-file-alt icn-file icn-single"></i>
+                                <i class="fas fa-file-alt icn-file icn-single" aria-hidden="true"></i>
                             </a>
                             {% if download.atom_uri is not None %}
                                 <a class="atom-feed-button" href="{{ download.atom_uri }}" target="_blank" title="{% trans 'Open atom feed client' %}">
-                                    <i class="fas fa-download icn-download icn-single"></i>
+                                    <i class="fas fa-download icn-download icn-single" aria-hidden="true"></i>
                                 </a>
                             {% endif %}
                         </div>
