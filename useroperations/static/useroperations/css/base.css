@@ -1333,7 +1333,7 @@ transition: all 0.2s ease-in-out;}
     }
     .sidebar-toggler{
         align-items: flex-start;
-        margin-top: 25px 0;
+        margin: 25px 0;
         font-size: 1.5rem;
         padding: 0.5rem;
     }
