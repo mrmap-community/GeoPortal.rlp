@@ -1372,6 +1372,9 @@ dl dd {
 .Zebra_DatePicker_Icon_Inside_Right {
   margin: 0 10px 0 0 !important; }
 
+#geoportal-maxResults option[selected="selected"], #geoportal-orderBy option[selected="selected"] {
+    display: none;
+}
 
 @media screen and (max-width: 700px){
     #search-results{
