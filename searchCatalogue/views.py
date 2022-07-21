@@ -391,7 +391,7 @@ def get_data_primary(request: HttpRequest):
     template_name = app_name + "search_results.html"
     resources = {
         "dataset": _("Datasets"),
-        "wms": _("Web Map Services"),
+        "wms": _("Map layers"),
         "wfs": _("Search-, Download-,Gathering-modules"),
         "wmc": _("Map Combinations"),
         "application": _("Applications"),
