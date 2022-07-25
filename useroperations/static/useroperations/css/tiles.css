@@ -240,12 +240,9 @@ input:checked + .slider:before {
     .options-left{display:none;}
     .options-middle{width:60%;}
     .options-right{width:40%;}
-    .tile-wrapper{
-        width: 90vw;
-    }
 
     .tile{
-        width: 90vw;
+        box-sizing:border-box;
     }
 
     .tile:hover{
@@ -263,7 +260,7 @@ input:checked + .slider:before {
     .tile-content{
         font-size: 1.05em;
     }
-    .tile-wrapper,.organizations .tile{width: 100%;}
+    .tile-wrapper,.organizations .tile{width: 100%;box-sizing: border-box;}
     .tile-options-wrapper {margin:10px;}
     .tile-filter-order, .tile-filter-input-wrapper,.tile-list-wrapper,.tile-filter-input{max-width: 100%;box-sizing: border-box;}
     .tile-order-wrapper.select-wrapper {max-width: 90%;box-sizing: border-box;}
