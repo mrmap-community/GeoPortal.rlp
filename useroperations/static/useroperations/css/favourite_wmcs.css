@@ -181,7 +181,8 @@
     .tile-title {font-size:1.5em;}
     .tile-img{width:70vw;height:auto;}
     .tile-content{padding: 0 10px 10px 10px;height:100%}
-    .tile-content-abstract{padding: 0 1rem 0px 1rem;}
+    .tile-content-abstract{padding: 0 1rem 0px 1rem;display: -webkit-box !important;-webkit-line-clamp: 6;-webkit-box-orient: vertical;}
+    .tile-content-abstract p {overflow: hidden;}
 }
 
 }
