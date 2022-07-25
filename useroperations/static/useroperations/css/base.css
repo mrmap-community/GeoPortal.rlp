@@ -1168,7 +1168,7 @@ z-index:1;
 
 .landing-page-body{
     margin:0 10px;
-    background-color: var(--hesse-lighterblue);
+    background-color: var(--hesse-lightblue);
     padding: 30px;
     margin: 0 10px 20px 10px;
 }
@@ -1485,7 +1485,6 @@ transition: all 0.2s ease-in-out;}
 
     .landing-page-body{
         margin:0 0 1rem 0;
-        background-color: var(--hesse-lighterblue);
         padding: 30px;
         border: none;
     }

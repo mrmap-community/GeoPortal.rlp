@@ -45,8 +45,8 @@ var Search = function() {
     this.searchUrl = null;
 
     this.resources_primary = {
-        wms: true,
-        wfs: true,
+        wms: false,
+        wfs: false,
         wmc: true,
         dataset: true,
         application: true,
