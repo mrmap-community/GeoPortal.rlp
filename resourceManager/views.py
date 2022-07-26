@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from pprint import pprint
 from django.views.decorators.csrf import csrf_exempt
-from useroperations.models import Wfs, Wms, InspireDownloads, Layer
+from useroperations.models import Wfs, Wms, InspireDownloads, Layer, WfsFeaturetype
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
 from Geoportal.settings import HOSTNAME, INTERNAL_SSL, HTTP_OR_SSL, DEFAULT_FROM_EMAIL, INSPIRE_ATOM_DIR, INSPIRE_ATOM_ALIAS
@@ -79,19 +79,31 @@ def download(request):
 
     # check if user is allowed to access layer
     refererparams = urllib.parse.parse_qs(urllib.parse.unquote(request.META['HTTP_REFERER']))
-    layerid = refererparams["layerid"][0]
     resourceType = refererparams["generateFrom"][0] # wmlayer = layer ; metadata = featuretype
+    #print(refererparams)
+    print(resourceType)
+    #layerid = refererparams["layerid"][0]
+    #resourceType = refererparams["generateFrom"][0] # wmlayer = layer ; metadata = featuretype
 
     if resourceType == "wmslayer":
         resourceType="layer"
+        layerid = refererparams["layerid"][0]
         service_id = Layer.objects.get(layer_id=layerid).fkey_wms_id
         secured_service_hash = Wms.objects.get(wms_id=service_id).wms_owsproxy
-    elif resourceType == "metadata":
+        print(layerid)
+        print(service_id)
+    elif resourceType == "wfs":
         resourceType="featuretype"
-        secured_service_hash = Wfs.objects.get(wfs_id=layerid).wfs_owsproxy
+        layerid = refererparams["wfsid"][0]
+        service_id = WfsFeaturetype.objects.get(featuretype_id=layerid).fkey_wfs_id
+        secured_service_hash = Wfs.objects.get(wfs_id=service_id).wfs_owsproxy
+        print(layerid)
+        print(service_id)
     else:
         resourceType=None
         secured_service_hash = ""
+
+    print(secured_service_hash)
 
     layer_permission = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_permissionWrapper.php?userId='+body['user_id']+'&resourceType='+resourceType+'&resourceId='+layerid, verify=INTERNAL_SSL)
     layer_permission = json.loads(layer_permission.text)
@@ -152,6 +164,7 @@ def download(request):
                 # transform url to local owsproxy http://localhost/owsproxy/{sessionid}/{securityhash}?{request}
                 new_url = "http://127.0.0.1/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
                 #print(urllib.parse.urlparse(urllib.parse.unquote(url)).query)
+                print(new_url)
                 download = requests.get(new_url, stream=True, proxies=None, verify=False)
             else:
                 response = HttpResponse("Something went wrong, please contact an Admin",status=500)
@@ -180,14 +193,15 @@ def download(request):
 
         response = HttpResponse("ok")
 
-	    send_mail(
-        	_("Inspire Download"),
-            _("Hello ") + body['user_name'] +
-            ", \n \n" +
-            message,
-            DEFAULT_FROM_EMAIL,
-            [body['user_email']],
-            fail_silently=False,
-        )
+
+ #       send_mail(
+ #           _("Inspire Download"),
+ #           _("Hello ") + body['user_name'] +
+ #           ", \n \n" +
+ #           message,
+ #           DEFAULT_FROM_EMAIL,
+ #           [body['user_email']],
+ #           fail_silently=False,
+ #       )
 
     return response
