@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from pprint import pprint
 from django.views.decorators.csrf import csrf_exempt
-from useroperations.models import Wfs, Wms, InspireDownloads
+from useroperations.models import Wfs, Wms, InspireDownloads, Layer
 from searchCatalogue.settings import PROXIES
 from django.core.mail import send_mail
-from Geoportal.settings import HOSTNAME, HTTP_OR_SSL, DEFAULT_FROM_EMAIL, INSPIRE_ATOM_DIR, INSPIRE_ATOM_ALIAS
+from Geoportal.settings import HOSTNAME, INTERNAL_SSL, HTTP_OR_SSL, DEFAULT_FROM_EMAIL, INSPIRE_ATOM_DIR, INSPIRE_ATOM_ALIAS
 from django.utils.translation import gettext as _
 from email.utils import parseaddr
 import json
@@ -17,7 +17,6 @@ import os
 
 @csrf_exempt
 def download(request):
-
 
     if request.META['HTTP_HOST'] not in ["127.0.0.1","localhost",HOSTNAME]:
         return HttpResponse('Only internal requests!')
@@ -34,7 +33,9 @@ def download(request):
     whitelist = []
     response = ""
     message = ""
+    download = ""
     numURLs = 0
+    secured = 0
 
     try:
         body = json.loads(body_decoded)
@@ -56,6 +57,50 @@ def download(request):
 
     if not re.match('^[A-Za-z0-9-]+$', body['uuid']):
         response = HttpResponseBadRequest('uuid not valid, use A-Z a-z 0-9 -')
+
+    if not re.match('^[A-Za-z0-9-]+$', body['session_id']):
+        response = HttpResponseBadRequest('sessionid not valid, use A-Z a-z 0-9 -')
+
+    downloadurl = urllib.parse.urlparse(urllib.parse.unquote(body['urls'][0]))
+    #print(downloadurl)
+    #print(downloadurl.hostname)
+    #print(downloadurl.query)
+
+
+    #check if it is an internal server, if so only internal email address will have access
+    if re.match('.*\.rlp$', downloadurl.hostname):
+        #print("rlp")
+        if not re.match('.*\.rlp.de$',body['user_email'].split("@")[1]):
+            #print("no rlp email")
+            response = HttpResponse('User is not allowed to access this ressource',status=403)
+    #else:
+        #print("not rlp")
+
+
+    # check if user is allowed to access layer
+    refererparams = urllib.parse.parse_qs(urllib.parse.unquote(request.META['HTTP_REFERER']))
+    layerid = refererparams["layerid"][0]
+    resourceType = refererparams["generateFrom"][0] # wmlayer = layer ; metadata = featuretype
+
+    if resourceType == "wmslayer":
+        resourceType="layer"
+        service_id = Layer.objects.get(layer_id=layerid).fkey_wms_id
+        secured_service_hash = Wms.objects.get(wms_id=service_id).wms_owsproxy
+    elif resourceType == "metadata":
+        resourceType="featuretype"
+        secured_service_hash = Wfs.objects.get(wfs_id=layerid).wfs_owsproxy
+    else:
+        resourceType=None
+        secured_service_hash = ""
+
+    layer_permission = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_permissionWrapper.php?userId='+body['user_id']+'&resourceType='+resourceType+'&resourceId='+layerid, verify=INTERNAL_SSL)
+    layer_permission = json.loads(layer_permission.text)
+
+    if secured_service_hash != "":
+        if layer_permission["result"] != True:
+            response = HttpResponse('User is not allowed to access this ressource',status=403)
+        else:
+            secured=1
 
     # build whitelist
     for url in wfslist:
@@ -97,15 +142,24 @@ def download(request):
         os.mkdir(INSPIRE_ATOM_DIR + body['uuid'])
 
         for id, url in enumerate(body['urls']):
-
             if "/" in body['names'][id]:
                 body['names'][id] = body['names'][id].replace("/", "-")
 
-            response = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
+            if secured == 0:
+                download = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
+            elif secured == 1:
+                query = urllib.parse.urlparse(urllib.parse.unquote(url)).query
+                # transform url to local owsproxy http://localhost/owsproxy/{sessionid}/{securityhash}?{request}
+                new_url = "http://127.0.0.1/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
+                #print(urllib.parse.urlparse(urllib.parse.unquote(url)).query)
+                download = requests.get(new_url, stream=True, proxies=None, verify=False)
+            else:
+                response = HttpResponse("Something went wrong, please contact an Admin",status=500)
+                return response
 
             with open(INSPIRE_ATOM_DIR + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
-                shutil.copyfileobj(response.raw, out_file)
-            del response
+                shutil.copyfileobj(download.raw, out_file)
+            del download
 
         shutil.make_archive(INSPIRE_ATOM_DIR + 'InspireDownload_' + body['uuid'], 'zip',
                             INSPIRE_ATOM_DIR + body['uuid'])
@@ -124,12 +178,10 @@ def download(request):
         download_request.no_of_tiles = numURLs
         download_request.save()
 
-        #print(message)
-
         response = HttpResponse("ok")
 
-        send_mail(
-            _("Inspire Download"),
+	    send_mail(
+        	_("Inspire Download"),
             _("Hello ") + body['user_name'] +
             ", \n \n" +
             message,
