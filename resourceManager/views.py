@@ -27,8 +27,6 @@ def download(request):
     # somehow uses ascii by default which is not changeable in binary mode (wb)
     body_decoded = request.body.decode('ascii','ignore')
 
-    wfslist = Wfs.objects.values('wfs_getfeature').distinct()
-    wmslist = Wms.objects.values('wms_getmap').distinct()
     download_request = InspireDownloads()
     whitelist = []
     response = ""
@@ -40,26 +38,26 @@ def download(request):
     try:
         body = json.loads(body_decoded)
     except ValueError:
-        response = HttpResponse('Value error while decoding request body')
+        return HttpResponse('Value error while decoding request body')
 
     # input validation
     if not re.match('^[0-9]{1,10}$', body['user_id']):
-        response = HttpResponseBadRequest('user_id should be an integer with max 10 digits')
+        return HttpResponseBadRequest('user_id should be an integer with max 10 digits')
 
     if not parseaddr(body['user_email']):
-        response = HttpResponseBadRequest('email not valid')
+        return HttpResponseBadRequest('email not valid')
 
     if not re.match('^\d{13}$', str(body['timestamp'])):
-        response = HttpResponseBadRequest('timestamp should be an integer with 13 digits')
+        return HttpResponseBadRequest('timestamp should be an integer with 13 digits')
 
     if not re.match('^[A-Za-z0-9.-_]+$', body['scriptname']):
-        response = HttpResponseBadRequest('scriptname not valid, use A-Z a-z 0-9 . - _')
+        return HttpResponseBadRequest('scriptname not valid, use A-Z a-z 0-9 . - _')
 
     if not re.match('^[A-Za-z0-9-]+$', body['uuid']):
-        response = HttpResponseBadRequest('uuid not valid, use A-Z a-z 0-9 -')
+        return HttpResponseBadRequest('uuid not valid, use A-Z a-z 0-9 -')
 
     if not re.match('^[A-Za-z0-9-]+$', body['session_id']):
-        response = HttpResponseBadRequest('sessionid not valid, use A-Z a-z 0-9 -')
+        return HttpResponseBadRequest('sessionid not valid, use A-Z a-z 0-9 -')
 
     downloadurl = urllib.parse.urlparse(urllib.parse.unquote(body['urls'][0]))
     #print(downloadurl)
@@ -72,7 +70,7 @@ def download(request):
         #print("rlp")
         if not re.match('.*\.rlp.de$',body['user_email'].split("@")[1]):
             #print("no rlp email")
-            response = HttpResponse('User is not allowed to access this ressource',status=403)
+            return HttpResponse('User is not allowed to access this ressource',status=403)
     #else:
         #print("not rlp")
 
@@ -81,40 +79,43 @@ def download(request):
     refererparams = urllib.parse.parse_qs(urllib.parse.unquote(request.META['HTTP_REFERER']))
     resourceType = refererparams["generateFrom"][0] # wmlayer = layer ; metadata = featuretype
     #print(refererparams)
-    print(resourceType)
-    #layerid = refererparams["layerid"][0]
+    #print(resourceType)
+    #ressource_id = refererparams["ressource_id"][0]
     #resourceType = refererparams["generateFrom"][0] # wmlayer = layer ; metadata = featuretype
 
     if resourceType == "wmslayer":
         resourceType="layer"
-        layerid = refererparams["layerid"][0]
-        service_id = Layer.objects.get(layer_id=layerid).fkey_wms_id
+        ressource_id = refererparams["layerid"][0]
+        service_id = Layer.objects.get(layer_id=ressource_id).fkey_wms_id
         secured_service_hash = Wms.objects.get(wms_id=service_id).wms_owsproxy
-        print(layerid)
-        print(service_id)
+        #print(ressource_id)
+        #print(service_id)
     elif resourceType == "wfs":
         resourceType="featuretype"
-        layerid = refererparams["wfsid"][0]
-        service_id = WfsFeaturetype.objects.get(featuretype_id=layerid).fkey_wfs_id
-        secured_service_hash = Wfs.objects.get(wfs_id=service_id).wfs_owsproxy
-        print(layerid)
-        print(service_id)
+        wfs_id = refererparams["wfsid"][0]
+        ressource_id = WfsFeaturetype.objects.get(fkey_wfs_id=wfs_id).featuretype_id
+        #featurype_id = WfsFeaturetype.objects.get(fkey_wfs_id=ressource_id).featureype_id
+        #service_id = WfsFeaturetype.objects.get(featuretype_id=ressource_id).fkey_wfs_id
+        secured_service_hash = Wfs.objects.get(wfs_id=wfs_id).wfs_owsproxy
+        #print(ressource_id)
     else:
-        resourceType=None
-        secured_service_hash = ""
+        return HttpResponse('No security hash for service found',status=500)
 
-    print(secured_service_hash)
+    #print(secured_service_hash)
 
-    layer_permission = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_permissionWrapper.php?userId='+body['user_id']+'&resourceType='+resourceType+'&resourceId='+layerid, verify=INTERNAL_SSL)
-    layer_permission = json.loads(layer_permission.text)
+    permission = requests.get(HTTP_OR_SSL + '127.0.0.1/mapbender/php/mod_permissionWrapper.php?userId='+body['user_id']+'&resourceType='+resourceType+'&resourceId='+str(ressource_id), verify=INTERNAL_SSL)
+    permission = json.loads(permission.text)
 
+    #print(permission)
     if secured_service_hash != "":
-        if layer_permission["result"] != True:
-            response = HttpResponse('User is not allowed to access this ressource',status=403)
+        if permission["result"] != True:
+            return HttpResponse('User is not allowed to access this ressource',status=403)
         else:
             secured=1
 
     # build whitelist
+    wfslist = Wfs.objects.values('wfs_getfeature').distinct()
+    wmslist = Wms.objects.values('wms_getmap').distinct()
     for url in wfslist:
         parsed = urllib.parse.urlparse(url['wfs_getfeature'])
         host = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed)
@@ -131,7 +132,7 @@ def download(request):
         parsed = urllib.parse.urlparse(urllib.parse.unquote(url))
         host = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed)
         if host not in whitelist:
-            response = HttpResponse("host not in whitelist",status=418)
+            return HttpResponse("host not in whitelist",status=418)
 
     # check if directory has space left
     disk = shutil.disk_usage(INSPIRE_ATOM_DIR)
@@ -143,65 +144,62 @@ def download(request):
 
     if format == ".tiff":
         if disk.free < numURLs * 60000000:
-            response = HttpResponse("No space left please try again later!",status=400)
+            return HttpResponse("No space left please try again later!",status=400)
     else:
         if disk.free < numURLs * 10000000:
-            response = HttpResponse("No space left please try again later!",status=400)
+            return HttpResponse("No space left please try again later!",status=400)
 
     # download and send email
-    if response == "":
 
-        os.mkdir(INSPIRE_ATOM_DIR + body['uuid'])
 
-        for id, url in enumerate(body['urls']):
-            if "/" in body['names'][id]:
-                body['names'][id] = body['names'][id].replace("/", "-")
+    os.mkdir(INSPIRE_ATOM_DIR + body['uuid'])
 
-            if secured == 0:
-                download = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
-            elif secured == 1:
-                query = urllib.parse.urlparse(urllib.parse.unquote(url)).query
-                # transform url to local owsproxy http://localhost/owsproxy/{sessionid}/{securityhash}?{request}
-                new_url = "http://127.0.0.1/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
-                #print(urllib.parse.urlparse(urllib.parse.unquote(url)).query)
-                print(new_url)
-                download = requests.get(new_url, stream=True, proxies=None, verify=False)
-            else:
-                response = HttpResponse("Something went wrong, please contact an Admin",status=500)
-                return response
+    for id, url in enumerate(body['urls']):
+        if "/" in body['names'][id]:
+            body['names'][id] = body['names'][id].replace("/", "-")
 
-            with open(INSPIRE_ATOM_DIR + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
-                shutil.copyfileobj(download.raw, out_file)
-            del download
-
-        shutil.make_archive(INSPIRE_ATOM_DIR + 'InspireDownload_' + body['uuid'], 'zip',
-                            INSPIRE_ATOM_DIR + body['uuid'])
-        shutil.rmtree(INSPIRE_ATOM_DIR + body['uuid'])
-
-        if body['lang'] == 'de':
-            message = "Dies ist Ihre Inspire Download Anfrage! Der Link wird für 24 Stunden gültig sein!" + "\n Link: " \
-                      + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
+        if secured == 0:
+            download = requests.get(urllib.parse.unquote(url), stream=True, proxies=PROXIES, verify=False)
+        elif secured == 1:
+            query = urllib.parse.urlparse(urllib.parse.unquote(url)).query
+            # transform url to local owsproxy http://localhost/owsproxy/{sessionid}/{securityhash}?{request}
+            new_url = "http://127.0.0.1/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
+            #print(urllib.parse.urlparse(urllib.parse.unquote(url)).query)
+            #print(new_url)
+            download = requests.get(new_url, stream=True, proxies=None, verify=False)
         else:
-            message = "This is your Inspire Download request! The Link will be valid  for 24 hours!" + "\n Link: " \
-                      + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
+            return HttpResponse("Something went wrong, please contact an Admin",status=500)
 
-        download_request.user_id = body['user_id']
-        download_request.user_email = body['user_email']
-        download_request.service_name = body['names'][0].split("Teil",1)[0]
-        download_request.no_of_tiles = numURLs
-        download_request.save()
+        with open(INSPIRE_ATOM_DIR + body['uuid'] + '/' + body['names'][id] + format, mode='wb') as out_file:
+            shutil.copyfileobj(download.raw, out_file)
+        del download
 
-        response = HttpResponse("ok")
+    shutil.make_archive(INSPIRE_ATOM_DIR + 'InspireDownload_' + body['uuid'], 'zip',
+                        INSPIRE_ATOM_DIR + body['uuid'])
+    shutil.rmtree(INSPIRE_ATOM_DIR + body['uuid'])
+
+    if body['lang'] == 'de':
+        message = "Dies ist Ihre Inspire Download Anfrage! Der Link wird für 24 Stunden gültig sein!" + "\n Link: " \
+                  + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
+    else:
+        message = "This is your Inspire Download request! The Link will be valid  for 24 hours!" + "\n Link: " \
+                  + HTTP_OR_SSL + HOSTNAME + INSPIRE_ATOM_ALIAS + 'InspireDownload_' + body['uuid'] + '.zip'
+
+    download_request.user_id = body['user_id']
+    download_request.user_email = body['user_email']
+    download_request.service_name = body['names'][0].split("Teil",1)[0]
+    download_request.no_of_tiles = numURLs
+    download_request.save()
 
 
- #       send_mail(
- #           _("Inspire Download"),
- #           _("Hello ") + body['user_name'] +
- #           ", \n \n" +
- #           message,
- #           DEFAULT_FROM_EMAIL,
- #           [body['user_email']],
- #           fail_silently=False,
- #       )
+    send_mail(
+        _("Inspire Download"),
+        _("Hello ") + body['user_name'] +
+        ", \n \n" +
+        message,
+        DEFAULT_FROM_EMAIL,
+        [body['user_email']],
+        fail_silently=False,
+        )
 
-    return response
+    return HttpResponse("all done")
