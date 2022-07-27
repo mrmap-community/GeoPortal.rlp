@@ -9,6 +9,10 @@
 
 .mediawiki-article > * {
     line-height: 1.5;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-break: break-word;
 }
 
 .mediawiki-article{
@@ -18,9 +22,9 @@
 
 .mediawiki-article p, .mediawiki-article li{
     font-size: 1.0em;
-    -webkit-hyphens: auto;
+    /*-webkit-hyphens: auto;
     -moz-hyphens: auto;
-    hyphens: auto;
+    hyphens: auto;*/
     text-align: justify
 }
 
