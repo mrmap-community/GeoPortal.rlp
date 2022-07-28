@@ -94,8 +94,6 @@ def download(request):
         resourceType="featuretype"
         wfs_id = refererparams["wfsid"][0]
         ressource_id = WfsFeaturetype.objects.get(fkey_wfs_id=wfs_id).featuretype_id
-        #featurype_id = WfsFeaturetype.objects.get(fkey_wfs_id=ressource_id).featureype_id
-        #service_id = WfsFeaturetype.objects.get(featuretype_id=ressource_id).fkey_wfs_id
         secured_service_hash = Wfs.objects.get(wfs_id=wfs_id).wfs_owsproxy
         #print(ressource_id)
     else:
@@ -163,7 +161,7 @@ def download(request):
         elif secured == 1:
             query = urllib.parse.urlparse(urllib.parse.unquote(url)).query
             # transform url to local owsproxy http://localhost/owsproxy/{sessionid}/{securityhash}?{request}
-            new_url = "http://127.0.0.1/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
+            new_url = "https://www.geoportal.rlp.de/owsproxy/"+body['session_id']+"/"+secured_service_hash+"?"+query
             #print(urllib.parse.urlparse(urllib.parse.unquote(url)).query)
             #print(new_url)
             download = requests.get(new_url, stream=True, proxies=None, verify=False)
