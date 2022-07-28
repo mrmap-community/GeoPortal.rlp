@@ -676,13 +676,13 @@ function checkForNews (){
                 }
                 showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
                 if (showIcon == true) {
-                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;"></i>');
                 }
         })
         .catch(function(error){console.log(error);});
 }
 
-var CheckForNewsPlaceIcon = false;
+var CheckForNewsPlaceIcon = true;
 
 if( CheckForNewsPlaceIcon == true ) {
         $( document ).ready( function () {
