@@ -684,7 +684,7 @@ function sendtodjango(){
       	alert("<?php echo _mb("No space left, please try again later!!");?>")
     },
     409: function(responseObject, textStatus, jqXHR) {
-     	alert("<?php echo _mb("Maximun 20 tiles allowed!");?>")
+     	alert("<?php echo _mb("Maximum 20 tiles allowed!");?>")
     },
     418: function(responseObject, textStatus, jqXHR) {
      	alert("<?php echo _mb("Host not in whitelist, please contact an Administrator!");?>")
