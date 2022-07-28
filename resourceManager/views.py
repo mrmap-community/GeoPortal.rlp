@@ -58,6 +58,11 @@ def download(request):
 
     if not re.match('^[A-Za-z0-9-]+$', body['session_id']):
         return HttpResponseBadRequest('sessionid not valid, use A-Z a-z 0-9 -')
+    
+    if len(body['urls']) > 20:
+        return HttpResponse('Max 20 tiles allowed', status=409)
+
+    
 
     downloadurl = urllib.parse.urlparse(urllib.parse.unquote(body['urls'][0]))
     #print(downloadurl)
