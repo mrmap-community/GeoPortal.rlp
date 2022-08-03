@@ -610,7 +610,7 @@ function fillSectionList(featureCollection, k) {
     		            downloadLink.attr({'onclick':"sendtodjango()"});
                     downloadLink.attr({'target':'_blank'});
                     downloadLink.attr({'id':'download_link'});
-    		            downloadLink.text("<?php echo _mb("Start asynchronos download, result will be mailed to you!");?>");
+    		            downloadLink.text("<?php echo _mb("Start download, a zip file will be mailed to you!");?>");
 
                 }else{
           					downloadLink = $(document.createElement('a')).appendTo('#section_list');
@@ -657,13 +657,14 @@ function sendtodjango(){
   DlSet.user_id = document.getElementById("user_id").getAttribute("value");
   DlSet.user_email = document.getElementById("user_email").getAttribute("value");
   DlSet.user_name = document.getElementById("user_name").getAttribute("value");
+  DlSet.session_id = document.getElementById("session_id").getAttribute("value");
   DlSet.uuid = uuidv4();
   DlSet.timestamp = Date.now();
   DlSet.scriptname = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1);
   DlSet.lang = navigator.language || navigator.userLanguage;
   host = location.protocol.concat("//").concat(window.location.hostname);
 
-  var DlJSON = {user_id: DlSet.user_id, user_name:DlSet.user_name , user_email: DlSet.user_email, uuid: DlSet.uuid, timestamp: DlSet.timestamp, scriptname: DlSet.scriptname, names:DlSet.names, urls:DlSet.urls, lang:DlSet.lang};
+  var DlJSON = {user_id: DlSet.user_id, user_name:DlSet.user_name , session_id:DlSet.session_id , user_email: DlSet.user_email, uuid: DlSet.uuid, timestamp: DlSet.timestamp, scriptname: DlSet.scriptname, names:DlSet.names, urls:DlSet.urls, lang:DlSet.lang};
   url = host.concat("/manage/download")
   data = JSON.stringify(DlJSON)
   //console.log(data)
@@ -676,11 +677,14 @@ function sendtodjango(){
     200: function(responseObject, textStatus, jqXHR) {
       	alert("<?php echo _mb("Download finished!");?>")
     },
+    403: function(responseObject, textStatus, jqXHR) {
+      	alert("<?php echo _mb("Unauthorized!");?>")
+    },
     400: function(responseObject, textStatus, jqXHR) {
       	alert("<?php echo _mb("No space left, please try again later!!");?>")
     },
     409: function(responseObject, textStatus, jqXHR) {
-     	alert("<?php echo _mb("Maximun 20 tiles allowed!");?>")
+     	alert("<?php echo _mb("Maximum 20 tiles allowed!");?>")
     },
     418: function(responseObject, textStatus, jqXHR) {
      	alert("<?php echo _mb("Host not in whitelist, please contact an Administrator!");?>")
@@ -691,7 +695,7 @@ function sendtodjango(){
 }});
 
 sf.square.unselectAll();
-alert("<?php echo _mb("Asynchronous download started, email will be send to ");?>".concat(DlSet.user_email))
+alert("<?php echo _mb("Download started, email will be send to ");?>".concat(DlSet.user_email))
 }
 
 
