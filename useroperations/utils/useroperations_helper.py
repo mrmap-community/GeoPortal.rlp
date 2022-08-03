@@ -70,10 +70,8 @@ def get_wiki_body_content(wiki_keyword, lang, category=None):
         str: The html content of the wiki article
     """
     # get mediawiki html
-    if MULTILINGUAL:
-        url = HTTP_OR_SSL + '127.0.0.1' + "/mediawiki/index.php/" + wiki_keyword + "/" + lang + "#bodyContent"
-    else:
-        url = HTTP_OR_SSL + '127.0.0.1' + "/mediawiki/index.php/" + wiki_keyword + "#bodyContent"
+
+    url = HTTP_OR_SSL + '127.0.0.1' + "/mediawiki/index.php/" + wiki_keyword + "#bodyContent"
     html_raw = requests.get(url, verify=INTERNAL_SSL)
     if html_raw.status_code != 200:
         raise FileNotFoundError
