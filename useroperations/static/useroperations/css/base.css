@@ -695,6 +695,10 @@ ul {
 
 .map-viewer-toggler:hover{cursor:pointer;}
 
+#mapviewer{
+    border: 0px;
+} 
+
 .map-viewer-toggler img, .sidebar-toggler img{
     background-color: var(--primary);
     padding: 0.1em;
