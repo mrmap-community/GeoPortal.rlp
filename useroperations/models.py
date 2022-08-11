@@ -150,7 +150,6 @@ class Wms(models.Model):
     contactvoicetelephone = models.CharField(max_length=255, blank=True, null=True)
     contactfacsimiletelephone = models.CharField(max_length=255, blank=True, null=True)
     contactelectronicmailaddress = models.CharField(max_length=255, blank=True, null=True)
-    wms_mb_getcapabilities_doc = models.TextField(blank=True, null=True)
     wms_owner = models.IntegerField(blank=True, null=True)
     wms_timestamp = models.IntegerField(blank=True, null=True)
     wms_supportsld = models.BooleanField(blank=True, null=True)
@@ -274,3 +273,43 @@ class InspireDownloads(models.Model):
     service_name = models.CharField(max_length=250)
     no_of_tiles = models.IntegerField()
     date = models.DateTimeField(default=timezone.now)
+
+class Layer(models.Model):
+    layer_id = models.AutoField(primary_key=True)
+    fkey_wms = models.ForeignKey('Wms', models.DO_NOTHING)
+    layer_pos = models.IntegerField()
+    layer_parent = models.CharField(max_length=50)
+    layer_name = models.CharField(max_length=255)
+    layer_title = models.CharField(max_length=255)
+    layer_queryable = models.IntegerField()
+    layer_minscale = models.IntegerField(blank=True, null=True)
+    layer_maxscale = models.IntegerField(blank=True, null=True)
+    layer_dataurl = models.CharField(max_length=255, blank=True, null=True)
+    layer_metadataurl = models.CharField(max_length=255, blank=True, null=True)
+    layer_abstract = models.TextField(blank=True, null=True)
+    layer_searchable = models.IntegerField(blank=True, null=True)
+    uuid = models.UUIDField(blank=True, null=True)
+    inspire_download = models.IntegerField(blank=True, null=True)
+    export2csw = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'layer'
+
+class WfsFeaturetype(models.Model):
+    fkey_wfs = models.ForeignKey('Wfs', models.DO_NOTHING)
+    featuretype_id = models.AutoField(primary_key=True)
+    featuretype_name = models.CharField(max_length=255)
+    featuretype_title = models.CharField(max_length=200, blank=True, null=True)
+    featuretype_srs = models.CharField(max_length=50, blank=True, null=True)
+    featuretype_searchable = models.IntegerField(blank=True, null=True)
+    featuretype_abstract = models.TextField(blank=True, null=True)
+    uuid = models.UUIDField(blank=True, null=True)
+    featuretype_latlon_bbox = models.CharField(max_length=255, blank=True, null=True)
+    inspire_download = models.IntegerField(blank=True, null=True)
+    featuretype_schema = models.TextField(blank=True, null=True)
+    featuretype_schema_problem = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'wfs_featuretype'
