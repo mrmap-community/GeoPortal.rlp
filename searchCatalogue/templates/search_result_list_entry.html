@@ -54,7 +54,7 @@
 
                 <div class="resource-element-action share-button popup-search" data-id="WMS={{ layer_data.id }}" target="_blank" title="{% trans 'Share' %}">
                     <div id="share-button-div" >
-                      <span class="popuptext-search {{ layer_data.id }}" name="sharepopup{{ layer_data.id }}">{% trans 'Map URL copied to clipboard' %}</span>
+                      <span class="popuptext-search {{ layer_data.id }}" id="sharepopup{{ layer_data.id }}">{% trans 'Map URL copied to clipboard' %}</span>
                         <i class="fa fa-share-alt"></i>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
             {% elif type == 'dataset' %}
                 <div class="resource-element-action share-button popup-search" data-id="WMS={{ layer_data.id }}" target="_blank" title="{% trans 'Share' %}">
                     <div id="share-button-div" >
-                      <span class="popuptext-search {{ layer_data.id }}" name="sharepopup{{ layer_data.id }}">{% trans 'Map URL copied to clipboard' %}</span>
+                      <span class="popuptext-search {{ layer_data.id }}" id="sharepopup{{ layer_data.id }}">{% trans 'Map URL copied to clipboard' %}</span>
                         <i class="fa fa-share-alt"></i>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
             {% elif type == 'wmc' %}
                 <div class="resource-element-action share-button popup-search" data-id="WMC={{ result.id }}" target="_blank" title="{% trans 'Share' %}">
                     <div id="share-button-div" >
-                      <span class="popuptext-search" name="sharepopup{{ result.id }}">{% trans 'Map URL copied to clipboard' %}</span>
+                      <span class="popuptext-search" id="sharepopup{{ result.id }}">{% trans 'Map URL copied to clipboard' %}</span>
                         <i class="fa fa-share-alt"></i>
                     </div>
                 </div>
