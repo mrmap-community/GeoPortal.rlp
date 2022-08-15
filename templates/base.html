@@ -70,7 +70,7 @@
 					</label>
 				</div>
 				<input type="text" id="geoportal-search-field" class="simple-search-field -js-simple-search-field" title="{% trans 'Search field' %}" placeholder="{% trans 'Search term' %}" aria-label="{% trans 'Search field' %}">
-				<button id="geoportal-empty-search-button" class="empty-search-button nobuttoncss">
+				<button id="geoportal-empty-search-button" class="empty-search-button nobuttoncss" title="Eingabe löschen">
 						<i class="fas fa-times" aria-hidden="true"></i>
 				</button>
 				<button id="geoportal-search-button" class="search-submit-button nobuttoncss" title="{% trans 'Start search' %}" aria-label="{% trans 'Start search' %}">
@@ -94,9 +94,9 @@
 		</div>
 		<div id="sidebar" class="sidebar-wrapper {% if sidebar_closed %}closed{% endif %}">
 			<ul class="sidebar-content" role="menu">
-				<li class="homebutton"  ><a href="{% url 'useroperations:index' %}" class="sidebar-area">
+				<li class="homebutton"  ><a href="{% url 'useroperations:index' %}" class="sidebar-area" title="{% trans 'Back to homepage' %}" aria-label="{% trans 'Back to homepage' %}">
 					<span class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
-						<i class="sidebar-area-title-icon fas fa-home" title="{% trans 'A stylized house' %}"></i>
+						<i class="sidebar-area-title-icon fas fa-home" aria-hidden="true"></i>
 						<span class="sidebar-area-title-text">
 							{% trans 'Home' %}
 						</span>
