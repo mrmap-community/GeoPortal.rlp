@@ -76,7 +76,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
     # renaming facet variables for dynamical reasons!
-    for key, value in preselected_facets.items():
+    for key, value in list(preselected_facets.items()):
         key_trans = _(key)
         del preselected_facets[key]
         for v in value:
