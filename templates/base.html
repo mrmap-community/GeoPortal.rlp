@@ -96,7 +96,7 @@
 			<ul class="sidebar-content" role="menu">
 				<li class="homebutton"  ><a href="{% url 'useroperations:index' %}" class="sidebar-area">
 					<span class="sidebar-area-title {% if request.session.current_page == "index" %}current-page{% endif %}">
-						<i class="sidebar-area-title-icon fas fa-home" alt="{% trans 'A stylized house' %}"></i>
+						<i class="sidebar-area-title-icon fas fa-home" title="{% trans 'A stylized house' %}"></i>
 						<span class="sidebar-area-title-text">
 							{% trans 'Home' %}
 						</span>
