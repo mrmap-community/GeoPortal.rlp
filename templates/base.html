@@ -166,7 +166,7 @@
 									{% if selected_navigation == sub_page.url %}
 										<li ><a href="{{ sub_page.url }}"><span class="sidebar-list-element current-page">{% trans sub_page.name %}</span></a></li>
 									{% else %}
-										<li ><a href="{{ sub_page.url }}" target="{% if sub_page.page_identifier == 'wiki' %}_blank{% endif %}"><span class="sidebar-list-element {% if request.session.current_page == sub_page.page_identifier %}current-page{% endif %}">{% trans sub_page.name %}</span></a></li>
+										<li ><a href="{{ sub_page.url }}" {% if sub_page.page_identifier == 'wiki' %}target="_blank"{% endif %}><span class="sidebar-list-element {% if request.session.current_page == sub_page.page_identifier %}current-page{% endif %}">{% trans sub_page.name %}</span></a></li>
 									{% endif %}
 								{% endif %}
 							{% endfor %}
