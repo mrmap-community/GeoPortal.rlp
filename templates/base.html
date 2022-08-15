@@ -105,9 +105,9 @@
 			<li class="sidebar-area login-status" >
 				<a href="#" class="sidebar-area-title" onclick="toggleSubMenu(this)">
 						{% if loggedin %}
-							<i class="sidebar-area-title-icon fas fa-user-circle" alt="{% trans 'A filled stylized person shape in a circle' %}"  aria-hidden="true"></i>
+							<i class="sidebar-area-title-icon fas fa-user-circle" title="{% trans 'A filled stylized person shape in a circle' %}"  aria-hidden="true"></i>
 						{% else %}
-							<i class="sidebar-area-title-icon far fa-user-circle" alt="{% trans 'An empty stylized person shape in a circle' %}" title="{% trans 'My Profile' %}"  aria-hidden="true"></i>
+							<i class="sidebar-area-title-icon far fa-user-circle" title="{% trans 'An empty stylized person shape in a circle' %}" title="{% trans 'My Profile' %}"  aria-hidden="true"></i>
 						{% endif %}
 					<span class="sidebar-area-title-text">
 						{% if loggedin %}
