@@ -117,7 +117,7 @@
 						{% endif %}
 					</span>
 				</a>
-				<div class="sidebar-area-content" role="menu">
+				<ul class="sidebar-area-content" role="menu">
 					{% if loggedin %}
 					<div>{% trans 'Hello' %}, {{ user }}!</div>
 						<li ><a href="{% url 'useroperations:change_profile' %}"><span class="sidebar-list-element {% if request.session.current_page == 'change_profile' %}current-page{% endif %}">{% trans 'Change Profile' %}</span></a></li>
@@ -128,7 +128,7 @@
 						<li ><a href="{% url 'useroperations:login' %}"><span class="sidebar-list-element {% if request.session.current_page == 'login' %}current-page{% endif %}">{% trans 'Login' %}</span></a></li>
 						<li  ><a href="{% url 'useroperations:register' %}"><span class="sidebar-list-element {% if request.session.current_page == 'register' %}current-page{% endif %}">{% trans 'Registration' %}</span></a></li>
 					{% endif %}
-				</div>
+				</ul>
 			</li>
 
 			<li class="sidebar-area" id="news" >
