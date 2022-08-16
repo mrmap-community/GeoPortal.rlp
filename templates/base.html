@@ -133,7 +133,7 @@
 
 			<li class="sidebar-area" id="news" >
 				<a class="sidebar-area-title {% if request.session.current_page == "Meldungen" or request.session.current_page == "News" %}current-page{% endif %}" href="/article/Meldungen/">
-				   <i class="sidebar-area-title-icon far fa-newspaper" title="{% trans 'A newspaper' %}" title="{% trans 'News' %}" aria-hidden="true"></i>
+				   <i class="sidebar-area-title-icon far fa-newspaper" title="{% trans 'News' %}" aria-hidden="true"></i>
 					<span class="sidebar-area-title-text menuMeldungen">{% trans 'News' %}</span>
 				</a>
 			</li>
@@ -150,7 +150,7 @@
 			{% for main_page_key, main_page_val in navigation.items %}
 				<li   class="sidebar-area">
 						<a href="#" class="sidebar-area-title {% if request.session.current_page == main_page_val.parent.page_identifier %}current-page{% endif %}" onclick="{% if main_page_val.children %} toggleSubMenu(this) {% else %} location.href = '{{ main_page_val.parent.url }}' {% endif %}">
-							<span class="sidebar-area-title-icon menuicon" title="{% trans 'A navigation menu icon' %}" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');" aria-hidden="true">
+							<span class="sidebar-area-title-icon menuicon" title="{% trans main_page_key %}" style="-webkit-mask-image:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');mask:url('{% static 'useroperations/images/' %}{{ main_page_val.parent.icon_name}}');" aria-hidden="true">
 							</span>
 							<span class="sidebar-area-title-text">
 								{% trans main_page_key %}
