@@ -109,7 +109,7 @@ function toggleMapviewer(servicetype){
             // start mobile with default mobile wmc (from index)
             }
         }else{
-            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
+            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?';
         }
     }else{
         // get preferred gui
@@ -124,8 +124,8 @@ function toggleMapviewer(servicetype){
         // change mb_user_gui Parameter if default gui  differs
         var url = new URL(dataParams)
         var params = new URLSearchParams(url.search);
-        if(preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
-            params.set('gui_id',"Geoportal-RLP")
+        if(preferred_gui == "Geoportal-Hessen-2019" || preferred_gui.length == 0 ){
+            params.set('gui_id',"Geoportal-Hessen-2019")
         }else{
             params.set('gui_id', preferred_gui)
         }
