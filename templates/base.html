@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 {% load static i18n %}
-{% csrf_token %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} {% block title %} {% endblock %}</title>
+    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} </title>
     <link rel="stylesheet" href="{% static 'Geoportal/fontawesome-5/css/all.css' %}">
     <link rel="icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
@@ -28,7 +27,7 @@
     {% block head %}
     {% endblock %}
 </head>
-
+<body>
 <header>
 
 <div class="header">
@@ -73,7 +72,6 @@
 </div>
 </header>
 
-<body>
     <nav>
     <div class="map-viewer-toggler" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}">
         <i class="far fa-map" alt="{% trans 'A lying map icon' %}" title="{% trans 'Open and close map viewer' %}"></i>
@@ -207,7 +205,6 @@
     {% endblock %}
     </div>
 
-</body>
 
 <footer>
     <div class="left-footer">
@@ -241,3 +238,5 @@
         <a href="/"><img alt="{% trans 'The logo of Geoportal Rhineland-Palatinate' %}" id="logo_geoportal" src="{% static 'useroperations/images/logo-geoportal.png' %}" title="{{ LOGO_GEOPORTAL_TITLE }}" /></a>
     </div>
 </footer>
+</body>
+</html>
