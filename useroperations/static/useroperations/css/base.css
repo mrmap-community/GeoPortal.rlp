@@ -1257,6 +1257,13 @@ z-index:1;
     word-break: break-word;
 }
 
+.linkedDataProxyIframe {
+    width: 100%;
+    border: none;
+    min-height: 600px;
+}
+
+
 @media screen and (min-width: 685px) and (max-width: 1108px){
     #footer-news-api ul li:nth-last-child(1) a {padding:0 0 0 22px;}
     #footer-news-api ul li:nth-last-child(2) a {width:0px;overflow:hidden;white-space: nowrap;}
