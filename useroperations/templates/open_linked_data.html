@@ -2,11 +2,11 @@
 {% load i18n %}
 
 {% block body %}
-<h1 style="display:inline-block;">Linked Open Data (Prototyp)</h1>&nbsp;&nbsp;<a href="https://de.wikipedia.org/wiki/Linked_Open_Data">Wikipedia<a>
+<h1 style="display:inline-block;">Linked Open Data (Prototyp)</h1>&nbsp;&nbsp;<a href="https://de.wikipedia.org/wiki/Linked_Open_Data">Wikipedia</a>
 <hr>
 <div class="form-wrapper">
 
-<iframe src="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/php/mod_linkedDataProxy.php" name="OpenLinkedData" frameborder="0" scrolling="no" width="100%" onload="resizeIframe(this);">
+<iframe src="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/php/mod_linkedDataProxy.php" name="OpenLinkedData" class="linkedDataProxyIframe" onload="resizeIframe(this);">
 </iframe>
 </div>
 

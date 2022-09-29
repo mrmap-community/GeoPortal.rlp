@@ -695,6 +695,10 @@ ul {
 
 .map-viewer-toggler:hover{cursor:pointer;}
 
+#mapviewer{
+    border: 0px;
+} 
+
 .map-viewer-toggler img, .sidebar-toggler img{
     background-color: var(--primary);
     padding: 0.1em;
@@ -942,7 +946,7 @@ ul {
     overflow-wrap: break-word;
 }
 
-.sidebar-area-content > div {
+.logged_username {
     font-weight: bold;
     padding: 10px 0 10px 10px;
     background-color: var(--hesse-lighterblue);
@@ -1252,6 +1256,13 @@ z-index:1;
 .-js-spatial-restriction {
     word-break: break-word;
 }
+
+.linkedDataProxyIframe {
+    width: 100%;
+    border: none;
+    min-height: 600px;
+}
+
 
 @media screen and (min-width: 685px) and (max-width: 1108px){
     #footer-news-api ul li:nth-last-child(1) a {padding:0 0 0 22px;}
