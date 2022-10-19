@@ -580,11 +580,11 @@ function startAjaxMapviewerCall(value, mobile){
             if(data["mapviewer_params"] != "" && data["url"] == ""){
             // internal mapviewer call
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
-                window.scrollTo({
-                    top:150,
-                    left:0,
-                    behavior:'smooth'
-                });
+                //window.scrollTo({
+                //    top:150,
+                //    left:0,
+                //    behavior:'smooth'
+                //});
 
                 var params = decodeURIComponent(data["mapviewer_params"]);
                 var wms = params.match(/LAYER\[id\]=\d+/);
