@@ -17,7 +17,7 @@ from django.utils.log import DEFAULT_LOGGING
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = "/data/"
-SESSION_NAME = 'PHPSESSID'
+SESSION_NAME = 'MAPBENDER'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
