@@ -127,7 +127,7 @@ echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
 su -c 'git reset --hard'
 su -c 'git pull'
-#su -c 'git chackout branchname'
+#su -c 'git checkout branchname'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
 
 echo "Restoring Mapbender Configs"
