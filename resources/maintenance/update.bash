@@ -1,6 +1,6 @@
 #!/bin/bash
 installation_folder="/data/"
-geoportal_url="https://www.geoportal.rlp.de"
+geoportal_url="https://www.geoportal.hessen.de"
 
 
 custom_update(){
@@ -46,11 +46,11 @@ check_settings(){
    rm $dottedname
 
    if [ $2 == "django" ]; then
-     wget https://raw.githubusercontent.com/mrmap-community/GeoPortal.rlp/master/$1 -O $dottedname
+     wget https://raw.githubusercontent.com/GDI-HE/GeoPortal.rlp/master/$1 -O $dottedname
    fi
 
    if [ $2 == "mapbender" ]; then
-     wget https://raw.githubusercontent.com/mrmap-community/Mapbender2.8/master/$1-dist -O $dottedname
+     wget https://raw.githubusercontent.com/GDI-HE/Mapbender2.8/master/$1-dist -O $dottedname
    fi
 
    while IFS="" read -r p || [ -n "$p" ]
@@ -127,6 +127,7 @@ echo "Updating Mapbender Sources"
 cd ${installation_folder}svn/mapbender
 su -c 'git reset --hard'
 su -c 'git pull'
+#su -c 'git chackout branchname'
 cp -a ${installation_folder}svn/mapbender ${installation_folder}
 
 echo "Restoring Mapbender Configs"
@@ -182,30 +183,34 @@ echo "Backing up Django Configs"
 cp -av ${installation_folder}GeoPortal.rlp/Geoportal/settings.py ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}GeoPortal.rlp/useroperations/conf.py ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y")
 cp -av ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y")
+cp -av ${installation_folder}GeoPortal.rlp/searchCatalogue/utils/url_conf.py ${installation_folder}config_backup_for_update/searchCatalogue_url_conf.py_$(date +"%m_%d_%Y")
 
 git reset --hard
 git pull
+#git checkout branchname 
 
 echo "Restoring Django Configs"
 cp -av ${installation_folder}config_backup_for_update/settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/Geoportal/settings.py
 cp -av ${installation_folder}config_backup_for_update/useroperations_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/useroperations/conf.py
 cp -av ${installation_folder}config_backup_for_update/searchCatalogue_settings.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/searchCatalogue/settings.py
+cp -av ${installation_folder}config_backup_for_update/searchCatalogue_url_conf.py_$(date +"%m_%d_%Y") ${installation_folder}GeoPortal.rlp/searchCatalogue/utils/url_conf.py
 
 # copy some scripts that are needed for django mapbender integration
 cp -av ${installation_folder}GeoPortal.rlp/resources/scripts/guiapi.php ${installation_folder}mapbender/http/local/
 cp -av ${installation_folder}GeoPortal.rlp/resources/sql/delete_inactive_users.sql ${installation_folder}mapbender/resources/db/delete_inactive_users.sql
 #only needed if multi download should be enabled
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/plugins/mb_downloadFeedClient.php ${installation_folder}mapbender/http/plugins/mb_downloadFeedClient.php
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/move.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/select.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/style.css ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
-#cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/javascripts/mb_downloadFeedClient.php ${installation_folder}mapbender/http/javascripts/mb_downloadFeedClient.php
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/plugins/mb_downloadFeedClient.php ${installation_folder}mapbender/http/plugins/mb_downloadFeedClient.php
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/move.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/select.png ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/img/
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/style.css ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/theme/default/
+cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mb_downloadFeedClient/OpenLayers.js ${installation_folder}mapbender/http/extensions/OpenLayers-2.13.1/
 
 # restore custom Files
 custom_update "restore"
 # this can used be to do some special tasks that may be needed by other users than rlp, eg. copy files that are overwritten by the update from the customconfig folder to another location
 # custom_update "script"
+#cp ${installation_folder}GeoPortal.rlp/templates/base-test.html  ${installation_folder}GeoPortal.rlp/templates/base.html
 # create and activate virtualenv
 rm -r ${installation_folder}env
 virtualenv -ppython3 ${installation_folder}env
