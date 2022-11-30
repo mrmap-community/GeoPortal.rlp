@@ -603,7 +603,7 @@ $(window).on("load", function(param){
 
 });
 
- */
+
 $(document).ready(function(){
     resetSearchCatalogue("primary");
     startAutomaticSearch();
