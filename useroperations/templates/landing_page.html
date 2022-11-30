@@ -13,7 +13,7 @@
 	    <h1>Herzlich willkommen im Geoportal Hessen</h1>
     </div>
     <div class="w3-container">
-        <p><strong>Hier erhalten Sie einen einheitlichen Zugang zu den raumbezogenen Daten der Geodateninfrastruktur Hessen (GDI-HE)</strong></p>
+        <p>Hier erhalten Sie einen einheitlichen Zugang zu den raumbezogenen Daten der Geodateninfrastruktur Hessen (GDI-HE)</p>
     </div>
 </div>
 
@@ -109,14 +109,6 @@
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                     </div>
-                    <hr>
-                    <p>
-                    {% if result.abstract|length == 0 %}
-                        {% trans 'No description available' %}
-                    {% else %}
-                        {{ result.abstract|safe }}
-                    {% endif %}
-                   </p>
                 </div>
             </div>
         </div>

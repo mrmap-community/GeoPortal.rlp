@@ -1173,9 +1173,11 @@ z-index:1;
 .landing-page-body{
     margin:0 10px;
     background-color: var(--hesse-lightblue);
-    padding: 30px;
+    padding: 10px;
     margin: 0 10px 20px 10px;
 }
+
+.landing-page-body .landing-page-headline{font-size:unset;}
 
 .landing-page-headline h1{
     font-size: 1.5em;

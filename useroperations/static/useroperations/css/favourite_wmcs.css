@@ -105,7 +105,6 @@
     -moz-hyphens: auto;
     hyphens: auto;
     line-height:1.5;
-    min-height: 150px;
     height: auto;
     padding: 10px;
     display: flex;
