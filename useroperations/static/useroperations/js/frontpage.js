@@ -554,22 +554,26 @@ $(function() {
     });
 });
 
+/* BEGIN resizeObserver bodyContent */
+$(document).ready(function(){
+    bodyBoxElement = document.querySelector('#body-content');
 
+    let resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+            // do sth here
+	    resizeSidebar();
+        }
+    });
 
+    resizeObserver.observe(bodyBoxElement);
 
-$(window).resize(function(){
-    resizeSidebar();
-    resizeMapOverlay();
 });
-
+/* END resizeObserver bodyContent */
 
 /*
  * Contains functions that shall be executed when the page is reloaded
  */
 $(window).on("load", function(param){
-    resizeSidebar();
-    resizeMapOverlay();
-
     var searchbar = $(".-js-simple-search-field");
     var checkbox = $("#spatial-checkbox");
     if (window.sessionStorage.getItem("isSpatialCheckboxChecked") == 'true'){
@@ -599,33 +603,8 @@ $(window).on("load", function(param){
 
 });
 
-$(document).on("scroll", function(){
-    var searchbar = $(".middle-header-top");
-    // check if searchbar is out of viewport
-    var searchbarPositionHeight = searchbar.outerHeight() + searchbar.innerHeight();
-    // get viewport Y offset
-    var viewportOffset = window.pageYOffset;
-
-    // sticky search bar makes mobile search unusable 
-    if ($(window).width() > 689) {
-        if(searchbarPositionHeight <= viewportOffset){
-            // make searchbar sticky to the viewport top
-            searchbar.addClass("sticky-top");
-        }else{
-            // revert this effect
-            searchbar.removeClass("sticky-top");
-        }
-    }
-})
-
-
-/*
- * Things that should start when the document is fully loaded
  */
 $(document).ready(function(){
-    resizeSidebar();
-    resizeMapOverlay();
-
     resetSearchCatalogue("primary");
     startAutomaticSearch();
 
