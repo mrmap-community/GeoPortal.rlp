@@ -235,7 +235,7 @@ $(document).on("click", ".share-button", function(){
     id = id.split("=")[1];
 
     copyTextToClipboard(window.location.origin+"/map?"+type+"="+id);
-    var popup = document.getElementsById("sharepopup"+id);
+    var popup = document.getElementsByName("sharepopup"+id);
 
     for (var i = 0; i < popup.length; i++) {
       popup[i].classList.add("show-popup");

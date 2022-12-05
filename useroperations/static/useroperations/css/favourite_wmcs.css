@@ -114,13 +114,17 @@
 .tile-content-abstract{
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 10px 0;
+    padding: 1.5em 0 0 0 !important;
 }
 
 .tile-header-img{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.favourite-wmc-links{
+ outline-offset: 1px !important;
 }
 
 .tile-body:hover{
@@ -133,13 +137,16 @@
     align-items: center;
 }
 
+.favourite-wmc-links{
+    display: inline-block;
+    outline-offset: 3px !important;
+}
+
 .mobile-button{
-    opacity: 0.75;
     font-size: 2em;
     padding: 0 0.25em;
 }
 .mobile-button:hover{
-    opacity: 1;
     color: var(--primary);
     cursor: pointer;
 }
@@ -148,14 +155,14 @@
     font-size: 1.25em;
 }
 .view-count img{
-    opacity: 0.5;
 }
 .view-count:hover{
     cursor: default;
 }
 
 #show-all-tile{
-    background: var(--hesse-lighterblue);
+    background: var(--hesse-green);
+    color: white;
 }
 
 .icn-sub-tile{
@@ -169,7 +176,7 @@
     padding: 0;
 }
 
-.favourite-wmcs .data-info-container .icn-metadata {font-size: 2em;font-weight:unset;opacity:0.75;}
+.favourite-wmcs .data-info-container .icn-metadata {font-size: 2em;font-weight:unset;}
 .favourite-wmcs .data-info-container .icn-metadata:hover{opacity: 1;color: var(--primary);cursor: pointer;}
 
 @media screen and (max-width: 540px){

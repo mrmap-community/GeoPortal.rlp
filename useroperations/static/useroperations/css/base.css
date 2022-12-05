@@ -210,33 +210,18 @@ label[for=id_identity]{
 
 .popup-landing .popuptext-landing {
  visibility: hidden;
- width: 180px;
- font-size: 15px;
+ width: 210px;
+ font-size: 10px;
  font-family: arial,helvetica;
  font-weight: bold;
- background-color: var(--secondary);
- color: var(--secondary-font);
- border-color: var(--primary);
- border-style: solid;
+ color: var(--hesse-green);
+ border: 1px solid var(--hesse-green);
  text-align: center;
- border-radius: 0.5px;
  position: absolute;
- top: 125%;
- left: 154%;
- margin-left: -150px;
-}
-
-/* Popup arrow */
-.popup-landing .popuptext-landing::after {
- content: "";
- position: absolute;
- bottom:110%;
- left: 56%;
- margin-left: -5px;
- border-width: 8px;
- border-style: solid;
- border-color: var(--primary) transparent transparent transparent;
- transform: rotate(180deg);
+ top: -2.4em;
+ left: -11.8em;
+ padding: 4px 2px 6px 2px;
+ line-height: 1;
 }
 
 .popup-landing .show-popup {
@@ -251,13 +236,10 @@ label[for=id_identity]{
 }
 
 .share-button{
-  padding-left: 10px;
-    opacity: 0.75;
     font-size: 2em;
     padding: 0 0.25em;
 }
 .share-button:hover{
-    opacity: 1;
     color: var(--primary);
     cursor: pointer;
 }

@@ -1674,7 +1674,7 @@ msgstr "Feedback Formular"
 #: searchCatalogue/templates/search_result_list_entry.html:102
 #: useroperations/templates/landing_page.html:80
 msgid "Map URL copied to clipboard"
-msgstr "Link zur Karte wurde in Zwischenablage kopiert"
+msgstr "Kartenlink in Zwischenablage kopiert"
 
 #: useroperations/templates/base.html:222
 msgid "Accessibility statement"
