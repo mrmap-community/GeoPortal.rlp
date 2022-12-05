@@ -5,13 +5,13 @@
         </div>
         <div id="search-main-content">
             {% if not is_info_search %}
-            <div class="area-wrapper">
-                <div style="font-size:160%" id="filter-area" class="area-title -js-accordion" title="{% trans 'Open and close filter settings' %}" aria-label="{% trans 'Open and close filter settings' %}">
+            <h1 style="margin:-2px 0 30px 0;font-size:2em;padding-top:39px;">{% trans 'Results' %}</h1>
+	    <div class="area-wrapper">
+		    <button id="filter-area" class="area-title -js-accordion" title="{% trans 'Open and close filter settings' %}" aria-label="{% trans 'Open and close filter settings' %}">
                     <span class="accordion icon closed"></span>
-                    <i class="fas fa-filter tab-icn" alt="{% trans 'A filter icon' %}" aria-hidden="true"></i><strong>
-                    {% trans 'Filter' %}</strong>
-                </div>
-                <div class="area-elements">
+                    <i class="fas fa-filter tab-icn" alt="{% trans 'A filter icon' %}" aria-hidden="true"></i>{% trans 'Filter' %}
+		    </button>
+                <div class="area-elements filter-area-elements">
                     {% include 'filterarea.html' %}
                     <div id="mobile-categories">
                         {% include 'facets.html' %}

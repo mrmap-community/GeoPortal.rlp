@@ -137,11 +137,6 @@
     align-items: center;
 }
 
-.favourite-wmc-links{
-    display: inline-block;
-    outline-offset: 3px !important;
-}
-
 .mobile-button{
     font-size: 2em;
     padding: 0 0.25em;

@@ -857,8 +857,9 @@ ul {
     transform: translateX(0px);
     background-color: white;
 }
-.sidebar-wrapper.closed{
+.sidebar-wrapper.closed {
     transform: translateX(-318px);
+    visibility: hidden;
 }
 
 .sidebar-content{
