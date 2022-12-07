@@ -1139,11 +1139,11 @@ ul {
 position: fixed;
 right: 20px;
 bottom: 60px;
-border: 2px solid #0362b9;
+border: 2px solid white;
 padding: 30px;
 border-radius: 50%;
 cursor: pointer;
-background-color: #0362b9;
+background-color: var(--hesse-green);
 color: white;
 background-image: url("../../../mapbender/img/geoportal2019/up.svg");
 background-repeat: no-repeat;
