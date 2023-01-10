@@ -1076,6 +1076,7 @@ ul {
     position: absolute;
     right: 0;
     left: 0;
+    top: 6rem;
     margin: 0 10rem;
     z-index: 3;
 }
