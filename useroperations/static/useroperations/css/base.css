@@ -40,7 +40,7 @@ body{
 }
 
 /* keyboard usability outline focus-visible */
-.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible, input[type="checkbox" i]:focus-visible, #backtotop:focus-visible { 
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible, input[type="checkbox" i]:focus-visible, #backtotop:focus-visible{ 
     outline: solid .125rem #f1b709;
 }
 
@@ -485,12 +485,21 @@ label[for=id_identity]{
     z-index: 3;
   }
 
-.simple-search-autocomplete div {
+.simple-search-autocomplete div, .simple-search-autocomplete button {
     width: 100%;
     overflow: hidden;
     padding: 10px;
     display: block;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    text-align: left;
+    border: none;
+    background-color: unset;
+}
+
+.simple-search-autocomplete button:focus-visible {
+    outline: solid .125rem #f1b709;
+    outline-offset: -5px;
+}
 
 .simple-search-autocomplete > div {
     overflow-y: auto;
@@ -527,25 +536,19 @@ label[for=id_identity]{
 .simple-search-autocomplete .suggestion-copy{
     float: right;
     padding: 0.5rem 0.5rem;
-    border-radius: 50%;
     text-align: center;
     width: auto;
-    height:100%;
-    transform: rotate(-45deg);
 }
 
-.simple-search-autocomplete .suggestion:hover,
-.simple-search-autocomplete .suggestion.active{
-    background-color: var(--primary);
+.simple-search-autocomplete .suggestion-copy i {
+  transform: rotate(-45deg);
+}
+
+.simple-search-autocomplete .suggestion:hover > button.suggestion-item, .simple-search-autocomplete .suggestion-copy:hover, .simple-search-autocomplete .suggestion.active, .location.suggestion:hover{
+    background-color: var(--hesse-green);
     color: white;
+    cursor: pointer;
     }
-
-.simple-search-autocomplete .suggestion-copy:hover{
-    background-color: white;
-    color: var(--primary);
-    width: 2rem;
-    height: 2rem;
-}
 
 .simple-search-autocomplete.active {
   display: block; }

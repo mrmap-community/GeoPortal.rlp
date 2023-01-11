@@ -84,6 +84,9 @@
 			</div>-->
 
 		</div>
+		{% if cookie is None %}
+                        {% include 'cookie_banner.html' %}
+                {% endif %}
 	</header>
 	
 	<nav aria-label="Navigation">
@@ -198,9 +201,6 @@
 		{% block body %}
 		{% endblock %}
 		</div>
-		{% if cookie is None %}
-			{% include 'cookie_banner.html' %}
-		{% endif %}
 	</main>
 	
 
