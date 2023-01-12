@@ -4,7 +4,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }}</title>
+    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} {% block title %} - {% trans 'Homepage' %}" {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'Geoportal/fontawesome-5/css/all.css' %}">
     <link rel="icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">

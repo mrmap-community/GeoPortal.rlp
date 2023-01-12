@@ -1314,6 +1314,10 @@ msgstr ""
 msgid "Information"
 msgstr "Information"
 
+#: useroperations/templates/landing_page.html:2
+msgid "Homepage"
+msgstr ""
+
 #: useroperations/templates/landing_page.html:10
 msgid "Search for all map collections"
 msgstr ""
