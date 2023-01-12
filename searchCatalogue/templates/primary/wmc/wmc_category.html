@@ -1,12 +1,12 @@
 {% load static i18n humanize %}
 <div class="search-cat {% if 'wmc' in search_results %} active {% endif %}">
-    <div class="search-header">
-        <div class="source--title -js-title -js-accordion">
-            <span class="accordion icon closed"></span>
+    <h2 class="search-header" title="{% trans 'Web Map Context' %}">
+        <button class="source--title -js-title -js-accordion" aria-label="{% trans 'Open and close searchresults for ' %}{% trans 'Web Map Context' %}">
+            <span class="accordion icon closed" aria-hidden="true"></span>
             <i class="fas fa-map tab-icn" title="{% trans 'Web Map Context' %}" aria-hidden="true"></i>
             <span>{{ all_resources.wmc }} ({{ search_results.wmc.wmc.wmc.md.nresults|intcomma }})</span>
-        </div><!-- end .source--title -->
-    </div><!-- end .search-header -->
+        </button><!-- end .source--title -->
+    </h2><!-- end .search-header -->
     <div class="wmc search--body hide">
         {% if search_results.wmc.keywords.tagCloud.tags|length > 0 and search_results.wmc.wmc.wmc.md.nresults|add:0 > 0 %}
             {% with search_results.wmc.keywords.tagCloud.tags as tags %}

@@ -1,12 +1,12 @@
 {% load static i18n humanize %}
 <div class="search-cat {% if 'wfs' in search_results %} active {% endif %}">
-    <div class="search-header">
-        <div class="source--title -js-title -js-accordion">
-            <span class="accordion icon closed"></span>
+	<h2 class="search-header" title="{% trans 'Search-, Download-,Gathering-modules' %}">
+        <button class="source--title -js-title -js-accordion" aria-label="{% trans 'Open and close searchresults for ' %}{% trans 'Search-, Download-,Gathering-modules' %}">
+            <span class="accordion icon closed" aria-hidden="true"></span>
             <i class="fas fa-info-circle tab-icn" aria-hidden="true"></i>
             <span>{{ all_resources.wfs }} ({{ search_results.wfs.wfs.wfs.md.nresults|intcomma }})</span>
-        </div><!-- end .source--title -->
-    </div><!-- end .search-header -->
+        </button><!-- end .source--title -->
+    </h2><!-- end .search-header -->
     <div class="wfs search--body hide">
         {% if search_results.wfs.keywords.tagCloud.tags|length > 0 and search_results.wfs.wfs.wfs.md.nresults|add:0 > 0 %}
             {% with search_results.wfs.keywords.tagCloud.tags as tags %}

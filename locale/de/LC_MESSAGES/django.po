@@ -416,7 +416,7 @@ msgstr "Weitere"
 #: searchCatalogue/templates/primary/wmc/wmc_category.html:6
 #: useroperations/templates/landing_page.html:12
 msgid "Web Map Context"
-msgstr ""
+msgstr "Kartenzusammenstellungen"
 
 #: searchCatalogue/templates/primary/wms/wms_category.html:7
 #: templates/base.html:140 useroperations/templates/landing_page.html:19
@@ -666,7 +666,7 @@ msgstr "Filter"
 
 #: searchCatalogue/templates/search_results.html:26
 msgid "Results"
-msgstr "Ergebnisse"
+msgstr "Suchergebnisse"
 
 #: searchCatalogue/templates/spatial/spatial_search_results.html:7
 msgid "No descriptor given (e.g. environment protection, minig, ...)"
@@ -1674,7 +1674,7 @@ msgstr "Feedback Formular"
 #: searchCatalogue/templates/search_result_list_entry.html:102
 #: useroperations/templates/landing_page.html:80
 msgid "Map URL copied to clipboard"
-msgstr "Link zur Karte wurde in Zwischenablage kopiert"
+msgstr "Kartenlink in Zwischenablage kopiert"
 
 #: useroperations/templates/base.html:222
 msgid "Accessibility statement"
@@ -1736,6 +1736,13 @@ msgstr "Suche starten"
 msgid "Open and close filter settings"
 msgstr "Filtereinstellung auf- oder zuklappen"
 
+#: GeoPortal.rlp/searchCatalogue/templates/primary/dataset/dataset_category.html:5
+#: GeoPortal.rlp/searchCatalogue/templates/primary/wms/wms_category.html:5
+#: GeoPortal.rlp/searchCatalogue/templates/primary/wmc/wmc_category.html:5
+#: GeoPortal.rlp/searchCatalogue/templates/primary/wfs/wfs_category.html:5
+#: GeoPortal.rlp/searchCatalogue/templates/primary/application/application_category.html:5
+msgid "Open and close searchresults for "
+msgstr "Auf- und zuklappen der Suchergebnisse für "
 
 
 #~ msgid "The letter W, as used for wikipedia"

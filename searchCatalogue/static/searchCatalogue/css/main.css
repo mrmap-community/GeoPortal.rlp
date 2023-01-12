@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
 
+/* keyboard usability outline focus-visible */
+#filter-area:focus-visible, .source--title:focus-visible, .search--list--item:focus-visible{
+  outline: solid .125rem #f1b709;
+}
 
 audio, canvas, progress, video {
   display: inline-block; }
@@ -721,12 +725,21 @@ dl dd {
     color: var(--hesse-grey);
     padding: 10px;
     border: 1px solid var(--primary);
-    border-bottom: 2px solid var(--hesse-blue);
 }
-.area-title:hover{
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
-    color:#fff;
+
+#filter-area {
+    background-color:unset;
+}
+
+.filter-area-elements {
+    border: 5px solid var(--hesse-green);
+    background-color: var(--hesse-lightblue);
+}
+
+.manual_opened_elem {
+  border-color: var(--hesse-green);
+  background-color: var(--hesse-green) !important;
+  color: white;
 }
 
 .filter-onlyOpenData-img{
@@ -869,7 +882,9 @@ dl dd {
   background-color: var(--secondary);
   color: var(--hesse-grey);
   cursor: pointer;
-  border:1px solid var(--hesse-grey)}
+  border: 1px solid var(--hesse-grey);
+  width: 100%;
+}
 
 .source--title:hover {
   color: white;
@@ -970,6 +985,18 @@ dl dd {
   margin: 5px;
   cursor: pointer;
   }
+
+button.search--list--item.-js-term {
+    border: 1px solid;
+    background: none;
+    padding: 1px 4px;
+    color: var(--hesse-green);
+}
+
+button.search--list--item.-js-term:hover {
+    color: var(--hesse-red);
+    background: none;
+}
 
 .search--list .search--list--item.inactive, .search--list .resource--list--item.inactive, .resource--list .search--list--item.inactive, .resource--list .resource--list--item.inactive {
   color: #666;

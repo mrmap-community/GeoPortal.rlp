@@ -70,9 +70,12 @@ form input[type=text], form input[type=password], form input[type=email], form t
 
 .form-submit-button:hover, .form-cancel-button:hover, .form-change-submit-button:hover{
     cursor: pointer;
-    background-color: var(--primary-light-hover);
+    background-color: var(--hesse-green);
 }
 
+.form-submit-button:focus-visible {
+    outline: solid .125rem #f1b709;
+}
 
 .form-wrapper{
     display: flex;

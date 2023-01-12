@@ -1,13 +1,13 @@
 
 {% load static i18n humanize %}
 <div class="search-cat {% if 'wms' in search_results %} active {% endif %}">
-    <div class="search-header">
-        <div class="source--title -js-title -js-accordion">
-            <span class="accordion icon closed"></span>
+    <h2 class="search-header" title="{% trans 'Map layers' %}">
+        <button class="source--title -js-title -js-accordion" aria-label="{% trans 'Open and close searchresults for ' %}{% trans 'Map layers' %}">
+            <span class="accordion icon closed" aria-hidden="true"></span>
             <i class="fas fa-layer-group tab-icn" alt="{% trans 'A lying map' %}" title="{% trans 'Map layers' %}" aria-hidden="true"></i>
             <span>{{ all_resources.wms }} ({{ search_results.wms.wms.wms.md.nresults|intcomma }})</span>
-        </div>
-    </div><!-- end .search-header -->
+        </button>
+    </h2><!-- end .search-header -->
     <div class="wms search--body hide">
         {% if search_results.wms.keywords.tagCloud.tags|length  > 0 and search_results.wms.wms.wms.md.nresults|add:0 > 0 %}
             {% with search_results.wms.keywords.tagCloud.tags as tags %}

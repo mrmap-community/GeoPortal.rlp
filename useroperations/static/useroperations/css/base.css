@@ -40,7 +40,7 @@ body{
 }
 
 /* keyboard usability outline focus-visible */
-.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible, input[type="checkbox" i]:focus-visible{ 
+.quickstart.search:focus-visible, .quickstart:focus-visible, .footer-list a:focus-visible, .left-header a:focus-visible, nav a:focus-visible, .hessenlogotab:focus-visible, input#geoportal-search-field:focus-visible, .nobuttoncss:focus-visible, input[type="checkbox" i]:focus-visible, #backtotop:focus-visible{ 
     outline: solid .125rem #f1b709;
 }
 
@@ -210,33 +210,18 @@ label[for=id_identity]{
 
 .popup-landing .popuptext-landing {
  visibility: hidden;
- width: 180px;
- font-size: 15px;
+ width: 210px;
+ font-size: 10px;
  font-family: arial,helvetica;
  font-weight: bold;
- background-color: var(--secondary);
- color: var(--secondary-font);
- border-color: var(--primary);
- border-style: solid;
+ color: var(--hesse-green);
+ border: 1px solid var(--hesse-green);
  text-align: center;
- border-radius: 0.5px;
  position: absolute;
- top: 125%;
- left: 154%;
- margin-left: -150px;
-}
-
-/* Popup arrow */
-.popup-landing .popuptext-landing::after {
- content: "";
- position: absolute;
- bottom:110%;
- left: 56%;
- margin-left: -5px;
- border-width: 8px;
- border-style: solid;
- border-color: var(--primary) transparent transparent transparent;
- transform: rotate(180deg);
+ top: -2.4em;
+ left: -11.8em;
+ padding: 4px 2px 6px 2px;
+ line-height: 1;
 }
 
 .popup-landing .show-popup {
@@ -251,13 +236,10 @@ label[for=id_identity]{
 }
 
 .share-button{
-  padding-left: 10px;
-    opacity: 0.75;
     font-size: 2em;
     padding: 0 0.25em;
 }
 .share-button:hover{
-    opacity: 1;
     color: var(--primary);
     cursor: pointer;
 }
@@ -503,12 +485,21 @@ label[for=id_identity]{
     z-index: 3;
   }
 
-.simple-search-autocomplete div {
+.simple-search-autocomplete div, .simple-search-autocomplete button {
     width: 100%;
     overflow: hidden;
     padding: 10px;
     display: block;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    text-align: left;
+    border: none;
+    background-color: unset;
+}
+
+.simple-search-autocomplete button:focus-visible {
+    outline: solid .125rem #f1b709;
+    outline-offset: -5px;
+}
 
 .simple-search-autocomplete > div {
     overflow-y: auto;
@@ -545,25 +536,19 @@ label[for=id_identity]{
 .simple-search-autocomplete .suggestion-copy{
     float: right;
     padding: 0.5rem 0.5rem;
-    border-radius: 50%;
     text-align: center;
     width: auto;
-    height:100%;
-    transform: rotate(-45deg);
 }
 
-.simple-search-autocomplete .suggestion:hover,
-.simple-search-autocomplete .suggestion.active{
-    background-color: var(--primary);
+.simple-search-autocomplete .suggestion-copy i {
+  transform: rotate(-45deg);
+}
+
+.simple-search-autocomplete .suggestion:hover > button.suggestion-item, .simple-search-autocomplete .suggestion-copy:hover, .simple-search-autocomplete .suggestion.active, .location.suggestion:hover{
+    background-color: var(--hesse-green);
     color: white;
+    cursor: pointer;
     }
-
-.simple-search-autocomplete .suggestion-copy:hover{
-    background-color: white;
-    color: var(--primary);
-    width: 2rem;
-    height: 2rem;
-}
 
 .simple-search-autocomplete.active {
   display: block; }
@@ -875,8 +860,9 @@ ul {
     transform: translateX(0px);
     background-color: white;
 }
-.sidebar-wrapper.closed{
+.sidebar-wrapper.closed {
     transform: translateX(-318px);
+    visibility: hidden;
 }
 
 .sidebar-content{
@@ -1093,6 +1079,7 @@ ul {
     position: absolute;
     right: 0;
     left: 0;
+    top: 6rem;
     margin: 0 10rem;
     z-index: 3;
 }
@@ -1156,11 +1143,11 @@ ul {
 position: fixed;
 right: 20px;
 bottom: 60px;
-border: 2px solid #0362b9;
+border: 2px solid white;
 padding: 30px;
 border-radius: 50%;
 cursor: pointer;
-background-color: #0362b9;
+background-color: var(--hesse-green);
 color: white;
 background-image: url("../../../mapbender/img/geoportal2019/up.svg");
 background-repeat: no-repeat;

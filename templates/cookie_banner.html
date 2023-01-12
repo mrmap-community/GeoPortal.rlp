@@ -1,15 +1,15 @@
 
 {% load i18n %}
 
-<div class="cookie-container cookie-container-visible">
-    <div class="cookie-text">
+<div class="cookie-container cookie-container-visible" role="banner">
+    <div class="cookie-text" role="dialog" aria-haspopup="true">
         <p>
             {% trans 'This webpage uses cookies to provide you the best user experience. On further questions regarding personal data security, please read our ' %}
             {% trans 'data policy' %}.
         </p>
         <p>Beachten Sie bitte unsere Nutzungsbedingungen im Impressum sowie die Nutzungsbedingungen der jeweiligen Daten- und Kartenanbieter in den Metadaten.</p>
     </div>
-    <div class="cookie-button form-submit-button" onclick="sc()">{% trans 'I understand!' %}</div>
+    <button class="cookie-button form-submit-button" title="{% trans 'I understand!' %}" onclick="sc()">{% trans 'I understand!' %}</button>
 </div>
 <script>
     function sc(){
