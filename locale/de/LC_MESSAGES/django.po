@@ -1270,6 +1270,10 @@ msgstr "Kartenviewer wechseln"
 msgid "Select other map application"
 msgstr "Andere Kartenanwendung auswählen"
 
+#: useroperations/templates/landing_page.html:2
+msgid "Homepage"
+msgstr "Startseite"
+
 #: useroperations/templates/landing_page.html:10
 msgid "Search for all map collections"
 msgstr "Suche nach allen Karten starten"
@@ -1350,7 +1354,7 @@ msgstr ""
 
 #: useroperations/templates/open_linked_data.html:5
 msgid "LinkedOpenData"
-msgstr ""
+msgstr "Linked Open Data"
 
 #: useroperations/templates/publishing_organizations.html:14
 msgid "Publishing Organizations"

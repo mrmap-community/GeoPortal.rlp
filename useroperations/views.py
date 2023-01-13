@@ -125,9 +125,10 @@ def index_view(request, wiki_keyword=""):
         results = useroperations_helper.get_landing_page(lang)
 
     context = {
+               "wiki_keyword": wiki_keyword,
                "content": output,
                "results": results,
-                "mobile_wmc_id": MOBILE_WMC_ID,
+               "mobile_wmc_id": MOBILE_WMC_ID,
                }
     geoportal_context.add_context(context=context)
 
