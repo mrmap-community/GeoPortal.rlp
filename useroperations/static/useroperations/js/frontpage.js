@@ -716,3 +716,20 @@ $(document).ready(function(){
         document.getElementById("main-body-class").style.margin = 'unset';
     }
 });
+
+/*
+ *  change pagetitle if mapviewer
+*/
+function changePageTitle() {
+    newPageTitle = 'Geoportal Hessen - Kartenviewer';
+    document.querySelector('title').textContent = newPageTitle;
+}
+
+function changePageTitleBack() {
+    var url= window.location.href;
+    var u1 = window.location.hostname;
+    var urll= url.split('/');
+    var urkl = urll[urll.length - 2] === u1 ? " Startseite" : "" + urll[urll.length - 2];
+    newPageTitle = 'Geoportal Hessen ' + ' - ' + urkl;
+    document.querySelector('title').textContent = newPageTitle;
+}

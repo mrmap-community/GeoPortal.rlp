@@ -4,7 +4,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} {% block title %} - {% trans 'Homepage' %}" {% endblock %}</title>
+    <title>Geoportal {{ GEOPORTAL_IDENTIFIER }} {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'Geoportal/fontawesome-5/css/all.css' %}">
     <link rel="icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static 'useroperations/images/favicon.ico' %}" type="image/x-icon">
@@ -48,12 +48,12 @@
 				<button class="sidebar-toggler nobuttoncss" aria-haspopup="true" aria-expanded="true" title="{% trans 'Open and close menu' %}" aria-label="{% trans 'Open and close menu' %}">
 					<i class="fas fa-bars" aria-hidden="true"></i><span>Menü</span>
 				</button>
-				<button class="map-viewer-toggler nobuttoncss" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
+				<button class="map-viewer-toggler nobuttoncss" onclick="toggleMapviewer();changePageTitle();" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
 					<i class="far fa-map" aria-hidden="true"></i>
 				<span>Kartenviewer</span>
 				</button>
 
-				<button class="map-viewer-toggler nobackbutton nobuttoncss" onclick="toggleMapviewer()" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
+				<button class="map-viewer-toggler nobackbutton nobuttoncss" onclick="toggleMapviewer();changePageTitleBack();" data-gui="{{ preferred_gui }}" title="{% trans 'Open and close map viewer' %}" aria-label="{% trans 'Open and close map viewer' %}">
 					<i class="fas fa-backward" aria-hidden="true"></i>
 				<span>Zurück</span>
 				</button>
