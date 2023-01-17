@@ -109,7 +109,7 @@ function toggleMapviewer(servicetype){
             // start mobile with default mobile wmc (from index)
             }
         }else{
-            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?';
+            window.location.href = window.location.href.split('/').slice(0, 3).join('/')+'/mapbender/extensions/mobilemap2/index.html?wmc_id='+$("#mapviewer-sidebar").attr("mobile_wmc");
         }
     }else{
         // get preferred gui
@@ -124,8 +124,8 @@ function toggleMapviewer(servicetype){
         // change mb_user_gui Parameter if default gui  differs
         var url = new URL(dataParams)
         var params = new URLSearchParams(url.search);
-        if(preferred_gui == "Geoportal-Hessen-2019" || preferred_gui.length == 0 ){
-            params.set('gui_id',"Geoportal-Hessen-2019")
+        if(preferred_gui == "Geoportal-RLP" || preferred_gui.length == 0 ){
+            params.set('gui_id',"Geoportal-RLP")
         }else{
             params.set('gui_id', preferred_gui)
         }
@@ -554,26 +554,22 @@ $(function() {
     });
 });
 
-/* BEGIN resizeObserver bodyContent */
-$(document).ready(function(){
-    bodyBoxElement = document.querySelector('#body-content');
 
-    let resizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-            // do sth here
-	    resizeSidebar();
-        }
-    });
 
-    resizeObserver.observe(bodyBoxElement);
 
+$(window).resize(function(){
+    resizeSidebar();
+    resizeMapOverlay();
 });
-/* END resizeObserver bodyContent */
+
 
 /*
  * Contains functions that shall be executed when the page is reloaded
  */
 $(window).on("load", function(param){
+    resizeSidebar();
+    resizeMapOverlay();
+
     var searchbar = $(".-js-simple-search-field");
     var checkbox = $("#spatial-checkbox");
     if (window.sessionStorage.getItem("isSpatialCheckboxChecked") == 'true'){
@@ -603,8 +599,33 @@ $(window).on("load", function(param){
 
 });
 
+$(document).on("scroll", function(){
+    var searchbar = $(".middle-header-top");
+    // check if searchbar is out of viewport
+    var searchbarPositionHeight = searchbar.outerHeight() + searchbar.innerHeight();
+    // get viewport Y offset
+    var viewportOffset = window.pageYOffset;
 
+    // sticky search bar makes mobile search unusable 
+    if ($(window).width() > 689) {
+        if(searchbarPositionHeight <= viewportOffset){
+            // make searchbar sticky to the viewport top
+            searchbar.addClass("sticky-top");
+        }else{
+            // revert this effect
+            searchbar.removeClass("sticky-top");
+        }
+    }
+})
+
+
+/*
+ * Things that should start when the document is fully loaded
+ */
 $(document).ready(function(){
+    resizeSidebar();
+    resizeMapOverlay();
+
     resetSearchCatalogue("primary");
     startAutomaticSearch();
 
@@ -673,7 +694,7 @@ if( !window.BackToTop  ) {
 function checkForNews (){
         const currentDate = new Date();
         const currentTimestamp = currentDate.getTime();
-        url = "https://" + location.hostname + "/mediawiki/api.php?action=query&prop=revisions&rvlimit=1&rvprop=timestamp&rvdir=older&titles=Meldungen&format=json";
+        url = "http://" + location.hostname + "/mediawiki/api.php?action=query&prop=revisions&rvlimit=1&rvprop=timestamp&rvdir=older&titles=Meldungen&format=json";
         fetch(url)
         .then(function(response){return response.json();})
         .then(function(response) {
@@ -730,6 +751,7 @@ function changePageTitleBack() {
     var u1 = window.location.hostname;
     var urll= url.split('/');
     var urkl = urll[urll.length - 2] === u1 ? " Startseite" : "" + urll[urll.length - 2];
-    newPageTitle = 'Geoportal Hessen ' + ' - ' + urkl;
+    console.log(urkl);
+    newPageTitle = 'Geoportal Hessen ' + ' - ' + {% blocktrans %} {{ urkl }} {% endblocktrans %};
     document.querySelector('title').textContent = newPageTitle;
 }
