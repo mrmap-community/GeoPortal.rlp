@@ -9,10 +9,11 @@ Created on: 02.05.19
 
 
 import requests
+import os
 from pymemcache.client import base
 from phpserialize import *
 from django.http import HttpRequest
-from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, INTERNAL_SSL, PROJECT_DIR, SESSION_NAME
+from Geoportal.settings import DEFAULT_GUI, HTTP_OR_SSL, INTERNAL_SSL, PROJECT_DIR, SESSION_NAME, SESSION_TYPE, SESSION_SAVE_PATH
 from Geoportal.utils.mbConfReader import get_mapbender_config_value
 from useroperations.models import MbUser
 
@@ -23,8 +24,9 @@ from useroperations.models import MbUser
 # If users dont see their login status anymore in the frontend after php upgrade, 
 # this will probably be the reason why, has to be changed in line 28 AND 42.
 def get_mapbender_session_by_memcache(session_id):
-    client = base.Client(('localhost', 11211))
-
+    
+    #client = base.Client(('localhost', 11211))
+    client = base.Client((SESSION_SAVE_PATH.split(":")[0], int(SESSION_SAVE_PATH.split(":")[1])))
     try:
         session_data = client.get('memc.sess.key.' + session_id)
     except ConnectionRefusedError:
@@ -36,10 +38,36 @@ def get_mapbender_session_by_memcache(session_id):
         session_data = None
     return session_data
 
+def get_mapbender_session_by_file(session_id):
+    
+    try:
+        session = open(SESSION_SAVE_PATH + "sess_" + session_id, "r", encoding='utf-8')
+        session_str=session.read()
+    except FileNotFoundError:
+        session_str = 'None'
+        print("session file" + SESSION_SAVE_PATH + "sess_" + session_id + "was not found in" + SESSION_SAVE_PATH)
+
+    try:
+        session_bytes = bytes(session_str, 'utf-8')
+        session_data = loads(session_bytes)
+    except ValueError:
+        session_data = None
+    return session_data
 
 def delete_mapbender_session_by_memcache(session_id):
-    client = base.Client(('localhost', 11211))
+
+    #client = base.Client(('localhost', 11211))
+    client = base.Client((SESSION_SAVE_PATH.split(":")[0], int(SESSION_SAVE_PATH.split(":")[1])))
+    #client.delete('memc.sess.' + session_id)
     client.delete('memc.sess.key.' + session_id)
+
+
+def delete_mapbender_session_by_file(session_id):
+    
+    try:
+        os.remove(SESSION_SAVE_PATH + "sess_" + session_id) 
+    except FileNotFoundError:
+        print("session" + session_id + "was not found in" + SESSION_SAVE_PATH)
 
 
 def get_session_data(request):
@@ -63,7 +91,14 @@ def get_session_data(request):
     session_data = None
 
     if request.COOKIES.get(SESSION_NAME) is not None:
-        session_data = get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
+
+        if SESSION_TYPE == 'file':
+            session_data = get_mapbender_session_by_file(request.COOKIES.get(SESSION_NAME))
+        elif SESSION_TYPE == 'memcached':
+            session_data = get_mapbender_session_by_memcache(request.COOKIES.get(SESSION_NAME))
+        else:
+            print("SESSION_TYPE IN SETTINGS NOT VALID")
+
         if session_data != None:
             if b'mb_user_id' in session_data:
                 guest_id = get_mapbender_config_value(PROJECT_DIR, 'ANONYMOUS_USER')
