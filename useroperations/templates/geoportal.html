@@ -19,6 +19,9 @@
 		        		</div>
 		        	</div>
 				{% endif %}
+				<div id="scroll-to-bottom" class="scroll-to-bottom" title="{% trans 'Scroll to bottom' %}">
+					<i class="fa fa-arrow-down"></i>
+				</div>
             </div>
             <div class="map-applications-list">
                 {% for gui in guis %}
@@ -32,5 +35,8 @@
 		{% else %}
 			<iframe id="mapviewer" frameborder="no" src="about:blank" data-resource="{{ HTTP_OR_SSL }}{{ HOSTNAME }}/mapbender/frames/index.php?lang={{ LANGUAGE_CODE }}&gui_id={{ mapviewer_params }}" name="geop_map" width="{{ IFRAME_WIDTH }}x" height="{{ IFRAME_HEIGHT }}px"></iframe>
 		{% endif %}
+	</div>
+	<div id="scroll-to-top" class="scroll-to-top hidden" title="{% trans 'Scroll to top' %}">
+		<i class="fa fa-arrow-up"></i>
 	</div>
 {% endblock %}

@@ -294,6 +294,7 @@ select {max-width: 100%;}
 <div id="user_name" value="<?php echo Mapbender::session()->get("mb_user_name");?>"></div>
 <div id="user_email" value="<?php echo Mapbender::session()->get("mb_user_email");?>"></div>
 <div id="django" value="<?php echo Mapbender::session()->get("django");?>"></div>
+<div id="session_id" value="<?php echo session_id();?>"></div>
 </body>
 </html>
 

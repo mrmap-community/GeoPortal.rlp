@@ -76,7 +76,7 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     preselected_facets = viewHelper.get_preselected_facets(get_params, facets)
 
     # renaming facet variables for dynamical reasons!
-    for key, value in preselected_facets.items():
+    for key, value in list(preselected_facets.items()):
         key_trans = _(key)
         del preselected_facets[key]
         for v in value:
@@ -472,7 +472,7 @@ def get_data_primary(request: HttpRequest):
     rehasher = Rehasher(search_results, search_filters)
     facets = rehasher.get_rehashed_categories()
     # set flag to indicate that the facet is one of the selected
-    for facet_key, facet_val in selected_facets.items():
+    for facet_key, facet_val in list(selected_facets.items()):
         facet_key_trans = _(facet_key)
         for k in facet_val:
             k["parent_category"] = _(k["parent_category"])

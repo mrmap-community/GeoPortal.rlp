@@ -23,7 +23,7 @@ function resizeIframe(obj) {
 }
 
 function setCookie(cname, cvalue){
-    document.cookie = cname + "=" + cvalue + ";path=/;";
+    document.cookie = cname + "=" + cvalue + ";path=/;SameSite=Lax";
 }
 
 function startSearch(){
@@ -146,6 +146,14 @@ function toggleMapviewer(servicetype){
         if(!$(".sidebar-wrapper").hasClass("closed")){
             $(".sidebar-toggler").click();
         }
+	    
+	if(!$(".map-viewer-overlay").hasClass("closed") && $(window).height() > 900){
+            document.body.style.overflowY = "hidden";
+        }else{
+	    document.body.style.overflowY = "visible";
+	}
+	document.getElementById('scroll-to-top').click();
+
     }
 }
 
@@ -273,7 +281,32 @@ $(document).on("click", ".map-viewer-selector", function(){
     }
 });
 
+$(document).on("click", ".scroll-to-bottom", function(){
+  window.scrollTo(0,document.body.scrollHeight);
+  document.getElementById("scroll-to-bottom").classList.add("hidden");
+  document.getElementById("scroll-to-top").classList.remove("hidden");
+
+});
+
+$(document).on("click", ".scroll-to-top", function(){
+  document.getElementById("scroll-to-top").classList.add("hidden");
+  document.getElementById("scroll-to-bottom").classList.remove("hidden");
+  window.scrollTo({
+  top: 1,
+  behavior: 'smooth'
+});
+
+});
+
+
 $(document).on("click", ".map-applications-toggler", function(){
+
+  var mapViewerToggler = $(".map-applications-toggler");
+  if(mapViewerToggler.hasClass("open")){
+    document.getElementById("scroll-to-bottom").classList.remove("hidden");
+  }
+
+
     var elem = $(this);
     var mapViewerSelector = $(".map-viewer-selector");
 
@@ -297,13 +330,6 @@ $(document).on("click", ".map-applications-toggler", function(){
 $(document).on("click", ".map-viewer-list-entry", function(){
     var elem = $(this);
     var iFrame = $("#mapviewer");
-
-    // move viewport for user
-    window.scrollTo({
-        top:150,
-        left:0,
-        behavior:'smooth'
-    });
 
     gui_id = elem.attr("data-resource");
     if(gui_id.includes("http")){
@@ -335,13 +361,6 @@ $(document).on("click", ".map-viewer-list-entry", function(){
 $(document).on("click", ".map-applications-list-entry", function(){
     var elem = $(this);
     var iframe = $("#mapviewer");
-
-    // move viewport for user
-    window.scrollTo({
-        top:150,
-        left:0,
-        behavior:'smooth'
-    });
 
     iframeSrc = iframe.attr("src").toString();
     iframeDataParams = iframe.attr("data-resource").toString();
@@ -475,33 +494,6 @@ $(document).on('focus blur', "#id_password", function(){
     setTimeout(resizeSidebar, 1000);
 });
 
-// Client side password validation
-$(document).on('keyup', "#id_password", function(){
-
-  var PasswordInput = document.getElementById("id_password");
-  var special = document.getElementById("special");
-  var length = document.getElementById("length");
-
-  // Validate special chars
-  if(PasswordInput.value.match(/[@#$%&+=!:-_]/g)) {
-    special.classList.remove("invalid");
-    special.classList.add("valid");
-  } else {
-    special.classList.remove("valid");
-    special.classList.add("invalid");
-  }
-
-  // Validate length
-  if(PasswordInput.value.length >= 9) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-
-});
-
 $(document).on('click', ".sidebar-area", function(){
 
 if ($(window).width() < 689) {
@@ -624,7 +616,7 @@ $(document).on("scroll", function(){
     // get viewport Y offset
     var viewportOffset = window.pageYOffset;
 
-    // sticky search bar makes mobile search unusable 
+    // sticky search bar makes mobile search unusable
     if ($(window).width() > 689) {
         if(searchbarPositionHeight <= viewportOffset){
             // make searchbar sticky to the viewport top
@@ -684,17 +676,16 @@ function checkForNews (){
                 }
                 showIcon = (articleTimestamp + 86400000 * 6  >= currentTimestamp) ? true : false;
                 if (showIcon == true) {
-                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;color: lightgreen;"></i>');
+                         $('.menuMeldungen').append('<i class="fas fa-exclamation-circle" style="position: absolute;margin-left: 5px;"></i>');
                 }
         })
         .catch(function(error){console.log(error);});
 }
 
-var CheckForNewsPlaceIcon = false;
+var CheckForNewsPlaceIcon = true;
 
 if( CheckForNewsPlaceIcon == true ) {
         $( document ).ready( function () {
           checkForNews();
         });
 }
-

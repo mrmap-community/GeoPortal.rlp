@@ -29,7 +29,6 @@ def get_mapbender_session_by_memcache(session_id):
     client = base.Client((SESSION_SAVE_PATH.split(":")[0], int(SESSION_SAVE_PATH.split(":")[1])))
     try:
         session_data = client.get('memc.sess.key.' + session_id)
-        #session_data = client.get('memc.sess.' + session_id)
     except ConnectionRefusedError:
         print("Connection Refused!Memcached not running?")
 

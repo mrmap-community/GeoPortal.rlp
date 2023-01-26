@@ -96,7 +96,7 @@ check_settings(){
 
 # needed for building new postgres python modules psycop2
 apt-get update
-apt-get install -y libpq-dev
+apt-get install -y libpq-dev libffi-dev
 
 custom_update "save"
 

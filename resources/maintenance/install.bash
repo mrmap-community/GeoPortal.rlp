@@ -1,11 +1,10 @@
 #!/bin/bash
 ############################################################
-# Geoportal-RLP install script for debian 9 server environment
-# 2019-07-04
-# debian netinstall 9
+# Geoportal-RLP install script for debian 11 server environment
+# 2022-07-04
+# debian netinstall 11
 # André Holl
 # Armin Retterath
-# Michel Peltriaux
 ############################################################
 
 
@@ -197,11 +196,11 @@ if [ "$http_proxy" != "" ];then
 
     # system proxy
       if [ "$http_proxy_user_hex" != "" ] && [ "$http_proxy_pass_hex" != "" ];then
-      	export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
-      	export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
+        export http_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
+        export https_proxy="http://$http_proxy_user_hex:$http_proxy_pass_hex@$http_proxy_host:$http_proxy_port"
       else
-      	export http_proxy="http://$http_proxy_host:$http_proxy_port"
-      	export https_proxy="http://$http_proxy_host:$http_proxy_port"
+        export http_proxy="http://$http_proxy_host:$http_proxy_port"
+        export https_proxy="http://$http_proxy_host:$http_proxy_port"
       fi
       # apt_proxy
       if [ -e "/etc/apt/apt.conf" ]; then
@@ -243,19 +242,19 @@ fi
 if [ $install_system_packages = 'true' ]; then
   echo -e "\n Installing needed Debian packages for Mapbender! \n" | tee -a $installation_log
   apt-get update | tee -a $installation_log
-  apt-get install -y git php7.0-mysql libapache2-mod-php7.0 php7.0-pgsql php7.0-gd php7.0-curl php7.0-cli  php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick mysql-server imagemagick locate postgresql postgresql-server-dev-all postgis postgresql-9.6-postgis-2.3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log
+    apt-get install -y rename git php7.4-mysql libapache2-mod-php7.4 php7.4-pgsql php7.4-gd php7.4-curl php7.4-cli  php-php-gettext g++ make bison bzip2 unzip zip gdal-bin cgi-mapserver php-imagick default-mysql-server imagemagick locate postgresql postgresql-server-dev-all postgis postgresql-13-postgis-3 mc zip unzip links w3m lynx arj xpdf dbview odt2txt ca-certificates oidentd gettext phppgadmin gkdebconf subversion subversion-tools memcached php-memcached php-memcache php-apcu php-apcu-bc curl libproj-dev libapache2-mod-security2 | tee -a $installation_log | tee -a $installation_log
   echo -e "\n ${green}Successfully installed Debian packages for Mapbender!${reset} \n" | tee -a $installation_log
 fi
 
 ############################################################
 # adopt php logging - only log errors - needed here, else the installation will throw many notices
 ############################################################
-cp /etc/php/7.0/cli/php.ini /etc/php/7.0/cli/php.ini_geoportal_backup
-cp /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini_geoportal_backup
+cp /etc/php/7.4/cli/php.ini /etc/php/7.4/cli/php.ini_geoportal_backup
+cp /etc/php/7.4/apache2/php.ini /etc/php/7.4/apache2/php.ini_geoportal_backup
 
 
-sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.0/cli/php.ini
-sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g" /etc/php/7.0/cli/php.ini
+sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ERROR/g" /etc/php/7.4/cli/php.ini
+sed -i "s/;error_log = php_errors.log/error_log = \/tmp\/php7_cli_errors\.log/g" /etc/php/7.4/cli/php.ini
 ############################################################
 
 ############################################################
@@ -281,7 +280,7 @@ fi
 
 if [ "$checkout_geoportal_git" = 'true' ]; then
   if [ -d "${installation_folder}GeoPortal.rlp" ];then
-  	echo -e "\n ${red} Folder ${installation_folder}GeoPortal.rlp found, please remove it!${reset}\n" | tee -a $installation_log
+        echo -e "\n ${red} Folder ${installation_folder}GeoPortal.rlp found, please remove it!${reset}\n" | tee -a $installation_log
     exit
   fi
   cd ${installation_folder}
@@ -342,19 +341,19 @@ if [ $install_mapbender_database = 'true' ]; then
   su - postgres -c "createdb -p $mapbender_database_port -E UTF8 $mapbender_database_name -T template0" | tee -a $installation_log
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "DROP USER IF EXISTS $mapbender_database_user" | tee -a $installation_log
   sudo -u postgres psql -q -p $mapbender_database_port -d $mapbender_database_name -c "CREATE USER $mapbender_database_user WITH ENCRYPTED PASSWORD '$mapbender_database_password'" | tee -a $installation_log
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/postgis.sql" | tee -a $installation_log
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/spatial_ref_sys.sql" | tee -a $installation_log
-  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/legacy.sql" | tee -a $installation_log
-  su - postgres -c "PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/9.6/contrib/postgis-2.3/topology.sql" | tee -a $installation_log
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/13/contrib/postgis-3.1/postgis.sql" | tee -a $installation_log
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/13/contrib/postgis-3.1/spatial_ref_sys.sql" | tee -a $installation_log
+  su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/13/contrib/postgis-3.1/legacy.sql" | tee -a $installation_log
+  su - postgres -c "PGOPTIONS='--client-min-messages=warning' psql -q -p $mapbender_database_port -d $mapbender_database_name -f /usr/share/postgresql/13/contrib/postgis-3.1/topology.sql" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'GRANT ALL PRIVILEGES ON DATABASE $mapbender_database_name TO $mapbender_database_user'" | tee -a $installation_log
   su - postgres -c "psql -q -p $mapbender_database_port -d $mapbender_database_name -c 'ALTER DATABASE $mapbender_database_name OWNER TO $mapbender_database_user'" | tee -a $installation_log
 
   #overwrite default pg_hba.conf of main - default cluster
-  cp /etc/postgresql/9.6/main/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf_backup
+  cp /etc/postgresql/13/main/pg_hba.conf /etc/postgresql/13/main/pg_hba.conf_backup
   #####################
-  cp -a ${installation_folder}GeoPortal.rlp/resources/systemconfigs/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
-  sed -i "s/mapbender_database_name/$mapbender_database_name/g" /etc/postgresql/9.6/main/pg_hba.conf
-  sed -i "s/mapbender_database_user/$mapbender_database_user/g" /etc/postgresql/9.6/main/pg_hba.conf
+  cp -a ${installation_folder}GeoPortal.rlp/resources/systemconfigs/pg_hba.conf /etc/postgresql/13/main/pg_hba.conf
+  sed -i "s/mapbender_database_name/$mapbender_database_name/g" /etc/postgresql/13/main/pg_hba.conf
+  sed -i "s/mapbender_database_user/$mapbender_database_user/g" /etc/postgresql/13/main/pg_hba.conf
 
   #####################
   service postgresql restart
@@ -591,7 +590,7 @@ fi
     echo -e "\n ${green}Successfully copied configurations! ${reset}\n" | tee -a $installation_log
 
     # mapfile for metadata wms
-   
+
     sed -i "s/dbname=mapbender /dbname=$mapbender_database_name /g" ${installation_folder}conf/extents.map
     sed -i "s/user=USERNAME /user=$mapbender_database_user /g" ${installation_folder}conf/extents.map
     sed -i "s/password=PASSWORD /password=$mapbender_database_password /g" ${installation_folder}conf/extents.map
@@ -627,7 +626,7 @@ fi
     cp -a ${installation_folder}conf/ ${installation_folder}mapbender/
     # alter group id for subadministrators in monitoring tool - use group_id 21 - this is the subadmin mb_group_id
     echo ". /etc/profile
-    [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.0 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null" >> ${installation_folder}mapbender/tools/monitorCapabilities.sh
+    [ -f /tmp/wmsmonitorlock ] && : || /usr/bin/php7.4 ${installation_folder}mapbender/tools/mod_monitorCapabilities_main.php group:${mapbender_subadmin_group_id} > /dev/null" >> ${installation_folder}mapbender/tools/monitorCapabilities.sh
 
     #####################
     # register initial services for default and extended search GUIs
@@ -651,9 +650,9 @@ fi
 
 
     if [ $? -eq 0 ];then
-  		echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
-	else
-    	echo -e "\n ${red}Registering services failed! ${reset}\n" | tee -a $installation_log
+                echo -e "\n ${green}Successfully registered services! ${reset}\n" | tee -a $installation_log
+        else
+        echo -e "\n ${red}Registering services failed! ${reset}\n" | tee -a $installation_log
     fi
 
     #####################
@@ -709,7 +708,7 @@ fi
   cp /etc/apache2/apache2.conf /etc/apache2/apache2.conf_backup_geoportal
   # replace only the first occurence of Require all denied - this is the entry for /
   sed -i "0,/Require all denied/{s/Require all denied/Require all granted/}" /etc/apache2/apache2.conf
-  sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" /etc/php/7.0/apache2/php.ini
+  sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" /etc/php/7.4/apache2/php.ini
   ############################################################
   #
   ############################################################
@@ -740,24 +739,24 @@ fi
     echo  "Timeout 60" >>/etc/apache2/conf-available/security.conf
   fi
 
-  if  ! grep -q -w "session.cookie_httponly = On"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.0/apache2/php.ini
+  if  ! grep -q -w "session.cookie_httponly = On"  /etc/php/7.4/apache2/php.ini ;then
+    sed -i s/"session.cookie_httponly ="/"session.cookie_httponly = On"/g /etc/php/7.4/apache2/php.ini
   fi
 
-  if  ! grep -q -w "session.cookie_lifetime = 14400"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i s/"session.cookie_lifetime = 0"/"session.cookie_lifetime = 14400"/g /etc/php/7.0/apache2/php.ini
+  if  ! grep -q -w "session.cookie_lifetime = 14400"  /etc/php/7.4/apache2/php.ini ;then
+    sed -i s/"session.cookie_lifetime = 0"/"session.cookie_lifetime = 14400"/g /etc/php/7.4/apache2/php.ini
   fi
 
-  if  ! grep -q -w "session.hash_function = 0"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i s/"session.hash_function = 0"/"session.hash_function = 1"/g /etc/php/7.0/apache2/php.ini
+  if  ! grep -q -w "session.hash_function = 0"  /etc/php/7.4/apache2/php.ini ;then
+    sed -i s/"session.hash_function = 0"/"session.hash_function = 1"/g /etc/php/7.4/apache2/php.ini
   fi
 
-  if  ! grep -q -w "allow_webdav_methods = Off"  /etc/php/7.0/apache2/php.ini ;then
-    sed -i "/^doc_root*/a allow_webdav_methods = Off" /etc/php/7.0/apache2/php.ini
+  if  ! grep -q -w "allow_webdav_methods = Off"  /etc/php/7.4/apache2/php.ini ;then
+    sed -i "/^doc_root*/a allow_webdav_methods = Off" /etc/php/7.4/apache2/php.ini
   fi
 
   if  ! grep -q "\-I"  /etc/memcached.conf ;then
-	echo  "-I 10m" >>/etc/memcached.conf
+        echo  "-I 10m" >>/etc/memcached.conf
   fi
 
 
@@ -939,7 +938,7 @@ printf "%s:%s:%s\n" "$phppgadmin_user" "$phppgadmin_realm" "$digest_phppgadmin" 
 #+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+##+#+#+#+#+#+#+#
 echo -e "\n Installing needed Debian packages for Django \n" | tee -a $installation_log
 apt-get update | tee -a $installation_log
-apt-get install -y apache2 apache2-dev python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip mysql-utilities zlib1g-dev libjpeg-dev libfreetype6-dev python-dev | tee -a $installation_log
+apt-get install -y apache2 apache2-dev python-dev-is-python3 python3 python3-dev git python3-pip virtualenv libapache2-mod-wsgi-py3 composer zip zlib1g-dev libjpeg-dev libfreetype6-dev | tee -a $installation_log
 echo -e "\n ${green}Successfully installed Debian packages for Django! ${reset}\n" | tee -a $installation_log
 cd ${installation_folder}
 
@@ -973,18 +972,18 @@ sed -i s/"        'NAME':'mapbender',"/"        'NAME':'$mapbender_database_name
 determineEmailSettings
 
 # enable php_serialize
-if ! grep -q "php_serialize"  /etc/php/7.0/apache2/php.ini;then
-	sed -i s/"session.serialize_handler = php"/"session.serialize_handler = php_serialize"/g /etc/php/7.0/apache2/php.ini
+if ! grep -q "php_serialize"  /etc/php/7.4/apache2/php.ini;then
+        sed -i s/"session.serialize_handler = php"/"session.serialize_handler = php_serialize"/g /etc/php/7.4/apache2/php.ini
 fi
 
 # activate memcached
-sed -i s/"session.save_handler = files"/"session.save_handler = memcached"/g /etc/php/7.0/apache2/php.ini
-sed -i s"/;     session.save_path = \"N;\/path\""/"session.save_path = \"127.0.0.1:11211\""/g /etc/php/7.0/apache2/php.ini
+sed -i s/"session.save_handler = files"/"session.save_handler = memcached"/g /etc/php/7.4/apache2/php.ini
+sed -i s"/;     session.save_path = \"N;\/path\""/"session.save_path = \"127.0.0.1:11211\""/g /etc/php/7.4/apache2/php.ini
 
 cd ${installation_folder}GeoPortal.rlp/
 echo -e "\n Creating Virtualenv in ${installation_folder}env. \n"
 # create and activate virtualenv
-virtualenv -ppython3 ${installation_folder}env | tee -a $installation_log
+virtualenv -ppython3.9 ${installation_folder}env | tee -a $installation_log
 
 if [ $? -eq 0 ];then
   echo -e "\n ${green} Successfully created virtualenv in ${installation_folder}env! ${reset}\n" | tee -a $installation_log
@@ -1016,20 +1015,16 @@ python manage.py loaddata useroperations/fixtures/navigation.json | tee -a $inst
 echo -e "\n ${green}Successfully configured Django!${reset} \n" | tee -a $installation_log
 
 # mediawiki
-# repo for backports
-if [ ! -f "/etc/apt/sources.list.d/backports.list"  ]; then
-	echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list.d/backports.list
-fi
+
 echo -e "\n Installing Mediawiki! \n" | tee -a $installation_log
-apt-get update | tee -a $installation_log
-apt-get install -y -t stretch-backports mediawiki | tee -a $installation_log
+apt-get install -y mediawiki | tee -a $installation_log
 echo -e "\n ${green}Successfully installed Mediawiki${reset} ! \n" | tee -a $installation_log
 #mysql_secure_installation
 
 echo -e "\n Configuring Mysql! \n" | tee -a $installation_log
-mysql -uroot -e "UPDATE mysql.user SET Password=PASSWORD('$mysql_root_pw') WHERE User='root';"
-mysql -uroot -e "update mysql.user set plugin='' where user='root';"
-mysql -uroot -e "flush privileges;"
+
+mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$mysql_root_pw';"
+mysql -uroot -p$mysql_root_pw -e "flush privileges;"
 
 mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='';"
 mysql -uroot -p$mysql_root_pw -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
@@ -1043,34 +1038,8 @@ mysql -uroot -p$mysql_root_pw Geoportal < ${installation_folder}GeoPortal.rlp/re
 
 echo -e "\n ${green}Successfully configured Mysql! ${reset}\n" | tee -a $installation_log
 
-echo -e "\n Downloading MediaWikiLanguageExtensionBundle! \n" | tee -a $installation_log
-cd /tmp/
-wget https://translatewiki.net/mleb/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2 | tee -a $installation_log
-if [ $? -eq 0 ];then
-  echo -e "\n ${green}Successfully downloaded MediaWikiLanguageExtensionBundle! ${reset}\n" | tee -a $installation_log
-else
-  echo -e "\n ${red}Failed to Download MediawikiLanguageExtensionBundle! Check connection or proxy!${reset}\n" | tee -a $installation_log
-  exit
-fi
-tar -kxjf MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
-rm /usr/share/mediawiki/extensions/LocalisationUpdate
-cp -a /tmp/extensions/* /usr/share/mediawiki/extensions
-rm -r /tmp/extensions
-rm /tmp/MediaWikiLanguageExtensionBundle-2019.01.tar.bz2
-
 cp -a ${installation_folder}GeoPortal.rlp/resources/systemconfigs/LocalSettings.php /etc/mediawiki/LocalSettings.php
 cp -a ${installation_folder}GeoPortal.rlp/resources/scripts/mediawiki_css/* /usr/share/mediawiki/skins/
-
-echo -e "\n Configuring Composer for SemanticMediaWiki extension! \n" | tee -a $installation_log
-cd /usr/share/mediawiki
-useradd composer
-mkdir -p /usr/share/mediawiki/extensions/SemanticMediaWiki/
-touch /usr/share/mediawiki/composer.json
-chown composer /usr/share/mediawiki/extensions/SemanticMediaWiki/
-chown composer /usr/share/mediawiki/composer.json
-chown composer /usr/share/mediawiki/
-chown -R composer /usr/share/mediawiki/vendor/
-su composer -c "composer require mediawiki/semantic-media-wiki "~2.5" --update-no-dev" | tee -a $installation_log
 
 echo -e "\n ${green}Successfully configured composer!${reset} \n" | tee -a $installation_log
 
@@ -1080,9 +1049,8 @@ sed -i s/"\$wgEmergencyContact = \"apache@192.168.56.222\";"/"\$wgEmergencyConta
 sed -i s/"\$wgPasswordSender = \"apache@192.168.56.222\";"/"\$wgPasswordSender = \"apache@$hostname\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgDBuser = \"geowiki\";"/"\$wgDBuser = \"$mysql_user\";"/g /etc/mediawiki/LocalSettings.php
 sed -i s/"\$wgDBpassword = \"root\";"/"\$wgDBpassword = \"$mysql_user_pw\";"/g /etc/mediawiki/LocalSettings.php
-sed -i s/"enableSemantics( '192.168.56.222' );"/"enableSemantics( '$hostname' );"/g /etc/mediawiki/LocalSettings.php
 if ! grep -q "\$wgRawHtml ="  /etc/mediawiki/LocalSettings.php;then
-	echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
+        echo "\$wgRawHtml = true;" >> /etc/mediawiki/LocalSettings.php
 fi
 
 php maintenance/update.php --quiet --skip-external-dependencies | tee -a $installation_log

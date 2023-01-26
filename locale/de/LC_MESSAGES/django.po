@@ -22,6 +22,12 @@ msgstr ""
 msgid "Modern"
 msgstr ""
 
+msgid "Scroll to top"
+msgstr "Zum Seitenanfang"
+
+msgid "Scroll to bottom"
+msgstr "Zum Seitenanende"
+
 #: Geoportal/geoportalObjects.py:67
 msgid "Klassik"
 msgstr ""
@@ -1660,8 +1666,8 @@ msgstr ""
 #: useroperations/views.py:967
 msgid "Feedback from "
 msgstr "Feedback Formular"
-  
-  
+
+
 #: searchCatalogue/templates/search_result_list_entry.html:57
 #: searchCatalogue/templates/search_result_list_entry.html:80
 #: searchCatalogue/templates/search_result_list_entry.html:102
@@ -1672,6 +1678,12 @@ msgstr "Link zur Karte wurde in Zwischenablage kopiert"
 #: useroperations/templates/base.html:222
 msgid "Accessibility"
 msgstr "Erklärung zur Barrierefreiheit"
+
+msgid "Spatial filter activated!"
+msgstr "Räumlicher Filter aktiviert!"
+
+msgid "What is this?"
+msgstr "Was ist das?"
 
 #~ msgid "The letter W, as used for wikipedia"
 #~ msgstr "Der Buchstabe W, bekannt im Zusammenhang mit Wikipedia"

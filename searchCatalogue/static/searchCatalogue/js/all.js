@@ -1,5 +1,7 @@
 'use strict';
 
+const MS_UNTIL_AUTOCOMPLETE_DIV_HIDES = 2000;
+
 var Storage = function() {
 
 };
@@ -351,6 +353,10 @@ var Autocomplete = function(search) {
             document.getElementById("geoportal-empty-search-button").style.display = 'none';
             };
         });
+	_input.on('click', function(e) {
+            self.keyUp(e.keyCode);
+        });    
+	
     };
 
     this.hide = function() {
@@ -574,11 +580,11 @@ function startAjaxMapviewerCall(value, mobile){
             if(data["mapviewer_params"] != "" && data["url"] == ""){
             // internal mapviewer call
                 changeMapviewerIframeSrc(data["mapviewer_params"]);
-                window.scrollTo({
-                    top:150,
-                    left:0,
-                    behavior:'smooth'
-                });
+                //window.scrollTo({
+                //    top:150,
+                //    left:0,
+                //    behavior:'smooth'
+                //});
 
                 var params = decodeURIComponent(data["mapviewer_params"]);
                 var wms = params.match(/LAYER\[id\]=\d+/);
@@ -640,6 +646,10 @@ $(document).ready(function() {
           setTimeout(resizeSidebar, 250);
         });
         observer.observe(target, config);
+    }
+
+    if ($("#spatial-checkbox").is(":checked")){
+        document.getElementById("spatial-search-text").classList.toggle('visible');
     }
 
 
@@ -848,7 +858,24 @@ $(document).ready(function() {
             $autocompleteSelect.removeClass('active');
         }
     });
+	
+    $(".-js-simple-search-autocomplete").mouseenter(function () {
+        $(".-js-simple-search-autocomplete").stop().fadeTo('fast', 1).show()
+    });
 
+    $(".middle-header-top").mouseleave(function () {
+        if($('.-js-simple-search-autocomplete').is(':hover') === false)
+        {
+            $(".-js-simple-search-autocomplete").fadeOut(MS_UNTIL_AUTOCOMPLETE_DIV_HIDES);
+        }
+    });
+	
+    $(document).on("change", "#spatial-checkbox", function(){
+        document.getElementById("spatial-search-text").classList.toggle('visible');
+
+    });
+	
+	
     /**
      *  Hide download options for search results
      */

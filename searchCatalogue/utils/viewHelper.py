@@ -460,7 +460,11 @@ def validate_geographic_coordinate_bounding_box_values(coordinates: list):
 
 
 def __handle_extent_graphics_for_layers_recursive(child_layers: dict):
-    """ Walk recursively through all sublayers and generates the urls for extent graphics
+
+    """ !!!THIS IS NOT USED ANYMORE AS ITS NOT WORKING AS EXPECTED!!!
+        !!! New function is called __handle_extent_graphics_for_layers !!!
+
+    Walk recursively through all sublayers and generates the urls for extent graphics
 
     Args:
         child_layers: The sublayers of an element
@@ -480,6 +484,31 @@ def __handle_extent_graphics_for_layers_recursive(child_layers: dict):
         else:
             a.append(__handle_extent_graphics_for_layers_recursive(child_layer.get("layer")))
     return a
+
+def __handle_extent_graphics_for_layers(child_layers: dict):
+    """ generates the extent urls for sublayers
+
+    Args:
+        child_layers: The sublayers of an element
+    Returns:
+        Nothing
+    """
+
+    for child_layer in child_layers:
+        if child_layer.get("srv", None) is not None:
+            # this is a dataset child, we need to handle this differently
+            child_layer = child_layer["srv"]
+
+        child_layer["extent_url"] = __gen_single_extent_graphic_url(child_layer)
+
+        try:
+            layer_list_len=len(child_layer.get("layer"))
+            for x in range(layer_list_len):
+                child_layer.get("layer")[x]["extent_url"] = __gen_single_extent_graphic_url(child_layer)
+        except:
+            continue
+
+    return None
 
 def gen_extent_graphic_url(search_results):
     """ Generates the url which leads to the web generated map graphics for each search result
@@ -521,7 +550,7 @@ def gen_extent_graphic_url(search_results):
                 layers = srv.get("ftype", None)
 
             if layers is not None:
-                layers = __handle_extent_graphics_for_layers_recursive(layers)
+                layers = __handle_extent_graphics_for_layers(layers)
     return search_results
 
 
