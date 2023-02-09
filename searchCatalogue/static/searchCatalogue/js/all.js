@@ -1138,7 +1138,7 @@ $(document).ready(function() {
                 'language': value
             },
             type: 'post',
-            dataType: 'json',
+            dataType: 'html',
             success: function(data) {
                 location.reload();
             },
