@@ -1147,10 +1147,10 @@ $(document).ready(function() {
                 if(textStatus === "timeout"){
                     alert("The catalogue provider didn't respond. Please try again later.");
                 }
-		console.log(value);
-                console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+		//console.log(value);
+                //console.log(jqXHR);
+                //console.log(textStatus);
+                //console.log(errorThrown);
                 /*else{
                     alert(errorThrown);
                 }
