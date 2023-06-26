@@ -31,7 +31,7 @@ class RegistrationForm(forms.Form):
         captcha = CaptchaField(label=_("I'm not a robot"))
 
 class LoginForm(forms.Form):
-    name = forms.CharField(max_length=100, label=_("Username"), widget=forms.TextInput(attrs={'title':_("Please enter your username.")}))
+    name = forms.CharField(max_length=100, label=_("Username"), widget=forms.TextInput(attrs={'autofocus': True}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'title': _("Please enter your password.")}), label=_("Password"))
 
 class ChangeProfileForm(forms.Form):
