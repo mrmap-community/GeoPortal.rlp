@@ -110,7 +110,7 @@ def download(request):
     permission = json.loads(permission.text)
 
     #print(permission)
-    if secured_service_hash != "":
+    if secured_service_hash != "" and secured_service_hash != None:
         if permission["result"] != True:
             return HttpResponse('User is not allowed to access this ressource',status=403)
         else:
