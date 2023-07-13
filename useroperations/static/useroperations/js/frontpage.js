@@ -648,7 +648,26 @@ $(document).ready(function(){
     // show and auto hide messages
     $(".messages-container").delay(500).slideToggle("medium");
     $(".messages-container").delay(5000).slideToggle("medium");
+    rewrite_article_urls()
 });
+
+function rewrite_article_urls() {
+    var currentURL = window.location.pathname,
+    ariclePattern = new RegExp('^/article/.*');
+
+    if (ariclePattern.test(window.location.pathname)) {
+        var anchors = document.getElementsByTagName('a');
+        for (var i = 0; i < anchors.length; i++) {
+            link=anchors[i].href;
+            console.log(link);
+            if (link.includes("mediawiki/index.php") && !link.includes(".pdf")){
+                var articleName = link.substr(link.lastIndexOf('/') + 1);
+                //remove port for production
+                anchors[i].href = location.protocol + "//" + location.hostname + "/article/" + articleName
+            } 
+        }
+    }
+} 
 
 $(document).on("click", "#geoportal-empty-search-button", function(){
     document.getElementById("geoportal-search-field").value = '';
