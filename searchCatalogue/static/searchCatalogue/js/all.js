@@ -1549,7 +1549,7 @@ $(document).ready(function() {
         var wikiKeyword = elem.attr("data-target");
         // start call for mediawiki content
         $.ajax({
-            url: "/article/" + wikiKeyword,
+            url: "/article/" + wikiKeyword.replace(/ /g, "_"),
             headers: {
                 "X-CSRFToken": getCookie("csrftoken")
             },
