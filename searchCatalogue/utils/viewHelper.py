@@ -867,8 +867,8 @@ def prepare_info_search_results(search_results, list_all: bool, lang: str):
     if list_all:
         ret_list["all"] = []
         for result in search_results.get("query", {}).get("allpages", []):
-            if "/" + lang in result.get("title"):
-                ret_list["all"].append(result)
+            #if "/" + lang in result.get("title"):
+            ret_list["all"].append(result)
     else:
         for search_result_key, search_result_val in search_results.items():
             ret_list[search_result_key] = []
@@ -883,10 +883,10 @@ def prepare_info_search_results(search_results, list_all: bool, lang: str):
                     for hit in res:
                         if ret_list.get(search_result_key, None) is None:
                             ret_list[search_result_key] = []
-                        if "/" + lang in hit.get("title", "") and hit not in ret_list[search_result_key]:
+                        #if "/" + lang in hit.get("title", "") and hit not in ret_list[search_result_key]:
                             # This way we try to fetch only translated pages with '.../de' or '.../en'
                             # Since the mediawiki API is ***** we have no direct way to fetch only translated ones
-                            ret_list[search_result_key].append(hit)
+                        ret_list[search_result_key].append(hit)
 
     return ret_list
 
