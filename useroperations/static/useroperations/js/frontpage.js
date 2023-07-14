@@ -677,6 +677,7 @@ const umlautMap = {
     '\u00e4': 'ae',
     '\u00f6': 'oe',
     '\u00df': 'ss',
+    ':': '_',
   }
   
 function replaceUmlaute(str) {
