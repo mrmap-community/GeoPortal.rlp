@@ -660,7 +660,7 @@ function rewrite_article_urls() {
         for (var i = 0; i < anchors.length; i++) {
             link=anchors[i].href;
             //console.log(link);
-            if (link.includes("mediawiki/index.php") && !link.includes(".pdf") ){
+            if (link.includes("mediawiki/index.php") && !link.includes(".pdf") && !link.includes(".odt") ){
                 var articleName = link.substr(link.lastIndexOf('/') + 1);
                 var decoded = decodeURIComponent(articleName)
                 var  wOutUmlaut = replaceUmlaute(decoded)
