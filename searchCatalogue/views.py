@@ -137,7 +137,7 @@ def auto_completion(request: HttpRequest):
     search_text = search_text.replace("ä", "ae")
     search_text = search_text.replace("Ä", "Ae")
     search_text = search_text.replace("ü", "ue")
-    search_text = search_text.replace("U", "Ue")
+    search_text = search_text.replace("Ü", "Ue")
     search_text = search_text.replace("ß", "ss")
 
     auto_completer = AutoCompleter(search_text, max_results)
