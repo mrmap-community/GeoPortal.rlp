@@ -34,8 +34,14 @@ def __set_tag(dom, tag, attribute, prefix):
     for elem in _list:
         attrib = elem.get(attribute)
         if tag == 'a':
-            # check if the page we want to go to is an internal or external page
-            title = elem.get("title", "").replace(" ", "_")
+            # Parse the href attribute as a URL
+            url = urlparse(elem.get('href', ''))
+            # Extract the query parameters from the URL
+            query_params = parse_qs(url.query)
+            # Get the "title" query parameter
+            title = query_params.get('title', [''])[0].replace(' ', '_')
+            #old  check if the page we want to go to is an internal or external page - old
+            # title = elem.get("title", "").replace(" ", "_")
             if searcher.is_article_internal(title):
                 attrib = "/article/" + title
         if protocol not in attrib:
