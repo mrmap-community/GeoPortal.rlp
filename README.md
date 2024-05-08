@@ -21,7 +21,7 @@ The development will be done using recent debian os with postgis as rdbms.
 
 Existing mapbender2 installations with a great amount of resources and users:
 
-- [GeoPortal Rhineland-Palatinate](http://www.geoportal.rlp.de) - 24.000 user and 17.700 layer
+- [GeoPortal Rhineland-Palatinate](http://www.geoportal.rlp.de) - 30.000 user and 24.000 layer
 - [GeoPortal Hesse](http://www.geoportal.hessen.de)
 - [GeoPortal Saarland](http://www.geoportal.saarland.de)
 
