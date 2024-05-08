@@ -11,7 +11,7 @@
 
 A complete SDI-Suite for the management of OWS (WMS / WFS, CSW), metadata (iso19139), users, organizations, and licences. It comes with OWS-security-proxy, CKAN-Interface, map viewers, WMC and KML handling and the possbility to generate persistent URIs for all resources.
 
-This repo will be used to develop a new FOSS SDI framework based on django. The blueprint for this framework is the former OSGEO project mapbender2. All over the world, there are many older mapbender installations online. The code of mapbender2 is hosted at https://trac.osgeo.org/mapbender/browser/trunk and will be maintained till all relevant modules are re-implemented with django. The old documentation is available at https://documents.geoportal.rlp.de/mediawiki/ .
+This repo will be used to develop a new FOSS SDI framework based on django. The blueprint for this framework is the former OSGEO project mapbender2. All over the world, there are many older mapbender installations online. The code of mapbender2 is hosted at https://github.com/mrmap-community/Mapbender2.8 (old code: https://github.com/mrmap-community/Mapbender2.8) and will be maintained till all relevant modules are re-implemented with django. The old documentation is available at https://documents.geoportal.rlp.de/mediawiki/ .
 
 Serverside catalogue interface documentation: https://documents.geoportal.rlp.de/mediawiki/index.php/SearchInterface
 
