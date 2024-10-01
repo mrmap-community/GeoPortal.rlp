@@ -1,0 +1,15 @@
+# docker compose file for development useage
+services:
+
+  # Extend the existing postgis container with an accessible port for development purposes
+  #postgis:
+   # ports:
+   #   - 5555:5432
+
+  geoportal:
+
+    container_name: geoportal-dev
+    # env_file:
+    #  - docker/geoportal/.mrmap.env
+    #  - docker/geoportal/.mrmap.dev.env
+    command: /bin/sh -c "python manage.py runserver 0.0.0.0:8007"
