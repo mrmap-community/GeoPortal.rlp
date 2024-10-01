@@ -1,0 +1,40 @@
+# docker compose file for productive useage
+services:
+  postgis:
+    image: postgis/postgis:15-3.3-alpine
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql/data
+    networks:
+      - internal
+    env_file:
+      - ./docker/postgis/.db.env
+
+  geoportal:
+    build:
+      context: ./
+      dockerfile: ./docker/geoportal/alpine.Dockerfile
+    hostname: "geoportal"
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/geoportal
+      - type: bind
+        source: ./resources/customconfigs/de-rp/data/conf
+        target: /data/mapbender/conf
+    networks:
+      - internal
+    env_file:
+      - docker/geoportal/.geoportal.env
+    depends_on:
+      - postgis
+
+    ports:
+      - "0.0.0.0:8007:8007"
+
+volumes:
+  db-data: null
+
+networks:
+  internal: null

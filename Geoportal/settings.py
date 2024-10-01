@@ -158,8 +158,8 @@ DATABASES = {
         'NAME':'mapbender',
         'USER':'mapbenderdbuser',
         'PASSWORD':'mapbenderdbpassword',
-        'HOST':'127.0.0.1',
-        'PORT':''
+        'HOST': os.environ.get('SQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('SQL_PORT', '5432')
     }
 }
 
