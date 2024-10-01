@@ -11,7 +11,7 @@ import smtplib
 import time
 
 from django.core.mail import send_mail
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
@@ -127,7 +127,7 @@ def auto_completion(request: HttpRequest):
         content = request.POST.dict()
     else:
         # nothing else is supported
-        return GeoportalJsonResponse().get_response()
+        return GeoportalJsonResponse()
 
     search_text = content["terms"]
 
@@ -167,7 +167,7 @@ def auto_completion(request: HttpRequest):
     }
     html = render_to_string("autocompleter/suggestions.html", context=params, request=request)
 
-    return GeoportalJsonResponse(html=html).get_response()
+    return GeoportalJsonResponse(html=html)
 
 
 def resolve_coupled_resources(request: HttpRequest):
@@ -188,7 +188,7 @@ def resolve_coupled_resources(request: HttpRequest):
         "type": "service_DE",
     }
     html = render_to_string(template, params, request)
-    return GeoportalJsonResponse(html=html, data=params).get_response()
+    return GeoportalJsonResponse(html=html, data=params)
 
 
 @check_browser
@@ -204,7 +204,7 @@ def get_data(request: HttpRequest):
         Redirects otherwise to working functions.
     """
     if not request.is_ajax():
-        return GeoportalJsonResponse().get_response()
+        return GeoportalJsonResponse()
 
     post_params = request.POST.dict()
     # Check if spatial search is required
@@ -216,7 +216,7 @@ def get_data(request: HttpRequest):
             return get_spatial_results(request)
 
     # Check which source is requested
-    source = post_params.get("source", None)
+    source = post_params.get("source", "de")
     if source is not None:
         if source == "primary":
             # call primary search method
@@ -231,9 +231,9 @@ def get_data(request: HttpRequest):
             # call info search method
             return get_data_info(request)
         else:
-            return GeoportalJsonResponse().get_response()
+            return GeoportalJsonResponse()
     else:
-        return GeoportalJsonResponse().get_response()
+        return GeoportalJsonResponse()
 
 
 @check_browser
@@ -257,7 +257,7 @@ def get_spatial_results(request: HttpRequest):
 
     view_content = render_to_string(template, results)
 
-    return GeoportalJsonResponse(html=view_content).get_response()
+    return GeoportalJsonResponse(html=view_content)
 
 
 @check_browser
@@ -270,6 +270,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     Returns:
         JsonResponse: Contains the content for the ajax call
     """
+    print("halllooaaa")
     post_params = request.POST.dict()
     template_name = app_name + "search_results.html"
     host = HOSTNAME
@@ -374,7 +375,7 @@ def get_data_other(request: HttpRequest, catalogue_id):
     view_content = render_to_string(template_name, results)
     print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
-    return GeoportalJsonResponse(html=view_content, params={}).get_response()
+    return GeoportalJsonResponse(html=view_content, params={})
 
 
 @check_browser
@@ -562,7 +563,7 @@ def get_data_primary(request: HttpRequest):
     view_content = render_to_string(template_name, results)
     print_debug(EXEC_TIME_PRINT % ("rendering view", time.time() - start_time))
 
-    return GeoportalJsonResponse(html=view_content, params={}).get_response()
+    return GeoportalJsonResponse(html=view_content, params={})
 
 
 @check_browser
@@ -610,7 +611,7 @@ def get_data_info(request: HttpRequest):
     # since we need to return plain text to the ajax handler, we need to use render_to_string
     view_content = render_to_string(template_name, params)
 
-    return GeoportalJsonResponse(html=view_content, params={"directly_open": True}).get_response()
+    return GeoportalJsonResponse(html=view_content, params={"directly_open": True})
 
 
 @check_browser
@@ -647,7 +648,7 @@ def get_permission_email_form(request: HttpRequest):
     }
     html = render_to_string(template_name=template, context=params, request=request)
 
-    return GeoportalJsonResponse(html=html).get_response()
+    return GeoportalJsonResponse(html=html)
 
 
 @check_browser
@@ -677,7 +678,7 @@ def send_permission_email(request: HttpRequest):
         logger.error("Could not send mail: " + subject + ", to " + address)
         success = False
 
-    return GeoportalJsonResponse(success=success).get_response()
+    return GeoportalJsonResponse(success=success)
 
 
 @check_browser
@@ -699,7 +700,7 @@ def terms_of_use(request: HttpRequest):
         resource = "wms"
     if resource == "wmc" or resource == "other-catalogue":
         # wmc has no disclaimer
-        return GeoportalJsonResponse(html=html).get_response()
+        return GeoportalJsonResponse(html=html)
 
     html = viewHelper.generic_srv_disclaimer(resource=resource, service_id=id, language=lang_code)
 
@@ -711,7 +712,7 @@ def terms_of_use(request: HttpRequest):
         }
 
         html = render_to_string(template_name=template, context=params)
-    return GeoportalJsonResponse(html=html).get_response()
+    return GeoportalJsonResponse(html=html)
 
 
 #ToDo: Check behaviour -> delete after a while

@@ -135,7 +135,7 @@ def index_view(request, wiki_keyword=""):
     if get_params.get("info_search", "") == 'true':
         category = get_params.get("category", "")
         output = useroperations_helper.get_wiki_body_content(wiki_keyword, lang, category)
-        return GeoportalJsonResponse(html=output).get_response()
+        return GeoportalJsonResponse(html=output)
     else:
         return render(request, template, geoportal_context.get_context())
 
@@ -822,7 +822,7 @@ def map_viewer_view(request):
     #        mobile_viewer_url += "&wmc_id={}".format(wmc_id)
     #    if wms_id != "":
     #        mobile_viewer_url += "&wms_id={}".format(wms_id)
-    #    return GeoportalJsonResponse(url=mobile_viewer_url).get_response()
+    #    return GeoportalJsonResponse(url=mobile_viewer_url)
 
     mapviewer_params_dict = {
         "LAYER[id]": request_get_params.get("LAYER[id]", ""),
@@ -855,11 +855,11 @@ def map_viewer_view(request):
 
     elif is_external_search:
         # for an external ajax call we need to deliver a url which can be used to open a new tab which leads to the geoportal
-        return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTNAME, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam")).get_response()
+        return GeoportalJsonResponse(url=HTTP_OR_SSL + HOSTNAME, mapviewer_params=gui_id + "&" + request_get_params_dict.get("searchResultParam"))
 
     else:
         # for an internal search result selection, where the dynamic map viewer overlay shall be used
-        return GeoportalJsonResponse(mapviewer_params=mapviewer_params).get_response()
+        return GeoportalJsonResponse(mapviewer_params=mapviewer_params)
 
 
 @check_browser

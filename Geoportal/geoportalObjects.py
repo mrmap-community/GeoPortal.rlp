@@ -17,7 +17,7 @@ from useroperations.conf import COOKIE_VALUE, GEOPORTAL_IDENTIFIER, LOGO_GEOPORT
     LOGO_COUNTRY_LINK_EN
 
 
-class GeoportalJsonResponse:
+class GeoportalJsonResponse(JsonResponse):
     """ Generic JsonResponse wrapper for Geoportal
 
     Use for AJAX responses.
@@ -37,9 +37,7 @@ class GeoportalJsonResponse:
         # add optional parameters
         for arg_key, arg_val in kwargs.items():
             self.response[arg_key] = arg_val
-
-    def get_response(self):
-        return JsonResponse(self.response)
+        super().__init__(self.response)
 
 
 class GeoportalContext:
