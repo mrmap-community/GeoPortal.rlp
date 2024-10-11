@@ -6,14 +6,9 @@ Contact: michel.peltriaux@vermkv.rlp.de
 Created on: 22.01.19
 
 """
-import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
 from Geoportal.settings import INTERNAL_SSL
+from Geoportal.utils.request_handler import CustomSession
 from searchCatalogue.utils.searcher import Searcher
-
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-
 from searchCatalogue.utils.url_conf import *
 
 
@@ -21,6 +16,7 @@ class AutoCompleter:
     """ The class instance for the auto completion on the address bar.
 
     """
+
     def __init__(self, search_text, max_results):
         """ Constructor
 
@@ -31,6 +27,7 @@ class AutoCompleter:
         # Define search arguments
         self.search_text = search_text
         self.max_results = max_results
+        self.session = CustomSession()
 
     def set_search_text(self, search_text):
         """ Setter for search text
@@ -65,14 +62,14 @@ class AutoCompleter:
             "searchText": self.search_text,
             "maxResults": self.max_results,
         }
-        response = requests.get(url, params, verify=INTERNAL_SSL)
-        results = {
-            "results": 0,
-            "resultList": []
-        }
-        if len(response.content) > 0:
-            results = response.json()
-        return results
+        response = self.session.get(
+            url=url, params=params, verify=INTERNAL_SSL)
+        if not response:
+            response = {
+                "results": 0,
+                "resultList": []
+            }
+        return response
 
     def get_location_suggestions(self):
         """ Returns location suggestions that match the search texts
@@ -81,5 +78,6 @@ class AutoCompleter:
              dict: Contains suggestions
         """
         searcher = Searcher()
-        locations = searcher.search_locations([self.search_text], max_results=self.max_results, srs=25832)
+        locations = searcher.search_locations(
+            [self.search_text], max_results=self.max_results, srs=25832)
         return locations

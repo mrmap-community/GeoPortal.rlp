@@ -11,19 +11,13 @@ import random
 import threading
 from collections import OrderedDict
 from copy import copy
-from json import JSONDecodeError
-
-import requests
-from requests.exceptions import ConnectionError
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from Geoportal.settings import (INTERNAL_PAGES_CATEGORY, INTERNAL_SSL,
                                 PRIMARY_CATALOGUE, SEARCH_API_PROTOCOL)
 from Geoportal.utils import utils
+from Geoportal.utils.request_handler import CustomSession
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
-
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Searcher:
@@ -87,6 +81,8 @@ class Searcher:
         md_5.update(microseconds)
         self.search_id = md_5.hexdigest()
 
+        self.session = CustomSession()
+
     def _prepare_selected_facets(self):
         """ Find the ids of the selected facets in all facets
 
@@ -116,17 +112,10 @@ class Searcher:
         Returns:
             nothing
         """
-        result[resource] = self.get_response(url, params)
-
-    def get_response(self, uri, params={}, verify=INTERNAL_SSL):
-        """ConnectionError and JSONDecodeError safe request handling"""
-        try:
-            response = requests.get(uri, params, verify=verify)
-            if response.status_code == 200:
-                response = response.json()
-        except (ConnectionError, JSONDecodeError):
-            response = {}
-        return response
+        response = self.session.get(
+            url=url, params=params, verify=INTERNAL_SSL)
+        if response:
+            result[resource] = response
 
     def search_categories_list(self, lang):
         """ Get a list of all categories/facets from the database using a GET request
@@ -134,7 +123,7 @@ class Searcher:
         Returns:
             Returns the categories which have been found during the search
         """
-        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_PRIMARY_SEARCH + URL_SEARCH_PRIMARY_SUFFIX
         params = {
             "outputFormat": self.output_format,
             "resultTarget": self.result_target,
@@ -146,9 +135,12 @@ class Searcher:
         }
         if self.host is not None:
             params["hostName"] = self.host
-        response = requests.get(url, params, verify=INTERNAL_SSL)
-        response = response.json()
-        categories = response["categories"]["searchMD"]["category"]
+        response = self.session.get(
+            url=url,
+            params=params,
+            verify=INTERNAL_SSL)
+        categories = response.get("categories", {}).get(
+            "searchMD", {}).get("category", [])
         return categories
 
     def search_all_organizations(self):
@@ -159,7 +151,7 @@ class Searcher:
         """
         # get overview of all organizations
         uri = URL_BASE_LOCALHOST + URL_GET_ORGANIZATIONS
-        return self.get_response(uri).get("organizations", {})
+        return self.session.get(url=uri).get("organizations", {})
 
     def search_topics(self, language: str, topic_type: str):
         """ Get a list of all topics that can be found in the database
@@ -182,7 +174,7 @@ class Searcher:
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
-        return self.get_response(uri, params).get("tagCloud", {})
+        return self.session.get(url=uri, params=params).get("tagCloud", {})
 
     def search_coupled_resource(self, md_link):
         """ Resolve coupled dataset/series resources for secondary catalogues
@@ -197,7 +189,7 @@ class Searcher:
             "getRecordByIdUrl": md_link,
             "hostName": self.host,
         }
-        return self.get_response(uri, params)
+        return self.session.get(url=uri, params=params)
 
     def search_primary_catalogue_data(self, user_id=None):
         """ Performs the search
@@ -207,7 +199,7 @@ class Searcher:
         Returns:
             dict: Contains the search results
         """
-        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_PRIMARY_SEARCH + URL_SEARCH_PRIMARY_SUFFIX
         self._prepare_selected_facets()
         params = {
             "searchText": self.keywords,
@@ -264,7 +256,7 @@ class Searcher:
         Returns:
             nothing
         """
-        response = self.get_response(url, params)
+        response = self.session.get(url=url, params=params)
         results[resource] = response or None
 
     def search_external_catalogue_data(self):
@@ -329,11 +321,9 @@ class Searcher:
             if self.host is not None:
                 params["hostName"] = self.host
 
-            response = requests.get(
-                url, params, proxies=PROXIES, verify=INTERNAL_SSL)
-
-            result = response.json()
-            result["keyword"] = search_text
+            result = self.session.get(
+                url=url, params=params, verify=INTERNAL_SSL)
+            result.update("keyword", search_text)
             ret_val.append(result)
 
         return ret_val
@@ -347,9 +337,10 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url=URL_SEARCH_INFO,
-                                params=params, verify=INTERNAL_SSL)
-        response = response.json()
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL)
+
         params["srsearch"] = params["srsearch"].replace("*", "")
         if results.get(params["srsearch"], None) is None:
             results[params["srsearch"]] = []
@@ -372,10 +363,11 @@ class Searcher:
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
-        response = requests.get(url=URL_SEARCH_INFO,
-                                params=params, verify=INTERNAL_SSL)
-        response = response.json()
-        response = response["query"]["pages"]
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL)
+
+        response = response.get("query", {}).get("pages", {})
         for resp_key, resp_val in response.items():
             return resp_val.get("categories", [])
 
@@ -435,12 +427,9 @@ class Searcher:
             "format": "json",
             "aplimit": 500,
         }
-        results = {}
-        response = requests.get(url=URL_SEARCH_INFO,
-                                params=params, verify=INTERNAL_SSL)
-        response = response.json()
-        results = response
-        return results
+        return self.session.get(url=URL_SEARCH_INFO,
+                                params=params,
+                                verify=INTERNAL_SSL)
 
     def get_info_pdf_files(self, keyword: str, results: dict):
         """ Searches for all given
@@ -458,9 +447,9 @@ class Searcher:
             "aiprop": "canonicaltitle|mime|url",
             "ailimit": 500,
         }
-        response = requests.get(url=URL_SEARCH_INFO,
-                                params=params, verify=INTERNAL_SSL)
-        response = response.json().get("query", {}).get("allimages", [])
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL).get("query", {}).get("allimages", [])
 
         # the mediawiki API does not provide a way to fetch directly files with a certain mimeType or even with a title match
         # therefore we need to iterate by hand

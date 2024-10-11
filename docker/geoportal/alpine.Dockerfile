@@ -24,7 +24,7 @@ COPY --from=compile-image /opt/venv /opt/venv
 RUN apk update \
     && apk add --no-cache libpq netcat-openbsd gettext libressl py3-psycopg \
     && rm -rf /var/cache/apk/*
-    
+
 # set work directory
 WORKDIR /opt/geoportal
 
