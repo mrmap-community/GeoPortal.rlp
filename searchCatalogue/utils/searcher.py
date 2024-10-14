@@ -257,7 +257,7 @@ class Searcher:
             nothing
         """
         response = self.session.get(url=url, params=params)
-        results[resource] = response or None
+        results[resource] = response or {}
 
     def search_external_catalogue_data(self):
         """ Main function for calling the german catalogue

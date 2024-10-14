@@ -32,6 +32,7 @@ WORKDIR /opt/geoportal
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV PATH="/opt/venv/bin:$PATH"
+ENV CONTAINER="1"
 
 
 ENTRYPOINT [ "/opt/geoportal/docker/geoportal/entrypoint.sh" ]
