@@ -21,21 +21,20 @@ import requests
 from django.utils.translation import gettext as _
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from Geoportal.utils.utils import execute_threads, write_gml_to_session, sha256
+from Geoportal.settings import (DE_SRC_IMG, EU_SRC_IMG,
+                                INTERNAL_PAGES_CATEGORY, INTERNAL_SSL,
+                                PRIMARY_SRC_IMG)
+from Geoportal.utils import utils
+from Geoportal.utils.utils import execute_threads, sha256, write_gml_to_session
+from searchCatalogue.settings import *
+from searchCatalogue.utils.searcher import URL_BASE_LOCALHOST, Searcher
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-from Geoportal.utils import utils
-from Geoportal.settings import INTERNAL_PAGES_CATEGORY, INTERNAL_SSL, PRIMARY_SRC_IMG, \
-    DE_SRC_IMG, EU_SRC_IMG
-from searchCatalogue.settings import *
+# SINGLE HELPER FUNCTIONS
 
 
-####    SINGLE HELPER FUNCTIONS
-from searchCatalogue.utils.searcher import Searcher, URL_BASE_LOCALHOST
-
-
-def get_source_catalogues(external_call: bool=False):
+def get_source_catalogues(external_call: bool = False):
     """ Returns a dict which holds all valid catalogue sources
 
     Args:
@@ -63,6 +62,7 @@ def get_source_catalogues(external_call: bool=False):
         }
     return sources
 
+
 def parse_extended_params(params: dict):
     """ Convert one long GET url parameter into a well formed dict.
 
@@ -74,7 +74,8 @@ def parse_extended_params(params: dict):
         dict: Contains the splitted extended search parameters
     """
     extended_search_params = {}
-    extended_search_params_raw = urllib.parse.unquote(params["extended"]).split("&")
+    extended_search_params_raw = urllib.parse.unquote(
+        params["extended"]).split("&")
     for entry in extended_search_params_raw:
         entry_arr = entry.split("=")
         if len(entry_arr) == 2:
@@ -106,7 +107,8 @@ def generate_page_list(max_page, current_page, max_displayed_pages):
     if max_page >= 0:
         # add the first page, it should always be there if we have at least one page
         final_list.append(1)
-        available_pages = range(current_page - max_displayed_pages, current_page + max_displayed_pages)
+        available_pages = range(
+            current_page - max_displayed_pages, current_page + max_displayed_pages)
         if 1 not in available_pages:
             final_list.append("...")
         for page in available_pages:
@@ -119,6 +121,7 @@ def generate_page_list(max_page, current_page, max_displayed_pages):
                 final_list.append("...")
             final_list.append(max_page)
     return final_list
+
 
 def calculate_pages_to_render_de(search_results, requested_page: int, requested_page_res: str):
     """ Returns a dict of page configurations for all requested resource types of the german catalogue
@@ -142,7 +145,8 @@ def calculate_pages_to_render_de(search_results, requested_page: int, requested_
         md = resource_val[resource_key]["md"]
         total_number_of_results = md["nresults"]
         results_per_page = md["rpp"]
-        max_page = int(math.ceil(int(total_number_of_results) / int(results_per_page)))
+        max_page = int(
+            math.ceil(int(total_number_of_results) / int(results_per_page)))
         max_displayed_pages = 3
         _page = -1
         if resource_key == requested_page_res:
@@ -159,6 +163,7 @@ def calculate_pages_to_render_de(search_results, requested_page: int, requested_
             result_pages["current_page"] = 1
         pages[resource_key] = result_pages
     return pages
+
 
 def calculate_pages_to_render(search_results, requested_page: int, requested_page_res: str):
     """ Returns a dict of page configurations for all requested resource types.
@@ -186,7 +191,8 @@ def calculate_pages_to_render(search_results, requested_page: int, requested_pag
             total_number_of_results = 0
             md["nresults"] = 0
         results_per_page = md["rpp"]
-        max_page = int(math.ceil(int(total_number_of_results) / int(results_per_page)))
+        max_page = int(
+            math.ceil(int(total_number_of_results) / int(results_per_page)))
         max_displayed_pages = 3
         _page = -1
         if result_key == requested_page_res:
@@ -204,6 +210,7 @@ def calculate_pages_to_render(search_results, requested_page: int, requested_pag
         pages[result_key] = result_pages
     return pages
 
+
 def set_children_data_wfs(search_results):
     """ Set the important top-level attributes to all children for all wfs results.
 
@@ -219,7 +226,8 @@ def set_children_data_wfs(search_results):
         return search_results
     for srv in search_results["wfs"]["wfs"]["wfs"]["srv"]:
         if srv is not dict:
-            return search_results   # ToDo: Change this workaround as soon as the bug related to this is removed
+            # ToDo: Change this workaround as soon as the bug related to this is removed
+            return search_results
         logo_url = srv["logoUrl"]
         resp_org = srv["respOrg"]
         data_date = srv["date"]
@@ -276,7 +284,9 @@ def gen_resource_arr(search_results: dict):
 
     return resources
 
-####    DOWNLOAD OPTIONS
+# DOWNLOAD OPTIONS
+
+
 def __group_download_options(download_options: dict):
     """
     Args:
@@ -294,9 +304,11 @@ def __group_download_options(download_options: dict):
         grouped_downloads["num"] = len(download_options_val["option"])
 
     for download_options_key, download_options_val in download_options.items():
-        grouped_downloads["options"]["resources"].append(download_options_val["option"][0].get("resourceId", None))
+        grouped_downloads["options"]["resources"].append(
+            download_options_val["option"][0].get("resourceId", None))
 
     return grouped_downloads
+
 
 def group_all_download_options(search_results):
     """ Sets all download Options in search_results to a grouped format, including the amount of available options
@@ -323,11 +335,14 @@ def group_all_download_options(search_results):
                     continue
             for layer in res_layer:
                 if layer["downloadOptions"] is not None:
-                    layer["downloadOptions"] = __group_download_options(layer["downloadOptions"])
+                    layer["downloadOptions"] = __group_download_options(
+                        layer["downloadOptions"])
     return search_results
 
-####    INSPIRE URL
-def __type_inspire_url(uuid, option:dict):
+# INSPIRE URL
+
+
+def __type_inspire_url(uuid, option: dict):
     """
 
     Args:
@@ -343,16 +358,21 @@ def __type_inspire_url(uuid, option:dict):
         # there could be option variables which are no dicts but only contain a digit -> no idea what this should be!
         return url
     # base_url = LOCAL_MACHINE + "/mapbender/plugins/mb_downloadFeedClient.php?url="
-    base_url = HTTP_OR_SSL + HOSTNAME + "/mapbender/plugins/mb_downloadFeedClient.php?url="
+    base_url = HTTP_OR_SSL + HOSTNAME + \
+        "/mapbender/plugins/mb_downloadFeedClient.php?url="
     if _type == "wmslayergetmap":
-	# url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
-        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        # url = base_url + urllib.parse.quote_plus(LOCAL_MACHINE + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" +
+                                                 uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wmslayerdataurl":
-        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
+        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" +
+                                                 uuid + "&type=SERVICE&generateFrom=wmslayer&layerid=" + option["resourceId"])
     if _type == "wfsrequest":
-        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
+        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" +
+                                                 uuid + "&type=SERVICE&generateFrom=wfs&wfsid=" + option["serviceId"])
     if _type == "downloadlink":
-        url = base_url + urllib.parse.quote_plus(HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
+        url = base_url + urllib.parse.quote_plus(
+            HTTP_OR_SSL + HOSTNAME + "/mapbender/php/mod_inspireDownloadFeed.php?id=" + uuid + "&type=SERVICE&generateFrom=metadata")
     return url
 
 
@@ -378,10 +398,12 @@ def gen_inspire_url(search_results):
                     continue
                 if isinstance(feeds, dict):
                     for feed_key, feed_val in feeds.items():
-                        feed_val["download_url"] = __type_inspire_url(result["uuid"], feed_val)
+                        feed_val["download_url"] = __type_inspire_url(
+                            result["uuid"], feed_val)
                 else:
                     for feed in feeds:
-                        feed["download_url"] = __type_inspire_url(result["uuid"], feed)
+                        feed["download_url"] = __type_inspire_url(
+                            result["uuid"], feed)
             elif resource == "wms":
                 layers = result.get("layer", None)
                 if layers is None:
@@ -394,11 +416,14 @@ def gen_inspire_url(search_results):
                             opt = download_options_val["option"][0]
                         except KeyError:
                             opt = None
-                        layer["download_url"] = __type_inspire_url(download_options_val["uuid"], opt)
+                        layer["download_url"] = __type_inspire_url(
+                            download_options_val["uuid"], opt)
         execute_threads(thread_list)
     return search_results
 
-####    EXTENT GRAPHICS
+# EXTENT GRAPHICS
+
+
 def __gen_single_extent_graphic_url(result: dict):
     """
     Args:
@@ -429,9 +454,14 @@ def __gen_single_extent_graphic_url(result: dict):
     area_bbox = list(map(str, area_bbox))
     bbox = list(map(str, bbox))
 
-    boundingBoxIsValid = validate_geographic_coordinate_bounding_box_values(area_bbox)
+    boundingBoxIsValid = validate_geographic_coordinate_bounding_box_values(
+        area_bbox)
     if boundingBoxIsValid:
-        url = EXTENT_SERVICE_URL + "VERSION=1.1.1&REQUEST=GetMap&SERVICE=WMS&LAYERS=" + EXTENT_SERVICE_LAYER + "&STYLES=&SRS=" + EXTENT_SERVICE_SRS + "&BBOX=" + area_bbox[0] + "," + area_bbox[1] + "," + area_bbox[2] + "," + area_bbox[3] + "&WIDTH=120&HEIGHT=120&FORMAT=image/png&BGCOLOR=0xffffff&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_inimage&minx=" + bbox[0] + "&miny=" + bbox[1] + "&maxx=" + bbox[2] + "&maxy=" + bbox[3]
+        url = EXTENT_SERVICE_URL + "VERSION=1.1.1&REQUEST=GetMap&SERVICE=WMS&LAYERS=" + EXTENT_SERVICE_LAYER + "&STYLES=&SRS=" + EXTENT_SERVICE_SRS + "&BBOX=" + \
+            area_bbox[0] + "," + area_bbox[1] + "," + area_bbox[2] + "," + area_bbox[3] + \
+            "&WIDTH=120&HEIGHT=120&FORMAT=image/png&BGCOLOR=0xffffff&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_inimage&minx=" + \
+            bbox[0] + "&miny=" + bbox[1] + "&maxx=" + \
+            bbox[2] + "&maxy=" + bbox[3]
 
     return url
 
@@ -460,7 +490,6 @@ def validate_geographic_coordinate_bounding_box_values(coordinates: list):
 
 
 def __handle_extent_graphics_for_layers_recursive(child_layers: dict):
-
     """ !!!THIS IS NOT USED ANYMORE AS ITS NOT WORKING AS EXPECTED!!!
         !!! New function is called __handle_extent_graphics_for_layers !!!
 
@@ -476,14 +505,17 @@ def __handle_extent_graphics_for_layers_recursive(child_layers: dict):
         if child_layer.get("srv", None) is not None:
             # this is a dataset child, we need to handle this differently
             child_layer = child_layer["srv"]
-        child_layer["extent_url"] = __gen_single_extent_graphic_url(child_layer)
+        child_layer["extent_url"] = __gen_single_extent_graphic_url(
+            child_layer)
 
         if child_layer.get("layer", None) is None:
             # no more childdren in this child
             return child_layer
         else:
-            a.append(__handle_extent_graphics_for_layers_recursive(child_layer.get("layer")))
+            a.append(__handle_extent_graphics_for_layers_recursive(
+                child_layer.get("layer")))
     return a
+
 
 def __handle_extent_graphics_for_layers(child_layers: dict):
     """ generates the extent urls for sublayers
@@ -499,16 +531,19 @@ def __handle_extent_graphics_for_layers(child_layers: dict):
             # this is a dataset child, we need to handle this differently
             child_layer = child_layer["srv"]
 
-        child_layer["extent_url"] = __gen_single_extent_graphic_url(child_layer)
+        child_layer["extent_url"] = __gen_single_extent_graphic_url(
+            child_layer)
 
         try:
-            layer_list_len=len(child_layer.get("layer"))
+            layer_list_len = len(child_layer.get("layer"))
             for x in range(layer_list_len):
-                child_layer.get("layer")[x]["extent_url"] = __gen_single_extent_graphic_url(child_layer)
+                child_layer.get("layer")[
+                    x]["extent_url"] = __gen_single_extent_graphic_url(child_layer)
         except:
             continue
 
     return None
+
 
 def gen_extent_graphic_url(search_results):
     """ Generates the url which leads to the web generated map graphics for each search result
@@ -554,7 +589,7 @@ def gen_extent_graphic_url(search_results):
     return search_results
 
 
-####    DISCLAIMER INFOS
+# DISCLAIMER INFOS
 def __dataset_single_layer_disclaimer(layer, language):
     """ Single thread handles a single dataset layer in here
 
@@ -568,10 +603,11 @@ def __dataset_single_layer_disclaimer(layer, language):
         service_id = layer.get("srv", {}).get("id", None)
         if service_id is None:
             return
-        #url = URL_BASE_LOCALHOST + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
+        # url = URL_BASE_LOCALHOST + "/mapbender/php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
         url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + "wms" + "&id=" + str(
             service_id) + "&languageCode=" + language + "&withHeader=true"
-        layer["srv"]["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
+        layer["srv"]["disclaimer_html"] = requests.get(
+            url, verify=INTERNAL_SSL).content.decode()
 
 
 def __dataset_srv_disclaimer(srv, language):
@@ -586,7 +622,8 @@ def __dataset_srv_disclaimer(srv, language):
     thread_list = []
     if srv.get("coupledResources", None) is not None:
         for layer in srv["coupledResources"].get("layer", []):
-            thread_list.append(threading.Thread(target=__dataset_single_layer_disclaimer, args=(layer, language)))
+            thread_list.append(threading.Thread(
+                target=__dataset_single_layer_disclaimer, args=(layer, language)))
     utils.execute_threads(thread_list)
 
 
@@ -603,8 +640,12 @@ def __wms_srv_disclaimer(layer, language, resource):
     service_id = layer.get("id", None)
     if service_id is None:
         return
-    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    layer["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
+    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + \
+        "&id=" + str(service_id) + "&languageCode=" + \
+        language + "&withHeader=true"
+    layer["disclaimer_html"] = requests.get(
+        url, verify=INTERNAL_SSL).content.decode()
+
 
 def __wfs_srv_disclaimer(srv, language, resource):
     """ Handles a wfs srv set and sets the disclaimer info
@@ -619,8 +660,12 @@ def __wfs_srv_disclaimer(srv, language, resource):
     service_id = srv.get("id", None)
     if service_id is None:
         return
-    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
-    srv["disclaimer_html"] = requests.get(url, verify=INTERNAL_SSL).content.decode()
+    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + \
+        "&id=" + str(service_id) + "&languageCode=" + \
+        language + "&withHeader=true"
+    srv["disclaimer_html"] = requests.get(
+        url, verify=INTERNAL_SSL).content.decode()
+
 
 def generic_srv_disclaimer(resource, service_id, language):
     """ Handles a generic srv set and returns the fetched disclaimer html
@@ -632,8 +677,11 @@ def generic_srv_disclaimer(resource, service_id, language):
     Returns:
         nothing
     """
-    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + "&id=" + str(service_id) + "&languageCode=" + language + "&withHeader=true"
+    url = URL_BASE_LOCALHOST + "php/mod_getServiceDisclaimer.php?type=" + resource + \
+        "&id=" + str(service_id) + "&languageCode=" + \
+        language + "&withHeader=true"
     return requests.get(url, verify=INTERNAL_SSL).content.decode()
+
 
 def __set_single_service_disclaimer_url(search_results, resource):
     """ Function handles a single resource from search_results. This function is needed for multithreading.
@@ -648,17 +696,20 @@ def __set_single_service_disclaimer_url(search_results, resource):
     thread_list = []
     if resource == "dataset":
         for srv in search_results[resource][resource][resource]["srv"]:
-            thread_list.append(threading.Thread(target=__dataset_srv_disclaimer, args=(srv, language)))
+            thread_list.append(threading.Thread(
+                target=__dataset_srv_disclaimer, args=(srv, language)))
     elif resource == "wmc":
         # wmc has no disclaimer info -> set it to None
         for srv in search_results["wmc"]["wmc"]["wmc"]["srv"]:
             srv["disclaimer_html"] = None
     elif resource == "wms":
         for layer in search_results[resource][resource][resource]["srv"]:
-            thread_list.append(threading.Thread(target=__wms_srv_disclaimer, args=(layer, language, resource)))
+            thread_list.append(threading.Thread(
+                target=__wms_srv_disclaimer, args=(layer, language, resource)))
     elif resource == "wfs":
         for srv in search_results["wfs"]["wfs"]["wfs"]["srv"]:
-            thread_list.append(threading.Thread(target=__wfs_srv_disclaimer, args=(srv, language, resource)))
+            thread_list.append(threading.Thread(
+                target=__wfs_srv_disclaimer, args=(srv, language, resource)))
 
     # Run threads
     utils.execute_threads(thread_list)
@@ -675,13 +726,14 @@ def set_service_disclaimer_url(search_results):
     resources = gen_resource_arr(search_results)
     thread_list = []
     for resource in resources:
-        #__set_single_service_disclaimer_url(search_results, resource)
-        thread_list.append(threading.Thread(target=__set_single_service_disclaimer_url, args=(search_results, resource)))
+        # __set_single_service_disclaimer_url(search_results, resource)
+        thread_list.append(threading.Thread(
+            target=__set_single_service_disclaimer_url, args=(search_results, resource)))
     utils.execute_threads(thread_list)
     return search_results
 
 
-####    ISO 3166
+# ISO 3166
 def __gen_single_iso3166_icon_path(title: str):
     """ Find the iso3166 icon path
 
@@ -714,15 +766,17 @@ def set_iso3166_icon_path(search_results):
                         continue
                     if layer_srv.get("iso3166", None) is None:
                         continue
-                    layer_srv["iso3166_path"] = __gen_single_iso3166_icon_path(layer_srv["iso3166"])
+                    layer_srv["iso3166_path"] = __gen_single_iso3166_icon_path(
+                        layer_srv["iso3166"])
             else:
                 if srv.get("iso3166", None) is None:
                     continue
-                srv["iso3166_path"] = __gen_single_iso3166_icon_path(srv["iso3166"])
+                srv["iso3166_path"] = __gen_single_iso3166_icon_path(
+                    srv["iso3166"])
     return search_results
 
 
-####    FACETS/CATEGORIES
+# FACETS/CATEGORIES
 def prepare_selected_facets(selected_facets):
     """ Selected facets are sent as a triple of (parentCategory, title, id) which needs to be transformed into a dict for better handling
 
@@ -753,6 +807,7 @@ def prepare_selected_facets(selected_facets):
 
     return ret_dict
 
+
 def __resolve_single_facet(preselected_categories, all_categories):
     """ Search for a single id which encodes the facet/category data.
 
@@ -780,6 +835,7 @@ def __resolve_single_facet(preselected_categories, all_categories):
                     break
     return ret_arr
 
+
 def get_preselected_facets(params, all_categories):
     """ Resolve all facets that have been determined by the GET parameters.
 
@@ -797,15 +853,22 @@ def get_preselected_facets(params, all_categories):
     org_cat = params.get("registratingDepartments", "")
 
     # resolve ids by iterating all_categories
-    all_iso_cat = all_categories[0]
-    all_inspire_cat = all_categories[1]
-    all_custom_cat = all_categories[2]
-    all_org_cat = all_categories[3]
+    if all_categories:
+        all_iso_cat = all_categories[0]
+        all_inspire_cat = all_categories[1]
+        all_custom_cat = all_categories[2]
+        all_org_cat = all_categories[3]
 
-    iso_preselect = __resolve_single_facet(iso_cat, all_iso_cat)
-    inspire_preselect = __resolve_single_facet(inspire_cat, all_inspire_cat)
-    custom_preselect = __resolve_single_facet(custom_cat, all_custom_cat)
-    org_preselect = __resolve_single_facet(org_cat, all_org_cat)
+        iso_preselect = __resolve_single_facet(iso_cat, all_iso_cat)
+        inspire_preselect = __resolve_single_facet(
+            inspire_cat, all_inspire_cat)
+        custom_preselect = __resolve_single_facet(custom_cat, all_custom_cat)
+        org_preselect = __resolve_single_facet(org_cat, all_org_cat)
+    else:
+        iso_preselect = []
+        inspire_preselect = []
+        custom_preselect = []
+        org_preselect = []
 
     if len(iso_preselect) > 0:
         ret_arr["ISO 19115"] = iso_preselect
@@ -818,6 +881,7 @@ def get_preselected_facets(params, all_categories):
 
     return ret_arr
 
+
 def get_search_filters(search_results):
     """ Find any search filter from the search results. Which one does not matter, since they contain all the same searchText and so on.
 
@@ -827,12 +891,15 @@ def get_search_filters(search_results):
         OrderedDict: Contains the search_filter object from the search_results
     """
     search_filters = OrderedDict()
+    # FIXME: don't know exactly what this should do.. "filter", and "classes" are not part of the search_results response content....
     for resource_key, resource_val in search_results.items():
         if len(search_filters) == 0:
             search_filters = resource_val["filter"]["searchFilter"]
         else:
-            search_filters["classes"].append(resource_val["filter"]["searchFilter"]["classes"][0])
+            search_filters["classes"].append(
+                resource_val["filter"]["searchFilter"]["classes"][0])
     return search_filters
+
 
 def prepare_requested_resources(requ_res):
     """ Ajax sends an array as a string. We need to decompose each element from that string and reforge it into a "true" array
@@ -842,7 +909,8 @@ def prepare_requested_resources(requ_res):
     Returns:
         list: Represents the string array requ_res as a real list
     """
-    requested_resources = requ_res.replace("[", "").replace("]", "").replace("\"","")
+    requested_resources = requ_res.replace(
+        "[", "").replace("]", "").replace("\"", "")
     requested_resources = requested_resources.split(",")
     if len(requested_resources) == 1 and requested_resources[0] == '':
         requested_resources = []
@@ -867,7 +935,7 @@ def prepare_info_search_results(search_results, list_all: bool, lang: str):
     if list_all:
         ret_list["all"] = []
         for result in search_results.get("query", {}).get("allpages", []):
-            #if "/" + lang in result.get("title"):
+            # if "/" + lang in result.get("title"):
             ret_list["all"].append(result)
     else:
         for search_result_key, search_result_val in search_results.items():
@@ -883,7 +951,7 @@ def prepare_info_search_results(search_results, list_all: bool, lang: str):
                     for hit in res:
                         if ret_list.get(search_result_key, None) is None:
                             ret_list[search_result_key] = []
-                        #if "/" + lang in hit.get("title", "") and hit not in ret_list[search_result_key]:
+                        # if "/" + lang in hit.get("title", "") and hit not in ret_list[search_result_key]:
                             # This way we try to fetch only translated pages with '.../de' or '.../en'
                             # Since the mediawiki API is ***** we have no direct way to fetch only translated ones
                         ret_list[search_result_key].append(hit)
@@ -906,7 +974,8 @@ def resolve_internal_external_info(search_results, searcher: Searcher):
             result["is_intern"] = False
             categories = searcher.get_info_result_category(result)
             for cat in categories:
-                result["is_intern"] = INTERNAL_PAGES_CATEGORY in cat.get("title", "")
+                result["is_intern"] = INTERNAL_PAGES_CATEGORY in cat.get(
+                    "title", "")
                 break
     return search_results
 
@@ -941,11 +1010,13 @@ def hash_inspire_ids(search_results):
     for search_result_key, search_result_val in search_results.items():
         thread_list.append(
             threading.Thread(
-                target=__hash_single_inspire_id, args=(search_result_val[search_result_key],)
+                target=__hash_single_inspire_id, args=(
+                    search_result_val[search_result_key],)
             )
         )
     utils.execute_threads(thread_list)
     return search_results
+
 
 def check_previewUrls(search_results):
     """ Checks if a result provides a previewUrl for thumbnails. Otherwise a placeholder will be set.
@@ -999,7 +1070,8 @@ def resolve_coupled_resources(md_link: str):
         "download_links": [],
     }
     searcher = Searcher(host=HOSTNAME)
-    resources = searcher.search_coupled_resource(md_link).get("result", {}).get("service", [])
+    resources = searcher.search_coupled_resource(
+        md_link).get("result", {}).get("service", [])
     if resources is not None:
         for resource in resources:
             _type = resource.get("serviceType", "")
@@ -1007,15 +1079,15 @@ def resolve_coupled_resources(md_link: str):
             dataset_id = resource.get("datasetId", "")
             uri_atom = resource.get("accessClient", None)
             data = {
-                    "uri": uri,
-                    "datasetId": urllib.parse.quote_plus(dataset_id),
-                    "atom_uri": uri_atom,
-                    "showMapUrl": urllib.parse.quote_plus(uri),
-                    "title": resource.get("serviceTitle", None),
-                    "id": sha256(md_link),
-                    "mdLink": resource.get("mdLink", None),
-                    "htmlLink": resource.get("htmlLink", None),
-                }
+                "uri": uri,
+                "datasetId": urllib.parse.quote_plus(dataset_id),
+                "atom_uri": uri_atom,
+                "showMapUrl": urllib.parse.quote_plus(uri),
+                "title": resource.get("serviceTitle", None),
+                "id": sha256(md_link),
+                "mdLink": resource.get("mdLink", None),
+                "htmlLink": resource.get("htmlLink", None),
+            }
             if _type == "view":
                 # to match the expected variable name in 'search_result_list_entry.html' we need to move some variables around
                 data["mdLink"] = data["htmlLink"]

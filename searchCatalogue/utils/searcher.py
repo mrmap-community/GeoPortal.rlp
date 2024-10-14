@@ -9,21 +9,15 @@ Created on: 22.01.19
 import hashlib
 import random
 import threading
-import requests
-
-from copy import copy
 from collections import OrderedDict
-from json import JSONDecodeError
+from copy import copy
 
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
+from Geoportal.settings import (INTERNAL_PAGES_CATEGORY, INTERNAL_SSL,
+                                PRIMARY_CATALOGUE, SEARCH_API_PROTOCOL)
 from Geoportal.utils import utils
-from Geoportal.settings import PRIMARY_CATALOGUE, INTERNAL_SSL, SEARCH_API_PROTOCOL, INTERNAL_PAGES_CATEGORY
-
+from Geoportal.utils.request_handler import CustomSession
 from searchCatalogue.settings import PROXIES
 from searchCatalogue.utils.url_conf import *
-
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Searcher:
@@ -87,6 +81,8 @@ class Searcher:
         md_5.update(microseconds)
         self.search_id = md_5.hexdigest()
 
+        self.session = CustomSession()
+
     def _prepare_selected_facets(self):
         """ Find the ids of the selected facets in all facets
 
@@ -116,8 +112,10 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url, params, verify=INTERNAL_SSL)
-        result[resource] = response.json()
+        response = self.session.get(
+            url=url, params=params, verify=INTERNAL_SSL)
+        if response:
+            result[resource] = response
 
     def search_categories_list(self, lang):
         """ Get a list of all categories/facets from the database using a GET request
@@ -125,7 +123,7 @@ class Searcher:
         Returns:
             Returns the categories which have been found during the search
         """
-        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_PRIMARY_SEARCH + URL_SEARCH_PRIMARY_SUFFIX
         params = {
             "outputFormat": self.output_format,
             "resultTarget": self.result_target,
@@ -137,9 +135,12 @@ class Searcher:
         }
         if self.host is not None:
             params["hostName"] = self.host
-        response = requests.get(url, params, verify=INTERNAL_SSL)
-        response = response.json()
-        categories = response["categories"]["searchMD"]["category"]
+        response = self.session.get(
+            url=url,
+            params=params,
+            verify=INTERNAL_SSL)
+        categories = response.get("categories", {}).get(
+            "searchMD", {}).get("category", [])
         return categories
 
     def search_all_organizations(self):
@@ -150,11 +151,7 @@ class Searcher:
         """
         # get overview of all organizations
         uri = URL_BASE_LOCALHOST + URL_GET_ORGANIZATIONS
-        response = requests.get(uri, {}, verify=INTERNAL_SSL)
-        if response.status_code == 200:
-            response = response.json().get("organizations")
-            return response
-        return {}
+        return self.session.get(url=uri).get("organizations", {})
 
     def search_topics(self, language: str, topic_type: str):
         """ Get a list of all topics that can be found in the database
@@ -167,7 +164,6 @@ class Searcher:
              dict: Contains a json list of all topics
         """
         uri = URL_BASE_LOCALHOST + URL_GET_TOPICS
-
         params = {
             "type": topic_type,
             "scale": "absolute",
@@ -178,13 +174,7 @@ class Searcher:
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
-        ret_resp = {}
-
-        response = requests.get(uri, params, verify=INTERNAL_SSL)
-        if response.status_code == 200:
-            ret_resp = response.json().get("tagCloud")
-
-        return ret_resp
+        return self.session.get(url=uri, params=params).get("tagCloud", {})
 
     def search_coupled_resource(self, md_link):
         """ Resolve coupled dataset/series resources for secondary catalogues
@@ -199,14 +189,7 @@ class Searcher:
             "getRecordByIdUrl": md_link,
             "hostName": self.host,
         }
-        response = requests.get(uri, params, verify=INTERNAL_SSL)
-        if response.status_code == 200:
-            try:
-                response = response.json()
-            except JSONDecodeError:
-                return {}
-            return response
-        return {}
+        return self.session.get(url=uri, params=params)
 
     def search_primary_catalogue_data(self, user_id=None):
         """ Performs the search
@@ -216,7 +199,7 @@ class Searcher:
         Returns:
             dict: Contains the search results
         """
-        url = URL_BASE_LOCALHOST + URL_SEARCH_PRIMARY_SUFFIX
+        url = URL_BASE_PRIMARY_SEARCH + URL_SEARCH_PRIMARY_SUFFIX
         self._prepare_selected_facets()
         params = {
             "searchText": self.keywords,
@@ -249,16 +232,16 @@ class Searcher:
         if len(self.search_resources) == 1 and self.search_resources[0] == '':
             return result
         for resource in self.search_resources:
-            _session = requests.Session()
             if resource == self.search_page_resource:
                 # use requested page
                 params["searchPages"] = self.search_pages
             else:
                 params["searchPages"] = 1
             params["searchResources"] = resource
-            thread = threading.Thread(target=self._get_resource_results, args=(url, copy(params), resource, result))
+            thread = threading.Thread(target=self._get_resource_results, args=(
+                url, copy(params), resource, result))
             thread_list.append(thread)
-            #self.__get_resource_results(url, params, resource, result)
+            # self.__get_resource_results(url, params, resource, result)
         utils.execute_threads(thread_list)
         return result
 
@@ -273,13 +256,8 @@ class Searcher:
         Returns:
             nothing
         """
-
-        response = requests.get(url, params, verify=INTERNAL_SSL)
-        try:
-            response = response.json()
-            results[resource] = response
-        except JSONDecodeError:
-            return
+        response = self.session.get(url=url, params=params)
+        results[resource] = response or {}
 
     def search_external_catalogue_data(self):
         """ Main function for calling the german catalogue
@@ -311,12 +289,13 @@ class Searcher:
             else:
                 params["searchPages"] = 1
             params["searchResources"] = resource
-            thread_list.append(threading.Thread(target=self._get_external_resource_results, args=(resource, copy(params), results, url)))
+            thread_list.append(threading.Thread(target=self._get_external_resource_results, args=(
+                resource, copy(params), results, url)))
         utils.execute_threads(thread_list)
 
         return results
 
-    def search_locations(self, search_texts: list, max_results: int=15, srs: int=4326):
+    def search_locations(self, search_texts: list, max_results: int = 15, srs: int = 4326):
         """ Performs a spatial filtered search
 
         Args:
@@ -341,9 +320,10 @@ class Searcher:
             }
             if self.host is not None:
                 params["hostName"] = self.host
-            response = requests.get(url, params, proxies=PROXIES, verify=INTERNAL_SSL)
-            result = response.json()
-            result["keyword"] = search_text
+
+            result = self.session.get(
+                url=url, params=params, verify=INTERNAL_SSL)
+            result.update("keyword", search_text)
             ret_val.append(result)
 
         return ret_val
@@ -357,8 +337,10 @@ class Searcher:
         Returns:
             nothing
         """
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
-        response = response.json()
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL)
+
         params["srsearch"] = params["srsearch"].replace("*", "")
         if results.get(params["srsearch"], None) is None:
             results[params["srsearch"]] = []
@@ -381,9 +363,11 @@ class Searcher:
             "hostName": HOSTNAME,
             "protocol": SEARCH_API_PROTOCOL,
         }
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
-        response = response.json()
-        response = response["query"]["pages"]
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL)
+
+        response = response.get("query", {}).get("pages", {})
         for resp_key, resp_val in response.items():
             return resp_val.get("categories", [])
 
@@ -423,8 +407,10 @@ class Searcher:
                 params_cp = copy(params)
                 params_cp["srwhat"] = what
                 # create thread
-                thread_list.append(threading.Thread(target=self._get_single_info_result, args=(params_cp, results)))
-            thread_list.append(threading.Thread(target=self.get_info_pdf_files, args=(keyword, results)))
+                thread_list.append(threading.Thread(
+                    target=self._get_single_info_result, args=(params_cp, results)))
+            thread_list.append(threading.Thread(
+                target=self.get_info_pdf_files, args=(keyword, results)))
         utils.execute_threads(thread_list)
         return results
 
@@ -441,11 +427,9 @@ class Searcher:
             "format": "json",
             "aplimit": 500,
         }
-        results = {}
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
-        response = response.json()
-        results = response
-        return results
+        return self.session.get(url=URL_SEARCH_INFO,
+                                params=params,
+                                verify=INTERNAL_SSL)
 
     def get_info_pdf_files(self, keyword: str, results: dict):
         """ Searches for all given
@@ -463,8 +447,9 @@ class Searcher:
             "aiprop": "canonicaltitle|mime|url",
             "ailimit": 500,
         }
-        response = requests.get(url=URL_SEARCH_INFO, params=params, verify=INTERNAL_SSL)
-        response = response.json().get("query", {}).get("allimages", [])
+        response = self.session.get(url=URL_SEARCH_INFO,
+                                    params=params,
+                                    verify=INTERNAL_SSL).get("query", {}).get("allimages", [])
 
         # the mediawiki API does not provide a way to fetch directly files with a certain mimeType or even with a title match
         # therefore we need to iterate by hand

@@ -18,18 +18,20 @@ from django.utils.translation import gettext as _
 from django_extensions import settings
 
 from Geoportal.decorator import check_browser
-from Geoportal.geoportalObjects import GeoportalJsonResponse, GeoportalContext
-from Geoportal.settings import DE_CATALOGUE, EU_CATALOGUE, PRIMARY_CATALOGUE, OPEN_DATA_URL, HOSTNAME, HTTP_OR_SSL, SESSION_NAME
+from Geoportal.geoportalObjects import GeoportalContext, GeoportalJsonResponse
+from Geoportal.settings import (DE_CATALOGUE, EU_CATALOGUE, HOSTNAME,
+                                HTTP_OR_SSL, OPEN_DATA_URL, PRIMARY_CATALOGUE,
+                                SESSION_NAME)
+from Geoportal.utils import utils
 from Geoportal.utils.php_session_data import get_mb_user_session_data
 from Geoportal.utils.utils import print_debug
-from searchCatalogue.utils import viewHelper, spatial_filter_helper
+from searchCatalogue.settings import DEFAULT_MAX_SEARCH_RESULTS
+from searchCatalogue.utils import spatial_filter_helper, viewHelper
 from searchCatalogue.utils.autoCompleter import AutoCompleter
 from searchCatalogue.utils.rehasher import Rehasher
 from searchCatalogue.utils.searcher import Searcher
 from searchCatalogue.utils.viewHelper import check_search_bbox
-from searchCatalogue.settings import DEFAULT_MAX_SEARCH_RESULTS
 from useroperations.models import MbUser
-from Geoportal.utils import utils
 
 EXEC_TIME_PRINT = "Exec time for %s: %1.5fs"
 
@@ -52,7 +54,8 @@ def index_external(request: HttpRequest):
     """
     external_call = True
     params_get = request.GET
-    start_search = utils.resolve_boolean_value(params_get.get("start", "False"))
+    start_search = utils.resolve_boolean_value(
+        params_get.get("start", "False"))
 
     return index(request=request, external_call=external_call, start_search=start_search)
 
@@ -100,9 +103,11 @@ def index(request: HttpRequest, external_call=False, start_search=False):
     geoportal_context.add_context(params)
 
     if external_call:
-        geoportal_context.add_context(context={"extended_template": "none.html"})
+        geoportal_context.add_context(
+            context={"extended_template": "none.html"})
     else:
-        geoportal_context.add_context(context={"extended_template": "base.html"})
+        geoportal_context.add_context(
+            context={"extended_template": "base.html"})
 
     return render(request, template_name, geoportal_context.get_context())
 
@@ -165,7 +170,8 @@ def auto_completion(request: HttpRequest):
         "data_suggestions": data_search_suggestions,
         "location_suggestions": location_search_suggestions,
     }
-    html = render_to_string("autocompleter/suggestions.html", context=params, request=request)
+    html = render_to_string("autocompleter/suggestions.html",
+                            context=params, request=request)
 
     return GeoportalJsonResponse(html=html).get_response()
 
@@ -216,7 +222,7 @@ def get_data(request: HttpRequest):
             return get_spatial_results(request)
 
     # Check which source is requested
-    source = post_params.get("source", None)
+    source = post_params.get("source")
     if source is not None:
         if source == "primary":
             # call primary search method
@@ -282,7 +288,8 @@ def get_data_other(request: HttpRequest, catalogue_id):
 
     search_pages = int(post_params.get("page-geoportal"))
     requested_page_res = post_params.get("data-geoportal")
-    requested_resources = viewHelper.prepare_requested_resources(post_params.get("resources"))
+    requested_resources = viewHelper.prepare_requested_resources(
+        post_params.get("resources"))
 
     # prepare bbox parameter
     search_bbox = post_params.get("searchBbox", "")
@@ -306,7 +313,8 @@ def get_data_other(request: HttpRequest, catalogue_id):
             "nonGeographicDataset": _("Miscellaneous Datasets"),
         }
 
-    print_debug(EXEC_TIME_PRINT % ("extracting parameters", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("extracting parameters", time.time() - start_time))
 
     # run search DE
     searcher = Searcher(page_res=requested_page_res,
@@ -317,11 +325,12 @@ def get_data_other(request: HttpRequest, catalogue_id):
                         resource_set=requested_resources,
                         language_code=request.LANGUAGE_CODE,
                         catalogue_id=catalogue_id,
-			            host=host,
+                        host=host,
                         )
     start_time = time.time()
     search_results = searcher.search_external_catalogue_data()
-    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " +
+                str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
     # search_filters = viewHelper.get_search_filters(search_results)
@@ -337,20 +346,24 @@ def get_data_other(request: HttpRequest, catalogue_id):
 
     start_time = time.time()
     # prepare pages to render for all resources
-    pages = viewHelper.calculate_pages_to_render_de(search_results, search_pages, requested_page_res)
-    print_debug(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
+    pages = viewHelper.calculate_pages_to_render_de(
+        search_results, search_pages, requested_page_res)
+    print_debug(EXEC_TIME_PRINT %
+                ("calculating pages to render", time.time() - start_time))
 
     # ONLY FOR EU
     if is_eu_search:
         start_time = time.time()
         # hash inspire id, so we can use them in a better way with javascript
         search_results = viewHelper.hash_inspire_ids(search_results)
-        print_debug(EXEC_TIME_PRINT % ("hash inspire ids", time.time() - start_time))
+        print_debug(EXEC_TIME_PRINT %
+                    ("hash inspire ids", time.time() - start_time))
 
     start_time = time.time()
     # prepare preview images
     search_results = viewHelper.check_previewUrls(search_results)
-    print_debug(EXEC_TIME_PRINT % ("checking previewUrls", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("checking previewUrls", time.time() - start_time))
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
@@ -408,7 +421,6 @@ def get_data_primary(request: HttpRequest):
     # prepare order parameter
     order_by = post_params.get("orderBy")
 
-
     # prepare rpp parameter
     max_results = post_params.get("maxResults", 5)
     if max_results == "":
@@ -431,7 +443,8 @@ def get_data_primary(request: HttpRequest):
 
     # prepare requeste resources to be an array of strings
     # requested_resources: str
-    requested_resources = viewHelper.prepare_requested_resources(post_params["resources"])
+    requested_resources = viewHelper.prepare_requested_resources(
+        post_params["resources"])
 
     # get requested page and for which resource it is requested
     requested_page = int(post_params["page-geoportal"])
@@ -461,8 +474,10 @@ def get_data_primary(request: HttpRequest):
                         catalogue_id=catalogue_id,
                         host=host
                         )
-    search_results = searcher.search_primary_catalogue_data(user_id=session_data.get("userid", ""))
-    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " + str(catalogue_id), time.time() - start_time))
+    search_results = searcher.search_primary_catalogue_data(
+        user_id=session_data.get("userid", ""))
+    print_debug(EXEC_TIME_PRINT % ("total search in catalogue with ID " +
+                str(catalogue_id), time.time() - start_time))
 
     # prepare search filters
     search_filters = viewHelper.get_search_filters(search_results)
@@ -488,12 +503,15 @@ def get_data_primary(request: HttpRequest):
         selected_facets[facet_key_trans] = facet_val
     search_filters = rehasher.get_rehashed_filters()
     del rehasher
-    print_debug(EXEC_TIME_PRINT % ("rehashing of facets", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("rehashing of facets", time.time() - start_time))
 
     start_time = time.time()
     # prepare pages to render for all resources
-    pages = viewHelper.calculate_pages_to_render(search_results, requested_page, requested_page_res)
-    print_debug(EXEC_TIME_PRINT % ("calculating pages to render", time.time() - start_time))
+    pages = viewHelper.calculate_pages_to_render(
+        search_results, requested_page, requested_page_res)
+    print_debug(EXEC_TIME_PRINT %
+                ("calculating pages to render", time.time() - start_time))
 
     # start_time = time.time()
     # # generate inspire feed urls
@@ -503,17 +521,20 @@ def get_data_primary(request: HttpRequest):
     start_time = time.time()
     # generate extent graphics url
     search_results = viewHelper.gen_extent_graphic_url(search_results)
-    print_debug(EXEC_TIME_PRINT % ("generating extent graphic urls", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("generating extent graphic urls", time.time() - start_time))
 
     start_time = time.time()
     # set attributes for wfs child modules
     search_results = viewHelper.set_children_data_wfs(search_results)
-    print_debug(EXEC_TIME_PRINT % ("setting wfs children data", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("setting wfs children data", time.time() - start_time))
 
     start_time = time.time()
     # set state icon file paths
     search_results = viewHelper.set_iso3166_icon_path(search_results)
-    print_debug(EXEC_TIME_PRINT % ("setting iso3166 icons", time.time() - start_time))
+    print_debug(EXEC_TIME_PRINT %
+                ("setting iso3166 icons", time.time() - start_time))
 
     # check for bounding box
     bbox = post_params.get("searchBbox", '')
@@ -595,8 +616,10 @@ def get_data_info(request: HttpRequest):
         search_results = searcher.get_info_all_pages()
     else:
         search_results = searcher.get_info_search_results()
-    search_results = viewHelper.prepare_info_search_results(search_results, list_all, lang)
-    search_results = viewHelper.resolve_internal_external_info(search_results, searcher)
+    search_results = viewHelper.prepare_info_search_results(
+        search_results, list_all, lang)
+    search_results = viewHelper.resolve_internal_external_info(
+        search_results, searcher)
 
     params = {
         "lang": lang,
@@ -635,17 +658,18 @@ def get_permission_email_form(request: HttpRequest):
     title = _("Send permission request")
     subject = _("[Geoportal.RLP] Permission request for ") + str(data_id)
     draft = _("Please give me permission to view the resource \n'") + data_name +\
-            _("'\n It has the ID ") + str(data_id) +\
-            _(".\n\n Thank you very much\n\n") +\
-            user + "\n" +\
-            mb_user_mail
+        _("'\n It has the ID ") + str(data_id) +\
+        _(".\n\n Thank you very much\n\n") +\
+        user + "\n" +\
+        mb_user_mail
     params = {
         "data_provider": params_GET.get("dataProvider", ""),
         "subject": subject,
         "title": title,
         "draft": draft,
     }
-    html = render_to_string(template_name=template, context=params, request=request)
+    html = render_to_string(template_name=template,
+                            context=params, request=request)
 
     return GeoportalJsonResponse(html=html).get_response()
 
@@ -701,7 +725,8 @@ def terms_of_use(request: HttpRequest):
         # wmc has no disclaimer
         return GeoportalJsonResponse(html=html).get_response()
 
-    html = viewHelper.generic_srv_disclaimer(resource=resource, service_id=id, language=lang_code)
+    html = viewHelper.generic_srv_disclaimer(
+        resource=resource, service_id=id, language=lang_code)
 
     if len(html) > 0:
         template = "terms_of_use.html"
@@ -714,7 +739,7 @@ def terms_of_use(request: HttpRequest):
     return GeoportalJsonResponse(html=html).get_response()
 
 
-#ToDo: Check behaviour -> delete after a while
+# ToDo: Check behaviour -> delete after a while
 """
 @check_browser
 def write_gml_session(request: HttpRequest):
