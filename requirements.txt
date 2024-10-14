@@ -24,3 +24,4 @@ pyyaml
 ua-parser
 user-agents
 django-user-agents
+debugpy==1.6.6

@@ -24,7 +24,7 @@ COPY --from=compile-image /opt/venv /opt/venv
 RUN apk update \
     && apk add --no-cache libpq netcat-openbsd gettext libressl py3-psycopg \
     && rm -rf /var/cache/apk/*
-    
+
 # set work directory
 WORKDIR /opt/geoportal
 
@@ -32,6 +32,7 @@ WORKDIR /opt/geoportal
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV PATH="/opt/venv/bin:$PATH"
+ENV CONTAINER="1"
 
 
 ENTRYPOINT [ "/opt/geoportal/docker/geoportal/entrypoint.sh" ]
