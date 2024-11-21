@@ -77,23 +77,34 @@
             {% if feeds is not None and feeds|length > 0 %}
             <div class="resource-list download_{{ result.id }}" style="display:none;">
                 <ul style="overflow: hidden;">
-                    {% for feed in feeds %}
+                    {% for feed in feeds|dictsort:"serviceTitle" %}
                         <li class="resource-element">
-                            <a href="{{ feed.htmlLink }}" target="_blank">
-                                <div class="resource-view-title" title="{% trans 'Metadata' %}">
-                                    {{ feed.serviceTitle }}
-                                    <br>
-                                    ({{ feed.serviceUuid }})
-                                </div></a>
+                            <a title="{% trans 'Open metadata in new window' %}" href="{{ feed.htmlLink }}" target="_blank">
+                                <div class="resource-view-title">
+                                    {% if feed.type != 'ogcapifeatures' %}
+                                        {{ feed.serviceTitle }}
+                                    {% else %}
+                                        OGC API-Features Interface - Objektart: {{ feed.resourceName }}
+                                    {% endif %}
+                                </div>
+                            </a>
                             <div id="download_button_{{ feed.serviceUuid }}" class="feed-download resource-element-data">
                                 <div class="resource-element-info"></div>
                                 <div class="feed-download-wrapper">
-                                    <a class="feed-download-button" href="{{ feed.accessUrl }}" target="_blank" title="{% trans 'Original atom feed' %}">
+                                    {% if feed.type == 'ogcapifeatures' %}
+                                    {% else %}
+                                    <a class="feed-download-button" href="{{ feed.accessUrl }}" target="_blank" title="{% if feed.type == 'directwfs' %}{% trans 'Show Capabilities' %}{% else %}{% trans 'Original atom feed' %}{% endif %}">
                                         <i class="fas fa-file-alt icn-file icn-single"></i>
+                                        {% if feed.type == 'directwfs' %}{% trans 'Show Capabilities' %}{% else %}{% trans 'Original atom feed' %}{% endif %}
                                     </a>
-                                    <a class="atom-feed-button" href="{{ feed.accessClient }}" target="_blank" title="{% trans 'Open in atom feed viewer' %}">
+                                    {% endif %}
+                                    {% if feed.type == 'directwfs' %}
+                                    {% else %}
+                                    <a class="atom-feed-button" href="{{ feed.accessClient }}" target="_blank" title="{% trans 'Open in html client' %}">
                                         <i class="fas fa-download icn-download icn-single"></i>
+                                        {% trans 'Open in html client' %}
                                     </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </li>
